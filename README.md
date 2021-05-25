@@ -17,6 +17,7 @@ such as AWS Rekognition.
 | :-----: | :-----: | :-----: |
 | ![Firstname Lastname](https://via.placeholder.com/150 "Firstname Lastname") <br/> Jd Perumal <br/> u18219285 | [GitHub](https://github.com/JdPerumal) <br/> [Profile Page](https://jdperumal.github.io/COS301Website2/) <br/> [LinkedIn](https://www.linkedin.com/in/jd-perumal-4abb1820b/) <br/> | Something exciting |
 
+| ![Firstname Lastname](https://via.placeholder.com/150 "Firstname Lastname") <br/> Tiashka Seetal <br/> u19226684 | [GitHub](https://github.com/tiashka) <br/> [Profile Page](https://tiashka.github.io/COS301Website2/) <br/> [LinkedIn](https://www.linkedin.com/in/tiashka-seetal-9a9841203/) <br/> | Something exciting |
 
 ---
 
