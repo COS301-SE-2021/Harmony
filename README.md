@@ -1,6 +1,6 @@
-#DreamTeam
+# DreamTeam
 
-#Harmony
+# Harmony
 
 The Harmony Application will allow the user to take a
 picture of a food item which will then be recognized by the application, and they
@@ -20,9 +20,11 @@ such as AWS Rekognition.
 
 ---
 
-## DreamTeam-Demo1
+## Recorded demo
 
 * :tv: [DreamTeam-Demo1](https://drive.google.com/open?id=)
+
+## SRS document
 * :open_book: [SRS Document](https://www.overleaf.com/read/)
 
 ## Project Management Tools
