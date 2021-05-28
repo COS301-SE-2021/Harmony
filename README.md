@@ -33,3 +33,5 @@ such as AWS Rekognition.
 ## Project Management Tools
 
 * :open_book: [GitHub](https://github.com/COS301-SE-2021/Harmony/projects)
+
+[![Coverage Status](https://coveralls.io/repos/github/COS301-SE-2021/Harmony/badge.svg?branch=master)](https://coveralls.io/github/COS301-SE-2021/Harmony?branch=master)
