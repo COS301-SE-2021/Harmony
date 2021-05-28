@@ -15,7 +15,7 @@ such as AWS Rekognition.
 
 | **Team Member** | **Profiles** | **Skills/Interest**
 | :-----: | :-----: | :-----: |
-| ![Firstname Lastname](https://octodex.github.com/images/yaktocat.png/150 "Firstname Lastname") <br/> Jd Perumal <br/> u18219285 | [GitHub](https://github.com/JdPerumal) <br/> [Profile Page](https://jdperumal.github.io/COS301Website2/) <br/> [LinkedIn](https://www.linkedin.com/in/jd-perumal-4abb1820b/) <br/> | Something exciting |
+| ![Firstname Lastname](https://octodex.github.com/images/yaktocat.png "Firstname Lastname") <br/> Jd Perumal <br/> u18219285 | [GitHub](https://github.com/JdPerumal) <br/> [Profile Page](https://jdperumal.github.io/COS301Website2/) <br/> [LinkedIn](https://www.linkedin.com/in/jd-perumal-4abb1820b/) <br/> | Something exciting |
  ![Firstname Lastname](https://via.placeholder.com/150 "Firstname Lastname") <br/> Tiashka Seetal <br/> u19226684 | [GitHub](https://github.com/tiashka) <br/> [Profile Page](https://tiashka.github.io/COS301Website2/) <br/> [LinkedIn](https://www.linkedin.com/in/tiashka-seetal-9a9841203/) <br/> | Something exciting |
  ![Firstname Lastname](https://via.placeholder.com/150 "Firstname Lastname") <br/> Arshad Sacoor <br/> u17012512 | [GitHub](https://github.com/) <br/> [Profile Page](https:) <br/> [LinkedIn]() <br/> | Think Different |
  ![Firstname Lastname](https://via.placeholder.com/150 "Firstname Lastname") <br/> Mohammed Carrim <br/> u18080813 | [GitHub](https://github.com/mohammedcarrim) <br/> [Profile Page](https://tiashka.github.io/COS301Website2/) <br/> [LinkedIn](https://www.linkedin.com/in/mohammed-carrim-706415194/) <br/> | Something exciting |
