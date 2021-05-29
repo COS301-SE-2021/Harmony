@@ -42,3 +42,4 @@ such as AWS Rekognition.
             *feature −module−name
    
 [![Coverage Status](https://coveralls.io/repos/github/COS301-SE-2021/Harmony/badge.svg?branch=master)](https://coveralls.io/github/COS301-SE-2021/Harmony?branch=master)
+https://img.shields.io/github/issues/COS301-SE-2021/Harmony
