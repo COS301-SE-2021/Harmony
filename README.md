@@ -34,4 +34,11 @@ such as AWS Rekognition.
 
 * :open_book: [GitHub](https://github.com/COS301-SE-2021/Harmony/projects)
 
+## Branching Strategy
+
+master (build)
+ −develop (build)
+  − Module−develop (build )
+   − feature −module−name
+   
 [![Coverage Status](https://coveralls.io/repos/github/COS301-SE-2021/Harmony/badge.svg?branch=master)](https://coveralls.io/github/COS301-SE-2021/Harmony?branch=master)
