@@ -37,7 +37,7 @@ such as AWS Rekognition.
 ## Branching Strategy
 
 master (build)
- −develop (build)
+&lt;p&gt;−develop (build)&lt;p&gt;
   − Module−develop (build )
    − feature −module−name
    
