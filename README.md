@@ -1,3 +1,6 @@
+[![Coverage Status](https://coveralls.io/repos/github/COS301-SE-2021/Harmony/badge.svg?branch=master)](https://coveralls.io/github/COS301-SE-2021/Harmony?branch=master)
+[![Issues tracking](https://img.shields.io/github/issues/COS301-SE-2021/Harmony)](https://img.shields.io/github/issues/COS301-SE-2021/Harmony)
+
 # DreamTeam
 
 # Harmony
@@ -36,11 +39,7 @@ such as AWS Rekognition.
 
 ## Branching Strategy
 
-*master (build)
-    *develop (build)
-        *Module−develop (build )
-            *feature −module−name
-   
-[![Coverage Status](https://coveralls.io/repos/github/COS301-SE-2021/Harmony/badge.svg?branch=master)](https://coveralls.io/github/COS301-SE-2021/Harmony?branch=master)
-[![Issues tracking](https://img.shields.io/github/issues/COS301-SE-2021/Harmony)](https://img.shields.io/github/issues/COS301-SE-2021/Harmony)
-
+- master (build)
+    - develop (build)
+        - Module−develop (build)
+            - feature −module−name
