@@ -37,7 +37,7 @@ class Pairing:
         self.drink=drink
         self.location=location
     def __str__(self):
-        return str(self.food.name)+" found at "+str(self.food.location)+" is paired with "+ str(self.drink)+" at "+str(self.location) +"\n"
+        return str(self.food.name)+" found at "+str(self.food.location)+" paired with "+ str(self.drink)+" at "+str(self.location) +"\n"
 
 
 
@@ -55,3 +55,13 @@ class MockPairingsDatabase:
             result=result+ "Food: "+str(i.food.name)+", Drink: "+str(i.drink)+", Location: "+str(i.location)+"\n"
 
         return result
+
+    def searchByName(self,name):
+        result=[]
+        for i in self.data:
+            if i.food.name==name:
+                result.append(i)
+        if not result:
+            return name+" is not found"
+        else:
+            return result
