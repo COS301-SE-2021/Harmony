@@ -31,3 +31,10 @@ class FoodItemDatabase:
                 return i
         return "not found"
 
+class Pairing:
+    def __init__(self,food,drink,location):
+        self.food=food
+        self.drink=drink
+        self.location=location
+    def __str__(self):
+        return str(self.food.name)+" found at "+str(self.food.location)+" is paired with "+ str(self.drink)+" at "+str(self.location) +"\n"

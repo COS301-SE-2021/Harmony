@@ -1,4 +1,4 @@
-from MockFoodItem import FoodItem,FoodItemDatabase
+from MockFoodItem import FoodItem,FoodItemDatabase,Pairing
 
 burger=FoodItem("Burger","mcDonalds")
 print(burger)
@@ -6,7 +6,7 @@ macAndCheese=FoodItem("Mac and Cheese","Panarottis")
 sushi=FoodItem("sushi","John Dorys")
 
 foodArray=[burger,macAndCheese,sushi]
-print("Food Array:\n")
+print("\nFood Array:\n")
 for i in foodArray:
     print(i)
 
@@ -17,3 +17,8 @@ print("Check database\n\n")
 print(database)
 
 print(database.searchByName("Mac and Cheese"))
+
+
+burgerAcoke=Pairing(burger,"Coke","Spur")
+print("\nPairing was made")
+print(burgerAcoke)
