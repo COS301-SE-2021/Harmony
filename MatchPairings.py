@@ -15,3 +15,5 @@ spaghetti=FoodItem("Spaghetti Bolognaise","Mimmos")
 database.add(spaghetti)
 print("Check database\n\n")
 print(database)
+
+print(database.searchByName("Mac and Cheese"))
