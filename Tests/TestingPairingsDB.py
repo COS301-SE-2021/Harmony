@@ -13,6 +13,9 @@ from InsertPairingsResponse import insertPairingsResponse
 from QueryPairingByIdRequest import queryPairingByIdRequest
 from QueryPairingByIdResponse import queryPairingByIdResponse
 
+from ScanPairingsByFoodRequest import scanPairingByFoodRequest
+from ScanPairingsByFoodResponse import scanByFoodResponse
+
 # CREATE THE TABLE
 creationRequest = createPairingsTableRequest()
 creationResponse = creationRequest.request()
@@ -50,4 +53,11 @@ print("Sushis's drink : "+str(queryByIdResponse0.getResponse()))
 queryByIdRequest1 = queryPairingByIdRequest(1563)
 queryByIdResponse1 = queryByIdRequest1.queryById()
 print("Was not exist found?: "+str(queryByIdResponse1.wasSuccessful))
+
+#   SCAN THE DB
+scanByNameRequest0=scanPairingByFoodRequest("Burger")
+scanByNameResponse0=scanByNameRequest0.scanByName()
+print("Show results: "+scanByNameResponse0.getResponse())
+
+
 
