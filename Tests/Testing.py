@@ -7,7 +7,34 @@ sys.path.append(r"C:\Users\user\PycharmProjects\Harmony\Response")
 from CreateFoodItemTableRequest import createFoodItemTableRequest
 from CreateFoodItemTableResponse import createFoodItemTableResponse
 
+from InsertFoodItemRequest import insertFoodItemRequest
+from InsertFoodItemResponse import insertFoodItemResponse
+
+# CREATE THE TABLE
 creationRequest = createFoodItemTableRequest()
 creationResponse = creationRequest.request()
 
-print(creationResponse.wasSuccessful)
+print("Created table: " + str(creationResponse.wasSuccessful))
+
+# INSERT INTO THE TABLE
+insertRequest0 = insertFoodItemRequest("Burger", "Spur")
+insertResponse0 = insertRequest0.insert()
+print("Inserted Burger,Spur: " + str(insertResponse0.wasSuccessful))
+
+insertRequest1 = insertFoodItemRequest("Burger", "Rocomamas")
+insertResponse1 = insertRequest1.insert()
+print("Inserted Burger,Rocomamas: " + str(insertResponse1.wasSuccessful))
+
+insertRequest2 = insertFoodItemRequest("Burger", "Hudsons")
+insertResponse2 = insertRequest2.insert()
+print("Inserted Burger,Hudsons: " + str(insertResponse2.wasSuccessful))
+
+insertRequest3 = insertFoodItemRequest("Bolognaise", "Mimmos")
+insertResponse3 = insertRequest3.insert()
+print("Inserted Burger,Hudsons: " + str(insertResponse3.wasSuccessful))
+
+insertRequest4 = insertFoodItemRequest("Sushi", "John Dorys")
+insertResponse4 = insertRequest4.insert()
+print("Inserted Burger,Hudsons: " + str(insertResponse4.wasSuccessful))
+
+
