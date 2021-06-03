@@ -6,7 +6,7 @@ class queryFoodItemByIdRequest:
     def __init__(self,id):
         self.id=id
 
-    def scanById(self):
+    def queryById(self):
         responseObject = queryFoodItemByIdResponse()
         responseText = queryFoodItem(self.id)
         responseObject.setResponse(responseText)

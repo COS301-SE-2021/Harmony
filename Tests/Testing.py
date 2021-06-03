@@ -13,6 +13,9 @@ from InsertFoodItemResponse import insertFoodItemResponse
 from QueryFoodItemByIdRequest import queryFoodItemByIdRequest
 from QueryFoodItemByIdResponse import queryFoodItemByIdResponse
 
+from ScanByNameRequest import scanByNameRequest
+from ScanByNameResponse import scanByNameResponse
+
 # CREATE THE TABLE
 creationRequest = createFoodItemTableRequest()
 creationResponse = creationRequest.request()
@@ -41,10 +44,16 @@ insertResponse4 = insertRequest4.insert()
 print("Inserted Sushi,John Dorys: " + str(insertResponse4.wasSuccessful))
 
 # QUERY THE DB
-scanRequest0 = queryFoodItemByIdRequest(insertResponse4.getResponse())
-scanResponse0 = scanRequest0.scanById()
-print("Was sushi found?: "+str(scanResponse0.wasSuccessful))
+queryByIdRequest0 = queryFoodItemByIdRequest(insertResponse4.getResponse())
+queryByIdResponse0 = queryByIdRequest0.queryById()
+print("Was sushi found?: "+str(queryByIdResponse0.wasSuccessful))
 
-scanRequest1 = queryFoodItemByIdRequest(1563)
-scanResponse1 = scanRequest1.scanById()
-print("Was not exist found?: "+str(scanResponse1.wasSuccessful))
+queryByIdRequest1 = queryFoodItemByIdRequest(1563)
+queryByIdResponse1 = queryByIdRequest1.queryById()
+print("Was not exist found?: "+str(queryByIdResponse1.wasSuccessful))
+
+#   SCAN THE DB
+scanByNameRequest0=scanByNameRequest("Burger")
+scanByNameResponse0=scanByNameRequest0.scanByName()
+print("Show results: "+scanByNameResponse0.getResponse())
+
