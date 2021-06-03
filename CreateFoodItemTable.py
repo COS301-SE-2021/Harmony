@@ -3,7 +3,7 @@ import boto3
 
 def createFoodItemTable(dynamodb=None):
     if not dynamodb:
-        dynamodb = boto3.resource('dynamodb')
+        dynamodb = boto3.resource('dynamodb',endpoint_url="http://localhost:8000")
         # remove endpoint to use ddb in aws endpoint is to tell local db
 
     table = dynamodb.create_table(
@@ -11,13 +11,21 @@ def createFoodItemTable(dynamodb=None):
         KeySchema=[
             {
                 'AttributeName': 'ID',
-                'KeyType': 'HASH'  # Sort key
+                'KeyType': 'HASH'  # Partition key
+            },
+            {
+                'AttributeName': 'Name',
+                'KeyType': 'RANGE'  # Sort key
             }
         ],
         AttributeDefinitions=[
             {
                 'AttributeName': 'ID',
                 'AttributeType': 'N'
+            },
+            {
+                'AttributeName': 'Name',
+                'AttributeType': 'S'
             },
 
         ],
