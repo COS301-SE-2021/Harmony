@@ -10,6 +10,9 @@ from CreatePairingsTableResponse import createPairingsTableResponse
 from InsertPairingsRequest import insertPairingsRequest
 from InsertPairingsResponse import insertPairingsResponse
 
+from QueryPairingByIdRequest import queryPairingByIdRequest
+from QueryPairingByIdResponse import queryPairingByIdResponse
+
 # CREATE THE TABLE
 creationRequest = createPairingsTableRequest()
 creationResponse = creationRequest.request()
@@ -38,3 +41,13 @@ print("Inserted Bolognaise,Red wine: " + str(insertResponse3.wasSuccessful))
 insertRequest4 = insertPairingsRequest("Sushi", "White Wine", "John Dorys")
 insertResponse4 = insertRequest4.insert()
 print("Inserted Sushi,White wine: " + str(insertResponse4.wasSuccessful))
+
+# QUERY THE DB
+queryByIdRequest0 = queryPairingByIdRequest(insertResponse4.getResponse())
+queryByIdResponse0 = queryByIdRequest0.queryById()
+print("Sushis's drink : "+str(queryByIdResponse0.getResponse()))
+
+queryByIdRequest1 = queryPairingByIdRequest(1563)
+queryByIdResponse1 = queryByIdRequest1.queryById()
+print("Was not exist found?: "+str(queryByIdResponse1.wasSuccessful))
+
