@@ -3,11 +3,12 @@ import boto3
 
 def createFoodItemTable(dynamodb=None):
     if not dynamodb:
-        dynamodb = boto3.resource('dynamodb',endpoint_url="http://localhost:8000")
+        dynamodb = boto3.resource('dynamodb', endpoint_url="http://localhost:8000")
         # remove endpoint to use ddb in aws endpoint is to tell local db
-
+    table = dynamodb.Table('FoodItem')
+    table.delete()
     table = dynamodb.create_table(
-        TableName='FoodItem',
+        TableName="FoodItem",
         KeySchema=[
             {
                 'AttributeName': 'ID',
@@ -36,7 +37,6 @@ def createFoodItemTable(dynamodb=None):
     )
     return table
 
-
-if __name__ == '__main__':
-    foodItemTable = createFoodItemTable()
-    print("Table status:", foodItemTable.table_status)
+# if __name__ == '__main__':
+#  foodItemTable = createFoodItemTable()
+# print("Table status:", foodItemTable.table_status)
