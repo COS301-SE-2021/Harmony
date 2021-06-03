@@ -10,6 +10,9 @@ from CreateFoodItemTableResponse import createFoodItemTableResponse
 from InsertFoodItemRequest import insertFoodItemRequest
 from InsertFoodItemResponse import insertFoodItemResponse
 
+from QueryFoodItemByIdRequest import queryFoodItemByIdRequest
+from QueryFoodItemByIdResponse import queryFoodItemByIdResponse
+
 # CREATE THE TABLE
 creationRequest = createFoodItemTableRequest()
 creationResponse = creationRequest.request()
@@ -31,10 +34,17 @@ print("Inserted Burger,Hudsons: " + str(insertResponse2.wasSuccessful))
 
 insertRequest3 = insertFoodItemRequest("Bolognaise", "Mimmos")
 insertResponse3 = insertRequest3.insert()
-print("Inserted Burger,Hudsons: " + str(insertResponse3.wasSuccessful))
+print("Inserted Bolognaise,Mimmos: " + str(insertResponse3.wasSuccessful))
 
 insertRequest4 = insertFoodItemRequest("Sushi", "John Dorys")
 insertResponse4 = insertRequest4.insert()
-print("Inserted Burger,Hudsons: " + str(insertResponse4.wasSuccessful))
+print("Inserted Sushi,John Dorys: " + str(insertResponse4.wasSuccessful))
 
+# QUERY THE DB
+scanRequest0 = queryFoodItemByIdRequest(insertResponse4.getResponse())
+scanResponse0 = scanRequest0.scanById()
+print("Was sushi found?: "+str(scanResponse0.wasSuccessful))
 
+scanRequest1 = queryFoodItemByIdRequest(1563)
+scanResponse1 = scanRequest1.scanById()
+print("Was not exist found?: "+str(scanResponse1.wasSuccessful))

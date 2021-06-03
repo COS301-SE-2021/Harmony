@@ -9,10 +9,9 @@ def putFoodItem(name, location, dynamodb=None):
 
     table = dynamodb.Table('FoodItem')
     id = random.randint(1000, 9999)
-    print(id)
     item = {'ID': id, 'Name': name, 'Location': location}
     response = table.put_item(Item=item)
-    return response
+    return id       #return id because this query doesnt return anything
 
 
 #if __name__ == '__main__':

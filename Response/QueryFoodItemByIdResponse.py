@@ -1,15 +1,14 @@
 from pprint import pprint
-class insertFoodItemResponse:
+
+
+class queryFoodItemByIdResponse:
     def __init__(self):
         self.wasSuccessful = False
 
-    def setResponse(self, id):
-       # pprint(response)
-        if id:
+    def setResponse(self, response):
+        self.response = response
+        if response:
             self.wasSuccessful=True
-            self.response=id
-        #query does not return anything
-
 
     def getResponse(self):
         return self.response
