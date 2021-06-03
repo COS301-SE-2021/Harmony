@@ -28,7 +28,7 @@ such as AWS Rekognition.
 
 ## Recorded demo
 
-* :tv: [DreamTeam-Demo1](https://drive.google.com/open?id=)
+* :tv: [DreamTeam-Demo1](https://drive.google.com/file/d/1nDxiOpgDTvwF3yLKnQhtvAptHO-trJP8/view?usp=sharing)
 
 ## SRS document
 * :open_book: [SRS Document](https://www.overleaf.com/read/)
