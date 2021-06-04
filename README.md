@@ -28,10 +28,10 @@ such as AWS Rekognition.
 
 ## Recorded demo
 
-* :tv: [DreamTeam-Demo1](https://drive.google.com/open?id=)
+* :tv: [DreamTeam-Demo1](https://drive.google.com/file/d/1nDxiOpgDTvwF3yLKnQhtvAptHO-trJP8/view?usp=sharing)
 
 ## SRS document
-* :open_book: [SRS Document](https://www.overleaf.com/read/)
+* :open_book: [SRS Document](https://drive.google.com/file/d/1b0Vfq70Yxiso4dJOJbDcvd1jPnjZuZAg/view?usp=sharing)
 
 ## Project Management Tools
 
