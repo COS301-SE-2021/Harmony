@@ -44,6 +44,18 @@ const styles = StyleSheet.create({
       fontFamily:"sans-serif-light"
     },
 
+    TextLarge:{
+      fontFamily:"sans-serif-light",
+      fontSize: 30, 
+    },
+    TextMedium:{
+      fontFamily:"sans-serif-light",
+      fontSize: 23, 
+    },
+    TextSmall:{
+      fontFamily:"sans-serif-light",
+      fontSize:14
+    },
     regularImage:{
       width:150,
       height:100
