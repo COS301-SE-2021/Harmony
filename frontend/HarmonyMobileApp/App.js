@@ -4,9 +4,11 @@ import {
   Text, View,  
   TextInput,
   Button,
+  SafeAreaView,
   TouchableOpacity
  } from 'react-native';
 
+ import ViewIndividualItems from "./viewIndividualItems";
 import styles from './styles'
 export default function App() {
 
@@ -15,7 +17,7 @@ export default function App() {
   
   
   return (
-    <View style={styles.container}>
+  /*  <View style={styles.container}>
       <StatusBar style="auto" />
 
       <StatusBar style="auto" />
@@ -45,7 +47,11 @@ export default function App() {
       <TouchableOpacity style={styles.loginBtn}>
       <Text style={styles.loginText}>LOGIN</Text>
       </TouchableOpacity>
-    </View>
+    </View>*/
+
+    <SafeAreaView>
+      <ViewIndividualItems/>
+    </SafeAreaView>
 
   );
 }

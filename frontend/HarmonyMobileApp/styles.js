@@ -39,6 +39,10 @@ const styles = StyleSheet.create({
       marginTop: 40,
       backgroundColor: "#20b2aa",
     },
+
+    Text:{
+      fontFamily:"sans-serif-condensed"
+    }
 });
   
 export default styles;
