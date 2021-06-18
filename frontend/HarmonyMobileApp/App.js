@@ -49,9 +49,9 @@ export default function App() {
       </TouchableOpacity>
     </View>*/
 
-    <SafeAreaView>
+    //<SafeAreaView>
       <ViewIndividualItems/>
-    </SafeAreaView>
+    //</SafeAreaView>
 
   );
 }

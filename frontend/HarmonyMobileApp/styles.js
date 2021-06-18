@@ -41,7 +41,12 @@ const styles = StyleSheet.create({
     },
 
     Text:{
-      fontFamily:"sans-serif-condensed"
+      fontFamily:"sans-serif-light"
+    },
+
+    regularImage:{
+      width:150,
+      height:100
     }
 });
   
