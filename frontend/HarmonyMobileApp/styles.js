@@ -39,6 +39,27 @@ const styles = StyleSheet.create({
       marginTop: 40,
       backgroundColor: "#20b2aa",
     },
+
+    Text:{
+      fontFamily:"sans-serif-light"
+    },
+
+    TextLarge:{
+      fontFamily:"sans-serif-light",
+      fontSize: 30, 
+    },
+    TextMedium:{
+      fontFamily:"sans-serif-light",
+      fontSize: 23, 
+    },
+    TextSmall:{
+      fontFamily:"sans-serif-light",
+      fontSize:14
+    },
+    regularImage:{
+      width:150,
+      height:100
+    }
 });
   
 export default styles;
