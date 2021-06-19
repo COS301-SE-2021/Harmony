@@ -15,38 +15,40 @@ const ShowLatestPairings =(props)=>{
                         <Image source={require("./assets/plus.png")} style={styles.smallImage}/>
                     </View>
                      <Text style={styles.TextMedium}> A Milkshake </Text>
-                   
+                     <View style={{justifyContent:"center",}}>
+                        <Image source={require("./assets/location.png")} style={{ width:30, height:30, resizeMode:"contain"}}/>
+                    </View>
                 </View>
                 <View style={styles.backgroundBarShowLatest}>
-                    <Text style={styles.TextMedium}> Waffles </Text>
+                    <Text style={styles.TextMedium}> Burgers </Text>
                     <View style={{justifyContent:"center"}}>
                         <Image source={require("./assets/plus.png")} style={styles.smallImage}/>
                     </View>
-                    <Text style={styles.TextMedium}> A Milkshake </Text>
+                    <Text style={styles.TextMedium}> Coke </Text>
 
                 </View>
                 <View style={styles.backgroundBarShowLatest}>
-                    <Text style={styles.TextMedium}> Waffles </Text>
+                    <Text style={styles.TextMedium}> French toast </Text>
                     <View style={{justifyContent:"center"}}>
                         <Image source={require("./assets/plus.png")} style={styles.smallImage}/>
                     </View>
-                    <Text style={styles.TextMedium}> A Milkshake </Text>
+                    <Text style={styles.TextMedium}> Coffee </Text>
 
                 </View>
                 <View style={styles.backgroundBarShowLatest}>
-                    <Text style={styles.TextMedium}> Waffles </Text>
+                    <Text style={styles.TextMedium}> Bunny Chow </Text>
                     <View style={{justifyContent:"center"}}>
                         <Image source={require("./assets/plus.png")} style={styles.smallImage}/>
                     </View>
-                    <Text style={styles.TextMedium}> A Milkshake </Text>
+                    <Text style={styles.TextMedium}> Coke </Text>
 
                 </View>
                 <View style={styles.backgroundBarShowLatest}>
-                    <Text style={styles.TextMedium}> Waffles </Text>
+                    <Text style={styles.TextMedium}> Koeksister </Text>
                     <View style={{justifyContent:"center"}}>
                         <Image source={require("./assets/plus.png")} style={styles.smallImage}/>
                     </View>
-                    <Text style={styles.TextMedium}> A Milkshake </Text>
+                    <Text style={styles.TextMedium}> Tea </Text>
 
                 </View>
             </ScrollView>

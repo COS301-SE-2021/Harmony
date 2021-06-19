@@ -69,11 +69,13 @@ const styles = StyleSheet.create({
     },
     regularImage:{
       width:150,
-      height:100
+      height:100,
+      resizeMode:"contain"
     },
     smallImage:{
       width:50,
-      height:50
+      height:50,
+      resizeMode:"contain"
     }
 });
   
