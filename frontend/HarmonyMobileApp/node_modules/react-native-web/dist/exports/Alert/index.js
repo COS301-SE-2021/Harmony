@@ -6,9 +6,7 @@
  *
  * 
  */
-var Alert =
-/*#__PURE__*/
-function () {
+var Alert = /*#__PURE__*/function () {
   function Alert() {}
 
   Alert.alert = function alert() {};

@@ -7,9 +7,7 @@
  * 
  */
 var dataUriPattern = /^data:/;
-export var ImageUriCache =
-/*#__PURE__*/
-function () {
+export var ImageUriCache = /*#__PURE__*/function () {
   function ImageUriCache() {}
 
   ImageUriCache.has = function has(uri) {

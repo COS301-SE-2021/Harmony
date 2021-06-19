@@ -56,11 +56,12 @@ const styles = StyleSheet.create({
 
     TextLarge:{
       fontFamily:"sans-serif-light",
-      fontSize: 30, 
+      fontSize: 30,
+      textAlignVertical:"center"
     },
     TextMedium:{
       fontFamily:"sans-serif-light",
-      fontSize: 23, 
+      fontSize: 23,
     },
     TextSmall:{
       fontFamily:"sans-serif-light",
@@ -77,5 +78,5 @@ const styles = StyleSheet.create({
       resizeMode:"contain"
     }
 });
-  
+
 export default styles;
