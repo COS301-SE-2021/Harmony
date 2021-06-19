@@ -6,15 +6,7 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
-    },
-
-    rowContainer: {
-      flexDirection: 'row',
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
-      marginBottom: 20,
-      marginLeft: 20,
+      position:"absolute"
     },
   
     inputView: {
@@ -49,6 +41,15 @@ const styles = StyleSheet.create({
       backgroundColor: "#20b2aa",
     },
 
+    backgroundBarShowLatest: {
+      width: "70%",
+      borderRadius: 25,
+      alignItems: "center",
+      justifyContent: "center",
+      marginTop: 40,
+      position:"relative",
+      backgroundColor: "#20b2aa",
+    },
     Text:{
       fontFamily:"sans-serif-light"
     },
@@ -56,11 +57,10 @@ const styles = StyleSheet.create({
     TextLarge:{
       fontFamily:"sans-serif-light",
       fontSize: 30, 
-      textAlign:"center"
     },
     TextMedium:{
       fontFamily:"sans-serif-light",
-      fontSize: 20, 
+      fontSize: 23, 
     },
     TextSmall:{
       fontFamily:"sans-serif-light",
@@ -69,6 +69,10 @@ const styles = StyleSheet.create({
     regularImage:{
       width:150,
       height:100
+    },
+    smallImage:{
+      width:50,
+      height:50
     }
 });
   
