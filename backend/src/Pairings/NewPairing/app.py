@@ -27,5 +27,16 @@ def lambda_handler(event, context):
     f = event['Location']
     g = event['UID']
 
+    response = table.put_item(
+        Item={
+            'PID': a,
+            'DrinkDesc': b,
+            'DrinkItem': c,
+            'FoodDesc': d,
+            'FoodItem': e,
+            'Location': f,
+            'UID': g
+        })
+
 
 
