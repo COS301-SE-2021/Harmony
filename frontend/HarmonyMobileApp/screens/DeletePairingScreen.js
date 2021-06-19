@@ -8,6 +8,7 @@ import {
   StyleSheet,
   StatusBar,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 
 import {
@@ -21,6 +22,27 @@ import {
 import styles from "../styles";
 
 const DeletePairingScreen = (props) => {
+  const showConfirmDialog = () => {
+    return Alert.alert(
+      "Delete",
+      "Are you sure you want to delete this pairing?",
+      [
+        // The "Yes" button
+        {
+          text: "Yes",
+          onPress: () => {
+            //setShowBox(false);
+          },
+        },
+        // The "No" button
+        // Does nothing but dismiss the dialog when tapped
+        {
+          text: "No",
+        },
+      ]
+    );
+  };
+
   return (
     <SafeAreaView style={personalStyles.container}>
       <View style={{ paddingBottom: "2%", paddingRight: "0.5%" }}>
@@ -53,12 +75,14 @@ const DeletePairingScreen = (props) => {
               </View>
               <View>
                 <Text style={styles.TextSmall}>
-                  {" "}
                   Waffle House, Ramsgate, South Coast
                 </Text>
               </View>
             </View>
-            <TouchableOpacity style={personalStyles.addToFavouriteBtn}>
+            <TouchableOpacity
+              style={personalStyles.addToFavouriteBtn}
+              onPress={() => showConfirmDialog()}
+            >
               <AntDesign name="minuscircleo" size={60} color="red" />
             </TouchableOpacity>
           </View>
@@ -82,12 +106,14 @@ const DeletePairingScreen = (props) => {
               </View>
               <View>
                 <Text style={styles.TextSmall}>
-                  {" "}
                   Rocomamas, Gateway, Umhlanga
                 </Text>
               </View>
             </View>
-            <TouchableOpacity style={personalStyles.addToFavouriteBtn}>
+            <TouchableOpacity
+              style={personalStyles.addToFavouriteBtn}
+              onPress={() => showConfirmDialog()}
+            >
               <AntDesign name="minuscircleo" size={60} color="red" />
             </TouchableOpacity>
           </View>
@@ -113,7 +139,10 @@ const DeletePairingScreen = (props) => {
                 <Text style={styles.TextSmall}> 1855, Lynnwood, Pretoria</Text>
               </View>
             </View>
-            <TouchableOpacity style={personalStyles.addToFavouriteBtn}>
+            <TouchableOpacity
+              style={personalStyles.addToFavouriteBtn}
+              onPress={() => showConfirmDialog()}
+            >
               <AntDesign name="minuscircleo" size={60} color="red" />
             </TouchableOpacity>
           </View>
@@ -137,12 +166,14 @@ const DeletePairingScreen = (props) => {
               </View>
               <View>
                 <Text style={styles.TextSmall}>
-                  {" "}
                   4 Chilli, Garsfontein, Pretoria
                 </Text>
               </View>
             </View>
-            <TouchableOpacity style={personalStyles.addToFavouriteBtn}>
+            <TouchableOpacity
+              style={personalStyles.addToFavouriteBtn}
+              onPress={() => showConfirmDialog()}
+            >
               <AntDesign name="minuscircleo" size={60} color="red" />
             </TouchableOpacity>
           </View>
@@ -166,12 +197,14 @@ const DeletePairingScreen = (props) => {
               </View>
               <View>
                 <Text style={styles.TextSmall}>
-                  {" "}
                   Bakehouse, HazelWood, Pretoria
                 </Text>
               </View>
             </View>
-            <TouchableOpacity style={personalStyles.addToFavouriteBtn}>
+            <TouchableOpacity
+              style={personalStyles.addToFavouriteBtn}
+              onPress={() => showConfirmDialog()}
+            >
               <AntDesign name="minuscircleo" size={60} color="red" />
             </TouchableOpacity>
           </View>
