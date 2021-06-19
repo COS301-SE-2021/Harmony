@@ -10,46 +10,89 @@ const ShowLatestPairings =(props)=>{
             </View>
             <ScrollView style={personalStyles.scrollView}>
                 <View style={styles.backgroundBarShowLatest}>
-                    <Text style={styles.TextMedium}> Waffles </Text>
-                    <View style={{justifyContent:"center"}}>
-                        <Image source={require("./assets/plus.png")} style={styles.smallImage}/>
+                    <View style={{flexDirection:"row",alignItems:"center"}}>
+                        <Text style={styles.TextMedium}> Waffles </Text>
+                        <View style={{justifyContent:"center"}}>
+                            <Image source={require("./assets/plus.png")} style={styles.smallImage}/>
+                        </View>
+                        <Text style={styles.TextMedium}> A Milkshake </Text>
                     </View>
-                     <Text style={styles.TextMedium}> A Milkshake </Text>
-                     <View style={{justifyContent:"center",}}>
-                        <Image source={require("./assets/location.png")} style={{ width:30, height:30, resizeMode:"contain"}}/>
+                    <View style={{flexDirection:"row",alignItems:"center"}}>
+                        <View style={{justifyContent:"center",}}>
+                            <Image source={require("./assets/location.png")} style={{ width:30, height:30, resizeMode:"contain"}}/>
+                        </View>
+                        <View>
+                            <Text style={styles.TextSmall}> Waffle House, Ramsgate, South Coast</Text>
+                        </View>
                     </View>
                 </View>
                 <View style={styles.backgroundBarShowLatest}>
-                    <Text style={styles.TextMedium}> Burgers </Text>
-                    <View style={{justifyContent:"center"}}>
-                        <Image source={require("./assets/plus.png")} style={styles.smallImage}/>
+                    <View style={{flexDirection:"row",alignItems:"center"}}>
+                        <Text style={styles.TextMedium}> Burgers </Text>
+                        <View style={{justifyContent:"center"}}>
+                            <Image source={require("./assets/plus.png")} style={styles.smallImage}/>
+                        </View>
+                        <Text style={styles.TextMedium}> Coke </Text>
                     </View>
-                    <Text style={styles.TextMedium}> Coke </Text>
-
+                    <View style={{flexDirection:"row",alignItems:"center"}}>
+                        <View style={{justifyContent:"center",}}>
+                            <Image source={require("./assets/location.png")} style={{ width:30, height:30, resizeMode:"contain"}}/>
+                        </View>
+                        <View>
+                            <Text style={styles.TextSmall}> Rocomamas, Gateway, Umhlanga</Text>
+                        </View>
+                    </View>
                 </View>
                 <View style={styles.backgroundBarShowLatest}>
-                    <Text style={styles.TextMedium}> French toast </Text>
-                    <View style={{justifyContent:"center"}}>
-                        <Image source={require("./assets/plus.png")} style={styles.smallImage}/>
+                    <View style={{flexDirection:"row",alignItems:"center"}}>
+                        <Text style={styles.TextMedium}> French Toast </Text>
+                        <View style={{justifyContent:"center"}}>
+                            <Image source={require("./assets/plus.png")} style={styles.smallImage}/>
+                        </View>
+                        <Text style={styles.TextMedium}> Coffee </Text>
                     </View>
-                    <Text style={styles.TextMedium}> Coffee </Text>
-
+                    <View style={{flexDirection:"row",alignItems:"center"}}>
+                        <View style={{justifyContent:"center",}}>
+                            <Image source={require("./assets/location.png")} style={{ width:30, height:30, resizeMode:"contain"}}/>
+                        </View>
+                        <View>
+                            <Text style={styles.TextSmall}> 1855, Lynnwood, Pretoria</Text>
+                        </View>
+                    </View>
                 </View>
                 <View style={styles.backgroundBarShowLatest}>
-                    <Text style={styles.TextMedium}> Bunny Chow </Text>
-                    <View style={{justifyContent:"center"}}>
-                        <Image source={require("./assets/plus.png")} style={styles.smallImage}/>
+                    <View style={{flexDirection:"row",alignItems:"center"}}>
+                        <Text style={styles.TextMedium}> Bunny Chow </Text>
+                        <View style={{justifyContent:"center"}}>
+                            <Image source={require("./assets/plus.png")} style={styles.smallImage}/>
+                        </View>
+                        <Text style={styles.TextMedium}> Coke </Text>
                     </View>
-                    <Text style={styles.TextMedium}> Coke </Text>
-
+                    <View style={{flexDirection:"row",alignItems:"center"}}>
+                        <View style={{justifyContent:"center",}}>
+                            <Image source={require("./assets/location.png")} style={{ width:30, height:30, resizeMode:"contain"}}/>
+                        </View>
+                        <View>
+                            <Text style={styles.TextSmall}> 4 Chilli, Garsfontein, Pretoria</Text>
+                        </View>
+                    </View>
                 </View>
                 <View style={styles.backgroundBarShowLatest}>
-                    <Text style={styles.TextMedium}> Koeksister </Text>
-                    <View style={{justifyContent:"center"}}>
-                        <Image source={require("./assets/plus.png")} style={styles.smallImage}/>
+                    <View style={{flexDirection:"row",alignItems:"center"}}>
+                        <Text style={styles.TextMedium}> Koeksister </Text>
+                        <View style={{justifyContent:"center"}}>
+                            <Image source={require("./assets/plus.png")} style={styles.smallImage}/>
+                        </View>
+                        <Text style={styles.TextMedium}> Tea </Text>
                     </View>
-                    <Text style={styles.TextMedium}> Tea </Text>
-
+                    <View style={{flexDirection:"row",alignItems:"center"}}>
+                        <View style={{justifyContent:"center",}}>
+                            <Image source={require("./assets/location.png")} style={{ width:30, height:30, resizeMode:"contain"}}/>
+                        </View>
+                        <View>
+                            <Text style={styles.TextSmall}> Bakehouse, HazelWood, Pretoria</Text>
+                        </View>
+                    </View>
                 </View>
             </ScrollView>
         </SafeAreaView>

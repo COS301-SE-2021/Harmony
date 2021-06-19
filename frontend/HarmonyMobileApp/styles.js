@@ -48,7 +48,6 @@ const styles = StyleSheet.create({
       marginTop: 40,
       position:"relative",
       backgroundColor: "grey",
-      flexDirection:"row",
       padding:"5%"
     },
     Text:{
