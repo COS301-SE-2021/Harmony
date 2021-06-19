@@ -29,13 +29,11 @@ var componentProviderInstrumentationHook = function componentProviderInstrumenta
 };
 
 var wrapperComponentProvider;
-
 /**
  * `AppRegistry` is the JS entry point to running all React Native apps.
  */
-var AppRegistry =
-/*#__PURE__*/
-function () {
+
+var AppRegistry = /*#__PURE__*/function () {
   function AppRegistry() {}
 
   AppRegistry.getAppKeys = function getAppKeys() {
