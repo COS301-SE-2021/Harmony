@@ -22,4 +22,13 @@ def lambda_handler(event, context):
     drink = item['DrinkItem']
     print("Match founds: " + food + " goes well with " + drink)
 
+    return {
+        "statusCode": 200,
+        "body": json.dumps({
+            "message": "A pairing has been found",
+            "Food Item": food,
+            "Drink Item": drink
+
+        }),
+    }
 
