@@ -1,17 +1,20 @@
 import "react-native-gesture-handler";
 import React from "react";
-
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-
 import { FontAwesome, AntDesign, MaterialIcons } from "@expo/vector-icons";
 
-import LoginScreen from "./LoginScreen.js";
-import HomeScreen from "./HomeScreen.js";
-import NewPairingScreen from "./NewPairingScreen.js";
-import DeletePairingScreen from "./DeletePairingScreen.js";
-import ViewPairingsScreen from "./ViewPairingsScreen.js";
+import LoginScreen from "./screens/LoginScreen";
+import HomeScreen from "./screens/HomeScreen.js";
+import NewPairingScreen from "./screens/NewPairingScreen.js";
+import DeletePairingScreen from "./screens/DeletePairingScreen.js";
+import ViewPairingsScreen from "./screens/ViewPairingsScreen.js";
+
+import AddToFavouritesScreen from "./screens/AddToFavouritesScreen.js";
+import ShowLatestPairingsScreen from "./screens/ShowLatestPairingsScreen.js";
+import ViewAllPairingsScreen from "./screens/ViewAllPairingsScreen.js";
+import ViewIndividualItemsScreen from "./screens/ViewIndividualItemsScreen.js";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -63,6 +66,50 @@ function App() {
           component={DeletePairingScreen}
           options={{
             title: "Delete pairing",
+            drawerIcon: ({ focused, size }) => (
+              <MaterialIcons name="delete" size={24} color="black" />
+            ),
+          }}
+        />
+
+        <Drawer.Screen
+          name="AddToFavourites"
+          component={AddToFavouritesScreen}
+          options={{
+            title: "Add To Favourites",
+            drawerIcon: ({ focused, size }) => (
+              <MaterialIcons name="delete" size={24} color="black" />
+            ),
+          }}
+        />
+
+        <Drawer.Screen
+          name="ShowLatestPairings"
+          component={ShowLatestPairingsScreen}
+          options={{
+            title: "Show Latest Pairings",
+            drawerIcon: ({ focused, size }) => (
+              <MaterialIcons name="delete" size={24} color="black" />
+            ),
+          }}
+        />
+
+        <Drawer.Screen
+          name="ViewAllPairings"
+          component={ViewAllPairingsScreen}
+          options={{
+            title: "View All Pairings",
+            drawerIcon: ({ focused, size }) => (
+              <MaterialIcons name="delete" size={24} color="black" />
+            ),
+          }}
+        />
+
+        <Drawer.Screen
+          name="ViewIndividualItems"
+          component={ViewIndividualItemsScreen}
+          options={{
+            title: "View Individual Items Screen",
             drawerIcon: ({ focused, size }) => (
               <MaterialIcons name="delete" size={24} color="black" />
             ),
