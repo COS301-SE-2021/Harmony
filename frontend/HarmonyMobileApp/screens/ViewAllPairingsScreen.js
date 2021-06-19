@@ -9,7 +9,7 @@ import {
   StatusBar,
   TouchableOpacity,
 } from "react-native";
-import styles from "./styles";
+import styles from "../styles";
 
 const ViewAllPairingsScreen = (props) => {
   return (
@@ -28,7 +28,7 @@ const ViewAllPairingsScreen = (props) => {
           >
             <View>
               <Image
-                source={require("./assets/person.png")}
+                source={require("../assets/person.png")}
                 style={{ width: 40, height: 40, resizeMode: "contain" }}
               />
             </View>
@@ -40,7 +40,7 @@ const ViewAllPairingsScreen = (props) => {
             <Text style={styles.TextMedium}> Waffles </Text>
             <View style={{ justifyContent: "center" }}>
               <Image
-                source={require("./assets/plus.png")}
+                source={require("../assets/plus.png")}
                 style={styles.smallImage}
               />
             </View>
@@ -49,7 +49,7 @@ const ViewAllPairingsScreen = (props) => {
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <View style={{ justifyContent: "center" }}>
               <Image
-                source={require("./assets/location.png")}
+                source={require("../assets/location.png")}
                 style={{ width: 30, height: 30, resizeMode: "contain" }}
               />
             </View>
@@ -63,7 +63,7 @@ const ViewAllPairingsScreen = (props) => {
           <TouchableOpacity style={personalStyles.addToFavouriteBtn}>
             <View style={{ justifyContent: "center" }}>
               <Image
-                source={require("./assets/favourites.png")}
+                source={require("../assets/favourites.png")}
                 style={{ width: 40, height: 40, resizeMode: "contain" }}
               />
             </View>
@@ -82,7 +82,7 @@ const ViewAllPairingsScreen = (props) => {
           >
             <View>
               <Image
-                source={require("./assets/person.png")}
+                source={require("../assets/person.png")}
                 style={{ width: 40, height: 40, resizeMode: "contain" }}
               />
             </View>
@@ -94,7 +94,7 @@ const ViewAllPairingsScreen = (props) => {
             <Text style={styles.TextMedium}> Burgers </Text>
             <View style={{ justifyContent: "center" }}>
               <Image
-                source={require("./assets/plus.png")}
+                source={require("../assets/plus.png")}
                 style={styles.smallImage}
               />
             </View>
@@ -103,7 +103,7 @@ const ViewAllPairingsScreen = (props) => {
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <View style={{ justifyContent: "center" }}>
               <Image
-                source={require("./assets/location.png")}
+                source={require("../assets/location.png")}
                 style={{ width: 30, height: 30, resizeMode: "contain" }}
               />
             </View>
@@ -117,7 +117,7 @@ const ViewAllPairingsScreen = (props) => {
           <TouchableOpacity style={personalStyles.addToFavouriteBtn}>
             <View style={{ justifyContent: "center" }}>
               <Image
-                source={require("./assets/favourites.png")}
+                source={require("../assets/favourites.png")}
                 style={{ width: 40, height: 40, resizeMode: "contain" }}
               />
             </View>
@@ -136,7 +136,7 @@ const ViewAllPairingsScreen = (props) => {
           >
             <View>
               <Image
-                source={require("./assets/person.png")}
+                source={require("../assets/person.png")}
                 style={{ width: 40, height: 40, resizeMode: "contain" }}
               />
             </View>
@@ -148,7 +148,7 @@ const ViewAllPairingsScreen = (props) => {
             <Text style={styles.TextMedium}> French Toast </Text>
             <View style={{ justifyContent: "center" }}>
               <Image
-                source={require("./assets/plus.png")}
+                source={require("../assets/plus.png")}
                 style={styles.smallImage}
               />
             </View>
@@ -157,7 +157,7 @@ const ViewAllPairingsScreen = (props) => {
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <View style={{ justifyContent: "center" }}>
               <Image
-                source={require("./assets/location.png")}
+                source={require("../assets/location.png")}
                 style={{ width: 30, height: 30, resizeMode: "contain" }}
               />
             </View>
@@ -168,7 +168,7 @@ const ViewAllPairingsScreen = (props) => {
           <TouchableOpacity style={personalStyles.addToFavouriteBtn}>
             <View style={{ justifyContent: "center" }}>
               <Image
-                source={require("./assets/favourites.png")}
+                source={require("../assets/favourites.png")}
                 style={{ width: 40, height: 40, resizeMode: "contain" }}
               />
             </View>
@@ -187,7 +187,7 @@ const ViewAllPairingsScreen = (props) => {
           >
             <View>
               <Image
-                source={require("./assets/person.png")}
+                source={require("../assets/person.png")}
                 style={{ width: 40, height: 40, resizeMode: "contain" }}
               />
             </View>
@@ -199,7 +199,7 @@ const ViewAllPairingsScreen = (props) => {
             <Text style={styles.TextMedium}> Bunny Chow </Text>
             <View style={{ justifyContent: "center" }}>
               <Image
-                source={require("./assets/plus.png")}
+                source={require("../assets/plus.png")}
                 style={styles.smallImage}
               />
             </View>
@@ -208,7 +208,7 @@ const ViewAllPairingsScreen = (props) => {
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <View style={{ justifyContent: "center" }}>
               <Image
-                source={require("./assets/location.png")}
+                source={require("../assets/location.png")}
                 style={{ width: 30, height: 30, resizeMode: "contain" }}
               />
             </View>
@@ -222,7 +222,7 @@ const ViewAllPairingsScreen = (props) => {
           <TouchableOpacity style={personalStyles.addToFavouriteBtn}>
             <View style={{ justifyContent: "center" }}>
               <Image
-                source={require("./assets/favourites.png")}
+                source={require("../assets/favourites.png")}
                 style={{ width: 40, height: 40, resizeMode: "contain" }}
               />
             </View>
@@ -241,7 +241,7 @@ const ViewAllPairingsScreen = (props) => {
           >
             <View>
               <Image
-                source={require("./assets/person.png")}
+                source={require("../assets/person.png")}
                 style={{ width: 40, height: 40, resizeMode: "contain" }}
               />
             </View>
@@ -253,7 +253,7 @@ const ViewAllPairingsScreen = (props) => {
             <Text style={styles.TextMedium}> Koeksister </Text>
             <View style={{ justifyContent: "center" }}>
               <Image
-                source={require("./assets/plus.png")}
+                source={require("../assets/plus.png")}
                 style={styles.smallImage}
               />
             </View>
@@ -262,7 +262,7 @@ const ViewAllPairingsScreen = (props) => {
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <View style={{ justifyContent: "center" }}>
               <Image
-                source={require("./assets/location.png")}
+                source={require("../assets/location.png")}
                 style={{ width: 30, height: 30, resizeMode: "contain" }}
               />
             </View>
@@ -276,7 +276,7 @@ const ViewAllPairingsScreen = (props) => {
           <TouchableOpacity style={personalStyles.addToFavouriteBtn}>
             <View style={{ justifyContent: "center" }}>
               <Image
-                source={require("./assets/favourites.png")}
+                source={require("../assets/favourites.png")}
                 style={{ width: 40, height: 40, resizeMode: "contain" }}
               />
             </View>

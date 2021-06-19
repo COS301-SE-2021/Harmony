@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, SafeAreaView, Image } from "react-native";
-import styles from "./styles";
+import styles from "../styles";
 
 const ViewIndividualItemsScreen = (props) => {
   return (
@@ -16,20 +16,20 @@ const ViewIndividualItemsScreen = (props) => {
       >
         <View>
           <Image
-            source={require("./assets/waffles.jpg")}
+            source={require("../assets/waffles.jpg")}
             style={styles.regularImage}
           />
           <Text style={styles.TextMedium}> Waffles </Text>
         </View>
         <View style={{ justifyContent: "center" }}>
           <Image
-            source={require("./assets/plus.png")}
+            source={require("../assets/plus.png")}
             style={styles.smallImage}
           />
         </View>
         <View>
           <Image
-            source={require("./assets/milkshake.jpg")}
+            source={require("../assets/milkshake.jpg")}
             style={styles.regularImage}
           />
           <Text style={styles.TextSmall}> A Milkshake </Text>
