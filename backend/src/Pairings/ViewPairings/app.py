@@ -38,7 +38,8 @@ def lambda_handler(event, context):
         KeyConditionExpression=
         Key('PID').eq('p5')
     )
-
+    items5 = response['Items']
+    print(items5)
 
     return {
 
