@@ -26,3 +26,11 @@ def lambda_handler(event, context):
     )
     items3 = response['Items']
     print(items3)
+
+    return {
+
+        "StatusCode": 200,
+
+        "Data": items3 + items2 + items1
+    }
+
