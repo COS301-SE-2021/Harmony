@@ -10,12 +10,9 @@ function NewPairingScreen({ navigation }) {
           title="Go to NewPairing... again"
           onPress={() => navigation.push('NewPairing')}
         /> */}
-        <Button title="Home" onPress={() => navigation.navigate('Home')} />
+        {/* <Button title="Home" onPress={() => navigation.navigate('Home')} /> */}
         {/* <Button title="Back" onPress={() => navigation.goBack()} /> */}
-        <Button
-          title="Logout"
-          onPress={() => navigation.popToTop()}
-        />
+        {/* <Button title="Logout" onPress={() => navigation.navigate('Logout')} /> */}
       </View>
     );
   }

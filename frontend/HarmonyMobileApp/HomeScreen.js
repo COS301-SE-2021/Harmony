@@ -6,15 +6,8 @@ function HomeScreen({ navigation }) {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>Home Screen </Text>
-        <Button
-          title="Go to NewPairing"
-          onPress={() => navigation.navigate('NewPairing')}
-        />
-
-        <Button
-          title="Logout"
-          onPress={() => navigation.popToTop()}
-        />
+        {/* <Button title="Go to NewPairing" onPress={() => navigation.navigate('NewPairing')}/> */}
+        {/* <Button title="Logout" onPress={() => navigation.navigate('Logout')} /> */}
 
       </View>
     );
