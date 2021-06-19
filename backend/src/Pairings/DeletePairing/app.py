@@ -19,13 +19,16 @@ now = strftime("%a, %d %b %Y %H:%M:%S +0000", gmtime())
 def lambda_handler(event, context):
 # extract values from the event object we got from the Lambda service and store in a variable
     pid = event[1]
+
     try:
+        #delete based on id from request
         response = table.delete_item(
             Key={
                 'PID': pid
             }
         )
     except ClientError as e:
+        #throw error if failed
         if e.response['Error']['Code'] == "ConditionalCheckFailedException":
             print(e.response['Error']['Message'])
         else:
