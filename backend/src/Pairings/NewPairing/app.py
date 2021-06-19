@@ -38,5 +38,10 @@ def lambda_handler(event, context):
             'UID': g
         })
 
+    return {
+        'statusCode': 200,
+        'body': json.dumps('The new pairing consists of , ' + event['DrinkItem'] + ' and ' + event['FoodItem'])
+    }
+
 
 
