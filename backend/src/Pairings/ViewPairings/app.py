@@ -12,4 +12,5 @@ def lambda_handler(event, context):
         KeyConditionExpression=
         Key('PID').eq('p1')
     )
-
+    items1 = response['Items']
+    print(items1)
