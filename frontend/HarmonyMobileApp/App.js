@@ -3,7 +3,13 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import { FontAwesome, AntDesign, MaterialIcons } from "@expo/vector-icons";
+import {
+  FontAwesome,
+  AntDesign,
+  MaterialIcons,
+  Entypo,
+  FontAwesome5,
+} from "@expo/vector-icons";
 
 import LoginScreen from "./screens/LoginScreen";
 import HomeScreen from "./screens/HomeScreen.js";
@@ -15,6 +21,7 @@ import AddToFavouritesScreen from "./screens/AddToFavouritesScreen.js";
 import ShowLatestPairingsScreen from "./screens/ShowLatestPairingsScreen.js";
 import ViewAllPairingsScreen from "./screens/ViewAllPairingsScreen.js";
 import ViewIndividualItemsScreen from "./screens/ViewIndividualItemsScreen.js";
+import ViewFavouritesScreen from "./screens/ViewFavouritesScreen.js";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -39,7 +46,7 @@ function App() {
           }}
         />
 
-        <Drawer.Screen
+        {/* <Drawer.Screen
           name="ViewPairings"
           component={ViewPairingsScreen}
           options={{
@@ -48,37 +55,15 @@ function App() {
               <FontAwesome name="eye" size={24} color="black" />
             ),
           }}
-        />
+        /> */}
 
         <Drawer.Screen
-          name="NewPairing"
-          component={NewPairingScreen}
+          name="ViewAllPairings"
+          component={ViewAllPairingsScreen}
           options={{
-            title: "New pairings",
+            title: "All Pairings",
             drawerIcon: ({ focused, size }) => (
-              <AntDesign name="plus" size={24} color="black" />
-            ),
-          }}
-        />
-
-        <Drawer.Screen
-          name="DeletePairing"
-          component={DeletePairingScreen}
-          options={{
-            title: "Delete pairing",
-            drawerIcon: ({ focused, size }) => (
-              <MaterialIcons name="delete" size={24} color="black" />
-            ),
-          }}
-        />
-
-        <Drawer.Screen
-          name="AddToFavourites"
-          component={AddToFavouritesScreen}
-          options={{
-            title: "Add To Favourites",
-            drawerIcon: ({ focused, size }) => (
-              <MaterialIcons name="delete" size={24} color="black" />
+              <FontAwesome name="eye" size={24} color="black" />
             ),
           }}
         />
@@ -87,29 +72,62 @@ function App() {
           name="ShowLatestPairings"
           component={ShowLatestPairingsScreen}
           options={{
-            title: "Show Latest Pairings",
+            title: "Recent Pairings",
             drawerIcon: ({ focused, size }) => (
-              <MaterialIcons name="delete" size={24} color="black" />
+              <Entypo name="time-slot" size={24} color="black" />
             ),
           }}
         />
 
         <Drawer.Screen
-          name="ViewAllPairings"
-          component={ViewAllPairingsScreen}
+          name="NewPairing"
+          component={NewPairingScreen}
           options={{
-            title: "View All Pairings",
+            title: "New Pairing",
             drawerIcon: ({ focused, size }) => (
-              <MaterialIcons name="delete" size={24} color="black" />
+              <AntDesign name="plus" size={24} color="black" />
             ),
           }}
         />
+
+        <Drawer.Screen
+          name="Favourites"
+          component={ViewFavouritesScreen}
+          options={{
+            title: "Favourites",
+            drawerIcon: ({ focused, size }) => (
+              <MaterialIcons name="favorite" size={24} color="black" />
+            ),
+          }}
+        />
+
+        {/* <Drawer.Screen
+          name="AddToFavourites"
+          component={AddToFavouritesScreen}
+          options={{
+            title: "Add To Favourites",
+            drawerIcon: ({ focused, size }) => (
+              <MaterialIcons name="favorite" size={24} color="black" />
+            ),
+          }}
+        /> */}
 
         <Drawer.Screen
           name="ViewIndividualItems"
           component={ViewIndividualItemsScreen}
           options={{
-            title: "View Individual Items Screen",
+            title: "Items",
+            drawerIcon: ({ focused, size }) => (
+              <FontAwesome5 name="hamburger" size={24} color="black" />
+            ),
+          }}
+        />
+
+        <Drawer.Screen
+          name="DeletePairing"
+          component={DeletePairingScreen}
+          options={{
+            title: "Delete Pairing",
             drawerIcon: ({ focused, size }) => (
               <MaterialIcons name="delete" size={24} color="black" />
             ),
