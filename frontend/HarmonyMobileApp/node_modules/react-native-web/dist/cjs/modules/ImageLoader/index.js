@@ -13,9 +13,7 @@ exports.default = exports.ImageUriCache = void 0;
  */
 var dataUriPattern = /^data:/;
 
-var ImageUriCache =
-/*#__PURE__*/
-function () {
+var ImageUriCache = /*#__PURE__*/function () {
   function ImageUriCache() {}
 
   ImageUriCache.has = function has(uri) {

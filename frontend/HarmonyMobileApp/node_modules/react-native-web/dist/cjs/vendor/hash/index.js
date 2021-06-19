@@ -16,6 +16,8 @@ exports.default = void 0;
  * @param {string} str ASCII only
  * @param {number} seed Positive integer only
  * @return {number} 32-bit positive integer hash
+ *
+ * 
  */
 function murmurhash2_32_gc(str, seed) {
   var l = str.length,

@@ -41,17 +41,27 @@ const styles = StyleSheet.create({
       backgroundColor: "#20b2aa",
     },
 
+    backgroundBarShowLatest: {
+      borderRadius: 25,
+      alignItems: "center",
+      justifyContent: "center",
+      marginTop: 40,
+      position:"relative",
+      backgroundColor: "#D4D3D3",
+      padding:"5%"
+    },
     Text:{
       fontFamily:"sans-serif-light"
     },
 
     TextLarge:{
       fontFamily:"sans-serif-light",
-      fontSize: 30, 
+      fontSize: 30,
+      textAlignVertical:"center"
     },
     TextMedium:{
       fontFamily:"sans-serif-light",
-      fontSize: 23, 
+      fontSize: 23,
     },
     TextSmall:{
       fontFamily:"sans-serif-light",
@@ -59,12 +69,14 @@ const styles = StyleSheet.create({
     },
     regularImage:{
       width:150,
-      height:100
+      height:100,
+      resizeMode:"contain"
     },
     smallImage:{
       width:50,
-      height:50
+      height:50,
+      resizeMode:"contain"
     }
 });
-  
+
 export default styles;
