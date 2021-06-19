@@ -45,6 +45,6 @@ def lambda_handler(event, context):
 
         "StatusCode": 200,
 
-        "Data": items4 + items3 + items2 + items1
+        "Data": items5 + items4 + items3 + items2 + items1
     }
 
