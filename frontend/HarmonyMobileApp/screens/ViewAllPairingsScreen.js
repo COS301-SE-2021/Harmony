@@ -15,7 +15,7 @@ const ViewAllPairingsScreen = (props) => {
   return (
     <SafeAreaView style={personalStyles.container}>
       <View style={{ paddingTop: "20%" }}>
-        <Text style={styles.TextLarge}>Here are all the recent pairings</Text>
+        <Text style={styles.TextLarge}>Popular Pairings</Text>
       </View>
       <ScrollView style={personalStyles.scrollView}>
         <View style={styles.backgroundBarShowLatest}>

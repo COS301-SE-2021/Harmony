@@ -61,9 +61,9 @@ function App() {
           name="ViewAllPairings"
           component={ViewAllPairingsScreen}
           options={{
-            title: "All Pairings",
+            title: "Popular",
             drawerIcon: ({ focused, size }) => (
-              <FontAwesome name="eye" size={24} color="black" />
+              <MaterialIcons name="trending-up" size={24} color="black" />
             ),
           }}
         />
@@ -72,7 +72,7 @@ function App() {
           name="ShowLatestPairings"
           component={ShowLatestPairingsScreen}
           options={{
-            title: "Recent Pairings",
+            title: "Recent",
             drawerIcon: ({ focused, size }) => (
               <Entypo name="time-slot" size={24} color="black" />
             ),
@@ -83,7 +83,7 @@ function App() {
           name="NewPairing"
           component={NewPairingScreen}
           options={{
-            title: "New Pairing",
+            title: "New",
             drawerIcon: ({ focused, size }) => (
               <AntDesign name="plus" size={24} color="black" />
             ),
@@ -127,7 +127,7 @@ function App() {
           name="DeletePairing"
           component={DeletePairingScreen}
           options={{
-            title: "Delete Pairing",
+            title: "Delete",
             drawerIcon: ({ focused, size }) => (
               <MaterialIcons name="delete" size={24} color="black" />
             ),
