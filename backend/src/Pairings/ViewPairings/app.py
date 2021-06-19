@@ -27,10 +27,17 @@ def lambda_handler(event, context):
     items3 = response['Items']
     print(items3)
 
+    response = table.query(
+        KeyConditionExpression=
+        Key('PID').eq('p4')
+    )
+    items4 = response['Items']
+    print(items4)
+
     return {
 
         "StatusCode": 200,
 
-        "Data": items3 + items2 + items1
+        "Data": items4 + items3 + items2 + items1
     }
 
