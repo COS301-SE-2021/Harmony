@@ -49,6 +49,8 @@ const styles = StyleSheet.create({
       marginTop: 40,
       position:"relative",
       backgroundColor: "#20b2aa",
+      flexDirection:"row",
+      padding:"5%"
     },
     Text:{
       fontFamily:"sans-serif-light"

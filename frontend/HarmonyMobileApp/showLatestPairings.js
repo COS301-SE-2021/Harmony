@@ -8,7 +8,7 @@ const ShowLatestPairings =(props)=>{
             <View style={{paddingTop:"20%"}}> 
                 <Text style={styles.TextLarge }>Here are your 5 most recent pairings</Text>
             </View>
-            <View style={styles.rowContainer}>
+            <View >
                 <View style={styles.backgroundBarShowLatest}>
                     <Text style={styles.TextMedium}> Waffles </Text>
                     <Text style={styles.TextMedium}> A Milkshake </Text>
