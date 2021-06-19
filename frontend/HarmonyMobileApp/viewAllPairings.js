@@ -6,10 +6,18 @@ const ViewAllPairings =(props)=>{
     return(
         <SafeAreaView style={personalStyles.container}>
             <View style={{paddingTop:"20%"}}> 
-                <Text style={styles.TextLarge }>Here are your 5 most recent pairings</Text>
+                <Text style={styles.TextLarge }>Here are all the recent pairings</Text>
             </View>
             <ScrollView style={personalStyles.scrollView}>
                 <View style={styles.backgroundBarShowLatest}>
+                <View style={{flexDirection:"row",alignItems:"center",justifyContent:"flex-start"}} >
+                        <View>
+                            <Image source={require("./assets/person.png")} style={{ width:40, height:40, resizeMode:"contain"}}/>
+                        </View>
+                        <View>
+                            <Text style={styles.TextSmall}> User9468 </Text>
+                        </View>
+                    </View>
                     <View style={{flexDirection:"row",alignItems:"center"}}>
                         <Text style={styles.TextMedium}> Waffles </Text>
                         <View style={{justifyContent:"center"}}>
@@ -35,6 +43,14 @@ const ViewAllPairings =(props)=>{
                     </TouchableOpacity>
                 </View>
                 <View style={styles.backgroundBarShowLatest}>
+                <View style={{flexDirection:"row",alignItems:"center",justifyContent:"flex-start"}} >
+                        <View>
+                            <Image source={require("./assets/person.png")} style={{ width:40, height:40, resizeMode:"contain"}}/>
+                        </View>
+                        <View>
+                            <Text style={styles.TextSmall}> User9468 </Text>
+                        </View>
+                    </View>
                     <View style={{flexDirection:"row",alignItems:"center"}}>
                         <Text style={styles.TextMedium}> Burgers </Text>
                         <View style={{justifyContent:"center"}}>
@@ -60,6 +76,14 @@ const ViewAllPairings =(props)=>{
                     </TouchableOpacity>
                 </View>
                 <View style={styles.backgroundBarShowLatest}>
+                <View style={{flexDirection:"row",alignItems:"center",justifyContent:"flex-start"}} >
+                        <View>
+                            <Image source={require("./assets/person.png")} style={{ width:40, height:40, resizeMode:"contain"}}/>
+                        </View>
+                        <View>
+                            <Text style={styles.TextSmall}> User9468 </Text>
+                        </View>
+                    </View>
                     <View style={{flexDirection:"row",alignItems:"center"}}>
                         <Text style={styles.TextMedium}> French Toast </Text>
                         <View style={{justifyContent:"center"}}>
@@ -85,6 +109,14 @@ const ViewAllPairings =(props)=>{
                     </TouchableOpacity>
                 </View>
                 <View style={styles.backgroundBarShowLatest}>
+                <View style={{flexDirection:"row",alignItems:"center",justifyContent:"flex-start"}} >
+                        <View>
+                            <Image source={require("./assets/person.png")} style={{ width:40, height:40, resizeMode:"contain"}}/>
+                        </View>
+                        <View>
+                            <Text style={styles.TextSmall}> User9468 </Text>
+                        </View>
+                    </View>
                     <View style={{flexDirection:"row",alignItems:"center"}}>
                         <Text style={styles.TextMedium}> Bunny Chow </Text>
                         <View style={{justifyContent:"center"}}>
@@ -110,6 +142,14 @@ const ViewAllPairings =(props)=>{
                     </TouchableOpacity>
                 </View>
                 <View style={styles.backgroundBarShowLatest}>
+                <View style={{flexDirection:"row",alignItems:"center",justifyContent:"flex-start"}} >
+                        <View>
+                            <Image source={require("./assets/person.png")} style={{ width:40, height:40, resizeMode:"contain"}}/>
+                        </View>
+                        <View>
+                            <Text style={styles.TextSmall}> User9468 </Text>
+                        </View>
+                    </View>
                     <View style={{flexDirection:"row",alignItems:"center"}}>
                         <Text style={styles.TextMedium}> Koeksister </Text>
                         <View style={{justifyContent:"center"}}>
