@@ -20,5 +20,9 @@ def lambda_handler(event, context):
     )
     items2 = response['Items']
     print(items2)
-
-
+    response = table.query(
+        KeyConditionExpression=
+        Key('PID').eq('p3')
+    )
+    items3 = response['Items']
+    print(items3)
