@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { StatusBar } from "expo-status-bar";
-import { Text, View, TextInput, Button, TouchableOpacity } from "react-native";
+import { Text, View, TextInput, TouchableOpacity } from "react-native";
 
 import styles from "./styles";
 
@@ -10,7 +10,7 @@ function LoginScreen({ navigation }) {
   const [password, setPassword] = useState("");
 
   return (
-    <View style={styles.container}>
+    <View style={styles.LoginContainer}>
       <StatusBar style="auto" />
 
       <StatusBar style="auto" />
