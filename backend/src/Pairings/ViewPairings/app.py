@@ -16,3 +16,10 @@ def lambda_handler(event, context):
         }
     )
 
+    item = response['Item']
+    food = item['FoodItem']
+    item = response['Item']
+    drink = item['DrinkItem']
+    print("Match founds: " + food + " goes well with " + drink)
+
+
