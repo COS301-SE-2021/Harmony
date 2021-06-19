@@ -1,14 +1,15 @@
-import 'react-native-gesture-handler';
-import React from 'react';
+import "react-native-gesture-handler";
+import React from "react";
 
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-// import Ionicons from 'react-native-ionicons'
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
-import LoginScreen from './LoginScreen.js'
-import HomeScreen from './HomeScreen.js'
-import NewPairingScreen from './NewPairingScreen.js'
+import { FontAwesome, AntDesign } from "@expo/vector-icons";
+
+import LoginScreen from "./LoginScreen.js";
+import HomeScreen from "./HomeScreen.js";
+import NewPairingScreen from "./NewPairingScreen.js";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -16,35 +17,45 @@ const Drawer = createDrawerNavigator();
 function App() {
   return (
     <NavigationContainer>
-      {/* <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login" component={LoginScreen}   options={{ title: 'Harmony Login' }}/>
-        <Stack.Screen name="Home" component={HomeScreen}   options={{ title: 'Welcome' }}/>
-        <Stack.Screen name="NewPairing" component={NewPairingScreen}   options={{ title: 'Overview' }}/>
-      </Stack.Navigator>     */}
-
-      <Drawer.Navigator 
-        initialRouteName="Home"
+      <Drawer.Navigator
+        initialRouteName="Login"
         openByDefault
-        drawerType={'slide'}>
-
-        
-        <Drawer.Screen name="Login" component={LoginScreen}   options={{ title: 'Harmony Login' }}/>
-        <Drawer.Screen name="Home" component={HomeScreen}          
-        // options={{
-        //    title: 'Home',
-        //    drawerIcon: ({focused, size}) => (
-        //       <Ionicons
-        //          name="md-home"
-        //          size={size}
-        //          color={focused ? '#7cc' : '#ccc'}
-        //       />
-        //    )
-        // }}
+        drawerType={"slide"}
+        edgeWidth={500}
+      >
+        <Drawer.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            title: "Home",
+            drawerIcon: ({ focused, size }) => (
+              <FontAwesome name="home" size={24} color="black" />
+            ),
+          }}
         />
-        <Drawer.Screen name="NewPairing" component={NewPairingScreen}   options={{ title: 'Overview' }}/>
 
+        <Drawer.Screen
+          name="NewPairing"
+          component={NewPairingScreen}
+          options={{
+            title: "New pairings",
+            drawerIcon: ({ focused, size }) => (
+              <AntDesign name="plus" size={24} color="black" />
+            ),
+          }}
+        />
+
+        <Drawer.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{
+            title: "Logout",
+            drawerIcon: ({ focused, size }) => (
+              <AntDesign name="logout" size={24} color="black" />
+            ),
+          }}
+        />
       </Drawer.Navigator>
-
     </NavigationContainer>
   );
 }
