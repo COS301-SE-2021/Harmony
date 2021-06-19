@@ -8,10 +8,32 @@ import {
   StyleSheet,
   StatusBar,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import styles from "../styles";
 
 const ShowLatestPairingsScreen = (props) => {
+  const showConfirmDialog = () => {
+    return Alert.alert(
+      "Add to Favourites",
+      "Are you sure you want to Favourite this pairing?",
+      [
+        // The "Yes" button
+        {
+          text: "Yes",
+          onPress: () => {
+            //setShowBox(false);
+          },
+        },
+        // The "No" button
+        // Does nothing but dismiss the dialog when tapped
+        {
+          text: "No",
+        },
+      ]
+    );
+  };
+
   return (
     <SafeAreaView style={personalStyles.container}>
       <ScrollView style={personalStyles.scrollView}>
@@ -48,7 +70,11 @@ const ShowLatestPairingsScreen = (props) => {
               </Text>
             </View>
           </View>
-          <TouchableOpacity style={personalStyles.addToFavouriteBtn}>
+
+          <TouchableOpacity
+            style={personalStyles.addToFavouriteBtn}
+            onPress={() => showConfirmDialog()}
+          >
             <View style={{ justifyContent: "center" }}>
               <Image
                 source={require("../assets/favourites.png")}
@@ -85,7 +111,10 @@ const ShowLatestPairingsScreen = (props) => {
               </Text>
             </View>
           </View>
-          <TouchableOpacity style={personalStyles.addToFavouriteBtn}>
+          <TouchableOpacity
+            style={personalStyles.addToFavouriteBtn}
+            onPress={() => showConfirmDialog()}
+          >
             <View style={{ justifyContent: "center" }}>
               <Image
                 source={require("../assets/favourites.png")}
@@ -119,7 +148,10 @@ const ShowLatestPairingsScreen = (props) => {
               <Text style={styles.TextSmall}> 1855, Lynnwood, Pretoria</Text>
             </View>
           </View>
-          <TouchableOpacity style={personalStyles.addToFavouriteBtn}>
+          <TouchableOpacity
+            style={personalStyles.addToFavouriteBtn}
+            onPress={() => showConfirmDialog()}
+          >
             <View style={{ justifyContent: "center" }}>
               <Image
                 source={require("../assets/favourites.png")}
@@ -156,7 +188,10 @@ const ShowLatestPairingsScreen = (props) => {
               </Text>
             </View>
           </View>
-          <TouchableOpacity style={personalStyles.addToFavouriteBtn}>
+          <TouchableOpacity
+            style={personalStyles.addToFavouriteBtn}
+            onPress={() => showConfirmDialog()}
+          >
             <View style={{ justifyContent: "center" }}>
               <Image
                 source={require("../assets/favourites.png")}
@@ -193,7 +228,10 @@ const ShowLatestPairingsScreen = (props) => {
               </Text>
             </View>
           </View>
-          <TouchableOpacity style={personalStyles.addToFavouriteBtn}>
+          <TouchableOpacity
+            style={personalStyles.addToFavouriteBtn}
+            onPress={() => showConfirmDialog()}
+          >
             <View style={{ justifyContent: "center" }}>
               <Image
                 source={require("../assets/favourites.png")}
