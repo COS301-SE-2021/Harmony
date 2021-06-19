@@ -3,8 +3,6 @@
 exports.__esModule = true;
 exports.default = void 0;
 
-var _buttonLikeRoles = _interopRequireDefault(require("./buttonLikeRoles"));
-
 var _isDisabled = _interopRequireDefault(require("./isDisabled"));
 
 var _propsToAccessibilityComponent = _interopRequireDefault(require("./propsToAccessibilityComponent"));
@@ -22,7 +20,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * 
  */
 var AccessibilityUtil = {
-  buttonLikeRoles: _buttonLikeRoles.default,
   isDisabled: _isDisabled.default,
   propsToAccessibilityComponent: _propsToAccessibilityComponent.default,
   propsToAriaRole: _propsToAriaRole.default
