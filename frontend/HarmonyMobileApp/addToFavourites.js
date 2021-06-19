@@ -5,7 +5,8 @@ import styles from './styles'
 const AddToFavourites =(props)=>{
     return(
         <SafeAreaView style={personalStyles.container}>
-        <View style={{paddingTop:"20%"}}> 
+        <View style={{paddingTop:"20%",justifyContent:"center",backgroundColor:"#D4D3D3",flexDirection:"row"}}> 
+            <Image source={require("./assets/favourites.png")} style={{height:100,width:100}}/>
             <Text style={styles.TextLarge }>Favourites</Text>
         </View>
         <ScrollView style={personalStyles.scrollView}>
