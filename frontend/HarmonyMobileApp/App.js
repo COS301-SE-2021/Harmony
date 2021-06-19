@@ -5,11 +5,13 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
-import { FontAwesome, AntDesign } from "@expo/vector-icons";
+import { FontAwesome, AntDesign, MaterialIcons } from "@expo/vector-icons";
 
 import LoginScreen from "./LoginScreen.js";
 import HomeScreen from "./HomeScreen.js";
 import NewPairingScreen from "./NewPairingScreen.js";
+import DeletePairingScreen from "./DeletePairingScreen.js";
+import ViewPairingsScreen from "./ViewPairingsScreen.js";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -35,12 +37,34 @@ function App() {
         />
 
         <Drawer.Screen
+          name="ViewPairings"
+          component={ViewPairingsScreen}
+          options={{
+            title: "View pairings",
+            drawerIcon: ({ focused, size }) => (
+              <FontAwesome name="eye" size={24} color="black" />
+            ),
+          }}
+        />
+
+        <Drawer.Screen
           name="NewPairing"
           component={NewPairingScreen}
           options={{
             title: "New pairings",
             drawerIcon: ({ focused, size }) => (
               <AntDesign name="plus" size={24} color="black" />
+            ),
+          }}
+        />
+
+        <Drawer.Screen
+          name="DeletePairing"
+          component={DeletePairingScreen}
+          options={{
+            title: "Delete pairing",
+            drawerIcon: ({ focused, size }) => (
+              <MaterialIcons name="delete" size={24} color="black" />
             ),
           }}
         />

@@ -1,13 +1,13 @@
 import React from "react";
 import { Text, View, TextInput, Button, TouchableOpacity } from "react-native";
 
-function NewPairingScreen({ navigation }) {
+function ViewPairingsScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>NewPairing Screen</Text>
+      <Text>ViewPairings Screen</Text>
       {/* <Button
-          title="Go to NewPairing... again"
-          onPress={() => navigation.push('NewPairing')}
+          title="Go to ViewPairings... again"
+          onPress={() => navigation.push('ViewPairings')}
         /> */}
       {/* <Button title="Home" onPress={() => navigation.navigate('Home')} /> */}
       {/* <Button title="Back" onPress={() => navigation.goBack()} /> */}
@@ -16,4 +16,4 @@ function NewPairingScreen({ navigation }) {
   );
 }
 
-export default NewPairingScreen;
+export default ViewPairingsScreen;
