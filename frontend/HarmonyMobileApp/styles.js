@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
+      position:"absolute"
     },
   
     inputView: {
@@ -59,6 +60,10 @@ const styles = StyleSheet.create({
     regularImage:{
       width:150,
       height:100
+    },
+    smallImage:{
+      width:50,
+      height:50
     }
 });
   
