@@ -14,10 +14,15 @@ import styles from "../styles";
 const ShowLatestPairingsScreen = (props) => {
   return (
     <SafeAreaView style={personalStyles.container}>
-      <View style={{ paddingTop: "20%" }}>
-        <Text style={styles.TextLarge}>Recent pairings</Text>
-      </View>
       <ScrollView style={personalStyles.scrollView}>
+        <View style={styles.backgroundBarShowLatest}>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <View style={{ justifyContent: "center" }}>
+              <Text style={styles.TextLarge}> Recent Pairings </Text>
+            </View>
+          </View>
+        </View>
+
         <View style={styles.backgroundBarShowLatest}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Text style={styles.TextMedium}> Waffles </Text>

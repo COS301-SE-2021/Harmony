@@ -25,12 +25,10 @@ const DeletePairingScreen = (props) => {
     <SafeAreaView style={personalStyles.container}>
       <View style={{ paddingBottom: "2%", paddingRight: "0.5%" }}>
         <ScrollView style={personalStyles.scrollView}>
-          <View style={{ paddingTop: "0%" }}>
-            <View style={styles.backgroundBarShowLatest}>
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <View style={{ justifyContent: "center" }}>
-                  <Text style={styles.TextLarge}> Delete Pairing </Text>
-                </View>
+          <View style={styles.backgroundBarShowLatest}>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <View style={{ justifyContent: "center" }}>
+                <Text style={styles.TextLarge}> Delete Pairing </Text>
               </View>
             </View>
           </View>

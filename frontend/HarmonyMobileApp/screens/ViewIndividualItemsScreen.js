@@ -6,7 +6,13 @@ const ViewIndividualItemsScreen = (props) => {
   return (
     <SafeAreaView style={styles.container}>
       <SafeAreaView style={(styles.container, { flex: 0, paddingTop: 20 })}>
-        <Text style={styles.TextLarge}>View Individual Pairing</Text>
+        <View style={styles.backgroundBarShowLatest}>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <View style={{ justifyContent: "center" }}>
+              <Text style={styles.TextLarge}> Items</Text>
+            </View>
+          </View>
+        </View>
       </SafeAreaView>
       <View
         style={
