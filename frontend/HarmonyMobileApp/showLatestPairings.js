@@ -25,10 +25,10 @@ const ShowLatestPairings =(props)=>{
                             <Text style={styles.TextSmall}> Waffle House, Ramsgate, South Coast</Text>
                         </View>
                     </View>
-                    <TouchableOpacity style={{flexDirection:"row",alignItems:"center"}} onPress={()=>console.log("clicked")}>
-                        <TouchableOpacity style={{justifyContent:"center",}}>
+                    <TouchableOpacity style={personalStyles.addToFavouriteBtn}>
+                        <View style={{justifyContent:"center",}}>
                             <Image source={require("./assets/favourites.png")} style={{ width:40, height:40, resizeMode:"contain"}}/>
-                        </TouchableOpacity>
+                        </View>
                         <View>
                             <Text style={styles.TextSmall}> Add to favourites</Text>
                         </View>
@@ -50,6 +50,14 @@ const ShowLatestPairings =(props)=>{
                             <Text style={styles.TextSmall}> Rocomamas, Gateway, Umhlanga</Text>
                         </View>
                     </View>
+                    <TouchableOpacity style={personalStyles.addToFavouriteBtn}>
+                        <View style={{justifyContent:"center",}}>
+                            <Image source={require("./assets/favourites.png")} style={{ width:40, height:40, resizeMode:"contain"}}/>
+                        </View>
+                        <View>
+                            <Text style={styles.TextSmall}> Add to favourites</Text>
+                        </View>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.backgroundBarShowLatest}>
                     <View style={{flexDirection:"row",alignItems:"center"}}>
@@ -67,6 +75,14 @@ const ShowLatestPairings =(props)=>{
                             <Text style={styles.TextSmall}> 1855, Lynnwood, Pretoria</Text>
                         </View>
                     </View>
+                    <TouchableOpacity style={personalStyles.addToFavouriteBtn}>
+                        <View style={{justifyContent:"center",}}>
+                            <Image source={require("./assets/favourites.png")} style={{ width:40, height:40, resizeMode:"contain"}}/>
+                        </View>
+                        <View>
+                            <Text style={styles.TextSmall}> Add to favourites</Text>
+                        </View>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.backgroundBarShowLatest}>
                     <View style={{flexDirection:"row",alignItems:"center"}}>
@@ -84,6 +100,14 @@ const ShowLatestPairings =(props)=>{
                             <Text style={styles.TextSmall}> 4 Chilli, Garsfontein, Pretoria</Text>
                         </View>
                     </View>
+                    <TouchableOpacity style={personalStyles.addToFavouriteBtn}>
+                        <View style={{justifyContent:"center",}}>
+                            <Image source={require("./assets/favourites.png")} style={{ width:40, height:40, resizeMode:"contain"}}/>
+                        </View>
+                        <View>
+                            <Text style={styles.TextSmall}> Add to favourites</Text>
+                        </View>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.backgroundBarShowLatest}>
                     <View style={{flexDirection:"row",alignItems:"center"}}>
@@ -101,6 +125,14 @@ const ShowLatestPairings =(props)=>{
                             <Text style={styles.TextSmall}> Bakehouse, HazelWood, Pretoria</Text>
                         </View>
                     </View>
+                    <TouchableOpacity style={personalStyles.addToFavouriteBtn}>
+                        <View style={{justifyContent:"center",}}>
+                            <Image source={require("./assets/favourites.png")} style={{ width:40, height:40, resizeMode:"contain"}}/>
+                        </View>
+                        <View>
+                            <Text style={styles.TextSmall}> Add to favourites</Text>
+                        </View>
+                    </TouchableOpacity>
                 </View>
             </ScrollView>
         </SafeAreaView>
@@ -118,6 +150,16 @@ const personalStyles = StyleSheet.create({
     text: {
       fontSize: 42,
     },
+    addToFavouriteBtn: {
+        width: "80%",
+        borderRadius: 25,
+        height: 50,
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: 40,
+        backgroundColor: "#8d918d",
+        flexDirection:"row"
+      },
   });
 
 export default ShowLatestPairings;
