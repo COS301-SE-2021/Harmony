@@ -42,13 +42,12 @@ const styles = StyleSheet.create({
     },
 
     backgroundBarShowLatest: {
-      width: "70%",
       borderRadius: 25,
       alignItems: "center",
       justifyContent: "center",
       marginTop: 40,
       position:"relative",
-      backgroundColor: "#20b2aa",
+      backgroundColor: "grey",
       flexDirection:"row",
       padding:"5%"
     },
