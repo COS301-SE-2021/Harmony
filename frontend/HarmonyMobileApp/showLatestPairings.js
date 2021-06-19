@@ -6,16 +6,21 @@ const ShowLatestPairings =(props)=>{
     return(
         <SafeAreaView>
         <SafeAreaView style={styles.container,{flex:0,paddingTop:20}}> 
-        <Text style={styles.TextMedium }>Here are your 5 most recent pairings</Text>
+        <Text style={styles.TextLarge }>Here are your 5 most recent pairings</Text>
         </SafeAreaView>
         <View style={styles.rowContainer}>
         <Text style={styles.TextMedium}> Waffles </Text>
-        <Text style={styles.TextSmall}> A Milkshake </Text>
+        <Text style={styles.TextMedium}> A Milkshake </Text>
 
         </View>
         <View style={styles.rowContainer}>
-        <Text style={styles.TextMedium}> Waffles stacks onto each other idk why </Text>
-        <Text style={styles.TextSmall}> A Milkshake </Text>
+        <Text style={styles.TextMedium}> Waffles </Text>
+        <Text style={styles.TextMedium}> A Milkshake </Text>
+
+        </View>
+        <View style={styles.rowContainer}>
+        <Text style={styles.TextMedium}> Waffles </Text>
+        <Text style={styles.TextMedium}> A Milkshake </Text>
 
         </View>
         </SafeAreaView>

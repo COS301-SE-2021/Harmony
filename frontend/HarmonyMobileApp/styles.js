@@ -10,10 +10,11 @@ const styles = StyleSheet.create({
 
     rowContainer: {
       flexDirection: 'row',
-       flex: 1,
       backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
+      marginBottom: 20,
+      marginLeft: 20,
     },
   
     inputView: {
@@ -55,10 +56,11 @@ const styles = StyleSheet.create({
     TextLarge:{
       fontFamily:"sans-serif-light",
       fontSize: 30, 
+      textAlign:"center"
     },
     TextMedium:{
       fontFamily:"sans-serif-light",
-      fontSize: 23, 
+      fontSize: 20, 
     },
     TextSmall:{
       fontFamily:"sans-serif-light",
