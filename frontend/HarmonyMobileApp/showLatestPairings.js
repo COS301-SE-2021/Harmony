@@ -1,5 +1,5 @@
 import React from 'react';
-import { View,Text ,SafeAreaView,Image,ScrollView,StyleSheet,StatusBar} from 'react-native';
+import { View,Text ,SafeAreaView,Image,ScrollView,StyleSheet,StatusBar,TouchableOpacity} from 'react-native';
 import styles from './styles'
 
 const ShowLatestPairings =(props)=>{
@@ -25,6 +25,14 @@ const ShowLatestPairings =(props)=>{
                             <Text style={styles.TextSmall}> Waffle House, Ramsgate, South Coast</Text>
                         </View>
                     </View>
+                    <TouchableOpacity style={{flexDirection:"row",alignItems:"center"}} onPress={()=>console.log("clicked")}>
+                        <TouchableOpacity style={{justifyContent:"center",}}>
+                            <Image source={require("./assets/favourites.png")} style={{ width:40, height:40, resizeMode:"contain"}}/>
+                        </TouchableOpacity>
+                        <View>
+                            <Text style={styles.TextSmall}> Add to favourites</Text>
+                        </View>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.backgroundBarShowLatest}>
                     <View style={{flexDirection:"row",alignItems:"center"}}>
