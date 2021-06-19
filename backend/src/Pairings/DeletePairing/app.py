@@ -30,9 +30,15 @@ def lambda_handler(event, context):
     except ClientError as e:
         #throw error if failed
         if e.response['Error']['Code'] == "ConditionalCheckFailedException":
-            print(e.response['Error']['Message'])
+            # return a properly formatted JSON object
+            return {
+                'statusCode': 400,
+                'body': json.dumps({'isSuccessful': 'false'})
+            }
         else:
             raise
     else:
-        return response
-
+        return {
+                'statusCode': 200,
+                'body': json.dumps({'isSuccessful': 'true'})
+            }
