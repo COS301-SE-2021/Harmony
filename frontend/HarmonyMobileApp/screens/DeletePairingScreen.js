@@ -44,7 +44,7 @@ const DeletePairingScreen = (props) => {
                   style={styles.smallImage}
                 />
               </View>
-              <Text style={styles.TextMedium}> A Milkshake </Text>
+              <Text style={styles.TextMedium}> Milkshake </Text>
             </View>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <View style={{ justifyContent: "center" }}>
