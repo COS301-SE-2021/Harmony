@@ -20,6 +20,8 @@ def lambda_handler(event, context):
     food = item['FoodItem']
     item = response['Item']
     drink = item['DrinkItem']
+    item = response['Item']
+    drink = item['DrinkItem']
     print("Match founds: " + food + " goes well with " + drink)
 
     return {
