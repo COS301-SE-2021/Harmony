@@ -48,9 +48,6 @@ useEffect(() => {
 });
 
   const showConfirmDialog = (pid) => {
-    console.log(pid);
-    var newpid = "\"" + pid + "\"";
-    console.log(newpid);
     return Alert.alert(
       "Delete",
       "Are you sure you want to remove this pairing from favourites?",
@@ -72,11 +69,10 @@ useEffect(() => {
                 "Content-Type":"application/json"
               },
               body:JSON.stringify({
-                "PID":newpid,
-                "UID":"u1"
+                "UID":"u1",
+                "PID":pid
               })
             })
-              .then((response) => response.json())
               .catch((error) => alert(error))
             //setShowBox(false);
           },
