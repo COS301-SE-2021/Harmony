@@ -28,8 +28,13 @@ import styles from "../styles";
 const DeletePairingScreen = (props) => {
   const viewPairingURL =
     "https://qkvdftfq7b.execute-api.eu-west-1.amazonaws.com/dev/viewpairings";
+  const deletePairingURL =
+    "https://htsec8hita.execute-api.eu-west-1.amazonaws.com/dev";
   const [isLoading, setLoading] = useState(useIsFocused());
   const [data, setData] = useState([]);
+  const [isDeleted, setIsDeleted] = useState(false);
+  const [PID, setPID] = useState("");
+  const [toDelete, setToDelete] = useState(false);
 
   useEffect(() => {
     fetch(viewPairingURL)
@@ -37,9 +42,35 @@ const DeletePairingScreen = (props) => {
       .then((json) => setData(json.Data))
       .catch((error) => alert(error))
       .then(setLoading(false));
-  });
+  }, [useIsFocused()]);
 
-  const showConfirmDialog = () => {
+  useEffect(() => {
+    fetch(deletePairingURL, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        PID: PID,
+      }),
+    })
+      .then((response) => response.json())
+      .then((json) => setData(json.Data))
+      .catch((error) => alert(error))
+      .then(setToDelete(false))
+      .then(setIsDeleted(true));
+  }, [toDelete]);
+
+  useEffect(() => {
+    fetch(viewPairingURL)
+      .then((response) => response.json())
+      .then((json) => setData(json.Data))
+      .catch((error) => alert(error))
+      .then(setIsDeleted(false));
+  }, [isDeleted]);
+
+  const deleteItem = (obj) => {
     return Alert.alert(
       "Delete",
       "Are you sure you want to delete this pairing?",
@@ -49,6 +80,9 @@ const DeletePairingScreen = (props) => {
           text: "Yes",
           onPress: () => {
             //setShowBox(false);
+            console.log(obj.item);
+            setToDelete(true);
+            setPID(obj.item);
           },
         },
         // The "No" button
@@ -119,7 +153,7 @@ const DeletePairingScreen = (props) => {
                   </View>
                   <TouchableOpacity
                     style={personalStyles.addToFavouriteBtn}
-                    onPress={() => showConfirmDialog()}
+                    onPress={() => deleteItem({ item: item.PID })}
                   >
                     <AntDesign name="minuscircleo" size={60} color="red" />
                   </TouchableOpacity>
