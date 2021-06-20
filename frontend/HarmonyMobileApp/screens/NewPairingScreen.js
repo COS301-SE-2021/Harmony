@@ -12,21 +12,25 @@ function NewPairingScreen({ navigation }) {
   const [DrinkDesc, setDrinkDesc] = useState("");
   const [Location, setLocation] = useState("");
 
-  const showConfirmDialog = () => {
-    return Alert.alert("Save", "Are you sure you want to save this pairing?", [
-      // The "Yes" button
-      {
-        text: "Yes",
-        onPress: () => {
-          //setShowBox(false);
+  const savePairing = () => {
+    return Alert.alert(
+      "Save",
+      "Are you sure you want to create this new pairing?",
+      [
+        // The "Yes" button
+        {
+          text: "Yes",
+          onPress: () => {
+            //setShowBox(false);
+          },
         },
-      },
-      // The "No" button
-      // Does nothing but dismiss the dialog when tapped
-      {
-        text: "No",
-      },
-    ]);
+        // The "No" button
+        // Does nothing but dismiss the dialog when tapped
+        {
+          text: "No",
+        },
+      ]
+    );
   };
   return (
     <View style={styles.LoginContainer}>
@@ -48,7 +52,7 @@ function NewPairingScreen({ navigation }) {
           style={styles.TextInput}
           placeholder="Description:"
           placeholderTextColor="#003f5c"
-          onChangeText={(FoodDesc) => setPassword(FoodDesc)}
+          onChangeText={(FoodDesc) => setFoodDesc(FoodDesc)}
         />
       </View>
 
@@ -57,7 +61,7 @@ function NewPairingScreen({ navigation }) {
           style={styles.TextInput}
           placeholder="Drink:"
           placeholderTextColor="#003f5c"
-          onChangeText={(DrinkItem) => setFoodItem(DrinkItem)}
+          onChangeText={(DrinkItem) => setDrinkItem(DrinkItem)}
         />
       </View>
 
@@ -66,7 +70,7 @@ function NewPairingScreen({ navigation }) {
           style={styles.TextInput}
           placeholder="Description:"
           placeholderTextColor="#003f5c"
-          onChangeText={(DrinkDesc) => setPassword(DrinkDesc)}
+          onChangeText={(DrinkDesc) => setDrinkDesc(DrinkDesc)}
         />
       </View>
 
@@ -75,7 +79,7 @@ function NewPairingScreen({ navigation }) {
           style={styles.TextInput}
           placeholder="Location:"
           placeholderTextColor="#003f5c"
-          onChangeText={(Location) => setPassword(Location)}
+          onChangeText={(Location) => setLocation(Location)}
         />
       </View>
 
@@ -84,7 +88,7 @@ function NewPairingScreen({ navigation }) {
       </TouchableOpacity>
 
       <TouchableOpacity
-        onPress={() => showConfirmDialog()}
+        onPress={() => savePairing()}
         // onPress={() => getMoviesFromApiAsync()}
         style={styles.loginBtn}
       >
