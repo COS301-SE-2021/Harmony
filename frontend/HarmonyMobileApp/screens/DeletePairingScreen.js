@@ -27,17 +27,18 @@ const DeletePairingScreen = (props) => {
       "Delete",
       "Are you sure you want to delete this pairing?",
       [
-        // The "Yes" button
-        {
-          text: "Yes",
-          onPress: () => {
-            //setShowBox(false);
-          },
-        },
+       
         // The "No" button
         // Does nothing but dismiss the dialog when tapped
         {
           text: "No",
+        },
+         // The "Yes" button
+         {
+          text: "Yes",
+          onPress: () => {
+            //setShowBox(false);
+          },
         },
       ]
     );

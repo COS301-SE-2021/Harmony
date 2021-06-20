@@ -8,10 +8,42 @@ import {
   StyleSheet,
   StatusBar,
   TouchableOpacity,
+  Alert,
 } from "react-native";
+
+
+import {
+  FontAwesome,
+  AntDesign,
+  MaterialIcons,
+  Entypo,
+  FontAwesome5,
+} from "@expo/vector-icons";
+
 import styles from "../styles";
 
 const ViewFavouritesScreen = (props) => {
+  const showConfirmDialog = () => {
+    return Alert.alert(
+      "Delete",
+      "Are you sure you want to remove this pairing from favourites?",
+      [
+       
+        // The "No" button
+        // Does nothing but dismiss the dialog when tapped
+        {
+          text: "No",
+        },
+         // The "Yes" button
+         {
+          text: "Yes",
+          onPress: () => {
+            //setShowBox(false);
+          },
+        },
+      ]
+    );
+  };
   return (
     <SafeAreaView style={personalStyles.container}>
       <View style={{ paddingBottom: "2%", paddingRight: "0.5%" }}>
@@ -36,6 +68,12 @@ const ViewFavouritesScreen = (props) => {
                 />
               </View>
               <Text style={styles.TextMedium}> A Milkshake </Text>
+              <TouchableOpacity
+              style={personalStyles.addToFavouriteBtn}
+              onPress={() => showConfirmDialog()}
+            >
+              <AntDesign name="minuscircleo" size={30} color="red" />
+            </TouchableOpacity>
             </View>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <View style={{ justifyContent: "center" }}>
@@ -51,6 +89,7 @@ const ViewFavouritesScreen = (props) => {
                 </Text>
               </View>
             </View>
+           
           </View>
           <View style={styles.backgroundBarShowLatest}>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -62,6 +101,12 @@ const ViewFavouritesScreen = (props) => {
                 />
               </View>
               <Text style={styles.TextMedium}> Coke </Text>
+              <TouchableOpacity
+              style={personalStyles.addToFavouriteBtn}
+              onPress={() => showConfirmDialog()}
+            >
+              <AntDesign name="minuscircleo" size={30} color="red" />
+            </TouchableOpacity>
             </View>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <View style={{ justifyContent: "center" }}>
@@ -88,6 +133,12 @@ const ViewFavouritesScreen = (props) => {
                 />
               </View>
               <Text style={styles.TextMedium}> Coffee </Text>
+              <TouchableOpacity
+              style={personalStyles.addToFavouriteBtn}
+              onPress={() => showConfirmDialog()}
+            >
+              <AntDesign name="minuscircleo" size={30} color="red" />
+            </TouchableOpacity>
             </View>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <View style={{ justifyContent: "center" }}>
@@ -111,6 +162,12 @@ const ViewFavouritesScreen = (props) => {
                 />
               </View>
               <Text style={styles.TextMedium}> Coke </Text>
+              <TouchableOpacity
+              style={personalStyles.addToFavouriteBtn}
+              onPress={() => showConfirmDialog()}
+            >
+              <AntDesign name="minuscircleo" size={30} color="red" />
+            </TouchableOpacity>
             </View>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <View style={{ justifyContent: "center" }}>
@@ -137,6 +194,12 @@ const ViewFavouritesScreen = (props) => {
                 />
               </View>
               <Text style={styles.TextMedium}> Tea </Text>
+              <TouchableOpacity
+              style={personalStyles.addToFavouriteBtn}
+              onPress={() => showConfirmDialog()}
+            >
+              <AntDesign name="minuscircleo" size={30} color="red" />
+            </TouchableOpacity>
             </View>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <View style={{ justifyContent: "center" }}>
