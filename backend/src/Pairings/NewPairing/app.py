@@ -20,13 +20,14 @@ now = strftime("%a, %d %b %Y %H:%M:%S +0000", gmtime())
 def lambda_handler(event, context):
 
     # extract values from the event object we got from the Lambda service and store in a variable
-    a = uuid.uuid4().hex
     b = event['DrinkDesc']
     c = event['DrinkItem']
     d = event['FoodDesc']
     e = event['FoodItem']
     f = event['Location']
     g = event['UID']
+    # generate unique id for pairing
+    a = uuid.uuid4().hex
 
     # write data for new pairing to the DynamoDB table using the object we instantiated and save response in a variable
     response = table.put_item(
