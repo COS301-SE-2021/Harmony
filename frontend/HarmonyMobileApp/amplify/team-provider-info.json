@@ -11,6 +11,7 @@
       "StackId": "arn:aws:cloudformation:eu-west-1:294481406452:stack/amplify-harmonymobileapp-dev-10402/a6ceb460-d152-11eb-a345-06553b827601",
       "AmplifyAppId": "d348oorcqc4y9s"
     }
+<<<<<<< HEAD
   },
   "hmnynviro": {
     "awscloudformation": {
@@ -24,5 +25,7 @@
       "StackId": "arn:aws:cloudformation:eu-west-1:294481406452:stack/amplify-harmonymobileapp-hmnynviro-120001/4a7be3c0-d1ae-11eb-93bf-0aa2eb738a15",
       "AmplifyAppId": "d348oorcqc4y9s"
     }
+=======
+>>>>>>> 655afea719954c95baac6bc0e899b0f36f2f5539
   }
 }
