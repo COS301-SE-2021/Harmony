@@ -29,8 +29,9 @@ def lambda_handler(event, context):
     amount = int(response['Item']['SizeOfFavs'])
     index = 0
     for key in response['Item']['FavouritePairings']:
-        # traverse each item in Pairings and search for id the append to list
+        # traverse each item in Pairings and search for id the list
         print(key)
+        # find id the break, because index is incrementing till id is found
         if key == pid:
             break
         index = index + 1
@@ -43,6 +44,7 @@ def lambda_handler(event, context):
             Key={
                 'UID': uid
             },
+            # remove id at index of FavouritePairings list
             UpdateExpression=f"remove FavouritePairings[{index}]",
             ConditionExpression=f"contains(FavouritePairings, :pair)",
             ExpressionAttributeValues={':pair': pid},
