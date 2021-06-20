@@ -34,6 +34,22 @@ const ViewAllPairingsScreen = (props) => {
     );
   };
 
+  const getAllPairingsFromApiAsync = async () => {
+    // return console.log("sds");
+    try {
+      let response = await fetch(
+        "https://qkvdftfq7b.execute-api.eu-west-1.amazonaws.com/dev/viewpairings"
+      );
+      let json = await response.json();
+      console.log(json);
+      return json;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // onPress={() => getAllPairingsFromApiAsync()}
+
   return (
     <SafeAreaView style={personalStyles.container}>
       <ScrollView style={personalStyles.scrollView}>
@@ -88,7 +104,8 @@ const ViewAllPairingsScreen = (props) => {
           </View>
           <TouchableOpacity
             style={personalStyles.addToFavouriteBtn}
-            onPress={() => showConfirmDialog()}
+            //onPress={() => showConfirmDialog()}
+            onPress={() => getAllPairingsFromApiAsync()}
           >
             <View style={{ justifyContent: "center" }}>
               <Image

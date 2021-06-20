@@ -85,6 +85,7 @@ function NewPairingScreen({ navigation }) {
 
       <TouchableOpacity
         onPress={() => showConfirmDialog()}
+        // onPress={() => getMoviesFromApiAsync()}
         style={styles.loginBtn}
       >
         <Text style={styles.loginText}>Add</Text>
