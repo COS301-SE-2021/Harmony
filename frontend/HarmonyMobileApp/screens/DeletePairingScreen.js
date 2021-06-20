@@ -32,7 +32,6 @@ const DeletePairingScreen = (props) => {
     "https://htsec8hita.execute-api.eu-west-1.amazonaws.com/dev";
   const [isLoading, setLoading] = useState(useIsFocused());
   const [data, setData] = useState([]);
-  const [isDeleted, setIsDeleted] = useState(false);
   const [PID, setPID] = useState("");
   const [toDelete, setToDelete] = useState(false);
 
@@ -42,7 +41,7 @@ const DeletePairingScreen = (props) => {
       .then((json) => setData(json.Data))
       .catch((error) => alert(error))
       .then(setLoading(false));
-  }, [useIsFocused()]);
+  });
 
   useEffect(() => {
     fetch(deletePairingURL, {
@@ -58,17 +57,8 @@ const DeletePairingScreen = (props) => {
       .then((response) => response.json())
       .then((json) => setData(json.Data))
       .catch((error) => alert(error))
-      .then(setToDelete(false))
-      .then(setIsDeleted(true));
+      .then(setToDelete(false));
   }, [toDelete]);
-
-  useEffect(() => {
-    fetch(viewPairingURL)
-      .then((response) => response.json())
-      .then((json) => setData(json.Data))
-      .catch((error) => alert(error))
-      .then(setIsDeleted(false));
-  }, [isDeleted]);
 
   const deleteItem = (obj) => {
     return Alert.alert(
