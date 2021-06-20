@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect,useState } from "react";
+import { useIsFocused } from "@react-navigation/native";  
 import {
   View,
   Text,
@@ -9,6 +10,7 @@ import {
   StatusBar,
   TouchableOpacity,
   Alert,
+  FlatList
 } from "react-native";
 
 
@@ -23,6 +25,28 @@ import {
 import styles from "../styles";
 
 const ViewFavouritesScreen = (props) => {
+  const viewFavouritesURL ="https://ypveh68wo0.execute-api.eu-west-1.amazonaws.com/dev";
+  
+const [isLoading, setLoading] = useState(useIsFocused());
+const [data, setData] = useState([]);
+
+useEffect(() => {
+  fetch(viewFavouritesURL,{
+    method:"POST",
+    headers:{
+      Accept:"application/json",
+      "Content-Type":"application/json"
+    },
+    body:JSON.stringify({
+      "UID":"u1"
+    })
+  })
+    .then((response) => response.json())
+    .then((json) => setData(json.Data))
+    .catch((error) => alert(error))
+    .then(setLoading(false));
+});
+
   const showConfirmDialog = () => {
     return Alert.alert(
       "Delete",
@@ -57,165 +81,45 @@ const ViewFavouritesScreen = (props) => {
               </View>
             </View>
           </View>
-
-          <View style={styles.backgroundBarShowLatest}>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Text style={styles.TextMedium}> Waffles </Text>
-              <View style={{ justifyContent: "center" }}>
-                <Image
-                  source={require("../assets/plus.png")}
-                  style={styles.smallImage}
-                />
-              </View>
-              <Text style={styles.TextMedium}> A Milkshake </Text>
-              <TouchableOpacity
-              style={personalStyles.addToFavouriteBtn}
-              onPress={() => showConfirmDialog()}
-            >
-              <AntDesign name="minuscircleo" size={30} color="red" />
-            </TouchableOpacity>
-            </View>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <View style={{ justifyContent: "center" }}>
-                <Image
-                  source={require("../assets/location.png")}
-                  style={{ width: 30, height: 30, resizeMode: "contain" }}
-                />
-              </View>
-              <View>
-                <Text style={styles.TextSmall}>
-                  {" "}
-                  Waffle House, Ramsgate, South Coast
-                </Text>
-              </View>
-            </View>
-           
-          </View>
-          <View style={styles.backgroundBarShowLatest}>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Text style={styles.TextMedium}> Burgers </Text>
-              <View style={{ justifyContent: "center" }}>
-                <Image
-                  source={require("../assets/plus.png")}
-                  style={styles.smallImage}
-                />
-              </View>
-              <Text style={styles.TextMedium}> Coke </Text>
-              <TouchableOpacity
-              style={personalStyles.addToFavouriteBtn}
-              onPress={() => showConfirmDialog()}
-            >
-              <AntDesign name="minuscircleo" size={30} color="red" />
-            </TouchableOpacity>
-            </View>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <View style={{ justifyContent: "center" }}>
-                <Image
-                  source={require("../assets/location.png")}
-                  style={{ width: 30, height: 30, resizeMode: "contain" }}
-                />
-              </View>
-              <View>
-                <Text style={styles.TextSmall}>
-                  {" "}
-                  Rocomamas, Gateway, Umhlanga
-                </Text>
-              </View>
-            </View>
-          </View>
-          <View style={styles.backgroundBarShowLatest}>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Text style={styles.TextMedium}> French Toast </Text>
-              <View style={{ justifyContent: "center" }}>
-                <Image
-                  source={require("../assets/plus.png")}
-                  style={styles.smallImage}
-                />
-              </View>
-              <Text style={styles.TextMedium}> Coffee </Text>
-              <TouchableOpacity
-              style={personalStyles.addToFavouriteBtn}
-              onPress={() => showConfirmDialog()}
-            >
-              <AntDesign name="minuscircleo" size={30} color="red" />
-            </TouchableOpacity>
-            </View>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <View style={{ justifyContent: "center" }}>
-                <Image
-                  source={require("../assets/location.png")}
-                  style={{ width: 30, height: 30, resizeMode: "contain" }}
-                />
-              </View>
-              <View>
-                <Text style={styles.TextSmall}> 1855, Lynnwood, Pretoria</Text>
-              </View>
-            </View>
-          </View>
-          <View style={styles.backgroundBarShowLatest}>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Text style={styles.TextMedium}> Bunny Chow </Text>
-              <View style={{ justifyContent: "center" }}>
-                <Image
-                  source={require("../assets/plus.png")}
-                  style={styles.smallImage}
-                />
-              </View>
-              <Text style={styles.TextMedium}> Coke </Text>
-              <TouchableOpacity
-              style={personalStyles.addToFavouriteBtn}
-              onPress={() => showConfirmDialog()}
-            >
-              <AntDesign name="minuscircleo" size={30} color="red" />
-            </TouchableOpacity>
-            </View>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <View style={{ justifyContent: "center" }}>
-                <Image
-                  source={require("../assets/location.png")}
-                  style={{ width: 30, height: 30, resizeMode: "contain" }}
-                />
-              </View>
-              <View>
-                <Text style={styles.TextSmall}>
-                  {" "}
-                  4 Chilli, Garsfontein, Pretoria
-                </Text>
-              </View>
-            </View>
-          </View>
-          <View style={styles.backgroundBarShowLatest}>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Text style={styles.TextMedium}> Koeksister </Text>
-              <View style={{ justifyContent: "center" }}>
-                <Image
-                  source={require("../assets/plus.png")}
-                  style={styles.smallImage}
-                />
-              </View>
-              <Text style={styles.TextMedium}> Tea </Text>
-              <TouchableOpacity
-              style={personalStyles.addToFavouriteBtn}
-              onPress={() => showConfirmDialog()}
-            >
-              <AntDesign name="minuscircleo" size={30} color="red" />
-            </TouchableOpacity>
-            </View>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <View style={{ justifyContent: "center" }}>
-                <Image
-                  source={require("../assets/location.png")}
-                  style={{ width: 30, height: 30, resizeMode: "contain" }}
-                />
-              </View>
-              <View>
-                <Text style={styles.TextSmall}>
-                  {" "}
-                  Bakehouse, HazelWood, Pretoria
-                </Text>
-              </View>
-            </View>
-          </View>
+          <FlatList
+    data={data}
+    keyExtractor={({PID},index)=>PID}
+    renderItem={({item})=>(<Text> <View style={styles.backgroundBarShowLatest}>
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <Text style={styles.TextMedium}> {item.FoodItem} </Text>
+        <View style={{ justifyContent: "center" }}>
+          <Image
+            source={require("../assets/plus.png")}
+            style={styles.smallImage}
+          />
+        </View>
+        <Text style={styles.TextMedium}> {item.DrinkItem} </Text>
+        <TouchableOpacity
+        style={personalStyles.addToFavouriteBtn}
+        onPress={() => showConfirmDialog()}
+      >
+        <AntDesign name="minuscircleo" size={30} color="red" />
+      </TouchableOpacity>
+      </View>
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <View style={{ justifyContent: "center" }}>
+          <Image
+            source={require("../assets/location.png")}
+            style={{ width: 30, height: 30, resizeMode: "contain" }}
+          />
+        </View>
+        <View>
+          <Text style={styles.TextSmall}>
+            {" "}
+            {item.Location}
+          </Text>
+        </View>
+      </View>
+     
+    </View></Text>)}
+    />
+         
+        
         </ScrollView>
       </View>
     </SafeAreaView>
