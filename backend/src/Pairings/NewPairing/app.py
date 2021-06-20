@@ -1,6 +1,6 @@
 # import the json utility package since we will be working with a JSON object
 import json
-
+import uuid
 # import the AWS SDK (for Python the package name is boto3)
 import boto3
 
@@ -20,7 +20,7 @@ now = strftime("%a, %d %b %Y %H:%M:%S +0000", gmtime())
 def lambda_handler(event, context):
 
     # extract values from the event object we got from the Lambda service and store in a variable
-    a = event['PID']
+    a = uuid.uuid4().hex
     b = event['DrinkDesc']
     c = event['DrinkItem']
     d = event['FoodDesc']
@@ -41,7 +41,7 @@ def lambda_handler(event, context):
         })
 
     # return a properly formatted JSON object
-    return json.dumps({'isSuccessful': 'true', 'PID': g})
+    return json.dumps({'isSuccessful': 'true', 'PID': a})
 
 
 
