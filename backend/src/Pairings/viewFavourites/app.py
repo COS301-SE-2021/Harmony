@@ -25,10 +25,12 @@ now = strftime("%a, %d %b %Y %H:%M:%S +0000", gmtime())
 def lambda_handler(event, context):
     # extract values from the event object we got from the Lambda service and store in a variable
     uid = event['UID']
+    # create list to store json
     returnedjson = []
     # store item from table in a response
     response = table.get_item(Key={'UID': uid})
     for key in response['Item']['FavouritePairings']:
+        # traverse each item in Pairings and search for id the append to list
         print(key)
         response = table2.query(
             KeyConditionExpression=
@@ -39,6 +41,7 @@ def lambda_handler(event, context):
 
     return {
             # parse the response as a json with the correct item attributes
+            # the data will be the appended list of fav pairings
             "StatusCode": 200,
             'Data': returnedjson
         }
