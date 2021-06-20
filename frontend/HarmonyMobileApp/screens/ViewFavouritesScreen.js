@@ -26,7 +26,7 @@ import styles from "../styles";
 
 const ViewFavouritesScreen = (props) => {
   const viewFavouritesURL ="https://ypveh68wo0.execute-api.eu-west-1.amazonaws.com/dev";
-  
+  const deleteFavourite="https://op7td19wdb.execute-api.eu-west-1.amazonaws.com/dev";
 const [isLoading, setLoading] = useState(useIsFocused());
 const [data, setData] = useState([]);
 
@@ -47,7 +47,10 @@ useEffect(() => {
     .then(setLoading(false));
 });
 
-  const showConfirmDialog = () => {
+  const showConfirmDialog = (pid) => {
+    console.log(pid);
+    var newpid = "\"" + pid + "\"";
+    console.log(newpid);
     return Alert.alert(
       "Delete",
       "Are you sure you want to remove this pairing from favourites?",
@@ -62,6 +65,19 @@ useEffect(() => {
          {
           text: "Yes",
           onPress: () => {
+            fetch(deleteFavourite,{
+              method:"POST",
+              headers:{
+                Accept:"application/json",
+                "Content-Type":"application/json"
+              },
+              body:JSON.stringify({
+                "PID":newpid,
+                "UID":"u1"
+              })
+            })
+              .then((response) => response.json())
+              .catch((error) => alert(error))
             //setShowBox(false);
           },
         },
@@ -96,7 +112,7 @@ useEffect(() => {
         <Text style={styles.TextMedium}> {item.DrinkItem} </Text>
         <TouchableOpacity
         style={personalStyles.addToFavouriteBtn}
-        onPress={() => showConfirmDialog()}
+        onPress={() => showConfirmDialog(item.PID)}
       >
         <AntDesign name="minuscircleo" size={30} color="red" />
       </TouchableOpacity>
