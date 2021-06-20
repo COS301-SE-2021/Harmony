@@ -22,30 +22,26 @@ now = strftime("%a, %d %b %Y %H:%M:%S +0000", gmtime())
 def lambda_handler(event, context):
     # extract values from the event object we got from the Lambda service and store in a variable
     uid = event['UID']
+    pid = event['PID']
+
+    response = table.get_item(Key={'UID': uid})
+    amount = response['Item']['SizeOfFavs']
 
     try:
-         # delete based on id from request
-        response = table.delete_item(
-            Key={
-                'UID': uid
-            }
-        )
-
-
-
-
+        for x in range(amount):
+            response = table.update_item(
+                Key={
+                    'UID': uid
+                },
+                UpdateExpression=f"remove FavouritePairings[{x}]",
+                ConditionExpression="contains(FavouritePairings, :pair)",
+                ExpressionAttributeValues={':pair': pid},
+                ReturnValues="UPDATED_NEW"
+            )
     except ClientError as e:
-        # throw error if failed
         if e.response['Error']['Code'] == "ConditionalCheckFailedException":
-            # return a properly formatted JSON object
-            return {
-                'statusCode': 400,
-                'body': json.dumps({'isSuccessful': 'false', 'UID': uid})
-            }
+            print(e.response['Error']['Message'])
         else:
             raise
     else:
-        return {
-            'statusCode': 200,
-            'body': json.dumps({'isSuccessful': 'true', 'UID': uid})
-        }
+        return response
