@@ -27,19 +27,28 @@ def lambda_handler(event, context):
     response = table.get_item(Key={'UID': uid})
     # convert number to integer
     amount = int(response['Item']['SizeOfFavs'])
+    index = 0
+    for key in response['Item']['FavouritePairings']:
+        # traverse each item in Pairings and search for id the append to list
+        print(key)
+        if key == pid:
+            break
+        index = index + 1
 
+    print(index)
+    print(pid)
     try:
-        for x in range(amount):
-            response = table.update_item(
-                Key={
-                    'UID': uid
-                },
-                UpdateExpression=f"remove FavouritePairings[{x}]",
-                ConditionExpression=f"contains(FavouritePairings[{x}], :pair)",
-                ExpressionAttributeValues={':pair': pid},
-                ReturnValues="UPDATED_NEW"
-            )
-            print(response['ResponseMetadata']['HTTPStatusCode'])
+
+        response = table.update_item(
+            Key={
+                'UID': uid
+            },
+            UpdateExpression=f"remove FavouritePairings[{index}]",
+            ConditionExpression=f"contains(FavouritePairings, :pair)",
+            ExpressionAttributeValues={':pair': pid},
+            ReturnValues="UPDATED_NEW"
+        )
+        print(response['ResponseMetadata']['HTTPStatusCode'])
 
     except ClientError as e:
         if e.response['Error']['Code'] == "ConditionalCheckFailedException":
