@@ -23,10 +23,10 @@ def lambda_handler(event, context):
     # extract values from the event object we got from the Lambda service and store in a variable
     uid = event['UID']
 
+    # store item from table in a response
     response = table.get_item(Key={'UID': uid})
     print(json.dumps(response['Item']['FavouritePairings']))
     return {
-
+            # parse the response as a json with the correct item attributes
             'Data': json.dumps(response['Item']['FavouritePairings'])
-
         }
