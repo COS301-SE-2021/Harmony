@@ -84,7 +84,7 @@ useEffect(() => {
           <FlatList
     data={data}
     keyExtractor={({PID},index)=>PID}
-    renderItem={({item})=>(<Text> <View style={styles.backgroundBarShowLatest}>
+    renderItem={({item})=>( <View style={styles.backgroundBarShowLatest}>
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <Text style={styles.TextMedium}> {item.FoodItem} </Text>
         <View style={{ justifyContent: "center" }}>
@@ -116,7 +116,7 @@ useEffect(() => {
         </View>
       </View>
      
-    </View></Text>)}
+    </View>)}
     />
          
         
@@ -129,6 +129,12 @@ const personalStyles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: StatusBar.currentHeight,
+  },
+  secondContainer:{
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
   scrollView: {
     marginHorizontal: 20,
