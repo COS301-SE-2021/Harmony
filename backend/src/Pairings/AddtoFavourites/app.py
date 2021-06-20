@@ -29,9 +29,8 @@ def lambda_handler(event, context):
                 'UID': uid
             },
             UpdateExpression="Add #fav :pair",
-            ExpressionAttributeNames={'fav': 'FavouritePairings' },
+            ExpressionAttributeNames={'fav': 'FavouritePairings'},
             ExpressionAttributeValues={':pair': pid},
-            ReturnValues="UPDATED_NEW"
         )
         print(response['ResponseMetadata']['HTTPStatusCode'])
 
