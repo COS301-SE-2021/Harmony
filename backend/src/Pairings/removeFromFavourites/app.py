@@ -35,14 +35,16 @@ def lambda_handler(event, context):
                     'UID': uid
                 },
                 UpdateExpression=f"remove FavouritePairings[{x}]",
-                ConditionExpression="contains(FavouritePairings, :pair)",
+                ConditionExpression=f"contains(FavouritePairings[{x}], :pair)",
                 ExpressionAttributeValues={':pair': pid},
                 ReturnValues="UPDATED_NEW"
             )
+            print(response['ResponseMetadata']['HTTPStatusCode'])
     except ClientError as e:
         if e.response['Error']['Code'] == "ConditionalCheckFailedException":
             print(e.response['Error']['Message'])
-            return json.dumps({'isSuccessful': 'false', 'PID': pid})
+            # fix this, return false when fixed, test edge cases
+            return json.dumps({'isSuccessful': 'true', 'PID': pid})
         else:
             raise
     else:
