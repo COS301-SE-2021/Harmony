@@ -25,4 +25,8 @@ def lambda_handler(event, context):
 
     response = table.get_item(Key={'UID': uid})
     print(json.dumps(response['Item']['FavouritePairings']))
+    return {
 
+            'Data': json.dumps(response['Item']['FavouritePairings'])
+
+        }
