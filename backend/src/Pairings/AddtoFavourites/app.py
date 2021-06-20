@@ -28,7 +28,7 @@ def lambda_handler(event, context):
             Key={
                 'UID': uid
             },
-            UpdateExpression="Add #fav :pair",
+            UpdateExpression={"Add #fav :pair"},
             ExpressionAttributeNames={'fav': 'FavouritePairings'},
             ExpressionAttributeValues={':pair': pid},
         )
