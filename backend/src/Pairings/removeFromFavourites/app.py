@@ -40,6 +40,7 @@ def lambda_handler(event, context):
                 ReturnValues="UPDATED_NEW"
             )
             print(response['ResponseMetadata']['HTTPStatusCode'])
+
     except ClientError as e:
         if e.response['Error']['Code'] == "ConditionalCheckFailedException":
             print(e.response['Error']['Message'])
