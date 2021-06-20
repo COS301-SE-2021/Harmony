@@ -25,7 +25,8 @@ def lambda_handler(event, context):
     pid = event['PID']
 
     response = table.get_item(Key={'UID': uid})
-    amount = response['Item']['SizeOfFavs']
+    # convert number to integer
+    amount = int(response['Item']['SizeOfFavs'])
 
     try:
         for x in range(amount):
@@ -41,7 +42,8 @@ def lambda_handler(event, context):
     except ClientError as e:
         if e.response['Error']['Code'] == "ConditionalCheckFailedException":
             print(e.response['Error']['Message'])
+            return json.dumps({'isSuccessful': 'false', 'PID': pid})
         else:
             raise
     else:
-        return response
+        return json.dumps({'isSuccessful': 'true', 'PID': pid})
