@@ -13,7 +13,6 @@ def lambda_handler(event, context):
     # edit the response to only show items
     response = allresponse['Items']
 
-
     return {
         # returns all items stored in response
         "StatusCode": 200,
