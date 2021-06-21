@@ -23,10 +23,6 @@ import ViewAllPairingsScreen from "./screens/ViewAllPairingsScreen.js";
 import ViewIndividualItemsScreen from "./screens/ViewIndividualItemsScreen.js";
 import ViewFavouritesScreen from "./screens/ViewFavouritesScreen.js";
 
-import Amplify, { API } from "aws-amplify";
-import config from "./aws-exports";
-Amplify.configure(config);
-
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
