@@ -45,19 +45,6 @@ def lambda_handler(event, context):
     # items5 = response['Items']
     # print(items5)
     #
-    # response = table.query(
-    #     KeyConditionExpression=
-    #     Key('PID').eq('p6')
-    # )
-    # items6 = response['Items']
-    # print(items6)
-    #
-    # return {
-    #
-    #     "StatusCode": 200,
-    #
-    #     "Data": items6 + items5 + items4 + items3 + items2 + items1
-    # }
 
     return {
         # returns all items stored in response
