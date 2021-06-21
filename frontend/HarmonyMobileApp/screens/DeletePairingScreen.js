@@ -86,73 +86,71 @@ const DeletePairingScreen = (props) => {
 
   return (
     <SafeAreaView style={personalStyles.container}>
-      <ScrollView style={personalStyles.scrollView}>
-        <View style={styles.backgroundBarShowLatest}>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <View style={{ justifyContent: "center" }}>
-              <Text style={styles.TextLarge}> Delete Pairing </Text>
-            </View>
+      <View style={styles.backgroundBarShowLatest}>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <View style={{ justifyContent: "center" }}>
+            <Text style={styles.TextLarge}> Delete Pairing </Text>
           </View>
         </View>
-        <View>
-          {isLoading ? (
-            <ActivityIndicator />
-          ) : (
-            <FlatList
-              data={data}
-              keyExtractor={({ PID }, index) => PID}
-              renderItem={({ item }) => (
-                <View style={styles.backgroundBarShowLatest}>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      alignItems: "center",
-                      justifyContent: "flex-start",
-                    }}
-                  >
-                    <View>
-                      <Image
-                        source={require("../assets/person.png")}
-                        style={{ width: 40, height: 40, resizeMode: "contain" }}
-                      />
-                    </View>
-                    <View>
-                      <Text style={styles.TextSmall}> {item.UID} </Text>
-                    </View>
+      </View>
+      <View>
+        {isLoading ? (
+          <ActivityIndicator />
+        ) : (
+          <FlatList
+            data={data}
+            keyExtractor={({ PID }, index) => PID}
+            renderItem={({ item }) => (
+              <View style={styles.backgroundBarShowLatest}>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "flex-start",
+                  }}
+                >
+                  <View>
+                    <Image
+                      source={require("../assets/person.png")}
+                      style={{ width: 40, height: 40, resizeMode: "contain" }}
+                    />
                   </View>
-                  <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <Text style={styles.TextMedium}> {item.FoodItem} </Text>
-                    <View style={{ justifyContent: "center" }}>
-                      <Image
-                        source={require("../assets/plus.png")}
-                        style={styles.smallImage}
-                      />
-                    </View>
-                    <Text style={styles.TextMedium}> {item.DrinkItem} </Text>
+                  <View>
+                    <Text style={styles.TextSmall}> {item.UID} </Text>
                   </View>
-                  <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <View style={{ justifyContent: "center" }}>
-                      <Image
-                        source={require("../assets/location.png")}
-                        style={{ width: 30, height: 30, resizeMode: "contain" }}
-                      />
-                    </View>
-                    <View>
-                      <Text style={styles.TextSmall}>{item.Location}</Text>
-                    </View>
-                  </View>
-                  <TouchableOpacity
-                    style={personalStyles.addToFavouriteBtn}
-                    onPress={() => deleteItem({ item: item.PID })}
-                  >
-                    <AntDesign name="minuscircleo" size={60} color="red" />
-                  </TouchableOpacity>
                 </View>
-              )}
-            />
-          )}
-        </View>
-      </ScrollView>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <Text style={styles.TextMedium}> {item.FoodItem} </Text>
+                  <View style={{ justifyContent: "center" }}>
+                    <Image
+                      source={require("../assets/plus.png")}
+                      style={styles.smallImage}
+                    />
+                  </View>
+                  <Text style={styles.TextMedium}> {item.DrinkItem} </Text>
+                </View>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <View style={{ justifyContent: "center" }}>
+                    <Image
+                      source={require("../assets/location.png")}
+                      style={{ width: 30, height: 30, resizeMode: "contain" }}
+                    />
+                  </View>
+                  <View>
+                    <Text style={styles.TextSmall}>{item.Location}</Text>
+                  </View>
+                </View>
+                <TouchableOpacity
+                  style={personalStyles.addToFavouriteBtn}
+                  onPress={() => deleteItem({ item: item.PID })}
+                >
+                  <AntDesign name="minuscircleo" size={60} color="red" />
+                </TouchableOpacity>
+              </View>
+            )}
+          />
+        )}
+      </View>
     </SafeAreaView>
   );
 };
@@ -160,6 +158,7 @@ const personalStyles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: StatusBar.currentHeight,
+    paddingBottom: 130,
   },
   scrollView: {
     marginHorizontal: 20,
