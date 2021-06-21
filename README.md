@@ -29,7 +29,7 @@ such as AWS Rekognition.
 ## Recorded demo
 
 * :tv: [DreamTeam-Demo1](https://drive.google.com/file/d/1nDxiOpgDTvwF3yLKnQhtvAptHO-trJP8/view?usp=sharing)
-* :tv: [DreamTeam-Demo2](https://drive.google.com/file/d/1nDxiOpgDTvwF3yLKnQhtvAptHO-trJP8/view?usp=sharing)
+* :tv: [DreamTeam-Demo2](https://drive.google.com/file/d/1HNs5SVvK4D86Od7OrxOauSXbe83Wpj7N/view?usp=sharing)
 
 ## SRS document
 * :open_book: [SRS Document - V1](https://drive.google.com/file/d/1b0Vfq70Yxiso4dJOJbDcvd1jPnjZuZAg/view?usp=sharing)
