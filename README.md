@@ -5,13 +5,10 @@
 
 # Harmony
 
-The Harmony Application will allow the user to take a
-picture of a food item which will then be recognized by the application, and they
-will be given a list of suggestions on what to pair the item with. This will allow
-tourists to try different types of food, in a typically South African way. We can
-provide this by using cloud-based architecture hosted on AWS. We intend to
-create a serverless system while using modern-day machine learning mechanisms
-such as AWS Rekognition.
+Visiting South Africa a tourist would not know what a Bunny Chow is, let alone what it pairs well with.
+They would pull out their phone, take a picture of the Bunny Chow and Harmony would show them the best possible drink pairings.
+
+
 ---
 
 ## Harmony Team Members
