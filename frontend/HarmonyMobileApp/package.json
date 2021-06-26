@@ -8,12 +8,15 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@eva-design/eva": "^2.1.0",
     "@react-native-async-storage/async-storage": "^1.15.5",
     "@react-native-community/masked-view": "0.1.10",
     "@react-native-community/netinfo": "^6.0.0",
     "@react-navigation/drawer": "^5.12.5",
     "@react-navigation/native": "^5.9.4",
     "@react-navigation/stack": "^5.14.5",
+    "@ui-kitten/components": "^5.1.0",
+    "@ui-kitten/eva-icons": "^5.1.0",
     "aws-amplify": "^4.1.1",
     "aws-amplify-react-native": "^5.0.2",
     "expo": "~41.0.1",
@@ -25,6 +28,7 @@
     "react-native-reanimated": "~2.1.0",
     "react-native-safe-area-context": "3.2.0",
     "react-native-screens": "~3.0.0",
+    "react-native-svg": "12.1.0",
     "react-native-web": "^0.17.0"
   },
   "devDependencies": {
