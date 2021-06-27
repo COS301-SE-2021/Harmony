@@ -2,7 +2,7 @@ import json
 
 import pytest
 
-from backend.src.Pairings.NewPairing import app
+from backend.src.Pairings.NewPairing import NewPairing
 
 
 @pytest.fixture()
@@ -18,9 +18,9 @@ def fixture_event():
     }
 
 
-def test_lambda_handler(fixture_event):
+def test_New_Pairing(fixture_event):
 
-    ret = app.lambda_handler(fixture_event, "")
+    ret = NewPairing.New_Pairing(fixture_event, "")
     data = json.loads(ret)
     print(data)
     assert data["isSuccessful"] == "true"
