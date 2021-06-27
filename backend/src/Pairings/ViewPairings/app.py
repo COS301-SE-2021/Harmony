@@ -6,7 +6,7 @@ client = boto3.resource('dynamodb')
 table = client.Table('Pairings')
 
 
-def lambda_handler(event, context):
+def View_Pairings(event, context):
     print("Hello Harmony")
     # add entire table to allresponse
     allresponse = table.scan()
