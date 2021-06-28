@@ -11,8 +11,8 @@ import {
   StyleSheet,
 } from "react-native";
 import * as eva from '@eva-design/eva';
-import { ApplicationProvider, Layout, Divider } from '@ui-kitten/components';
-
+import { ApplicationProvider, Layout,Button, Divider } from '@ui-kitten/components';
+import { default as theme } from '../theme.json';
 import styles from "../styles";
 
 function NewPairingScreen({ navigation }) {
@@ -77,7 +77,12 @@ function NewPairingScreen({ navigation }) {
     );
   };
   return (
-    <SafeAreaView style={personalStyles.container}>
+    <ApplicationProvider {...eva} theme={{ ...eva.dark, ...theme }}>
+    <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Button>HOME</Button>
+    </Layout>
+  </ApplicationProvider>
+    /*<SafeAreaView style={personalStyles.container}>
       <View style={styles.LoginContainer}>
         <StatusBar style="auto" />
     <Divider>
@@ -139,7 +144,7 @@ function NewPairingScreen({ navigation }) {
         </TouchableOpacity>
         </Divider>
       </View>
-    </SafeAreaView>
+    </SafeAreaView>*/
   );
 }
 const personalStyles = StyleSheet.create({
