@@ -6,6 +6,8 @@ import {
   BottomNavigationTab,
   Layout,
   Text,
+  Button,
+  Icon,
 } from "@ui-kitten/components";
 
 import HomeScreen from "./HomeScreen.js";
@@ -14,6 +16,14 @@ import ViewAllPairingsScreen from "./ViewAllPairingsScreen.js";
 import SettingsScreen from "./SettingsScreen.js";
 
 const { Navigator, Screen } = createBottomTabNavigator();
+
+const HomeIcon = (props) => <Icon {...props} name="home-outline" />;
+const TrendingIcon = (props) => <Icon {...props} name="trending-up-outline" />;
+const CameraIcon = (props) => (
+  <Icon {...props} name="camera-outline" width="32" height="32" />
+);
+const HeartIcon = (props) => <Icon {...props} name="heart-outline" />;
+const SettingsIcon = (props) => <Icon {...props} name="settings-2-outline" />;
 
 const CameraScreen = () => (
   <Layout style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -26,11 +36,11 @@ const BottomTabBar = ({ navigation, state }) => (
     selectedIndex={state.index}
     onSelect={(index) => navigation.navigate(state.routeNames[index])}
   >
-    <BottomNavigationTab title="Home" />
-    <BottomNavigationTab title="Popular" />
-    <BottomNavigationTab title="Camera" />
-    <BottomNavigationTab title="Favourites" />
-    <BottomNavigationTab title="Settings" />
+    <BottomNavigationTab icon={HomeIcon} />
+    <BottomNavigationTab icon={TrendingIcon} />
+    <BottomNavigationTab icon={CameraIcon} />
+    <BottomNavigationTab icon={HeartIcon} />
+    <BottomNavigationTab icon={SettingsIcon} />
   </BottomNavigation>
 );
 
