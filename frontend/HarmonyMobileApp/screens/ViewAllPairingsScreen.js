@@ -71,18 +71,18 @@ const ViewAllPairingsScreen = (props) => {
               <View style={{flexDirection:"row"}}>
                     <Image
                       source={require("../assets/waffles.jpg")}
-                      style={{ width: "45%", height: 80, resizeMode: "contain" }}
+                      style={styles.standardImage}
                     />
                     <Image
                       source={require("../assets/milkshake.jpg")}
-                      style={{ width: "45%", height: 80, resizeMode: "contain" }}
+                      style={styles.standardImage}
                     />
               </View>
               <Text>{item.FoodItem}</Text>
               <Text>{item.DrinkItem}</Text>
               <Text>Pairing descr</Text>
               <View style={{flexDirection:"row"}}>
-              <Icon name="thumb-tack" size={25} color="#000" style={{paddingRight:"5%"}}/>
+              <Icon name="compass" size={25} color="#000" style={{paddingRight:"5%"}}/>
               <Text>Location</Text>
               <Icon name="pencil" size={25} color="#000" style={{paddingLeft:"50%"}}/>
               <Icon name="heart-o" size={25} color="#000" style={{paddingLeft:"5%"}}/>

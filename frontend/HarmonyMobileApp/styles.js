@@ -84,6 +84,11 @@ const styles = StyleSheet.create({
     height: 20,
     resizeMode: "contain",
   },
+  standardImage:{
+    width: "45%", 
+    height: 80,
+    resizeMode: "contain"
+  }
 });
 
 export default styles;
