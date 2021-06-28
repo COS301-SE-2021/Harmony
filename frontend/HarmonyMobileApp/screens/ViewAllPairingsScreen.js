@@ -3,7 +3,6 @@ import { useIsFocused } from "@react-navigation/native";
 import { render } from "react-dom";
 import {
   View,
-  Text,
   SafeAreaView,
   Image,
   ScrollView,
@@ -14,7 +13,11 @@ import {
   FlatList,
   Alert,
 } from "react-native";
+import * as eva from '@eva-design/eva';
+import { ApplicationProvider, Layout,Button, Divider, Card,Text } from '@ui-kitten/components';
+import { default as theme } from '../theme.json';
 import styles from "../styles";
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const ViewAllPairingsScreen = (props) => {
   const viewPairingURL =
@@ -52,7 +55,32 @@ const ViewAllPairingsScreen = (props) => {
   };
 
   return (
-    <SafeAreaView style={personalStyles.container}>
+    <ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }}>
+    <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <Card>
+    <View style={{flexDirection:"row"}}>
+                    <Image
+                      source={require("../assets/waffles.jpg")}
+                      style={{ width: "45%", height: 80, resizeMode: "contain" }}
+                    />
+                    <Image
+                      source={require("../assets/milkshake.jpg")}
+                      style={{ width: "45%", height: 80, resizeMode: "contain" }}
+                    />
+                  </View>
+    <Text>Medium Rare Steak</Text>
+    <Text>Coke</Text>
+    <Text>Pairing descr</Text>
+    <View style={{flexDirection:"row"}}>
+    <Icon name="thumb-tack" size={25} color="#000"/>
+    <Text>Location</Text>
+    <Icon name="pencil" size={25} color="#000"/>
+    <Icon name="heart-o" size={25} color="#000"/>
+    </View>
+    </Card>
+    </Layout>
+  </ApplicationProvider>
+   /* <SafeAreaView style={personalStyles.container}>
       <View style={styles.backgroundBarShowLatest}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <View style={{ justifyContent: "center" }}>
@@ -123,7 +151,7 @@ const ViewAllPairingsScreen = (props) => {
           />
         )}
       </View>
-    </SafeAreaView>
+    </SafeAreaView>*/
   );
 };
 const personalStyles = StyleSheet.create({

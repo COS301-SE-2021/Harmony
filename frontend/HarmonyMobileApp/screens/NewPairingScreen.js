@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 
 import { StatusBar } from "expo-status-bar";
 import {
-  Text,
   View,
   TextInput,
   TouchableOpacity,
@@ -11,7 +10,7 @@ import {
   StyleSheet,
 } from "react-native";
 import * as eva from '@eva-design/eva';
-import { ApplicationProvider, Layout,Button, Divider } from '@ui-kitten/components';
+import { ApplicationProvider, Layout,Button, Divider, Card,Text } from '@ui-kitten/components';
 import { default as theme } from '../theme.json';
 import styles from "../styles";
 
@@ -77,12 +76,15 @@ function NewPairingScreen({ navigation }) {
     );
   };
   return (
-    <ApplicationProvider {...eva} theme={{ ...eva.dark, ...theme }}>
+   /* <ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }}>
     <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Button>HOME</Button>
+    <Card>
+    <Text>Medium Rare Steak</Text>
+    <Text>Coke</Text>
+    </Card>
     </Layout>
-  </ApplicationProvider>
-    /*<SafeAreaView style={personalStyles.container}>
+  </ApplicationProvider>*/
+    <SafeAreaView style={personalStyles.container}>
       <View style={styles.LoginContainer}>
         <StatusBar style="auto" />
     <Divider>
@@ -144,7 +146,7 @@ function NewPairingScreen({ navigation }) {
         </TouchableOpacity>
         </Divider>
       </View>
-    </SafeAreaView>*/
+    </SafeAreaView>
   );
 }
 const personalStyles = StyleSheet.create({
