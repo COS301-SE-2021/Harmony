@@ -5,9 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
-
 @interface RCTUtilsUIOverride : NSObject
 /**
  Set the global presented view controller instance override.

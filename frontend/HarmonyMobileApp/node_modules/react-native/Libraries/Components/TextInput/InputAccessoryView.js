@@ -17,7 +17,7 @@ const StyleSheet = require('../../StyleSheet/StyleSheet');
 import RCTInputAccessoryViewNativeComponent from './RCTInputAccessoryViewNativeComponent';
 
 import type {ViewStyleProp} from '../../StyleSheet/StyleSheet';
-import type {ColorValue} from '../../StyleSheet/StyleSheet';
+import type {ColorValue} from '../../StyleSheet/StyleSheetTypes';
 
 /**
  * Note: iOS only

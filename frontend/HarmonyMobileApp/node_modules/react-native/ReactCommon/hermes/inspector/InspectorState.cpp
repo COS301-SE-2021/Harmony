@@ -51,10 +51,6 @@ std::pair<NextStatePtr, CommandPtr> InspectorState::RunningDetached::didPause(
       nullptr, makeContinueCommand());
 }
 
-void InspectorState::RunningDetached::onEnter(InspectorState *previous) {
-  inspector_.awaitingDebuggerOnStart_ = false;
-}
-
 std::pair<NextStatePtr, bool> InspectorState::RunningDetached::enable() {
   return std::make_pair<NextStatePtr, bool>(
       InspectorState::Running::make(inspector_), true);
@@ -176,8 +172,6 @@ void InspectorState::Running::onEnter(InspectorState *prevState) {
       inspector_.notifyScriptsLoaded();
     }
   }
-
-  inspector_.awaitingDebuggerOnStart_ = false;
 }
 
 void InspectorState::Running::detach(
@@ -242,10 +236,6 @@ std::pair<NextStatePtr, CommandPtr> InspectorState::Running::didPause(
   } else if (reason == debugger::PauseReason::ScriptLoaded) {
     inspector_.addCurrentScriptToLoadedScripts();
     inspector_.notifyScriptsLoaded();
-    if (inspector_.shouldPauseOnThisScriptLoad()) {
-      return std::make_pair<NextStatePtr, CommandPtr>(
-          InspectorState::Paused::make(inspector_), nullptr);
-    }
   } else if (reason == debugger::PauseReason::EvalComplete) {
     assert(pendingEvalPromise_);
 
@@ -254,12 +244,6 @@ std::pair<NextStatePtr, CommandPtr> InspectorState::Running::didPause(
     pendingEvalPromise_->setValue(
         inspector_.debugger_.getProgramState().getEvalResult());
     pendingEvalPromise_.reset();
-  } else if (
-      reason == debugger::PauseReason::Breakpoint &&
-      !inspector_.breakpointsActive_) {
-    // We hit a user defined breakpoint, but breakpoints have been deactivated.
-    return std::make_pair<NextStatePtr, CommandPtr>(
-        nullptr, makeContinueCommand());
   } else /* other cases imply a transition to Pause */ {
     return std::make_pair<NextStatePtr, CommandPtr>(
         InspectorState::Paused::make(inspector_), nullptr);

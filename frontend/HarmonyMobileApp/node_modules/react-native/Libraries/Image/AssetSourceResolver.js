@@ -18,18 +18,13 @@ export type ResolvedAssetSource = {|
   +scale: number,
 |};
 
-import type {PackagerAsset} from '@react-native/assets/registry';
+import type {PackagerAsset} from './AssetRegistry';
 
 const PixelRatio = require('../Utilities/PixelRatio');
 const Platform = require('../Utilities/Platform');
 
+const assetPathUtils = require('./assetPathUtils');
 const invariant = require('invariant');
-
-const {
-  getAndroidResourceFolderName,
-  getAndroidResourceIdentifier,
-  getBasePath,
-} = require('@react-native/assets/path-support');
 
 /**
  * Returns a path like 'assets/AwesomeModule/icon@2x.png'
@@ -37,7 +32,7 @@ const {
 function getScaledAssetPath(asset): string {
   const scale = AssetSourceResolver.pickScale(asset.scales, PixelRatio.get());
   const scaleSuffix = scale === 1 ? '' : '@' + scale + 'x';
-  const assetDir = getBasePath(asset);
+  const assetDir = assetPathUtils.getBasePath(asset);
   return assetDir + '/' + asset.name + scaleSuffix + '.' + asset.type;
 }
 
@@ -46,8 +41,11 @@ function getScaledAssetPath(asset): string {
  */
 function getAssetPathInDrawableFolder(asset): string {
   const scale = AssetSourceResolver.pickScale(asset.scales, PixelRatio.get());
-  const drawbleFolder = getAndroidResourceFolderName(asset, scale);
-  const fileName = getAndroidResourceIdentifier(asset);
+  const drawbleFolder = assetPathUtils.getAndroidResourceFolderName(
+    asset,
+    scale,
+  );
+  const fileName = assetPathUtils.getAndroidResourceIdentifier(asset);
   return drawbleFolder + '/' + fileName + '.' + asset.type;
 }
 
@@ -135,7 +133,9 @@ class AssetSourceResolver {
       Platform.OS === 'android',
       'resource identifiers work on Android',
     );
-    return this.fromSource(getAndroidResourceIdentifier(this.asset));
+    return this.fromSource(
+      assetPathUtils.getAndroidResourceIdentifier(this.asset),
+    );
   }
 
   /**

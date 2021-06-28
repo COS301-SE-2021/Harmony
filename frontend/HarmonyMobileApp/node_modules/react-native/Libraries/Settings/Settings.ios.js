@@ -10,9 +10,11 @@
 
 'use strict';
 
-import RCTDeviceEventEmitter from '../EventEmitter/RCTDeviceEventEmitter';
+const RCTDeviceEventEmitter = require('../EventEmitter/RCTDeviceEventEmitter');
+
+const invariant = require('invariant');
+
 import NativeSettingsManager from './NativeSettingsManager';
-import invariant from 'invariant';
 
 const subscriptions: Array<{
   keys: Array<string>,

@@ -32,16 +32,14 @@ import NativeToastAndroid from './NativeToastAndroid';
  * ```
  */
 
-const ToastAndroidConstants = NativeToastAndroid.getConstants();
-
 const ToastAndroid = {
   // Toast duration constants
-  SHORT: (ToastAndroidConstants.SHORT: number),
-  LONG: (ToastAndroidConstants.LONG: number),
+  SHORT: (NativeToastAndroid.getConstants().SHORT: number),
+  LONG: (NativeToastAndroid.getConstants().LONG: number),
   // Toast gravity constants
-  TOP: (ToastAndroidConstants.TOP: number),
-  BOTTOM: (ToastAndroidConstants.BOTTOM: number),
-  CENTER: (ToastAndroidConstants.CENTER: number),
+  TOP: (NativeToastAndroid.getConstants().TOP: number),
+  BOTTOM: (NativeToastAndroid.getConstants().BOTTOM: number),
+  CENTER: (NativeToastAndroid.getConstants().CENTER: number),
 
   show: function(message: string, duration: number): void {
     NativeToastAndroid.show(message, duration);

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  *
  * @format
- * @flow strict-local
+ * @flow
  */
 
 'use strict';
@@ -22,7 +22,7 @@ type LoaderId = string;
 type FrameId = string;
 type Timestamp = number;
 
-type Headers = {[string]: string};
+type Headers = Object;
 
 // We don't currently care about this
 type ResourceTiming = null;
@@ -160,7 +160,7 @@ class Interceptor {
     return this._requests.get(requestId);
   }
 
-  requestSent(id: number, url: string, method: string, headers: Headers) {
+  requestSent(id: number, url: string, method: string, headers: Object) {
     const requestId = String(id);
     this._requests.set(requestId, '');
 
@@ -188,7 +188,7 @@ class Interceptor {
     this._agent.sendEvent('requestWillBeSent', event);
   }
 
-  responseReceived(id: number, url: string, status: number, headers: Headers) {
+  responseReceived(id: number, url: string, status: number, headers: Object) {
     const requestId = String(id);
     const response: Response = {
       url,
@@ -247,7 +247,7 @@ class Interceptor {
     this._agent.sendEvent('loadingFailed', event);
   }
 
-  _getMimeType(headers: Headers): string {
+  _getMimeType(headers: Object): string {
     const contentType = headers['Content-Type'] || '';
     return contentType.split(';')[0];
   }

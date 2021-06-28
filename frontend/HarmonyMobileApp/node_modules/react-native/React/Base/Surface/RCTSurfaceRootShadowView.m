@@ -46,6 +46,7 @@
   NSHashTable<NSString *> *other = [NSHashTable new];
 
   RCTLayoutContext layoutContext = {};
+  layoutContext.absolutePosition = CGPointZero;
   layoutContext.affectedShadowViews = affectedShadowViews;
   layoutContext.other = other;
 

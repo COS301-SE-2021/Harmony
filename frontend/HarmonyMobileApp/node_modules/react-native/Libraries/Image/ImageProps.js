@@ -21,8 +21,9 @@ export type ImageLoadEvent = SyntheticEvent<
     source: $ReadOnly<{|
       width: number,
       height: number,
-      uri: string,
+      url: string,
     |}>,
+    uri?: string, // Only on Android
   |}>,
 >;
 

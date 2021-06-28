@@ -4,58 +4,59 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @flow strict-local
+ * @flow
  * @format
  */
 
 'use strict';
 
 const UIManager = require('../ReactNative/UIManager');
-import type {Spec as FabricUIManagerSpec} from '../ReactNative/FabricUIManager';
-import type {
-  LayoutAnimationConfig as LayoutAnimationConfig_,
-  LayoutAnimationType,
-  LayoutAnimationProperty,
-} from '../Renderer/shims/ReactNativeTypes';
 
 import Platform from '../Utilities/Platform';
 
-// Reexport type
-export type LayoutAnimationConfig = LayoutAnimationConfig_;
+type Type =
+  | 'spring'
+  | 'linear'
+  | 'easeInEaseOut'
+  | 'easeIn'
+  | 'easeOut'
+  | 'keyboard';
 
-type OnAnimationDidEndCallback = () => void;
-type OnAnimationDidFailCallback = () => void;
+type Property = 'opacity' | 'scaleX' | 'scaleY' | 'scaleXY';
+
+type AnimationConfig = $ReadOnly<{|
+  duration?: number,
+  delay?: number,
+  springDamping?: number,
+  initialVelocity?: number,
+  type?: Type,
+  property?: Property,
+|}>;
+
+export type LayoutAnimationConfig = $ReadOnly<{|
+  duration: number,
+  create?: AnimationConfig,
+  update?: AnimationConfig,
+  delete?: AnimationConfig,
+|}>;
 
 function configureNext(
   config: LayoutAnimationConfig,
-  onAnimationDidEnd?: OnAnimationDidEndCallback,
-  onAnimationDidFail?: OnAnimationDidFailCallback,
+  onAnimationDidEnd?: Function,
 ) {
   if (!Platform.isTesting) {
-    if (UIManager?.configureNextLayoutAnimation) {
-      UIManager.configureNextLayoutAnimation(
-        config,
-        onAnimationDidEnd ?? function() {},
-        onAnimationDidFail ??
-          function() {} /* this should never be called in Non-Fabric */,
-      );
-    }
-    const FabricUIManager: FabricUIManagerSpec = global?.nativeFabricUIManager;
-    if (FabricUIManager?.configureNextLayoutAnimation) {
-      global?.nativeFabricUIManager?.configureNextLayoutAnimation(
-        config,
-        onAnimationDidEnd ?? function() {},
-        onAnimationDidFail ??
-          function() {} /* this will only be called if configuration fails */,
-      );
-    }
+    UIManager.configureNextLayoutAnimation(
+      config,
+      onAnimationDidEnd ?? function() {},
+      function() {} /* unused onError */,
+    );
   }
 }
 
 function create(
   duration: number,
-  type: LayoutAnimationType,
-  property: LayoutAnimationProperty,
+  type: Type,
+  property: Property,
 ): LayoutAnimationConfig {
   return {
     duration,
@@ -137,13 +138,13 @@ const LayoutAnimation = {
   },
   Presets,
   easeInEaseOut: (configureNext.bind(null, Presets.easeInEaseOut): (
-    onAnimationDidEnd?: OnAnimationDidEndCallback,
+    onAnimationDidEnd?: any,
   ) => void),
   linear: (configureNext.bind(null, Presets.linear): (
-    onAnimationDidEnd?: OnAnimationDidEndCallback,
+    onAnimationDidEnd?: any,
   ) => void),
   spring: (configureNext.bind(null, Presets.spring): (
-    onAnimationDidEnd?: OnAnimationDidEndCallback,
+    onAnimationDidEnd?: any,
   ) => void),
 };
 

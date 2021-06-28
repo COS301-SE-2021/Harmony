@@ -6,7 +6,6 @@
  */
 
 #include "jsireact/JSINativeModules.h"
-#include <reactperflogger/BridgeNativeModulePerfLogger.h>
 
 #include <glog/logging.h>
 
@@ -32,21 +31,13 @@ Value JSINativeModules::getModule(Runtime &rt, const PropNameID &name) {
 
   std::string moduleName = name.utf8(rt);
 
-  BridgeNativeModulePerfLogger::moduleJSRequireBeginningStart(
-      moduleName.c_str());
-
   const auto it = m_objects.find(moduleName);
   if (it != m_objects.end()) {
-    BridgeNativeModulePerfLogger::moduleJSRequireBeginningCacheHit(
-        moduleName.c_str());
-    BridgeNativeModulePerfLogger::moduleJSRequireBeginningEnd(
-        moduleName.c_str());
     return Value(rt, it->second);
   }
 
   auto module = createModule(rt, moduleName);
   if (!module.hasValue()) {
-    BridgeNativeModulePerfLogger::moduleJSRequireEndingFail(moduleName.c_str());
     // Allow lookup to continue in the objects own properties, which allows for
     // overrides of NativeModules
     return nullptr;
@@ -54,10 +45,7 @@ Value JSINativeModules::getModule(Runtime &rt, const PropNameID &name) {
 
   auto result =
       m_objects.emplace(std::move(moduleName), std::move(*module)).first;
-
-  Value ret = Value(rt, result->second);
-  BridgeNativeModulePerfLogger::moduleJSRequireEndingEnd(moduleName.c_str());
-  return ret;
+  return Value(rt, result->second);
 }
 
 void JSINativeModules::reset() {

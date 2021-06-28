@@ -24,7 +24,6 @@
 @implementation RCTExceptionsManager
 
 @synthesize bridge = _bridge;
-@synthesize turboModuleRegistry = _turboModuleRegistry;
 
 RCT_EXPORT_MODULE()
 
@@ -42,13 +41,7 @@ RCT_EXPORT_MODULE()
     suppressRedBox:(BOOL)suppressRedBox
 {
   if (!suppressRedBox) {
-    // TODO T5287269 - Delete _bridge case when TM ships.
-    if (_bridge) {
-      [_bridge.redBox showErrorMessage:message withStack:stack errorCookie:((int)exceptionId)];
-    } else {
-      RCTRedBox *redbox = [_turboModuleRegistry moduleForName:"RCTRedBox"];
-      [redbox showErrorMessage:message withStack:stack errorCookie:(int)exceptionId];
-    }
+    [_bridge.redBox showErrorMessage:message withStack:stack errorCookie:((int)exceptionId)];
   }
 
   if (_delegate) {
@@ -64,13 +57,7 @@ RCT_EXPORT_MODULE()
      suppressRedBox:(BOOL)suppressRedBox
 {
   if (!suppressRedBox) {
-    // TODO T5287269 - Delete _bridge case when TM ships.
-    if (_bridge) {
-      [_bridge.redBox showErrorMessage:message withStack:stack errorCookie:((int)exceptionId)];
-    } else {
-      RCTRedBox *redbox = [_turboModuleRegistry moduleForName:"RCTRedBox"];
-      [redbox showErrorMessage:message withStack:stack errorCookie:(int)exceptionId];
-    }
+    [_bridge.redBox showErrorMessage:message withStack:stack errorCookie:((int)exceptionId)];
   }
 
   if (_delegate) {
@@ -111,13 +98,7 @@ RCT_EXPORT_METHOD(updateExceptionMessage
                   : (NSArray<NSDictionary *> *)stack exceptionId
                   : (double)exceptionId)
 {
-  // TODO T5287269 - Delete _bridge case when TM ships.
-  if (_bridge) {
-    [_bridge.redBox updateErrorMessage:message withStack:stack errorCookie:((int)exceptionId)];
-  } else {
-    RCTRedBox *redbox = [_turboModuleRegistry moduleForName:"RCTRedBox"];
-    [redbox updateErrorMessage:message withStack:stack errorCookie:(int)exceptionId];
-  }
+  [_bridge.redBox updateErrorMessage:message withStack:stack errorCookie:((int)exceptionId)];
 
   if (_delegate && [_delegate respondsToSelector:@selector(updateJSExceptionWithMessage:stack:exceptionId:)]) {
     [_delegate updateJSExceptionWithMessage:message stack:stack exceptionId:[NSNumber numberWithDouble:exceptionId]];
@@ -167,10 +148,12 @@ RCT_EXPORT_METHOD(reportException : (JS::NativeExceptionsManager::ExceptionData 
   }
 }
 
-- (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:
-    (const facebook::react::ObjCTurboModule::InitParams &)params
+- (std::shared_ptr<facebook::react::TurboModule>)
+    getTurboModuleWithJsInvoker:(std::shared_ptr<facebook::react::CallInvoker>)jsInvoker
+                  nativeInvoker:(std::shared_ptr<facebook::react::CallInvoker>)nativeInvoker
+                     perfLogger:(id<RCTTurboModulePerformanceLogger>)perfLogger
 {
-  return std::make_shared<facebook::react::NativeExceptionsManagerSpecJSI>(params);
+  return std::make_shared<facebook::react::NativeExceptionsManagerSpecJSI>(self, jsInvoker, nativeInvoker, perfLogger);
 }
 
 @end

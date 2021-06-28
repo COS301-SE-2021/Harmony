@@ -95,11 +95,6 @@ public class ReactNativeTestRule implements TestRule {
                   public void onReactContextInitialized(ReactContext reactContext) {
                     final UIManagerModule uiManagerModule =
                         reactContext.getCatalystInstance().getNativeModule(UIManagerModule.class);
-
-                    if (uiManagerModule == null) {
-                      return;
-                    }
-
                     uiManagerModule
                         .getUIImplementation()
                         .setLayoutUpdateListener(

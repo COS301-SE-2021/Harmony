@@ -13,13 +13,13 @@
 @property (nonatomic, copy, readonly) NSString *file;
 @property (nonatomic, readonly) NSInteger lineNumber;
 @property (nonatomic, readonly) NSInteger column;
-@property (nonatomic, readonly) BOOL collapse;
+@property (nonatomic, readonly) NSInteger collapse;
 
 - (instancetype)initWithMethodName:(NSString *)methodName
                               file:(NSString *)file
                         lineNumber:(NSInteger)lineNumber
                             column:(NSInteger)column
-                          collapse:(BOOL)collapse;
+                          collapse:(NSInteger)collapse;
 - (NSDictionary *)toDictionary;
 
 + (instancetype)stackFrameWithLine:(NSString *)line;

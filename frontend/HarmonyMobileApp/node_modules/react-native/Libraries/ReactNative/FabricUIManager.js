@@ -14,7 +14,6 @@ import type {
   MeasureOnSuccessCallback,
   MeasureInWindowOnSuccessCallback,
   MeasureLayoutOnSuccessCallback,
-  LayoutAnimationConfig,
 } from '../Renderer/shims/ReactNativeTypes';
 
 // TODO: type these properly.
@@ -22,7 +21,7 @@ type Node = {...};
 type NodeSet = Array<Node>;
 type NodeProps = {...};
 type InstanceHandle = {...};
-export type Spec = {|
+type Spec = {|
   +createNode: (
     reactTag: number,
     viewName: string,
@@ -49,13 +48,6 @@ export type Spec = {|
     relativeNode: Node,
     onFail: () => void,
     onSuccess: MeasureLayoutOnSuccessCallback,
-  ) => void,
-  +configureNextLayoutAnimation: (
-    config: LayoutAnimationConfig,
-    callback: () => void, // check what is returned here
-    // This error isn't currently called anywhere, so the `error` object is really not defined
-    // $FlowFixMe
-    errorCallback: (error: Object) => void,
   ) => void,
 |};
 

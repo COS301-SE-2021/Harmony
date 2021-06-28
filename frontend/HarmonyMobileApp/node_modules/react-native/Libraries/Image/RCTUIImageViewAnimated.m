@@ -181,12 +181,9 @@ static NSUInteger RCTDeviceFreeMemory() {
 {
 #if TARGET_OS_UIKITFORMAC
   // TODO: `displayLink.frameInterval` is not available on UIKitForMac
-  NSTimeInterval durationToNextRefresh = displayLink.duration;
+  NSTimeInterval duration = displayLink.duration;
 #else
-  // displaylink.duration -- time interval between frames, assuming maximumFramesPerSecond
-  // displayLink.preferredFramesPerSecond (>= iOS 10) -- Set to 30 for displayDidRefresh to be called at 30 fps
-  // durationToNextRefresh -- Time interval to the next time displayDidRefresh is called
-  NSTimeInterval durationToNextRefresh = displayLink.targetTimestamp - displayLink.timestamp;
+  NSTimeInterval duration = displayLink.duration * displayLink.frameInterval;
 #endif
   NSUInteger totalFrameCount = self.totalFrameCount;
   NSUInteger currentFrameIndex = self.currentFrameIndex;
@@ -195,14 +192,13 @@ static NSUInteger RCTDeviceFreeMemory() {
   // Check if we have the frame buffer firstly to improve performance
   if (!self.bufferMiss) {
     // Then check if timestamp is reached
-    self.currentTime += durationToNextRefresh;
+    self.currentTime += duration;
     NSTimeInterval currentDuration = [self.animatedImage animatedImageDurationAtIndex:currentFrameIndex];
     if (self.currentTime < currentDuration) {
       // Current frame timestamp not reached, return
       return;
     }
     self.currentTime -= currentDuration;
-    // nextDuration - duration to wait before displaying next image
     NSTimeInterval nextDuration = [self.animatedImage animatedImageDurationAtIndex:nextFrameIndex];
     if (self.currentTime > nextDuration) {
       // Do not skip frame

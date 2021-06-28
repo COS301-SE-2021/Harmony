@@ -47,14 +47,4 @@ import com.facebook.react.bridge.ReadableMap;
       }
     }
   }
-
-  @Override
-  public String prettyPrint() {
-    return "SubtractionAnimatedNode["
-        + mTag
-        + "]: input nodes: "
-        + (mInputNodes != null ? mInputNodes.toString() : "null")
-        + " - super: "
-        + super.prettyPrint();
-  }
 }

@@ -11,7 +11,7 @@
 #import <better/map.h>
 #import <better/set.h>
 
-#import <react/renderer/mounting/MountingTransactionMetadata.h>
+#import <react/mounting/MountingTransactionMetadata.h>
 
 class RCTMountingTransactionObserverCoordinator final {
  public:

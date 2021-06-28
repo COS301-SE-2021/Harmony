@@ -9,8 +9,6 @@ package com.facebook.react.modules.vibration;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.os.Build;
-import android.os.VibrationEffect;
 import android.os.Vibrator;
 import com.facebook.fbreact.specs.NativeVibrationSpec;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -37,13 +35,7 @@ public class VibrationModule extends NativeVibrationSpec {
     int duration = (int) durationDouble;
 
     Vibrator v = (Vibrator) getReactApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
-    if (v == null) {
-      return;
-    }
-
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-      v.vibrate(VibrationEffect.createOneShot(duration, VibrationEffect.DEFAULT_AMPLITUDE));
-    } else {
+    if (v != null) {
       v.vibrate(duration);
     }
   }
@@ -53,18 +45,11 @@ public class VibrationModule extends NativeVibrationSpec {
     int repeat = (int) repeatDouble;
 
     Vibrator v = (Vibrator) getReactApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
-    if (v == null) {
-      return;
-    }
-
-    long[] patternLong = new long[pattern.size()];
-    for (int i = 0; i < pattern.size(); i++) {
-      patternLong[i] = pattern.getInt(i);
-    }
-
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-      v.vibrate(VibrationEffect.createWaveform(patternLong, repeat));
-    } else {
+    if (v != null) {
+      long[] patternLong = new long[pattern.size()];
+      for (int i = 0; i < pattern.size(); i++) {
+        patternLong[i] = pattern.getInt(i);
+      }
       v.vibrate(patternLong, repeat);
     }
   }

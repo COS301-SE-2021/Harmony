@@ -8,10 +8,7 @@
 #import "RCTModuleData.h"
 
 #import <objc/runtime.h>
-#import <atomic>
-#import <mutex>
-
-#import <reactperflogger/BridgeNativeModulePerfLogger.h>
+#include <mutex>
 
 #import "RCTBridge+Private.h"
 #import "RCTBridge.h"
@@ -19,27 +16,6 @@
 #import "RCTModuleMethod.h"
 #import "RCTProfile.h"
 #import "RCTUtils.h"
-
-using namespace facebook::react;
-
-namespace {
-int32_t getUniqueId()
-{
-  static std::atomic<int32_t> counter{0};
-  return counter++;
-}
-}
-static BOOL isMainQueueExecutionOfConstantToExportDisabled = NO;
-
-void RCTSetIsMainQueueExecutionOfConstantsToExportDisabled(BOOL val)
-{
-  isMainQueueExecutionOfConstantToExportDisabled = val;
-}
-
-BOOL RCTIsMainQueueExecutionOfConstantsToExportDisabled()
-{
-  return isMainQueueExecutionOfConstantToExportDisabled;
-}
 
 @implementation RCTModuleData {
   NSDictionary<NSString *, id> *_constantsToExport;
@@ -134,29 +110,22 @@ RCT_NOT_IMPLEMENTED(-(instancetype)init);
 
 #pragma mark - private setup methods
 
-- (void)setUpInstanceAndBridge:(int32_t)requestId
+- (void)setUpInstanceAndBridge
 {
-  NSString *moduleName = [self name];
-
   RCT_PROFILE_BEGIN_EVENT(
       RCTProfileTagAlways,
       @"[RCTModuleData setUpInstanceAndBridge]",
       @{@"moduleClass" : NSStringFromClass(_moduleClass)});
   {
     std::unique_lock<std::mutex> lock(_instanceLock);
-    BOOL shouldSetup = !_setupComplete && _bridge.valid;
 
-    if (shouldSetup) {
+    if (!_setupComplete && _bridge.valid) {
       if (!_instance) {
         if (RCT_DEBUG && _requiresMainQueueSetup) {
           RCTAssertMainQueue();
         }
         RCT_PROFILE_BEGIN_EVENT(RCTProfileTagAlways, @"[RCTModuleData setUpInstanceAndBridge] Create module", nil);
-
-        BridgeNativeModulePerfLogger::moduleCreateConstructStart([moduleName UTF8String], requestId);
         _instance = _moduleProvider ? _moduleProvider() : nil;
-        BridgeNativeModulePerfLogger::moduleCreateConstructEnd([moduleName UTF8String], requestId);
-
         RCT_PROFILE_END_EVENT(RCTProfileTagAlways, @"");
         if (!_instance) {
           // Module init returned nil, probably because automatic instantiation
@@ -174,13 +143,7 @@ RCT_NOT_IMPLEMENTED(-(instancetype)init);
       if (_instance && RCTProfileIsProfiling()) {
         RCTProfileHookInstance(_instance);
       }
-    }
 
-    if (_instance) {
-      BridgeNativeModulePerfLogger::moduleCreateSetUpStart([moduleName UTF8String], requestId);
-    }
-
-    if (shouldSetup) {
       // Bridge must be set before methodQueue is set up, as methodQueue
       // initialization requires it (View Managers get their queue by calling
       // self.bridge.uiManager.methodQueue)
@@ -207,10 +170,6 @@ RCT_NOT_IMPLEMENTED(-(instancetype)init);
     // nothing in finishSetupForInstance needs to be run on the main
     // thread.
     _requiresMainQueueSetup = NO;
-  }
-
-  if (_instance) {
-    BridgeNativeModulePerfLogger::moduleCreateSetUpEnd([moduleName UTF8String], requestId);
   }
 }
 
@@ -327,10 +286,6 @@ RCT_NOT_IMPLEMENTED(-(instancetype)init);
 
 - (id<RCTBridgeModule>)instance
 {
-  NSString *moduleName = [self name];
-  int32_t requestId = getUniqueId();
-  BridgeNativeModulePerfLogger::moduleCreateStart([moduleName UTF8String], requestId);
-
   if (!_setupComplete) {
     RCT_PROFILE_BEGIN_EVENT(
         RCTProfileTagAlways, ([NSString stringWithFormat:@"[RCTModuleData instanceForClass:%@]", _moduleClass]), nil);
@@ -346,21 +301,13 @@ RCT_NOT_IMPLEMENTED(-(instancetype)init);
       }
 
       RCTUnsafeExecuteOnMainQueueSync(^{
-        [self setUpInstanceAndBridge:requestId];
+        [self setUpInstanceAndBridge];
       });
       RCT_PROFILE_END_EVENT(RCTProfileTagAlways, @"");
     } else {
-      [self setUpInstanceAndBridge:requestId];
+      [self setUpInstanceAndBridge];
     }
     RCT_PROFILE_END_EVENT(RCTProfileTagAlways, @"");
-  } else {
-    BridgeNativeModulePerfLogger::moduleCreateCacheHit([moduleName UTF8String], requestId);
-  }
-
-  if (_instance) {
-    BridgeNativeModulePerfLogger::moduleCreateEnd([moduleName UTF8String], requestId);
-  } else {
-    BridgeNativeModulePerfLogger::moduleCreateFail([moduleName UTF8String], requestId);
   }
   return _instance;
 }
@@ -384,31 +331,11 @@ RCT_NOT_IMPLEMENTED(-(instancetype)init);
 
 - (void)gatherConstants
 {
-  return [self gatherConstantsAndSignalJSRequireEnding:NO];
-}
-
-- (void)gatherConstantsAndSignalJSRequireEnding:(BOOL)startMarkers
-{
-  NSString *moduleName = [self name];
-
   if (_hasConstantsToExport && !_constantsToExport) {
     RCT_PROFILE_BEGIN_EVENT(
         RCTProfileTagAlways, ([NSString stringWithFormat:@"[RCTModuleData gatherConstants] %@", _moduleClass]), nil);
     (void)[self instance];
-
-    if (startMarkers) {
-      /**
-       * Why do we instrument moduleJSRequireEndingStart here?
-       *  - NativeModule requires from JS go through ModuleRegistry::getConfig().
-       *  - ModuleRegistry::getConfig() calls NativeModule::getConstants() first.
-       *  - This delegates to RCTNativeModule::getConstants(), which calls RCTModuleData gatherConstants().
-       *  - Therefore, this is the first statement that executes after the NativeModule is created/initialized in a JS
-       *    require.
-       */
-      BridgeNativeModulePerfLogger::moduleJSRequireEndingStart([moduleName UTF8String]);
-    }
-
-    if (!RCTIsMainQueueExecutionOfConstantsToExportDisabled() && _requiresMainQueueSetup) {
+    if (_requiresMainQueueSetup) {
       if (!RCTIsMainQueue()) {
         RCTLogWarn(@"Required dispatch_sync to load constants for %@. This may lead to deadlocks", _moduleClass);
       }
@@ -419,20 +346,13 @@ RCT_NOT_IMPLEMENTED(-(instancetype)init);
     } else {
       _constantsToExport = [_instance constantsToExport] ?: @{};
     }
-
     RCT_PROFILE_END_EVENT(RCTProfileTagAlways, @"");
-  } else if (startMarkers) {
-    /**
-     * If a NativeModule doesn't have constants, it isn't eagerly loaded until its methods are first invoked.
-     * Therefore, we should immediately start JSRequireEnding
-     */
-    BridgeNativeModulePerfLogger::moduleJSRequireEndingStart([moduleName UTF8String]);
   }
 }
 
 - (NSDictionary<NSString *, id> *)exportedConstants
 {
-  [self gatherConstantsAndSignalJSRequireEnding:YES];
+  [self gatherConstants];
   NSDictionary<NSString *, id> *constants = _constantsToExport;
   _constantsToExport = nil; // Not needed anymore
   return constants;

@@ -14,7 +14,7 @@ class CLIError extends Error {
     super(inlineString(msg));
 
     if (originalError) {
-      this.stack = typeof originalError === 'string' ? originalError : originalError.stack || ''.split('\n').slice(0, 2).join('\n');
+      this.stack = typeof originalError === 'string' ? originalError : (originalError.stack || '').split('\n').slice(0, 2).join('\n');
     } else {
       // When the "originalError" is not passed, it means that we know exactly
       // what went wrong and provide means to fix it. In such cases showing the

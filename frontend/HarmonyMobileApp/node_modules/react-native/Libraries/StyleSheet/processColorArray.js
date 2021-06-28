@@ -12,7 +12,7 @@
 
 const processColor = require('./processColor');
 
-import type {ColorValue} from './StyleSheet';
+import type {ColorValue} from './StyleSheetTypes';
 import type {ProcessedColorValue} from './processColor';
 
 function processColorArray(

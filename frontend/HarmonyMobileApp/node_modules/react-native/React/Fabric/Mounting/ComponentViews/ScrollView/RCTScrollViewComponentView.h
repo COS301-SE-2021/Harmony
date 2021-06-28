@@ -7,9 +7,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import <React/RCTDefines.h>
 #import <React/RCTGenericDelegateSplitter.h>
-#import <React/RCTMountingTransactionObserving.h>
 #import <React/RCTScrollableProtocol.h>
 #import <React/RCTViewComponentView.h>
 
@@ -23,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
  * keyboard-avoiding functionality and so on. All that complexity must be implemented inside those components in order
  * to keep the complexity of this component manageable.
  */
-@interface RCTScrollViewComponentView : RCTViewComponentView <RCTMountingTransactionObserving>
+@interface RCTScrollViewComponentView : RCTViewComponentView
 
 /*
  * Finds and returns the closet RCTScrollViewComponentView component to the given view

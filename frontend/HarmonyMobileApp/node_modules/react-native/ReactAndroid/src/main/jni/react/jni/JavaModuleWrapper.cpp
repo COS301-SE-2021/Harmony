@@ -50,26 +50,6 @@ std::string JavaNativeModule::getName() {
   return getNameMethod(wrapper_)->toStdString();
 }
 
-std::string JavaNativeModule::getSyncMethodName(unsigned int reactMethodId) {
-  if (reactMethodId >= syncMethods_.size()) {
-    throw std::invalid_argument(folly::to<std::string>(
-        "methodId ",
-        reactMethodId,
-        " out of range [0..",
-        syncMethods_.size(),
-        "]"));
-  }
-
-  auto &methodInvoker = syncMethods_[reactMethodId];
-
-  if (!methodInvoker.hasValue()) {
-    throw std::invalid_argument(folly::to<std::string>(
-        "methodId ", reactMethodId, " is not a recognized sync method"));
-  }
-
-  return methodInvoker->getMethodName();
-}
-
 std::vector<MethodDescriptor> JavaNativeModule::getMethods() {
   std::vector<MethodDescriptor> ret;
   syncMethods_.clear();
@@ -89,7 +69,6 @@ std::vector<MethodDescriptor> JavaNativeModule::getMethods() {
           syncMethods_.begin() + methodIndex,
           MethodInvoker(
               desc->getMethod(),
-              methodName,
               desc->getSignature(),
               getName() + "." + methodName,
               true));
@@ -169,7 +148,6 @@ NewJavaNativeModule::NewJavaNativeModule(
     auto name = desc->getName();
     methods_.emplace_back(
         desc->getMethod(),
-        desc->getName(),
         desc->getSignature(),
         moduleName + "." + name,
         type == "syncHook");

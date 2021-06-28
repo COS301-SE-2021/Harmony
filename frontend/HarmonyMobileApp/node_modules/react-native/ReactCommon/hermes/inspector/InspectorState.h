@@ -5,10 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// using include guards instead of #pragma once due to compile issues
-// with MSVC and BUCK
-#ifndef HERMES_INSPECTOR_INSPECTOR_STATE_H
-#define HERMES_INSPECTOR_INSPECTOR_STATE_H
+#pragma once
 
 #include <condition_variable>
 #include <iostream>
@@ -55,7 +52,7 @@ class InspectorState {
    */
 
   /**
-   * detach clears all debugger state and transitions to RunningDetached.
+   * detach clears all debuger state and transitions to RunningDetached.
    */
   virtual void detach(std::shared_ptr<folly::Promise<folly::Unit>> promise) {
     // As we're not attached we'd like for the operation to be idempotent
@@ -188,8 +185,6 @@ class InspectorState::RunningDetached : public InspectorState {
 
   std::pair<NextStatePtr, CommandPtr> didPause(MonitorLock &lock) override;
   std::pair<NextStatePtr, bool> enable() override;
-
-  void onEnter(InspectorState *prevState) override;
 
   bool isRunningDetached() const override {
     return true;
@@ -408,5 +403,3 @@ class InspectorState::Paused : public InspectorState {
 } // namespace inspector
 } // namespace hermes
 } // namespace facebook
-
-#endif // HERMES_INSPECTOR_INSPECTOR_STATE_H

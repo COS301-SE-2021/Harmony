@@ -7,6 +7,7 @@
 
 package com.facebook.react.testing;
 
+import com.facebook.react.bridge.JavaScriptContextHolder;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.UIManager;
 import com.facebook.react.uimanager.ViewManagerRegistry;
@@ -15,5 +16,7 @@ import com.facebook.react.uimanager.ViewManagerRegistry;
 public interface FabricUIManagerFactory {
 
   UIManager getFabricUIManager(
-      ReactApplicationContext reactApplicationContext, ViewManagerRegistry viewManagerRegistry);
+      ReactApplicationContext reactApplicationContext,
+      ViewManagerRegistry viewManagerRegistry,
+      JavaScriptContextHolder jsContext);
 }

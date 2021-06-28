@@ -10,8 +10,8 @@
 
 'use strict';
 
-import registerGeneratedViewConfig from '../../Utilities/registerGeneratedViewConfig';
-import requireNativeComponent from '../../ReactNative/requireNativeComponent';
+const registerGeneratedViewConfig = require('../../Utilities/registerGeneratedViewConfig');
+const requireNativeComponent = require('../../ReactNative/requireNativeComponent');
 
 import type {HostComponent} from '../../Renderer/shims/ReactNativeTypes';
 import type {ViewProps} from '../View/ViewPropTypes';

@@ -22,6 +22,5 @@
 @property (nonatomic, copy) NSArray<RCTImageSource *> *imageSources;
 @property (nonatomic, assign) CGFloat blurRadius;
 @property (nonatomic, assign) RCTResizeMode resizeMode;
-@property (nonatomic, copy) NSString *internal_analyticTag;
 
 @end

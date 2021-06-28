@@ -32,10 +32,10 @@ module.exports = {
   reactNativePath: '.',
   project: {
     ios: {
-      project: './packages/rn-tester/RNTesterPods.xcworkspace',
+      project: './RNTester/RNTesterPods.xcworkspace',
     },
     android: {
-      sourceDir: './packages/rn-tester',
+      sourceDir: './RNTester',
     },
   },
 };

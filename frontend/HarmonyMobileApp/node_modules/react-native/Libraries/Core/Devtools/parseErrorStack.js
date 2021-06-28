@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  *
  * @format
- * @flow strict
+ * @flow
  */
 
 'use strict';
@@ -47,22 +47,22 @@ function convertHermesStack(stack: HermesParsedStack): Array<StackFrame> {
   return frames;
 }
 
-function parseErrorStack(errorStack?: string): Array<StackFrame> {
-  if (errorStack == null) {
+function parseErrorStack(e: ExtendedError): Array<StackFrame> {
+  if (!e || !e.stack) {
     return [];
   }
 
   const stacktraceParser = require('stacktrace-parser');
-  const parsedStack = Array.isArray(errorStack)
-    ? errorStack
+  const stack = Array.isArray(e.stack)
+    ? e.stack
     : global.HermesInternal
-    ? convertHermesStack(parseHermesStack(errorStack))
-    : stacktraceParser.parse(errorStack).map(frame => ({
+    ? convertHermesStack(parseHermesStack(e.stack))
+    : stacktraceParser.parse(e.stack).map(frame => ({
         ...frame,
         column: frame.column != null ? frame.column - 1 : null,
       }));
 
-  return parsedStack;
+  return stack;
 }
 
 module.exports = parseErrorStack;

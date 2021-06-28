@@ -43,14 +43,13 @@ public class AndroidViewPagerManagerDelegate<T extends View, U extends BaseViewM
     }
   }
 
-  @Override
-  public void receiveCommand(T view, String commandName, ReadableArray args) {
+  public void receiveCommand(AndroidViewPagerManagerInterface<T> viewManager, T view, String commandName, ReadableArray args) {
     switch (commandName) {
       case "setPage":
-        mViewManager.setPage(view, args.getInt(0));
+        viewManager.setPage(view, args.getInt(0));
         break;
       case "setPageWithoutAnimation":
-        mViewManager.setPageWithoutAnimation(view, args.getInt(0));
+        viewManager.setPageWithoutAnimation(view, args.getInt(0));
         break;
     }
   }

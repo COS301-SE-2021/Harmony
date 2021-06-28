@@ -9,9 +9,11 @@
 
 'use strict';
 
-import NativeEventEmitter from '../EventEmitter/NativeEventEmitter';
+const NativeEventEmitter = require('../EventEmitter/NativeEventEmitter');
+
 import NativeWebSocketModule from './NativeWebSocketModule';
-import base64 from 'base64-js';
+
+const base64 = require('base64-js');
 
 const originalRCTWebSocketConnect = NativeWebSocketModule.connect;
 const originalRCTWebSocketSend = NativeWebSocketModule.send;

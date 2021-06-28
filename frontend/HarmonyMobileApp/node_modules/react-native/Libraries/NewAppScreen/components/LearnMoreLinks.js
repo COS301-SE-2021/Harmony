@@ -12,14 +12,8 @@
 import Colors from './Colors';
 import type {Node} from 'react';
 import openURLInBrowser from 'react-native/Libraries/Core/Devtools/openURLInBrowser';
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  useColorScheme,
-  View,
-} from 'react-native';
-import React, {Fragment} from 'react';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import React from 'react';
 
 const links = [
   {
@@ -76,40 +70,24 @@ const links = [
   },
 ];
 
-const LinkList = (): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.container}>
-      {links.map(({id, title, link, description}) => (
-        <Fragment key={id}>
-          <View
-            style={[
-              styles.separator,
-              {
-                backgroundColor: isDarkMode ? Colors.dark : Colors.light,
-              },
-            ]}
-          />
+const LinkList = (): Node => (
+  <View style={styles.container}>
+    {links.map(({id, title, link, description}) => {
+      return (
+        <React.Fragment key={id}>
+          <View style={styles.separator} />
           <TouchableOpacity
-            accessibilityRole="button"
+            accessibilityRole={'button'}
             onPress={() => openURLInBrowser(link)}
             style={styles.linkContainer}>
             <Text style={styles.link}>{title}</Text>
-            <Text
-              style={[
-                styles.description,
-                {
-                  color: isDarkMode ? Colors.lighter : Colors.dark,
-                },
-              ]}>
-              {description}
-            </Text>
+            <Text style={styles.description}>{description}</Text>
           </TouchableOpacity>
-        </Fragment>
-      ))}
-    </View>
-  );
-};
+        </React.Fragment>
+      );
+    })}
+  </View>
+);
 
 const styles = StyleSheet.create({
   container: {
@@ -134,9 +112,11 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     fontWeight: '400',
     fontSize: 18,
+    color: Colors.dark,
   },
   separator: {
-    height: StyleSheet.hairlineWidth,
+    backgroundColor: Colors.light,
+    height: 1,
   },
 });
 

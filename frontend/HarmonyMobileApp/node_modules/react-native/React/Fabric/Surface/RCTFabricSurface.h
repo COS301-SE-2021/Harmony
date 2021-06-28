@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-#import <React/RCTSurfaceProtocol.h>
+#import <React/RCTPrimitives.h>
 #import <React/RCTSurfaceStage.h>
-#import <react/renderer/mounting/MountingCoordinator.h>
+#import <react/mounting/MountingCoordinator.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -34,7 +34,15 @@ NS_ASSUME_NONNULL_BEGIN
  *  * ability to create a UIView instance on demand (later);
  *  * ability to communicate the current stage of the surface granularly.
  */
-@interface RCTFabricSurface : NSObject <RCTSurfaceProtocol>
+@interface RCTFabricSurface : NSObject
+
+@property (atomic, readonly) RCTSurfaceStage stage;
+@property (atomic, readonly) NSString *moduleName;
+@property (atomic, readonly) ReactTag rootTag;
+
+@property (atomic, readwrite, weak, nullable) id<RCTSurfaceDelegate> delegate;
+
+@property (atomic, copy, readwrite) NSDictionary *properties;
 
 - (instancetype)initWithSurfacePresenter:(RCTSurfacePresenter *)surfacePresenter
                               moduleName:(NSString *)moduleName
@@ -63,7 +71,9 @@ NS_ASSUME_NONNULL_BEGIN
  * A Surface object can be stopped and then restarted.
  * The starting process includes initializing all underlying React Native
  * infrastructure and running React app.
- * Surface stops itself on deallocation automatically.
+ * Just initialized Surface object starts automatically, there is no need
+ * to call `start` explicitly. Surface also stops itself on deallocation
+ * automatically.
  * Returns YES in case of success. Returns NO if the Surface is already
  * started or stopped.
  */
@@ -71,6 +81,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)stop;
 
 #pragma mark - Layout: Setting the size constrains
+
+/**
+ * Sets `minimumSize` and `maximumSize` layout constraints for the Surface.
+ */
+- (void)setMinimumSize:(CGSize)minimumSize maximumSize:(CGSize)maximumSize;
 
 /**
  * Previously set `minimumSize` layout constraint.
@@ -83,12 +98,6 @@ NS_ASSUME_NONNULL_BEGIN
  * Defaults to `{CGFLOAT_MAX, CGFLOAT_MAX}`.
  */
 @property (atomic, assign, readonly) CGSize maximumSize;
-
-/**
- * Previously set `viewportOffset` layout constraint.
- * Defaults to `{0, 0}`.
- */
-@property (atomic, assign, readonly) CGPoint viewportOffset;
 
 /**
  * Simple shortcut to `-[RCTSurface setMinimumSize:size maximumSize:size]`.
@@ -138,6 +147,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithBridge:(RCTBridge *)bridge
                     moduleName:(NSString *)moduleName
              initialProperties:(NSDictionary *)initialProperties;
+
+/**
+ * Deprecated. Use `rootTag` instead.
+ */
+@property (atomic, readonly) NSNumber *rootViewTag;
 
 @end
 

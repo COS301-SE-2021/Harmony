@@ -6,14 +6,16 @@
  */
 
 #import <UIKit/UIKit.h>
-#import "RCTLogBoxView.h"
 
-@interface RCTLogBox : NSObject
+#import <React/RCTBridge.h>
+#import <React/RCTBridgeModule.h>
+#import <React/RCTErrorCustomizer.h>
 
-#if RCT_DEV_MENU
+@class RCTJSStackFrame;
 
-- (void)setRCTLogBoxView:(RCTLogBoxView *)view;
+@interface RCTLogBox : NSObject <RCTBridgeModule>
 
-#endif
+- (void)show;
+- (void)hide;
 
 @end

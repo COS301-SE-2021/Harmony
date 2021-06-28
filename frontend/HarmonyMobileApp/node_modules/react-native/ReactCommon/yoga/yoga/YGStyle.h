@@ -6,9 +6,6 @@
  */
 
 #pragma once
-
-#ifdef __cplusplus
-
 #include <algorithm>
 #include <array>
 #include <cstdint>
@@ -232,5 +229,3 @@ YOGA_EXPORT bool operator==(const YGStyle& lhs, const YGStyle& rhs);
 YOGA_EXPORT inline bool operator!=(const YGStyle& lhs, const YGStyle& rhs) {
   return !(lhs == rhs);
 }
-
-#endif

@@ -10,10 +10,11 @@
 
 'use strict';
 
-import RCTDeviceEventEmitter from '../EventEmitter/RCTDeviceEventEmitter';
-import NativeRedBox from '../NativeModules/specs/NativeRedBox';
-import {type EventSubscription} from '../vendor/emitter/EventEmitter';
+const RCTDeviceEventEmitter = require('../EventEmitter/RCTDeviceEventEmitter');
+
+import type EmitterSubscription from '../vendor/emitter/EmitterSubscription';
 import NativeBugReporting from './NativeBugReporting';
+import NativeRedBox from '../NativeModules/specs/NativeRedBox';
 
 type ExtraData = {[key: string]: string, ...};
 type SourceCallback = () => string;
@@ -38,8 +39,8 @@ function defaultExtras() {
 class BugReporting {
   static _extraSources: Map<string, SourceCallback> = new Map();
   static _fileSources: Map<string, SourceCallback> = new Map();
-  static _subscription: ?EventSubscription = null;
-  static _redboxSubscription: ?EventSubscription = null;
+  static _subscription: ?EmitterSubscription = null;
+  static _redboxSubscription: ?EmitterSubscription = null;
 
   static _maybeInit() {
     if (!BugReporting._subscription) {

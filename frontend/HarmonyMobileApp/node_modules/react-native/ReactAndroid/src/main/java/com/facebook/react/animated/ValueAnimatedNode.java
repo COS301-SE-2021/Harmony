@@ -60,8 +60,4 @@ import com.facebook.react.bridge.ReadableMap;
   public void setValueListener(@Nullable AnimatedNodeValueListener listener) {
     mValueListener = listener;
   }
-
-  public String prettyPrint() {
-    return "ValueAnimatedNode[" + mTag + "]: value: " + mValue + " offset: " + mOffset;
-  }
 }

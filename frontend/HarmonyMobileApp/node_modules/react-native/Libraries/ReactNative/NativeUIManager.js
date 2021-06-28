@@ -17,6 +17,7 @@ export interface Spec extends TurboModule {
   +getConstants: () => Object;
   +getConstantsForViewManager: (viewManagerName: string) => Object;
   +getDefaultEventTypes: () => Array<string>;
+  +playTouchSound: () => void;
   +lazilyLoadView: (name: string) => Object; // revisit return
   +createView: (
     reactTag: ?number,

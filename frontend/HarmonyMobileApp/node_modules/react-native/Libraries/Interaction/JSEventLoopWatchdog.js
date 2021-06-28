@@ -11,6 +11,7 @@
 'use strict';
 
 const infoLog = require('../Utilities/infoLog');
+const performanceNow = require('fbjs/lib/performanceNow');
 
 type Handler = {
   onIterate?: () => void,
@@ -43,7 +44,7 @@ const JSEventLoopWatchdog = {
     totalStallTime = 0;
     stallCount = 0;
     longestStall = 0;
-    lastInterval = global.performance.now();
+    lastInterval = performanceNow();
   },
   addHandler: function(handler: Handler) {
     handlers.push(handler);
@@ -54,9 +55,9 @@ const JSEventLoopWatchdog = {
       return;
     }
     installed = true;
-    lastInterval = global.performance.now();
+    lastInterval = performanceNow();
     function iteration() {
-      const now = global.performance.now();
+      const now = performanceNow();
       const busyTime = now - lastInterval;
       if (busyTime >= thresholdMS) {
         const stallTime = busyTime - thresholdMS;

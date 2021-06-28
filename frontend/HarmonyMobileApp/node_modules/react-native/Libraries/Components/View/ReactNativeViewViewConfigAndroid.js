@@ -19,12 +19,6 @@ const ReactNativeViewViewConfigAndroid = {
         captured: 'onSelectCapture',
       },
     },
-    topAssetDidLoad: {
-      phasedRegistrationNames: {
-        bubbled: 'onAssetDidLoad',
-        captured: 'onAssetDidLoadCapture',
-      },
-    },
   },
   directEventTypes: {
     topClick: {
@@ -62,9 +56,6 @@ const ReactNativeViewViewConfigAndroid = {
     },
     topSelectionChange: {
       registrationName: 'onSelectionChange',
-    },
-    onAssetDidLoad: {
-      registrationName: 'onAssetDidLoad',
     },
   },
   validAttributes: {

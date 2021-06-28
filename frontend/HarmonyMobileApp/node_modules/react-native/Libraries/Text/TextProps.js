@@ -57,18 +57,6 @@ export type TextProps = $ReadOnly<{|
    * See https://reactnative.dev/docs/text.html#allowfontscaling
    */
   allowFontScaling?: ?boolean,
-
-  /**
-   * Set hyphenation strategy on Android.
-   *
-   */
-  android_hyphenationFrequency?: ?(
-    | 'normal'
-    | 'none'
-    | 'full'
-    | 'high'
-    | 'balanced'
-  ),
   children?: ?Node,
 
   /**
@@ -122,7 +110,7 @@ export type TextProps = $ReadOnly<{|
    * See https://reactnative.dev/docs/text.html#onpress
    */
   onPress?: ?(event: PressEvent) => mixed,
-  onResponderGrant?: ?(event: PressEvent) => void,
+  onResponderGrant?: ?(event: PressEvent, dispatchID: string) => void,
   onResponderMove?: ?(event: PressEvent) => void,
   onResponderRelease?: ?(event: PressEvent) => void,
   onResponderTerminate?: ?(event: PressEvent) => void,

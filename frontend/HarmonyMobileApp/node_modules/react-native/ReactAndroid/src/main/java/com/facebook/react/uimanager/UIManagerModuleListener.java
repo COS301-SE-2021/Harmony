@@ -7,11 +7,7 @@
 
 package com.facebook.react.uimanager;
 
-/**
- * Listener used to hook into the UIManager update process. Deprecated: use UIManagerListener
- * instead. This will be deleted in some future release.
- */
-@Deprecated
+/** Listener used to hook into the UIManager update process. */
 public interface UIManagerModuleListener {
   /**
    * Called right before view updates are dispatched at the end of a batch. This is useful if a

@@ -9,7 +9,6 @@ package com.facebook.react.modules.image;
 
 import android.net.Uri;
 import android.util.SparseArray;
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.facebook.common.executors.CallerThreadExecutor;
 import com.facebook.common.references.CloseableReference;
@@ -33,7 +32,6 @@ import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.module.annotations.ReactModule;
 import com.facebook.react.modules.fresco.ReactNetworkImageRequest;
-import com.facebook.react.views.image.ReactCallerContextFactory;
 import com.facebook.react.views.imagehelper.ImageSource;
 
 @ReactModule(name = ImageLoaderModule.NAME)
@@ -45,11 +43,9 @@ public class ImageLoaderModule extends NativeImageLoaderAndroidSpec
   private static final String ERROR_GET_SIZE_FAILURE = "E_GET_SIZE_FAILURE";
   public static final String NAME = "ImageLoader";
 
-  private @Nullable final Object mCallerContext;
+  private final Object mCallerContext;
   private final Object mEnqueuedRequestMonitor = new Object();
   private final SparseArray<DataSource<Void>> mEnqueuedRequests = new SparseArray<>();
-  private @Nullable ImagePipeline mImagePipeline = null;
-  private @Nullable ReactCallerContextFactory mCallerContextFactory;
 
   public ImageLoaderModule(ReactApplicationContext reactContext) {
     super(reactContext);
@@ -61,30 +57,9 @@ public class ImageLoaderModule extends NativeImageLoaderAndroidSpec
     mCallerContext = callerContext;
   }
 
-  public ImageLoaderModule(
-      ReactApplicationContext reactContext,
-      ImagePipeline imagePipeline,
-      ReactCallerContextFactory callerContextFactory) {
-    super(reactContext);
-    mCallerContextFactory = callerContextFactory;
-    mImagePipeline = imagePipeline;
-    mCallerContext = null;
-  }
-
-  private @Nullable Object getCallerContext() {
-    return mCallerContextFactory != null
-        ? mCallerContextFactory.getOrCreateCallerContext("", "")
-        : mCallerContext;
-  }
-
   @Override
-  @NonNull
   public String getName() {
     return NAME;
-  }
-
-  private ImagePipeline getImagePipeline() {
-    return mImagePipeline != null ? mImagePipeline : Fresco.getImagePipeline();
   }
 
   /**
@@ -105,7 +80,7 @@ public class ImageLoaderModule extends NativeImageLoaderAndroidSpec
     ImageRequest request = ImageRequestBuilder.newBuilderWithSource(source.getUri()).build();
 
     DataSource<CloseableReference<CloseableImage>> dataSource =
-        getImagePipeline().fetchDecodedImage(request, getCallerContext());
+        Fresco.getImagePipeline().fetchDecodedImage(request, mCallerContext);
 
     DataSubscriber<CloseableReference<CloseableImage>> dataSubscriber =
         new BaseDataSubscriber<CloseableReference<CloseableImage>>() {
@@ -166,7 +141,7 @@ public class ImageLoaderModule extends NativeImageLoaderAndroidSpec
         ReactNetworkImageRequest.fromBuilderWithHeaders(imageRequestBuilder, headers);
 
     DataSource<CloseableReference<CloseableImage>> dataSource =
-        getImagePipeline().fetchDecodedImage(request, getCallerContext());
+        Fresco.getImagePipeline().fetchDecodedImage(request, mCallerContext);
 
     DataSubscriber<CloseableReference<CloseableImage>> dataSubscriber =
         new BaseDataSubscriber<CloseableReference<CloseableImage>>() {
@@ -226,7 +201,7 @@ public class ImageLoaderModule extends NativeImageLoaderAndroidSpec
     ImageRequest request = ImageRequestBuilder.newBuilderWithSource(uri).build();
 
     DataSource<Void> prefetchSource =
-        getImagePipeline().prefetchToDiskCache(request, getCallerContext());
+        Fresco.getImagePipeline().prefetchToDiskCache(request, mCallerContext);
     DataSubscriber<Void> prefetchSubscriber =
         new BaseDataSubscriber<Void>() {
           @Override
@@ -237,8 +212,6 @@ public class ImageLoaderModule extends NativeImageLoaderAndroidSpec
             try {
               removeRequest(requestId);
               promise.resolve(true);
-            } catch (Exception e) {
-              promise.reject(ERROR_PREFETCH_FAILURE, e);
             } finally {
               dataSource.close();
             }
@@ -273,7 +246,7 @@ public class ImageLoaderModule extends NativeImageLoaderAndroidSpec
       @Override
       protected void doInBackgroundGuarded(Void... params) {
         WritableMap result = Arguments.createMap();
-        ImagePipeline imagePipeline = getImagePipeline();
+        ImagePipeline imagePipeline = Fresco.getImagePipeline();
         for (int i = 0; i < uris.size(); i++) {
           String uriString = uris.getString(i);
           final Uri uri = Uri.parse(uriString);

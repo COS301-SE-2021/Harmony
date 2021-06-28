@@ -47,14 +47,13 @@ public class AndroidDrawerLayoutManagerDelegate<T extends View, U extends BaseVi
     }
   }
 
-  @Override
-  public void receiveCommand(T view, String commandName, ReadableArray args) {
+  public void receiveCommand(AndroidDrawerLayoutManagerInterface<T> viewManager, T view, String commandName, ReadableArray args) {
     switch (commandName) {
       case "openDrawer":
-        mViewManager.openDrawer(view);
+        viewManager.openDrawer(view);
         break;
       case "closeDrawer":
-        mViewManager.closeDrawer(view);
+        viewManager.closeDrawer(view);
         break;
     }
   }

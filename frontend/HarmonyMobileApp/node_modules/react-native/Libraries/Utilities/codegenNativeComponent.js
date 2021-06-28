@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  *
  * @format
- * @flow strict-local
+ * @flow
  */
 
 // TODO: move this file to shims/ReactNative (requires React update and sync)
@@ -21,7 +21,7 @@ type Options = $ReadOnly<{|
   interfaceOnly?: boolean,
   paperComponentName?: string,
   paperComponentNameDeprecated?: string,
-  excludedPlatforms?: $ReadOnlyArray<'iOS' | 'android'>,
+  excludedPlatform?: 'iOS' | 'android',
 |}>;
 
 export type NativeComponentType<T> = HostComponent<T>;
@@ -31,7 +31,7 @@ function codegenNativeComponent<Props>(
   options?: Options,
 ): NativeComponentType<Props> {
   let componentNameInUse =
-    options && options.paperComponentName != null
+    options && options.paperComponentName
       ? options.paperComponentName
       : componentName;
 
@@ -45,7 +45,7 @@ function codegenNativeComponent<Props>(
       componentNameInUse = options.paperComponentNameDeprecated;
     } else {
       throw new Error(
-        `Failed to find native component for either ${componentName} or ${options.paperComponentNameDeprecated ??
+        `Failed to find native component for either ${componentName} or ${options.paperComponentNameDeprecated ||
           '(unknown)'}`,
       );
     }

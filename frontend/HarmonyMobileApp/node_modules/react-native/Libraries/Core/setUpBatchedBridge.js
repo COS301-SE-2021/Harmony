@@ -26,9 +26,8 @@ registerModule('SamplingProfiler', () =>
   require('../Performance/SamplingProfiler'),
 );
 registerModule('RCTLog', () => require('../Utilities/RCTLog'));
-registerModule(
-  'RCTDeviceEventEmitter',
-  () => require('../EventEmitter/RCTDeviceEventEmitter').default,
+registerModule('RCTDeviceEventEmitter', () =>
+  require('../EventEmitter/RCTDeviceEventEmitter'),
 );
 registerModule('RCTNativeAppEventEmitter', () =>
   require('../EventEmitter/RCTNativeAppEventEmitter'),

@@ -8,7 +8,6 @@
 #import <UIKit/UIKit.h>
 
 #import <React/RCTSurfaceDelegate.h>
-#import <React/RCTSurfaceProtocol.h>
 #import <React/RCTSurfaceSizeMeasureMode.h>
 #import <React/RCTSurfaceStage.h>
 
@@ -39,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Instanciates a view with given Surface object.
  * Note: The view retains the surface object.
  */
-- (instancetype)initWithSurface:(id<RCTSurfaceProtocol>)surface
+- (instancetype)initWithSurface:(RCTSurface *)surface
                 sizeMeasureMode:(RCTSurfaceSizeMeasureMode)sizeMeasureMode NS_DESIGNATED_INITIALIZER;
 
 /**
@@ -56,7 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Surface object which is currently using to power the view.
  * Read-only.
  */
-@property (nonatomic, strong, readonly) id<RCTSurfaceProtocol> surface;
+@property (nonatomic, strong, readonly) RCTSurface *surface;
 
 /**
  * Size measure mode which are defining relationship between UIKit and ReactNative

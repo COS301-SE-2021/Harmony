@@ -10,7 +10,8 @@
 
 'use strict';
 
-import NativeEventEmitter from '../../EventEmitter/NativeEventEmitter';
+const NativeEventEmitter = require('../../EventEmitter/NativeEventEmitter');
+
 import NativeStatusBarManagerIOS from './NativeStatusBarManagerIOS';
 
 /**

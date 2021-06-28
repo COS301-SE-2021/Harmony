@@ -12,7 +12,7 @@
 
 import invariant from 'invariant';
 import {Commands} from '../View/ViewNativeComponent';
-import type {ColorValue} from '../../StyleSheet/StyleSheet';
+import type {ColorValue} from '../../StyleSheet/StyleSheetTypes';
 import type {PressEvent} from '../../Types/CoreEventTypes';
 import {Platform, View, processColor} from 'react-native';
 import * as React from 'react';
@@ -26,9 +26,9 @@ type NativeBackgroundProp = $ReadOnly<{|
 |}>;
 
 export type RippleConfig = {|
-  color?: ColorValue,
-  borderless?: boolean,
-  radius?: number,
+  color?: ?ColorValue,
+  borderless?: ?boolean,
+  radius?: ?number,
 |};
 
 /**
@@ -47,12 +47,13 @@ export default function useAndroidRippleForView(
   |}>,
 |}> {
   const {color, borderless, radius} = rippleConfig ?? {};
+  const normalizedBorderless = borderless === true;
 
   return useMemo(() => {
     if (
       Platform.OS === 'android' &&
       Platform.Version >= 21 &&
-      (color != null || borderless != null || radius != null)
+      (color != null || normalizedBorderless || radius != null)
     ) {
       const processedColor = processColor(color);
       invariant(
@@ -66,7 +67,7 @@ export default function useAndroidRippleForView(
           nativeBackgroundAndroid: {
             type: 'RippleAndroid',
             color: processedColor,
-            borderless: borderless === true,
+            borderless: normalizedBorderless,
             rippleRadius: radius,
           },
         },
@@ -100,5 +101,5 @@ export default function useAndroidRippleForView(
       };
     }
     return null;
-  }, [color, borderless, radius, viewRef]);
+  }, [color, normalizedBorderless, radius, viewRef]);
 }

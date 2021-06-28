@@ -5,16 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  *
  * @format
- * @flow strict
+ * @flow
  */
 
 'use strict';
 
 const base64 = require('base64-js');
 
-function binaryToBase64(data: ArrayBuffer | $ArrayBufferView): string {
+function binaryToBase64(data: ArrayBuffer | $ArrayBufferView): any {
   if (data instanceof ArrayBuffer) {
-    // $FlowFixMe[reassign-const]
     data = new Uint8Array(data);
   }
   if (data instanceof Uint8Array) {
@@ -23,8 +22,7 @@ function binaryToBase64(data: ArrayBuffer | $ArrayBufferView): string {
   if (!ArrayBuffer.isView(data)) {
     throw new Error('data must be ArrayBuffer or typed array');
   }
-  // Already checked that `data` is `DataView` in `ArrayBuffer.isView(data)`
-  const {buffer, byteOffset, byteLength} = ((data: $FlowFixMe): DataView);
+  const {buffer, byteOffset, byteLength} = data;
   return base64.fromByteArray(new Uint8Array(buffer, byteOffset, byteLength));
 }
 

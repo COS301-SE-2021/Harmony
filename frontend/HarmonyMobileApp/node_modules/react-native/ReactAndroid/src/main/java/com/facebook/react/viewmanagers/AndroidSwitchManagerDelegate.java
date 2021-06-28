@@ -56,11 +56,10 @@ public class AndroidSwitchManagerDelegate<T extends View, U extends BaseViewMana
     }
   }
 
-  @Override
-  public void receiveCommand(T view, String commandName, ReadableArray args) {
+  public void receiveCommand(AndroidSwitchManagerInterface<T> viewManager, T view, String commandName, ReadableArray args) {
     switch (commandName) {
       case "setNativeValue":
-        mViewManager.setNativeValue(view, args.getBoolean(0));
+        viewManager.setNativeValue(view, args.getBoolean(0));
         break;
     }
   }

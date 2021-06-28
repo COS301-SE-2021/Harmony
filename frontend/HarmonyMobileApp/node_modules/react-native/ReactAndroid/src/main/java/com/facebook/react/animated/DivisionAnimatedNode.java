@@ -42,23 +42,13 @@ import com.facebook.react.bridge.ReadableMap;
         }
         if (value == 0) {
           throw new JSApplicationCausedNativeException(
-              "Detected a division by zero in Animated.divide node with Animated ID " + mTag);
+              "Detected a division by zero in " + "Animated.divide node");
         }
         mValue /= value;
       } else {
         throw new JSApplicationCausedNativeException(
-            "Illegal node ID set as an input for Animated.divide node with Animated ID " + mTag);
+            "Illegal node ID set as an input for " + "Animated.divide node");
       }
     }
-  }
-
-  @Override
-  public String prettyPrint() {
-    return "DivisionAnimatedNode["
-        + mTag
-        + "]: input nodes: "
-        + (mInputNodes != null ? mInputNodes.toString() : "null")
-        + " - super: "
-        + super.prettyPrint();
   }
 }

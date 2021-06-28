@@ -18,10 +18,13 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.module.model.ReactModuleInfo;
 import com.facebook.react.turbomodule.core.interfaces.TurboModule;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public abstract class ReactPackageTurboModuleManagerDelegate extends TurboModuleManagerDelegate {
   private final List<TurboReactPackage> mPackages = new ArrayList<>();
+  private final Map<String, TurboModule> mModules = new HashMap<>();
   private final ReactApplicationContext mReactApplicationContext;
 
   protected ReactPackageTurboModuleManagerDelegate(
@@ -66,8 +69,11 @@ public abstract class ReactPackageTurboModuleManagerDelegate extends TurboModule
     return (CxxModuleWrapper) module;
   }
 
-  @Nullable
   private TurboModule resolveModule(String moduleName) {
+    if (mModules.containsKey(moduleName)) {
+      return mModules.get(moduleName);
+    }
+
     NativeModule resolvedModule = null;
 
     for (final TurboReactPackage pkg : mPackages) {
@@ -86,10 +92,20 @@ public abstract class ReactPackageTurboModuleManagerDelegate extends TurboModule
     }
 
     if (resolvedModule instanceof TurboModule) {
-      return (TurboModule) resolvedModule;
+      mModules.put(moduleName, (TurboModule) resolvedModule);
+    } else {
+      /**
+       * 1. The list of TurboReactPackages doesn't change. 2. TurboReactPackage.getModule is
+       * deterministic. Therefore, any two invocations of TurboReactPackage.getModule will return
+       * the same result given that they're provided the same arguments.
+       *
+       * <p>Hence, if module lookup fails once, we know it'll fail every time. Therefore, we can
+       * write null to the mModules Map and avoid doing this extra work.
+       */
+      mModules.put(moduleName, null);
     }
 
-    return null;
+    return mModules.get(moduleName);
   }
 
   @Override

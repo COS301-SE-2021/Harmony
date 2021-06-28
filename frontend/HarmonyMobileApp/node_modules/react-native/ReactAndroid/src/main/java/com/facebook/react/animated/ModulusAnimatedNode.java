@@ -34,15 +34,4 @@ import com.facebook.react.bridge.ReadableMap;
           "Illegal node ID set as an input for " + "Animated.modulus node");
     }
   }
-
-  public String prettyPrint() {
-    return "NativeAnimatedNodesManager["
-        + mTag
-        + "] inputNode: "
-        + mInputNode
-        + " modulus: "
-        + mModulus
-        + " super: "
-        + super.prettyPrint();
-  }
 }

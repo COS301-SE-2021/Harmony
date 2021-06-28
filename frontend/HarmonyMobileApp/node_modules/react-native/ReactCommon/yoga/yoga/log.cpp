@@ -26,6 +26,10 @@ void vlog(
     va_list args) {
   YGConfig* logConfig = config != nullptr ? config : YGConfigGetDefault();
   logConfig->log(logConfig, node, level, context, format, args);
+
+  if (level == YGLogLevelFatal) {
+    abort();
+  }
 }
 } // namespace
 

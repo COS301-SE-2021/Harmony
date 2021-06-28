@@ -28,9 +28,7 @@ namespace chrome {
  */
 class SyncConnection {
  public:
-  SyncConnection(
-      std::shared_ptr<HermesRuntime> runtime,
-      bool waitForDebugger = false);
+  SyncConnection(std::shared_ptr<HermesRuntime> runtime);
   ~SyncConnection() = default;
 
   /// sends a message to the debugger

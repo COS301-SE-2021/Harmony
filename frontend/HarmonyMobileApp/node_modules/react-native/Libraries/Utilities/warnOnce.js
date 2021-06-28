@@ -5,10 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  *
  * @format
- * @flow strict
+ * @flow strict-local
  */
 
 'use strict';
+
+const warning = require('fbjs/lib/warning');
 
 const warnedKeys: {[string]: boolean, ...} = {};
 
@@ -24,7 +26,7 @@ function warnOnce(key: string, message: string) {
     return;
   }
 
-  console.warn(message);
+  warning(false, message);
 
   warnedKeys[key] = true;
 }

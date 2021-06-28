@@ -16,7 +16,7 @@ const BackHandler = {
 
   addEventListener: function(
     eventName: BackPressEventName,
-    handler: () => ?boolean,
+    handler: Function,
   ): {remove: () => void} {
     _backPressSubscriptions.add(handler);
     return {
@@ -26,7 +26,7 @@ const BackHandler = {
 
   removeEventListener: function(
     eventName: BackPressEventName,
-    handler: () => ?boolean,
+    handler: Function,
   ): void {
     _backPressSubscriptions.delete(handler);
   },

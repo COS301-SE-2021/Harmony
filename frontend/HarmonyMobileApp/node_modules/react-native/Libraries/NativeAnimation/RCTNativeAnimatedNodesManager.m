@@ -46,7 +46,6 @@ static NSString *RCTNormalizeAnimatedEventName(NSString *eventName)
 @implementation RCTNativeAnimatedNodesManager
 {
   __weak RCTBridge *_bridge;
-  __weak id<RCTSurfacePresenterStub> _surfacePresenter;
   NSMutableDictionary<NSNumber *, RCTAnimatedNode *> *_animationNodes;
   // Mapping of a view tag and an event name to a list of event animation drivers. 99% of the time
   // there will be only one driver per mapping so all code code should be optimized around that.
@@ -55,11 +54,10 @@ static NSString *RCTNormalizeAnimatedEventName(NSString *eventName)
   CADisplayLink *_displayLink;
 }
 
-- (instancetype)initWithBridge:(nonnull RCTBridge *)bridge surfacePresenter:(id<RCTSurfacePresenterStub>)surfacePresenter;
+- (instancetype)initWithBridge:(nonnull RCTBridge *)bridge
 {
   if ((self = [super init])) {
     _bridge = bridge;
-    _surfacePresenter = surfacePresenter;
     _animationNodes = [NSMutableDictionary new];
     _eventDrivers = [NSMutableDictionary new];
     _activeAnimations = [NSMutableSet new];
@@ -150,10 +148,7 @@ static NSString *RCTNormalizeAnimatedEventName(NSString *eventName)
 {
   RCTAnimatedNode *node = _animationNodes[nodeTag];
   if ([node isKindOfClass:[RCTPropsAnimatedNode class]]) {
-    [(RCTPropsAnimatedNode *)node connectToView:viewTag
-                                       viewName:viewName
-                                         bridge:_bridge
-                               surfacePresenter:_surfacePresenter];
+    [(RCTPropsAnimatedNode *)node connectToView:viewTag viewName:viewName bridge:_bridge];
   }
   [node setNeedsUpdate];
 }
@@ -245,17 +240,6 @@ static NSString *RCTNormalizeAnimatedEventName(NSString *eventName)
 
   RCTValueAnimatedNode *valueNode = (RCTValueAnimatedNode *)node;
   [valueNode extractOffset];
-}
-
-- (void)getValue:(NSNumber *)nodeTag saveCallback:(RCTResponseSenderBlock)saveCallback
-{
-     RCTAnimatedNode *node = _animationNodes[nodeTag];
-     if (![node isKindOfClass:[RCTValueAnimatedNode class]]) {
-       RCTLogError(@"Not a value node.");
-       return;
-     }
-    RCTValueAnimatedNode *valueNode = (RCTValueAnimatedNode *)node;;
-    saveCallback(@[@(valueNode.value)]);
 }
 
 #pragma mark -- Drivers

@@ -11,8 +11,8 @@ import android.annotation.SuppressLint;
 import androidx.annotation.NonNull;
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;
+import com.facebook.react.bridge.JavaScriptContextHolder;
 import com.facebook.react.bridge.NativeMap;
-import com.facebook.react.bridge.RuntimeExecutor;
 import com.facebook.react.bridge.queue.MessageQueueThread;
 import com.facebook.react.fabric.events.EventBeatManager;
 import com.facebook.react.uimanager.PixelUtil;
@@ -34,11 +34,11 @@ public class Binding {
   }
 
   private native void installFabricUIManager(
-      RuntimeExecutor runtimeExecutor,
+      long jsContextNativePointer,
       Object uiManager,
       EventBeatManager eventBeatManager,
       MessageQueueThread jsMessageQueueThread,
-      ComponentFactory componentsRegistry,
+      ComponentFactoryDelegate componentsRegistry,
       Object reactNativeConfig);
 
   public native void startSurface(
@@ -52,8 +52,6 @@ public class Binding {
       float maxWidth,
       float minHeight,
       float maxHeight,
-      float offsetX,
-      float offsetY,
       boolean isRTL,
       boolean doLeftAndRightSwapInRTL);
 
@@ -69,28 +67,23 @@ public class Binding {
       float maxWidth,
       float minHeight,
       float maxHeight,
-      float offsetX,
-      float offsetY,
       boolean isRTL,
       boolean doLeftAndRightSwapInRTL);
 
-  public native void driveCxxAnimations();
-
-  // TODO (T67721598) Remove the jsContext param once we've migrated to using RuntimeExecutor
   public void register(
-      @NonNull RuntimeExecutor runtimeExecutor,
+      @NonNull JavaScriptContextHolder jsContext,
       @NonNull FabricUIManager fabricUIManager,
       @NonNull EventBeatManager eventBeatManager,
       @NonNull MessageQueueThread jsMessageQueueThread,
-      @NonNull ComponentFactory componentFactory,
+      @NonNull ComponentFactoryDelegate componentFactoryDelegate,
       @NonNull ReactNativeConfig reactNativeConfig) {
     fabricUIManager.setBinding(this);
     installFabricUIManager(
-        runtimeExecutor,
+        jsContext.get(),
         fabricUIManager,
         eventBeatManager,
         jsMessageQueueThread,
-        componentFactory,
+        componentFactoryDelegate,
         reactNativeConfig);
     setPixelDensity(PixelUtil.getDisplayMetricDensity());
   }

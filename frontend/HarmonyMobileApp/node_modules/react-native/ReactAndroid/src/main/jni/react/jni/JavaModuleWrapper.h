@@ -69,7 +69,6 @@ class JavaNativeModule : public NativeModule {
         messageQueueThread_(std::move(messageQueueThread)) {}
 
   std::string getName() override;
-  std::string getSyncMethodName(unsigned int reactMethodId) override;
   folly::dynamic getConstants() override;
   std::vector<MethodDescriptor> getMethods() override;
   void invoke(unsigned int reactMethodId, folly::dynamic &&params, int callId)

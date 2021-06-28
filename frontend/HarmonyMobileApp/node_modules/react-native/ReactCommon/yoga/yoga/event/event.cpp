@@ -8,6 +8,7 @@
 #include "event.h"
 #include <atomic>
 #include <memory>
+#include <stdexcept>
 
 namespace facebook {
 namespace yoga {

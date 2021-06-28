@@ -346,7 +346,7 @@ RCT_EXTERN_C_END
  * A protocol that allows TurboModules to do lookup on other TurboModules.
  * Calling these methods may cause a module to be synchronously instantiated.
  */
-@protocol RCTTurboModuleRegistry <NSObject>
+@protocol RCTTurboModuleLookupDelegate <NSObject>
 - (id)moduleForName:(const char *)moduleName;
 
 /**
@@ -360,9 +360,6 @@ RCT_EXTERN_C_END
  */
 - (id)moduleForName:(const char *)moduleName warnOnLookupFailure:(BOOL)warnOnLookupFailure;
 - (BOOL)moduleIsInitialized:(const char *)moduleName;
-
-- (NSArray<NSString *> *)eagerInitModuleNames;
-- (NSArray<NSString *> *)eagerInitMainQueueModuleNames;
 @end
 
 /**

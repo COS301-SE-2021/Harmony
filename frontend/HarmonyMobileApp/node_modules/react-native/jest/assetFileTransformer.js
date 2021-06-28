@@ -12,8 +12,7 @@
 /* eslint-env node */
 
 const path = require('path');
-const createCacheKeyFunction = require('@jest/create-cache-key-function')
-  .default;
+const createCacheKeyFunction = require('fbjs-scripts/jest/createCacheKeyFunction');
 
 module.exports = {
   // Mocks asset requires to return the filename. Makes it possible to test that
@@ -22,7 +21,7 @@ module.exports = {
   // the Jest snapshot.
   process: (_, filename) =>
     `module.exports = {
-      testUri:
+      testUri: 
         ${JSON.stringify(
           path.relative(__dirname, filename).replace(/\\/g, '/'),
         )}

@@ -37,7 +37,6 @@ class RN_EXPORT CxxNativeModule : public NativeModule {
         messageQueueThread_(messageQueueThread) {}
 
   std::string getName() override;
-  std::string getSyncMethodName(unsigned int methodId) override;
   std::vector<MethodDescriptor> getMethods() override;
   folly::dynamic getConstants() override;
   void invoke(unsigned int reactMethodId, folly::dynamic &&params, int callId)

@@ -15,7 +15,6 @@
 #import <React/RCTUtils.h>
 
 #import "CoreModulesPlugins.h"
-#import "RCTAlertController.h"
 
 @implementation RCTConvert (UIAlertViewStyle)
 
@@ -100,9 +99,29 @@ RCT_EXPORT_METHOD(alertWithArgs : (JS::NativeAlertManager::Args &)args callback 
     }
   }
 
-  RCTAlertController *alertController = [RCTAlertController alertControllerWithTitle:title
-                                                                             message:nil
-                                                                      preferredStyle:UIAlertControllerStyleAlert];
+  UIViewController *presentingController = RCTPresentedViewController();
+  if (presentingController == nil) {
+    RCTLogError(@"Tried to display alert view but there is no application window. args: %@", @{
+      @"title" : args.title() ?: [NSNull null],
+      @"message" : args.message() ?: [NSNull null],
+      @"buttons" : RCTConvertOptionalVecToArray(
+          args.buttons(),
+          ^id(id<NSObject> element) {
+            return element;
+          })
+          ?: [NSNull null],
+      @"type" : args.type() ?: [NSNull null],
+      @"defaultValue" : args.defaultValue() ?: [NSNull null],
+      @"cancelButtonKey" : args.cancelButtonKey() ?: [NSNull null],
+      @"destructiveButtonKey" : args.destructiveButtonKey() ?: [NSNull null],
+      @"keyboardType" : args.keyboardType() ?: [NSNull null],
+    });
+    return;
+  }
+
+  UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title
+                                                                           message:nil
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
   switch (type) {
     case RCTAlertViewStylePlainTextInput: {
       [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
@@ -151,7 +170,7 @@ RCT_EXPORT_METHOD(alertWithArgs : (JS::NativeAlertManager::Args &)args callback 
     } else if ([buttonKey isEqualToString:destructiveButtonKey]) {
       buttonStyle = UIAlertActionStyleDestructive;
     }
-    __weak RCTAlertController *weakAlertController = alertController;
+    __weak UIAlertController *weakAlertController = alertController;
     [alertController
         addAction:[UIAlertAction
                       actionWithTitle:buttonTitle
@@ -183,14 +202,16 @@ RCT_EXPORT_METHOD(alertWithArgs : (JS::NativeAlertManager::Args &)args callback 
   [_alertControllers addObject:alertController];
 
   dispatch_async(dispatch_get_main_queue(), ^{
-    [alertController show:YES completion:nil];
+    [presentingController presentViewController:alertController animated:YES completion:nil];
   });
 }
 
-- (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:
-    (const facebook::react::ObjCTurboModule::InitParams &)params
+- (std::shared_ptr<facebook::react::TurboModule>)
+    getTurboModuleWithJsInvoker:(std::shared_ptr<facebook::react::CallInvoker>)jsInvoker
+                  nativeInvoker:(std::shared_ptr<facebook::react::CallInvoker>)nativeInvoker
+                     perfLogger:(id<RCTTurboModulePerformanceLogger>)perfLogger
 {
-  return std::make_shared<facebook::react::NativeAlertManagerSpecJSI>(params);
+  return std::make_shared<facebook::react::NativeAlertManagerSpecJSI>(self, jsInvoker, nativeInvoker, perfLogger);
 }
 
 @end

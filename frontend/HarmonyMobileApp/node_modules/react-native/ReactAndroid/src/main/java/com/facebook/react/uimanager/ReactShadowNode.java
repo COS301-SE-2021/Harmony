@@ -288,8 +288,6 @@ public interface ReactShadowNode<T extends ReactShadowNode> {
 
   YogaValue getStyleHeight();
 
-  float getFlex();
-
   void setStyleHeight(float heightPx);
 
   void setStyleHeightPercent(float percent);

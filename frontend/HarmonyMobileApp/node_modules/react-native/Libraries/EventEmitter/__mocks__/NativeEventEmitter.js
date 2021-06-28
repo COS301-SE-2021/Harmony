@@ -10,14 +10,16 @@
 
 'use strict';
 
-import EventEmitter from '../../vendor/emitter/EventEmitter';
-import RCTDeviceEventEmitter from '../RCTDeviceEventEmitter';
+const EventEmitter = require('../../vendor/emitter/EventEmitter');
+const RCTDeviceEventEmitter = require('../RCTDeviceEventEmitter');
 
 /**
  * Mock the NativeEventEmitter as a normal JS EventEmitter.
  */
-export default class NativeEventEmitter extends EventEmitter {
+class NativeEventEmitter extends EventEmitter {
   constructor() {
     super(RCTDeviceEventEmitter.sharedSubscriber);
   }
 }
+
+module.exports = NativeEventEmitter;

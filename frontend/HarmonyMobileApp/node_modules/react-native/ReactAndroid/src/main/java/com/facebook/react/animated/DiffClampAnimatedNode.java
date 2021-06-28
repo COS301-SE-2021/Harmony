@@ -46,19 +46,4 @@ import com.facebook.react.bridge.ReadableMap;
 
     return ((ValueAnimatedNode) animatedNode).getValue();
   }
-
-  public String prettyPrint() {
-    return "DiffClampAnimatedNode["
-        + mTag
-        + "]: InputNodeTag: "
-        + mInputNodeTag
-        + " min: "
-        + mMin
-        + " max: "
-        + mMax
-        + " lastValue: "
-        + mLastValue
-        + " super: "
-        + super.prettyPrint();
-  }
 }

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  *
  * @format
- * @flow strict
+ * @flow
  */
 
 'use strict';
@@ -18,7 +18,7 @@ import type {ExtendedError} from '../Core/Devtools/parseErrorStack';
 
 export type ModuleConfig = [
   string /* name */,
-  ?{...} /* constants */,
+  ?Object /* constants */,
   ?$ReadOnlyArray<string> /* functions */,
   ?$ReadOnlyArray<number> /* promise method IDs */,
   ?$ReadOnlyArray<number> /* sync method IDs */,
@@ -31,7 +31,7 @@ function genModule(
   moduleID: number,
 ): ?{
   name: string,
-  module?: {...},
+  module?: Object,
   ...
 } {
   if (!config) {
@@ -55,9 +55,8 @@ function genModule(
   methods &&
     methods.forEach((methodName, methodID) => {
       const isPromise =
-        (promiseMethods && arrayContains(promiseMethods, methodID)) || false;
-      const isSync =
-        (syncMethods && arrayContains(syncMethods, methodID)) || false;
+        promiseMethods && arrayContains(promiseMethods, methodID);
+      const isSync = syncMethods && arrayContains(syncMethods, methodID);
       invariant(
         !isPromise || !isSync,
         'Cannot have a method that is both async and a sync hook',
@@ -86,7 +85,7 @@ function genModule(
 // export this method as a global so we can call it from native
 global.__fbGenNativeModule = genModule;
 
-function loadModule(name: string, moduleID: number): ?{...} {
+function loadModule(name: string, moduleID: number): ?Object {
   invariant(
     global.nativeRequireModuleConfig,
     "Can't lazily create module without nativeRequireModuleConfig",
@@ -99,7 +98,7 @@ function loadModule(name: string, moduleID: number): ?{...} {
 function genMethod(moduleID: number, methodID: number, type: MethodType) {
   let fn = null;
   if (type === 'promise') {
-    fn = function promiseMethodWrapper(...args: Array<mixed>) {
+    fn = function promiseMethodWrapper(...args: Array<any>) {
       // In case we reject, capture a useful stack trace here.
       const enqueueingFrameError: ExtendedError = new Error();
       return new Promise((resolve, reject) => {
@@ -109,17 +108,12 @@ function genMethod(moduleID: number, methodID: number, type: MethodType) {
           args,
           data => resolve(data),
           errorData =>
-            reject(
-              updateErrorWithErrorData(
-                (errorData: $FlowFixMe),
-                enqueueingFrameError,
-              ),
-            ),
+            reject(updateErrorWithErrorData(errorData, enqueueingFrameError)),
         );
       });
     };
   } else {
-    fn = function nonPromiseMethodWrapper(...args: Array<mixed>) {
+    fn = function nonPromiseMethodWrapper(...args: Array<any>) {
       const lastArg = args.length > 0 ? args[args.length - 1] : null;
       const secondLastArg = args.length > 1 ? args[args.length - 2] : null;
       const hasSuccessCallback = typeof lastArg === 'function';
@@ -129,17 +123,15 @@ function genMethod(moduleID: number, methodID: number, type: MethodType) {
           hasSuccessCallback,
           'Cannot have a non-function arg after a function arg.',
         );
-      // $FlowFixMe[incompatible-type]
-      const onSuccess: ?(mixed) => void = hasSuccessCallback ? lastArg : null;
-      // $FlowFixMe[incompatible-type]
-      const onFail: ?(mixed) => void = hasErrorCallback ? secondLastArg : null;
+      const onSuccess = hasSuccessCallback ? lastArg : null;
+      const onFail = hasErrorCallback ? secondLastArg : null;
       const callbackCount = hasSuccessCallback + hasErrorCallback;
-      const newArgs = args.slice(0, args.length - callbackCount);
+      args = args.slice(0, args.length - callbackCount);
       if (type === 'sync') {
         return BatchedBridge.callNativeSyncHook(
           moduleID,
           methodID,
-          newArgs,
+          args,
           onFail,
           onSuccess,
         );
@@ -147,7 +139,7 @@ function genMethod(moduleID: number, methodID: number, type: MethodType) {
         BatchedBridge.enqueueNativeCall(
           moduleID,
           methodID,
-          newArgs,
+          args,
           onFail,
           onSuccess,
         );
@@ -169,7 +161,7 @@ function updateErrorWithErrorData(
   return Object.assign(error, errorData || {});
 }
 
-let NativeModules: {[moduleName: string]: $FlowFixMe, ...} = {};
+let NativeModules: {[moduleName: string]: Object, ...} = {};
 if (global.nativeModuleProxy) {
   NativeModules = global.nativeModuleProxy;
 } else if (!global.nativeExtensions) {
