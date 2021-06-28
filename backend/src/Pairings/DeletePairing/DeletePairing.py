@@ -20,18 +20,19 @@ now = strftime("%a, %d %b %Y %H:%M:%S +0000", gmtime())
 
 
 # define the handler function that the Lambda service will use as an entry point
-def Delete_Pairing(event, context):
+def delete_pairing(event, context):
     # extract values from the event object we got from the Lambda service and store in a variable
     pid = event['PID']
 
     try:
-         # delete based on id from request
+        # delete based on id from request
         response = table.delete_item(
             Key={
                 'PID': pid
             }
         )
-
+        # once pairing has been deleted from pairings database, we need to delete pairings from user favourites
+        remove_favourite(pid)
 
 
 
@@ -50,3 +51,30 @@ def Delete_Pairing(event, context):
             'statusCode': 200,
             'body': json.dumps({'isSuccessful': 'true', 'PID': pid})
         }
+
+
+def remove_favourite(pid):
+    allresponse = table2.scan()
+    # edit the response to only show items
+    response = allresponse['Items']
+
+    for items in response:
+        print(items["UID"])
+        uid = items["UID"]
+        index = 0
+
+        for fav in items["FavouritePairings"]:
+            if fav == pid:
+                table2.update_item(
+                    Key={
+                        'UID': uid
+                    },
+                    # remove id at index of FavouritePairings list
+                    UpdateExpression=f"remove FavouritePairings[{index}]",
+                    ConditionExpression=f"contains(FavouritePairings, :pair)",
+                    ExpressionAttributeValues={':pair': pid},
+                    ReturnValues="UPDATED_NEW"
+                )
+            index = index + 1
+
+    return json.dumps({'isSuccessful': 'true', 'PID': pid})
