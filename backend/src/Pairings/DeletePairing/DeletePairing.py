@@ -54,17 +54,22 @@ def delete_pairing(event, context):
 
 
 def remove_favourite(pid):
+    # this function deletes the pairing from user favourites in user table
+    # here we scan the whole table and store it's json in allresponse var
     allresponse = table2.scan()
     # edit the response to only show items
     response = allresponse['Items']
 
     for items in response:
+        #iterate through response to go through every item in user table
         print(items["UID"])
         uid = items["UID"]
         index = 0
 
         for fav in items["FavouritePairings"]:
+            # iterate through the favourite pairings array
             if fav == pid:
+                # when id is found then update the item by removing it.
                 table2.update_item(
                     Key={
                         'UID': uid
