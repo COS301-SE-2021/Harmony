@@ -15,8 +15,6 @@ function _path() {
   return data;
 }
 
-var _common = require("./common");
-
 var _downloadAndUnzip = require("../../../tools/downloadAndUnzip");
 
 var _executeWinCommand = require("../../../tools/windows/executeWinCommand");
@@ -78,10 +76,11 @@ var _default = {
     loader.succeed(`Android Studio installed successfully in "${installPath}".`);
   },
   runAutomaticFix: async ({
-    loader
+    loader,
+    logManualInstallation
   }) => {
     loader.fail();
-    return (0, _common.logManualInstallation)({
+    return logManualInstallation({
       healthcheck: 'Android Studio',
       url: 'https://reactnative.dev/docs/environment-setup'
     });

@@ -36,21 +36,20 @@ var _default = {
   description: 'Pull and convert a Hermes tracing profile to Chrome tracing profile, then store it in the directory <destinationDir> of the local machine',
   func: profileHermes,
   options: [{
-    name: '--filename [string]',
+    name: '--filename <string>',
     description: 'File name of the profile to be downloaded, eg. sampling-profiler-trace8593107139682635366.cpuprofile'
   }, {
     name: '--raw',
     description: 'Pulls the original Hermes tracing profile without any transformation'
   }, {
-    name: '--sourcemap-path [string]',
+    name: '--sourcemap-path <string>',
     description: 'The local path to your source map file, eg. /tmp/sourcemap.json'
   }, {
     name: '--generate-sourcemap',
     description: 'Generates the JS bundle and source map'
   }, {
-    name: '--port [number]',
-    default: process.env.RCT_METRO_PORT || 8081,
-    parse: val => String(val)
+    name: '--port <number>',
+    default: `${process.env.RCT_METRO_PORT || 8081}`
   }],
   examples: [{
     desc: 'Download the Hermes Sampling Profiler to the directory <destinationDir> on the local machine',

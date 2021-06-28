@@ -20,9 +20,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 const reactLogoArray = ['                                                          ', '               ######                ######               ', '             ###     ####        ####     ###             ', '            ##          ###    ###          ##            ', '            ##             ####             ##            ', '            ##             ####             ##            ', '            ##           ##    ##           ##            ', '            ##         ###      ###         ##            ', '             ##  ########################  ##             ', '          ######    ###            ###    ######          ', '      ###     ##    ##              ##    ##     ###      ', '   ###         ## ###      ####      ### ##         ###   ', '  ##           ####      ########      ####           ##  ', ' ##             ###     ##########     ###             ## ', '  ##           ####      ########      ####           ##  ', '   ###         ## ###      ####      ### ##         ###   ', '      ###     ##    ##              ##    ##     ###      ', '          ######    ###            ###    ######          ', '             ##  ########################  ##             ', '            ##         ###      ###         ##            ', '            ##           ##    ##           ##            ', '            ##             ####             ##            ', '            ##             ####             ##            ', '            ##          ###    ###          ##            ', '             ###     ####        ####     ###             ', '               ######                ######               ', '                                                          '];
 const welcomeMessage = '                  Welcome to React Native!                ';
 const learnOnceMessage = '                 Learn once, write anywhere               ';
-var _default = `${_chalk().default.blue(reactLogoArray.join('\n'))}
+var _default = `${_chalk().default.cyan(reactLogoArray.join('\n'))}
 
-${_chalk().default.blue.bold(welcomeMessage)}
+${_chalk().default.cyanBright.bold(welcomeMessage)}
 ${_chalk().default.dim(learnOnceMessage)}
 `;
 exports.default = _default;

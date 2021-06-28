@@ -15,8 +15,6 @@ function _chalk() {
   return data;
 }
 
-var _common = require("./common");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // List of answers on how to set `ANDROID_HOME` for each platform
@@ -36,7 +34,8 @@ var _default = {
     needsToBeFixed: !process.env.ANDROID_HOME
   }),
   runAutomaticFix: async ({
-    loader
+    loader,
+    logManualInstallation
   }) => {
     // Variable could have been added if installing Android Studio so double checking
     if (process.env.ANDROID_HOME) {
@@ -45,7 +44,7 @@ var _default = {
     }
 
     loader.fail();
-    (0, _common.logManualInstallation)({
+    logManualInstallation({
       message
     });
   }

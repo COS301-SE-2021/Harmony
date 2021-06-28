@@ -50,7 +50,7 @@ function enableWatchMode(messageSocket) {
   // right after its done loading.
 
   const restore = (0, _hookStdout.default)(output => {
-    if (output.includes('Learn once, write anywhere')) {
+    if (output.includes('Fast - Scalable - Integrated')) {
       printWatchModeInstructions();
       restore();
     }
@@ -68,7 +68,7 @@ function enableWatchMode(messageSocket) {
           break;
 
         case 'z':
-          process.emit('SIGTSTP');
+          process.emit('SIGTSTP', 'SIGTSTP');
           break;
       }
     } else if (name === 'r') {

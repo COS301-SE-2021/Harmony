@@ -20,6 +20,7 @@ export interface IOSProjectParams {
     scriptPhases?: Array<any>;
 }
 export interface IOSDependencyParams extends IOSProjectParams {
+    configurations?: string[];
 }
 export interface IOSProjectConfig {
     sourceDir: string;
@@ -34,6 +35,7 @@ export interface IOSProjectConfig {
     plist: Array<any>;
 }
 export interface IOSDependencyConfig extends IOSProjectConfig {
+    configurations: string[];
 }
 /**
  * @see https://www.rubydoc.info/gems/cocoapods-core/Pod/Podfile/DSL#script_phase-instance_method

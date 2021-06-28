@@ -41,7 +41,7 @@ function _cliHermes() {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const projectCommands = [_start.default, _bundle.default, _ramBundle.default, _link.default, _unlink.default, _install.default, _uninstall.default, _upgrade.default, _info.default, _config.default, _doctor.default, _cliHermes().default];
+const projectCommands = [_start.default, _bundle.default, _ramBundle.default, _link.default, _unlink.default, _install.default, _uninstall.default, _upgrade.default, _info.default, _config.default, _cliHermes().default];
 exports.projectCommands = projectCommands;
 const detachedCommands = [_init.default, _doctor.default];
 exports.detachedCommands = detachedCommands;

@@ -167,7 +167,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
       </View>
     </SafeAreaView>*/
   );
-};
 const personalStyles = StyleSheet.create({
   container: {
     flex: 1,

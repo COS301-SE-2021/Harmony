@@ -5,145 +5,170 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.projectConfig = exports.dependencyConfig = void 0;
 
-function t() {
-  const data = _interopRequireWildcard(require("@hapi/joi"));
+function _joi() {
+  const data = _interopRequireDefault(require("joi"));
 
-  t = function () {
+  _joi = function () {
     return data;
   };
 
   return data;
 }
 
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-const map = (key, value) => t().object().unknown(true).pattern(key, value);
+const map = (key, value) => _joi().default.object().unknown(true).pattern(key, value);
 /**
  * Schema for CommandT
  */
 
 
-const command = t().object({
-  name: t().string().required(),
-  description: t().string(),
-  usage: t().string(),
-  func: t().func().required(),
-  options: t().array().items(t().object({
-    name: t().string().required(),
-    description: t().string(),
-    parse: t().func(),
-    default: t().alternatives().try([t().bool(), t().number(), t().string().allow(''), t().func()])
+const command = _joi().default.object({
+  name: _joi().default.string().required(),
+  description: _joi().default.string(),
+  usage: _joi().default.string(),
+  func: _joi().default.func().required(),
+  options: _joi().default.array().items(_joi().default.object({
+    name: _joi().default.string().required(),
+    description: _joi().default.string(),
+    parse: _joi().default.func(),
+    default: _joi().default.alternatives().try(_joi().default.bool(), _joi().default.number(), _joi().default.string().allow(''), _joi().default.func())
   }).rename('command', 'name', {
     ignoreUndefined: true
   })),
-  examples: t().array().items(t().object({
-    desc: t().string().required(),
-    cmd: t().string().required()
+  examples: _joi().default.array().items(_joi().default.object({
+    desc: _joi().default.string().required(),
+    cmd: _joi().default.string().required()
+  }))
+});
+/**
+ * Schema for HealthChecksT
+ */
+
+
+const healthCheck = _joi().default.object({
+  label: _joi().default.string().required(),
+  healthchecks: _joi().default.array().items(_joi().default.object({
+    label: _joi().default.string().required(),
+    isRequired: _joi().default.bool(),
+    description: _joi().default.string(),
+    getDiagnostics: _joi().default.func(),
+    win32AutomaticFix: _joi().default.func(),
+    darwinAutomaticFix: _joi().default.func(),
+    linuxAutomaticFix: _joi().default.func(),
+    runAutomaticFix: _joi().default.func().required()
   }))
 });
 /**
  * Schema for UserDependencyConfigT
  */
 
-const dependencyConfig = t().object({
-  dependency: t().object({
-    platforms: map(t().string(), t().any()).keys({
-      ios: t().object({
-        project: t().string(),
-        podspecPath: t().string(),
-        sharedLibraries: t().array().items(t().string()),
-        libraryFolder: t().string(),
-        scriptPhases: t().array().items(t().object())
+
+const dependencyConfig = _joi().default.object({
+  dependency: _joi().default.object({
+    platforms: map(_joi().default.string(), _joi().default.any()).keys({
+      ios: _joi().default.object({
+        project: _joi().default.string(),
+        podspecPath: _joi().default.string(),
+        sharedLibraries: _joi().default.array().items(_joi().default.string()),
+        libraryFolder: _joi().default.string(),
+        scriptPhases: _joi().default.array().items(_joi().default.object()),
+        configurations: _joi().default.array().items(_joi().default.string()).default([])
       }).default({}),
-      android: t().object({
-        sourceDir: t().string(),
-        manifestPath: t().string(),
-        packageImportPath: t().string(),
-        packageInstance: t().string()
+      android: _joi().default.object({
+        sourceDir: _joi().default.string(),
+        manifestPath: _joi().default.string(),
+        packageImportPath: _joi().default.string(),
+        packageInstance: _joi().default.string(),
+        buildTypes: _joi().default.array().items(_joi().default.string()).default([])
       }).default({})
     }).default(),
-    assets: t().array().items(t().string()).default([]),
-    hooks: map(t().string(), t().string()).default({}),
-    params: t().array().items(t().object({
-      name: t().string(),
-      type: t().string(),
-      message: t().string()
+    assets: _joi().default.array().items(_joi().default.string()).default([]),
+    hooks: map(_joi().default.string(), _joi().default.string()).default({}),
+    params: _joi().default.array().items(_joi().default.object({
+      name: _joi().default.string(),
+      type: _joi().default.string(),
+      message: _joi().default.string()
     })).default([])
   }).default(),
-  platforms: map(t().string(), t().object({
-    npmPackageName: t().string().optional(),
-    dependencyConfig: t().func(),
-    projectConfig: t().func(),
-    linkConfig: t().func()
+  platforms: map(_joi().default.string(), _joi().default.object({
+    npmPackageName: _joi().default.string().optional(),
+    dependencyConfig: _joi().default.func(),
+    projectConfig: _joi().default.func(),
+    linkConfig: _joi().default.func()
   })).default({}),
-  commands: t().array().items(command).default([])
+  commands: _joi().default.array().items(command).default([]),
+  healthChecks: _joi().default.array().items(healthCheck).default([])
 }).unknown(true).default();
 /**
  * Schema for ProjectConfigT
  */
 
+
 exports.dependencyConfig = dependencyConfig;
-const projectConfig = t().object({
-  dependencies: map(t().string(), t().object({
-    root: t().string(),
-    platforms: map(t().string(), t().any()).keys({
-      ios: t().object({
-        sourceDir: t().string(),
-        folder: t().string(),
-        pbxprojPath: t().string(),
-        podfile: t().string(),
-        podspecPath: t().string(),
-        projectPath: t().string(),
-        projectName: t().string(),
-        libraryFolder: t().string(),
-        sharedLibraries: t().array().items(t().string())
+
+const projectConfig = _joi().default.object({
+  dependencies: map(_joi().default.string(), _joi().default.object({
+    root: _joi().default.string(),
+    platforms: map(_joi().default.string(), _joi().default.any()).keys({
+      ios: _joi().default.object({
+        sourceDir: _joi().default.string(),
+        folder: _joi().default.string(),
+        pbxprojPath: _joi().default.string(),
+        podfile: _joi().default.string(),
+        podspecPath: _joi().default.string(),
+        projectPath: _joi().default.string(),
+        projectName: _joi().default.string(),
+        libraryFolder: _joi().default.string(),
+        sharedLibraries: _joi().default.array().items(_joi().default.string()),
+        configurations: _joi().default.array().items(_joi().default.string()).default([])
       }).allow(null),
-      android: t().object({
-        sourceDir: t().string(),
-        folder: t().string(),
-        packageImportPath: t().string(),
-        packageInstance: t().string()
+      android: _joi().default.object({
+        sourceDir: _joi().default.string(),
+        folder: _joi().default.string(),
+        packageImportPath: _joi().default.string(),
+        packageInstance: _joi().default.string(),
+        buildTypes: _joi().default.array().items(_joi().default.string()).default([])
       }).allow(null)
     }),
-    assets: t().array().items(t().string()),
-    hooks: map(t().string(), t().string()),
-    params: t().array().items(t().object({
-      name: t().string(),
-      type: t().string(),
-      message: t().string()
+    assets: _joi().default.array().items(_joi().default.string()),
+    hooks: map(_joi().default.string(), _joi().default.string()),
+    params: _joi().default.array().items(_joi().default.object({
+      name: _joi().default.string(),
+      type: _joi().default.string(),
+      message: _joi().default.string()
     }))
   }).allow(null)).default({}),
-  reactNativePath: t().string(),
-  project: map(t().string(), t().any()).keys({
-    ios: t().object({
-      project: t().string(),
-      sharedLibraries: t().array().items(t().string()),
-      libraryFolder: t().string()
+  reactNativePath: _joi().default.string(),
+  project: map(_joi().default.string(), _joi().default.any()).keys({
+    ios: _joi().default.object({
+      project: _joi().default.string(),
+      sharedLibraries: _joi().default.array().items(_joi().default.string()),
+      libraryFolder: _joi().default.string()
     }).default({}),
-    android: t().object({
-      sourceDir: t().string(),
-      manifestPath: t().string(),
-      packageName: t().string(),
-      packageFolder: t().string(),
-      mainFilePath: t().string(),
-      stringsPath: t().string(),
-      settingsGradlePath: t().string(),
-      assetsPath: t().string(),
-      buildGradlePath: t().string(),
-      appName: t().string()
+    android: _joi().default.object({
+      sourceDir: _joi().default.string(),
+      manifestPath: _joi().default.string(),
+      packageName: _joi().default.string(),
+      packageFolder: _joi().default.string(),
+      mainFilePath: _joi().default.string(),
+      stringsPath: _joi().default.string(),
+      settingsGradlePath: _joi().default.string(),
+      assetsPath: _joi().default.string(),
+      buildGradlePath: _joi().default.string(),
+      appName: _joi().default.string()
     }).default({})
   }).default(),
-  assets: t().array().items(t().string()).default([]),
-  commands: t().array().items(command).default([]),
-  platforms: map(t().string(), t().object({
-    npmPackageName: t().string().optional(),
-    dependencyConfig: t().func(),
-    projectConfig: t().func(),
-    linkConfig: t().func()
+  assets: _joi().default.array().items(_joi().default.string()).default([]),
+  commands: _joi().default.array().items(command).default([]),
+  platforms: map(_joi().default.string(), _joi().default.object({
+    npmPackageName: _joi().default.string().optional(),
+    dependencyConfig: _joi().default.func(),
+    projectConfig: _joi().default.func(),
+    linkConfig: _joi().default.func()
   })).default({})
 }).unknown(true).default();
+
 exports.projectConfig = projectConfig;
 
 //# sourceMappingURL=schema.js.map

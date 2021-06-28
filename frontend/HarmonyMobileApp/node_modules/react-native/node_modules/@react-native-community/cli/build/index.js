@@ -76,8 +76,6 @@ var _commands = require("./commands");
 
 var _initCompat = _interopRequireDefault(require("./commands/init/initCompat"));
 
-var _assertRequiredOptions = _interopRequireDefault(require("./tools/assertRequiredOptions"));
-
 var _config = _interopRequireDefault(require("./tools/config"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -92,17 +90,23 @@ _commander().default.arguments('<command>').action(cmd => {
 });
 
 const handleError = err => {
+  _cliTools().logger.enable();
+
   if (_commander().default.verbose) {
     _cliTools().logger.error(err.message);
   } else {
     // Some error messages (esp. custom ones) might have `.` at the end already.
     const message = err.message.replace(/\.$/, '');
 
-    _cliTools().logger.error(`${message}. ${_chalk().default.dim(`Run CLI with ${_chalk().default.reset('--verbose')} ${_chalk().default.dim('flag for more details.')}`)}`);
+    _cliTools().logger.error(`${message}.`);
   }
 
   if (err.stack) {
-    _cliTools().logger.log(_chalk().default.dim(err.stack));
+    _cliTools().logger.log(err.stack);
+  }
+
+  if (!_commander().default.verbose) {
+    _cliTools().logger.info(_chalk().default.dim(`Run CLI with ${_chalk().default.reset('--verbose')} ${_chalk().default.dim('flag for more details.')}`));
   }
 
   process.exit(1);
@@ -171,15 +175,11 @@ const isDetachedCommand = command => {
 
 
 function attachCommand(command, ...rest) {
-  const options = command.options || [];
-
   const cmd = _commander().default.command(command.name).action(async function handleAction(...args) {
     const passedOptions = this.opts();
     const argv = Array.from(args).slice(0, -1);
 
     try {
-      (0, _assertRequiredOptions.default)(options, passedOptions);
-
       if (isDetachedCommand(command)) {
         await command.func(argv, passedOptions);
       } else {
@@ -254,8 +254,6 @@ async function setupAndRun() {
      * of commands will be available. That's why we don't throw on such kind of error.
      */
     if (error.message.includes("We couldn't find a package.json")) {
-      _cliTools().logger.enable();
-
       _cliTools().logger.debug(error.message);
 
       _cliTools().logger.debug('Failed to load configuration of your project. Only a subset of commands will be available.');

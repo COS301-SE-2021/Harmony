@@ -17,7 +17,7 @@ function _cliTools() {
 
 class JoiError extends _cliTools().CLIError {
   constructor(joiError) {
-    super(joiError.details.map(error => {
+    const message = joiError.details.map(error => {
       const name = error.path.join('.');
 
       switch (error.type) {
@@ -25,25 +25,17 @@ class JoiError extends _cliTools().CLIError {
           {
             const value = JSON.stringify(error.context && error.context.value);
             return `
-                Unknown option ${name} with value "${value}" was found.
-                This is either a typing error or a user mistake. Fixing it will remove this message.
-              `;
-          }
-
-        case 'object.base':
-        case 'string.base':
-          {
-            const expectedType = error.type.replace('.base', '');
-            const actualType = typeof (error.context && error.context.value);
-            return `
-                Option ${name} must be a ${expectedType}, instead got ${actualType}
-              `;
+              Unknown option ${name} with value "${value}" was found.
+              This is either a typing error or a user mistake. Fixing it will remove this message.
+            `;
           }
 
         default:
           return error.message;
       }
-    }).join());
+    }).join().trim();
+    super(message);
+    this.name = 'Config Validation Error';
 
     if (Error.captureStackTrace) {
       Error.captureStackTrace(this, JoiError);

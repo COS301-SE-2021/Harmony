@@ -70,7 +70,8 @@ const getDefaultConfig = ctx => {
     transformer: {
       allowOptionalDependencies: true,
       babelTransformerPath: require.resolve('metro-react-native-babel-transformer'),
-      assetRegistryPath: 'react-native/Libraries/Image/AssetRegistry'
+      assetRegistryPath: 'react-native/Libraries/Image/AssetRegistry',
+      asyncRequireModulePath: require.resolve('metro-runtime/src/modules/asyncRequire')
     },
     watchFolders: []
   };

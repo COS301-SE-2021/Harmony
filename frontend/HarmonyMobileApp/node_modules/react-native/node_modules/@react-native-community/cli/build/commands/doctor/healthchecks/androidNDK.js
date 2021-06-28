@@ -15,8 +15,6 @@ function _chalk() {
   return data;
 }
 
-var _common = require("./common");
-
 var _versionRanges = _interopRequireDefault(require("../versionRanges"));
 
 var _checkInstallation = require("../checkInstallation");
@@ -42,6 +40,7 @@ var _default = {
   },
   runAutomaticFix: async ({
     loader,
+    logManualInstallation,
     environmentInfo
   }) => {
     const androidSdk = environmentInfo.SDKs['Android SDK'];
@@ -49,12 +48,12 @@ var _default = {
     loader.fail();
 
     if (isNDKInstalled) {
-      return (0, _common.logManualInstallation)({
+      return logManualInstallation({
         message: `Read more about how to update Android NDK at ${_chalk().default.dim('https://developer.android.com/ndk/downloads')}`
       });
     }
 
-    return (0, _common.logManualInstallation)({
+    return logManualInstallation({
       healthcheck: 'Android NDK',
       url: 'https://developer.android.com/ndk/downloads'
     });

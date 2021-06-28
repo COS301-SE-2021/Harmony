@@ -9,8 +9,6 @@ var _versionRanges = _interopRequireDefault(require("../versionRanges"));
 
 var _checkInstallation = require("../checkInstallation");
 
-var _common = require("./common");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _default = {
@@ -30,10 +28,11 @@ var _default = {
     };
   },
   runAutomaticFix: async ({
-    loader
+    loader,
+    logManualInstallation
   }) => {
     loader.fail();
-    (0, _common.logManualInstallation)({
+    logManualInstallation({
       healthcheck: 'Xcode',
       url: 'https://developer.apple.com/xcode/'
     });

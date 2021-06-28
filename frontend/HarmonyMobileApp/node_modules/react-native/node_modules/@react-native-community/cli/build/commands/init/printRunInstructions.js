@@ -25,6 +25,16 @@ function _fs() {
   return data;
 }
 
+function _process() {
+  const data = _interopRequireDefault(require("process"));
+
+  _process = function () {
+    return data;
+  };
+
+  return data;
+}
+
 function _chalk() {
   const data = _interopRequireDefault(require("chalk"));
 
@@ -56,28 +66,47 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @format
  */
 function printRunInstructions(projectDir, projectName) {
-  const iosProjectDir = _path().default.resolve(projectDir, 'ios');
+  let iosInstructions = '';
+  let desktopInstructions = '';
 
-  const iosPodsFile = _path().default.resolve(iosProjectDir, `${projectName}.xcworkspace`);
+  if (_process().default.platform === 'darwin') {
+    const iosProjectDir = _path().default.resolve(projectDir, 'ios');
 
-  const isUsingPods = _fs().default.existsSync(iosPodsFile);
+    const iosPodsFile = _path().default.resolve(iosProjectDir, `${projectName}.xcworkspace`);
 
-  const relativeXcodeProjectPath = _path().default.relative('..', isUsingPods ? iosPodsFile : _path().default.resolve(iosProjectDir, `${projectName}.xcodeproj`));
+    const isUsingPods = _fs().default.existsSync(iosPodsFile);
 
-  _cliTools().logger.log(`
+    const relativeXcodeProjectPath = _path().default.relative('..', isUsingPods ? iosPodsFile : _path().default.resolve(iosProjectDir, `${projectName}.xcodeproj`));
+
+    iosInstructions = `
   ${_chalk().default.cyan(`Run instructions for ${_chalk().default.bold('iOS')}`)}:
     • cd "${projectDir}" && npx react-native run-ios
     ${_chalk().default.dim('- or -')}
     • Open ${relativeXcodeProjectPath} in Xcode or run "xed -b ios"
     • Hit the Run button
+    `;
+    desktopInstructions = `
+  ${_chalk().default.magenta(`Run instructions for ${_chalk().default.bold('macOS')}`)}:
+    • See ${_chalk().default.underline('https://aka.ms/ReactNativeGuideMacOS')} for the latest up-to-date instructions.
+    `;
+  }
 
+  if (_process().default.platform === 'win32') {
+    desktopInstructions = `
+  ${_chalk().default.cyan(`Run instructions for ${_chalk().default.bold('Windows')}`)}:
+    • See ${_chalk().default.underline('https://aka.ms/ReactNativeGuideWindows')} for the latest up-to-date instructions.
+    `;
+  }
+
+  const androidInstructions = `
   ${_chalk().default.green(`Run instructions for ${_chalk().default.bold('Android')}`)}:
     • Have an Android emulator running (quickest way to get started), or a device connected.
     • cd "${projectDir}" && npx react-native run-android
+  `;
 
-  ${_chalk().default.magenta(`Run instructions for ${_chalk().default.bold('Windows')} and ${_chalk().default.bold('macOS')}`)}:
-    • See ${_chalk().default.underline('https://aka.ms/ReactNative')} for the latest up-to-date instructions.
-`);
+  _cliTools().logger.log(`
+  ${androidInstructions}${iosInstructions}${desktopInstructions}
+  `);
 }
 
 var _default = printRunInstructions;

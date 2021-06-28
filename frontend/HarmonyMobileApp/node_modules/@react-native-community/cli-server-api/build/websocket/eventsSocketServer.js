@@ -57,7 +57,7 @@ function parseMessage(data) {
     }
 
     _cliTools().logger.error('Received message had wrong protocol version: ' + message.version);
-  } catch (_unused) {
+  } catch {
     _cliTools().logger.error('Failed to parse the message as JSON:\n' + data);
   }
 

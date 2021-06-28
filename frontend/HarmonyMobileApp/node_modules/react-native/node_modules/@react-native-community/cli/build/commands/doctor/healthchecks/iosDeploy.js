@@ -25,10 +25,10 @@ function _chalk() {
   return data;
 }
 
-function _inquirer() {
-  const data = _interopRequireDefault(require("inquirer"));
+function _prompts() {
+  const data = _interopRequireDefault(require("prompts"));
 
-  _inquirer = function () {
+  _prompts = function () {
     return data;
   };
 
@@ -43,7 +43,6 @@ var _common = require("./common");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// @ts-ignore untyped
 const label = 'ios-deploy';
 const installationWithYarn = 'yarn global add ios-deploy';
 const installationWithNpm = 'npm install ios-deploy --global';
@@ -88,37 +87,48 @@ var _default = {
     needsToBeFixed: await (0, _checkInstallation.isSoftwareNotInstalled)('ios-deploy')
   }),
   runAutomaticFix: async ({
-    loader
+    loader,
+    logManualInstallation
   }) => {
     loader.stop();
     const installationCommand = identifyInstallationCommand(); // This means that we couldn't "guess" the package manager
 
     if (installationCommand === undefined) {
       const promptQuestion = `ios-deploy needs to be installed either by ${_chalk().default.bold('yarn')} ${_chalk().default.reset('or')} ${_chalk().default.bold('npm')} ${_chalk().default.reset()}, which one do you want to use?`;
-      const installWithYarn = 'yarn';
-      const installWithNpm = 'npm';
-      const skipInstallation = 'Skip installation';
+      const installWithYarn = {
+        title: 'yarn',
+        value: 'yarn'
+      };
+      const installWithNpm = {
+        title: 'npm',
+        value: 'npm'
+      };
+      const skipInstallation = {
+        title: 'Skip installation',
+        value: 'skip'
+      };
       const {
         chosenPackageManager
-      } = await _inquirer().default.prompt([{
-        type: 'list',
+      } = await (0, _prompts().default)([{
+        type: 'select',
         name: 'chosenPackageManager',
         message: promptQuestion,
         choices: [installWithYarn, installWithNpm, skipInstallation]
       }]);
       (0, _common.removeMessage)(`? ${promptQuestion} ${chosenPackageManager}`);
 
-      if (chosenPackageManager === skipInstallation) {
-        loader.fail(); // Then we just print out the URL that the user can head to download the library
+      if (chosenPackageManager === skipInstallation.value || !chosenPackageManager // e.g. when user presses Esc
+      ) {
+          loader.fail(); // Then we just print out the URL that the user can head to download the library
 
-        (0, _common.logManualInstallation)({
-          healthcheck: 'ios-deploy',
-          url: 'https://github.com/ios-control/ios-deploy#readme'
-        });
-        return;
-      }
+          logManualInstallation({
+            healthcheck: 'ios-deploy',
+            url: 'https://github.com/ios-control/ios-deploy#readme'
+          });
+          return;
+        }
 
-      const shouldInstallWithYarn = chosenPackageManager === installWithYarn;
+      const shouldInstallWithYarn = chosenPackageManager === installWithYarn.value;
       return installLibrary({
         installationCommand: shouldInstallWithYarn ? installationWithYarn : installationWithNpm,
         loader,

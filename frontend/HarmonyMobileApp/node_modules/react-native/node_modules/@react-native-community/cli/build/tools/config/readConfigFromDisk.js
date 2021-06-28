@@ -6,16 +6,6 @@ Object.defineProperty(exports, "__esModule", {
 exports.readConfigFromDisk = readConfigFromDisk;
 exports.readDependencyConfigFromDisk = readDependencyConfigFromDisk;
 
-function _joi() {
-  const data = _interopRequireDefault(require("@hapi/joi"));
-
-  _joi = function () {
-    return data;
-  };
-
-  return data;
-}
-
 function _cosmiconfig() {
   const data = _interopRequireDefault(require("cosmiconfig"));
 
@@ -52,8 +42,7 @@ function readConfigFromDisk(rootFolder) {
   });
   const searchResult = explorer.searchSync(rootFolder);
   const config = searchResult ? searchResult.config : undefined;
-
-  const result = _joi().default.validate(config, schema.projectConfig);
+  const result = schema.projectConfig.validate(config);
 
   if (result.error) {
     throw new _errors.JoiError(result.error);
@@ -74,8 +63,7 @@ function readDependencyConfigFromDisk(rootFolder) {
   });
   const searchResult = explorer.searchSync(rootFolder);
   const config = searchResult ? searchResult.config : emptyDependencyConfig;
-
-  const result = _joi().default.validate(config, schema.dependencyConfig);
+  const result = schema.dependencyConfig.validate(config);
 
   if (result.error) {
     throw new _errors.JoiError(result.error);

@@ -38,10 +38,10 @@ function _chalk() {
   return data;
 }
 
-function _inquirer() {
-  const data = _interopRequireDefault(require("inquirer"));
+function _prompts() {
+  const data = _interopRequireDefault(require("prompts"));
 
-  _inquirer = function () {
+  _prompts = function () {
     return data;
   };
 
@@ -74,7 +74,6 @@ var _brewInstall = require("./brewInstall");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// @ts-ignore untyped
 // @ts-ignore untyped
 async function runPodInstall(loader, projectName, shouldHandleRepoUpdate = true) {
   try {
@@ -133,18 +132,23 @@ async function promptCocoaPodsInstallationQuestion() {
   const installWithGem = 'Yes, with gem (may require sudo)';
   const installWithHomebrew = 'Yes, with Homebrew';
   const {
-    shouldInstallCocoaPods
-  } = await _inquirer().default.prompt([{
-    type: 'list',
-    name: 'shouldInstallCocoaPods',
+    installMethod
+  } = await (0, _prompts().default)([{
+    type: 'select',
+    name: 'installMethod',
     message: promptQuestion,
-    choices: [installWithGem, installWithHomebrew]
+    choices: [{
+      title: installWithGem,
+      value: 'gem'
+    }, {
+      title: installWithHomebrew,
+      value: 'homebrew'
+    }]
   }]);
-  const shouldInstallWithGem = shouldInstallCocoaPods === installWithGem;
   return {
-    installMethod: shouldInstallWithGem ? 'gem' : 'homebrew',
+    installMethod,
     // This is used for removing the message in `doctor` after it's answered
-    promptQuestion: `? ${promptQuestion} ${shouldInstallWithGem ? installWithGem : installWithHomebrew}`
+    promptQuestion: `? ${promptQuestion} ${installMethod === 'gem' ? installWithGem : installWithHomebrew}`
   };
 }
 

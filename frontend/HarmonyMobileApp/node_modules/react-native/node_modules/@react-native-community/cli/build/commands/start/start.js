@@ -31,39 +31,39 @@ var _default = {
   func: _runServer.default,
   description: 'starts the webserver',
   options: [{
-    name: '--port [number]',
-    parse: val => Number(val)
+    name: '--port <number>',
+    parse: Number
   }, {
-    name: '--host [string]',
+    name: '--host <string>',
     default: ''
   }, {
-    name: '--projectRoot [path]',
+    name: '--projectRoot <path>',
     description: 'Path to a custom project root',
     parse: val => _path().default.resolve(val)
   }, {
-    name: '--watchFolders [list]',
+    name: '--watchFolders <list>',
     description: 'Specify any additional folders to be added to the watch list',
     parse: val => val.split(',').map(folder => _path().default.resolve(folder))
   }, {
-    name: '--assetPlugins [list]',
+    name: '--assetPlugins <list>',
     description: 'Specify any additional asset plugins to be used by the packager by full filepath',
     parse: val => val.split(',')
   }, {
-    name: '--sourceExts [list]',
+    name: '--sourceExts <list>',
     description: 'Specify any additional source extensions to be used by the packager',
     parse: val => val.split(',')
   }, {
-    name: '--max-workers [number]',
+    name: '--max-workers <number>',
     description: 'Specifies the maximum number of workers the worker-pool ' + 'will spawn for transforming files. This defaults to the number of the ' + 'cores available on your machine.',
     parse: workers => Number(workers)
   }, {
-    name: '--transformer [string]',
+    name: '--transformer <string>',
     description: 'Specify a custom transformer to be used'
   }, {
     name: '--reset-cache, --resetCache',
     description: 'Removes cached files'
   }, {
-    name: '--custom-log-reporter-path, --customLogReporterPath [string]',
+    name: '--custom-log-reporter-path, --customLogReporterPath <string>',
     description: 'Path to a JavaScript file that exports a log reporter as a replacement for TerminalReporter'
   }, {
     name: '--verbose',
@@ -72,13 +72,13 @@ var _default = {
     name: '--https',
     description: 'Enables https connections to the server'
   }, {
-    name: '--key [path]',
+    name: '--key <path>',
     description: 'Path to custom SSL key'
   }, {
-    name: '--cert [path]',
+    name: '--cert <path>',
     description: 'Path to custom SSL cert'
   }, {
-    name: '--config [string]',
+    name: '--config <string>',
     description: 'Path to the CLI configuration file',
     parse: val => _path().default.resolve(val)
   }, {

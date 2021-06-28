@@ -25,6 +25,16 @@ function _xmldoc() {
   return data;
 }
 
+function _cliTools() {
+  const data = require("@react-native-community/cli-tools");
+
+  _cliTools = function () {
+    return data;
+  };
+
+  return data;
+}
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -35,7 +45,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  */
 function readManifest(manifestPath) {
-  return new (_xmldoc().default.XmlDocument)(_fs().default.readFileSync(manifestPath, 'utf8'));
+  try {
+    return new (_xmldoc().default.XmlDocument)(_fs().default.readFileSync(manifestPath, 'utf8'));
+  } catch (error) {
+    throw new (_cliTools().CLIError)(`Failed to parse Android Manifest file at ${manifestPath}`, error);
+  }
 }
 
 //# sourceMappingURL=readManifest.js.map

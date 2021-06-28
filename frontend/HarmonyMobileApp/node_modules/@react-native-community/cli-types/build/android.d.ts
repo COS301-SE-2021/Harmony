@@ -20,6 +20,7 @@ export interface AndroidDependencyConfig {
     packageInstance: string;
     manifestPath: string;
     packageName: string;
+    buildTypes: string[];
 }
 export declare type AndroidDependencyParams = Partial<AndroidDependencyConfig>;
 //# sourceMappingURL=android.d.ts.map

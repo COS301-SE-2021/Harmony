@@ -45,8 +45,6 @@ function _cliTools() {
   return data;
 }
 
-var _common = require("./common");
-
 var _findProjectRoot = _interopRequireDefault(require("../../../tools/config/findProjectRoot"));
 
 var _androidWinHelpers = require("../../../tools/windows/androidWinHelpers");
@@ -63,7 +61,7 @@ const getBuildToolsVersion = () => {
   try {
     // doctor is a detached command, so we may not be in a RN project.
     projectRoot = (0, _findProjectRoot.default)();
-  } catch (_unused) {
+  } catch {
     _cliTools().logger.log(); // for extra space
 
 
@@ -177,17 +175,18 @@ var _default = {
   },
   runAutomaticFix: async ({
     loader,
+    logManualInstallation,
     environmentInfo
   }) => {
     loader.fail();
 
     if (isSDKInstalled(environmentInfo)) {
-      return (0, _common.logManualInstallation)({
+      return logManualInstallation({
         message: installMessage
       });
     }
 
-    return (0, _common.logManualInstallation)({
+    return logManualInstallation({
       healthcheck: 'Android SDK',
       url: 'https://reactnative.dev/docs/getting-started'
     });

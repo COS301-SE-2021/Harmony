@@ -19,8 +19,6 @@ var _versionRanges = _interopRequireDefault(require("../versionRanges"));
 
 var _checkInstallation = require("../checkInstallation");
 
-var _common = require("./common");
-
 var _downloadAndUnzip = require("../../../tools/downloadAndUnzip");
 
 var _environmentVariables = require("../../../tools/windows/environmentVariables");
@@ -62,8 +60,12 @@ var _default = {
       loader.fail(e);
     }
   },
-  runAutomaticFix: async () => {
-    (0, _common.logManualInstallation)({
+  runAutomaticFix: async ({
+    logManualInstallation,
+    loader
+  }) => {
+    loader.fail();
+    logManualInstallation({
       healthcheck: 'JDK',
       url: 'https://openjdk.java.net/'
     });

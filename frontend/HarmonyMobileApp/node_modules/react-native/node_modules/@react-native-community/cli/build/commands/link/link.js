@@ -130,9 +130,8 @@ var _default = {
     description: 'Scope linking to specified platforms',
     parse: val => val.toLowerCase().split(',')
   }, {
-    name: '--all [boolean]',
-    description: 'Link all native modules and assets',
-    parse: val => val.toLowerCase().split(',')
+    name: '--all',
+    description: 'Link all native modules and assets'
   }]
 };
 exports.default = _default;

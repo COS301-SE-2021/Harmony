@@ -99,7 +99,8 @@ async function buildBundle(args, ctx, output = _bundle().default) {
     sourceMapUrl,
     dev: args.dev,
     minify: args.minify !== undefined ? args.minify : !args.dev,
-    platform: args.platform
+    platform: args.platform,
+    unstable_transformProfile: args.unstableTransformProfile
   };
   const server = new (_Server().default)(config);
 

@@ -85,7 +85,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 function getLatestFile(packageName) {
   try {
-    const file = (0, _child_process().execSync)(`adb shell run-as ${packageName} ls cache/ -tp | grep -v /$ | egrep '\.cpuprofile' | head -1
+    const file = (0, _child_process().execSync)(`adb shell run-as ${packageName} ls cache/ -tp | grep -v /$ | egrep '.cpuprofile' | head -1
         `);
     return file.toString().trim();
   } catch (e) {

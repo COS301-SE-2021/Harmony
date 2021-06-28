@@ -10,7 +10,6 @@ var _default = {
   YARN: '>= 1.10.x',
   NPM: '>= 4.x',
   WATCHMAN: '4.x',
-  PYTHON: '>= 2.x < 3',
   JAVA: '>= 8',
   // Android
   ANDROID_SDK: '>= 26.x',

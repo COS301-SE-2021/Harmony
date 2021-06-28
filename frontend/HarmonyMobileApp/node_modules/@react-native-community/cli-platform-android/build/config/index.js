@@ -147,11 +147,13 @@ function dependencyConfig(root, userConfig = {}) {
 
   const packageImportPath = userConfig.packageImportPath || `import ${packageName}.${packageClassName};`;
   const packageInstance = userConfig.packageInstance || `new ${packageClassName}()`;
+  const buildTypes = userConfig.buildTypes || [];
   return {
     sourceDir,
     folder: root,
     packageImportPath,
-    packageInstance
+    packageInstance,
+    buildTypes
   };
 }
 

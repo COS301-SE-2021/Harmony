@@ -11,8 +11,6 @@ var _packageManagers = require("./packageManagers");
 
 var _jdk = _interopRequireDefault(require("./jdk"));
 
-var _python = _interopRequireDefault(require("./python"));
-
 var _watchman = _interopRequireDefault(require("./watchman"));
 
 var _androidHomeEnvVariable = _interopRequireDefault(require("./androidHomeEnvVariable"));
@@ -29,6 +27,8 @@ var _cocoaPods = _interopRequireDefault(require("./cocoaPods"));
 
 var _iosDeploy = _interopRequireDefault(require("./iosDeploy"));
 
+var _config = _interopRequireDefault(require("../../../tools/config"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const HEALTHCHECK_TYPES = {
@@ -39,22 +39,32 @@ exports.HEALTHCHECK_TYPES = HEALTHCHECK_TYPES;
 
 const getHealthchecks = ({
   contributor
-}) => ({
-  common: {
-    label: 'Common',
-    healthchecks: [_nodeJS.default, _packageManagers.yarn, _packageManagers.npm, ...(process.platform === 'darwin' ? [_watchman.default] : []), ...(process.platform === 'win32' ? [_python.default] : [])]
-  },
-  android: {
-    label: 'Android',
-    healthchecks: [_jdk.default, _androidStudio.default, _androidSDK.default, _androidHomeEnvVariable.default, ...(contributor ? [_androidNDK.default] : [])]
-  },
-  ...(process.platform === 'darwin' ? {
-    ios: {
-      label: 'iOS',
-      healthchecks: [_xcode.default, _cocoaPods.default, _iosDeploy.default]
-    }
-  } : {})
-});
+}) => {
+  let additionalChecks = []; // Doctor can run in a detached mode, where there isn't a config so this can fail
+
+  try {
+    let config = (0, _config.default)();
+    additionalChecks = config.healthChecks;
+  } catch {}
+
+  return {
+    common: {
+      label: 'Common',
+      healthchecks: [_nodeJS.default, _packageManagers.yarn, _packageManagers.npm, ...(process.platform === 'darwin' ? [_watchman.default] : [])]
+    },
+    android: {
+      label: 'Android',
+      healthchecks: [_jdk.default, _androidStudio.default, _androidSDK.default, _androidHomeEnvVariable.default, ...(contributor ? [_androidNDK.default] : [])]
+    },
+    ...(process.platform === 'darwin' ? {
+      ios: {
+        label: 'iOS',
+        healthchecks: [_xcode.default, _cocoaPods.default, _iosDeploy.default]
+      }
+    } : {}),
+    ...additionalChecks
+  };
+};
 
 exports.getHealthchecks = getHealthchecks;
 

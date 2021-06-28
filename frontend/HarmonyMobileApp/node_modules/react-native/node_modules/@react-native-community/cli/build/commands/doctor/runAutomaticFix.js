@@ -38,6 +38,8 @@ function _cliTools() {
 
 var _healthchecks = require("./healthchecks");
 
+var _common = require("./healthchecks/common");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 let AUTOMATIC_FIX_LEVELS;
@@ -104,6 +106,7 @@ async function _default({
       try {
         await healthcheckToRun.runAutomaticFix({
           loader: spinner,
+          logManualInstallation: _common.logManualInstallation,
           environmentInfo
         });
       } catch (error) {// TODO: log the error in a meaningful way

@@ -15,19 +15,19 @@ var _default = {
   name: 'init <projectName>',
   description: 'Initialize a new React Native project named <projectName> in a directory of the same name.',
   options: [{
-    name: '--version [string]',
+    name: '--version <string>',
     description: 'Shortcut for `--template react-native@version`'
   }, {
-    name: '--template [string]',
-    description: 'Uses a custom template. Valid arguments are: npm package, absolute directory prefixed with `file://`, Git repository or a tarball'
+    name: '--template <string>',
+    description: 'Uses a custom template. Valid arguments are the ones supported by `yarn add [package]` or `npm install [package]`, if you are using `--npm` option'
   }, {
     name: '--npm',
     description: 'Forces using npm for initialization'
   }, {
-    name: '--directory [string]',
+    name: '--directory <string>',
     description: 'Uses a custom directory instead of `<projectName>`.'
   }, {
-    name: '--title [string]',
+    name: '--title <string>',
     description: 'Uses a custom app title name for application'
   }, {
     name: '--skip-install',

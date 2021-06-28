@@ -6,8 +6,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 
 class ReservedNameError extends Error {
-  constructor() {
-    super('Not a valid name for a project. Please do not use the reserved word "React".');
+  constructor(name) {
+    super(`Not a valid name for a project. Please do not use the reserved word "${name}".`);
   }
 
 }

@@ -35,6 +35,16 @@ function _os() {
   return data;
 }
 
+function _appdirsjs() {
+  const data = _interopRequireDefault(require("appdirsjs"));
+
+  _appdirsjs = function () {
+    return data;
+  };
+
+  return data;
+}
+
 function _mkdirp() {
   const data = _interopRequireDefault(require("mkdirp"));
 
@@ -86,7 +96,12 @@ function saveCache(name, cache) {
 
 
 function getCacheRootPath() {
-  const cachePath = _path().default.resolve(_os().default.homedir(), '.react-native-cli', 'cache');
+  const legacyPath = _path().default.resolve(_os().default.homedir(), '.react-native-cli', 'cache');
+
+  const cachePath = (0, _appdirsjs().default)({
+    appName: 'react-native-cli',
+    legacyPath
+  }).cache;
 
   if (!_fs().default.existsSync(cachePath)) {
     _mkdirp().default.sync(cachePath);

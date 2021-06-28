@@ -90,6 +90,7 @@ function loadConfig(projectRoot = (0, _findProjectRoot.default)()) {
       return (0, _findAssets.default)(projectRoot, userConfig.assets);
     },
 
+    healthChecks: [],
     platforms: userConfig.platforms,
 
     get project() {
@@ -139,7 +140,8 @@ function loadConfig(projectRoot = (0, _findProjectRoot.default)()) {
       commands: [...acc.commands, ...config.commands],
       platforms: { ...acc.platforms,
         ...config.platforms
-      }
+      },
+      healthChecks: [...acc.healthChecks, ...config.healthChecks]
     });
   }, initialConfig);
   return finalConfig;

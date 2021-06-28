@@ -75,3 +75,4 @@ fabric.properties
 frontend/HarmonyMobileApp/.expo/packager-info.json
 frontend/HarmonyMobileApp/.expo/settings.json
 frontend/HarmonyMobileApp/.expo/packager-info.json
+*.json

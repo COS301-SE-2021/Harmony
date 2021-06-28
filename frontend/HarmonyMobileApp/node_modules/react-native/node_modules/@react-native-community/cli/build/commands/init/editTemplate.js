@@ -48,12 +48,18 @@ const DEFAULT_TITLE_PLACEHOLDER = 'Hello App Display Name';
 function replaceNameInUTF8File(filePath, projectName, templateName) {
   _cliTools().logger.debug(`Replacing in ${filePath}`);
 
+  const isPackageJson = _path().default.basename(filePath) === 'package.json';
+
   const fileContent = _fs().default.readFileSync(filePath, 'utf8');
 
   const replacedFileContent = fileContent.replace(new RegExp(templateName, 'g'), projectName).replace(new RegExp(templateName.toLowerCase(), 'g'), projectName.toLowerCase());
 
   if (fileContent !== replacedFileContent) {
     _fs().default.writeFileSync(filePath, replacedFileContent, 'utf8');
+  }
+
+  if (isPackageJson) {
+    _fs().default.writeFileSync(filePath, fileContent.replace(templateName, projectName.toLowerCase()), 'utf8');
   }
 }
 
@@ -73,7 +79,7 @@ function shouldIgnoreFile(filePath) {
   return filePath.match(/node_modules|yarn.lock|package-lock.json/g);
 }
 
-const UNDERSCORED_DOTFILES = ['buckconfig', 'eslintrc.js', 'flowconfig', 'gitattributes', 'gitignore', 'prettierrc.js', 'watchmanconfig'];
+const UNDERSCORED_DOTFILES = ['buckconfig', 'eslintrc.js', 'flowconfig', 'gitattributes', 'gitignore', 'prettierrc.js', 'watchmanconfig', 'editorconfig'];
 
 function processDotfiles(filePath) {
   const dotfile = UNDERSCORED_DOTFILES.find(e => filePath.includes(`_${e}`));
