@@ -53,11 +53,12 @@ const ViewAllPairingsScreen = (props) => {
       ]
     );
   };
-
   return (
     
     <ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }}>
     <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Label</Text>
+      <ScrollView>
     {isLoading ? (
           <ActivityIndicator />
         ) : (
@@ -81,16 +82,17 @@ const ViewAllPairingsScreen = (props) => {
               <Text>{item.DrinkItem}</Text>
               <Text>Pairing descr</Text>
               <View style={{flexDirection:"row"}}>
-              <Icon name="thumb-tack" size={25} color="#000" />
+              <Icon name="thumb-tack" size={25} color="#000" style={{paddingRight:"5%"}}/>
               <Text>Location</Text>
-              <Icon name="pencil" size={25} color="#000"/>
-              <Icon name="heart-o" size={25} color="#000" />
+              <Icon name="pencil" size={25} color="#000" style={{paddingLeft:"50%"}}/>
+              <Icon name="heart-o" size={25} color="#000" style={{paddingLeft:"5%"}}/>
               </View>
             </Card>
             </View>
             )}
             />
           )}
+          </ScrollView>
     </Layout>
   </ApplicationProvider>
    /* <SafeAreaView style={personalStyles.container}>
