@@ -8,35 +8,16 @@ import {
   Text,
 } from "@ui-kitten/components";
 
+import HomeScreen from "./HomeScreen.js";
+import ViewFavouritesScreen from "./ViewFavouritesScreen.js";
+import ViewAllPairingsScreen from "./ViewAllPairingsScreen.js";
+import SettingsScreen from "./SettingsScreen.js";
+
 const { Navigator, Screen } = createBottomTabNavigator();
-
-const HomeScreen = () => (
-  <Layout style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-    <Text category="h1">HOME</Text>
-  </Layout>
-);
-
-const PopularScreen = () => (
-  <Layout style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-    <Text category="h1">Popular</Text>
-  </Layout>
-);
 
 const CameraScreen = () => (
   <Layout style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
     <Text category="h1">Camera</Text>
-  </Layout>
-);
-
-const FavouritesScreen = () => (
-  <Layout style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-    <Text category="h1">Favourites</Text>
-  </Layout>
-);
-
-const SettingsScreen = () => (
-  <Layout style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-    <Text category="h1">Settings</Text>
   </Layout>
 );
 
@@ -56,9 +37,9 @@ const BottomTabBar = ({ navigation, state }) => (
 const TabNavigator = () => (
   <Navigator tabBar={(props) => <BottomTabBar {...props} />}>
     <Screen name="Home" component={HomeScreen} />
-    <Screen name="Popular" component={PopularScreen} />
+    <Screen name="Popular" component={ViewAllPairingsScreen} />
     <Screen name="Camera" component={CameraScreen} />
-    <Screen name="Favourite" component={FavouritesScreen} />
+    <Screen name="Favourite" component={ViewFavouritesScreen} />
     <Screen name="Settings" component={SettingsScreen} />
   </Navigator>
 );
