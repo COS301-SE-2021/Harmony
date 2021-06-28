@@ -19,7 +19,6 @@ import { default as theme } from '../theme.json';
 import styles from "../styles";
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const ViewAllPairingsScreen = (props) => {
   const viewPairingURL =
     "https://qkvdftfq7b.execute-api.eu-west-1.amazonaws.com/dev/viewpairings";
   const [isLoading, setLoading] = useState(useIsFocused());
