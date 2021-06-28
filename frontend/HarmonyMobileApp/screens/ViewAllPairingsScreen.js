@@ -55,10 +55,19 @@ const ViewAllPairingsScreen = (props) => {
   };
 
   return (
+    
     <ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }}>
     <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Card>
-    <View style={{flexDirection:"row"}}>
+    {isLoading ? (
+          <ActivityIndicator />
+        ) : (
+          <FlatList
+            data={data}
+            keyExtractor={({ PID }, index) => PID}
+            renderItem={({ item }) => (
+            <View style={{padding:10}}>
+            <Card>
+              <View style={{flexDirection:"row"}}>
                     <Image
                       source={require("../assets/waffles.jpg")}
                       style={{ width: "45%", height: 80, resizeMode: "contain" }}
@@ -67,17 +76,21 @@ const ViewAllPairingsScreen = (props) => {
                       source={require("../assets/milkshake.jpg")}
                       style={{ width: "45%", height: 80, resizeMode: "contain" }}
                     />
-                  </View>
-    <Text>Medium Rare Steak</Text>
-    <Text>Coke</Text>
-    <Text>Pairing descr</Text>
-    <View style={{flexDirection:"row"}}>
-    <Icon name="thumb-tack" size={25} color="#000"/>
-    <Text>Location</Text>
-    <Icon name="pencil" size={25} color="#000"/>
-    <Icon name="heart-o" size={25} color="#000"/>
-    </View>
-    </Card>
+              </View>
+              <Text>{item.FoodItem}</Text>
+              <Text>{item.DrinkItem}</Text>
+              <Text>Pairing descr</Text>
+              <View style={{flexDirection:"row"}}>
+              <Icon name="thumb-tack" size={25} color="#000" />
+              <Text>Location</Text>
+              <Icon name="pencil" size={25} color="#000"/>
+              <Icon name="heart-o" size={25} color="#000" />
+              </View>
+            </Card>
+            </View>
+            )}
+            />
+          )}
     </Layout>
   </ApplicationProvider>
    /* <SafeAreaView style={personalStyles.container}>
