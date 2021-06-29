@@ -23,6 +23,11 @@ now = strftime("%a, %d %b %Y %H:%M:%S +0000", gmtime())
 def delete_pairing(event, context):
     # extract values from the event object we got from the Lambda service and store in a variable
     pid = event['PID']
+    if validate_request(pid) == "false":
+        return {
+                'statusCode': 400,
+                'body': json.dumps({'isSuccessful': 'false', 'PID': pid})
+            }
 
     try:
         # delete based on id from request
@@ -33,8 +38,6 @@ def delete_pairing(event, context):
         )
         # once pairing has been deleted from pairings database, we need to delete pairings from user favourites
         remove_favourite(pid)
-
-
 
     except ClientError as e:
         # throw error if failed
@@ -61,7 +64,7 @@ def remove_favourite(pid):
     response = allresponse['Items']
 
     for items in response:
-        #iterate through response to go through every item in user table
+        # iterate through response to go through every item in user table
         print(items["UID"])
         uid = items["UID"]
         index = 0
@@ -83,3 +86,13 @@ def remove_favourite(pid):
             index = index + 1
 
     return json.dumps({'isSuccessful': 'true', 'PID': pid})
+
+
+def validate_request(pid):
+    testrequest = None
+    if pid == "":
+        testrequest = "true"
+        return testrequest
+    else:
+        testrequest = "false"
+        return testrequest
