@@ -65,7 +65,6 @@ def remove_favourite(pid):
 
     for items in response:
         # iterate through response to go through every item in user table
-        print(items["UID"])
         uid = items["UID"]
         index = 0
 
@@ -91,8 +90,8 @@ def remove_favourite(pid):
 def validate_request(pid):
     testrequest = None
     if pid == "":
-        testrequest = "true"
+        testrequest = "false"
         return testrequest
     else:
-        testrequest = "false"
+        testrequest = "true"
         return testrequest
