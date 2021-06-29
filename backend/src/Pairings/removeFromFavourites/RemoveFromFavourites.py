@@ -34,14 +34,12 @@ def remove_from_favourites(event, context):
     index = 0
     for key in response['Item']['FavouritePairings']:
         # traverse each item in Pairings and search for id the list
-        print(key)
         # find id the break, because index is incrementing till id is found
         if key == pid:
             break
         index = index + 1
 
-    print(index)
-    print(pid)
+
     try:
 
         response = table.update_item(
@@ -54,7 +52,6 @@ def remove_from_favourites(event, context):
             ExpressionAttributeValues={':pair': pid},
             ReturnValues="UPDATED_NEW"
         )
-        print(response['ResponseMetadata']['HTTPStatusCode'])
 
     except ClientError as e:
         if e.response['Error']['Code'] == "ConditionalCheckFailedException":
