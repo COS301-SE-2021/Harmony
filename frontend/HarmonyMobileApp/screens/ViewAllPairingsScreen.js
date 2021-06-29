@@ -68,7 +68,7 @@ const ViewAllPairingsScreen = (props) => {
             renderItem={({ item }) => (
             <View style={{padding:10}}>
             <Card>
-              <View style={{flexDirection:"row"}}>
+              <View style={{flexDirection:"row", borderWidth:2, borderColor:"#d3d3d3",borderRadius:5}}>
                     <Image
                       source={require("../assets/waffles.jpg")}
                       style={styles.standardImage}

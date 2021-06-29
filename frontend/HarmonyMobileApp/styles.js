@@ -87,7 +87,16 @@ const styles = StyleSheet.create({
   standardImage:{
     width: "45%", 
     height: 80,
-    resizeMode: "contain"
+    resizeMode: "contain",
+    borderWidth:2, 
+    borderColor:"#d3d3d3",
+    borderRadius:5,
+  },
+  imageContainer:{
+    flexDirection:"row",
+    borderWidth:2,
+    borderColor:"#d3d3d3",
+    borderRadius:5
   }
 });
 
