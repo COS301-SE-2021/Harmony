@@ -97,6 +97,9 @@ const styles = StyleSheet.create({
     borderWidth:2,
     borderColor:"#d3d3d3",
     borderRadius:5
+  },
+  reviewContainer:{
+    width:"85%"
   }
 });
 

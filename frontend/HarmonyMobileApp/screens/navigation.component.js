@@ -14,6 +14,7 @@ import HomeScreen from "./HomeScreen.js";
 import ViewFavouritesScreen from "./ViewFavouritesScreen.js";
 import ViewAllPairingsScreen from "./ViewAllPairingsScreen.js";
 import SettingsScreen from "./SettingsScreen.js";
+import viewReviewScreen from "./ViewReviewScreen.js"
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -48,7 +49,7 @@ const TabNavigator = () => (
   <Navigator tabBar={(props) => <BottomTabBar {...props} />}>
     <Screen name="Home" component={HomeScreen} />
     <Screen name="Popular" component={ViewAllPairingsScreen} />
-    <Screen name="Camera" component={CameraScreen} />
+    <Screen name="Camera" component={viewReviewScreen} />
     <Screen name="Favourite" component={ViewFavouritesScreen} />
     <Screen name="Settings" component={SettingsScreen} />
   </Navigator>
