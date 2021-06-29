@@ -13,6 +13,7 @@ def fixture_event():
 
 
 def test_delete_pairing(fixture_event):
+
     ret = DeletePairing.delete_pairing(fixture_event, "")
     data = json.loads(ret['body'])
     assert data["isSuccessful"] == "true"
@@ -22,6 +23,7 @@ def test_delete_pairing(fixture_event):
 def test_validate_request():
     ret = DeletePairing.validate_request("p1")
     assert ret == "true"
+
 
 def test_remove_favourite():
     ret = DeletePairing.remove_favourite("p1")
