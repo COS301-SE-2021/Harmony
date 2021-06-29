@@ -18,14 +18,32 @@ now = strftime("%a, %d %b %Y %H:%M:%S +0000", gmtime())
 
 # define the handler function that the Lambda service will use as an entry point
 def newpairing(event, context):
-
     # extract values from the event object we got from the Lambda service and store in a variable
+    # exits if the string is not correct.
     b = event['DrinkDesc']
+    if not validatestring(b):
+        exit()
+
     c = event['DrinkItem']
+    if not validatestring(c):
+        exit()
+
     d = event['FoodDesc']
+    if not validatestring(d):
+        exit()
+
     e = event['FoodItem']
+    if not validatestring(e):
+        exit()
+
+    # Must implement location data instead of string
     f = event['Location']
+    if not validatestring(f):
+        exit()
+
     g = event['UID']
+    if not validatestring(g):
+        exit()
     # generate unique id for pairing
     a = uuid.uuid4().hex
 
@@ -45,4 +63,20 @@ def newpairing(event, context):
     return json.dumps({'isSuccessful': 'true', 'PID': a})
 
 
-
+def validatestring(inputstring: str) -> bool:
+    # checking if string is empty (nothing entered including spaces.)
+    print("Check if the input is empty : ", end="")
+    if not inputstring:
+        # the string is empty
+        print("Invalid String")
+        return False
+    else:
+        # not empty and check second condition
+        # checking if string with space is empty
+        if inputstring and not inputstring.isspace():
+            # String valid
+            return True
+        else:
+            # String invalid
+            print("Invalid String")
+            return False
