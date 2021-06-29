@@ -18,9 +18,8 @@ import { ApplicationProvider, Layout,Button, Divider, Card,Text } from '@ui-kitt
 import { default as theme } from '../theme.json';
 import styles from "../styles";
 import Icon from 'react-native-vector-icons/FontAwesome';
-import viewReviewScreen from "./ViewReviewScreen.js"
 
-const ViewAllPairingsScreen = (props) => {
+const viewReviewScreen = (props) => {
   const viewPairingURL =
     "https://qkvdftfq7b.execute-api.eu-west-1.amazonaws.com/dev/viewpairings";
   const [isLoading, setLoading] = useState(useIsFocused());
@@ -58,15 +57,8 @@ const ViewAllPairingsScreen = (props) => {
     
     <ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }}>
     <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Label</Text>
-      <ScrollView>
-    {isLoading ? (
-          <ActivityIndicator />
-        ) : (
-          <FlatList
-            data={data}
-            keyExtractor={({ PID }, index) => PID}
-            renderItem={({ item }) => (
+      <Text>Hello from review page</Text>
+
             <View style={{padding:10}}>
             <Card>
               <View style={{flexDirection:"row", borderWidth:2, borderColor:"#d3d3d3",borderRadius:5}}>
@@ -90,10 +82,7 @@ const ViewAllPairingsScreen = (props) => {
               </View>
             </Card>
             </View>
-            )}
-            />
-          )}
-          </ScrollView>
+        
     </Layout>
   </ApplicationProvider>
    /* <SafeAreaView style={personalStyles.container}>
@@ -194,4 +183,4 @@ const personalStyles = StyleSheet.create({
   },
 });
 
-export default ViewAllPairingsScreen;
+export default viewReviewScreen;
