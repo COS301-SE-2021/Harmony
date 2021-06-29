@@ -24,6 +24,10 @@ def remove_from_favourites(event, context):
     uid = event['UID']
     pid = event['PID']
 
+    # validate request edge case
+    if validate_request(pid, uid) == "false":
+        return json.dumps({'isSuccessful': 'false', 'PID': pid})
+
     response = table.get_item(Key={'UID': uid})
     # convert number to integer
     amount = int(response['Item']['SizeOfFavs'])
@@ -61,3 +65,10 @@ def remove_from_favourites(event, context):
             raise
     else:
         return json.dumps({'isSuccessful': 'true', 'PID': pid})
+
+
+def validate_request(pid, uid):
+    if pid == "" or uid == "":
+        return "false"
+    else:
+        return "true"
