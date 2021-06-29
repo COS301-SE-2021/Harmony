@@ -22,7 +22,7 @@ now = strftime("%a, %d %b %Y %H:%M:%S +0000", gmtime())
 
 
 # define the handler function that the Lambda service will use as an entry point
-def lambda_handler(event, context):
+def view_favourites(event, context):
     # extract values from the event object we got from the Lambda service and store in a variable
     uid = event['UID']
     # create list to store json
