@@ -25,23 +25,30 @@ now = strftime("%a, %d %b %Y %H:%M:%S +0000", gmtime())
 def view_favourites(event, context):
     # extract values from the event object we got from the Lambda service and store in a variable
     uid = event['UID']
+    # validate that the uid passed in is valid
+    validate_uid(uid)
     # create list to store json
     returnedjson = []
     # store item from table in a response
     response = table.get_item(Key={'UID': uid})
     for key in response['Item']['FavouritePairings']:
         # traverse each item in Pairings and search for id the append to list
-        print(key)
         response = table2.query(
             KeyConditionExpression=
             Key('PID').eq(key)
         )
         returnedjson = returnedjson + response['Items']
 
-
     return {
-            # parse the response as a json with the correct item attributes
-            # the data will be the appended list of fav pairings
-            "StatusCode": 200,
-            'Data': returnedjson
-        }
+        # parse the response as a json with the correct item attributes
+        # the data will be the appended list of fav pairings
+        "StatusCode": 200,
+        'Data': returnedjson
+    }
+
+
+def validate_uid(uid):
+    if uid == "":
+        return "false"
+    else:
+        return "true"

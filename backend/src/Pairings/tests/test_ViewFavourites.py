@@ -1,10 +1,23 @@
-import unittest
+import json
+
+import pytest
+
+from backend.src.Pairings.viewFavourites import ViewFavourites
 
 
-class MyTestCase(unittest.TestCase):
-    def test_something(self):
-        self.assertEqual(True, False)
+@pytest.fixture()
+def fixture_event():
+    return {
+        "UID": "u1"
+    }
 
 
-if __name__ == '__main__':
-    unittest.main()
+def test_view_favourites(fixture_event):
+    data = ViewFavourites.view_favourites(fixture_event, "")
+    assert data["StatusCode"] == 200
+    assert "Data" in data
+
+
+def test_validate_uid():
+    ret = ViewFavourites.validate_uid("u1")
+    assert ret == "true"
