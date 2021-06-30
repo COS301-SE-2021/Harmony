@@ -12,6 +12,10 @@ import * as ImagePicker from "expo-image-picker";
 import { Text, Button } from "@ui-kitten/components";
 import HomeScreen from "./HomeScreen.js";
 
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+const Stack = createStackNavigator();
+
 export default function CameraScreen() {
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
   const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
@@ -55,6 +59,40 @@ export default function CameraScreen() {
     }
   };
 
+  function CameraCaptureScreen() {
+    return (
+      <SafeAreaView style={{ flex: 1 }}>
+        <View style={styles.cameraContainer}>
+          {isFocused && (
+            <Camera
+              ref={(ref) => setCamera(ref)}
+              style={styles.fixedRatio}
+              type={type}
+              // ratio={"1:1"}
+            />
+          )}
+        </View>
+
+        <Button title="Take Picture" onPress={() => takePicture()}>
+          Take picture
+        </Button>
+        <Button title="Pick image from gallery" onPress={() => pickImage()}>
+          Pick from gallery
+        </Button>
+
+        {/* {image && <Image source={{ uri: image }} style={{ flex: 1 }} />} */}
+      </SafeAreaView>
+    );
+  }
+
+  function CameraPreviewScreen() {
+    return (
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <Text>Camera Preview Screen</Text>
+      </View>
+    );
+  }
+
   if (hasCameraPermission === false || hasGalleryPermission === false) {
     return <View />;
   }
@@ -62,27 +100,10 @@ export default function CameraScreen() {
     return <Text>No access to camera or gallery</Text>;
   }
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View style={styles.cameraContainer}>
-        {isFocused && (
-          <Camera
-            ref={(ref) => setCamera(ref)}
-            style={styles.fixedRatio}
-            type={type}
-            // ratio={"1:1"}
-          />
-        )}
-      </View>
-
-      <Button title="Take Picture" onPress={() => takePicture()}>
-        Take picture
-      </Button>
-      <Button title="Pick image from gallery" onPress={() => pickImage()}>
-        Pick from gallery
-      </Button>
-
-      {/* {image && <Image source={{ uri: image }} style={{ flex: 1 }} />} */}
-    </SafeAreaView>
+    <Stack.Navigator>
+      <Stack.Screen name="Capture Screen" component={CameraCaptureScreen} />
+      <Stack.Screen name="Preview Screen" component={CameraPreviewScreen} />
+    </Stack.Navigator>
   );
 }
 
