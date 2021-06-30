@@ -12,13 +12,11 @@ import {
 
 import HomeScreen from "./HomeScreen.js";
 import ViewFavouritesScreen from "./ViewFavouritesScreen.js";
-import ViewAllPairingsScreen from "./ViewAllPairingsScreen.js";
 import SettingsScreen from "./SettingsScreen.js";
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
 const HomeIcon = (props) => <Icon {...props} name="home-outline" />;
-const TrendingIcon = (props) => <Icon {...props} name="trending-up-outline" />;
 const CameraIcon = (props) => (
   <Icon {...props} name="camera-outline" width="32" height="32" />
 );
@@ -37,7 +35,6 @@ const BottomTabBar = ({ navigation, state }) => (
     onSelect={(index) => navigation.navigate(state.routeNames[index])}
   >
     <BottomNavigationTab icon={HomeIcon} />
-    <BottomNavigationTab icon={TrendingIcon} />
     <BottomNavigationTab icon={CameraIcon} />
     <BottomNavigationTab icon={HeartIcon} />
     <BottomNavigationTab icon={SettingsIcon} />
@@ -47,7 +44,6 @@ const BottomTabBar = ({ navigation, state }) => (
 const TabNavigator = () => (
   <Navigator tabBar={(props) => <BottomTabBar {...props} />}>
     <Screen name="Home" component={HomeScreen} />
-    <Screen name="Popular" component={ViewAllPairingsScreen} />
     <Screen name="Camera" component={CameraScreen} />
     <Screen name="Favourite" component={ViewFavouritesScreen} />
     <Screen name="Settings" component={SettingsScreen} />
