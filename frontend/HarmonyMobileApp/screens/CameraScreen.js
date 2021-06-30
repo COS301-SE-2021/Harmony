@@ -10,6 +10,7 @@ import { useIsFocused } from "@react-navigation/native";
 import { Camera } from "expo-camera";
 import * as ImagePicker from "expo-image-picker";
 import { Text, Button } from "@ui-kitten/components";
+import HomeScreen from "./HomeScreen.js";
 
 export default function CameraScreen() {
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
@@ -22,11 +23,11 @@ export default function CameraScreen() {
   useEffect(() => {
     (async () => {
       const { cameraStatus } = await Camera.requestPermissionsAsync();
-      hasCameraPermission(cameraStatus.status === "granted");
+      setHasCameraPermission(cameraStatus.status === "granted");
 
       const { galleryStatus } =
         await ImagePicker.requestMediaLibraryPermissionsAsync();
-      hasGalleryPermission(galleryStatus.status === "granted");
+      setHasGalleryPermission(galleryStatus.status === "granted");
     })();
   }, []);
 
@@ -35,6 +36,7 @@ export default function CameraScreen() {
       const data = await camera.takePictureAsync(null);
       console.log(data.uri); //Saved as a temp picture in our phone and this is the URI
       setImage(data.uri);
+      HomeScreen();
     }
   };
 
@@ -67,7 +69,7 @@ export default function CameraScreen() {
             ref={(ref) => setCamera(ref)}
             style={styles.fixedRatio}
             type={type}
-            ratio={"1:1"}
+            // ratio={"1:1"}
           />
         )}
       </View>
@@ -79,7 +81,7 @@ export default function CameraScreen() {
         Pick from gallery
       </Button>
 
-      {image && <Image source={{ uri: image }} style={{ flex: 1 }} />}
+      {/* {image && <Image source={{ uri: image }} style={{ flex: 1 }} />} */}
     </SafeAreaView>
   );
 }
@@ -94,6 +96,5 @@ const styles = StyleSheet.create({
   },
   fixedRatio: {
     flex: 1,
-    aspectRatio: 1,
   },
 });

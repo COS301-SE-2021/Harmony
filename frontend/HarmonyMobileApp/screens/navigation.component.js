@@ -18,17 +18,9 @@ import CameraScreen from "./CameraScreen.js";
 const { Navigator, Screen } = createBottomTabNavigator();
 
 const HomeIcon = (props) => <Icon {...props} name="home-outline" />;
-const CameraIcon = (props) => (
-  <Icon {...props} name="camera-outline" width="32" height="32" />
-);
+const CameraIcon = (props) => <Icon {...props} name="camera-outline" />;
 const HeartIcon = (props) => <Icon {...props} name="heart-outline" />;
 const SettingsIcon = (props) => <Icon {...props} name="settings-2-outline" />;
-
-// const CameraScreen = () => (
-//   <Layout style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-//     <Text category="h1">Camera</Text>
-//   </Layout>
-// );
 
 const BottomTabBar = ({ navigation, state }) => (
   <BottomNavigation
