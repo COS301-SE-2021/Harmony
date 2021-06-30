@@ -13,6 +13,7 @@ import {
 import HomeScreen from "./HomeScreen.js";
 import ViewFavouritesScreen from "./ViewFavouritesScreen.js";
 import SettingsScreen from "./SettingsScreen.js";
+import CameraScreen from "./CameraScreen.js";
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -23,11 +24,11 @@ const CameraIcon = (props) => (
 const HeartIcon = (props) => <Icon {...props} name="heart-outline" />;
 const SettingsIcon = (props) => <Icon {...props} name="settings-2-outline" />;
 
-const CameraScreen = () => (
-  <Layout style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-    <Text category="h1">Camera</Text>
-  </Layout>
-);
+// const CameraScreen = () => (
+//   <Layout style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+//     <Text category="h1">Camera</Text>
+//   </Layout>
+// );
 
 const BottomTabBar = ({ navigation, state }) => (
   <BottomNavigation
