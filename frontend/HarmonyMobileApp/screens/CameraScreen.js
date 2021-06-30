@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
-  Text,
   View,
   TouchableOpacity,
-  Button,
   SafeAreaView,
   Image,
 } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
-
 import { Camera } from "expo-camera";
 import * as ImagePicker from "expo-image-picker";
+import { Text, Button } from "@ui-kitten/components";
 
 export default function CameraScreen() {
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
@@ -74,8 +72,13 @@ export default function CameraScreen() {
         )}
       </View>
 
-      <Button title="Take Picture" onPress={() => takePicture()} />
-      <Button title="Pick image from gallery" onPress={() => pickImage()} />
+      <Button title="Take Picture" onPress={() => takePicture()}>
+        Take picture
+      </Button>
+      <Button title="Pick image from gallery" onPress={() => pickImage()}>
+        Pick from gallery
+      </Button>
+
       {image && <Image source={{ uri: image }} style={{ flex: 1 }} />}
     </SafeAreaView>
   );
