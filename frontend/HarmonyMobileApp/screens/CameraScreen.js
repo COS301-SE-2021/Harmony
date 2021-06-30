@@ -65,7 +65,7 @@ export default function CameraScreen() {
         <View style={styles.cameraContainer}>
           {isFocused && (
             <Camera
-              ref={(ref) => setCamera(ref)}
+              //   ref={(ref) => setCamera(ref)}
               style={styles.fixedRatio}
               type={type}
               // ratio={"1:1"}
