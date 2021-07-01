@@ -40,7 +40,6 @@ export default function CameraScreen() {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images, //We could also do videos in the future
       allowsEditing: true,
-      aspect: [4, 3],
       quality: 1,
     });
 
@@ -50,9 +49,9 @@ export default function CameraScreen() {
     }
   };
 
-  const onSnap = async () => {
+  const onCapture = async () => {
     if (cameraRef.current) {
-      const options = { quality: 0.7, base64: true };
+      const options = { quality: 1, base64: true };
       const data = await cameraRef.current.takePictureAsync(options);
       const source = data.base64;
 
@@ -89,13 +88,23 @@ export default function CameraScreen() {
       />
       <View style={styles.container}>
         {isPreview && (
-          <TouchableOpacity
-            onPress={cancelPreview}
-            style={styles.closeButton}
-            activeOpacity={0.7}
-          >
-            <Icon style={styles.icon} fill="#fff" name="close-outline" />
-          </TouchableOpacity>
+          <View style={styles.previewButtonsContainer}>
+            <TouchableOpacity onPress={cancelPreview}>
+              <Icon
+                style={styles.icon}
+                fill="#fff"
+                name="close-circle-outline"
+              />
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={cancelPreview}>
+              <Icon
+                style={styles.icon}
+                fill="#fff"
+                name="checkmark-circle-2-outline"
+              />
+            </TouchableOpacity>
+          </View>
         )}
         {!isPreview && (
           <View style={styles.bottomButtonsContainer}>
@@ -108,9 +117,8 @@ export default function CameraScreen() {
             </TouchableOpacity>
 
             <TouchableOpacity
-              activeOpacity={0.7}
               disabled={!isCameraReady}
-              onPress={onSnap}
+              onPress={onCapture}
               style={styles.capture}
             />
           </View>
@@ -133,16 +141,15 @@ const styles = StyleSheet.create({
     bottom: 15,
     width: "100%",
   },
-  closeButton: {
+
+  previewButtonsContainer: {
     position: "absolute",
-    top: 35,
-    right: 20,
-    height: 50,
-    width: 50,
-    borderRadius: 25,
-    justifyContent: "center",
+    flexDirection: "row",
+    bottom: 15,
+    width: "100%",
+    flex: 1,
     alignItems: "center",
-    opacity: 0.7,
+    justifyContent: "center",
   },
   capture: {
     left: "100%",
@@ -157,7 +164,7 @@ const styles = StyleSheet.create({
     height: 70,
   },
   icon: {
-    width: 45,
-    height: 45,
+    width: 80,
+    height: 80,
   },
 });
