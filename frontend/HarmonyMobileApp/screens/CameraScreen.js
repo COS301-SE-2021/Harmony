@@ -1,18 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
-import {
-  StyleSheet,
-  Dimensions,
-  View,
-  Text,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, Dimensions, View, TouchableOpacity } from "react-native";
 import { Camera } from "expo-camera";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
+import { StatusBar } from "expo-status-bar";
+import { Icon } from "@ui-kitten/components";
 
 const WINDOW_HEIGHT = Dimensions.get("window").height;
 const CAPTURE_SIZE = Math.floor(WINDOW_HEIGHT * 0.08);
 
-export default function App() {
+export default function CameraScreen() {
   const cameraRef = useRef();
   const [hasPermission, setHasPermission] = useState(null);
   const [cameraType, setCameraType] = useState(Camera.Constants.Type.back);
@@ -70,6 +66,8 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+      <StatusBar style="auto" />
+
       <Camera
         ref={cameraRef}
         style={styles.container}
@@ -84,14 +82,19 @@ export default function App() {
             style={styles.closeButton}
             activeOpacity={0.7}
           >
-            <AntDesign name="close" size={32} color="#fff" />
+            <Icon style={styles.icon} fill="#fff" name="close-outline" />
           </TouchableOpacity>
         )}
         {!isPreview && (
           <View style={styles.bottomButtonsContainer}>
-            <TouchableOpacity disabled={!isCameraReady} onPress={switchCamera}>
-              <MaterialIcons name="flip-camera-ios" size={28} color="white" />
+            <TouchableOpacity
+              style={styles.gallery}
+              disabled={!isCameraReady}
+              onPress={switchCamera}
+            >
+              <Icon style={styles.icon} fill="#fff" name="image-outline" />
             </TouchableOpacity>
+
             <TouchableOpacity
               activeOpacity={0.7}
               disabled={!isCameraReady}
@@ -115,10 +118,8 @@ const styles = StyleSheet.create({
   bottomButtonsContainer: {
     position: "absolute",
     flexDirection: "row",
-    bottom: 28,
+    bottom: 15,
     width: "100%",
-    alignItems: "center",
-    justifyContent: "center",
   },
   closeButton: {
     position: "absolute",
@@ -129,14 +130,22 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#5A45FF",
     opacity: 0.7,
   },
   capture: {
+    left: "100%",
     width: 70,
     height: 70,
-    bottom: 0,
     borderRadius: 50,
     backgroundColor: "#fff",
+  },
+  gallery: {
+    left: 20,
+    width: 70,
+    height: 70,
+  },
+  icon: {
+    width: 45,
+    height: 45,
   },
 });
