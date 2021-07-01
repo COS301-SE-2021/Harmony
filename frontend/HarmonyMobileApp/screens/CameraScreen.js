@@ -1,42 +1,49 @@
 import React, { useState, useRef, useEffect } from "react";
-import { StyleSheet, Dimensions, View, TouchableOpacity } from "react-native";
+import { StyleSheet, View, TouchableOpacity, Image } from "react-native";
 import { Camera } from "expo-camera";
-import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 import { Icon } from "@ui-kitten/components";
-
-const WINDOW_HEIGHT = Dimensions.get("window").height;
-const CAPTURE_SIZE = Math.floor(WINDOW_HEIGHT * 0.08);
+import * as ImagePicker from "expo-image-picker";
 
 export default function CameraScreen() {
   const cameraRef = useRef();
-  const [hasPermission, setHasPermission] = useState(null);
   const [cameraType, setCameraType] = useState(Camera.Constants.Type.back);
   const [isPreview, setIsPreview] = useState(false);
   const [isCameraReady, setIsCameraReady] = useState(false);
+
+  const [hasCameraPermission, setHasCameraPermission] = useState(null);
+  const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
+  const [image, setImage] = useState(null);
 
   useEffect(() => {
     onHandlePermission();
   }, []);
 
   const onHandlePermission = async () => {
-    const { status } = await Camera.requestPermissionsAsync();
-    setHasPermission(status === "granted");
+    const { cameraStatus } = await Camera.requestPermissionsAsync();
+    setHasCameraPermission(cameraStatus.status === "granted");
+
+    const { galleryStatus } =
+      await ImagePicker.requestMediaLibraryPermissionsAsync();
+    setHasGalleryPermission(galleryStatus.status === "granted");
   };
 
   const onCameraReady = () => {
     setIsCameraReady(true);
   };
 
-  const switchCamera = () => {
-    if (isPreview) {
-      return;
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images, //We could also do videos in the future
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+    if (!result.cancelled) {
+      setImage(result.uri);
     }
-    setCameraType((prevCameraType) =>
-      prevCameraType === Camera.Constants.Type.back
-        ? Camera.Constants.Type.front
-        : Camera.Constants.Type.back
-    );
   };
 
   const onSnap = async () => {
@@ -47,6 +54,7 @@ export default function CameraScreen() {
 
       if (source) {
         await cameraRef.current.pausePreview();
+        setImage(data.uri);
         setIsPreview(true);
       }
     }
@@ -57,10 +65,10 @@ export default function CameraScreen() {
     setIsPreview(false);
   };
 
-  if (hasPermission === null) {
+  if (hasCameraPermission === false || hasGalleryPermission === false) {
     return <View />;
   }
-  if (hasPermission === false) {
+  if (hasCameraPermission === false || hasGalleryPermission === false) {
     return <Text style={styles.text}>No access to camera</Text>;
   }
 
@@ -90,7 +98,7 @@ export default function CameraScreen() {
             <TouchableOpacity
               style={styles.gallery}
               disabled={!isCameraReady}
-              onPress={switchCamera}
+              onPress={pickImage}
             >
               <Icon style={styles.icon} fill="#fff" name="image-outline" />
             </TouchableOpacity>
