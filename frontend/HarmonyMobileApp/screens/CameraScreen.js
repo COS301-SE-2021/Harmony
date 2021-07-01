@@ -1,5 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
-import { StyleSheet, View, TouchableOpacity, Image } from "react-native";
+import {
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  Image,
+  ImageBackground,
+} from "react-native";
 import { Camera } from "expo-camera";
 import { StatusBar } from "expo-status-bar";
 import { Icon } from "@ui-kitten/components";
@@ -7,12 +13,12 @@ import * as ImagePicker from "expo-image-picker";
 
 export default function CameraScreen() {
   const cameraRef = useRef();
-  const [cameraType, setCameraType] = useState(Camera.Constants.Type.back);
   const [isPreview, setIsPreview] = useState(false);
   const [isCameraReady, setIsCameraReady] = useState(false);
 
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
   const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
+
   const [image, setImage] = useState(null);
 
   useEffect(() => {
@@ -46,6 +52,7 @@ export default function CameraScreen() {
     console.log(result);
     if (!result.cancelled) {
       setImage(result.uri);
+      setIsPreview(true);
     }
   };
 
@@ -56,7 +63,7 @@ export default function CameraScreen() {
       const source = data.base64;
 
       if (source) {
-        await cameraRef.current.pausePreview();
+        // await cameraRef.current.pausePreview();
         setImage(data.uri);
         setIsPreview(true);
       }
@@ -82,28 +89,35 @@ export default function CameraScreen() {
       <Camera
         ref={cameraRef}
         style={styles.container}
-        type={cameraType}
+        type={Camera.Constants.Type.back}
         onCameraReady={onCameraReady}
         useCamera2Api={true}
       />
       <View style={styles.container}>
         {isPreview && (
-          <View style={styles.previewButtonsContainer}>
-            <TouchableOpacity onPress={cancelPreview}>
-              <Icon
-                style={styles.icon}
-                fill="#fff"
-                name="close-circle-outline"
-              />
-            </TouchableOpacity>
+          <View style={styles.container}>
+            <ImageBackground
+              source={{ uri: image }}
+              style={{ width: "100%", height: "100%" }}
+            >
+              <View style={styles.previewButtonsContainer}>
+                <TouchableOpacity onPress={cancelPreview}>
+                  <Icon
+                    style={styles.icon}
+                    fill="#fff"
+                    name="close-circle-outline"
+                  />
+                </TouchableOpacity>
 
-            <TouchableOpacity onPress={cancelPreview}>
-              <Icon
-                style={styles.icon}
-                fill="#fff"
-                name="checkmark-circle-2-outline"
-              />
-            </TouchableOpacity>
+                <TouchableOpacity onPress={cancelPreview}>
+                  <Icon
+                    style={styles.icon}
+                    fill="#fff"
+                    name="checkmark-circle-2-outline"
+                  />
+                </TouchableOpacity>
+              </View>
+            </ImageBackground>
           </View>
         )}
         {!isPreview && (
