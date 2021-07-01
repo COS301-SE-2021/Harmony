@@ -9,6 +9,8 @@ import { useIsFocused } from "@react-navigation/native";
 export default function CameraScreen() {
   const cameraRef = useRef();
   const [isPreview, setIsPreview] = useState(false);
+  const [isGalleryImage, setisGalleryImage] = useState(false);
+  const [isCameraImage, setisCameraImage] = useState(false);
   const [isCameraReady, setIsCameraReady] = useState(false);
 
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
@@ -49,6 +51,8 @@ export default function CameraScreen() {
     if (!result.cancelled) {
       setImage(result.uri);
       setIsPreview(true);
+      setisGalleryImage(true);
+      setisCameraImage(false);
     }
   };
 
@@ -59,9 +63,11 @@ export default function CameraScreen() {
       const source = data.base64;
 
       if (source) {
-        // await cameraRef.current.pausePreview();
+        await cameraRef.current.pausePreview();
         setImage(data.uri);
         setIsPreview(true);
+        setisGalleryImage(false);
+        setisCameraImage(true);
 
         // let base64Img = `data:image/jpg;base64,${source}`;
         // let apiUrl =
@@ -119,10 +125,12 @@ export default function CameraScreen() {
       <View style={styles.container}>
         {isPreview && (
           <View style={styles.container}>
-            <Image
-              source={{ uri: image }}
-              style={{ width: "100%", height: "100%" }}
-            ></Image>
+            {isGalleryImage && (
+              <Image
+                source={{ uri: image }}
+                style={{ width: "100%", height: "100%" }}
+              ></Image>
+            )}
             <View style={styles.previewButtonsContainer}>
               <TouchableOpacity onPress={cancelPreview}>
                 <Icon
