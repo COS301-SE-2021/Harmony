@@ -21,11 +21,15 @@ export default function CameraScreen() {
 
   const onHandlePermission = async () => {
     const { cameraStatus } = await Camera.requestPermissionsAsync();
-    setHasCameraPermission(cameraStatus.status === "granted");
+    if (cameraStatus) {
+      setHasCameraPermission(cameraStatus.status === "granted");
+    }
 
     const { galleryStatus } =
       await ImagePicker.requestMediaLibraryPermissionsAsync();
-    setHasGalleryPermission(galleryStatus.status === "granted");
+    if (cameraStatus) {
+      setHasGalleryPermission(galleryStatus.status === "granted");
+    }
   };
 
   const onCameraReady = () => {
