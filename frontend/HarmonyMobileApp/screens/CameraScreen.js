@@ -133,12 +133,10 @@ const styles = StyleSheet.create({
     opacity: 0.7,
   },
   capture: {
-    backgroundColor: "#5A45FF",
-    borderRadius: 5,
-    height: CAPTURE_SIZE,
-    width: CAPTURE_SIZE,
-    borderRadius: Math.floor(CAPTURE_SIZE / 2),
-    marginBottom: 28,
-    marginHorizontal: 30,
+    width: 70,
+    height: 70,
+    bottom: 0,
+    borderRadius: 50,
+    backgroundColor: "#fff",
   },
 });
