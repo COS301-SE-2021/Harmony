@@ -10,6 +10,7 @@ import { Camera } from "expo-camera";
 import { StatusBar } from "expo-status-bar";
 import { Icon } from "@ui-kitten/components";
 import * as ImagePicker from "expo-image-picker";
+import { useIsFocused } from "@react-navigation/native";
 
 export default function CameraScreen() {
   const cameraRef = useRef();
@@ -20,6 +21,7 @@ export default function CameraScreen() {
   const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
 
   const [image, setImage] = useState(null);
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     onHandlePermission();
@@ -85,39 +87,39 @@ export default function CameraScreen() {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-
-      <Camera
-        ref={cameraRef}
-        style={styles.container}
-        type={Camera.Constants.Type.back}
-        onCameraReady={onCameraReady}
-        useCamera2Api={true}
-      />
+      {isFocused && (
+        <Camera
+          ref={cameraRef}
+          style={styles.container}
+          type={Camera.Constants.Type.back}
+          onCameraReady={onCameraReady}
+          useCamera2Api={true}
+        />
+      )}
       <View style={styles.container}>
         {isPreview && (
           <View style={styles.container}>
-            <ImageBackground
+            <Image
               source={{ uri: image }}
               style={{ width: "100%", height: "100%" }}
-            >
-              <View style={styles.previewButtonsContainer}>
-                <TouchableOpacity onPress={cancelPreview}>
-                  <Icon
-                    style={styles.icon}
-                    fill="#fff"
-                    name="close-circle-outline"
-                  />
-                </TouchableOpacity>
+            ></Image>
+            <View style={styles.previewButtonsContainer}>
+              <TouchableOpacity onPress={cancelPreview}>
+                <Icon
+                  style={styles.icon}
+                  fill="#fff"
+                  name="close-circle-outline"
+                />
+              </TouchableOpacity>
 
-                <TouchableOpacity onPress={cancelPreview}>
-                  <Icon
-                    style={styles.icon}
-                    fill="#fff"
-                    name="checkmark-circle-2-outline"
-                  />
-                </TouchableOpacity>
-              </View>
-            </ImageBackground>
+              <TouchableOpacity onPress={cancelPreview}>
+                <Icon
+                  style={styles.icon}
+                  fill="#fff"
+                  name="checkmark-circle-2-outline"
+                />
+              </TouchableOpacity>
+            </View>
           </View>
         )}
         {!isPreview && (
