@@ -1,11 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import {
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  Image,
-  ImageBackground,
-} from "react-native";
+import { StyleSheet, View, TouchableOpacity, Image } from "react-native";
 import { Camera } from "expo-camera";
 import { StatusBar } from "expo-status-bar";
 import { Icon } from "@ui-kitten/components";
@@ -68,6 +62,32 @@ export default function CameraScreen() {
         // await cameraRef.current.pausePreview();
         setImage(data.uri);
         setIsPreview(true);
+
+        // let base64Img = `data:image/jpg;base64,${source}`;
+        // let apiUrl =
+        //   "https://api.aws.s3.com";//WAITING ON API URL FROM BACKEND
+
+        // let data = {
+        //   file: base64Img,
+        //   upload_preset: "<your-upload-preset>",
+        // };
+
+        // fetch(apiUrl, {
+        //   body: JSON.stringify(data),
+        //   headers: {
+        //     "content-type": "application/json",
+        //   },
+        //   method: "POST",
+        // })
+        //   .then(async (response) => {
+        //     let data = await response.json();
+        //     if (data.secure_url) {
+        //       alert("Upload successful");
+        //     }
+        //   })
+        //   .catch((err) => {
+        //     alert("Cannot upload");
+        //   });
       }
     }
   };
