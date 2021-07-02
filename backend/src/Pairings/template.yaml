@@ -14,7 +14,7 @@ Resources:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: AddtoFavourites/
-      Handler: app.lambda_handler
+      Handler: AddToFavourites.add_to_favourites
       Runtime: python3.8
 
 
