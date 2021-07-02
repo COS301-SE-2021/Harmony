@@ -15,22 +15,25 @@ dynamodb = boto3.resource('dynamodb')
 table = dynamodb.Table('Users')
 
 
-
 # define the handler function that the Lambda service will use as an entry point
 def add_to_favourites(event, context):
     # extract values from the event object we got from the Lambda service and store in a variable
     uid = event['UID']
     pid = event['PID']
-
+    validate1 = validate_event(uid, pid)
+    validate2 = check_if_fav_exists(uid, pid)
+    if validate1 == "false" or validate2 == "false":
+        return json.dumps({'isSuccessful': 'false', 'PID': pid})
 
     try:
         response = table.update_item(
             Key={
                 'UID': uid
             },
-            UpdateExpression={"Add #fav :pair"},
-            ExpressionAttributeNames={'fav': 'FavouritePairings'},
-            ExpressionAttributeValues={':pair': pid},
+            UpdateExpression="SET FavouritePairings = list_append(FavouritePairings, :pair)",
+            ExpressionAttributeValues={':pair': [pid]},
+            ReturnValues="UPDATED_NEW"
+
         )
         print(response['ResponseMetadata']['HTTPStatusCode'])
 
@@ -38,8 +41,26 @@ def add_to_favourites(event, context):
         if e.response['Error']['Code'] == "ConditionalCheckFailedException":
             print(e.response['Error']['Message'])
             # fix this, return false when fixed, test edge cases
-            return json.dumps({'isSuccessful': 'true', 'PID': pid})
+            return json.dumps({'isSuccessful': 'false', 'PID': pid})
         else:
             raise
     else:
         return json.dumps({'isSuccessful': 'true', 'PID': pid})
+
+
+def validate_event(uid, pid):
+    if pid == "" or uid == "":
+        return "false"
+    else:
+        return "true"
+
+
+def check_if_fav_exists(uid, pid):
+    response = table.get_item(Key={'UID': uid})
+    item = response["Item"]
+    pairings = item["FavouritePairings"]
+    for i in pairings:
+        if i == pid:
+            return "false"
+
+    return "true"
