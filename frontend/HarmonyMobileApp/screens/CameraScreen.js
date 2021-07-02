@@ -10,7 +10,6 @@ export default function CameraScreen() {
   const cameraRef = useRef();
   const [isPreview, setIsPreview] = useState(false);
   const [isGalleryImage, setisGalleryImage] = useState(false);
-  const [isCameraImage, setisCameraImage] = useState(false);
   const [isCameraReady, setIsCameraReady] = useState(false);
 
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
@@ -19,6 +18,7 @@ export default function CameraScreen() {
   const [image, setImage] = useState(null);
   const isFocused = useIsFocused();
   const [flashMode, setFlashMode] = React.useState("off");
+  const [flashIcon, setFlashIcon] = useState("flash-outline");
 
   useEffect(() => {
     onHandlePermission();
@@ -53,7 +53,6 @@ export default function CameraScreen() {
       setImage(result.uri);
       setIsPreview(true);
       setisGalleryImage(true);
-      setisCameraImage(false);
     }
   };
 
@@ -68,7 +67,6 @@ export default function CameraScreen() {
         setImage(data.uri);
         setIsPreview(true);
         setisGalleryImage(false);
-        setisCameraImage(true);
 
         // let base64Img = `data:image/jpg;base64,${source}`;
         // let apiUrl =
@@ -107,8 +105,10 @@ export default function CameraScreen() {
   const handleFlashMode = () => {
     if (flashMode === "on") {
       setFlashMode("off");
+      setFlashIcon("flash-off-outline");
     } else if (flashMode === "off") {
       setFlashMode("on");
+      setFlashIcon("flash-outline");
     } else {
       setFlashMode("auto");
     }
@@ -167,18 +167,21 @@ export default function CameraScreen() {
             <View style={styles.container}>
               <TouchableOpacity
                 style={{
+                  alignItems: "center",
                   position: "absolute",
                   left: "5%",
                   top: "10%",
-                  backgroundColor: flashMode === "off" ? "#000" : "#fff",
-                  borderRadius: 50,
-                  height: 25,
-                  width: 25,
                 }}
-                disabled={!isCameraReady}
-                onPress={handleFlashMode}
               >
-                <Icon style={styles.icon} fill="#fff" name="flash-outline" />
+                <Icon
+                  style={styles.icon}
+                  fill="#fff"
+                  name="flash-outline"
+                  // name= {flashMode === 'off' ? '#000' : '#fff}
+                  name={flashIcon}
+                  onPress={handleFlashMode}
+                  disabled={!isCameraReady}
+                />
               </TouchableOpacity>
             </View>
 
