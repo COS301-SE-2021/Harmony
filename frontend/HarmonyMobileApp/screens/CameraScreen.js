@@ -7,6 +7,7 @@ import {
   Text,
   Dimensions,
   Platform,
+  ImageBackground,
 } from "react-native";
 import { Camera } from "expo-camera";
 import { StatusBar } from "expo-status-bar";
@@ -34,6 +35,9 @@ export default function CameraScreen() {
   const { height, width } = Dimensions.get("window");
   const screenRatio = height / width;
   const [isRatioSet, setIsRatioSet] = useState(false);
+
+  const windowWidth = Dimensions.get("window").width;
+  const windowHeight = Dimensions.get("window").height;
 
   useEffect(() => {
     onHandlePermission();
@@ -249,24 +253,43 @@ export default function CameraScreen() {
         {!isPreview && (
           <View style={styles.container}>
             <View style={styles.container}>
-              <TouchableOpacity
+              <ImageBackground
                 style={{
-                  alignItems: "center",
-                  position: "absolute",
-                  left: "5%",
-                  top: "10%",
+                  width: windowWidth,
+                  height: windowHeight,
                 }}
+                source={require("../assets/Grid-Transparent-3.png")}
               >
-                <Icon
-                  style={styles.icon}
-                  fill="#fff"
-                  name="flash-outline"
-                  // name= {flashMode === 'off' ? '#000' : '#fff}
-                  name={flashIcon}
-                  onPress={handleFlashMode}
-                  disabled={!isCameraReady}
-                />
-              </TouchableOpacity>
+                <TouchableOpacity style={styles.toolbarContainer}>
+                  <Icon
+                    style={styles.toolbarIcon}
+                    fill="#fff"
+                    name="flash-outline"
+                    // name= {flashMode === 'off' ? '#000' : '#fff}
+                    name={flashIcon}
+                    onPress={handleFlashMode}
+                    disabled={!isCameraReady}
+                  />
+                  <Icon
+                    style={styles.toolbarIcon}
+                    fill="#fff"
+                    name="flash-outline"
+                    // name= {flashMode === 'off' ? '#000' : '#fff}
+                    name={flashIcon}
+                    onPress={handleFlashMode}
+                    disabled={!isCameraReady}
+                  />
+                  <Icon
+                    style={styles.toolbarIcon}
+                    fill="#fff"
+                    name="flash-outline"
+                    // name= {flashMode === 'off' ? '#000' : '#fff}
+                    name={flashIcon}
+                    onPress={handleFlashMode}
+                    disabled={!isCameraReady}
+                  />
+                </TouchableOpacity>
+              </ImageBackground>
             </View>
 
             <View style={styles.bottomButtonsContainer}>
@@ -330,7 +353,19 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
   },
+  toolbarContainer: {
+    flex: 1,
+    flexWrap: "nowrap",
+    flexDirection: "column",
+    justifyContent: "center",
+  },
+  toolbarIcon: {
+    paddingTop: 80,
+    width: 40,
+    height: 40,
+  },
   cameraPreview: {
     flex: 1,
   },
+  grid: {},
 });
