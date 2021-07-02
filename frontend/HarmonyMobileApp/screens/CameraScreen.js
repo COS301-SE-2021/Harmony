@@ -132,6 +132,7 @@ export default function CameraScreen() {
           type={Camera.Constants.Type.back}
           onCameraReady={onCameraReady}
           useCamera2Api={true}
+          autoFocus={Camera.Constants.AutoFocus.on}
         />
       )}
       <View style={styles.container}>
