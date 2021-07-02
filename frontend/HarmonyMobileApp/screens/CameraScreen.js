@@ -14,6 +14,7 @@ import { StatusBar } from "expo-status-bar";
 import { Icon } from "@ui-kitten/components";
 import * as ImagePicker from "expo-image-picker";
 import { useIsFocused } from "@react-navigation/native";
+import { MaterialIcons } from "@expo/vector-icons";
 
 export default function CameraScreen() {
   const cameraRef = useRef();
@@ -273,19 +274,15 @@ export default function CameraScreen() {
                   <Icon
                     style={styles.toolbarIcon}
                     fill="#fff"
-                    name="flash-outline"
-                    // name= {flashMode === 'off' ? '#000' : '#fff}
-                    name={flashIcon}
-                    onPress={handleFlashMode}
+                    name="grid-outline"
+                    onPress={handleFlashMode} //Change to handleGridMode
                     disabled={!isCameraReady}
                   />
                   <Icon
                     style={styles.toolbarIcon}
                     fill="#fff"
-                    name="flash-outline"
-                    // name= {flashMode === 'off' ? '#000' : '#fff}
-                    name={flashIcon}
-                    onPress={handleFlashMode}
+                    name="search-outline"
+                    onPress={handleFlashMode} //Change to handleBarcode
                     disabled={!isCameraReady}
                   />
                 </TouchableOpacity>
