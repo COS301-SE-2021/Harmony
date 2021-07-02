@@ -195,7 +195,7 @@ export default function CameraScreen() {
           style={[
             styles.cameraPreview,
             // { marginTop: 22, marginBottom: 22 },
-            { marginTop: imagePadding, marginBottom: imagePadding },
+            // { marginTop: imagePadding, marginBottom: imagePadding },
             // { width: width, height: height },
           ]}
           type={Camera.Constants.Type.back}
@@ -213,8 +213,14 @@ export default function CameraScreen() {
           <View
             style={[
               styles.cameraPreview,
-              { marginTop: imagePadding, marginBottom: imagePadding },
-              // { marginTop: 22, marginBottom: 22 },
+              // { marginTop: imagePadding, marginBottom: imagePadding },
+              styles.cameraPreview,
+              {
+                backgroundColor: "black", //Simulates blinking effect, also reduces noticeability of camera distortion
+                // borderWidth: 5,//To show a slight screen flash, indicating an image being taken
+                // borderColor: "#fff",
+                // borderRadius: 6,
+              }, // { marginTop: 22, marginBottom: 22 },
               // { width: width, height: height },
             ]}
           >
