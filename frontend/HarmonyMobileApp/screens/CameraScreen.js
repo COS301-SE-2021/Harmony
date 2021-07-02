@@ -1,5 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
-import { StyleSheet, View, TouchableOpacity, Image, Text } from "react-native";
+import {
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  Image,
+  Text,
+  Dimensions,
+  Platform,
+} from "react-native";
 import { Camera } from "expo-camera";
 import { StatusBar } from "expo-status-bar";
 import { Icon } from "@ui-kitten/components";
@@ -20,6 +28,13 @@ export default function CameraScreen() {
   const [flashMode, setFlashMode] = React.useState("off");
   const [flashIcon, setFlashIcon] = useState("flash-off-outline");
 
+  // Screen Ratio and image padding
+  const [imagePadding, setImagePadding] = useState(0);
+  const [ratio, setRatio] = useState("4:3"); // default is 4:3
+  const { height, width } = Dimensions.get("window");
+  const screenRatio = height / width;
+  const [isRatioSet, setIsRatioSet] = useState(false);
+
   useEffect(() => {
     onHandlePermission();
   }, []);
@@ -37,7 +52,11 @@ export default function CameraScreen() {
     }
   };
 
-  const onCameraReady = () => {
+  const onCameraReady = async () => {
+    if (!isRatioSet) {
+      await prepareRatio();
+    }
+
     setIsCameraReady(true);
   };
 
@@ -114,6 +133,50 @@ export default function CameraScreen() {
     }
   };
 
+  // set the camera ratio and padding.
+  // this code assumes a portrait mode screen
+  const prepareRatio = async () => {
+    let desiredRatio = "4:3"; // Start with the system default
+    // This issue only affects Android
+    if (Platform.OS === "android") {
+      const ratios = await cameraRef.current.getSupportedRatiosAsync();
+
+      // Calculate the width/height of each of the supported camera ratios
+      // These width/height are measured in landscape mode
+      // find the ratio that is closest to the screen ratio without going over
+      let distances = {};
+      let realRatios = {};
+      let minDistance = null;
+      for (const ratio of ratios) {
+        const parts = ratio.split(":");
+        const realRatio = parseInt(parts[0]) / parseInt(parts[1]);
+        realRatios[ratio] = realRatio;
+        // ratio can't be taller than screen, so we don't want an abs()
+        const distance = screenRatio - realRatio;
+        distances[ratio] = realRatio;
+        if (minDistance == null) {
+          minDistance = ratio;
+        } else {
+          if (distance >= 0 && distance < distances[minDistance]) {
+            minDistance = ratio;
+          }
+        }
+      }
+      // set the best match
+      desiredRatio = minDistance;
+      //  calculate the difference between the camera width and the screen height
+      const remainder = Math.floor(
+        (height - realRatios[desiredRatio] * width) / 2
+      );
+      // set the preview padding and preview ratio
+      setImagePadding(remainder / 2);
+      setRatio(desiredRatio);
+      // Set a flag so we don't do this
+      // calculation each time the screen refreshes
+      setIsRatioSet(true);
+    }
+  };
+
   if (hasCameraPermission === false || hasGalleryPermission === false) {
     return <View />;
   }
@@ -128,18 +191,33 @@ export default function CameraScreen() {
         <Camera
           ref={cameraRef}
           flashMode={flashMode}
-          style={styles.container}
+          // style={styles.container}
+          style={[
+            styles.cameraPreview,
+            // { marginTop: 22, marginBottom: 22 },
+            { marginTop: imagePadding, marginBottom: imagePadding },
+            // { width: width, height: height },
+          ]}
           type={Camera.Constants.Type.back}
           onCameraReady={onCameraReady}
           useCamera2Api={true}
           autoFocus={Camera.Constants.AutoFocus.on}
           zoom={0}
-          ratio={"16:9"}
+          // ratio={"16:9"}
+          ratio={ratio}
         />
       )}
       <View style={styles.container}>
         {isPreview && (
-          <View style={styles.container}>
+          // <View style={styles.container}>
+          <View
+            style={[
+              styles.cameraPreview,
+              { marginTop: imagePadding, marginBottom: imagePadding },
+              // { marginTop: 22, marginBottom: 22 },
+              // { width: width, height: height },
+            ]}
+          >
             {/* {isGalleryImage && ( */}
             <Image source={{ uri: image }} style={styles.container}></Image>
             {/* )} */}
@@ -245,5 +323,8 @@ const styles = StyleSheet.create({
   icon: {
     width: 80,
     height: 80,
+  },
+  cameraPreview: {
+    flex: 1,
   },
 });
