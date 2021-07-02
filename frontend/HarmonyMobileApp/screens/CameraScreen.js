@@ -18,7 +18,7 @@ export default function CameraScreen() {
   const [image, setImage] = useState(null);
   const isFocused = useIsFocused();
   const [flashMode, setFlashMode] = React.useState("off");
-  const [flashIcon, setFlashIcon] = useState("flash-outline");
+  const [flashIcon, setFlashIcon] = useState("flash-off-outline");
 
   useEffect(() => {
     onHandlePermission();
@@ -58,12 +58,12 @@ export default function CameraScreen() {
 
   const onCapture = async () => {
     if (cameraRef.current) {
-      const options = { quality: 1, base64: true };
+      const options = { quality: 1, base64: true, skipProcessing: true };
       const data = await cameraRef.current.takePictureAsync(options);
       const source = data.base64;
 
       if (source) {
-        await cameraRef.current.pausePreview();
+        // await cameraRef.current.pausePreview();
         setImage(data.uri);
         setIsPreview(true);
         setisGalleryImage(false);
@@ -133,17 +133,16 @@ export default function CameraScreen() {
           onCameraReady={onCameraReady}
           useCamera2Api={true}
           autoFocus={Camera.Constants.AutoFocus.on}
+          zoom={0}
+          ratio={"16:9"}
         />
       )}
       <View style={styles.container}>
         {isPreview && (
           <View style={styles.container}>
-            {isGalleryImage && (
-              <Image
-                source={{ uri: image }}
-                style={{ width: "100%", height: "100%" }}
-              ></Image>
-            )}
+            {/* {isGalleryImage && ( */}
+            <Image source={{ uri: image }} style={styles.container}></Image>
+            {/* )} */}
             <View style={styles.previewButtonsContainer}>
               <TouchableOpacity onPress={cancelPreview}>
                 <Icon
