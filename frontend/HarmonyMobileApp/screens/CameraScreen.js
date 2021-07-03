@@ -352,10 +352,17 @@ export default function CameraScreen() {
               </TouchableOpacity>
 
               <TouchableOpacity
+                style={styles.capture}
                 disabled={!isCameraReady}
                 onPress={onCapture}
-                style={styles.capture}
-              />
+                // style={styles.capture}
+              >
+                <MaterialCommunityIcons
+                  name="circle-outline"
+                  size={80}
+                  color="#fff"
+                />
+              </TouchableOpacity>
             </View>
           </View>
         )}
@@ -375,7 +382,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     flexDirection: "row",
     bottom: 15,
-    // width: "100%",
+    width: "100%",
   },
 
   previewButtonsContainer: {
@@ -389,15 +396,12 @@ const styles = StyleSheet.create({
   },
   capture: {
     left: "100%",
-    width: 70,
-    height: 70,
-    borderRadius: 50,
-    backgroundColor: "#fff",
   },
   gallery: {
-    left: 20,
+    left: 5,
     width: 60,
     height: 60,
+    top: "2.5%",
   },
   icon: {
     width: 80,
