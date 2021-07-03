@@ -8,9 +8,9 @@ import {
   Dimensions,
   Platform,
   ImageBackground,
+  StatusBar,
 } from "react-native";
 import { Camera } from "expo-camera";
-import { StatusBar } from "expo-status-bar";
 import { Icon } from "@ui-kitten/components";
 import * as ImagePicker from "expo-image-picker";
 import { useIsFocused } from "@react-navigation/native";
@@ -199,6 +199,34 @@ export default function CameraScreen() {
     }
   };
 
+  const ToolBar = () => (
+    <TouchableOpacity style={styles.toolbarContainer}>
+      <MaterialIcons
+        name={flashIcon}
+        size={40}
+        style={styles.toolbarIcon}
+        onPress={handleFlashMode}
+        disabled={!isCameraReady}
+      />
+
+      <MaterialIcons
+        name={gridIcon}
+        size={40}
+        style={styles.toolbarIcon}
+        onPress={handleGridMode}
+        disabled={!isCameraReady}
+      />
+
+      <MaterialCommunityIcons
+        name="barcode-scan"
+        size={40}
+        // onPress={handleGridMode} //Change to handleBarcode
+        disabled={!isCameraReady}
+        style={styles.toolbarIcon}
+      />
+    </TouchableOpacity>
+  );
+
   if (hasCameraPermission === false || hasGalleryPermission === false) {
     return <View />;
   }
@@ -209,6 +237,7 @@ export default function CameraScreen() {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
+      {/* <StatusBar hidden /> */}
       {isFocused && (
         <Camera
           ref={cameraRef}
@@ -277,64 +306,12 @@ export default function CameraScreen() {
                     width: windowWidth,
                     height: windowHeight,
                   }}
-                  // name= {flashMode === 'off' ? '#000' : '#fff}
-
                   source={require("../assets/Grid-Transparent-3.png")}
                 >
-                  <TouchableOpacity style={styles.toolbarContainer}>
-                    <MaterialIcons
-                      name={flashIcon}
-                      size={40}
-                      style={styles.toolbarIcon}
-                      onPress={handleFlashMode}
-                      disabled={!isCameraReady}
-                    />
-
-                    <MaterialIcons
-                      name={gridIcon}
-                      size={40}
-                      style={styles.toolbarIcon}
-                      onPress={handleGridMode}
-                      disabled={!isCameraReady}
-                    />
-
-                    <MaterialCommunityIcons
-                      name="barcode-scan"
-                      size={40}
-                      // onPress={handleGridMode} //Change to handleBarcode
-                      disabled={!isCameraReady}
-                      style={styles.toolbarIcon}
-                    />
-                  </TouchableOpacity>
+                  <ToolBar />
                 </ImageBackground>
               )}
-              {!isGridMode && (
-                <TouchableOpacity style={styles.toolbarContainer}>
-                  <MaterialIcons
-                    name={flashIcon}
-                    size={40}
-                    style={styles.toolbarIcon}
-                    onPress={handleFlashMode}
-                    disabled={!isCameraReady}
-                  />
-
-                  <MaterialIcons
-                    name={gridIcon}
-                    size={40}
-                    style={styles.toolbarIcon}
-                    onPress={handleGridMode}
-                    disabled={!isCameraReady}
-                  />
-
-                  <MaterialCommunityIcons
-                    name="barcode-scan"
-                    size={40}
-                    // onPress={handleGridMode} //Change to handleBarcode
-                    disabled={!isCameraReady}
-                    style={styles.toolbarIcon}
-                  />
-                </TouchableOpacity>
-              )}
+              {!isGridMode && <ToolBar />}
             </View>
 
             <View style={styles.bottomButtonsContainer}>
