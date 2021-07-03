@@ -8,7 +8,7 @@ def lambda_handler(event, context):
     body = {
         "Url": "https://thestayathomechef.com/wp-content/uploads/2016/06/The-Most-Amazing-Chocolate-Cake-Square-1.jpg"}
     headers = {
-        'Prediction-Key': '606bb8fd69394bc2bf192a8453995342',
+        'Prediction-Key': '',
         'Content-Type': 'application/json'
     }
 
