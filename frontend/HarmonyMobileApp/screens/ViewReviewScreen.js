@@ -91,7 +91,15 @@ const viewReviewScreen = (props) => {
                 ItemSeparatorComponent={Divider}
                 renderItem={({ item })=>(
                     <View >
-                    <Text>User</Text>
+                   <View style={{flexDirection:"column"}}> 
+                      <Image
+                        source={require("../assets/user.png")}
+                        style={{  width: 20,
+                          height: 20,
+                          resizeMode: "contain",}}
+                      />
+                      <Text>User</Text>
+                    </View>
                     <Text>Time</Text>
                     <Text>User Review</Text>
                     </View>
