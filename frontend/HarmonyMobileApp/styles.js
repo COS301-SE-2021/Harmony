@@ -8,6 +8,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     position: "absolute",
   },
+  standardContainer:{
+    flex: 1,
+  },
+  scrollView: {
+    marginHorizontal: 20,
+  },
 
   LoginContainer: {
     flex: 1,
@@ -52,9 +58,28 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     alignItems: "center",
     justifyContent: "center",
+    width:"95%",
+    height:"auto",
     marginTop: 40,
-    position: "relative",
-    backgroundColor: "#D4D3D3",
+    backgroundColor: "#fff",
+    padding: "5%",
+   
+  },
+  shadowBox:{
+    shadowColor: '#000000',
+    shadowOffset: {
+      width: 5,
+      height: 5
+    },
+    shadowRadius: 10,
+    shadowOpacity: 1.0,
+    alignItems: "center",
+    justifyContent: "flex-start",
+    borderRadius: 25,
+    width:"95%",
+    height:"auto",
+    marginTop: 40,
+    backgroundColor: "#fff",
     padding: "5%",
   },
   Text: {

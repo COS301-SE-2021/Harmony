@@ -35,8 +35,8 @@ const HomeScreen = (props) => {
   };
 
   return (
-    <SafeAreaView style={personalStyles.container}>
-      <ScrollView style={personalStyles.scrollView}>
+    <SafeAreaView style={styles.standardContainer}>
+      <ScrollView style={styles.scrollView}>
         <View style={styles.backgroundBarShowLatest}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <View style={{ justifyContent: "center" }}>
@@ -45,24 +45,7 @@ const HomeScreen = (props) => {
           </View>
         </View>
 
-        <View style={styles.backgroundBarShowLatest}>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "flex-start",
-            }}
-          >
-            <View>
-              <Image
-                source={require("../assets/person.png")}
-                style={{ width: 40, height: 40, resizeMode: "contain" }}
-              />
-            </View>
-            <View>
-              <Text style={styles.TextSmall}> User9468 </Text>
-            </View>
-          </View>
+        <View  elevation={5} style={styles.shadowBox}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Text style={styles.TextMedium}> Waffles </Text>
             <View style={{ justifyContent: "center" }}>
@@ -101,238 +84,12 @@ const HomeScreen = (props) => {
             </View>
           </TouchableOpacity>
         </View>
-        <View style={styles.backgroundBarShowLatest}>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "flex-start",
-            }}
-          >
-            <View>
-              <Image
-                source={require("../assets/person.png")}
-                style={{ width: 40, height: 40, resizeMode: "contain" }}
-              />
-            </View>
-            <View>
-              <Text style={styles.TextSmall}> User9468 </Text>
-            </View>
-          </View>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text style={styles.TextMedium}> Burgers </Text>
-            <View style={{ justifyContent: "center" }}>
-              <Image
-                source={require("../assets/plus.png")}
-                style={styles.smallImage}
-              />
-            </View>
-            <Text style={styles.TextMedium}> Coke </Text>
-          </View>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <View style={{ justifyContent: "center" }}>
-              <Image
-                source={require("../assets/location.png")}
-                style={{ width: 30, height: 30, resizeMode: "contain" }}
-              />
-            </View>
-            <View>
-              <Text style={styles.TextSmall}>Rocomamas, Gateway, Umhlanga</Text>
-            </View>
-          </View>
-          <TouchableOpacity
-            style={personalStyles.addToFavouriteBtn}
-            onPress={() => showConfirmDialog()}
-          >
-            <View style={{ justifyContent: "center" }}>
-              <Image
-                source={require("../assets/favourites.png")}
-                style={{ width: 40, height: 40, resizeMode: "contain" }}
-              />
-            </View>
-            <View>
-              <Text style={styles.TextSmall}> Add to favourites</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.backgroundBarShowLatest}>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "flex-start",
-            }}
-          >
-            <View>
-              <Image
-                source={require("../assets/person.png")}
-                style={{ width: 40, height: 40, resizeMode: "contain" }}
-              />
-            </View>
-            <View>
-              <Text style={styles.TextSmall}> User9468 </Text>
-            </View>
-          </View>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text style={styles.TextMedium}> French Toast </Text>
-            <View style={{ justifyContent: "center" }}>
-              <Image
-                source={require("../assets/plus.png")}
-                style={styles.smallImage}
-              />
-            </View>
-            <Text style={styles.TextMedium}> Coffee </Text>
-          </View>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <View style={{ justifyContent: "center" }}>
-              <Image
-                source={require("../assets/location.png")}
-                style={{ width: 30, height: 30, resizeMode: "contain" }}
-              />
-            </View>
-            <View>
-              <Text style={styles.TextSmall}> 1855, Lynnwood, Pretoria</Text>
-            </View>
-          </View>
-          <TouchableOpacity
-            style={personalStyles.addToFavouriteBtn}
-            onPress={() => showConfirmDialog()}
-          >
-            <View style={{ justifyContent: "center" }}>
-              <Image
-                source={require("../assets/favourites.png")}
-                style={{ width: 40, height: 40, resizeMode: "contain" }}
-              />
-            </View>
-            <View>
-              <Text style={styles.TextSmall}> Add to favourites</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.backgroundBarShowLatest}>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "flex-start",
-            }}
-          >
-            <View>
-              <Image
-                source={require("../assets/person.png")}
-                style={{ width: 40, height: 40, resizeMode: "contain" }}
-              />
-            </View>
-            <View>
-              <Text style={styles.TextSmall}> User9468 </Text>
-            </View>
-          </View>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text style={styles.TextMedium}> Bunny Chow </Text>
-            <View style={{ justifyContent: "center" }}>
-              <Image
-                source={require("../assets/plus.png")}
-                style={styles.smallImage}
-              />
-            </View>
-            <Text style={styles.TextMedium}> Coke </Text>
-          </View>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <View style={{ justifyContent: "center" }}>
-              <Image
-                source={require("../assets/location.png")}
-                style={{ width: 30, height: 30, resizeMode: "contain" }}
-              />
-            </View>
-            <View>
-              <Text style={styles.TextSmall}>
-                4 Chilli, Garsfontein, Pretoria
-              </Text>
-            </View>
-          </View>
-          <TouchableOpacity
-            style={personalStyles.addToFavouriteBtn}
-            onPress={() => showConfirmDialog()}
-          >
-            <View style={{ justifyContent: "center" }}>
-              <Image
-                source={require("../assets/favourites.png")}
-                style={{ width: 40, height: 40, resizeMode: "contain" }}
-              />
-            </View>
-            <View>
-              <Text style={styles.TextSmall}> Add to favourites</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.backgroundBarShowLatest}>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "flex-start",
-            }}
-          >
-            <View>
-              <Image
-                source={require("../assets/person.png")}
-                style={{ width: 40, height: 40, resizeMode: "contain" }}
-              />
-            </View>
-            <View>
-              <Text style={styles.TextSmall}> User9468 </Text>
-            </View>
-          </View>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text style={styles.TextMedium}> Koeksister </Text>
-            <View style={{ justifyContent: "center" }}>
-              <Image
-                source={require("../assets/plus.png")}
-                style={styles.smallImage}
-              />
-            </View>
-            <Text style={styles.TextMedium}> Tea </Text>
-          </View>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <View style={{ justifyContent: "center" }}>
-              <Image
-                source={require("../assets/location.png")}
-                style={{ width: 30, height: 30, resizeMode: "contain" }}
-              />
-            </View>
-            <View>
-              <Text style={styles.TextSmall}>
-                Bakehouse, HazelWood, Pretoria
-              </Text>
-            </View>
-          </View>
-          <TouchableOpacity
-            style={personalStyles.addToFavouriteBtn}
-            onPress={() => showConfirmDialog()}
-          >
-            <View style={{ justifyContent: "center" }}>
-              <Image
-                source={require("../assets/favourites.png")}
-                style={{ width: 40, height: 40, resizeMode: "contain" }}
-              />
-            </View>
-            <View>
-              <Text style={styles.TextSmall}> Add to favourites</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
       </ScrollView>
     </SafeAreaView>
   );
 };
 const personalStyles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: StatusBar.currentHeight,
-  },
-  scrollView: {
-    marginHorizontal: 20,
-  },
+ 
   text: {
     fontSize: 42,
   },
