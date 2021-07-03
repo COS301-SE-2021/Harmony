@@ -14,7 +14,7 @@ import { StatusBar } from "expo-status-bar";
 import { Icon } from "@ui-kitten/components";
 import * as ImagePicker from "expo-image-picker";
 import { useIsFocused } from "@react-navigation/native";
-import { MaterialIcons } from "@expo/vector-icons";
+import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function CameraScreen() {
   const cameraRef = useRef();
@@ -28,7 +28,8 @@ export default function CameraScreen() {
   const [image, setImage] = useState(null);
   const isFocused = useIsFocused();
   const [flashMode, setFlashMode] = React.useState("off");
-  const [flashIcon, setFlashIcon] = useState("flash-off-outline");
+  // const [flashIcon, setFlashIcon] = useState("flash-off-outline");
+  const [flashIcon, setFlashIcon] = useState("flash-off");
 
   const [isGridMode, setGridMode] = React.useState(false);
   const [gridIcon, setGridIcon] = useState("grid-off");
@@ -130,14 +131,17 @@ export default function CameraScreen() {
   };
 
   const handleFlashMode = () => {
-    if (flashMode === "on") {
+    if (flashMode === "auto") {
       setFlashMode("off");
-      setFlashIcon("flash-off-outline");
+      // setFlashIcon("flash-off-outline");
+      setFlashIcon("flash-off");
     } else if (flashMode === "off") {
       setFlashMode("on");
-      setFlashIcon("flash-outline");
-    } else {
+      // setFlashIcon("flash-outline");
+      setFlashIcon("flash-on");
+    } else if (flashMode === "on") {
       setFlashMode("auto");
+      setFlashIcon("flash-auto");
     }
   };
 
@@ -278,11 +282,10 @@ export default function CameraScreen() {
                   source={require("../assets/Grid-Transparent-3.png")}
                 >
                   <TouchableOpacity style={styles.toolbarContainer}>
-                    <Icon
-                      style={styles.toolbarIcon}
-                      fill="#fff"
-                      name="flash-outline"
+                    <MaterialIcons
                       name={flashIcon}
+                      size={40}
+                      style={styles.toolbarIcon}
                       onPress={handleFlashMode}
                       disabled={!isCameraReady}
                     />
@@ -290,28 +293,27 @@ export default function CameraScreen() {
                     <MaterialIcons
                       name={gridIcon}
                       size={40}
-                      color="#fff"
-                      onPress={handleGridMode} //Change to handleBarcode
+                      style={styles.toolbarIcon}
+                      onPress={handleGridMode}
                       disabled={!isCameraReady}
                     />
 
-                    <Icon
-                      style={styles.toolbarIcon}
-                      fill="#fff"
-                      name="search-outline"
-                      onPress={handleFlashMode} //Change to handleBarcode
+                    <MaterialCommunityIcons
+                      name="barcode-scan"
+                      size={40}
+                      // onPress={handleGridMode} //Change to handleBarcode
                       disabled={!isCameraReady}
+                      style={styles.toolbarIcon}
                     />
                   </TouchableOpacity>
                 </ImageBackground>
               )}
               {!isGridMode && (
                 <TouchableOpacity style={styles.toolbarContainer}>
-                  <Icon
-                    style={styles.toolbarIcon}
-                    fill="#fff"
-                    name="flash-outline"
+                  <MaterialIcons
                     name={flashIcon}
+                    size={40}
+                    style={styles.toolbarIcon}
                     onPress={handleFlashMode}
                     disabled={!isCameraReady}
                   />
@@ -319,17 +321,17 @@ export default function CameraScreen() {
                   <MaterialIcons
                     name={gridIcon}
                     size={40}
-                    color="#fff"
-                    onPress={handleGridMode} //Change to handleBarcode
+                    style={styles.toolbarIcon}
+                    onPress={handleGridMode}
                     disabled={!isCameraReady}
                   />
 
-                  <Icon
-                    style={styles.toolbarIcon}
-                    fill="#fff"
-                    name="search-outline"
-                    onPress={handleFlashMode} //Change to handleBarcode
+                  <MaterialCommunityIcons
+                    name="barcode-scan"
+                    size={40}
+                    // onPress={handleGridMode} //Change to handleBarcode
                     disabled={!isCameraReady}
+                    style={styles.toolbarIcon}
                   />
                 </TouchableOpacity>
               )}
@@ -341,7 +343,12 @@ export default function CameraScreen() {
                 disabled={!isCameraReady}
                 onPress={pickImage}
               >
-                <Icon style={styles.icon} fill="#fff" name="image-outline" />
+                {/* <Icon style={styles.icon} fill="#fff" name="image-outline" /> */}
+                <MaterialCommunityIcons
+                  name="image-multiple-outline"
+                  size={60}
+                  color="#fff"
+                />
               </TouchableOpacity>
 
               <TouchableOpacity
@@ -368,7 +375,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     flexDirection: "row",
     bottom: 15,
-    width: "100%",
+    // width: "100%",
   },
 
   previewButtonsContainer: {
@@ -389,8 +396,8 @@ const styles = StyleSheet.create({
   },
   gallery: {
     left: 20,
-    width: 70,
-    height: 70,
+    width: 60,
+    height: 60,
   },
   icon: {
     width: 80,
@@ -398,12 +405,12 @@ const styles = StyleSheet.create({
   },
   toolbarContainer: {
     position: "absolute",
-    top: 250,
+    top: 180,
+    left: 5,
   },
   toolbarIcon: {
-    paddingTop: 80,
-    width: 40,
-    height: 40,
+    paddingTop: 40,
+    color: "#fff",
   },
   cameraPreview: {
     flex: 1,
