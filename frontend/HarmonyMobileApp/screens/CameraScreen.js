@@ -30,6 +30,9 @@ export default function CameraScreen() {
   const [flashMode, setFlashMode] = React.useState("off");
   const [flashIcon, setFlashIcon] = useState("flash-off-outline");
 
+  const [isGridMode, setGridMode] = React.useState(false);
+  const [gridIcon, setGridIcon] = useState("grid-off");
+
   // Screen Ratio and image padding
   const [imagePadding, setImagePadding] = useState(0);
   const [ratio, setRatio] = useState("4:3"); // default is 4:3
@@ -135,6 +138,16 @@ export default function CameraScreen() {
       setFlashIcon("flash-outline");
     } else {
       setFlashMode("auto");
+    }
+  };
+
+  const handleGridMode = () => {
+    if (isGridMode === true) {
+      setGridMode(false);
+      setGridIcon("grid-off");
+    } else if (isGridMode === false) {
+      setGridMode(true);
+      setGridIcon("grid-on");
     }
   };
 
@@ -254,30 +267,63 @@ export default function CameraScreen() {
         {!isPreview && (
           <View style={styles.container}>
             <View style={styles.container}>
-              <ImageBackground
-                style={{
-                  width: windowWidth,
-                  height: windowHeight,
-                }}
-                source={require("../assets/Grid-Transparent-3.png")}
-              >
+              {isGridMode && (
+                <ImageBackground
+                  style={{
+                    width: windowWidth,
+                    height: windowHeight,
+                  }}
+                  // name= {flashMode === 'off' ? '#000' : '#fff}
+
+                  source={require("../assets/Grid-Transparent-3.png")}
+                >
+                  <TouchableOpacity style={styles.toolbarContainer}>
+                    <Icon
+                      style={styles.toolbarIcon}
+                      fill="#fff"
+                      name="flash-outline"
+                      name={flashIcon}
+                      onPress={handleFlashMode}
+                      disabled={!isCameraReady}
+                    />
+
+                    <MaterialIcons
+                      name={gridIcon}
+                      size={40}
+                      color="#fff"
+                      onPress={handleGridMode} //Change to handleBarcode
+                      disabled={!isCameraReady}
+                    />
+
+                    <Icon
+                      style={styles.toolbarIcon}
+                      fill="#fff"
+                      name="search-outline"
+                      onPress={handleFlashMode} //Change to handleBarcode
+                      disabled={!isCameraReady}
+                    />
+                  </TouchableOpacity>
+                </ImageBackground>
+              )}
+              {!isGridMode && (
                 <TouchableOpacity style={styles.toolbarContainer}>
                   <Icon
                     style={styles.toolbarIcon}
                     fill="#fff"
                     name="flash-outline"
-                    // name= {flashMode === 'off' ? '#000' : '#fff}
                     name={flashIcon}
                     onPress={handleFlashMode}
                     disabled={!isCameraReady}
                   />
-                  <Icon
-                    style={styles.toolbarIcon}
-                    fill="#fff"
-                    name="grid-outline"
-                    onPress={handleFlashMode} //Change to handleGridMode
+
+                  <MaterialIcons
+                    name={gridIcon}
+                    size={40}
+                    color="#fff"
+                    onPress={handleGridMode} //Change to handleBarcode
                     disabled={!isCameraReady}
                   />
+
                   <Icon
                     style={styles.toolbarIcon}
                     fill="#fff"
@@ -286,7 +332,7 @@ export default function CameraScreen() {
                     disabled={!isCameraReady}
                   />
                 </TouchableOpacity>
-              </ImageBackground>
+              )}
             </View>
 
             <View style={styles.bottomButtonsContainer}>
@@ -351,10 +397,8 @@ const styles = StyleSheet.create({
     height: 80,
   },
   toolbarContainer: {
-    flex: 1,
-    flexWrap: "nowrap",
-    flexDirection: "column",
-    justifyContent: "center",
+    position: "absolute",
+    top: 250,
   },
   toolbarIcon: {
     paddingTop: 80,
@@ -364,5 +408,8 @@ const styles = StyleSheet.create({
   cameraPreview: {
     flex: 1,
   },
-  grid: {},
+  hidden: {
+    width: 0,
+    height: 0,
+  },
 });
