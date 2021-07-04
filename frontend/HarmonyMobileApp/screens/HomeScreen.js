@@ -68,6 +68,7 @@ const HomeScreen = (props) => {
             data={data}
             keyExtractor={({ PID }, index) => PID}
             renderItem={({ item }) => (
+              <View>
         <Card style={styles.cardContainer}>
                 <View style={styles.imageContainer}>
                     <Image
@@ -88,7 +89,7 @@ const HomeScreen = (props) => {
                     <SimpleLineIcons name="location-pin" size={25} color="black" />
                     <Text>Location</Text>
                     <Feather name="tag" size={25} color="black" />
-                    <Text>Tag1,Tag2,Tag3,Tag4</Text>
+                    <Text style={styles.TextSmall}>Tag1,Tag2,Tag3,Tag4</Text>
                     
                 </View>
                 <Divider/>
@@ -109,6 +110,8 @@ const HomeScreen = (props) => {
                 </View>
                 
                 </Card>
+                <Text></Text>
+                </View>
                 )}
                 />
               )}

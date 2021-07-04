@@ -10,7 +10,9 @@ const styles = StyleSheet.create({
   },
   cardContainer:{
     height:"100%",
-    flex:1
+    flex:1,
+    borderColor:"grey",
+    borderWidth:1,
   },
   standardContainer:{
     flex: 1,
