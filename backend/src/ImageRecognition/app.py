@@ -8,7 +8,7 @@ def lambda_handler(event, context):
     body = {
         "Url": "https://thestayathomechef.com/wp-content/uploads/2016/06/The-Most-Amazing-Chocolate-Cake-Square-1.jpg"}
     headers = {
-        'Prediction-Key': '',
+        'Prediction-Key': '{Prediction-Key}',
         'Content-Type': 'application/json'
     }
 
@@ -17,6 +17,7 @@ def lambda_handler(event, context):
     # load the json data
     data = response.json()
     a = data['predictions'][0]['tagName']
-    print("Harmony has predicted a", a)
+    b = data['predictions'][0]['probability']
+    print("Harmony has predicted a",a , " with a probability of", b)
 
-    return a
+    return a+b
