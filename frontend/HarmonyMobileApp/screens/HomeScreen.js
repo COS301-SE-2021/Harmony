@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   SafeAreaView,
@@ -7,6 +7,8 @@ import {
   StyleSheet,
   StatusBar,
   TouchableOpacity,
+  ActivityIndicator,
+  FlatList,
   Alert,
 } from "react-native";
 import styles from "../styles";
@@ -15,8 +17,21 @@ import { Feather,SimpleLineIcons  } from '@expo/vector-icons';
 import * as eva from '@eva-design/eva';
 import { default as theme } from '../theme.json';
 import { ApplicationProvider, Layout,Button, Divider, Card,Text } from '@ui-kitten/components';
+import { useIsFocused } from "@react-navigation/native";
 
 const HomeScreen = (props) => {
+  const viewPairingURL =
+    "https://qkvdftfq7b.execute-api.eu-west-1.amazonaws.com/dev/viewpairings";
+  const [isLoading, setLoading] = useState(useIsFocused());
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetch(viewPairingURL)
+      .then((response) => response.json())
+      .then((json) => setData(json.Data))
+      .catch((error) => alert(error))
+      .then(setLoading(false));
+  });
   const showConfirmDialog = () => {
     return Alert.alert(
       "Add to Favourites",
@@ -45,6 +60,14 @@ const HomeScreen = (props) => {
         <View style={styles.Header}>
               <Text style={styles.TextLarge}> Harmony </Text>
         </View>
+        <Text>Popular pairings of the day</Text>
+        {isLoading ? (
+          <ActivityIndicator />
+        ) : (
+          <FlatList
+            data={data}
+            keyExtractor={({ PID }, index) => PID}
+            renderItem={({ item }) => (
         <Card style={styles.cardContainer}>
                 <View style={styles.imageContainer}>
                     <Image
@@ -57,8 +80,8 @@ const HomeScreen = (props) => {
                     />
                 </View>
                 <View style={styles.cardText}>
-                <Text>FoodItem</Text>
-                <Text>DrinkItem</Text>
+                <Text>{item.FoodItem}</Text>
+                <Text>{item.DrinkItem}</Text>
                 <Text>Pairing descr</Text>
                 </View>
                 <View style={styles.locationBar}>
@@ -86,7 +109,9 @@ const HomeScreen = (props) => {
                 </View>
                 
                 </Card>
-               
+                )}
+                />
+              )}
                 </View>
       </ScrollView>
       </ApplicationProvider>
