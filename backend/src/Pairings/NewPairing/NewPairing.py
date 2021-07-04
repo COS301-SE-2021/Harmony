@@ -82,10 +82,10 @@ def validatestring(inputstring: str) -> bool:
     :rtype Boolean
     """
     # checking if string is empty (nothing entered including spaces.)
-    print("Check if the input is empty : ", end="")
+    # print("Check if the input is empty : ", end="")
     if not inputstring:
         # the string is empty
-        print("Invalid String")
+        # print("Invalid String")
         return False
     else:
         # not empty and check second condition
@@ -95,5 +95,5 @@ def validatestring(inputstring: str) -> bool:
             return True
         else:
             # String invalid
-            print("Invalid String")
+            # print("Invalid String")
             return False

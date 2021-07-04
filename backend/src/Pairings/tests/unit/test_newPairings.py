@@ -21,7 +21,6 @@ def fixture_event():
 def test_New_Pairing(fixture_event):
     ret = NewPairing.newpairing(fixture_event, "")
     data = json.loads(ret)
-    print(data)
     assert data["isSuccessful"] == "true"
     assert "PID" in data
 
