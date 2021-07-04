@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 import {
   SafeAreaView,
@@ -16,6 +16,8 @@ import {
 } from "react-native-image-header-scroll-view";
 import { FontAwesome } from "@expo/vector-icons";
 import ImagedCarouselCard from "react-native-imaged-carousel-card";
+
+import * as Animatable from "react-native-animatable";
 
 const MIN_HEIGHT = Platform.OS === "ios" ? 90 : 55;
 const MAX_HEIGHT = 300;
@@ -71,6 +73,8 @@ const response = {
 };
 
 const PairingResultsScreen = (props) => {
+  const navTitleView = useRef(null);
+
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
@@ -83,9 +87,25 @@ const PairingResultsScreen = (props) => {
             source={{ uri: response.data.imageURI }}
           />
         )}
+        renderForeground={() => (
+          <View style={styles.titleContainer}>
+            <Text style={styles.imageTitle}>{response.data.foodItem}</Text>
+          </View>
+        )}
+        renderFixedForeground={() => (
+          <Animatable.View style={styles.navTitleView} ref={navTitleView}>
+            <Text style={styles.navTitle}>{response.data.foodItem}</Text>
+          </Animatable.View>
+        )}
       >
-        <TriggeringView style={styles.section}>
-          <View>
+        <TriggeringView
+          style={styles.section}
+          onHide={() => navTitleView.current.fadeInUp(200)}
+          onDisplay={() => navTitleView.current.fadeOut(100)}
+        >
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
             <Text style={styles.title}>{response.data.foodItem}</Text>
           </View>
         </TriggeringView>
@@ -93,7 +113,6 @@ const PairingResultsScreen = (props) => {
         <View style={[styles.section]}>
           <Text style={styles.sectionContent}>{response.data.foodDesc}</Text>
         </View>
-
         <View style={styles.section}>
           <View style={styles.tags}>
             {response.data.tags.map((tag, index) => (
@@ -104,7 +123,6 @@ const PairingResultsScreen = (props) => {
             ))}
           </View>
         </View>
-
         {/* <View style={[styles.section]}>
           {response.data.drinkPairings.map((drink, index) => (
             <View style={styles.tagContainer} key={index}>
@@ -115,7 +133,6 @@ const PairingResultsScreen = (props) => {
             </View>
           ))}
         </View> */}
-
         <View style={[styles.section]}>
           <Text style={styles.title}>Recommended:</Text>
 
@@ -127,7 +144,6 @@ const PairingResultsScreen = (props) => {
             source={{ uri: response.data.recommendedDrink.imageURI }}
           />
         </View>
-
         <View style={[styles.section]}>
           {response.data.drinkPairings.map((drink, index) => (
             <View style={styles.drinks} key={index}>
@@ -224,5 +240,28 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     height: 150,
     width: 150,
+  },
+  titleContainer: {
+    flex: 1,
+    alignSelf: "stretch",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  imageTitle: {
+    color: "white",
+    backgroundColor: "transparent",
+    fontSize: 24,
+  },
+  navTitleView: {
+    height: MIN_HEIGHT,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingTop: Platform.OS === "ios" ? 40 : 5,
+    opacity: 0,
+  },
+  navTitle: {
+    color: "white",
+    fontSize: 18,
+    backgroundColor: "transparent",
   },
 });
