@@ -1,7 +1,6 @@
 import React from "react";
 import {
   View,
-  Text,
   SafeAreaView,
   Image,
   ScrollView,
@@ -11,6 +10,11 @@ import {
   Alert,
 } from "react-native";
 import styles from "../styles";
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { Feather,SimpleLineIcons  } from '@expo/vector-icons'; 
+import * as eva from '@eva-design/eva';
+import { default as theme } from '../theme.json';
+import { ApplicationProvider, Layout,Button, Divider, Card,Text } from '@ui-kitten/components';
 
 const HomeScreen = (props) => {
   const showConfirmDialog = () => {
@@ -35,57 +39,57 @@ const HomeScreen = (props) => {
   };
 
   return (
-    <SafeAreaView style={styles.standardContainer}>
+<ApplicationProvider  {...eva} theme={{ ...eva.light, ...theme }} style={styles.container}>
       <ScrollView style={styles.scrollView}>
-        <View style={styles.backgroundBarShowLatest}>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <View style={{ justifyContent: "center" }}>
+        <View style={{height:"100%"}}>
+        <View style={styles.Header}>
               <Text style={styles.TextLarge}> Harmony </Text>
-            </View>
-          </View>
         </View>
-
-        <View  elevation={5} style={styles.shadowBox}>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text style={styles.TextMedium}> Waffles </Text>
-            <View style={{ justifyContent: "center" }}>
-              <Image
-                source={require("../assets/plus.png")}
-                style={styles.smallImage}
-              />
-            </View>
-            <Text style={styles.TextMedium}> A Milkshake </Text>
-          </View>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <View style={{ justifyContent: "center" }}>
-              <Image
-                source={require("../assets/location.png")}
-                style={{ width: 30, height: 30, resizeMode: "contain" }}
-              />
-            </View>
-            <View>
-              <Text style={styles.TextSmall}>
-                Waffle House, Ramsgate, South Coast
-              </Text>
-            </View>
-          </View>
-          <TouchableOpacity
-            style={personalStyles.addToFavouriteBtn}
-            onPress={() => showConfirmDialog()}
-          >
-            <View style={{ justifyContent: "center" }}>
-              <Image
-                source={require("../assets/favourites.png")}
-                style={{ width: 40, height: 40, resizeMode: "contain" }}
-              />
-            </View>
-            <View>
-              <Text style={styles.TextSmall}> Add to favourites</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
+        <Card style={styles.cardContainer}>
+                <View style={styles.imageContainer}>
+                    <Image
+                      source={require("../assets/waffles.jpg")}
+                      style={styles.standardImage}
+                    />
+                    <Image
+                      source={require("../assets/milkshake.jpg")}
+                      style={styles.standardImage}
+                    />
+                </View>
+                <View style={styles.cardText}>
+                <Text>FoodItem</Text>
+                <Text>DrinkItem</Text>
+                <Text>Pairing descr</Text>
+                </View>
+                <View style={styles.locationBar}>
+                    <SimpleLineIcons name="location-pin" size={25} color="black" />
+                    <Text>Location</Text>
+                    <Feather name="tag" size={25} color="black" />
+                    <Text>Tag1,Tag2,Tag3,Tag4</Text>
+                    
+                </View>
+                <Divider/>
+                <View style={styles.iconsBar}>
+                  <View style={{flexDirection:"row",justifyContent:"center"}}>
+                  <Feather name="star" size={25} color="black" />
+                  <Text style={{paddingLeft:"2%",paddingVertical:"1%"}}>4.6</Text>
+                  </View>
+                  <View style={{flexDirection:"row",justifyContent:"center"}}>
+                  <Feather name="arrow-down-circle" size={25} color="black" />
+                  <Text style={{paddingLeft:"2%",paddingVertical:"1%"}}>45</Text>
+                  </View>
+                  <View style={{flexDirection:"row",justifyContent:"center"}}>
+                  <Feather name="arrow-up-circle" size={25} color="black" />
+                  <Text style={{paddingLeft:"2%",paddingVertical:"1%"}}>100</Text>
+                  </View>
+                  <Feather name="heart" size={25} color="black" />
+                </View>
+                
+                </Card>
+               
+                </View>
       </ScrollView>
-    </SafeAreaView>
+      </ApplicationProvider>
   );
 };
 const personalStyles = StyleSheet.create({

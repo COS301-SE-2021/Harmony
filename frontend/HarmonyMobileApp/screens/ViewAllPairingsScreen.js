@@ -18,7 +18,6 @@ import { ApplicationProvider, Layout,Button, Divider, Card,Text } from '@ui-kitt
 import { default as theme } from '../theme.json';
 import styles from "../styles";
 import Icon from 'react-native-vector-icons/FontAwesome';
-import viewReviewScreen from "./ViewReviewScreen.js"
 
 const ViewAllPairingsScreen = (props) => {
   const viewPairingURL =
@@ -56,7 +55,7 @@ const ViewAllPairingsScreen = (props) => {
   };
   return (
     
-    <ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }}>
+    <ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }} style={styles.container}>
     <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Label</Text>
       <ScrollView>
