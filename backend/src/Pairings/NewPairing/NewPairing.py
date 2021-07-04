@@ -7,6 +7,10 @@ import boto3
 # import two packages to help us with dates and date formatting
 from time import gmtime, strftime
 
+"""
+This file implements a new pairing that will be added to the pairings database.
+"""
+
 dynamodb = boto3.resource('dynamodb')
 
 # use the DynamoDB object to select our table
@@ -18,6 +22,12 @@ now = strftime("%a, %d %b %Y %H:%M:%S +0000", gmtime())
 
 # define the handler function that the Lambda service will use as an entry point
 def newpairing(event, context):
+    """
+    This function adds a new pairing to the database.
+    A Pid is generated for the user.
+    If any input is not passed in, the system does not add the new pairing.
+    :returns JSON object saying whether it was successful, as well as the generated Pid
+    """
     # extract values from the event object we got from the Lambda service and store in a variable
     # exits if the string is not correct.
     b = event['DrinkDesc']
@@ -36,7 +46,8 @@ def newpairing(event, context):
     if not validatestring(e):
         exit()
 
-    # Must implement location data instead of string
+    #TODO
+    # Must implement location data instead of string in future
     f = event['Location']
     if not validatestring(f):
         exit()
@@ -64,6 +75,12 @@ def newpairing(event, context):
 
 
 def validatestring(inputstring: str) -> bool:
+    """
+    :param inputstring: string going through validation check
+    :type inputstring: string
+    :returns true/false depending whether string is valid or not
+    :rtype Boolean
+    """
     # checking if string is empty (nothing entered including spaces.)
     print("Check if the input is empty : ", end="")
     if not inputstring:
