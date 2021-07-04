@@ -13,6 +13,7 @@ import {
 import HomeScreen from "./HomeScreen.js";
 import ViewFavouritesScreen from "./ViewFavouritesScreen.js";
 import SettingsScreen from "./SettingsScreen.js";
+import PairingResultsScreen from "./PairingResultsScreen.js";
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -43,7 +44,7 @@ const BottomTabBar = ({ navigation, state }) => (
 
 const TabNavigator = () => (
   <Navigator tabBar={(props) => <BottomTabBar {...props} />}>
-    <Screen name="Home" component={HomeScreen} />
+    <Screen name="Home" component={PairingResultsScreen} />
     <Screen name="Camera" component={CameraScreen} />
     <Screen name="Favourite" component={ViewFavouritesScreen} />
     <Screen name="Settings" component={SettingsScreen} />
