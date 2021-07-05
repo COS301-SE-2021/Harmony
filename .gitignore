@@ -74,5 +74,3 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 frontend/HarmonyMobileApp/.expo/packager-info.json
 frontend/HarmonyMobileApp/.expo/settings.json
-/.idea/
-/backend/src/Pairings/.aws-sam/
