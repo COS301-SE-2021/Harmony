@@ -8,6 +8,8 @@ import {
   Image,
   Dimensions,
   Platform,
+  FlatList,
+  ScrollView,
 } from "react-native";
 import { Layout, Text } from "@ui-kitten/components";
 import {
@@ -41,6 +43,7 @@ const response = {
     },
     drinkPairings: [
       {
+        id: "1",
         drinkItem: "Espresso",
         drinkDesc:
           "Espresso is a coffee-brewing method of Italian origin, in which a small amount of nearly boiling water is forced under 9–10 bars of pressure through finely-ground coffee beans.",
@@ -48,6 +51,7 @@ const response = {
           "https://cdn-a.william-reed.com/var/wrbm_gb_food_pharma/storage/images/publications/food-beverage-nutrition/beveragedaily.com/news/r-d/aussie-barista-helps-scientists-to-brew-the-perfect-espresso/10795433-1-eng-GB/Aussie-barista-helps-scientists-to-brew-the-perfect-espresso_wrbm_large.jpg",
       },
       {
+        id: "2",
         drinkItem: "Iced coffee",
         drinkDesc:
           "Iced coffee is a coffee beverage served cold. It may be prepared either by brewing coffee in the normal way and then serving it over ice or in cold milk, or by brewing the coffee cold.",
@@ -55,6 +59,7 @@ const response = {
           "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Blue_Bottle%2C_Kyoto_Style_Ice_Coffee_%285909775445%29.jpg/600px-Blue_Bottle%2C_Kyoto_Style_Ice_Coffee_%285909775445%29.jpg",
       },
       {
+        id: "3",
         drinkItem: "Iced coffee",
         drinkDesc:
           "Iced coffee is a coffee beverage served cold. It may be prepared either by brewing coffee in the normal way and then serving it over ice or in cold milk, or by brewing the coffee cold.",
@@ -62,6 +67,7 @@ const response = {
           "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Blue_Bottle%2C_Kyoto_Style_Ice_Coffee_%285909775445%29.jpg/600px-Blue_Bottle%2C_Kyoto_Style_Ice_Coffee_%285909775445%29.jpg",
       },
       {
+        id: "4",
         drinkItem: "Iced coffee",
         drinkDesc:
           "Iced coffee is a coffee beverage served cold. It may be prepared either by brewing coffee in the normal way and then serving it over ice or in cold milk, or by brewing the coffee cold.",
@@ -72,8 +78,40 @@ const response = {
   },
 };
 
+const DATA = {
+  statusCode: 200,
+  data: {
+    foodItem: "Koeksister",
+
+    drinks: [
+      {
+        id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+        title: "First Item",
+        drinkItem: "Iced coffee",
+      },
+      {
+        id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+        title: "Second Item",
+        drinkItem: "Iced coffee",
+      },
+      {
+        id: "58694a0f-3da1-471f-bd96-145571e29d72",
+        title: "Third Item",
+        drinkItem: "Iced coffee",
+      },
+    ],
+  },
+};
 const PairingResultsScreen = (props) => {
   const navTitleView = useRef(null);
+  const Item = ({ drinkItem }) => (
+    <View style={styles.flatlistItem}>
+      <Text style={styles.flatlistTitle}>{drinkItem}</Text>
+    </View>
+  );
+
+  // const renderItem = ({ item }) => <Item title={item.title} />;
+  const renderItem = ({ item }) => <Item drinkItem={item.drinkItem} />;
 
   return (
     <View style={styles.container}>
@@ -130,7 +168,7 @@ const PairingResultsScreen = (props) => {
           />
         </View>
 
-        <View style={[styles.section]}>
+        {/* <View style={styles.section}>
           {response.data.drinkPairings.map((drink, index) => (
             <View style={styles.drinks} key={index}>
               <Image
@@ -138,6 +176,28 @@ const PairingResultsScreen = (props) => {
                 text={drink.drinkItem}
                 source={{ uri: drink.imageURI }}
               />
+            </View>
+          ))}
+        </View> */}
+
+        {/* <View style={styles.flatlistContainer}>
+          <FlatList
+            // data={response.data.drinkPairings}
+            data={DATA.data.drinks}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.id}
+          />
+        </View> */}
+        <ScrollView
+          style={styles.ImageContainer}
+          contentContainerStyle={{
+            flexDirection: "row",
+            flexWrap: "wrap",
+          }}
+          horizontal={false}
+        >
+          {response.data.drinkPairings.map((drink, index) => (
+            <View key={index}>
               <Image
                 style={styles.drinkContainer}
                 text={drink.drinkItem}
@@ -145,7 +205,7 @@ const PairingResultsScreen = (props) => {
               />
             </View>
           ))}
-        </View>
+        </ScrollView>
       </ImageHeaderScrollView>
     </View>
   );
@@ -256,5 +316,33 @@ const styles = StyleSheet.create({
     marginLeft: 16,
     fontWeight: "600",
     textAlign: "center",
+  },
+  flatlistContainer: {
+    flex: 1,
+    marginTop: StatusBar.currentHeight || 0,
+  },
+  flatlistItem: {
+    backgroundColor: "#f9c2ff",
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+  flatlistTitle: {
+    fontSize: 32,
+  },
+  ImageContainer: {
+    marginHorizontal: 16,
+    marginTop: 30,
+    width: "100%",
+  },
+  drinkImage: {
+    shadowColor: "black",
+    shadowOffset: {
+      width: -10,
+      height: 9,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 2,
+    // elevation: 5,
   },
 });
