@@ -31,7 +31,7 @@ const response = {
     foodDesc:
       "A koeksister also spelled koesister is a traditional Afrikaner confectionery made of fried dough infused in syrup or honey. There is also a Cape Malay version of the dish, which is a fried ball of dough that is rolled in desiccated coconut. ",
     location: "Pretoria",
-    tags: ["Desert", "Sweet", "Snack"],
+    tags: ["Dessert", "Sweet", "Snack"],
     recommendedDrink: {
       drinkItem: "Tea",
       drinkDesc:
@@ -87,11 +87,6 @@ const PairingResultsScreen = (props) => {
             source={{ uri: response.data.imageURI }}
           />
         )}
-        renderForeground={() => (
-          <View style={styles.titleContainer}>
-            <Text style={styles.imageTitle}>{response.data.foodItem}</Text>
-          </View>
-        )}
         renderFixedForeground={() => (
           <Animatable.View style={styles.navTitleView} ref={navTitleView}>
             <Text style={styles.navTitle}>{response.data.foodItem}</Text>
@@ -103,9 +98,7 @@ const PairingResultsScreen = (props) => {
           onHide={() => navTitleView.current.fadeInUp(200)}
           onDisplay={() => navTitleView.current.fadeOut(100)}
         >
-          <View
-            style={{ flexDirection: "row", justifyContent: "space-between" }}
-          >
+          <View style={{ flexDirection: "row", justifyContent: "center" }}>
             <Text style={styles.title}>{response.data.foodItem}</Text>
           </View>
         </TriggeringView>
@@ -123,18 +116,9 @@ const PairingResultsScreen = (props) => {
             ))}
           </View>
         </View>
-        {/* <View style={[styles.section]}>
-          {response.data.drinkPairings.map((drink, index) => (
-            <View style={styles.tagContainer} key={index}>
-              <Image
-                style={styles.drinkImage}
-                source={{ uri: drink.imageURI }}
-              />
-            </View>
-          ))}
-        </View> */}
+
         <View style={[styles.section]}>
-          <Text style={styles.title}>Recommended:</Text>
+          <Text style={styles.subtitle}>Recommended:</Text>
 
           <ImagedCarouselCard
             width={300}
@@ -142,8 +126,10 @@ const PairingResultsScreen = (props) => {
             shadowColor="#051934"
             text={response.data.recommendedDrink.drinkItem}
             source={{ uri: response.data.recommendedDrink.imageURI }}
+            textStyle={styles.imageTextOverlay}
           />
         </View>
+
         <View style={[styles.section]}>
           {response.data.drinkPairings.map((drink, index) => (
             <View style={styles.drinks} key={index}>
@@ -190,8 +176,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     alignSelf: "center",
   },
-  name: {
-    fontWeight: "bold",
+  subtitle: {
+    fontSize: 20,
+    alignSelf: "center",
+    paddingBottom: 10,
   },
   section: {
     padding: 20,
@@ -204,9 +192,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: "justify",
   },
-  sectionLarge: {
-    minHeight: 200,
-  },
+
   tags: {
     flexDirection: "row",
     justifyContent: "flex-start",
@@ -263,5 +249,12 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 18,
     backgroundColor: "transparent",
+  },
+  imageTextOverlay: {
+    fontSize: 18,
+    color: "white",
+    marginLeft: 16,
+    fontWeight: "600",
+    textAlign: "center",
   },
 });
