@@ -1,4 +1,10 @@
-[![Coverage Status](https://coveralls.io/repos/github/COS301-SE-2021/Harmony/badge.svg?branch=master)](https://coveralls.io/github/COS301-SE-2021/Harmony?branch=master)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=COS301-SE-2021_Harmony&metric=alert_status)](https://sonarcloud.io/dashboard?id=COS301-SE-2021_Harmony)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=COS301-SE-2021_Harmony&metric=bugs)](https://sonarcloud.io/dashboard?id=COS301-SE-2021_Harmony)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=COS301-SE-2021_Harmony&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=COS301-SE-2021_Harmony)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=COS301-SE-2021_Harmony&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=COS301-SE-2021_Harmony)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=COS301-SE-2021_Harmony&metric=ncloc)](https://sonarcloud.io/dashboard?id=COS301-SE-2021_Harmony)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=COS301-SE-2021_Harmony&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=COS301-SE-2021_Harmony)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=COS301-SE-2021_Harmony&metric=security_rating)](https://sonarcloud.io/dashboard?id=COS301-SE-2021_Harmony)
 [![Issues tracking](https://img.shields.io/github/issues/COS301-SE-2021/Harmony)](https://img.shields.io/github/issues/COS301-SE-2021/Harmony)
 
 # DreamTeam
