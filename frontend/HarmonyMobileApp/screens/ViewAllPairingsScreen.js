@@ -13,9 +13,16 @@ import {
   FlatList,
   Alert,
 } from "react-native";
-
-import { Icon, Layout, Text } from "@ui-kitten/components";
-
+import * as eva from "@eva-design/eva";
+import {
+  ApplicationProvider,
+  Layout,
+  Button,
+  Divider,
+  Card,
+  Text,
+} from "@ui-kitten/components";
+import { default as theme } from "../theme.json";
 import styles from "../styles";
 const BackIcon = (props) => <Icon {...props} name="arrow-back" />;
 
@@ -53,80 +60,75 @@ const ViewAllPairingsScreen = (navigation) => {
       ]
     );
   };
-
   return (
-    <SafeAreaView style={personalStyles.container}>
-      <View style={styles.backgroundBarShowLatest}>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <View style={{ justifyContent: "center" }}>
-            <Text style={styles.TextLarge}> Popular Pairings </Text>
-          </View>
-        </View>
-      </View>
-      <View>
-        {isLoading ? (
-          <ActivityIndicator />
-        ) : (
-          <FlatList
-            data={data}
-            keyExtractor={({ PID }, index) => PID}
-            renderItem={({ item }) => (
-              <View style={styles.backgroundBarShowLatest}>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "flex-start",
-                  }}
-                >
-                  <View>
-                    <Image
-                      source={require("../assets/person.png")}
-                      style={{ width: 40, height: 40, resizeMode: "contain" }}
-                    />
-                  </View>
-                  <View>
-                    <Text style={styles.TextSmall}> {item.UID} </Text>
-                  </View>
+    <ApplicationProvider
+      {...eva}
+      theme={{ ...eva.light, ...theme }}
+      style={styles.container}
+    >
+      <Layout
+        style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+      >
+        <Text>Label</Text>
+        <ScrollView>
+          {isLoading ? (
+            <ActivityIndicator />
+          ) : (
+            <FlatList
+              data={data}
+              keyExtractor={({ PID }, index) => PID}
+              renderItem={({ item }) => (
+                <View style={{ padding: 10 }}>
+                  <Card>
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        borderWidth: 2,
+                        borderColor: "#d3d3d3",
+                        borderRadius: 5,
+                      }}
+                    >
+                      <Image
+                        source={require("../assets/waffles.jpg")}
+                        style={styles.standardImage}
+                      />
+                      <Image
+                        source={require("../assets/milkshake.jpg")}
+                        style={styles.standardImage}
+                      />
+                    </View>
+                    <Text>{item.FoodItem}</Text>
+                    <Text>{item.DrinkItem}</Text>
+                    <Text>Pairing descr</Text>
+                    <View style={{ flexDirection: "row" }}>
+                      <Icon
+                        name="compass"
+                        size={25}
+                        color="#000"
+                        style={{ paddingRight: "5%" }}
+                      />
+                      <Text>Location</Text>
+                      <Icon
+                        name="pencil"
+                        size={25}
+                        color="#000"
+                        style={{ paddingLeft: "50%" }}
+                      />
+                      <Icon
+                        name="heart-o"
+                        size={25}
+                        color="#000"
+                        style={{ paddingLeft: "5%" }}
+                      />
+                    </View>
+                  </Card>
                 </View>
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
-                  <Text style={styles.TextMedium}> {item.FoodItem} </Text>
-                  <View style={{ justifyContent: "center" }}>
-                    <Image
-                      source={require("../assets/plus.png")}
-                      style={styles.smallImage}
-                    />
-                  </View>
-                  <Text style={styles.TextMedium}> {item.DrinkItem} </Text>
-                </View>
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
-                  <View style={{ justifyContent: "center" }}>
-                    <Image
-                      source={require("../assets/location.png")}
-                      style={{ width: 30, height: 30, resizeMode: "contain" }}
-                    />
-                  </View>
-                  <View>
-                    <Text style={styles.TextSmall}>{item.Location}</Text>
-                  </View>
-                </View>
-                <TouchableOpacity style={personalStyles.addToFavouriteBtn}>
-                  <View style={{ justifyContent: "center" }}>
-                    <Image
-                      source={require("../assets/favourites.png")}
-                      style={{ width: 40, height: 40, resizeMode: "contain" }}
-                    />
-                  </View>
-                  <View>
-                    <Text style={styles.TextSmall}> Add to favourites</Text>
-                  </View>
-                </TouchableOpacity>
-              </View>
-            )}
-          />
-        )}
-      </View>
-    </SafeAreaView>
+              )}
+            />
+          )}
+        </ScrollView>
+      </Layout>
+    </ApplicationProvider>
   );
 };
 const personalStyles = StyleSheet.create({
