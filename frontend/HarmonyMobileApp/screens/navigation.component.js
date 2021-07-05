@@ -13,6 +13,7 @@ import {
 import HomeScreen from "./HomeScreen.js";
 import ViewFavouritesScreen from "./ViewFavouritesScreen.js";
 import SettingsScreen from "./SettingsScreen.js";
+import viewReviewScreen from "./ViewReviewScreen.js"
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
