@@ -1,8 +1,8 @@
-import requests
 import json
+import requests
 
-def lambda_handler(event, context):
 
+def identify_food_item(event, context):
     url = "https://aiharmony-prediction.cognitiveservices.azure.com/customvision/v3.0/Prediction/b2c99ecb-e43e-4a59-ac87-a189c109e267/classify/iterations/Iteration1/url"
 
     body = {
@@ -18,6 +18,6 @@ def lambda_handler(event, context):
     data = response.json()
     a = data['predictions'][0]['tagName']
     b = data['predictions'][0]['probability']
-    print("Harmony has predicted a",a , " with a probability of", b)
+    print("Harmony has predicted a", a, " with a probability of", b)
 
-    return a+b
+    return a + b
