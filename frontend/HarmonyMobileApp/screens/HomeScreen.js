@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useIsFocused } from "@react-navigation/native";
-import { render } from "react-dom";
 import {
   View,
   SafeAreaView,
@@ -17,8 +15,14 @@ import {
 import { Text } from "@ui-kitten/components";
 
 import styles from "../styles";
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { Feather,SimpleLineIcons  } from '@expo/vector-icons'; 
+import * as eva from '@eva-design/eva';
+import { default as theme } from '../theme.json';
+import { ApplicationProvider, Layout,Button, Divider, Card,Text } from '@ui-kitten/components';
+import { useIsFocused } from "@react-navigation/native";
 
-const HomeScreen = (navigation) => {
+const HomeScreen = (props) => {
   const viewPairingURL =
     "https://qkvdftfq7b.execute-api.eu-west-1.amazonaws.com/dev/viewpairings";
   const [isLoading, setLoading] = useState(useIsFocused());
@@ -31,7 +35,6 @@ const HomeScreen = (navigation) => {
       .catch((error) => alert(error))
       .then(setLoading(false));
   });
-
   const showConfirmDialog = () => {
     return Alert.alert(
       "Add to Favourites",
@@ -54,15 +57,13 @@ const HomeScreen = (navigation) => {
   };
 
   return (
-    <SafeAreaView style={personalStyles.container}>
-      <View style={styles.backgroundBarShowLatest}>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <View style={{ justifyContent: "center" }}>
-            <Text style={styles.TextLarge}> Harmony </Text>
-          </View>
+<ApplicationProvider  {...eva} theme={{ ...eva.light, ...theme }} style={styles.container}>
+      <ScrollView style={styles.scrollView}>
+        <View style={{height:"100%"}}>
+        <View style={styles.Header}>
+              <Text style={styles.TextLarge}> Harmony </Text>
         </View>
-      </View>
-      <View>
+        <Text>Popular pairings of the day</Text>
         {isLoading ? (
           <ActivityIndicator />
         ) : (
@@ -70,73 +71,60 @@ const HomeScreen = (navigation) => {
             data={data}
             keyExtractor={({ PID }, index) => PID}
             renderItem={({ item }) => (
-              <View style={styles.backgroundBarShowLatest}>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "flex-start",
-                  }}
-                >
-                  <View>
+              <View>
+        <Card style={styles.cardContainer}>
+                <View style={styles.imageContainer}>
                     <Image
-                      source={require("../assets/person.png")}
-                      style={{ width: 40, height: 40, resizeMode: "contain" }}
+                      source={require("../assets/waffles.jpg")}
+                      style={styles.standardImage}
                     />
-                  </View>
-                  <View>
-                    <Text style={styles.TextSmall}> {item.UID} </Text>
-                  </View>
+                    <Image
+                      source={require("../assets/milkshake.jpg")}
+                      style={styles.standardImage}
+                    />
                 </View>
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
-                  <Text style={styles.TextMedium}> {item.FoodItem} </Text>
-                  <View style={{ justifyContent: "center" }}>
-                    <Image
-                      source={require("../assets/plus.png")}
-                      style={styles.smallImage}
-                    />
-                  </View>
-                  <Text style={styles.TextMedium}> {item.DrinkItem} </Text>
+                <View style={styles.cardText}>
+                <Text>{item.FoodItem}</Text>
+                <Text>{item.DrinkItem}</Text>
+                <Text>Pairing descr</Text>
                 </View>
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
-                  <View style={{ justifyContent: "center" }}>
-                    <Image
-                      source={require("../assets/location.png")}
-                      style={{ width: 30, height: 30, resizeMode: "contain" }}
-                    />
-                  </View>
-                  <View>
-                    <Text style={styles.TextSmall}>{item.Location}</Text>
-                  </View>
+                <View style={styles.locationBar}>
+                    <SimpleLineIcons name="location-pin" size={25} color="black" />
+                    <Text>Location</Text>
+                    <Feather name="tag" size={25} color="black" />
+                    <Text style={styles.TextSmall}>Tag1,Tag2,Tag3,Tag4</Text>
+                    
                 </View>
-                <TouchableOpacity style={personalStyles.addToFavouriteBtn}>
-                  <View style={{ justifyContent: "center" }}>
-                    <Image
-                      source={require("../assets/favourites.png")}
-                      style={{ width: 40, height: 40, resizeMode: "contain" }}
-                    />
+                <Divider/>
+                <View style={styles.iconsBar}>
+                  <View style={{flexDirection:"row",justifyContent:"center"}}>
+                  <Feather name="star" size={25} color="black" />
+                  <Text style={{paddingLeft:"2%",paddingVertical:"1%"}}>4.6</Text>
                   </View>
-                  <View>
-                    <Text style={styles.TextSmall}> Add to favourites</Text>
+                  <View style={{flexDirection:"row",justifyContent:"center"}}>
+                  <Feather name="arrow-down-circle" size={25} color="black" />
+                  <Text style={{paddingLeft:"2%",paddingVertical:"1%"}}>45</Text>
                   </View>
-                </TouchableOpacity>
-              </View>
-            )}
-          />
-        )}
-      </View>
-    </SafeAreaView>
+                  <View style={{flexDirection:"row",justifyContent:"center"}}>
+                  <Feather name="arrow-up-circle" size={25} color="black" />
+                  <Text style={{paddingLeft:"2%",paddingVertical:"1%"}}>100</Text>
+                  </View>
+                  <Feather name="heart" size={25} color="black" />
+                </View>
+                
+                </Card>
+                <Text></Text>
+                </View>
+                )}
+                />
+              )}
+                </View>
+      </ScrollView>
+      </ApplicationProvider>
   );
 };
 const personalStyles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: StatusBar.currentHeight,
-    paddingBottom: 130,
-  },
-  scrollView: {
-    marginHorizontal: 20,
-  },
+ 
   text: {
     fontSize: 42,
   },

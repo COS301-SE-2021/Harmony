@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 
 import { StatusBar } from "expo-status-bar";
 import {
-  Text,
   View,
   TextInput,
   TouchableOpacity,
@@ -10,7 +9,9 @@ import {
   SafeAreaView,
   StyleSheet,
 } from "react-native";
-
+import * as eva from '@eva-design/eva';
+import { ApplicationProvider, Layout,Button, Divider, Card,Text } from '@ui-kitten/components';
+import { default as theme } from '../theme.json';
 import styles from "../styles";
 
 function NewPairingScreen({ navigation }) {
@@ -25,28 +26,6 @@ function NewPairingScreen({ navigation }) {
   const [DrinkDesc, setDrinkDesc] = useState("");
   const [Location, setLocation] = useState("");
   const [toSave, setToSave] = useState(false);
-
-  // useEffect(() => {
-  //   fetch(addPairingURL, {
-  //     method: "POST",
-  //     headers: {
-  //       Accept: "application/json",
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       DrinkDesc: DrinkDesc,
-  //       DrinkItem: DrinkItem,
-  //       FoodDesc: FoodDesc,
-  //       FoodItem: FoodItem,
-  //       Location: Location,
-  //       UID: "u1",
-  //     }),
-  //   })
-  //     .then((response) => response.json())
-  //     .then((json) => setData(json.Data))
-  //     .catch((error) => alert(error))
-  //     .then(setToSave(false));
-  // }, [toSave]);
 
   const savePairing = () => {
     return Alert.alert(
@@ -97,10 +76,18 @@ function NewPairingScreen({ navigation }) {
     );
   };
   return (
+   /* <ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }}>
+    <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <Card>
+    <Text>Medium Rare Steak</Text>
+    <Text>Coke</Text>
+    </Card>
+    </Layout>
+  </ApplicationProvider>*/
     <SafeAreaView style={personalStyles.container}>
       <View style={styles.LoginContainer}>
         <StatusBar style="auto" />
-
+    <Divider>
         <View style={styles.inputView}>
           <TextInput
             style={styles.TextInput}
@@ -157,6 +144,7 @@ function NewPairingScreen({ navigation }) {
         >
           <Text style={styles.loginText}>Add</Text>
         </TouchableOpacity>
+        </Divider>
       </View>
     </SafeAreaView>
   );
