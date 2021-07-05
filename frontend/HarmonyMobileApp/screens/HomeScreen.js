@@ -11,6 +11,9 @@ import {
   FlatList,
   Alert,
 } from "react-native";
+
+import { Text } from "@ui-kitten/components";
+
 import styles from "../styles";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Feather,SimpleLineIcons  } from '@expo/vector-icons'; 

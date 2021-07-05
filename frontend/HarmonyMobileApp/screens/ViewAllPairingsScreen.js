@@ -17,7 +17,15 @@ import * as eva from '@eva-design/eva';
 import { ApplicationProvider, Layout,Button, Divider, Card,Text } from '@ui-kitten/components';
 import { default as theme } from '../theme.json';
 import styles from "../styles";
-import Icon from 'react-native-vector-icons/FontAwesome';
+const BackIcon = (props) => <Icon {...props} name="arrow-back" />;
+
+const ViewAllPairingsScreen = (navigation) => {
+  const navigateBack = () => {
+    navigation.goBack();
+  };
+  const BackAction = () => (
+    <TopNavigationAction icon={BackIcon} onPress={navigateBack} />
+  );
 
 const ViewAllPairingsScreen = (props) => {
   const viewPairingURL =
@@ -59,7 +67,8 @@ const ViewAllPairingsScreen = (props) => {
     <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Label</Text>
       <ScrollView>
-    {isLoading ? (
+    {
+    isLoading ? (
           <ActivityIndicator />
         ) : (
           <FlatList
@@ -95,81 +104,10 @@ const ViewAllPairingsScreen = (props) => {
           </ScrollView>
     </Layout>
   </ApplicationProvider>
-   /* <SafeAreaView style={personalStyles.container}>
-      <View style={styles.backgroundBarShowLatest}>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <View style={{ justifyContent: "center" }}>
-            <Text style={styles.TextLarge}> Popular Pairings </Text>
-          </View>
-        </View>
-      </View>
-      <View>
-        {isLoading ? (
-          <ActivityIndicator />
-        ) : (
-          <FlatList
-            data={data}
-            keyExtractor={({ PID }, index) => PID}
-            renderItem={({ item }) => (
-              <View style={styles.backgroundBarShowLatest}>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "flex-start",
-                  }}
-                >
-                  <View>
-                    <Image
-                      source={require("../assets/person.png")}
-                      style={{ width: 40, height: 40, resizeMode: "contain" }}
-                    />
-                  </View>
-                  <View>
-                    <Text style={styles.TextSmall}> {item.UID} </Text>
-                  </View>
-                </View>
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
-                  <Text style={styles.TextMedium}> {item.FoodItem} </Text>
-                  <View style={{ justifyContent: "center" }}>
-                    <Image
-                      source={require("../assets/plus.png")}
-                      style={styles.smallImage}
-                    />
-                  </View>
-                  <Text style={styles.TextMedium}> {item.DrinkItem} </Text>
-                </View>
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
-                  <View style={{ justifyContent: "center" }}>
-                    <Image
-                      source={require("../assets/location.png")}
-                      style={{ width: 30, height: 30, resizeMode: "contain" }}
-                    />
-                  </View>
-                  <View>
-                    <Text style={styles.TextSmall}>{item.Location}</Text>
-                  </View>
-                </View>
-                <TouchableOpacity style={personalStyles.addToFavouriteBtn}>
-                  <View style={{ justifyContent: "center" }}>
-                    <Image
-                      source={require("../assets/favourites.png")}
-                      style={{ width: 40, height: 40, resizeMode: "contain" }}
-                    />
-                  </View>
-                  <View>
-                    <Text style={styles.TextSmall}> Add to favourites</Text>
-                  </View>
-                </TouchableOpacity>
-              </View>
-            )}
-          />
-        )}
-      </View>
-    </SafeAreaView>*/
   );
 };
-const personalStyles = StyleSheet.create({
+const personalStyles = StyleSheet.create(
+  {
   container: {
     flex: 1,
     paddingTop: StatusBar.currentHeight,
@@ -191,6 +129,7 @@ const personalStyles = StyleSheet.create({
     backgroundColor: "#8d918d",
     flexDirection: "row",
   },
-});
+}
+);
 
 export default ViewAllPairingsScreen;
