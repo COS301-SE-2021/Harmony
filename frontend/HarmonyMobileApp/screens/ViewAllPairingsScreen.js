@@ -14,26 +14,12 @@ import {
   Alert,
 } from "react-native";
 
-import {
-  Divider,
-  Icon,
-  Layout,
-  Text,
-  TopNavigation,
-  TopNavigationAction,
-} from "@ui-kitten/components";
+import { Icon, Layout, Text } from "@ui-kitten/components";
 
 import styles from "../styles";
 const BackIcon = (props) => <Icon {...props} name="arrow-back" />;
 
 const ViewAllPairingsScreen = (navigation) => {
-  const navigateBack = () => {
-    navigation.goBack();
-  };
-  const BackAction = () => (
-    <TopNavigationAction icon={BackIcon} onPress={navigateBack} />
-  );
-
   const viewPairingURL =
     "https://qkvdftfq7b.execute-api.eu-west-1.amazonaws.com/dev/viewpairings";
   const [isLoading, setLoading] = useState(useIsFocused());
@@ -70,13 +56,6 @@ const ViewAllPairingsScreen = (navigation) => {
 
   return (
     <SafeAreaView style={personalStyles.container}>
-      <TopNavigation
-        title="Popular"
-        alignment="center"
-        accessoryLeft={BackAction}
-      />
-      <Divider />
-
       <View style={styles.backgroundBarShowLatest}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <View style={{ justifyContent: "center" }}>
