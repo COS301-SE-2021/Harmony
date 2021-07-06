@@ -115,15 +115,6 @@ const PairingResultsScreen = (props) => {
             }}
           >
             <Text style={styles.title}>{response.data.foodItem}</Text>
-            {/* <TouchableOpacity
-              style={{
-                flexDirection: "row",
-                left: "35%",
-              }}
-            >
-              <MaterialIcons name="error-outline" size={24} color="red" />
-            </TouchableOpacity> */}
-
             <Modal
               animationType="slide"
               transparent={true}
@@ -134,29 +125,28 @@ const PairingResultsScreen = (props) => {
             >
               <View style={styles.centeredView}>
                 <View style={styles.modalView}>
+                  <View style={[styles.modalHeaderSection]}>
+                    <Text style={styles.modalText}>Feedback </Text>
+                  </View>
                   <Text style={styles.modalText}>
                     Is the food correctly identified?
                   </Text>
                   <View style={styles.modalButtonContainer}>
                     <TouchableOpacity
-                      style={[styles.button, styles.buttonClose]}
+                      style={[styles.button, styles.buttonIncorrect]}
                       onPress={() => setModalVisible(!modalVisible)}
                     >
-                      <Icon
-                        style={styles.icon}
-                        fill="#fff"
-                        name="close-circle-outline"
+                      <MaterialIcons
+                        name="thumb-down"
+                        size={40}
+                        color="white"
                       />
                     </TouchableOpacity>
                     <TouchableOpacity
-                      style={[styles.button, styles.buttonClose]}
+                      style={[styles.button, styles.buttonCorrect]}
                       onPress={() => setModalVisible(!modalVisible)}
                     >
-                      <Icon
-                        style={styles.icon}
-                        fill="#fff"
-                        name="checkmark-circle-2-outline"
-                      />
+                      <MaterialIcons name="thumb-up" size={40} color="white" />
                     </TouchableOpacity>
                   </View>
                 </View>
@@ -252,7 +242,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     marginTop: 10,
     width: "100%",
-    backgroundColor: "red",
   },
   title: {
     fontSize: 20,
@@ -366,7 +355,7 @@ const styles = StyleSheet.create({
     margin: 20,
     backgroundColor: "white",
     borderRadius: 20,
-    padding: 35,
+    padding: 20,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
@@ -386,20 +375,28 @@ const styles = StyleSheet.create({
   button: {
     borderRadius: 20,
     padding: 10,
-    elevation: 2,
+    elevation: 4,
     margin: 5,
   },
-  buttonClose: {
-    backgroundColor: "#2196F3",
+  buttonCorrect: {
+    backgroundColor: "#56a211",
+  },
+  buttonIncorrect: {
+    backgroundColor: "#e9430f",
   },
   modalButtonText: {
     color: "white",
     fontWeight: "bold",
     textAlign: "center",
   },
+  modalHeaderSection: {
+    borderBottomWidth: 1,
+    borderBottomColor: "#cccccc",
+    backgroundColor: "white",
+  },
   modalText: {
-    marginBottom: 15,
-    fontSize: 18,
+    paddingVertical: 10,
+    fontSize: 20,
     alignSelf: "center",
   },
   icon: {
