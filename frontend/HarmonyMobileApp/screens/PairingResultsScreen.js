@@ -13,7 +13,8 @@ import {
   Modal,
   Pressable,
 } from "react-native";
-import { Text } from "@ui-kitten/components";
+import { Text, Icon } from "@ui-kitten/components";
+
 import {
   ImageHeaderScrollView,
   TriggeringView,
@@ -159,25 +160,31 @@ const PairingResultsScreen = (props) => {
             >
               <View style={styles.centeredView}>
                 <View style={styles.modalView}>
-                  <Text style={styles.modalText}>Did we get it wrong?</Text>
-                  <TouchableOpacity
-                    style={[styles.button, styles.buttonClose]}
-                    onPress={() => setModalVisible(!modalVisible)}
-                  >
-                    <Text style={styles.textStyle}>Yes</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    style={[styles.button, styles.buttonClose]}
-                    onPress={() => setModalVisible(!modalVisible)}
-                  >
-                    <Text style={styles.textStyle}>No</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    style={[styles.button, styles.buttonClose]}
-                    onPress={() => setModalVisible(!modalVisible)}
-                  >
-                    <Text style={styles.textStyle}>Cancel</Text>
-                  </TouchableOpacity>
+                  <Text style={styles.modalText}>
+                    Is the food correctly identified?
+                  </Text>
+                  <View style={styles.modalButtonContainer}>
+                    <TouchableOpacity
+                      style={[styles.button, styles.buttonClose]}
+                      onPress={() => setModalVisible(!modalVisible)}
+                    >
+                      <Icon
+                        style={styles.icon}
+                        fill="#fff"
+                        name="close-circle-outline"
+                      />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={[styles.button, styles.buttonClose]}
+                      onPress={() => setModalVisible(!modalVisible)}
+                    >
+                      <Icon
+                        style={styles.icon}
+                        fill="#fff"
+                        name="checkmark-circle-2-outline"
+                      />
+                    </TouchableOpacity>
+                  </View>
                 </View>
               </View>
             </Modal>
@@ -308,6 +315,7 @@ const styles = StyleSheet.create({
     margin: 5,
     padding: 10,
     paddingHorizontal: 10,
+    elevation: 4,
   },
   tagText: {
     fontSize: 14,
@@ -363,10 +371,17 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
+  modalButtonContainer: {
+    width: "100%",
+    flexDirection: "row",
+    alignContent: "center",
+    flexWrap: "wrap",
+  },
   button: {
     borderRadius: 20,
     padding: 10,
     elevation: 2,
+    margin: 5,
   },
   buttonOpen: {
     backgroundColor: "#F194FF",
@@ -374,13 +389,18 @@ const styles = StyleSheet.create({
   buttonClose: {
     backgroundColor: "#2196F3",
   },
-  textStyle: {
+  modalButtonText: {
     color: "white",
     fontWeight: "bold",
     textAlign: "center",
   },
   modalText: {
     marginBottom: 15,
-    textAlign: "center",
+    fontSize: 18,
+    alignSelf: "center",
+  },
+  icon: {
+    width: 60,
+    height: 60,
   },
 });
