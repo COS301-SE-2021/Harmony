@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 import {
   View,
@@ -8,6 +8,10 @@ import {
   Dimensions,
   Platform,
   ScrollView,
+  TouchableOpacity,
+  Alert,
+  Modal,
+  Pressable,
 } from "react-native";
 import { Text } from "@ui-kitten/components";
 import {
@@ -104,6 +108,7 @@ const tags = {
 
 const PairingResultsScreen = (props) => {
   const navTitleView = useRef(null);
+  const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -135,14 +140,57 @@ const PairingResultsScreen = (props) => {
             }}
           >
             <Text style={styles.title}>{response.data.foodItem}</Text>
-            <View
+            {/* <TouchableOpacity
               style={{
                 flexDirection: "row",
                 left: "35%",
               }}
             >
               <MaterialIcons name="error-outline" size={24} color="red" />
-            </View>
+            </TouchableOpacity> */}
+
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={modalVisible}
+              onRequestClose={() => {
+                setModalVisible(!modalVisible);
+              }}
+            >
+              <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                  <Text style={styles.modalText}>Did we get it wrong?</Text>
+                  <TouchableOpacity
+                    style={[styles.button, styles.buttonClose]}
+                    onPress={() => setModalVisible(!modalVisible)}
+                  >
+                    <Text style={styles.textStyle}>Yes</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={[styles.button, styles.buttonClose]}
+                    onPress={() => setModalVisible(!modalVisible)}
+                  >
+                    <Text style={styles.textStyle}>No</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={[styles.button, styles.buttonClose]}
+                    onPress={() => setModalVisible(!modalVisible)}
+                  >
+                    <Text style={styles.textStyle}>Cancel</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </Modal>
+
+            <TouchableOpacity
+              style={{
+                flexDirection: "row",
+                left: "35%",
+              }}
+              onPress={() => setModalVisible(true)}
+            >
+              <MaterialIcons name="error-outline" size={24} color="red" />
+            </TouchableOpacity>
           </View>
         </TriggeringView>
 
@@ -259,7 +307,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     margin: 5,
     padding: 10,
-    paddingHorizontal: 15,
+    paddingHorizontal: 10,
   },
   tagText: {
     fontSize: 14,
@@ -292,6 +340,47 @@ const styles = StyleSheet.create({
     color: "white",
     marginLeft: 16,
     fontWeight: "600",
+    textAlign: "center",
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: "#F194FF",
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  modalText: {
+    marginBottom: 15,
     textAlign: "center",
   },
 });
