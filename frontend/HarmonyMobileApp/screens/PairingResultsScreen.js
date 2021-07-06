@@ -1,17 +1,15 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useRef } from "react";
 
 import {
-  SafeAreaView,
   View,
   StyleSheet,
   StatusBar,
   Image,
   Dimensions,
   Platform,
-  FlatList,
   ScrollView,
 } from "react-native";
-import { Layout, Text } from "@ui-kitten/components";
+import { Text } from "@ui-kitten/components";
 import {
   ImageHeaderScrollView,
   TriggeringView,
@@ -78,40 +76,8 @@ const response = {
   },
 };
 
-const DATA = {
-  statusCode: 200,
-  data: {
-    foodItem: "Koeksister",
-
-    drinks: [
-      {
-        id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-        title: "First Item",
-        drinkItem: "Iced coffee",
-      },
-      {
-        id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-        title: "Second Item",
-        drinkItem: "Iced coffee",
-      },
-      {
-        id: "58694a0f-3da1-471f-bd96-145571e29d72",
-        title: "Third Item",
-        drinkItem: "Iced coffee",
-      },
-    ],
-  },
-};
 const PairingResultsScreen = (props) => {
   const navTitleView = useRef(null);
-  const Item = ({ drinkItem }) => (
-    <View style={styles.flatlistItem}>
-      <Text style={styles.flatlistTitle}>{drinkItem}</Text>
-    </View>
-  );
-
-  // const renderItem = ({ item }) => <Item title={item.title} />;
-  const renderItem = ({ item }) => <Item drinkItem={item.drinkItem} />;
 
   return (
     <View style={styles.container}>
@@ -157,7 +123,7 @@ const PairingResultsScreen = (props) => {
 
         <View style={[styles.section]}>
           <Text style={styles.subtitle}>Recommended:</Text>
-
+          {/* Main recommendedDrink */}
           <ImagedCarouselCard
             width={300}
             height={300}
@@ -168,26 +134,7 @@ const PairingResultsScreen = (props) => {
           />
         </View>
 
-        {/* <View style={styles.section}>
-          {response.data.drinkPairings.map((drink, index) => (
-            <View style={styles.drinks} key={index}>
-              <Image
-                style={styles.drinkContainer}
-                text={drink.drinkItem}
-                source={{ uri: drink.imageURI }}
-              />
-            </View>
-          ))}
-        </View> */}
-
-        {/* <View style={styles.flatlistContainer}>
-          <FlatList
-            // data={response.data.drinkPairings}
-            data={DATA.data.drinks}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.id}
-          />
-        </View> */}
+        {/* Other alternate drink options */}
         <ScrollView
           style={styles.ImageContainer}
           contentContainerStyle={{
@@ -198,10 +145,13 @@ const PairingResultsScreen = (props) => {
         >
           {response.data.drinkPairings.map((drink, index) => (
             <View key={index}>
-              <Image
-                style={styles.drinkContainer}
+              <ImagedCarouselCard
+                width={150}
+                height={150}
+                shadowColor="#051934"
                 text={drink.drinkItem}
                 source={{ uri: drink.imageURI }}
+                style={styles.drinkContainer}
               />
             </View>
           ))}
