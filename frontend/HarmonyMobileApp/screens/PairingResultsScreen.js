@@ -9,10 +9,10 @@ import {
   Platform,
   ScrollView,
   TouchableOpacity,
-  Modal,
   TouchableWithoutFeedback,
 } from "react-native";
 import { Text, Icon } from "@ui-kitten/components";
+import Modal from "react-native-modal";
 
 import {
   ImageHeaderScrollView,
@@ -82,8 +82,61 @@ const response = {
 
 const PairingResultsScreen = (props) => {
   const navTitleView = useRef(null);
-  const [modalVisible, setModalVisible] = useState(false);
+  const [isModalVisible, setModalVisible] = useState(false);
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
 
+  const FeedbackModal = () => (
+    <Modal
+      isVisible={isModalVisible}
+      onBackButtonPress={toggleModal}
+      onBackdropPress={toggleModal}
+      animationIn={"slideInRight"}
+      animationOut={"slideOutRight"}
+      swipeDirection={["up", "left", "right", "down"]}
+      onSwipeComplete={toggleModal}
+    >
+      <View style={styles.centeredView}>
+        <View style={styles.modalView}>
+          <View style={[styles.modalHeaderSection]}>
+            <Text style={styles.title}>Feedback </Text>
+          </View>
+          <Text style={styles.modalText}>
+            Is the food correctly identified?
+          </Text>
+          <View style={styles.modalButtonContainer}>
+            <TouchableOpacity
+              style={[styles.button, styles.buttonIncorrect]}
+              onPress={() => setModalVisible(!isModalVisible)}
+            >
+              {/* Keeping outlined icons just incase we want to change to them for consistency overall */}
+              {/* The filled icons look better in this case though */}
+              {/* <MaterialIcons
+                    name="thumb-down-off-alt"
+                    size={40}
+                    color="white"
+                  /> */}
+              <MaterialIcons name="thumb-down" size={40} color="white" />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.button, styles.buttonCorrect]}
+              onPress={() => setModalVisible(!isModalVisible)}
+            >
+              {/* Keeping outlined icons just incase we want to change to them for consistency overall */}
+              {/* The filled icons look better in this case though */}
+              {/* <MaterialIcons
+                    name="thumb-up-off-alt"
+                    size={40}
+                    color="white"
+                  /> */}
+              <MaterialIcons name="thumb-up" size={40} color="white" />
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    </Modal>
+  );
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
@@ -114,76 +167,6 @@ const PairingResultsScreen = (props) => {
             }}
           >
             <Text style={styles.title}>{response.data.foodItem}</Text>
-            <Modal
-              animationType="slide"
-              transparent={true}
-              visible={modalVisible}
-              onRequestClose={() => {
-                setModalVisible(!modalVisible);
-              }}
-            >
-              <TouchableOpacity
-                style={styles.container}
-                activeOpacity={1}
-                onPressOut={() => {
-                  setModalVisible(!modalVisible);
-                }}
-              >
-                <ScrollView
-                  directionalLockEnabled={true}
-                  contentContainerStyle={styles.scrollModal}
-                >
-                  <TouchableWithoutFeedback>
-                    <View style={styles.centeredView}>
-                      <View style={styles.modalView}>
-                        <View style={[styles.modalHeaderSection]}>
-                          <Text style={styles.modalText}>Feedback </Text>
-                        </View>
-                        <Text style={styles.modalText}>
-                          Is the food correctly identified?
-                        </Text>
-                        <View style={styles.modalButtonContainer}>
-                          <TouchableOpacity
-                            style={[styles.button, styles.buttonIncorrect]}
-                            onPress={() => setModalVisible(!modalVisible)}
-                          >
-                            {/* Keeping outlined icons just incase we want to change to them for consistency overall */}
-                            {/* The filled icons look better in this case though */}
-                            {/* <MaterialIcons
-                              name="thumb-down-off-alt"
-                              size={40}
-                              color="white"
-                            /> */}
-                            <MaterialIcons
-                              name="thumb-down"
-                              size={40}
-                              color="white"
-                            />
-                          </TouchableOpacity>
-                          <TouchableOpacity
-                            style={[styles.button, styles.buttonCorrect]}
-                            onPress={() => setModalVisible(!modalVisible)}
-                          >
-                            {/* Keeping outlined icons just incase we want to change to them for consistency overall */}
-                            {/* The filled icons look better in this case though */}
-                            {/* <MaterialIcons
-                              name="thumb-up-off-alt"
-                              size={40}
-                              color="white"
-                            /> */}
-                            <MaterialIcons
-                              name="thumb-up"
-                              size={40}
-                              color="white"
-                            />
-                          </TouchableOpacity>
-                        </View>
-                      </View>
-                    </View>
-                  </TouchableWithoutFeedback>
-                </ScrollView>
-              </TouchableOpacity>
-            </Modal>
 
             <TouchableOpacity
               style={{
@@ -193,6 +176,7 @@ const PairingResultsScreen = (props) => {
               onPress={() => setModalVisible(true)}
             >
               <MaterialIcons name="error-outline" size={24} color="red" />
+              <FeedbackModal />
             </TouchableOpacity>
           </View>
         </TriggeringView>
@@ -419,11 +403,6 @@ const styles = StyleSheet.create({
   buttonIncorrect: {
     backgroundColor: "#e9430f",
   },
-  modalButtonText: {
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center",
-  },
   modalHeaderSection: {
     borderBottomWidth: 1,
     borderBottomColor: "#cccccc",
@@ -432,7 +411,7 @@ const styles = StyleSheet.create({
   modalText: {
     paddingVertical: 10,
     fontSize: 20,
-    alignSelf: "center",
+    textAlign: "center",
   },
   icon: {
     width: 60,
