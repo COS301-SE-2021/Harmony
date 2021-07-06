@@ -81,32 +81,6 @@ const response = {
   },
 };
 
-const tags = {
-  activeIndex: 0,
-  carouselItems: [
-    {
-      title: "Item 1",
-      text: "Text 1",
-    },
-    {
-      title: "Item 2",
-      text: "Text 2",
-    },
-    {
-      title: "Item 3",
-      text: "Text 3",
-    },
-    {
-      title: "Item 4",
-      text: "Text 4",
-    },
-    {
-      title: "Item 5",
-      text: "Text 5",
-    },
-  ],
-};
-
 const PairingResultsScreen = (props) => {
   const navTitleView = useRef(null);
   const [modalVisible, setModalVisible] = useState(false);
@@ -119,7 +93,7 @@ const PairingResultsScreen = (props) => {
         minHeight={MIN_HEIGHT}
         renderHeader={() => (
           <Image
-            style={styles.foodImage}
+            style={styles.foodCard}
             source={{ uri: response.data.imageURI }}
           />
         )}
@@ -202,7 +176,7 @@ const PairingResultsScreen = (props) => {
         </TriggeringView>
 
         <View style={[styles.section]}>
-          <Text style={styles.sectionContent}>{response.data.foodDesc}</Text>
+          <Text style={styles.sectionText}>{response.data.foodDesc}</Text>
         </View>
         <View style={styles.tagsSection}>
           <ScrollView
@@ -228,18 +202,16 @@ const PairingResultsScreen = (props) => {
           <Text style={styles.subtitle}>Recommended:</Text>
           {/* Main recommendedDrink */}
           <ImagedCarouselCard
-            width={300}
-            height={300}
-            shadowColor="#051934"
             text={response.data.recommendedDrink.drinkItem}
+            textStyle={styles.cardTextOverlay}
             source={{ uri: response.data.recommendedDrink.imageURI }}
-            textStyle={styles.imageTextOverlay}
+            style={styles.largeDrinkCard}
           />
         </View>
 
         {/* Other alternate drink options */}
         <ScrollView
-          style={styles.otherDrinkImage}
+          style={styles.otherDrinkCardsContainer}
           contentContainerStyle={{
             flexDirection: "row",
             flexWrap: "wrap",
@@ -249,13 +221,12 @@ const PairingResultsScreen = (props) => {
           {response.data.drinkPairings.map((drink, index) => (
             <View key={index}>
               <ImagedCarouselCard
-                width={150}
+                width={150} //Width must be defined here, else the overlay text will overflow out of the container
                 height={150}
-                shadowColor="#051934"
                 text={drink.drinkItem}
+                textStyle={styles.cardTextOverlay}
                 source={{ uri: drink.imageURI }}
-                style={styles.drinkContainer}
-                textStyle={styles.imageTextOverlay}
+                style={styles.smallDrinkCard}
               />
             </View>
           ))}
@@ -271,16 +242,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  foodImage: {
+  foodCard: {
     height: MAX_HEIGHT,
     width: Dimensions.get("window").width,
     alignSelf: "stretch",
     resizeMode: "cover",
   },
-  otherDrinkImage: {
+  otherDrinkCardsContainer: {
     marginHorizontal: 16,
-    marginTop: 30,
+    marginTop: 10,
     width: "100%",
+    backgroundColor: "red",
   },
   title: {
     fontSize: 20,
@@ -298,46 +270,71 @@ const styles = StyleSheet.create({
     borderBottomColor: "#cccccc",
     backgroundColor: "white",
   },
-  sectionContent: {
+  sectionText: {
     fontSize: 16,
-    textAlign: "justify",
+    textAlign: "center",
   },
   tagsSection: {
     paddingTop: 20,
     paddingBottom: 20,
-
     borderBottomWidth: 1,
     borderBottomColor: "#cccccc",
     backgroundColor: "white",
   },
   tagsContainer: {
+    //Container to hold all tags
     width: "100%",
     flexDirection: "row",
     alignContent: "center",
     flexWrap: "wrap",
   },
   tagContainer: {
-    flexDirection: "row",
+    //Container of individual tag
+    flexDirection: "row", //Needed to keep the tag icon and text in one line
     backgroundColor: "#FF6347",
     borderRadius: 20,
-    margin: 5,
-    padding: 10,
-    paddingHorizontal: 10,
-    elevation: 4,
+    margin: 5, //Space between tags
+    padding: 10, //Space around innner tag
+    elevation: 4, //gives shadow/3D effect
   },
   tagText: {
     fontSize: 14,
     color: "#fff",
-    marginLeft: 10,
+    marginLeft: 10, //Space between tag icon and text
   },
-  drinkContainer: {
-    backgroundColor: "#FF6347",
+  smallDrinkCard: {
+    //Card style for smaller cards falling into the other section
+    borderRadius: 20,
+    margin: 5,
+    padding: 10,
+    height: 150,
+    width: 150,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  largeDrinkCard: {
+    //Card style for main recommended drink card
+
     borderRadius: 20,
     margin: 5,
     padding: 10,
     paddingHorizontal: 15,
-    height: 150,
-    width: 150,
+    height: 300,
+    width: 300,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 3,
   },
   navTitleView: {
     height: MIN_HEIGHT,
@@ -351,10 +348,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     backgroundColor: "transparent",
   },
-  imageTextOverlay: {
+  cardTextOverlay: {
     fontSize: 18,
     color: "white",
     marginLeft: 16,
+    marginRight: 16,
     fontWeight: "600",
     textAlign: "center",
   },
@@ -390,9 +388,6 @@ const styles = StyleSheet.create({
     padding: 10,
     elevation: 2,
     margin: 5,
-  },
-  buttonOpen: {
-    backgroundColor: "#F194FF",
   },
   buttonClose: {
     backgroundColor: "#2196F3",
