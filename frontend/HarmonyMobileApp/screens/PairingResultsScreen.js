@@ -9,9 +9,8 @@ import {
   Platform,
   ScrollView,
   TouchableOpacity,
-  Alert,
   Modal,
-  Pressable,
+  TouchableWithoutFeedback,
 } from "react-native";
 import { Text, Icon } from "@ui-kitten/components";
 
@@ -123,34 +122,67 @@ const PairingResultsScreen = (props) => {
                 setModalVisible(!modalVisible);
               }}
             >
-              <View style={styles.centeredView}>
-                <View style={styles.modalView}>
-                  <View style={[styles.modalHeaderSection]}>
-                    <Text style={styles.modalText}>Feedback </Text>
-                  </View>
-                  <Text style={styles.modalText}>
-                    Is the food correctly identified?
-                  </Text>
-                  <View style={styles.modalButtonContainer}>
-                    <TouchableOpacity
-                      style={[styles.button, styles.buttonIncorrect]}
-                      onPress={() => setModalVisible(!modalVisible)}
-                    >
-                      <MaterialIcons
-                        name="thumb-down"
-                        size={40}
-                        color="white"
-                      />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      style={[styles.button, styles.buttonCorrect]}
-                      onPress={() => setModalVisible(!modalVisible)}
-                    >
-                      <MaterialIcons name="thumb-up" size={40} color="white" />
-                    </TouchableOpacity>
-                  </View>
-                </View>
-              </View>
+              <TouchableOpacity
+                style={styles.container}
+                activeOpacity={1}
+                onPressOut={() => {
+                  setModalVisible(!modalVisible);
+                }}
+              >
+                <ScrollView
+                  directionalLockEnabled={true}
+                  contentContainerStyle={styles.scrollModal}
+                >
+                  <TouchableWithoutFeedback>
+                    <View style={styles.centeredView}>
+                      <View style={styles.modalView}>
+                        <View style={[styles.modalHeaderSection]}>
+                          <Text style={styles.modalText}>Feedback </Text>
+                        </View>
+                        <Text style={styles.modalText}>
+                          Is the food correctly identified?
+                        </Text>
+                        <View style={styles.modalButtonContainer}>
+                          <TouchableOpacity
+                            style={[styles.button, styles.buttonIncorrect]}
+                            onPress={() => setModalVisible(!modalVisible)}
+                          >
+                            {/* Keeping outlined icons just incase we want to change to them for consistency overall */}
+                            {/* The filled icons look better in this case though */}
+                            {/* <MaterialIcons
+                              name="thumb-down-off-alt"
+                              size={40}
+                              color="white"
+                            /> */}
+                            <MaterialIcons
+                              name="thumb-down"
+                              size={40}
+                              color="white"
+                            />
+                          </TouchableOpacity>
+                          <TouchableOpacity
+                            style={[styles.button, styles.buttonCorrect]}
+                            onPress={() => setModalVisible(!modalVisible)}
+                          >
+                            {/* Keeping outlined icons just incase we want to change to them for consistency overall */}
+                            {/* The filled icons look better in this case though */}
+                            {/* <MaterialIcons
+                              name="thumb-up-off-alt"
+                              size={40}
+                              color="white"
+                            /> */}
+                            <MaterialIcons
+                              name="thumb-up"
+                              size={40}
+                              color="white"
+                            />
+                          </TouchableOpacity>
+                        </View>
+                      </View>
+                    </View>
+                  </TouchableWithoutFeedback>
+                </ScrollView>
+              </TouchableOpacity>
             </Modal>
 
             <TouchableOpacity
@@ -181,6 +213,9 @@ const PairingResultsScreen = (props) => {
               {response.data.tags.map((tag, index) => (
                 <View style={styles.tagContainer} key={index}>
                   <FontAwesome name="tag" size={16} color="#fff" />
+                  {/* Keeping outlined icons just incase we want to change to them for consistency overall */}
+                  {/* The filled icons look better in this case though */}
+                  {/* <Feather name="tag" size={16} color="#fff" /> */}
                   <Text style={styles.tagText}>{tag}</Text>
                 </View>
               ))}
