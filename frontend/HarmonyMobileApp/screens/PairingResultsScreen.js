@@ -9,16 +9,19 @@ import {
   Platform,
   ScrollView,
   TouchableOpacity,
-  TouchableWithoutFeedback,
 } from "react-native";
-import { Text, Icon } from "@ui-kitten/components";
+import { Text } from "@ui-kitten/components";
 import Modal from "react-native-modal";
 
 import {
   ImageHeaderScrollView,
   TriggeringView,
 } from "react-native-image-header-scroll-view";
-import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
+import {
+  FontAwesome,
+  MaterialIcons,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 
 import ImagedCarouselCard from "react-native-imaged-carousel-card";
 import * as Animatable from "react-native-animatable";
@@ -99,6 +102,16 @@ const PairingResultsScreen = (props) => {
     >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
+          <TouchableOpacity
+            style={[styles.closeButton]}
+            onPress={() => setModalVisible(!isModalVisible)}
+          >
+            <MaterialCommunityIcons
+              name="close-circle-outline"
+              size={30}
+              color="black"
+            />
+          </TouchableOpacity>
           <View style={[styles.modalHeaderSection]}>
             <Text style={styles.title}>Feedback </Text>
           </View>
@@ -402,6 +415,11 @@ const styles = StyleSheet.create({
   },
   buttonIncorrect: {
     backgroundColor: "#e9430f",
+  },
+  closeButton: {
+    position: "absolute",
+    right: 10,
+    top: 5,
   },
   modalHeaderSection: {
     borderBottomWidth: 1,
