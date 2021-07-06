@@ -14,7 +14,8 @@ import {
   ImageHeaderScrollView,
   TriggeringView,
 } from "react-native-image-header-scroll-view";
-import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
+
 import ImagedCarouselCard from "react-native-imaged-carousel-card";
 
 import * as Animatable from "react-native-animatable";
@@ -102,8 +103,27 @@ const PairingResultsScreen = (props) => {
           onHide={() => navTitleView.current.fadeInUp(200)}
           onDisplay={() => navTitleView.current.fadeOut(100)}
         >
-          <View style={{ flexDirection: "row", justifyContent: "center" }}>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "center",
+            }}
+          >
             <Text style={styles.title}>{response.data.foodItem}</Text>
+            <View
+              style={{
+                flexDirection: "row",
+                left: "35%",
+              }}
+            >
+              {/* <FontAwesome
+                name="exclamation-triangle"
+                size={24}
+                color="#FF6347"
+                backgroundColor="red"
+              /> */}
+              <MaterialIcons name="error-outline" size={24} color="red" />
+            </View>
           </View>
         </TriggeringView>
 
@@ -185,6 +205,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     alignSelf: "center",
+    fontWeight: "bold",
   },
   subtitle: {
     fontSize: 20,
