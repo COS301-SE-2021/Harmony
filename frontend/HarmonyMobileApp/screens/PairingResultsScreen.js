@@ -17,7 +17,6 @@ import {
 import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
 
 import ImagedCarouselCard from "react-native-imaged-carousel-card";
-
 import * as Animatable from "react-native-animatable";
 
 const MIN_HEIGHT = Platform.OS === "ios" ? 90 : 55;
@@ -32,7 +31,7 @@ const response = {
     foodDesc:
       "A koeksister also spelled koesister is a traditional Afrikaner confectionery made of fried dough infused in syrup or honey. There is also a Cape Malay version of the dish, which is a fried ball of dough that is rolled in desiccated coconut. ",
     location: "Pretoria",
-    tags: ["Dessert", "Sweet", "Snack"],
+    tags: ["Dessert", "Sweet", "Snack", "Dessert", "Sweet", "Snack"],
     recommendedDrink: {
       drinkItem: "Tea",
       drinkDesc:
@@ -77,6 +76,32 @@ const response = {
   },
 };
 
+const tags = {
+  activeIndex: 0,
+  carouselItems: [
+    {
+      title: "Item 1",
+      text: "Text 1",
+    },
+    {
+      title: "Item 2",
+      text: "Text 2",
+    },
+    {
+      title: "Item 3",
+      text: "Text 3",
+    },
+    {
+      title: "Item 4",
+      text: "Text 4",
+    },
+    {
+      title: "Item 5",
+      text: "Text 5",
+    },
+  ],
+};
+
 const PairingResultsScreen = (props) => {
   const navTitleView = useRef(null);
 
@@ -116,12 +141,6 @@ const PairingResultsScreen = (props) => {
                 left: "35%",
               }}
             >
-              {/* <FontAwesome
-                name="exclamation-triangle"
-                size={24}
-                color="#FF6347"
-                backgroundColor="red"
-              /> */}
               <MaterialIcons name="error-outline" size={24} color="red" />
             </View>
           </View>
@@ -131,14 +150,23 @@ const PairingResultsScreen = (props) => {
           <Text style={styles.sectionContent}>{response.data.foodDesc}</Text>
         </View>
         <View style={styles.section}>
-          <View style={styles.tags}>
-            {response.data.tags.map((tag, index) => (
-              <View style={styles.tagContainer} key={index}>
-                <FontAwesome name="tag" size={16} color="#fff" />
-                <Text style={styles.tag}>{tag}</Text>
-              </View>
-            ))}
-          </View>
+          <ScrollView
+            contentContainerStyle={{
+              flexDirection: "row",
+              flexWrap: "wrap",
+            }}
+            showsHorizontalScrollIndicator={false}
+            horizontal={true}
+          >
+            <View style={styles.tagsContainer}>
+              {response.data.tags.map((tag, index) => (
+                <View style={styles.tagContainer} key={index}>
+                  <FontAwesome name="tag" size={16} color="#fff" />
+                  <Text style={styles.tagText}>{tag}</Text>
+                </View>
+              ))}
+            </View>
+          </ScrollView>
         </View>
 
         <View style={[styles.section]}>
@@ -156,7 +184,7 @@ const PairingResultsScreen = (props) => {
 
         {/* Other alternate drink options */}
         <ScrollView
-          style={styles.ImageContainer}
+          style={styles.otherDrinkImage}
           contentContainerStyle={{
             flexDirection: "row",
             flexWrap: "wrap",
@@ -172,6 +200,7 @@ const PairingResultsScreen = (props) => {
                 text={drink.drinkItem}
                 source={{ uri: drink.imageURI }}
                 style={styles.drinkContainer}
+                textStyle={styles.imageTextOverlay}
               />
             </View>
           ))}
@@ -193,14 +222,10 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
     resizeMode: "cover",
   },
-  drinkImage: {
-    height: MAX_HEIGHT,
-    width: Dimensions.get("window").width,
-    margin: 5,
-    padding: 10,
-    paddingHorizontal: 15,
-    alignSelf: "center",
-    resizeMode: "cover",
+  otherDrinkImage: {
+    marginHorizontal: 16,
+    marginTop: 30,
+    width: "100%",
   },
   title: {
     fontSize: 20,
@@ -218,15 +243,13 @@ const styles = StyleSheet.create({
     borderBottomColor: "#cccccc",
     backgroundColor: "white",
   },
-
   sectionContent: {
     fontSize: 16,
     textAlign: "justify",
   },
-
-  tags: {
+  tagsContainer: {
+    width: "100%",
     flexDirection: "row",
-    justifyContent: "flex-start",
     alignContent: "center",
     flexWrap: "wrap",
   },
@@ -238,16 +261,10 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingHorizontal: 15,
   },
-  tag: {
+  tagText: {
     fontSize: 14,
     color: "#fff",
     marginLeft: 10,
-  },
-  drinks: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    flexWrap: "wrap",
-    // backgroundColor: "#FF6347",
   },
   drinkContainer: {
     backgroundColor: "#FF6347",
@@ -257,17 +274,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     height: 150,
     width: 150,
-  },
-  titleContainer: {
-    flex: 1,
-    alignSelf: "stretch",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  imageTitle: {
-    color: "white",
-    backgroundColor: "transparent",
-    fontSize: 24,
   },
   navTitleView: {
     height: MIN_HEIGHT,
@@ -287,33 +293,5 @@ const styles = StyleSheet.create({
     marginLeft: 16,
     fontWeight: "600",
     textAlign: "center",
-  },
-  flatlistContainer: {
-    flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
-  },
-  flatlistItem: {
-    backgroundColor: "#f9c2ff",
-    padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
-  },
-  flatlistTitle: {
-    fontSize: 32,
-  },
-  ImageContainer: {
-    marginHorizontal: 16,
-    marginTop: 30,
-    width: "100%",
-  },
-  drinkImage: {
-    shadowColor: "black",
-    shadowOffset: {
-      width: -10,
-      height: 9,
-    },
-    shadowOpacity: 0.5,
-    shadowRadius: 2,
-    // elevation: 5,
   },
 });
