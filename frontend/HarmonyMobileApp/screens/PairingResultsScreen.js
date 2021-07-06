@@ -204,7 +204,7 @@ const PairingResultsScreen = (props) => {
         <View style={[styles.section]}>
           <Text style={styles.sectionContent}>{response.data.foodDesc}</Text>
         </View>
-        <View style={styles.section}>
+        <View style={styles.tagsSection}>
           <ScrollView
             contentContainerStyle={{
               flexDirection: "row",
@@ -301,6 +301,14 @@ const styles = StyleSheet.create({
   sectionContent: {
     fontSize: 16,
     textAlign: "justify",
+  },
+  tagsSection: {
+    paddingTop: 20,
+    paddingBottom: 20,
+
+    borderBottomWidth: 1,
+    borderBottomColor: "#cccccc",
+    backgroundColor: "white",
   },
   tagsContainer: {
     width: "100%",
