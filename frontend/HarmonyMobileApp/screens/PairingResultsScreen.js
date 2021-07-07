@@ -1,5 +1,4 @@
-import React, { useRef, useState } from "react";
-
+import React, { useState } from "react";
 import {
   View,
   StyleSheet,
@@ -12,11 +11,7 @@ import {
 } from "react-native";
 import { Text } from "@ui-kitten/components";
 import Modal from "react-native-modal";
-
-import {
-  ImageHeaderScrollView,
-  TriggeringView,
-} from "react-native-image-header-scroll-view";
+import { ImageHeaderScrollView } from "react-native-image-header-scroll-view";
 import {
   FontAwesome,
   MaterialIcons,
@@ -24,7 +19,6 @@ import {
 } from "@expo/vector-icons";
 
 import ImagedCarouselCard from "react-native-imaged-carousel-card";
-import * as Animatable from "react-native-animatable";
 
 const MIN_HEIGHT = Platform.OS === "ios" ? 90 : 55;
 const MAX_HEIGHT = 300;
@@ -84,7 +78,6 @@ const response = {
 };
 
 const PairingResultsScreen = (props) => {
-  const navTitleView = useRef(null);
   const [isModalVisible, setModalVisible] = useState(false);
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
@@ -118,7 +111,7 @@ const PairingResultsScreen = (props) => {
           <Text style={styles.modalText}>
             Is the food correctly identified?
           </Text>
-          <View style={styles.modalButtonContainer}>
+          <View style={styles.rowContainer}>
             <TouchableOpacity
               style={[styles.button, styles.buttonIncorrect]}
               onPress={() => setModalVisible(!isModalVisible)}
@@ -150,6 +143,99 @@ const PairingResultsScreen = (props) => {
       </View>
     </Modal>
   );
+
+  const TagBar = () => (
+    <View style={styles.tagsSection}>
+      <ScrollView
+        contentContainerStyle={{
+          flexDirection: "row",
+          flexWrap: "wrap",
+        }}
+        showsHorizontalScrollIndicator={false}
+        horizontal={true}
+      >
+        <View style={styles.rowContainer}>
+          {response.data.tags.map((tag, index) => (
+            <View style={styles.tagContainer} key={index}>
+              <FontAwesome name="tag" size={16} color="#fff" />
+              {/* Keeping outlined icons just incase we want to change to them for consistency overall */}
+              {/* The filled icons look better in this case though */}
+              {/* <Feather name="tag" size={16} color="#fff" /> */}
+              <Text style={styles.tagText}>{tag}</Text>
+            </View>
+          ))}
+        </View>
+      </ScrollView>
+    </View>
+  );
+
+  const RecommendedDrink = () => (
+    <View style={[styles.section]}>
+      <Text style={styles.subtitle}>Recommended:</Text>
+      {/* Main recommendedDrink */}
+      <ImagedCarouselCard
+        width={300} //Width must be defined here, else the overlay text will overflow out of the container
+        height={300}
+        text={response.data.recommendedDrink.drinkItem}
+        textStyle={styles.cardTextOverlay}
+        source={{ uri: response.data.recommendedDrink.imageURI }}
+        style={styles.drinkCard}
+      />
+    </View>
+  );
+
+  const OtherDrinks = () => (
+    <ScrollView
+      style={styles.otherDrinkCardsContainer}
+      contentContainerStyle={{
+        flexDirection: "row",
+        flexWrap: "wrap",
+      }}
+      horizontal={false}
+    >
+      {response.data.drinkPairings.map((drink, index) => (
+        <View key={index}>
+          <ImagedCarouselCard
+            width={150} //Width must be defined here, else the overlay text will overflow out of the container
+            height={150}
+            text={drink.drinkItem}
+            textStyle={styles.cardTextOverlay}
+            source={{ uri: drink.imageURI }}
+            style={styles.drinkCard}
+          />
+        </View>
+      ))}
+    </ScrollView>
+  );
+  const FoodDescription = () => (
+    <View style={[styles.section]}>
+      <Text style={styles.sectionText}>{response.data.foodDesc}</Text>
+    </View>
+  );
+  const TitleBar = () => (
+    <View
+      style={[
+        styles.section,
+        {
+          flexDirection: "row",
+          justifyContent: "center",
+        },
+      ]}
+    >
+      <Text style={styles.title}>{response.data.foodItem}</Text>
+      <TouchableOpacity
+        style={{
+          flexDirection: "row",
+          left: "35%",
+        }}
+        onPress={() => setModalVisible(true)}
+      >
+        <MaterialIcons name="error-outline" size={24} color="red" />
+        <FeedbackModal />
+      </TouchableOpacity>
+    </View>
+  );
+
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
@@ -162,97 +248,12 @@ const PairingResultsScreen = (props) => {
             source={{ uri: response.data.imageURI }}
           />
         )}
-        renderFixedForeground={() => (
-          <Animatable.View style={styles.navTitleView} ref={navTitleView}>
-            <Text style={styles.navTitle}>{response.data.foodItem}</Text>
-          </Animatable.View>
-        )}
       >
-        <TriggeringView
-          style={styles.section}
-          onHide={() => navTitleView.current.fadeInUp(200)}
-          onDisplay={() => navTitleView.current.fadeOut(100)}
-        >
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "center",
-            }}
-          >
-            <Text style={styles.title}>{response.data.foodItem}</Text>
-
-            <TouchableOpacity
-              style={{
-                flexDirection: "row",
-                left: "35%",
-              }}
-              onPress={() => setModalVisible(true)}
-            >
-              <MaterialIcons name="error-outline" size={24} color="red" />
-              <FeedbackModal />
-            </TouchableOpacity>
-          </View>
-        </TriggeringView>
-
-        <View style={[styles.section]}>
-          <Text style={styles.sectionText}>{response.data.foodDesc}</Text>
-        </View>
-        <View style={styles.tagsSection}>
-          <ScrollView
-            contentContainerStyle={{
-              flexDirection: "row",
-              flexWrap: "wrap",
-            }}
-            showsHorizontalScrollIndicator={false}
-            horizontal={true}
-          >
-            <View style={styles.tagsContainer}>
-              {response.data.tags.map((tag, index) => (
-                <View style={styles.tagContainer} key={index}>
-                  <FontAwesome name="tag" size={16} color="#fff" />
-                  {/* Keeping outlined icons just incase we want to change to them for consistency overall */}
-                  {/* The filled icons look better in this case though */}
-                  {/* <Feather name="tag" size={16} color="#fff" /> */}
-                  <Text style={styles.tagText}>{tag}</Text>
-                </View>
-              ))}
-            </View>
-          </ScrollView>
-        </View>
-
-        <View style={[styles.section]}>
-          <Text style={styles.subtitle}>Recommended:</Text>
-          {/* Main recommendedDrink */}
-          <ImagedCarouselCard
-            text={response.data.recommendedDrink.drinkItem}
-            textStyle={styles.cardTextOverlay}
-            source={{ uri: response.data.recommendedDrink.imageURI }}
-            style={styles.largeDrinkCard}
-          />
-        </View>
-
-        {/* Other alternate drink options */}
-        <ScrollView
-          style={styles.otherDrinkCardsContainer}
-          contentContainerStyle={{
-            flexDirection: "row",
-            flexWrap: "wrap",
-          }}
-          horizontal={false}
-        >
-          {response.data.drinkPairings.map((drink, index) => (
-            <View key={index}>
-              <ImagedCarouselCard
-                width={150} //Width must be defined here, else the overlay text will overflow out of the container
-                height={150}
-                text={drink.drinkItem}
-                textStyle={styles.cardTextOverlay}
-                source={{ uri: drink.imageURI }}
-                style={styles.smallDrinkCard}
-              />
-            </View>
-          ))}
-        </ScrollView>
+        <TitleBar />
+        <FoodDescription />
+        <TagBar />
+        <RecommendedDrink />
+        <OtherDrinks />
       </ImageHeaderScrollView>
     </View>
   );
@@ -270,13 +271,8 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
     resizeMode: "cover",
   },
-  otherDrinkCardsContainer: {
-    marginHorizontal: 16,
-    marginTop: 10,
-    width: "100%",
-  },
   title: {
-    fontSize: 20,
+    fontSize: 22,
     alignSelf: "center",
     fontWeight: "bold",
   },
@@ -296,13 +292,14 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   tagsSection: {
-    paddingTop: 20,
-    paddingBottom: 20,
+    //Different from section because theres no padding on the right or left
+    //We do this so theres no visible cutoff as you scroll left or right
+    paddingVertical: 20,
     borderBottomWidth: 1,
     borderBottomColor: "#cccccc",
     backgroundColor: "white",
   },
-  tagsContainer: {
+  rowContainer: {
     //Container to hold all tags
     width: "100%",
     flexDirection: "row",
@@ -323,13 +320,12 @@ const styles = StyleSheet.create({
     color: "#fff",
     marginLeft: 10, //Space between tag icon and text
   },
-  smallDrinkCard: {
-    //Card style for smaller cards falling into the other section
+  drinkCard: {
+    //Card style for drinks
+    //Width and Height must be set inline for ImageCarousel cards
     borderRadius: 20,
     margin: 5,
     padding: 10,
-    height: 150,
-    width: 150,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -339,35 +335,10 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 3,
   },
-  largeDrinkCard: {
-    //Card style for main recommended drink card
-
-    borderRadius: 20,
-    margin: 5,
-    padding: 10,
-    paddingHorizontal: 15,
-    height: 300,
-    width: 300,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  navTitleView: {
-    height: MIN_HEIGHT,
-    justifyContent: "center",
-    alignItems: "center",
-    paddingTop: Platform.OS === "ios" ? 40 : 5,
-    opacity: 0,
-  },
-  navTitle: {
-    color: "white",
-    fontSize: 18,
-    backgroundColor: "transparent",
+  otherDrinkCardsContainer: {
+    marginHorizontal: 16,
+    marginTop: 10,
+    width: "100%",
   },
   cardTextOverlay: {
     fontSize: 18,
@@ -398,12 +369,6 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
-  modalButtonContainer: {
-    width: "100%",
-    flexDirection: "row",
-    alignContent: "center",
-    flexWrap: "wrap",
-  },
   button: {
     borderRadius: 20,
     padding: 10,
@@ -430,9 +395,5 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     fontSize: 20,
     textAlign: "center",
-  },
-  icon: {
-    width: 60,
-    height: 60,
   },
 });
