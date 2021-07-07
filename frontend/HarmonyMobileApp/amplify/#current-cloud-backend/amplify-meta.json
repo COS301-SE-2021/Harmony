@@ -1,0 +1,15 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-harmonymobileapp-hmnynviro-120001-authRole",
+      "UnauthRoleArn": "arn:aws:iam::294481406452:role/amplify-harmonymobileapp-hmnynviro-120001-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::294481406452:role/amplify-harmonymobileapp-hmnynviro-120001-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-harmonymobileapp-hmnynviro-120001-deployment",
+      "UnauthRoleName": "amplify-harmonymobileapp-hmnynviro-120001-unauthRole",
+      "StackName": "amplify-harmonymobileapp-hmnynviro-120001",
+      "StackId": "arn:aws:cloudformation:eu-west-1:294481406452:stack/amplify-harmonymobileapp-hmnynviro-120001/4a7be3c0-d1ae-11eb-93bf-0aa2eb738a15",
+      "AmplifyAppId": "d348oorcqc4y9s"
+    }
+  }
+}
