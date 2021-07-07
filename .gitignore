@@ -77,6 +77,7 @@ frontend/HarmonyMobileApp/.expo/settings.json
 frontend/HarmonyMobileApp/.expo/packager-info.json
 
 .vscode/*
+.vscode/
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
@@ -107,7 +108,7 @@ amplifytools.xcconfig
 
 #expo
 .expo/*
+.expo/
 
 #node modules
 node_modules/
-.vscode/
