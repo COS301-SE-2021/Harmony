@@ -110,3 +110,4 @@ amplifytools.xcconfig
 
 #node modules
 node_modules/
+.vscode/
