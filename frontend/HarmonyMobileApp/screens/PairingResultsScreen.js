@@ -187,7 +187,10 @@ const PairingResultsScreen = ({ navigation }) => {
         }}
       >
         {/* <SharedElement id={"item.${item.id}.image_url"}> */}
-        <SharedElement id={"response.data.recommendedDrink.imageURI"}>
+        {/* <SharedElement id={"response.data.recommendedDrink.imageURI"}> */}
+        <SharedElement
+          id={`item.${response.data.recommendedDrink.id}.imageURI`}
+        >
           <ImagedCarouselCard
             width={300} //Width must be defined here, else the overlay text will overflow out of the container
             height={300}

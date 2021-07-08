@@ -59,9 +59,24 @@ const TabNavigator = () => (
 const Results = () => (
   <Stack.Navigator headerMode="none" initialRouteName="Results">
     <Stack.Screen name="PairingResults" component={PairingResultsScreen} />
-    <Stack.Screen name="DrinkDetailsScreen" component={DrinkDetailsScreen} />
+    <Stack.Screen
+      name="DrinkDetailsScreen"
+      component={DrinkDetailsScreen}
+      options={() => options}
+    />
   </Stack.Navigator>
 );
+
+const options = {
+  headerBackTitleVisible: false,
+  cardStyleInterpolator: ({ current: { progress } }) => {
+    return {
+      cardStyle: {
+        opacity: progress,
+      },
+    };
+  },
+};
 
 export const AppNavigator = () => (
   <NavigationContainer>

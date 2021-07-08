@@ -29,7 +29,8 @@ const DrinkDetailsScreen = ({ navigation, route }) => {
 
   return (
     <View style={{ flex: 1, backgroundColor: "#fff" }}>
-      <SharedElement id={"item.imageURI"}>
+      {/* <SharedElement id={"item.imageURI"}> */}
+      <SharedElement id={`item.${item.id}.imageURI`}>
         <Image
           source={{ uri: item.imageURI }}
           style={{
@@ -113,7 +114,8 @@ DrinkDetailsScreen.sharedElements = (route) => {
   const { item } = route.params;
   return [
     {
-      id: "item.imageURI",
+      // id: "item.imageURI",
+      id: `item.${item.id}.imageURI`,
       animation: "move",
       resize: "clip",
     },
