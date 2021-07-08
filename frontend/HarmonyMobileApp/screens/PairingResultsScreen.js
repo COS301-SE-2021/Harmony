@@ -12,6 +12,8 @@ import {
 import { Text } from "@ui-kitten/components";
 import Modal from "react-native-modal";
 import { ImageHeaderScrollView } from "react-native-image-header-scroll-view";
+import { SharedElement } from "react-navigation-shared-element";
+
 import {
   FontAwesome,
   MaterialIcons,
@@ -34,6 +36,7 @@ const response = {
     location: "Pretoria",
     tags: ["Dessert", "Sweet", "Snack", "Warm", "Donut", "Baked"],
     recommendedDrink: {
+      id: "99",
       drinkItem: "Tea",
       drinkDesc:
         "Tea is an aromatic beverage prepared by pouring hot or boiling water over cured or fresh leaves of Camellia sinensis, an evergreen shrub native to China and East Asia. ",
@@ -174,14 +177,27 @@ const PairingResultsScreen = ({ navigation }) => {
     <View style={[styles.section]}>
       <Text style={styles.subtitle}>Recommended:</Text>
       {/* Main recommendedDrink */}
-      <ImagedCarouselCard
-        width={300} //Width must be defined here, else the overlay text will overflow out of the container
-        height={300}
-        text={response.data.recommendedDrink.drinkItem}
-        textStyle={styles.cardTextOverlay}
-        source={{ uri: response.data.recommendedDrink.imageURI }}
-        style={styles.drinkCard}
-      />
+
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate("Results", {
+            screen: "DrinkDetailsScreen",
+            params: { item: response.data.recommendedDrink },
+          });
+        }}
+      >
+        {/* <SharedElement id={"item.${item.id}.image_url"}> */}
+        <SharedElement id={"response.data.recommendedDrink.imageURI"}>
+          <ImagedCarouselCard
+            width={300} //Width must be defined here, else the overlay text will overflow out of the container
+            height={300}
+            text={response.data.recommendedDrink.drinkItem}
+            textStyle={styles.cardTextOverlay}
+            source={{ uri: response.data.recommendedDrink.imageURI }}
+            style={styles.drinkCard}
+          />
+        </SharedElement>
+      </TouchableOpacity>
     </View>
   );
 
@@ -252,17 +268,6 @@ const PairingResultsScreen = ({ navigation }) => {
           />
         )}
       >
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate("Results", { screen: "DrinkDetailsScreen" });
-          }}
-        >
-          <MaterialCommunityIcons
-            name="close-circle-outline"
-            size={50}
-            color="black"
-          />
-        </TouchableOpacity>
         <TitleBar />
         <FoodDescription />
         <TagBar />
