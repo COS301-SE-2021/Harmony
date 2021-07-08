@@ -33,23 +33,24 @@ const response = {
   data: {
     imageURI:
       "https://www.eatout.co.za/wp-content/uploads/2014/11/koeksuster-recipe-20Mar13-043451.jpg",
-    foodItem: "Koeksister",
+    foodName: "Koeksister",
     foodDesc:
       "A koeksister also spelled koesister is a traditional Afrikaner confectionery made of fried dough infused in syrup or honey. There is also a Cape Malay version of the dish, which is a fried ball of dough that is rolled in desiccated coconut. ",
     location: "Pretoria",
     tags: ["Dessert", "Sweet", "Snack", "Warm", "Donut", "Baked"],
     recommendedDrink: {
       id: "99",
-      drinkItem: "Tea",
+      drinkName: "Tea",
       drinkDesc:
         "Tea is an aromatic beverage prepared by pouring hot or boiling water over cured or fresh leaves of Camellia sinensis, an evergreen shrub native to China and East Asia. ",
       imageURI:
         "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/tea-cup-bag-high-res-stock-photography-1570544677.jpg?resize=768:*",
+      tags: ["Hot", "Sweet", "Healthy", "Gluten-Free"],
     },
     drinkPairings: [
       {
         id: "1",
-        drinkItem: "Espresso",
+        drinkName: "Espresso",
         drinkDesc:
           "Espresso is a coffee-brewing method of Italian origin, in which a small amount of nearly boiling water is forced under 9–10 bars of pressure through finely-ground coffee beans.",
         imageURI:
@@ -57,7 +58,7 @@ const response = {
       },
       {
         id: "2",
-        drinkItem: "Iced coffee",
+        drinkName: "Iced coffee",
         drinkDesc:
           "Iced coffee is a coffee beverage served cold. It may be prepared either by brewing coffee in the normal way and then serving it over ice or in cold milk, or by brewing the coffee cold.",
         imageURI:
@@ -65,7 +66,7 @@ const response = {
       },
       {
         id: "3",
-        drinkItem: "Iced coffee",
+        drinkName: "Iced coffee",
         drinkDesc:
           "Iced coffee is a coffee beverage served cold. It may be prepared either by brewing coffee in the normal way and then serving it over ice or in cold milk, or by brewing the coffee cold.",
         imageURI:
@@ -73,7 +74,7 @@ const response = {
       },
       {
         id: "4",
-        drinkItem: "Iced coffee",
+        drinkName: "Iced coffee",
         drinkDesc:
           "Iced coffee is a coffee beverage served cold. It may be prepared either by brewing coffee in the normal way and then serving it over ice or in cold milk, or by brewing the coffee cold.",
         imageURI:
@@ -180,7 +181,6 @@ const PairingResultsScreen = ({ navigation }) => {
     <View style={[styles.section]}>
       <Text style={styles.subtitle}>Recommended:</Text>
       {/* Main recommendedDrink */}
-
       <TouchableOpacity
         activeOpacity={1}
         onPress={() => {
@@ -190,13 +190,11 @@ const PairingResultsScreen = ({ navigation }) => {
           });
         }}
       >
-        {/* <SharedElement id={"item.${item.id}.image_url"}> */}
-        {/* <SharedElement id={"response.data.recommendedDrink.imageURI"}> */}
         <SharedElement id={response.data.recommendedDrink.id}>
           {/* <ImagedCarouselCard
             width={300} //Width must be defined here, else the overlay text will overflow out of the container
             height={300}
-            text={response.data.recommendedDrink.drinkItem}
+            text={response.data.recommendedDrink.drinkName}
             textStyle={styles.cardTextOverlay}
             source={{ uri: response.data.recommendedDrink.imageURI }}
             style={styles.drinkCard}
@@ -210,6 +208,12 @@ const PairingResultsScreen = ({ navigation }) => {
             }}
             resizeMode="cover"
           />
+        </SharedElement>
+
+        <SharedElement id={response.data.recommendedDrink.drinkName}>
+          <Text style={styles.title}>
+            {response.data.recommendedDrink.drinkName}
+          </Text>
         </SharedElement>
       </TouchableOpacity>
     </View>
@@ -229,7 +233,7 @@ const PairingResultsScreen = ({ navigation }) => {
           <ImagedCarouselCard
             width={150} //Width must be defined here, else the overlay text will overflow out of the container
             height={150}
-            text={drink.drinkItem}
+            text={drink.drinkName}
             textStyle={styles.cardTextOverlay}
             source={{ uri: drink.imageURI }}
             style={styles.drinkCard}
@@ -255,7 +259,7 @@ const PairingResultsScreen = ({ navigation }) => {
         },
       ]}
     >
-      <Text style={styles.title}>{response.data.foodItem}</Text>
+      <Text style={styles.title}>{response.data.foodName}</Text>
       <TouchableOpacity
         style={{
           flexDirection: "row",
