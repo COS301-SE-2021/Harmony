@@ -19,14 +19,10 @@ import {
   MaterialIcons,
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
-
-import ImagedCarouselCard from "react-native-imaged-carousel-card";
+import * as Animatable from "react-native-animatable";
 
 const MIN_HEIGHT = Platform.OS === "ios" ? 90 : 55;
 const MAX_HEIGHT = 300;
-
-const { height } = Dimensions.get("window");
-const ITEM_HEIGHT = height * 0.5;
 
 const response = {
   statusCode: 200,
@@ -195,28 +191,23 @@ const PairingResultsScreen = ({ navigation }) => {
         }}
       >
         <SharedElement id={response.data.recommendedDrink.id}>
-          {/* <ImagedCarouselCard
-            width={300} //Width must be defined here, else the overlay text will overflow out of the container
-            height={300}
-            text={response.data.recommendedDrink.drinkName}
-            textStyle={styles.cardTextOverlay}
-            source={{ uri: response.data.recommendedDrink.imageURI }}
-            style={styles.drinkCard}
-          /> */}
           <Image
             source={{ uri: response.data.recommendedDrink.imageURI }}
-            style={[styles.drinkCard, styles.largeDrinkCard]}
+            style={[styles.drinkCard, styles.bigDrinkCard]}
           />
         </SharedElement>
-        <View>
-          <SharedElement id={response.data.recommendedDrink.drinkName}>
-            <Text
-              style={[styles.cardTextOverlay, styles.cardBackgroundOverlay]}
-            >
-              {response.data.recommendedDrink.drinkName}
-            </Text>
-          </SharedElement>
-        </View>
+        <Animatable.View
+          animation="fadeIn"
+          duration={600}
+          delay={1000}
+          style={[styles.cardBackgroundOverlay, { width: 300 }]}
+        >
+          {/* <SharedElement id={response.data.recommendedDrink.drinkName}> */}
+          <Text style={[styles.cardTextOverlay]}>
+            {response.data.recommendedDrink.drinkName}
+          </Text>
+          {/* </SharedElement> */}
+        </Animatable.View>
       </TouchableOpacity>
     </View>
   );
@@ -242,20 +233,16 @@ const PairingResultsScreen = ({ navigation }) => {
             }}
           >
             <SharedElement id={drink.id}>
-              {/* <ImagedCarouselCard
-              width={150} //Width must be defined here, else the overlay text will overflow out of the container
-              height={150}
-              text={drink.drinkName}
-              textStyle={styles.cardTextOverlay}
-              source={{ uri: drink.imageURI }}
-              style={styles.drinkCard}
-            /> */}
-
               <Image
                 source={{ uri: drink.imageURI }}
                 style={[styles.drinkCard, styles.smallDrinkCard]}
               />
             </SharedElement>
+            <View style={[styles.cardBackgroundOverlay, { width: 150 }]}>
+              {/* <SharedElement id={response.data.recommendedDrink.drinkName}> */}
+              <Text style={[styles.cardTextOverlay]}>{drink.drinkName}</Text>
+              {/* </SharedElement> */}
+            </View>
           </TouchableOpacity>
         </View>
       ))}
@@ -394,7 +381,7 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150,
   },
-  largeDrinkCard: {
+  bigDrinkCard: {
     width: 300,
     height: 300,
   },
@@ -413,11 +400,11 @@ const styles = StyleSheet.create({
   cardBackgroundOverlay: {
     position: "absolute",
     height: 50,
-    width: 300,
-    bottom: "30",
+    left: 5,
+    bottom: 5,
     backgroundColor: "rgba(0,0,0,0.3)",
-    borderBottomLeftRadius: 16,
-    borderBottomRightRadius: 16,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
     justifyContent: "center",
     alignItems: "center",
   },

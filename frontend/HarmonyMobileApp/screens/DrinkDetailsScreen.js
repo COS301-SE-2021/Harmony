@@ -2,25 +2,16 @@ import React from "react";
 import {
   View,
   StyleSheet,
-  StatusBar,
   Image,
   Dimensions,
-  Platform,
   ScrollView,
-  TouchableOpacity,
   Text,
 } from "react-native";
 
 import { SharedElement } from "react-navigation-shared-element";
 import * as Animatable from "react-native-animatable";
-import {
-  FontAwesome,
-  MaterialIcons,
-  MaterialCommunityIcons,
-} from "@expo/vector-icons";
-import ImagedCarouselCard from "react-native-imaged-carousel-card";
+import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 
-const MIN_HEIGHT = Platform.OS === "ios" ? 90 : 55;
 const MAX_HEIGHT = 300;
 
 // const DrinkDetailsScreen = ({ navigation, props }) => {
@@ -56,17 +47,19 @@ const DrinkDetailsScreen = ({ navigation, route }) => {
   );
 
   const TitleBar = () => (
-    <View
-      style={[
-        styles.section,
-        {
-          flexDirection: "row",
-          justifyContent: "center",
-        },
-      ]}
-    >
-      <Text style={styles.title}>{item.drinkName}</Text>
-    </View>
+    <SharedElement id={item.drinkName}>
+      <View
+        style={[
+          styles.section,
+          {
+            flexDirection: "row",
+            justifyContent: "center",
+          },
+        ]}
+      >
+        <Text style={styles.title}>{item.drinkName}</Text>
+      </View>
+    </SharedElement>
   );
 
   const FoodDescription = () => (
@@ -123,6 +116,11 @@ DrinkDetailsScreen.sharedElements = (route) => {
     {
       id: item.id,
       animation: "move",
+      resize: "clip",
+    },
+    {
+      id: item.drinkName,
+      animation: "fade",
       resize: "clip",
     },
   ];
