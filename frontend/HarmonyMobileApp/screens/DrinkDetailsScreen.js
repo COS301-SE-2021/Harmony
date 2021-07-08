@@ -18,6 +18,7 @@ import {
   MaterialIcons,
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
+import ImagedCarouselCard from "react-native-imaged-carousel-card";
 
 const { height } = Dimensions.get("window");
 const ITEM_HEIGHT = height * 0.5;
@@ -28,19 +29,29 @@ const DrinkDetailsScreen = ({ navigation, route }) => {
   const buttonRef = React.useRef();
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#fff" }}>
+    // <View style={{ flex: 1, backgroundColor: "red" }}>
+    <View style={{ flex: 1, backgroundColor: "white" }}>
+      {/* <View> */}
       {/* <SharedElement id={"item.imageURI"}> */}
-      <SharedElement id={`item.${item.id}.imageURI`}>
+      {/* <SharedElement id={`item.${item.id}.imageURI`}> */}
+      <SharedElement id={item.id}>
         <Image
           source={{ uri: item.imageURI }}
           style={{
             width: "100%",
             height: ITEM_HEIGHT,
-            borderBottomLeftRadius: 20,
-            borderBottomRightRadius: 20,
           }}
           resizeMode="cover"
         />
+
+        {/* <ImagedCarouselCard
+          width={300} //Width must be defined here, else the overlay text will overflow out of the container
+          height={300}
+          text={"Tea"}
+          textStyle={styles.cardTextOverlay}
+          source={{ uri: item.imageURI }}
+          style={styles.drinkCard}
+        /> */}
       </SharedElement>
       <Animatable.View
         ref={buttonRef}
@@ -66,47 +77,6 @@ const DrinkDetailsScreen = ({ navigation, route }) => {
           }}
         />
       </Animatable.View>
-      <ScrollView
-        indicatorStyle="white"
-        style={{
-          paddingHorizontal: 20,
-          backgroundColor: "#0f0f0f",
-        }}
-        contentContainerStyle={{ paddingVertical: 20 }}
-      >
-        <Text
-          style={{
-            fontSize: 18,
-            color: "#fff",
-            lineHeight: 24,
-            marginBottom: 4,
-          }}
-        >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </Text>
-        <Text
-          style={{
-            fontSize: 18,
-            color: "#fff",
-            lineHeight: 24,
-            marginBottom: 4,
-          }}
-        >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </Text>
-      </ScrollView>
     </View>
   );
 };
@@ -115,7 +85,8 @@ DrinkDetailsScreen.sharedElements = (route) => {
   return [
     {
       // id: "item.imageURI",
-      id: `item.${item.id}.imageURI`,
+      // id: `item.${item.id}.imageURI`,
+      id: item.id,
       animation: "move",
       resize: "clip",
     },

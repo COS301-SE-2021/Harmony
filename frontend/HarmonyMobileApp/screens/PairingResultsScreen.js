@@ -25,6 +25,9 @@ import ImagedCarouselCard from "react-native-imaged-carousel-card";
 const MIN_HEIGHT = Platform.OS === "ios" ? 90 : 55;
 const MAX_HEIGHT = 300;
 
+const { height } = Dimensions.get("window");
+const ITEM_HEIGHT = height * 0.5;
+
 const response = {
   statusCode: 200,
   data: {
@@ -179,6 +182,7 @@ const PairingResultsScreen = ({ navigation }) => {
       {/* Main recommendedDrink */}
 
       <TouchableOpacity
+        activeOpacity={1}
         onPress={() => {
           navigation.navigate("Results", {
             screen: "DrinkDetailsScreen",
@@ -188,16 +192,23 @@ const PairingResultsScreen = ({ navigation }) => {
       >
         {/* <SharedElement id={"item.${item.id}.image_url"}> */}
         {/* <SharedElement id={"response.data.recommendedDrink.imageURI"}> */}
-        <SharedElement
-          id={`item.${response.data.recommendedDrink.id}.imageURI`}
-        >
-          <ImagedCarouselCard
+        <SharedElement id={response.data.recommendedDrink.id}>
+          {/* <ImagedCarouselCard
             width={300} //Width must be defined here, else the overlay text will overflow out of the container
             height={300}
             text={response.data.recommendedDrink.drinkItem}
             textStyle={styles.cardTextOverlay}
             source={{ uri: response.data.recommendedDrink.imageURI }}
             style={styles.drinkCard}
+          /> */}
+          <Image
+            source={{ uri: response.data.recommendedDrink.imageURI }}
+            style={{
+              width: 300,
+              height: 300,
+              borderRadius: 20,
+            }}
+            resizeMode="cover"
           />
         </SharedElement>
       </TouchableOpacity>

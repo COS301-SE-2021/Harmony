@@ -68,6 +68,11 @@ const Results = () => (
 );
 
 const options = {
+  transitionSpec: {
+    //Necessary to avoid image flicker after transition
+    open: { animation: "timing", config: { duration: 250 } },
+    close: { animation: "timing", config: { duration: 250 } },
+  },
   headerBackTitleVisible: false,
   cardStyleInterpolator: ({ current: { progress } }) => {
     return {
@@ -75,6 +80,9 @@ const options = {
         opacity: progress,
       },
     };
+  },
+  cardStyle: {
+    backgroundColor: "transparent",
   },
 };
 
