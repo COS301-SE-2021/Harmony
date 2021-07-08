@@ -55,6 +55,7 @@ const response = {
           "Espresso is a coffee-brewing method of Italian origin, in which a small amount of nearly boiling water is forced under 9–10 bars of pressure through finely-ground coffee beans.",
         imageURI:
           "https://cdn-a.william-reed.com/var/wrbm_gb_food_pharma/storage/images/publications/food-beverage-nutrition/beveragedaily.com/news/r-d/aussie-barista-helps-scientists-to-brew-the-perfect-espresso/10795433-1-eng-GB/Aussie-barista-helps-scientists-to-brew-the-perfect-espresso_wrbm_large.jpg",
+        tags: ["Hot", "Sweet", "Healthy", "Gluten-Free"],
       },
       {
         id: "2",
@@ -63,6 +64,7 @@ const response = {
           "Iced coffee is a coffee beverage served cold. It may be prepared either by brewing coffee in the normal way and then serving it over ice or in cold milk, or by brewing the coffee cold.",
         imageURI:
           "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Blue_Bottle%2C_Kyoto_Style_Ice_Coffee_%285909775445%29.jpg/600px-Blue_Bottle%2C_Kyoto_Style_Ice_Coffee_%285909775445%29.jpg",
+        tags: ["Hot", "Sweet", "Healthy", "Gluten-Free"],
       },
       {
         id: "3",
@@ -71,6 +73,7 @@ const response = {
           "Iced coffee is a coffee beverage served cold. It may be prepared either by brewing coffee in the normal way and then serving it over ice or in cold milk, or by brewing the coffee cold.",
         imageURI:
           "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Blue_Bottle%2C_Kyoto_Style_Ice_Coffee_%285909775445%29.jpg/600px-Blue_Bottle%2C_Kyoto_Style_Ice_Coffee_%285909775445%29.jpg",
+        tags: ["Hot", "Sweet", "Healthy", "Gluten-Free"],
       },
       {
         id: "4",
@@ -79,6 +82,7 @@ const response = {
           "Iced coffee is a coffee beverage served cold. It may be prepared either by brewing coffee in the normal way and then serving it over ice or in cold milk, or by brewing the coffee cold.",
         imageURI:
           "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Blue_Bottle%2C_Kyoto_Style_Ice_Coffee_%285909775445%29.jpg/600px-Blue_Bottle%2C_Kyoto_Style_Ice_Coffee_%285909775445%29.jpg",
+        tags: ["Hot", "Sweet", "Healthy", "Gluten-Free"],
       },
     ],
   },
@@ -230,14 +234,36 @@ const PairingResultsScreen = ({ navigation }) => {
     >
       {response.data.drinkPairings.map((drink, index) => (
         <View key={index}>
-          <ImagedCarouselCard
-            width={150} //Width must be defined here, else the overlay text will overflow out of the container
-            height={150}
-            text={drink.drinkName}
-            textStyle={styles.cardTextOverlay}
-            source={{ uri: drink.imageURI }}
-            style={styles.drinkCard}
-          />
+          <TouchableOpacity
+            activeOpacity={1}
+            onPress={() => {
+              navigation.navigate("Results", {
+                screen: "DrinkDetailsScreen",
+                params: { item: drink },
+              });
+            }}
+          >
+            {/* <ImagedCarouselCard
+              width={150} //Width must be defined here, else the overlay text will overflow out of the container
+              height={150}
+              text={drink.drinkName}
+              textStyle={styles.cardTextOverlay}
+              source={{ uri: drink.imageURI }}
+              style={styles.drinkCard}
+            /> */}
+
+            <SharedElement id={drink.id}>
+              <Image
+                source={{ uri: drink.imageURI }}
+                style={{
+                  width: 150,
+                  height: 150,
+                  borderRadius: 20,
+                }}
+                resizeMode="cover"
+              />
+            </SharedElement>
+          </TouchableOpacity>
         </View>
       ))}
     </ScrollView>

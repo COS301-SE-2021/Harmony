@@ -28,6 +28,33 @@ const DrinkDetailsScreen = ({ navigation, route }) => {
   const { item } = route.params;
   const buttonRef = React.useRef();
 
+  const CloseButton = () => (
+    <Animatable.View
+      ref={buttonRef}
+      animation="fadeIn"
+      duration={600}
+      delay={300}
+      style={[StyleSheet.absoluteFillObject]}
+    >
+      <MaterialCommunityIcons
+        name="close"
+        size={28}
+        color="#fff"
+        style={{
+          position: "absolute",
+          top: 40,
+          right: 20,
+          zIndex: 2,
+        }}
+        onPress={() => {
+          buttonRef.current.fadeOut(100).then(() => {
+            navigation.goBack();
+          });
+        }}
+      />
+    </Animatable.View>
+  );
+
   const TitleBar = () => (
     <View
       style={[
@@ -82,31 +109,8 @@ const DrinkDetailsScreen = ({ navigation, route }) => {
           resizeMode="cover"
         />
       </SharedElement>
-      <Animatable.View
-        ref={buttonRef}
-        animation="fadeIn"
-        duration={600}
-        delay={300}
-        style={[StyleSheet.absoluteFillObject]}
-      >
-        <MaterialCommunityIcons
-          name="close"
-          size={28}
-          color="#fff"
-          style={{
-            position: "absolute",
-            top: 40,
-            right: 20,
-            zIndex: 2,
-          }}
-          onPress={() => {
-            buttonRef.current.fadeOut(100).then(() => {
-              navigation.goBack();
-            });
-          }}
-        />
-      </Animatable.View>
 
+      <CloseButton />
       <TitleBar />
       <FoodDescription />
       <TagBar />
