@@ -8,7 +8,7 @@ import requests
 Make sure env variable AWS_SAM_STACK_NAME exists with the name of the stack we are going to test. 
 """
 
-os.environ['AWS_SAM_STACK_NAME'] = 'Hello'
+os.environ['AWS_SAM_STACK_NAME'] = 'Stack_Name'
 class TestApiGateway(TestCase):
     api_endpoint: str
 
@@ -42,8 +42,8 @@ class TestApiGateway(TestCase):
         stacks = response["Stacks"]
 
         stack_outputs = stacks[0]["Outputs"]
-        api_outputs = [output for output in stack_outputs if output["OutputKey"] == "HelloWorldApi"]
-        self.assertTrue(api_outputs, f"Cannot find output HelloWorldApi in stack {stack_name}")
+        api_outputs = [output for output in stack_outputs if output["OutputKey"] == "ApiName"]
+        self.assertTrue(api_outputs, f"Cannot find output API in stack {stack_name}")
 
         self.api_endpoint = api_outputs[0]["OutputValue"]
 
@@ -52,4 +52,4 @@ class TestApiGateway(TestCase):
         Call the API Gateway endpoint and check the response
         """
         response = requests.get(self.api_endpoint)
-        self.assertDictEqual(response.json(), {"message": ""})
+        self.assertDictEqual(response.json(), {"isSuccessful": "true"})
