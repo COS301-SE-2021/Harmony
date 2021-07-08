@@ -186,7 +186,7 @@ const PairingResultsScreen = ({ navigation }) => {
       <Text style={styles.subtitle}>Recommended:</Text>
       {/* Main recommendedDrink */}
       <TouchableOpacity
-        activeOpacity={1}
+        activeOpacity={0.8}
         onPress={() => {
           navigation.navigate("Results", {
             screen: "DrinkDetailsScreen",
@@ -208,12 +208,15 @@ const PairingResultsScreen = ({ navigation }) => {
             style={[styles.drinkCard, styles.largeDrinkCard]}
           />
         </SharedElement>
-
-        <SharedElement id={response.data.recommendedDrink.drinkName}>
-          <Text style={styles.title}>
-            {response.data.recommendedDrink.drinkName}
-          </Text>
-        </SharedElement>
+        <View>
+          <SharedElement id={response.data.recommendedDrink.drinkName}>
+            <Text
+              style={[styles.cardTextOverlay, styles.cardBackgroundOverlay]}
+            >
+              {response.data.recommendedDrink.drinkName}
+            </Text>
+          </SharedElement>
+        </View>
       </TouchableOpacity>
     </View>
   );
@@ -230,7 +233,7 @@ const PairingResultsScreen = ({ navigation }) => {
       {response.data.drinkPairings.map((drink, index) => (
         <View key={index}>
           <TouchableOpacity
-            activeOpacity={1}
+            activeOpacity={0.8}
             onPress={() => {
               navigation.navigate("Results", {
                 screen: "DrinkDetailsScreen",
@@ -401,12 +404,22 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   cardTextOverlay: {
-    fontSize: 18,
+    fontSize: 20,
     color: "white",
-    marginLeft: 16,
-    marginRight: 16,
+    marginHorizontal: 10,
     fontWeight: "600",
     textAlign: "center",
+  },
+  cardBackgroundOverlay: {
+    position: "absolute",
+    height: 50,
+    width: 300,
+    bottom: "30",
+    backgroundColor: "rgba(0,0,0,0.3)",
+    borderBottomLeftRadius: 16,
+    borderBottomRightRadius: 16,
+    justifyContent: "center",
+    alignItems: "center",
   },
   centeredView: {
     flex: 1,
