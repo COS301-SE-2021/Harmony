@@ -1,42 +1,21 @@
 import json
+import boto3
+from boto3.dynamodb.conditions import Key
 
 # import requests
 
+dynamodb = boto3.resource('dynamodb')
 
-def lambda_handler3(event, context):
-    """Sample pure Lambda function
+# use the DynamoDB object to select our table
+table = dynamodb.Table('Pairings')
 
-    Parameters
-    ----------
-    event: dict, required
-        API Gateway Lambda Proxy Input Format
 
-        Event doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html#api-gateway-simple-proxy-for-lambda-input-format
-
-    context: object, required
-        Lambda Context runtime methods and attributes
-
-        Context doc: https://docs.aws.amazon.com/lambda/latest/dg/python-context-object.html
-
-    Returns
-    ------
-    API Gateway Lambda Proxy Output Format: dict
-
-        Return doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html
-    """
-
-    # try:
-    #     ip = requests.get("http://checkip.amazonaws.com/")
-    # except requests.RequestException as e:
-    #     # Send some context about this error to Lambda Logs
-    #     print(e)
-
-    #     raise e
-
-    return {
-        "statusCode": 200,
-        "body": json.dumps({
-            "message": "hello world",
-            # "location": ip.text.replace("\n", "")
-        }),
-    }
+# must actually take in a string variable when we combine full functionality to equate it too
+def findpairing(event, context):
+    print("Test")
+    finditem = 'Waffles'
+    response = table.query(
+        IndexName="FoodItem-index",
+        KeyConditionExpression=Key('FoodItem').eq(finditem)
+    )
+    return response['Items']
