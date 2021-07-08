@@ -182,7 +182,7 @@ const PairingResultsScreen = ({ navigation }) => {
   );
 
   const RecommendedDrink = () => (
-    <View style={[styles.section]}>
+    <View style={[styles.section, styles.centeredView]}>
       <Text style={styles.subtitle}>Recommended:</Text>
       {/* Main recommendedDrink */}
       <TouchableOpacity
@@ -205,12 +205,7 @@ const PairingResultsScreen = ({ navigation }) => {
           /> */}
           <Image
             source={{ uri: response.data.recommendedDrink.imageURI }}
-            style={{
-              width: 300,
-              height: 300,
-              borderRadius: 20,
-            }}
-            resizeMode="cover"
+            style={[styles.drinkCard, styles.largeDrinkCard]}
           />
         </SharedElement>
 
@@ -243,7 +238,8 @@ const PairingResultsScreen = ({ navigation }) => {
               });
             }}
           >
-            {/* <ImagedCarouselCard
+            <SharedElement id={drink.id}>
+              {/* <ImagedCarouselCard
               width={150} //Width must be defined here, else the overlay text will overflow out of the container
               height={150}
               text={drink.drinkName}
@@ -252,15 +248,9 @@ const PairingResultsScreen = ({ navigation }) => {
               style={styles.drinkCard}
             /> */}
 
-            <SharedElement id={drink.id}>
               <Image
                 source={{ uri: drink.imageURI }}
-                style={{
-                  width: 150,
-                  height: 150,
-                  borderRadius: 20,
-                }}
-                resizeMode="cover"
+                style={[styles.drinkCard, styles.smallDrinkCard]}
               />
             </SharedElement>
           </TouchableOpacity>
@@ -384,18 +374,26 @@ const styles = StyleSheet.create({
   },
   drinkCard: {
     //Card style for drinks
-    //Width and Height must be set inline for ImageCarousel cards
     borderRadius: 20,
     margin: 5,
     padding: 10,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 3,
+    // shadowColor: "#000",
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 2,
+    // },
+    // shadowOpacity: 0.25,
+    // shadowRadius: 4,
+    // elevation: 3,
+    resizeMode: "cover",
+  },
+  smallDrinkCard: {
+    width: 150,
+    height: 150,
+  },
+  largeDrinkCard: {
+    width: 300,
+    height: 300,
   },
   otherDrinkCardsContainer: {
     marginHorizontal: 16,
@@ -414,7 +412,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22,
   },
   modalView: {
     margin: 20,
