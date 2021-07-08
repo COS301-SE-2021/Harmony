@@ -11,17 +11,17 @@ Globals:
     Timeout: 10
 
 Resources:
-  HelloWorldFunction:
+  IdentifyFoodItemFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: ImageRecognition/
-      Handler: app.lambda_handler
+      Handler: IdentifyFoodItem.identify_food_item
       Runtime: python3.8
       Events:
-        HelloWorld:
+        IdentifyFoodItem:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
-            Path: /hello
+            Path: /food
             Method: get
 
   HelloWorldFunction2:
