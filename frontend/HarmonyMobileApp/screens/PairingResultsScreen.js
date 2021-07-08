@@ -32,7 +32,7 @@ const response = {
     foodDesc:
       "A koeksister also spelled koesister is a traditional Afrikaner confectionery made of fried dough infused in syrup or honey. There is also a Cape Malay version of the dish, which is a fried ball of dough that is rolled in desiccated coconut. ",
     location: "Pretoria",
-    tags: ["Dessert", "Sweet", "Snack", "Dessert", "Sweet", "Snack"],
+    tags: ["Dessert", "Sweet", "Snack", "Warm", "Donut", "Baked"],
     recommendedDrink: {
       drinkItem: "Tea",
       drinkDesc:
@@ -77,8 +77,9 @@ const response = {
   },
 };
 
-const PairingResultsScreen = (props) => {
+const PairingResultsScreen = ({ navigation }) => {
   const [isModalVisible, setModalVisible] = useState(false);
+
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
@@ -207,11 +208,13 @@ const PairingResultsScreen = (props) => {
       ))}
     </ScrollView>
   );
+
   const FoodDescription = () => (
     <View style={[styles.section]}>
       <Text style={styles.sectionText}>{response.data.foodDesc}</Text>
     </View>
   );
+
   const TitleBar = () => (
     <View
       style={[
@@ -249,6 +252,17 @@ const PairingResultsScreen = (props) => {
           />
         )}
       >
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("Results", { screen: "DrinkDetailsScreen" });
+          }}
+        >
+          <MaterialCommunityIcons
+            name="close-circle-outline"
+            size={50}
+            color="black"
+          />
+        </TouchableOpacity>
         <TitleBar />
         <FoodDescription />
         <TagBar />
@@ -258,7 +272,6 @@ const PairingResultsScreen = (props) => {
     </View>
   );
 };
-
 export default PairingResultsScreen;
 
 const styles = StyleSheet.create({

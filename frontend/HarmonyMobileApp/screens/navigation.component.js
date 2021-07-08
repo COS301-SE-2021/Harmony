@@ -1,6 +1,8 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createSharedElementStackNavigator } from "react-navigation-shared-element";
+
 import {
   BottomNavigation,
   BottomNavigationTab,
@@ -14,8 +16,10 @@ import HomeScreen from "./HomeScreen.js";
 import ViewFavouritesScreen from "./ViewFavouritesScreen.js";
 import SettingsScreen from "./SettingsScreen.js";
 import PairingResultsScreen from "./PairingResultsScreen.js";
+import DrinkDetailsScreen from "./DrinkDetailsScreen.js";
 
 const { Navigator, Screen } = createBottomTabNavigator();
+const Stack = createSharedElementStackNavigator();
 
 const HomeIcon = (props) => <Icon {...props} name="home-outline" />;
 const CameraIcon = (props) => (
@@ -44,11 +48,19 @@ const BottomTabBar = ({ navigation, state }) => (
 
 const TabNavigator = () => (
   <Navigator tabBar={(props) => <BottomTabBar {...props} />}>
-    <Screen name="Home" component={PairingResultsScreen} />
+    <Screen name="Results" component={Results} />
+    {/* <Screen name="Home" component={HomeScreen} /> */}
     <Screen name="Camera" component={CameraScreen} />
     <Screen name="Favourite" component={ViewFavouritesScreen} />
     <Screen name="Settings" component={SettingsScreen} />
   </Navigator>
+);
+
+const Results = () => (
+  <Stack.Navigator headerMode="none" initialRouteName="Results">
+    <Stack.Screen name="PairingResults" component={PairingResultsScreen} />
+    <Stack.Screen name="DrinkDetailsScreen" component={DrinkDetailsScreen} />
+  </Stack.Navigator>
 );
 
 export const AppNavigator = () => (
