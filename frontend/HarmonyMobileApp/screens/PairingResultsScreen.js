@@ -13,6 +13,7 @@ import { Text } from "@ui-kitten/components";
 import Modal from "react-native-modal";
 import { ImageHeaderScrollView } from "react-native-image-header-scroll-view";
 import { SharedElement } from "react-navigation-shared-element";
+import { useIsFocused, useFocusEffect } from "@react-navigation/native";
 
 import {
   FontAwesome,
@@ -198,8 +199,7 @@ const PairingResultsScreen = ({ navigation }) => {
         </SharedElement>
         <Animatable.View
           animation="fadeIn"
-          duration={600}
-          delay={1000}
+          delay={200}
           style={[styles.cardBackgroundOverlay, { width: 300 }]}
         >
           {/* <SharedElement id={response.data.recommendedDrink.drinkName}> */}
@@ -278,6 +278,13 @@ const PairingResultsScreen = ({ navigation }) => {
       </TouchableOpacity>
     </View>
   );
+  //Somehow the this line affects the animation
+  //Each time the screen comes into focus, the animations
+  //for the drink titles animate
+  //however there are side effects such as image flickering
+  //and transitioning too fast making the whole transition
+  //look very botched
+  // const isFocused = useIsFocused();
 
   return (
     <View style={styles.container}>
@@ -392,17 +399,18 @@ const styles = StyleSheet.create({
   },
   cardTextOverlay: {
     fontSize: 20,
-    color: "white",
+    // color: "white",
+    color: "black",
     marginHorizontal: 10,
     fontWeight: "600",
     textAlign: "center",
   },
   cardBackgroundOverlay: {
-    position: "absolute",
+    // position: "absolute",
     height: 50,
     left: 5,
     bottom: 5,
-    backgroundColor: "rgba(0,0,0,0.3)",
+    // backgroundColor: "rgba(0,0,0,0.3)",
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
     justifyContent: "center",
