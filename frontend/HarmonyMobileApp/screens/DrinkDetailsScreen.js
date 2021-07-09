@@ -129,24 +129,10 @@ DrinkDetailsScreen.sharedElements = (route) => {
 export default DrinkDetailsScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  foodCard: {
-    height: MAX_HEIGHT,
-    width: Dimensions.get("window").width,
-    alignSelf: "stretch",
-    resizeMode: "cover",
-  },
   title: {
     fontSize: 22,
     alignSelf: "center",
     fontWeight: "bold",
-  },
-  subtitle: {
-    fontSize: 20,
-    alignSelf: "center",
-    paddingBottom: 10,
   },
   section: {
     padding: 20,
@@ -186,81 +172,5 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#fff",
     marginLeft: 10, //Space between tag icon and text
-  },
-  drinkCard: {
-    //Card style for drinks
-    //Width and Height must be set inline for ImageCarousel cards
-    borderRadius: 20,
-    margin: 5,
-    padding: 10,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  otherDrinkCardsContainer: {
-    marginHorizontal: 16,
-    marginTop: 10,
-    width: "100%",
-  },
-  cardTextOverlay: {
-    fontSize: 18,
-    color: "white",
-    marginLeft: 16,
-    marginRight: 16,
-    fontWeight: "600",
-    textAlign: "center",
-  },
-  centeredView: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 22,
-  },
-  modalView: {
-    margin: 20,
-    backgroundColor: "white",
-    borderRadius: 20,
-    padding: 20,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 4,
-    margin: 5,
-  },
-  buttonCorrect: {
-    backgroundColor: "#56a211",
-  },
-  buttonIncorrect: {
-    backgroundColor: "#e9430f",
-  },
-  closeButton: {
-    position: "absolute",
-    right: 10,
-    top: 5,
-  },
-  modalHeaderSection: {
-    borderBottomWidth: 1,
-    borderBottomColor: "#cccccc",
-    backgroundColor: "white",
-  },
-  modalText: {
-    paddingVertical: 10,
-    fontSize: 20,
-    textAlign: "center",
   },
 });
