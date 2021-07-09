@@ -115,7 +115,7 @@ const PairingResultsScreen = ({ navigation }) => {
             />
           </TouchableOpacity>
           <View style={[styles.modalHeaderSection]}>
-            <Text style={styles.title}>Feedback </Text>
+            <Text style={styles.title}>Help us improve </Text>
           </View>
           <Text style={styles.modalText}>
             Is the food correctly identified?
@@ -180,7 +180,7 @@ const PairingResultsScreen = ({ navigation }) => {
 
   const RecommendedDrink = () => (
     <View style={[styles.section, styles.centeredView]}>
-      <Text style={styles.subtitle}>Recommended:</Text>
+      <Text style={styles.subtitle}>Suggested for you</Text>
       {/* Main recommendedDrink */}
       <TouchableOpacity
         activeOpacity={0.8}
@@ -213,40 +213,44 @@ const PairingResultsScreen = ({ navigation }) => {
   );
 
   const OtherDrinks = () => (
-    <ScrollView
-      style={styles.otherDrinkCardsContainer}
-      contentContainerStyle={{
-        flexDirection: "row",
-        flexWrap: "wrap",
-      }}
-      horizontal={false}
-    >
-      {response.data.drinkPairings.map((drink, index) => (
-        <View key={index}>
-          <TouchableOpacity
-            activeOpacity={0.8}
-            onPress={() => {
-              navigation.navigate("Results", {
-                screen: "DrinkDetailsScreen",
-                params: { item: drink },
-              });
-            }}
-          >
-            <SharedElement id={drink.id}>
-              <Image
-                source={{ uri: drink.imageURI }}
-                style={[styles.drinkCard, styles.smallDrinkCard]}
-              />
-            </SharedElement>
-            <View style={[styles.cardBackgroundOverlay, { width: 150 }]}>
-              {/* <SharedElement id={response.data.recommendedDrink.drinkName}> */}
-              <Text style={[styles.cardTextOverlay]}>{drink.drinkName}</Text>
-              {/* </SharedElement> */}
-            </View>
-          </TouchableOpacity>
-        </View>
-      ))}
-    </ScrollView>
+    <View style={[styles.section, styles.centeredView]}>
+      <Text style={styles.subtitle}>You might also like</Text>
+
+      <ScrollView
+        style={styles.otherDrinkCardsContainer}
+        contentContainerStyle={{
+          flexDirection: "row",
+          flexWrap: "wrap",
+        }}
+        horizontal={false}
+      >
+        {response.data.drinkPairings.map((drink, index) => (
+          <View key={index}>
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={() => {
+                navigation.navigate("Results", {
+                  screen: "DrinkDetailsScreen",
+                  params: { item: drink },
+                });
+              }}
+            >
+              <SharedElement id={drink.id}>
+                <Image
+                  source={{ uri: drink.imageURI }}
+                  style={[styles.drinkCard, styles.smallDrinkCard]}
+                />
+              </SharedElement>
+              <View style={[styles.cardBackgroundOverlay, { width: 150 }]}>
+                {/* <SharedElement id={response.data.recommendedDrink.drinkName}> */}
+                <Text style={[styles.cardTextOverlay]}>{drink.drinkName}</Text>
+                {/* </SharedElement> */}
+              </View>
+            </TouchableOpacity>
+          </View>
+        ))}
+      </ScrollView>
+    </View>
   );
 
   const FoodDescription = () => (
@@ -362,7 +366,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     margin: 5, //Space between tags
     padding: 10, //Space around innner tag
-    elevation: 4, //gives shadow/3D effect
+    elevation: 2, //gives shadow/3D effect
   },
   tagText: {
     fontSize: 14,
@@ -371,7 +375,9 @@ const styles = StyleSheet.create({
   },
   drinkCard: {
     //Card style for drinks
-    borderRadius: 20,
+    // borderRadius: 20,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
     margin: 5,
     padding: 10,
     // shadowColor: "#000",
@@ -404,15 +410,25 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     fontWeight: "600",
     textAlign: "center",
+    // backgroundColor: "rgba(0,0,0,0.3)",
   },
   cardBackgroundOverlay: {
     // position: "absolute",
     height: 50,
     left: 5,
     bottom: 5,
-    // backgroundColor: "rgba(0,0,0,0.3)",
+    // backgroundColor: "rgba(0,0,0,0.1)",
+    // backgroundColor: "#4F6D7A",
+    // backgroundColor: "#DD6E42",
+    // backgroundColor: "#FF6347",
+    // backgroundColor: "#E8DAB2",
+    // backgroundColor: "#C0D6DF",
+    backgroundColor: "#EAEAEA",
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
+    // borderWidth: 1,
+    elevation: 2,
+
     justifyContent: "center",
     alignItems: "center",
   },
