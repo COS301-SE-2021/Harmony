@@ -10,14 +10,17 @@ export const UserPairingsScreen = () => {
       selectedIndex={selectedIndex}
       onSelect={(index) => setSelectedIndex(index)}
     >
-      <Tab title="My Favourites">
+      <Tab
+        style={[styles.tabHeader, styles.tabHeaderText]}
+        title="My Favourites"
+      >
         <Layout style={styles.tabContainer}>
-          <Text category="h5">My Favourites</Text>
+          <Text>My Favourites</Text>
         </Layout>
       </Tab>
-      <Tab title="My Pairings">
+      <Tab style={styles.tabHeader} title="My Pairings">
         <Layout style={styles.tabContainer}>
-          <Text category="h5">My Pairings</Text>
+          <Text>My Pairings</Text>
         </Layout>
       </Tab>
     </TabView>
@@ -25,6 +28,11 @@ export const UserPairingsScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  tabHeader: {
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 10,
+  },
   tabContainer: {
     height: Dimensions.get("window").height,
     width: Dimensions.get("window").width,
