@@ -2,22 +2,21 @@ import React from "react";
 import { StyleSheet, Dimensions } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createSharedElementStackNavigator } from "react-navigation-shared-element";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { createSharedElementStackNavigator } from "react-navigation-shared-element";
+import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 
 import {
   BottomNavigation,
   BottomNavigationTab,
   Layout,
   Text,
-  Button,
   Icon,
 } from "@ui-kitten/components";
 
 import HomeScreen from "./HomeScreen.js";
 import ViewFavouritesScreen from "./ViewFavouritesScreen.js";
 import ShowLatestPairingsScreen from "./ShowLatestPairingsScreen";
-import UserPairingsScreen from "./UserPairingsScreen.js";
 import SettingsScreen from "./SettingsScreen.js";
 import PairingResultsScreen from "./PairingResultsScreen.js";
 import DrinkDetailsScreen from "./DrinkDetailsScreen.js";
@@ -79,19 +78,51 @@ function UserPairingsTopTabs() {
     <Tab.Navigator
       initialRouteName="Favourites"
       tabBarOptions={{
-        labelStyle: { fontSize: 16 },
-        style: { backgroundColor: "powderblue" },
+        labelStyle: {
+          textAlign: "center",
+          textTransform: "none", //Needed else the table titles will be all caps
+          fontSize: 20,
+        },
+        showIcon: true, //Required for icon to show
+        // showLabel: false,// to hide tab text
+        activeTintColor: "#3366FF", //When this is the active tab, this will be the color of the text and icons
+        inactiveTintColor: "rgba(0,0,0,0.4)",
+        // backgroundColor: "rgba(0,0,0,0.1)",
+
+        tabStyle: {
+          flexDirection: "row",
+          height: 70,
+        },
+        indicatorStyle: {
+          //Style of the scroll bar at the bottom of the tabs
+          borderBottomColor: "#3366FF",
+          borderBottomWidth: 4,
+        },
       }}
     >
       <Tab.Screen
         name="UserFavourites"
         component={ViewFavouritesScreen}
-        options={{ tabBarLabel: "My Favourites" }}
+        options={{
+          tabBarLabel: "My Favourites",
+          tabBarIcon: ({ color }) => (
+            <FontAwesome name="heart-o" color={color} size={24} />
+          ),
+        }}
       />
       <Tab.Screen
         name="UserPairings"
         component={ShowLatestPairingsScreen}
-        options={{ tabBarLabel: "My Pairings" }}
+        options={{
+          tabBarLabel: "My Pairings",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="cards-outline"
+              color={color}
+              size={24}
+            />
+          ),
+        }}
       />
     </Tab.Navigator>
   );
