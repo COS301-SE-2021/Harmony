@@ -331,8 +331,14 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 20,
-    alignSelf: "center",
-    paddingBottom: 10,
+    textAlign: "center",
+    padding: 10,
+    // borderWidth: 1,
+    borderRadius: 20,
+    width: "100%",
+    // backgroundColor: "#EAEAEA",
+    borderBottomWidth: 1,
+    borderBottomColor: "#cccccc",
   },
   section: {
     padding: 20,
