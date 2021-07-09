@@ -14,6 +14,7 @@ import {
 
 import HomeScreen from "./HomeScreen.js";
 import ViewFavouritesScreen from "./ViewFavouritesScreen.js";
+import UserPairingsScreen from "./UserPairingsScreen.js";
 import SettingsScreen from "./SettingsScreen.js";
 import PairingResultsScreen from "./PairingResultsScreen.js";
 import DrinkDetailsScreen from "./DrinkDetailsScreen.js";
@@ -51,7 +52,8 @@ const TabNavigator = () => (
     <Screen name="Results" component={Results} />
     {/* <Screen name="Home" component={HomeScreen} /> */}
     <Screen name="Camera" component={CameraScreen} />
-    <Screen name="Favourite" component={ViewFavouritesScreen} />
+    {/* <Screen name="Favourite" component={ViewFavouritesScreen} /> */}
+    <Screen name="Favourite" component={UserPairingsScreen} />
     <Screen name="Settings" component={SettingsScreen} />
   </Navigator>
 );
