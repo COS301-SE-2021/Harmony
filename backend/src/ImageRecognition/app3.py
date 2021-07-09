@@ -43,7 +43,23 @@ def findpairing(event, context):
     )
     return response['Items']
 
-#TODO: Validation of input string for the name of the item.
-#TODO: Validation to check if database exists.
+
 #TODO: Retrieving images from S3 bucket using URL in database.
 
+def validatestring(inputstring: str) -> bool:
+    # checking if string is empty (nothing entered including spaces.)
+    print("Check if the input is empty : ", end="")
+    if not inputstring:
+        # the string is empty
+        print("Invalid String")
+        return False
+    else:
+        # not empty and check second condition
+        # checking if string with space is empty
+        if inputstring and not inputstring.isspace():
+            # String valid
+            return True
+        else:
+            # String invalid
+            print("Invalid String")
+            return False
