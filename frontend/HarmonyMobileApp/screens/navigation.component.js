@@ -1,7 +1,9 @@
 import React from "react";
+import { StyleSheet, Dimensions } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createSharedElementStackNavigator } from "react-navigation-shared-element";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 import {
   BottomNavigation,
@@ -14,6 +16,7 @@ import {
 
 import HomeScreen from "./HomeScreen.js";
 import ViewFavouritesScreen from "./ViewFavouritesScreen.js";
+import ShowLatestPairingsScreen from "./ShowLatestPairingsScreen";
 import UserPairingsScreen from "./UserPairingsScreen.js";
 import SettingsScreen from "./SettingsScreen.js";
 import PairingResultsScreen from "./PairingResultsScreen.js";
@@ -21,6 +24,7 @@ import DrinkDetailsScreen from "./DrinkDetailsScreen.js";
 
 const { Navigator, Screen } = createBottomTabNavigator();
 const Stack = createSharedElementStackNavigator();
+const Tab = createMaterialTopTabNavigator();
 
 const HomeIcon = (props) => <Icon {...props} name="home-outline" />;
 const CameraIcon = (props) => (
@@ -53,7 +57,8 @@ const TabNavigator = () => (
     {/* <Screen name="Home" component={HomeScreen} /> */}
     <Screen name="Camera" component={CameraScreen} />
     {/* <Screen name="Favourite" component={ViewFavouritesScreen} /> */}
-    <Screen name="Favourite" component={UserPairingsScreen} />
+    <Screen name="Favourite" component={UserPairingsTopTabs} />
+    {/* <Screen name="Favourite" component={UserPairingsScreen} /> */}
     <Screen name="Settings" component={SettingsScreen} />
   </Navigator>
 );
@@ -68,6 +73,29 @@ const Results = () => (
     />
   </Stack.Navigator>
 );
+
+function UserPairingsTopTabs() {
+  return (
+    <Tab.Navigator
+      initialRouteName="Favourites"
+      tabBarOptions={{
+        labelStyle: { fontSize: 16 },
+        style: { backgroundColor: "powderblue" },
+      }}
+    >
+      <Tab.Screen
+        name="UserFavourites"
+        component={ViewFavouritesScreen}
+        options={{ tabBarLabel: "My Favourites" }}
+      />
+      <Tab.Screen
+        name="UserPairings"
+        component={ShowLatestPairingsScreen}
+        options={{ tabBarLabel: "My Pairings" }}
+      />
+    </Tab.Navigator>
+  );
+}
 
 const options = {
   transitionSpec: {
@@ -93,3 +121,16 @@ export const AppNavigator = () => (
     <TabNavigator />
   </NavigationContainer>
 );
+const styles = StyleSheet.create({
+  tabHeader: {
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 10,
+  },
+  tabContainer: {
+    height: Dimensions.get("window").height,
+    width: Dimensions.get("window").width,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
