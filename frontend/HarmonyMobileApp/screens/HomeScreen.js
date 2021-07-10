@@ -9,10 +9,9 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   FlatList,
-  Alert,
+  Alert, Button, Modal, Pressable
 } from "react-native";
-
-
+//import Modal from 'react-native-modal';
 import styles from "../styles";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Feather, SimpleLineIcons } from '@expo/vector-icons';
@@ -26,6 +25,7 @@ const HomeScreen = (props) => {
     "https://qkvdftfq7b.execute-api.eu-west-1.amazonaws.com/dev/viewpairings";
   const [isLoading, setLoading] = useState(useIsFocused());
   const [data, setData] = useState([]);
+  const [isModalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     fetch(viewPairingURL)
@@ -55,7 +55,9 @@ const HomeScreen = (props) => {
     );
   };
 
-  const onPress = () => { console.log("pressed successfully") };
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
 
   return (
     <ApplicationProvider  {...eva} theme={{ ...eva.light, ...theme }} style={styles.container}>
@@ -63,11 +65,36 @@ const HomeScreen = (props) => {
         <View style={{ height: "100%" }}>
           <View style={styles.Header}>
             <Text style={styles.TextLarge}> Harmony </Text>
-            <TouchableOpacity onPress={onPress}>
-              <Text>
-                <Feather name="filter" size={24} color="black" />
-              </Text>
-            </TouchableOpacity>
+            <View style={styles.modalContainer}>
+              <Modal
+                animationType="slide"
+                transparent={true}
+                visible={isModalVisible}
+                onRequestClose={() => {
+                  Alert.alert("Modal has been closed.");
+                  setModalVisible(!isModalVisible);
+                }}
+              >
+                <View >
+                  <View >
+                    <Text >Hello World!</Text>
+                    <Pressable
+                      onPress={() => setModalVisible(!isModalVisible)}
+                    >
+                      <Text >Hide Modal</Text>
+                    </Pressable>
+                  </View>
+                </View>
+              </Modal>
+              <Pressable
+                onPress={() => setModalVisible(true)}
+              >
+                <Text >
+                  <Feather name="filter" size={24} color="black" />
+                </Text>
+              </Pressable>
+            </View>
+
           </View>
           <Text>Popular pairings of the day</Text>
           {isLoading ? (

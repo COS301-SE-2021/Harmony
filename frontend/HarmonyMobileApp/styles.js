@@ -73,7 +73,9 @@ const styles = StyleSheet.create({
     padding: "5%",
 
   },
-
+  modalContainer: {
+    flex: 1
+  },
   Header: {
     alignItems: "center",
     justifyContent: "center",
