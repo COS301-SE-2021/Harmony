@@ -76,7 +76,7 @@ const HomeScreen = (props) => {
                     <Picker
                       flavourProfile={flavourProfile}
                       style={{ height: 50, width: 150 }}
-                      onValueChange={(itemValue, itemIndex) => setFlavourProfile(itemValue)}
+                      onValueChange={(itemValue, itemIndex) => { setFlavourProfile(itemValue); console.log(itemValue) }}
                     >
                       <Picker.Item label="None" value="None" />
                       <Picker.Item label="Sweet" value="Sweet" />
@@ -89,7 +89,7 @@ const HomeScreen = (props) => {
                     <Picker
                       mealType={mealType}
                       style={{ height: 50, width: 150 }}
-                      onValueChange={(itemValue, itemIndex) => setMealType(itemValue)}
+                      onValueChange={(itemValue, itemIndex) => { setMealType(itemValue); console.log(itemValue) }}
                     >
                       <Picker.Item label="None" value="None" />
                       <Picker.Item label="Breakfast" value="Breakfast" />
@@ -156,23 +156,21 @@ const HomeScreen = (props) => {
                       <Text style={styles.tag}><Feather name="tag" size={15} color="white" />Contains Dairy</Text>
                     </View>
                     <View style={styles.locationBar}>
-                      <SimpleLineIcons name="location-pin" size={25} color="black" />
-                      <Text>14 Prospect Street, Pretoria, Gauteng </Text>
+                      <SimpleLineIcons name="location-pin" size={25} color="white" />
+                      <Text style={styles.TextSmallWhite}>Prospect Street, Pretoria, Gauteng </Text>
 
                     </View>
                     <Divider />
                     <View style={styles.iconsBar}>
-                      <View style={{ flexDirection: "row", justifyContent: "center" }}>
-                        <Feather name="star" size={25} color="black" />
-                        <Text style={{ paddingLeft: "2%", paddingVertical: "1%" }}>4.6</Text>
-                      </View>
-                      <View style={{ flexDirection: "row", justifyContent: "center" }}>
-                        <Feather name="arrow-down-circle" size={25} color="black" />
-                        <Text style={{ paddingLeft: "2%", paddingVertical: "1%" }}>45</Text>
-                      </View>
-                      <View style={{ flexDirection: "row", justifyContent: "center" }}>
-                        <Feather name="arrow-up-circle" size={25} color="black" />
-                        <Text style={{ paddingLeft: "2%", paddingVertical: "1%" }}>100</Text>
+                      <View style={{ flexDirection: "row" }}>
+                        <View style={{ flexDirection: "row", justifyContent: "center", paddingRight: "10%" }}>
+                          <Feather name="arrow-down-circle" size={25} color="black" />
+                          <Text style={{ paddingLeft: "2%", paddingVertical: "1%" }}>45</Text>
+                        </View>
+                        <View style={{ flexDirection: "row", justifyContent: "center" }}>
+                          <Feather name="arrow-up-circle" size={25} color="black" />
+                          <Text style={{ paddingLeft: "2%", paddingVertical: "1%" }}>100</Text>
+                        </View>
                       </View>
                       <Pressable onPress={showConfirmDialog}>
                         <Feather name="heart" size={25} color="black" />

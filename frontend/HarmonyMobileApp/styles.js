@@ -12,9 +12,7 @@ const styles = StyleSheet.create({
   cardContainer: {
     height: "100%",
     flex: 1,
-    borderColor: "grey",
     borderRadius: 15,
-    borderWidth: 1,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -155,8 +153,6 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     shadowOpacity: 80.0,
     flexDirection: "row",
-    borderWidth: 2,
-    borderTopColor: "grey",
     borderColor: "white",
     paddingLeft: "4%",
     paddingRight: "4%",
@@ -168,8 +164,12 @@ const styles = StyleSheet.create({
   },
   locationBar: {
     flexDirection: "row",
-    paddingBottom: "5%",
     flex: 1,
+    borderRadius: 15,
+    padding: 10,
+    elevation: 2,
+    backgroundColor: "#4F6D7A",
+    color: "white"
   },
   tagBar: {
     flexDirection: "row",
@@ -204,6 +204,7 @@ const styles = StyleSheet.create({
   TextSmallWhite: {
     fontFamily: "sans-serif-light",
     fontSize: 14,
+    color: "white"
 
   },
   regularImage: {
