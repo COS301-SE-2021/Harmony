@@ -13,7 +13,16 @@ const styles = StyleSheet.create({
     height: "100%",
     flex: 1,
     borderColor: "grey",
+    borderRadius: 15,
     borderWidth: 1,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
   },
   standardContainer: {
     flex: 1,
@@ -95,15 +104,15 @@ const styles = StyleSheet.create({
     elevation: 5
   },
   button: {
-    borderRadius: 20,
+    borderRadius: 15,
     padding: 10,
     elevation: 2
   },
   buttonOpen: {
-    backgroundColor: "#F194FF",
+    backgroundColor: "#DD6E42",
   },
   buttonClose: {
-    backgroundColor: "#2196F3",
+    backgroundColor: "#4F6D7A",
   },
   textStyle: {
     color: "white",
@@ -134,42 +143,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
 
   },
-  shadowCard: {
-    shadowColor: '#000000',
-    shadowOffset: {
-      width: 5,
-      height: 5
-    },
-    shadowRadius: 10,
-    shadowOpacity: 1.0,
-    alignItems: "center",
-    justifyContent: "flex-start",
-    borderRadius: 25,
-    width: "95%",
-    height: "auto",
-    marginTop: 40,
-    backgroundColor: "#fff",
-    padding: "5%",
-  },
 
-
-  Card: {
-    shadowColor: '#000000',
-    shadowOffset: {
-      width: 2,
-      height: 2
-    },
-    backgroundColor: "#fff",
-    shadowRadius: 8,
-    shadowOpacity: 80.0,
-    alignItems: "center",
-    width: "100%",
-    paddingTop: "5%",
-    flex: 1
-
-  },
-
-  cardText: { alignItems: "center" },
+  cardText: { flexDirection: "row", justifyContent: "space-between" },
 
   iconsBar: {
     shadowColor: '#000000',
@@ -194,9 +169,19 @@ const styles = StyleSheet.create({
   locationBar: {
     flexDirection: "row",
     paddingBottom: "5%",
-    justifyContent: "space-between",
-    flex: 1
-
+    flex: 1,
+  },
+  tagBar: {
+    flexDirection: "row",
+    paddingBottom: "5%",
+    flex: 1,
+    justifyContent: "space-around"
+  },
+  tag: {
+    borderRadius: 15,
+    padding: 10,
+    elevation: 2,
+    backgroundColor: "#DD6E42",
   },
   Text: {
     fontFamily: "sans-serif-light",
@@ -212,6 +197,10 @@ const styles = StyleSheet.create({
     fontSize: 23,
   },
   TextSmall: {
+    fontFamily: "sans-serif-light",
+    fontSize: 14,
+  },
+  TextSmallWhite: {
     fontFamily: "sans-serif-light",
     fontSize: 14,
   },

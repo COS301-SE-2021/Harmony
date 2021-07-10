@@ -82,7 +82,7 @@ const HomeScreen = (props) => {
                       style={[styles.button, styles.buttonClose]}
                       onPress={() => setModalVisible(!isModalVisible)}
                     >
-                      <Text style={styles.textStyle}>Hide Modal</Text>
+                      <Text style={styles.textStyle}>close</Text>
                     </Pressable>
                   </View>
                 </View>
@@ -118,16 +118,26 @@ const HomeScreen = (props) => {
                         style={styles.standardImage}
                       />
                     </View>
-                    <View style={styles.cardText}>
-                      <Text>{item.FoodItem}</Text>
-                      <Text>{item.DrinkItem}</Text>
-                      <Text>Pairing descr</Text>
+                    <View >
+                      <View style={styles.cardText}>
+                        <Text>{item.FoodItem}</Text>
+                        <Text>{item.DrinkItem}</Text>
+                      </View>
+                      <View>
+                        <Text style={{ textAlign: "center" }}>Pairing descr</Text>
+                      </View>
+                    </View>
+
+                    <View style={styles.tagBar}>
+                      <Text style={[styles.TextSmallWhite], [styles.tag]}><Feather name="tag" size={15} color="black" />Salty</Text>
+                      <Text style={[styles.TextSmallWhite], [styles.tag]}><Feather name="tag" size={15} color="black" />Dessert</Text>
+                    </View><View style={styles.tagBar}>
+                      <Text style={[styles.TextSmallWhite], [styles.tag]}><Feather name="tag" size={15} color="black" />Medium Sized</Text>
+                      <Text style={[styles.TextSmallWhite], [styles.tag]}><Feather name="tag" size={15} color="black" />Contains Dairy</Text>
                     </View>
                     <View style={styles.locationBar}>
                       <SimpleLineIcons name="location-pin" size={25} color="black" />
                       <Text>Location</Text>
-                      <Feather name="tag" size={25} color="black" />
-                      <Text style={styles.TextSmall}>Tag1,Tag2,Tag3,Tag4</Text>
 
                     </View>
                     <Divider />
