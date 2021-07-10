@@ -35,13 +35,18 @@ and returns the pair as well as some data for the pair
 def findpairing(event, context):
 
     print("Test")
-    finditem = 'Waffles'
+    finditem = 'Burger'
+
+    if not validatestring(finditem):
+        exit()
 
     response = table.query(
         IndexName="FoodItem-index",
         KeyConditionExpression=Key('FoodItem').eq(finditem)
     )
-    return response['Items']
+    #If no item.
+    #Format response to have only one food item and multiple drink items.
+    return {"Data":response['Items']}
 
 
 #TODO: Retrieving images from S3 bucket using URL in database.
@@ -51,7 +56,7 @@ def validatestring(inputstring: str) -> bool:
     print("Check if the input is empty : ", end="")
     if not inputstring:
         # the string is empty
-        print("Invalid String")
+        print("Invalid String food item")
         return False
     else:
         # not empty and check second condition
@@ -61,5 +66,5 @@ def validatestring(inputstring: str) -> bool:
             return True
         else:
             # String invalid
-            print("Invalid String")
+            print("Invalid String food item")
             return False
