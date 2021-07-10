@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from "react";
 import {
   View,
-  SafeAreaView,
   Image,
   ScrollView,
   StyleSheet,
-  StatusBar,
-  TouchableOpacity,
   ActivityIndicator,
   FlatList,
-  Alert, Button, Modal, Pressable
+  Alert,
+  Modal,
+  Pressable,
+  Picker
 } from "react-native";
-//import Modal from 'react-native-modal';
 import styles from "../styles";
-import Icon from 'react-native-vector-icons/FontAwesome';
 import { Feather, SimpleLineIcons } from '@expo/vector-icons';
 import * as eva from '@eva-design/eva';
 import { default as theme } from '../theme.json';
@@ -26,6 +24,8 @@ const HomeScreen = (props) => {
   const [isLoading, setLoading] = useState(useIsFocused());
   const [data, setData] = useState([]);
   const [isModalVisible, setModalVisible] = useState(false);
+  const [flavourProfile, setFlavourProfile] = useState("None");
+  const [mealType, setMealType] = useState("None");
 
   useEffect(() => {
     fetch(viewPairingURL)
@@ -54,11 +54,6 @@ const HomeScreen = (props) => {
       ]
     );
   };
-
-  const toggleModal = () => {
-    setModalVisible(!isModalVisible);
-  };
-
   return (
     <ApplicationProvider  {...eva} theme={{ ...eva.light, ...theme }} style={styles.container}>
       <ScrollView style={styles.scrollView}>
@@ -77,7 +72,32 @@ const HomeScreen = (props) => {
               >
                 <View style={styles.centeredView}>
                   <View style={styles.modalView} >
-                    <Text style={styles.modalText} >Hello World!</Text>
+                    <Text>Flavour Profile</Text>
+                    <Picker
+                      flavourProfile={flavourProfile}
+                      style={{ height: 50, width: 150 }}
+                      onValueChange={(itemValue, itemIndex) => setFlavourProfile(itemValue)}
+                    >
+                      <Picker.Item label="None" value="None" />
+                      <Picker.Item label="Sweet" value="Sweet" />
+                      <Picker.Item label="Salty" value="Salty" />
+                      <Picker.Item label="Spicy" value="Spicy" />
+                      <Picker.Item label="Sour" value="Sour" />
+                    </Picker>
+                    <Divider />
+                    <Text>Meal Type</Text>
+                    <Picker
+                      mealType={mealType}
+                      style={{ height: 50, width: 150 }}
+                      onValueChange={(itemValue, itemIndex) => setMealType(itemValue)}
+                    >
+                      <Picker.Item label="None" value="None" />
+                      <Picker.Item label="Breakfast" value="Breakfast" />
+                      <Picker.Item label="Brunch" value="Brunch" />
+                      <Picker.Item label="Supper" value="Supper" />
+                      <Picker.Item label="Dessert" value="Dessert" />
+                    </Picker>
+                    <Divider />
                     <Pressable
                       style={[styles.button, styles.buttonClose]}
                       onPress={() => setModalVisible(!isModalVisible)}
@@ -92,7 +112,7 @@ const HomeScreen = (props) => {
                 onPress={() => setModalVisible(true)}
               >
                 <Text >
-                  <Feather name="filter" size={24} color="black" />
+                  <Feather name="filter" size={24} color="white" />
                 </Text>
               </Pressable>
             </View>
@@ -129,15 +149,15 @@ const HomeScreen = (props) => {
                     </View>
 
                     <View style={styles.tagBar}>
-                      <Text style={[styles.TextSmallWhite], [styles.tag]}><Feather name="tag" size={15} color="black" />Salty</Text>
-                      <Text style={[styles.TextSmallWhite], [styles.tag]}><Feather name="tag" size={15} color="black" />Dessert</Text>
+                      <Text style={styles.tag}><Feather name="tag" size={15} color="white" />Salty</Text>
+                      <Text style={styles.tag}><Feather name="tag" size={15} color="white" />Dessert</Text>
                     </View><View style={styles.tagBar}>
-                      <Text style={[styles.TextSmallWhite], [styles.tag]}><Feather name="tag" size={15} color="black" />Medium Sized</Text>
-                      <Text style={[styles.TextSmallWhite], [styles.tag]}><Feather name="tag" size={15} color="black" />Contains Dairy</Text>
+                      <Text style={styles.tag}><Feather name="tag" size={15} color="white" />Medium Sized</Text>
+                      <Text style={styles.tag}><Feather name="tag" size={15} color="white" />Contains Dairy</Text>
                     </View>
                     <View style={styles.locationBar}>
                       <SimpleLineIcons name="location-pin" size={25} color="black" />
-                      <Text>Location</Text>
+                      <Text>14 Prospect Street, Pretoria, Gauteng </Text>
 
                     </View>
                     <Divider />
@@ -154,7 +174,9 @@ const HomeScreen = (props) => {
                         <Feather name="arrow-up-circle" size={25} color="black" />
                         <Text style={{ paddingLeft: "2%", paddingVertical: "1%" }}>100</Text>
                       </View>
-                      <Feather name="heart" size={25} color="black" />
+                      <Pressable onPress={showConfirmDialog}>
+                        <Feather name="heart" size={25} color="black" />
+                      </Pressable>
                     </View>
 
                   </Card>

@@ -182,6 +182,7 @@ const styles = StyleSheet.create({
     padding: 10,
     elevation: 2,
     backgroundColor: "#DD6E42",
+    color: "white"
   },
   Text: {
     fontFamily: "sans-serif-light",
@@ -189,7 +190,7 @@ const styles = StyleSheet.create({
 
   TextLarge: {
     fontFamily: "sans-serif-light",
-    fontSize: 30,
+    fontSize: 40,
     textAlignVertical: "center",
   },
   TextMedium: {
@@ -203,6 +204,7 @@ const styles = StyleSheet.create({
   TextSmallWhite: {
     fontFamily: "sans-serif-light",
     fontSize: 14,
+
   },
   regularImage: {
     width: 150,
