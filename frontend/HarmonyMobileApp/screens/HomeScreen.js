@@ -18,7 +18,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { Feather, SimpleLineIcons } from '@expo/vector-icons';
 import * as eva from '@eva-design/eva';
 import { default as theme } from '../theme.json';
-import { ApplicationProvider, Layout, Button, Divider, Card, Text } from '@ui-kitten/components';
+import { ApplicationProvider, Layout, Divider, Card, Text } from '@ui-kitten/components';
 import { useIsFocused } from "@react-navigation/native";
 
 const HomeScreen = (props) => {
@@ -55,12 +55,19 @@ const HomeScreen = (props) => {
     );
   };
 
+  const onPress = () => { console.log("pressed successfully") };
+
   return (
     <ApplicationProvider  {...eva} theme={{ ...eva.light, ...theme }} style={styles.container}>
       <ScrollView style={styles.scrollView}>
         <View style={{ height: "100%" }}>
           <View style={styles.Header}>
             <Text style={styles.TextLarge}> Harmony </Text>
+            <TouchableOpacity onPress={onPress}>
+              <Text>
+                <Feather name="filter" size={24} color="black" />
+              </Text>
+            </TouchableOpacity>
           </View>
           <Text>Popular pairings of the day</Text>
           {isLoading ? (

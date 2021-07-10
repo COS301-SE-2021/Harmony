@@ -83,8 +83,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     padding: "5%",
     paddingBottom: "10%",
-    flex: 1
-
+    flex: 1,
+    flexDirection: "row",
 
   },
   shadowCard: {
