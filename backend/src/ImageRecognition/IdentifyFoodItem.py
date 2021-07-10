@@ -7,7 +7,7 @@ from botocore.exceptions import ClientError
 
 
 def identify_food_item(event, context):
-    url = "https://aiharmony-prediction.cognitiveservices.azure.com/customvision/v3.0/Prediction/b2c99ecb-e43e-4a59-ac87-a189c109e267/classify/iterations/Iteration1/image"
+    url = "https://aiharmony-prediction.cognitiveservices.azure.com/customvision/v3.0/Prediction/b2c99ecb-e43e-4a59-ac87-a189c109e267/classify/iterations/Iteration3/image"
 
     headers = {
         # Request headers
@@ -26,7 +26,7 @@ def identify_food_item(event, context):
         # print("Harmony has predicted a", a, " with a probability of", b)
     else:
         # print("Predictions is not found in JSON data")
-        #TODO: If error occures terminate.
+        # TODO: If error occures terminate.
         a = "An error has occurred"
         b = data
         # print(a,b)
@@ -58,7 +58,7 @@ def identify_food_item(event, context):
     finditem = a
 
     if not validatestring(finditem):
-            exit()
+        exit()
 
     response = table.query(
         IndexName="FoodItem-index",
@@ -66,7 +66,11 @@ def identify_food_item(event, context):
     )
     # If no item.
     # Format response to have only one food item and multiple drink items.
-    return {"Data": response['Items']}
+    return {
+        "statusCode": 200,
+        "data": response['Items']
+    }
+
 
 def validatestring(inputstring: str) -> bool:
     # checking if string is empty (nothing entered including spaces.)
