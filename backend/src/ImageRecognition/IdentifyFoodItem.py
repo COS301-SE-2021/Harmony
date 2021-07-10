@@ -1,18 +1,18 @@
 import json
 import requests
-
+import base64
 
 def identify_food_item(event, context):
-    url = "https://aiharmony-prediction.cognitiveservices.azure.com/customvision/v3.0/Prediction/b2c99ecb-e43e-4a59-ac87-a189c109e267/classify/iterations/Iteration1/url"
+    url = "https://aiharmony-prediction.cognitiveservices.azure.com/customvision/v3.0/Prediction/b2c99ecb-e43e-4a59-ac87-a189c109e267/classify/iterations/Iteration1/image"
 
-    body = {
-        "Url": "https://thestayathomechef.com/wp-content/uploads/2016/06/The-Most-Amazing-Chocolate-Cake-Square-1.jpg"}
     headers = {
-        'Prediction-Key': '606bb8fd69394bc2bf192a8453995342',
-        'Content-Type': 'application/json'
+        # Request headers
+        'Prediction-key': '',
+        'Content-Type': 'application/octet-stream',
     }
-
-    response = requests.post(url, headers=headers, data=json.dumps(body))
+    t = event['data'].encode("ascii")
+    body = base64.decodebytes(t)
+    response = requests.post(url, headers=headers, data=body)
     data = response.json()
     keyVal = 'predictions'
 
