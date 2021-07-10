@@ -65,7 +65,7 @@ const HomeScreen = (props) => {
         <View style={{ height: "100%" }}>
           <View style={styles.Header}>
             <Text style={styles.TextLarge}> Harmony </Text>
-            <View style={styles.modalContainer}>
+            <View style={styles.centeredView}>
               <Modal
                 animationType="slide"
                 transparent={true}
@@ -75,18 +75,20 @@ const HomeScreen = (props) => {
                   setModalVisible(!isModalVisible);
                 }}
               >
-                <View >
-                  <View >
-                    <Text >Hello World!</Text>
+                <View style={styles.centeredView}>
+                  <View style={styles.modalView} >
+                    <Text style={styles.modalText} >Hello World!</Text>
                     <Pressable
+                      style={[styles.button, styles.buttonClose]}
                       onPress={() => setModalVisible(!isModalVisible)}
                     >
-                      <Text >Hide Modal</Text>
+                      <Text style={styles.textStyle}>Hide Modal</Text>
                     </Pressable>
                   </View>
                 </View>
               </Modal>
               <Pressable
+                style={[styles.button, styles.buttonOpen]}
                 onPress={() => setModalVisible(true)}
               >
                 <Text >
