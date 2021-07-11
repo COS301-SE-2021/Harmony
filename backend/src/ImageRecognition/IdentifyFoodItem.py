@@ -5,6 +5,16 @@ import base64
 from boto3.dynamodb.conditions import Key
 from botocore.exceptions import ClientError
 
+"""
+The aim of this lambda function is to receive a picture from the frontend
+which is then put into our AI model. The model is expected to determine the type of 
+food that the picture is, as long as it has been trained with that food.
+
+Once the food is identified the system then performs a lookup in our DynamoDb
+to find all relevant pairings of that food item.
+
+All the relevant data is then returned as a JSON object back to the frontend.
+"""
 
 def identify_food_item(event, context):
     url = "https://aiharmony-prediction.cognitiveservices.azure.com/customvision/v3.0/Prediction/b2c99ecb-e43e-4a59-ac87-a189c109e267/classify/iterations/Iteration3/image"
@@ -31,12 +41,6 @@ def identify_food_item(event, context):
         b = data
         # print(a,b)
 
-    """
-    This file is part of a larger implementation that needs to recognize
-    an image that was sent and thereafter returns pairings and information
-    on these pairings. 
-    """
-
     dynamodb = boto3.resource('dynamodb')
 
     # use the DynamoDB object to select our table
@@ -50,11 +54,6 @@ def identify_food_item(event, context):
         print("Table %s doesn't exist." % table.name)
         exit()
 
-    """
-    findpairing will take in a string of a food type that was recognized by the AI.
-    It then searches the database for all the pairings that include the individual food item
-    and returns the pair as well as some data for the pair  
-    """
     finditem = a
 
     if not validatestring(finditem):
@@ -71,7 +70,12 @@ def identify_food_item(event, context):
         "data": response['Items']
     }
 
-
+"""
+This function validates a string. 
+We don't want our main function to query the database using a blank food item.
+If for any reason our AI model returns a blank/empty string there is no reason
+to perform a lookup in the DB.
+"""
 def validatestring(inputstring: str) -> bool:
     # checking if string is empty (nothing entered including spaces.)
     print("Check if the input is empty : ", end="")
