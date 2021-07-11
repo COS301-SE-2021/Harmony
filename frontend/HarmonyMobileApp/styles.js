@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     elevation: 2
   },
   buttonOpen: {
-    backgroundColor: "#DD6E42",
+    backgroundColor: "#FF6347",
   },
   buttonClose: {
     backgroundColor: "#4F6D7A",
@@ -232,6 +232,35 @@ const styles = StyleSheet.create({
     height: 120,
     flex: 1
 
+  },
+  tagsSection: {
+    //Different from section because theres no padding on the right or left
+    //We do this so theres no visible cutoff as you scroll left or right
+    paddingVertical: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: "#cccccc",
+    backgroundColor: "white",
+  },
+  rowContainer: {
+    //Container to hold all tags
+    width: "100%",
+    flexDirection: "row",
+    alignContent: "center",
+    flexWrap: "wrap",
+  },
+  tagContainer: {
+    //Container of individual tag
+    flexDirection: "row", //Needed to keep the tag icon and text in one line
+    backgroundColor: "#FF6347",
+    borderRadius: 20,
+    margin: 5, //Space between tags
+    padding: 10, //Space around innner tag
+    elevation: 2, //gives shadow/3D effect
+  },
+  tagText: {
+    fontSize: 14,
+    color: "#fff",
+    marginLeft: 10, //Space between tag icon and text
   },
 });
 
