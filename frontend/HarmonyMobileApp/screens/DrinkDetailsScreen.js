@@ -12,7 +12,7 @@ import { SharedElement } from "react-navigation-shared-element";
 import * as Animatable from "react-native-animatable";
 import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 
-const MAX_HEIGHT = 300;
+const MAX_HEIGHT = 400;
 
 // const DrinkDetailsScreen = ({ navigation, props }) => {
 const DrinkDetailsScreen = ({ navigation, route }) => {
@@ -91,25 +91,36 @@ const DrinkDetailsScreen = ({ navigation, route }) => {
   );
 
   return (
-    <View style={{ flex: 1, backgroundColor: "white" }}>
-      {/* <SharedElement id={item.id}> */}
-      <SharedElement id={item.PID}>
-        {/* Temp ID used above as an ID was not provided by the API yet */}
-        <Image
-          source={{ uri: item.DrinkImage }}
-          style={{
-            width: "100%",
-            height: MAX_HEIGHT,
-          }}
-          resizeMode="cover"
-        />
-      </SharedElement>
+    <ScrollView
+      style={styles.otherDrinkCardsContainer}
+      contentContainerStyle={{
+        flexDirection: "row",
+        flexWrap: "wrap",
+      }}
+      horizontal={false}
+    >
+      <View style={{ flex: 1, backgroundColor: "white" }}>
+        {/* <SharedElement id={item.id}> */}
 
-      <CloseButton />
-      <TitleBar />
-      <FoodDescription />
-      <TagBar />
-    </View>
+        <SharedElement id={item.PID}>
+          {/* Temp ID used above as an ID was not provided by the API yet */}
+          <Image
+            source={{ uri: item.DrinkImage }}
+            style={{
+              width: "100%",
+              height: MAX_HEIGHT,
+              // height: "70%",
+            }}
+            resizeMode="cover"
+          />
+        </SharedElement>
+
+        <CloseButton />
+        <TitleBar />
+        <FoodDescription />
+        <TagBar />
+      </View>
+    </ScrollView>
   );
 };
 DrinkDetailsScreen.sharedElements = (route) => {
