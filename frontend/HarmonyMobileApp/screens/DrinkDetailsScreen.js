@@ -47,7 +47,7 @@ const DrinkDetailsScreen = ({ navigation, route }) => {
   );
 
   const TitleBar = () => (
-    <SharedElement id={item.drinkName}>
+    <SharedElement id={item.DrinkItem}>
       <View
         style={[
           styles.section,
@@ -57,14 +57,14 @@ const DrinkDetailsScreen = ({ navigation, route }) => {
           },
         ]}
       >
-        <Text style={styles.title}>{item.drinkName}</Text>
+        <Text style={styles.title}>{item.DrinkItem}</Text>
       </View>
     </SharedElement>
   );
 
   const FoodDescription = () => (
     <View style={[styles.section]}>
-      <Text style={styles.sectionText}>{item.drinkDesc}</Text>
+      <Text style={styles.sectionText}>{item.DrinkDesc}</Text>
     </View>
   );
 
@@ -79,7 +79,7 @@ const DrinkDetailsScreen = ({ navigation, route }) => {
         horizontal={true}
       >
         <View style={styles.rowContainer}>
-          {item.tags.map((tag, index) => (
+          {item.DrinkTags.map((tag, index) => (
             <View style={styles.tagContainer} key={index}>
               <FontAwesome name="tag" size={16} color="#fff" />
               <Text style={styles.tagText}>{tag}</Text>
@@ -92,9 +92,11 @@ const DrinkDetailsScreen = ({ navigation, route }) => {
 
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
-      <SharedElement id={item.id}>
+      {/* <SharedElement id={item.id}> */}
+      <SharedElement id={item.PID}>
+        {/* Temp ID used above as an ID was not provided by the API yet */}
         <Image
-          source={{ uri: item.imageURI }}
+          source={{ uri: item.DrinkImage }}
           style={{
             width: "100%",
             height: MAX_HEIGHT,
@@ -114,12 +116,13 @@ DrinkDetailsScreen.sharedElements = (route) => {
   const { item } = route.params;
   return [
     {
-      id: item.id,
+      // id: item.id,
+      id: item.PID, //temp ID used because API does not yet return the needed IDs
       animation: "move",
       resize: "clip",
     },
     {
-      id: item.drinkName,
+      id: item.DrinkItem,
       animation: "fade",
       resize: "clip",
     },
