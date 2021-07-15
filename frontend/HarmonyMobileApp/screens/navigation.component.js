@@ -6,15 +6,13 @@ import { createSharedElementStackNavigator } from "react-navigation-shared-eleme
 import {
   BottomNavigation,
   BottomNavigationTab,
-  Layout,
-  Text,
-  Button,
   Icon,
 } from "@ui-kitten/components";
 
 import HomeScreen from "./HomeScreen.js";
 import ViewFavouritesScreen from "./ViewFavouritesScreen.js";
 import SettingsScreen from "./SettingsScreen.js";
+import CameraScreen from "./CameraScreen.js";
 import PairingResultsScreen from "./PairingResultsScreen.js";
 import DrinkDetailsScreen from "./DrinkDetailsScreen.js";
 
@@ -22,17 +20,9 @@ const { Navigator, Screen } = createBottomTabNavigator();
 const Stack = createSharedElementStackNavigator();
 
 const HomeIcon = (props) => <Icon {...props} name="home-outline" />;
-const CameraIcon = (props) => (
-  <Icon {...props} name="camera-outline" width="32" height="32" />
-);
+const CameraIcon = (props) => <Icon {...props} name="camera-outline" />;
 const HeartIcon = (props) => <Icon {...props} name="heart-outline" />;
 const SettingsIcon = (props) => <Icon {...props} name="settings-2-outline" />;
-
-const CameraScreen = () => (
-  <Layout style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-    <Text category="h1">Camera</Text>
-  </Layout>
-);
 
 const BottomTabBar = ({ navigation, state }) => (
   <BottomNavigation
@@ -51,6 +41,7 @@ const TabNavigator = () => (
     <Screen name="Results" component={Results} />
     {/* <Screen name="Home" component={HomeScreen} /> */}
     <Screen name="Camera" component={CameraScreen} />
+
     <Screen name="Favourite" component={ViewFavouritesScreen} />
     <Screen name="Settings" component={SettingsScreen} />
   </Navigator>

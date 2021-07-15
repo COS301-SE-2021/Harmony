@@ -37,6 +37,8 @@
     "react-native-snap-carousel": "^3.9.1",
     "react-native-svg": "12.1.0",
     "react-native-web": "^0.17.0",
+    "expo-camera": "~11.0.2",
+    "expo-image-picker": "~10.1.4",
     "react-navigation-shared-element": "^5.0.0-alpha1"
   },
   "devDependencies": {
