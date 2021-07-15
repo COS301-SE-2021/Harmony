@@ -25,14 +25,21 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-41.0.0.tar.gz",
+    "react-native-animatable": "^1.3.3",
     "react-native-gesture-handler": "~1.10.2",
+    "react-native-image-header-scroll-view": "^1.0.0",
+    "react-native-imaged-carousel-card": "^0.1.1",
+    "react-native-modal": "^12.0.2",
     "react-native-reanimated": "~2.1.0",
     "react-native-safe-area-context": "3.2.0",
     "react-native-screens": "~3.0.0",
+    "react-native-shared-element": "^0.7.0",
+    "react-native-snap-carousel": "^3.9.1",
     "react-native-svg": "12.1.0",
     "react-native-web": "^0.17.0",
     "expo-camera": "~11.0.2",
-    "expo-image-picker": "~10.1.4"
+    "expo-image-picker": "~10.1.4",
+    "react-navigation-shared-element": "^5.0.0-alpha1"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"
