@@ -19,7 +19,7 @@ import * as eva from '@eva-design/eva';
 import { default as theme } from '../theme.json';
 import { ApplicationProvider, Layout, Divider, Card, Text } from '@ui-kitten/components';
 import { useIsFocused } from "@react-navigation/native";
-
+import { Header } from 'react-native-elements'
 const response = {
   statusCode: 200,
   data: {
@@ -226,83 +226,105 @@ const HomeScreen = (props) => {
     value={search}
   />);
 
+  const ShowTitle = () => (
+    <Text style={styles.TextLarge}> {sortPairings} </Text>
+  )
+
+  const filterButton = () => (
+    <Pressable
+      style={[styles.button, styles.buttonOpen]}
+      onPress={() => setModalVisible(true)}
+    >
+      <Text >
+        <Feather name="filter" size={24} color="white" />
+      </Text>
+    </Pressable>
+
+  )
+  const searchButton = () => (
+    <Pressable
+      style={[styles.button, styles.buttonOpen]}
+      onPress={() => setModalVisible(true)}
+    >
+      <Text >
+        <Feather name="search" size={24} color="white" />
+      </Text>
+    </Pressable>
+  )
 
   return (
     <ApplicationProvider  {...eva} theme={{ ...eva.light, ...theme }} style={styles.container}>
+      <Header
+        statusBarProps={{ elevated: 'true', backgroundColor: "white" }}
+        leftComponent={searchButton}
+        centerComponent={< ShowTitle />} //sortpairings doesnt show
+        containerStyle={{
+          backgroundColor: 'white',
+        }}
+        rightComponent={filterButton} />
       <ScrollView style={styles.scrollView}>
         <View style={{ height: "100%" }}>
-          <View style={styles.Header}>
-            <Text style={styles.TextLarge}> {sortPairings} </Text>
-            <View style={styles.centeredView}>
-              <Modal
-                animationType="slide"
-                transparent={true}
-                visible={isModalVisible}
-                onRequestClose={() => {
-                  Alert.alert("Modal has been closed.");
-                  setModalVisible(!isModalVisible);
-                }}
-              >
-                <View style={styles.centeredView}>
-                  <View style={styles.modalView} >
-                    <Text>Sort Pairings</Text>
-                    <Picker
-                      sortPairings={sortPairings}
-                      style={{ height: 50, width: 150 }}
-                      onValueChange={(itemValue, itemIndex) => { setSortPairings(itemValue); console.log(itemValue) }}
-                    >
-                      <Picker.Item label="Trending" value="Trending" />
-                      <Picker.Item label="Most Liked" value="Most Liked" />
-                      <Picker.Item label="Newest" value="Newest" />
-                    </Picker>
-                    <Divider />
+          <View style={styles.centeredView}>
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={isModalVisible}
+              onRequestClose={() => {
+                Alert.alert("Modal has been closed.");
+                setModalVisible(!isModalVisible);
+              }}
+            >
+              <View style={styles.centeredView}>
+                <View style={styles.modalView} >
+                  <Text>Sort Pairings</Text>
+                  <Picker
+                    sortPairings={sortPairings}
+                    style={{ height: 50, width: 150 }}
+                    onValueChange={(itemValue, itemIndex) => { setSortPairings(itemValue); console.log(itemValue) }}
+                  >
+                    <Picker.Item label="Trending" value="Trending" />
+                    <Picker.Item label="Most Liked" value="Most Liked" />
+                    <Picker.Item label="Newest" value="Newest" />
+                  </Picker>
+                  <Divider />
 
-                    <Text>Flavour Profile</Text>
-                    <Picker
-                      flavourProfile={flavourProfile}
-                      style={{ height: 50, width: 150 }}
-                      onValueChange={(itemValue, itemIndex) => { setFlavourProfile(itemValue); console.log(itemValue) }}
-                    >
-                      <Picker.Item label="None" value="None" />
-                      <Picker.Item label="Sweet" value="Sweet" />
-                      <Picker.Item label="Salty" value="Salty" />
-                      <Picker.Item label="Spicy" value="Spicy" />
-                      <Picker.Item label="Sour" value="Sour" />
-                    </Picker>
-                    <Divider />
-                    <Text>Meal Type</Text>
-                    <Picker
-                      mealType={mealType}
-                      style={{ height: 50, width: 150 }}
-                      onValueChange={(itemValue, itemIndex) => { setMealType(itemValue); console.log(itemValue) }}
-                    >
-                      <Picker.Item label="None" value="None" />
-                      <Picker.Item label="Breakfast" value="Breakfast" />
-                      <Picker.Item label="Brunch" value="Brunch" />
-                      <Picker.Item label="Supper" value="Supper" />
-                      <Picker.Item label="Dessert" value="Dessert" />
-                    </Picker>
-                    <Divider />
-                    <Pressable
-                      style={[styles.button, styles.buttonClose]}
-                      onPress={() => setModalVisible(!isModalVisible)}
-                    >
-                      <Text style={styles.textStyle}>close</Text>
-                    </Pressable>
-                  </View>
+                  <Text>Flavour Profile</Text>
+                  <Picker
+                    flavourProfile={flavourProfile}
+                    style={{ height: 50, width: 150 }}
+                    onValueChange={(itemValue, itemIndex) => { setFlavourProfile(itemValue); console.log(itemValue) }}
+                  >
+                    <Picker.Item label="None" value="None" />
+                    <Picker.Item label="Sweet" value="Sweet" />
+                    <Picker.Item label="Salty" value="Salty" />
+                    <Picker.Item label="Spicy" value="Spicy" />
+                    <Picker.Item label="Sour" value="Sour" />
+                  </Picker>
+                  <Divider />
+                  <Text>Meal Type</Text>
+                  <Picker
+                    mealType={mealType}
+                    style={{ height: 50, width: 150 }}
+                    onValueChange={(itemValue, itemIndex) => { setMealType(itemValue); console.log(itemValue) }}
+                  >
+                    <Picker.Item label="None" value="None" />
+                    <Picker.Item label="Breakfast" value="Breakfast" />
+                    <Picker.Item label="Brunch" value="Brunch" />
+                    <Picker.Item label="Supper" value="Supper" />
+                    <Picker.Item label="Dessert" value="Dessert" />
+                  </Picker>
+                  <Divider />
+                  <Pressable
+                    style={[styles.button, styles.buttonClose]}
+                    onPress={() => setModalVisible(!isModalVisible)}
+                  >
+                    <Text style={styles.textStyle}>close</Text>
+                  </Pressable>
                 </View>
-              </Modal>
-              <Pressable
-                style={[styles.button, styles.buttonOpen]}
-                onPress={() => setModalVisible(true)}
-              >
-                <Text >
-                  <Feather name="filter" size={24} color="white" />
-                </Text>
-              </Pressable>
-            </View>
-
+              </View>
+            </Modal>
           </View>
+
           {isLoading ? (
             <ActivityIndicator />
           ) : (
