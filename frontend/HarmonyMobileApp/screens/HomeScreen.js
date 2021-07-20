@@ -45,7 +45,7 @@ const response = {
         tags: ["Hot", "Sweet", "Healthy", "Gluten-Free"],
         upVotes: "68",
         downVotes: "12",
-
+        location: "Prospect Street, Pretoria, Gauteng"
       },
       {
         id: "2",
@@ -60,38 +60,8 @@ const response = {
         tags: ["Hot", "Sweet", "Healthy", "Gluten-Free"],
         upVotes: "59",
         downVotes: "19",
-      },
-      {
-        id: "3",
-        foodName: "Koeksister",
-        foodImageURI:
-          "https://www.eatout.co.za/wp-content/uploads/2014/11/koeksuster-recipe-20Mar13-043451.jpg",
-        drinkName: "Iced coffee",
-        drinkImageURI:
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Blue_Bottle%2C_Kyoto_Style_Ice_Coffee_%285909775445%29.jpg/600px-Blue_Bottle%2C_Kyoto_Style_Ice_Coffee_%285909775445%29.jpg",
-        pairingDesc:
-          "Iced coffee is a coffee beverage served cold. It may be prepared either by brewing coffee in the normal way and then serving it over ice or in cold milk, or by brewing the coffee cold.",
-        drinkImageURI:
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Blue_Bottle%2C_Kyoto_Style_Ice_Coffee_%285909775445%29.jpg/600px-Blue_Bottle%2C_Kyoto_Style_Ice_Coffee_%285909775445%29.jpg",
-        tags: ["Hot", "Sweet", "Healthy", "Gluten-Free"],
-        upVotes: "23",
-        downVotes: "8",
-      },
-      {
-        id: "4",
-        foodName: "Koeksister",
-        foodImageURI:
-          "https://www.eatout.co.za/wp-content/uploads/2014/11/koeksuster-recipe-20Mar13-043451.jpg",
-        drinkName: "Iced coffee",
-        drinkImageURI:
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Blue_Bottle%2C_Kyoto_Style_Ice_Coffee_%285909775445%29.jpg/600px-Blue_Bottle%2C_Kyoto_Style_Ice_Coffee_%285909775445%29.jpg",
-        pairingDesc:
-          "Iced coffee is a coffee beverage served cold. It may be prepared either by brewing coffee in the normal way and then serving it over ice or in cold milk, or by brewing the coffee cold.",
-        drinkImageURI:
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Blue_Bottle%2C_Kyoto_Style_Ice_Coffee_%285909775445%29.jpg/600px-Blue_Bottle%2C_Kyoto_Style_Ice_Coffee_%285909775445%29.jpg",
-        tags: ["Hot", "Sweet", "Healthy", "Gluten-Free"],
-        upVotes: "12",
-        downVotes: "39",
+        location: "Prospect Street, Pretoria, Gauteng"
+
       },
     ],
   },
