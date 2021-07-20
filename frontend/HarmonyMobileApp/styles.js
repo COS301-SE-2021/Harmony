@@ -193,6 +193,13 @@ const styles = StyleSheet.create({
     fontSize: 40,
     textAlignVertical: "center",
   },
+  TitleText: {
+    fontFamily: "sans-serif-light",
+    fontSize: 40,
+    textAlignVertical: "center",
+    backgroundColor: "white",
+    width: "100%",
+  },
   TextMedium: {
     fontFamily: "sans-serif-light",
     fontSize: 23,
@@ -220,7 +227,7 @@ const styles = StyleSheet.create({
   standardImage: {
     width: "50%",
     height: "100%",
-    resizeMode: "contain",
+    resizeMode: "cover",
     borderColor: "white",
     borderWidth: 2,
     flex: 1

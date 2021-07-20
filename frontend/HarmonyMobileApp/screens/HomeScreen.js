@@ -104,6 +104,7 @@ const HomeScreen = (props) => {
   const [data, setData] = useState([]);
   const [isModalVisible, setModalVisible] = useState(false);
   const [flavourProfile, setFlavourProfile] = useState("None");
+  const [sortPairings, setSortPairings] = useState("Trending");
   const [mealType, setMealType] = useState("None");
 
   useEffect(() => {
@@ -133,12 +134,105 @@ const HomeScreen = (props) => {
       ]
     );
   };
+
+
+  const TagBar = () => (
+    <View style={styles.tagsSection}>
+      <ScrollView
+        contentContainerStyle={{
+          flexDirection: "row",
+          flexWrap: "wrap",
+        }}
+        showsHorizontalScrollIndicator={false}
+        horizontal={true}
+      >
+        <View style={styles.rowContainer}>
+          {response.data.tags.map((tag, index) => (
+            <View style={styles.tagContainer} key={index}>
+              <FontAwesome name="tag" size={16} color="#fff" />
+              {/* Keeping outlined icons just incase we want to change to them for consistency overall */}
+              {/* The filled icons look better in this case though */}
+              {/* <Feather name="tag" size={16} color="#fff" /> */}
+              <Text style={styles.tagText}>{tag}</Text>
+            </View>
+          ))}
+        </View>
+      </ScrollView>
+    </View>
+  );
+
+  const ModalView = () => (
+    <View style={styles.centeredView}>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={isModalVisible}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+          setModalVisible(!isModalVisible);
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView} >
+            <Text>Flavour Profile</Text>
+            <Picker
+              flavourProfile={flavourProfile}
+              style={{ height: 50, width: 150 }}
+              onValueChange={(itemValue, itemIndex) => { setFlavourProfile(itemValue); console.log(itemValue) }}
+            >
+              <Picker.Item label="None" value="None" />
+              <Picker.Item label="Sweet" value="Sweet" />
+              <Picker.Item label="Salty" value="Salty" />
+              <Picker.Item label="Spicy" value="Spicy" />
+              <Picker.Item label="Sour" value="Sour" />
+            </Picker>
+            <Divider />
+            <Text>Meal Type</Text>
+            <Picker
+              mealType={mealType}
+              style={{ height: 50, width: 150 }}
+              onValueChange={(itemValue, itemIndex) => { setMealType(itemValue); console.log(itemValue) }}
+            >
+              <Picker.Item label="None" value="None" />
+              <Picker.Item label="Breakfast" value="Breakfast" />
+              <Picker.Item label="Brunch" value="Brunch" />
+              <Picker.Item label="Supper" value="Supper" />
+              <Picker.Item label="Dessert" value="Dessert" />
+            </Picker>
+            <Divider />
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => setModalVisible(!isModalVisible)}
+            >
+              <Text style={styles.textStyle}>close</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+      <Pressable
+        style={[styles.button, styles.buttonOpen]}
+        onPress={() => setModalVisible(true)}
+      >
+        <Text >
+          <Feather name="filter" size={24} color="white" />
+        </Text>
+      </Pressable>
+    </View>
+  );
+
+  const SearchBar = () => (<SearchBar
+    placeholder="Search here..."
+    onChangeText={this.updateSearch}
+    value={search}
+  />);
+
+
   return (
     <ApplicationProvider  {...eva} theme={{ ...eva.light, ...theme }} style={styles.container}>
       <ScrollView style={styles.scrollView}>
         <View style={{ height: "100%" }}>
           <View style={styles.Header}>
-            <Text style={styles.TextLarge}> Harmony </Text>
+            <Text style={styles.TextLarge}> {sortPairings} </Text>
             <View style={styles.centeredView}>
               <Modal
                 animationType="slide"
@@ -151,6 +245,18 @@ const HomeScreen = (props) => {
               >
                 <View style={styles.centeredView}>
                   <View style={styles.modalView} >
+                    <Text>Sort Pairings</Text>
+                    <Picker
+                      sortPairings={sortPairings}
+                      style={{ height: 50, width: 150 }}
+                      onValueChange={(itemValue, itemIndex) => { setSortPairings(itemValue); console.log(itemValue) }}
+                    >
+                      <Picker.Item label="Trending" value="Trending" />
+                      <Picker.Item label="Most Liked" value="Most Liked" />
+                      <Picker.Item label="Newest" value="Newest" />
+                    </Picker>
+                    <Divider />
+
                     <Text>Flavour Profile</Text>
                     <Picker
                       flavourProfile={flavourProfile}
@@ -197,7 +303,6 @@ const HomeScreen = (props) => {
             </View>
 
           </View>
-          <Text>Popular pairings of the day</Text>
           {isLoading ? (
             <ActivityIndicator />
           ) : (
@@ -260,91 +365,13 @@ const HomeScreen = (props) => {
       </ScrollView>
     </ApplicationProvider>
   );
+
+
+
+
+
 };
 
-const TagBar = () => (
-  <View style={styles.tagsSection}>
-    <ScrollView
-      contentContainerStyle={{
-        flexDirection: "row",
-        flexWrap: "wrap",
-      }}
-      showsHorizontalScrollIndicator={false}
-      horizontal={true}
-    >
-      <View style={styles.rowContainer}>
-        {response.data.tags.map((tag, index) => (
-          <View style={styles.tagContainer} key={index}>
-            <FontAwesome name="tag" size={16} color="#fff" />
-            {/* Keeping outlined icons just incase we want to change to them for consistency overall */}
-            {/* The filled icons look better in this case though */}
-            {/* <Feather name="tag" size={16} color="#fff" /> */}
-            <Text style={styles.tagText}>{tag}</Text>
-          </View>
-        ))}
-      </View>
-    </ScrollView>
-  </View>
-);
-
-const modalView = () => (
-  <View style={styles.centeredView}>
-    <Modal
-      animationType="slide"
-      transparent={true}
-      visible={isModalVisible}
-      onRequestClose={() => {
-        Alert.alert("Modal has been closed.");
-        setModalVisible(!isModalVisible);
-      }}
-    >
-      <View style={styles.centeredView}>
-        <View style={styles.modalView} >
-          <Text>Flavour Profile</Text>
-          <Picker
-            flavourProfile={flavourProfile}
-            style={{ height: 50, width: 150 }}
-            onValueChange={(itemValue, itemIndex) => { setFlavourProfile(itemValue); console.log(itemValue) }}
-          >
-            <Picker.Item label="None" value="None" />
-            <Picker.Item label="Sweet" value="Sweet" />
-            <Picker.Item label="Salty" value="Salty" />
-            <Picker.Item label="Spicy" value="Spicy" />
-            <Picker.Item label="Sour" value="Sour" />
-          </Picker>
-          <Divider />
-          <Text>Meal Type</Text>
-          <Picker
-            mealType={mealType}
-            style={{ height: 50, width: 150 }}
-            onValueChange={(itemValue, itemIndex) => { setMealType(itemValue); console.log(itemValue) }}
-          >
-            <Picker.Item label="None" value="None" />
-            <Picker.Item label="Breakfast" value="Breakfast" />
-            <Picker.Item label="Brunch" value="Brunch" />
-            <Picker.Item label="Supper" value="Supper" />
-            <Picker.Item label="Dessert" value="Dessert" />
-          </Picker>
-          <Divider />
-          <Pressable
-            style={[styles.button, styles.buttonClose]}
-            onPress={() => setModalVisible(!isModalVisible)}
-          >
-            <Text style={styles.textStyle}>close</Text>
-          </Pressable>
-        </View>
-      </View>
-    </Modal>
-    <Pressable
-      style={[styles.button, styles.buttonOpen]}
-      onPress={() => setModalVisible(true)}
-    >
-      <Text >
-        <Feather name="filter" size={24} color="white" />
-      </Text>
-    </Pressable>
-  </View>
-);
 const personalStyles = StyleSheet.create({
 
   text: {
