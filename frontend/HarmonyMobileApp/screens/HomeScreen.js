@@ -13,7 +13,7 @@ import {
 } from "react-native";
 import styles from "../styles";
 import {
-  Feather, SimpleLineIcons, FontAwesome,
+  Feather, SimpleLineIcons, FontAwesome, Entypo
 } from '@expo/vector-icons';
 import * as eva from '@eva-design/eva';
 import { default as theme } from '../theme.json';
@@ -106,6 +106,8 @@ const HomeScreen = (props) => {
   const [flavourProfile, setFlavourProfile] = useState("None");
   const [sortPairings, setSortPairings] = useState("Trending");
   const [mealType, setMealType] = useState("None");
+  const [favouriteIconColor, setFavouriteIconColor] = useState("black");
+  const [favouriteIconOutline, setFavouriteIconOutline] = useState("heart-outlined");
 
   useEffect(() => {
     fetch(viewPairingURL)
@@ -119,17 +121,23 @@ const HomeScreen = (props) => {
       "Add to Favourites",
       "Are you sure you want to Favourite this pairing?",
       [
-        // The "Yes" button
-        {
-          text: "Yes",
-          onPress: () => {
-            //setShowBox(false);
-          },
-        },
+
         // The "No" button
         // Does nothing but dismiss the dialog when tapped
         {
           text: "No",
+          onPress: () => {
+            setFavouriteIconColor("black"),
+              setFavouriteIconOutline("heart-outlined")
+          },
+        },
+        // The "Yes" button
+        {
+          text: "Yes",
+          onPress: () => {
+            setFavouriteIconColor("red"),
+              setFavouriteIconOutline("heart")
+          },
         },
       ]
     );
@@ -373,7 +381,7 @@ const HomeScreen = (props) => {
                         </View>
                       </View>
                       <Pressable onPress={showConfirmDialog}>
-                        <Feather name="heart" size={25} color="black" />
+                        <Entypo name={favouriteIconOutline} size={25} color={favouriteIconColor} />
                       </Pressable>
                     </View>
 
