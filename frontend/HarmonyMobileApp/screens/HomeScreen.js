@@ -317,7 +317,7 @@ const HomeScreen = (props) => {
               data={data}
               keyExtractor={({ PID }, index) => PID}
               renderItem={({ item }) => (
-                <View style={{ paddingBottom: 10 }}>
+                <View style={{ paddingBottom: 15 }}>
                   <View style={styles.cardContainer}>
                     <View style={styles.imageContainer}>
 

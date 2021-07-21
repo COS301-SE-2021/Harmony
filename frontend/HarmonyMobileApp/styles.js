@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
 
   },
 
-  cardText: { flexDirection: "row", justifyContent: "space-between" },
+  cardText: { flexDirection: "row", justifyContent: "space-around" },
 
   iconsBar: {
     shadowColor: '#000000',
