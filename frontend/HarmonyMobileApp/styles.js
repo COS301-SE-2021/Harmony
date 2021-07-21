@@ -10,10 +10,11 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   cardContainer: {
-    height: "100%",
+    height: "auto",
     flex: 1,
     borderRadius: 15,
     shadowColor: "#000",
+    padding: 0,
     shadowOffset: {
       width: 0,
       height: 2
@@ -227,7 +228,7 @@ const styles = StyleSheet.create({
   standardImage: {
     width: "50%",
     height: "100%",
-    resizeMode: "cover",
+    resizeMode: "contain",
     borderColor: "white",
     borderWidth: 2,
     flex: 1

@@ -20,6 +20,13 @@ import { default as theme } from '../theme.json';
 import { ApplicationProvider, Layout, Divider, Card, Text } from '@ui-kitten/components';
 import { useIsFocused } from "@react-navigation/native";
 import { Header } from 'react-native-elements'
+import {
+  SharedElement,
+} from 'react-native-shared-element';
+const MIN_HEIGHT = Platform.OS === "ios" ? 90 : 55;
+const MAX_HEIGHT = 300;
+
+
 const response = {
   statusCode: 200,
   data: {
@@ -310,54 +317,55 @@ const HomeScreen = (props) => {
               data={data}
               keyExtractor={({ PID }, index) => PID}
               renderItem={({ item }) => (
-                <View>
-                  <Card style={styles.cardContainer}>
-                    <View style={styles.imageContainer}>
-                      <Image
-                        source={require("../assets/waffles.jpg")}
-                        style={styles.standardImage}
-                      />
-                      <Image
-                        source={require("../assets/milkshake.jpg")}
-                        style={styles.standardImage}
-                      />
-                    </View>
-                    <View >
-                      <View style={styles.cardText}>
-                        <Text>{item.FoodItem}</Text>
-                        <Text>{item.DrinkItem}</Text>
-                      </View>
-                      <View>
-                        <Text style={{ textAlign: "center" }}>Pairing descr</Text>
-                      </View>
-                    </View>
+                <View style={styles.cardContainer}>
+                  <View style={styles.imageContainer}>
 
-                    <TagBar />
-                    <View style={styles.locationBar}>
-                      <SimpleLineIcons name="location-pin" size={25} color="white" />
-                      <Text style={styles.TextSmallWhite}>Prospect Street, Pretoria, Gauteng </Text>
+                    <Image
+                      source={require("../assets/waffles.jpg")}
+                      style={styles.standardImage}
+                    />
+                    <Image
+                      source={require("../assets/milkshake.jpg")}
+                      style={styles.standardImage}
+                    />
+                  </View>
 
+                  <View >
+                    <View style={styles.cardText}>
+                      <Text>{item.FoodItem}</Text>
+                      <Text>{item.DrinkItem}</Text>
                     </View>
-                    <Divider />
-                    <View style={styles.iconsBar}>
-                      <View style={{ flexDirection: "row" }}>
-                        <View style={{ flexDirection: "row", justifyContent: "center", paddingRight: "10%" }}>
-                          <Feather name="arrow-down-circle" size={25} color="black" />
-                          <Text style={{ paddingLeft: "2%", paddingVertical: "1%" }}>45</Text>
-                        </View>
-                        <View style={{ flexDirection: "row", justifyContent: "center" }}>
-                          <Feather name="arrow-up-circle" size={25} color="black" />
-                          <Text style={{ paddingLeft: "2%", paddingVertical: "1%" }}>100</Text>
-                        </View>
+                    <View>
+                      <Text style={{ textAlign: "center" }}>Pairing descr</Text>
+                    </View>
+                  </View>
+
+                  <TagBar />
+                  <View style={styles.locationBar}>
+                    <SimpleLineIcons name="location-pin" size={25} color="white" />
+                    <Text style={styles.TextSmallWhite}>Prospect Street, Pretoria, Gauteng </Text>
+
+                  </View>
+                  <Divider />
+                  <View style={styles.iconsBar}>
+                    <View style={{ flexDirection: "row" }}>
+                      <View style={{ flexDirection: "row", justifyContent: "center", paddingRight: "10%" }}>
+                        <Feather name="arrow-down-circle" size={25} color="black" />
+                        <Text style={{ paddingLeft: "2%", paddingVertical: "1%" }}>45</Text>
                       </View>
-                      <Pressable onPress={showConfirmDialog}>
-                        <Entypo name={favouriteIconOutline} size={25} color={favouriteIconColor} />
-                      </Pressable>
+                      <View style={{ flexDirection: "row", justifyContent: "center" }}>
+                        <Feather name="arrow-up-circle" size={25} color="black" />
+                        <Text style={{ paddingLeft: "2%", paddingVertical: "1%" }}>100</Text>
+                      </View>
                     </View>
+                    <Pressable onPress={showConfirmDialog}>
+                      <Entypo name={favouriteIconOutline} size={25} color={favouriteIconColor} />
+                    </Pressable>
+                  </View>
 
-                  </Card>
                   <Text></Text>
                 </View>
+
               )}
             />
           )}
@@ -386,6 +394,31 @@ const personalStyles = StyleSheet.create({
     marginTop: 40,
     backgroundColor: "#8d918d",
     flexDirection: "row",
+  },
+  drinkCard: {
+    //Card style for drinks
+    // borderRadius: 20,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    margin: 5,
+    padding: 10,
+    // shadowColor: "#000",
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 2,
+    // },
+    // shadowOpacity: 0.25,
+    // shadowRadius: 4,
+    // elevation: 3,
+    resizeMode: "cover",
+  },
+  smallDrinkCard: {
+    width: 150,
+    height: 150,
+  },
+  bigDrinkCard: {
+    width: 300,
+    height: 300,
   },
 });
 
