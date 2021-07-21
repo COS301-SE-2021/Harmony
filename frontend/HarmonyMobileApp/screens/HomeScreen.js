@@ -216,15 +216,25 @@ const HomeScreen = (props) => {
   )
 
   const filterButton = () => (
-    <Pressable
-      style={[styles.button, styles.buttonOpen]}
-      onPress={() => setModalVisible(true)}
-    >
-      <Text >
-        <Feather name="filter" size={24} color="white" />
-      </Text>
-    </Pressable>
-
+    <View style={{ flexDirection: "row" }}>
+      <Pressable
+        style={[styles.button, styles.buttonOpen]}
+        onPress={() => setModalVisible(true)}
+      >
+        <Text >
+          <Feather name="filter" size={24} color="white" />
+        </Text>
+      </Pressable>
+      <Text style={{ width: "5%" }}></Text>
+      <Pressable
+        style={[styles.button, styles.buttonOpen]}
+        onPress={() => setModalVisible(true)}
+      >
+        <Text >
+          <Feather name="search" size={24} color="white" />
+        </Text>
+      </Pressable>
+    </View>
   )
   const searchButton = () => (
     <Pressable
@@ -241,7 +251,7 @@ const HomeScreen = (props) => {
     <ApplicationProvider  {...eva} theme={{ ...eva.light, ...theme }} style={styles.container}>
       <Header
         statusBarProps={{ elevated: 'true', backgroundColor: "white" }}
-        leftComponent={searchButton}
+        //   leftComponent={searchButton}
         centerComponent={< ShowTitle />} //sortpairings doesnt show
         containerStyle={{
           backgroundColor: 'white',
@@ -347,7 +357,6 @@ const HomeScreen = (props) => {
                       <Text style={styles.TextSmallWhite}>Prospect Street, Pretoria, Gauteng </Text>
 
                     </View>
-                    <Divider />
                     <View style={styles.iconsBar}>
                       <View style={{ flexDirection: "row" }}>
                         <View style={{ flexDirection: "row", justifyContent: "center", paddingRight: "10%" }}>

@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     elevation: 2
   },
   buttonOpen: {
-    backgroundColor: "#FF6347",
+    backgroundColor: "#C5C3C6",
   },
   buttonClose: {
     backgroundColor: "#4F6D7A",
@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
     height: "100%",
     resizeMode: "contain",
     borderWidth: 2,
-    flex: 1
+    flex: 1,
 
   },
   imageContainer: {
