@@ -317,55 +317,56 @@ const HomeScreen = (props) => {
               data={data}
               keyExtractor={({ PID }, index) => PID}
               renderItem={({ item }) => (
-                <View style={styles.cardContainer}>
-                  <View style={styles.imageContainer}>
+                <View style={{ paddingBottom: 10 }}>
+                  <View style={styles.cardContainer}>
+                    <View style={styles.imageContainer}>
 
-                    <Image
-                      source={require("../assets/waffles.jpg")}
-                      style={styles.standardImage}
-                    />
-                    <Image
-                      source={require("../assets/milkshake.jpg")}
-                      style={styles.standardImage}
-                    />
-                  </View>
-
-                  <View >
-                    <View style={styles.cardText}>
-                      <Text>{item.FoodItem}</Text>
-                      <Text>{item.DrinkItem}</Text>
+                      <Image
+                        source={require("../assets/waffles.jpg")}
+                        style={styles.standardImage}
+                      />
+                      <Image
+                        source={require("../assets/milkshake.jpg")}
+                        style={styles.standardImage}
+                      />
                     </View>
-                    <View>
-                      <Text style={{ textAlign: "center" }}>Pairing descr</Text>
-                    </View>
-                  </View>
 
-                  <TagBar />
-                  <View style={styles.locationBar}>
-                    <SimpleLineIcons name="location-pin" size={25} color="white" />
-                    <Text style={styles.TextSmallWhite}>Prospect Street, Pretoria, Gauteng </Text>
-
-                  </View>
-                  <Divider />
-                  <View style={styles.iconsBar}>
-                    <View style={{ flexDirection: "row" }}>
-                      <View style={{ flexDirection: "row", justifyContent: "center", paddingRight: "10%" }}>
-                        <Feather name="arrow-down-circle" size={25} color="black" />
-                        <Text style={{ paddingLeft: "2%", paddingVertical: "1%" }}>45</Text>
+                    <View >
+                      <View style={styles.cardText}>
+                        <Text>{item.FoodItem}</Text>
+                        <Text>{item.DrinkItem}</Text>
                       </View>
-                      <View style={{ flexDirection: "row", justifyContent: "center" }}>
-                        <Feather name="arrow-up-circle" size={25} color="black" />
-                        <Text style={{ paddingLeft: "2%", paddingVertical: "1%" }}>100</Text>
+                      <View>
+                        <Text style={{ textAlign: "center" }}>Pairing descr</Text>
                       </View>
                     </View>
-                    <Pressable onPress={showConfirmDialog}>
-                      <Entypo name={favouriteIconOutline} size={25} color={favouriteIconColor} />
-                    </Pressable>
-                  </View>
 
-                  <Text></Text>
+                    <TagBar />
+                    <View style={styles.locationBar}>
+                      <SimpleLineIcons name="location-pin" size={25} color="white" />
+                      <Text style={styles.TextSmallWhite}>Prospect Street, Pretoria, Gauteng </Text>
+
+                    </View>
+                    <Divider />
+                    <View style={styles.iconsBar}>
+                      <View style={{ flexDirection: "row" }}>
+                        <View style={{ flexDirection: "row", justifyContent: "center", paddingRight: "10%" }}>
+                          <Feather name="arrow-down-circle" size={25} color="black" />
+                          <Text style={{ paddingLeft: "2%", paddingVertical: "1%" }}>45</Text>
+                        </View>
+                        <View style={{ flexDirection: "row", justifyContent: "center" }}>
+                          <Feather name="arrow-up-circle" size={25} color="black" />
+                          <Text style={{ paddingLeft: "2%", paddingVertical: "1%" }}>100</Text>
+                        </View>
+                      </View>
+                      <Pressable onPress={showConfirmDialog}>
+                        <Entypo name={favouriteIconOutline} size={25} color={favouriteIconColor} />
+                      </Pressable>
+                    </View>
+
+                    <Text></Text>
+                  </View>
                 </View>
-
               )}
             />
           )}

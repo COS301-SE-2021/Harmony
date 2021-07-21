@@ -14,14 +14,15 @@ const styles = StyleSheet.create({
     flex: 1,
     borderRadius: 15,
     shadowColor: "#000",
-    padding: 0,
-    shadowOffset: {
-      width: 0,
-      height: 2
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5
+    backgroundColor: "white",
+    /* padding: 15,
+     shadowOffset: {
+       width: 0,
+       height: 2
+     },
+     shadowOpacity: 0.25,
+     shadowRadius: 4,
+     elevation: 5*/
   },
   standardContainer: {
     flex: 1,
@@ -229,7 +230,6 @@ const styles = StyleSheet.create({
     width: "50%",
     height: "100%",
     resizeMode: "contain",
-    borderColor: "white",
     borderWidth: 2,
     flex: 1
 
@@ -238,8 +238,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: "100%",
     height: 120,
-    flex: 1
-
+    flex: 1,
   },
   tagsSection: {
     //Different from section because theres no padding on the right or left
