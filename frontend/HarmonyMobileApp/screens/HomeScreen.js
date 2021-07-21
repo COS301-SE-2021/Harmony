@@ -20,9 +20,6 @@ import { default as theme } from '../theme.json';
 import { ApplicationProvider, Layout, Divider, Card, Text } from '@ui-kitten/components';
 import { useIsFocused } from "@react-navigation/native";
 import { Header } from 'react-native-elements'
-import {
-  SharedElement,
-} from 'react-native-shared-element';
 const MIN_HEIGHT = Platform.OS === "ios" ? 90 : 55;
 const MAX_HEIGHT = 300;
 
@@ -199,7 +196,7 @@ const HomeScreen = (props) => {
         onPress={() => setModalVisible(true)}
       >
         <Text >
-          <Feather name="filter" size={24} color="white" />
+          <Feather name="filter" size={20} color="white" />
         </Text>
       </Pressable>
     </View>
@@ -222,7 +219,7 @@ const HomeScreen = (props) => {
         onPress={() => setModalVisible(true)}
       >
         <Text >
-          <Feather name="filter" size={24} color="white" />
+          <Feather name="filter" size={22} color="white" />
         </Text>
       </Pressable>
       <Text style={{ width: "5%" }}></Text>
@@ -231,7 +228,7 @@ const HomeScreen = (props) => {
         onPress={() => setModalVisible(true)}
       >
         <Text >
-          <Feather name="search" size={24} color="white" />
+          <Feather name="search" size={22} color="white" />
         </Text>
       </Pressable>
     </View>
@@ -252,7 +249,8 @@ const HomeScreen = (props) => {
       <Header
         statusBarProps={{ elevated: 'true', backgroundColor: "white" }}
         //   leftComponent={searchButton}
-        centerComponent={< ShowTitle />} //sortpairings doesnt show
+        placement="left"
+        centerComponent={< ShowTitle />}
         containerStyle={{
           backgroundColor: 'white',
         }}
