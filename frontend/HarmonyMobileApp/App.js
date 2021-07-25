@@ -6,7 +6,13 @@ import { AppNavigator } from "./screens/navigation.component";
 
 import Amplify from "aws-amplify";
 import awsExports from "./aws-exports";
-Amplify.configure(awsExports);
+
+Amplify.configure({
+  ...awsExports,
+  Analytics: {
+    disabled: true,
+  },
+});
 
 import { withAuthenticator } from "aws-amplify-react-native";
 
@@ -20,4 +26,4 @@ const App = () => (
 );
 
 // export default App;
-export default withAuthenticator(App, true);
+export default withAuthenticator(App);

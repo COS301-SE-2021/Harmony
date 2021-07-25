@@ -29,7 +29,6 @@ export default function SettingsScreen({ updateAuthState }) {
 
   return (
     <View style={styles.container}>
-      <Text> + </Text>
       <Button title="Sign Out" color="tomato" onPress={signOut} />
     </View>
   );

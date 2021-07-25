@@ -77,8 +77,10 @@ const options = {
   },
 };
 
-export const AppNavigator = () => (
-  <NavigationContainer>
-    <TabNavigator />
-  </NavigationContainer>
-);
+export const AppNavigator = (props) => {
+  return (
+    <NavigationContainer>
+      <TabNavigator />
+    </NavigationContainer>
+  );
+};
