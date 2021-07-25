@@ -227,7 +227,7 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   standardImage: {
-    height: 120,
+    height: 160,  //for the homescreen images
     width: "100%",
     resizeMode: "contain",
     borderWidth: 2,
@@ -237,7 +237,7 @@ const styles = StyleSheet.create({
   imageContainer: {
     flexDirection: "row",
     width: "100%",
-    height: 120,
+    height: 160,
     flex: 1,
   },
   tagsSection: {
@@ -263,7 +263,7 @@ const styles = StyleSheet.create({
     elevation: 2, //gives shadow/3D effect
   },
   tagText: {
-    fontSize: 14,
+    fontSize: 12,
     color: "#fff",
     marginLeft: 10, //Space between tag icon and text
   },

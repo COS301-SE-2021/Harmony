@@ -131,7 +131,7 @@ const HomeScreen = (props) => {
         <View style={styles.rowContainer}>
           {response.data.tags.map((tag, index) => (
             <View style={styles.tagContainer} key={index}>
-              <FontAwesome name="tag" size={16} color="#fff" />
+              <FontAwesome name="tag" size={14} color="#fff" />
               {/* Keeping outlined icons just incase we want to change to them for consistency overall */}
               {/* The filled icons look better in this case though */}
               {/* <Feather name="tag" size={16} color="#fff" /> */}
@@ -328,7 +328,7 @@ const HomeScreen = (props) => {
                 <View style={{ paddingBottom: 15 }}>
                   <View style={styles.cardContainer}>
                     <View style={styles.imageContainer}>
-                      <View style={{ flexDirection: "column", textAlign: "center", width: "50%", height: 120 }}>
+                      <View style={{ flexDirection: "column", textAlign: "center", width: "50%", height: 160 }}>
                         <Image
                           source={require("../assets/waffles.jpg")}
                           style={styles.standardImage}
@@ -337,7 +337,7 @@ const HomeScreen = (props) => {
 
                       </View>
 
-                      <View style={{ flexDirection: "column", textAlign: "center", width: "50%", height: 120 }}>
+                      <View style={{ flexDirection: "column", textAlign: "center", width: "50%", height: 160 }}>
                         <Image
                           source={require("../assets/milkshake.jpg")}
                           style={styles.standardImage}
