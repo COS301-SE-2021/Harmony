@@ -244,8 +244,6 @@ const styles = StyleSheet.create({
     //Different from section because theres no padding on the right or left
     //We do this so theres no visible cutoff as you scroll left or right
     paddingVertical: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: "#cccccc",
     backgroundColor: "white",
   },
   rowContainer: {
