@@ -382,7 +382,11 @@ const HomeScreen = (props) => {
                           <Text style={{ paddingLeft: "2%", paddingVertical: "1%" }}>100</Text>
                         </View>
                       </View>
-                      <Pressable onPress={showConfirmDialog}>
+                      <Pressable onPress={() => {
+                        setFavouriteIconColor("red"),
+                          setFavouriteIconOutline("heart")
+                      }
+                      }>
                         <Entypo name={favouriteIconOutline} size={25} color={favouriteIconColor} />
                       </Pressable>
                     </View>
