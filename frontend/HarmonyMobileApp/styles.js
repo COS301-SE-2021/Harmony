@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     shadowColor: "#000",
     backgroundColor: "white",
+    marginHorizontal: 20,
     /* padding: 15,
      shadowOffset: {
        width: 0,
@@ -28,7 +29,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollView: {
-    marginHorizontal: 20,
 
   },
 
