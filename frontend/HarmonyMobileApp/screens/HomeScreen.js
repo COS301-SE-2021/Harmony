@@ -222,7 +222,7 @@ const HomeScreen = (props) => {
           <Feather name="filter" size={22} color="white" />
         </Text>
       </Pressable>
-      <Text style={{ width: "5%" }}></Text>
+      <Text style={{ width: "8%" }}></Text>
       <Pressable
         style={[styles.button, styles.buttonOpen]}
         onPress={() => setModalVisible(true)}
