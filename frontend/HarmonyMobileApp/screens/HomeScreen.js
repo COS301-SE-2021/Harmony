@@ -255,6 +255,7 @@ const HomeScreen = (props) => {
         //   leftComponent={searchButton}
         placement="left"
         centerComponent={< ShowTitle />}
+        centerContainerStyle={{ height: "15%", }}
         containerStyle={{
           backgroundColor: 'white',
         }}

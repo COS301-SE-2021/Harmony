@@ -200,6 +200,7 @@ const styles = StyleSheet.create({
   TextLarge: {
     fontFamily: "sans-serif-light",
     fontSize: 40,
+    fontWeight: "bold",
     textAlignVertical: "center",
   },
   TitleText: {
