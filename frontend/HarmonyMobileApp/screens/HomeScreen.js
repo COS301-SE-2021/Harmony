@@ -356,14 +356,21 @@ const HomeScreen = (props) => {
                     </View>
 
                     <TagBar />
+                    <Divider />
                     <View style={styles.locationBar}>
-                      <SimpleLineIcons name="location-pin" style={{ paddingVertical: "3%", paddingRight: "2%" }} size={20} color="white" />
-                      <Text style={styles.TextSmallWhite}>Prospect Street, Pretoria, Gauteng </Text>
+                      <SimpleLineIcons name="location-pin" style={{ paddingVertical: "3%", paddingRight: "2%" }} size={25} color="black" />
+                      <Text style={styles.TextSmall}>Prospect Street, Pretoria, Gauteng </Text>
                       <View style={{ alignContent: "flex-end", alignSelf: "flex-end", flex: 1, paddingRight: "1%" }}>
                         <Text style={styles.TextSmallWhiteAlignedRight}>35 </Text>
                         <Text style={styles.TextSmallWhiteAlignedRight}>KM </Text>
                       </View>
                     </View>
+                    <Divider />
+
+
+
+
+
                     <View style={styles.iconsBar}>
                       <View style={{ flexDirection: "row" }}>
                         <View style={{ flexDirection: "row", justifyContent: "center", paddingRight: "10%" }}>

@@ -167,11 +167,11 @@ const styles = StyleSheet.create({
   locationBar: {
     flexDirection: "row",
     flex: 1,
-    borderRadius: 15,
+    //  borderRadius: 15,
     padding: 5,
-    elevation: 2,
-    backgroundColor: "#77A3B7",//"#6A92A4",
-    color: "white"
+    // elevation: 2,
+    backgroundColor: "white",//"#6A92A4",
+    color: "black"
   },
   tagBar: {
     flexDirection: "row",
@@ -209,6 +209,8 @@ const styles = StyleSheet.create({
   TextSmall: {
     fontFamily: "sans-serif-light",
     fontSize: 14,
+    textAlignVertical: "center"
+
   },
   TextSmallWhite: {
     fontFamily: "sans-serif-light",
@@ -220,7 +222,6 @@ const styles = StyleSheet.create({
   TextSmallWhiteAlignedRight: {  //for location bar
     fontFamily: "sans-serif-light",
     fontSize: 14,
-    color: "white",
     textAlign: "right"
   },
   regularImage: {
@@ -251,7 +252,7 @@ const styles = StyleSheet.create({
   tagsSection: {
     //Different from section because theres no padding on the right or left
     //We do this so theres no visible cutoff as you scroll left or right
-    paddingVertical: 20,
+    paddingVertical: 10,
     backgroundColor: "white",
   },
   rowContainer: {
