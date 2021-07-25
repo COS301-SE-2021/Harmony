@@ -328,22 +328,27 @@ const HomeScreen = (props) => {
                 <View style={{ paddingBottom: 15 }}>
                   <View style={styles.cardContainer}>
                     <View style={styles.imageContainer}>
+                      <View style={{ flexDirection: "column", textAlign: "center", width: "50%", height: 120 }}>
+                        <Image
+                          source={require("../assets/waffles.jpg")}
+                          style={styles.standardImage}
+                        />
+                        <Text style={styles.cardText}>{item.FoodItem}</Text>
 
-                      <Image
-                        source={require("../assets/waffles.jpg")}
-                        style={styles.standardImage}
-                      />
-                      <Image
-                        source={require("../assets/milkshake.jpg")}
-                        style={styles.standardImage}
-                      />
+                      </View>
+
+                      <View style={{ flexDirection: "column", textAlign: "center", width: "50%", height: 120 }}>
+                        <Image
+                          source={require("../assets/milkshake.jpg")}
+                          style={styles.standardImage}
+                        />
+
+                        <Text style={styles.cardText}>{item.DrinkItem}</Text>
+                      </View>
                     </View>
 
                     <View >
-                      <View style={styles.cardText}>
-                        <Text>{item.FoodItem}</Text>
-                        <Text>{item.DrinkItem}</Text>
-                      </View>
+
                       <View>
                         <Text style={{ textAlign: "center" }}>Pairing descr</Text>
                       </View>

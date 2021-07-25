@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
 
   },
 
-  cardText: { flexDirection: "row", justifyContent: "space-around" },
+  cardText: { flexDirection: "row", justifyContent: "space-around", textAlign: "center", alignContent: "center" },
 
   iconsBar: {
     shadowColor: '#000000',
@@ -227,8 +227,8 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   standardImage: {
-    width: "50%",
-    height: "100%",
+    height: 120,
+    width: "100%",
     resizeMode: "contain",
     borderWidth: 2,
     flex: 1,
