@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createSharedElementStackNavigator } from "react-navigation-shared-element";
+
+import { ActivityIndicator, View } from "react-native";
+import Amplify, { Auth } from "aws-amplify";
+import { createStackNavigator } from "@react-navigation/stack";
 
 import {
   BottomNavigation,
@@ -15,6 +19,13 @@ import SettingsScreen from "./SettingsScreen.js";
 import CameraScreen from "./CameraScreen.js";
 import PairingResultsScreen from "./PairingResultsScreen.js";
 import DrinkDetailsScreen from "./DrinkDetailsScreen.js";
+
+import config from "../aws-exports";
+import SignIn from "./SignIn";
+import SignUp from "./SignUp";
+import ConfirmSignUp from "./ConfirmSignUp";
+
+Amplify.configure(config);
 
 const { Navigator, Screen } = createBottomTabNavigator();
 const Stack = createSharedElementStackNavigator();
@@ -36,16 +47,23 @@ const BottomTabBar = ({ navigation, state }) => (
   </BottomNavigation>
 );
 
-const TabNavigator = () => (
-  <Navigator tabBar={(props) => <BottomTabBar {...props} />}>
-    <Screen name="Results" component={Results} />
-    {/* <Screen name="Home" component={HomeScreen} /> */}
-    <Screen name="Camera" component={CameraScreen} />
+// const TabNavigator = () => (
+const TabNavigator = (props) => {
+  return (
+    <Navigator tabBar={(props) => <BottomTabBar {...props} />}>
+      <Screen name="Results" component={Results} />
+      {/* <Screen name="Home" component={HomeScreen} /> */}
+      <Screen name="Camera" component={CameraScreen} />
 
-    <Screen name="Favourite" component={ViewFavouritesScreen} />
-    <Screen name="Settings" component={SettingsScreen} />
-  </Navigator>
-);
+      <Screen name="Favourite" component={ViewFavouritesScreen} />
+      <Screen
+        name="Settings"
+        component={SettingsScreen}
+        updateAuthState={props.updateAuthState}
+      ></Screen>
+    </Navigator>
+  );
+};
 
 const Results = () => (
   <Stack.Navigator headerMode="none" initialRouteName="Results">
@@ -77,10 +95,72 @@ const options = {
   },
 };
 
+const AuthenticationStack = createStackNavigator();
+const AppStack = createStackNavigator();
+
+const AuthenticationNavigator = (props) => {
+  return (
+    <AuthenticationStack.Navigator headerMode="none">
+      <AuthenticationStack.Screen name="SignIn">
+        {(screenProps) => (
+          <SignIn {...screenProps} updateAuthState={props.updateAuthState} />
+        )}
+      </AuthenticationStack.Screen>
+      <AuthenticationStack.Screen name="SignUp" component={SignUp} />
+      <AuthenticationStack.Screen
+        name="ConfirmSignUp"
+        component={ConfirmSignUp}
+      />
+    </AuthenticationStack.Navigator>
+  );
+};
+
+const Initializing = () => {
+  return (
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <ActivityIndicator size="large" color="tomato" />
+    </View>
+  );
+};
+
 export const AppNavigator = (props) => {
+  // function AppNavigator() {
+  const [isUserLoggedIn, setUserLoggedIn] = useState("initializing");
+
+  useEffect(() => {
+    checkAuthState();
+  }, []);
+
+  async function checkAuthState() {
+    try {
+      await Auth.currentAuthenticatedUser();
+      console.log(" User is signed in");
+      setUserLoggedIn("loggedIn");
+    } catch (err) {
+      console.log(" User is not signed in");
+      setUserLoggedIn("loggedOut");
+    }
+  }
+
+  function updateAuthState(isUserLoggedIn) {
+    setUserLoggedIn(isUserLoggedIn);
+  }
+
   return (
     <NavigationContainer>
-      <TabNavigator />
+      {isUserLoggedIn === "initializing" && <Initializing />}
+      {isUserLoggedIn === "loggedIn" && (
+        <TabNavigator updateAuthState={updateAuthState} />
+      )}
+      {isUserLoggedIn === "loggedOut" && (
+        <AuthenticationNavigator updateAuthState={updateAuthState} />
+      )}
     </NavigationContainer>
   );
 };
+
+// return (
+//   <NavigationContainer>
+//     <TabNavigator />
+//   </NavigationContainer>
+// );

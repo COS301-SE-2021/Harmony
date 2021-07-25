@@ -21,9 +21,9 @@ export default function SettingsScreen({ updateAuthState }) {
   async function signOut() {
     try {
       await Auth.signOut();
-      updateAuthState("loggedOut");
+      // updateAuthState("loggedOut");
     } catch (error) {
-      console.log("Error signing out: ", error);
+      console.log("Error signing out: ", updateAuthState);
     }
   }
 
