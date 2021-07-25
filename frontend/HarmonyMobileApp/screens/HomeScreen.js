@@ -349,16 +349,20 @@ const HomeScreen = (props) => {
 
                     <View >
 
-                      <View>
-                        <Text style={{ textAlign: "center" }}>Pairing descr</Text>
+                      <View style={{ paddingTop: "4%" }}>
+                        <Text style={{ textAlign: "center" }}>      "A koeksister is a traditional Afrikaner confectionery made of fried dough infused in syrup or honey. There is also a Cape Malay version of the dish, which is a fried ball of dough that is rolled in desiccated coconut. "
+                        </Text>
                       </View>
                     </View>
 
                     <TagBar />
                     <View style={styles.locationBar}>
-                      <SimpleLineIcons name="location-pin" size={25} color="white" />
+                      <SimpleLineIcons name="location-pin" style={{ paddingVertical: "3%", paddingRight: "2%" }} size={20} color="white" />
                       <Text style={styles.TextSmallWhite}>Prospect Street, Pretoria, Gauteng </Text>
-
+                      <View style={{ alignContent: "flex-end", alignSelf: "flex-end", flex: 1, paddingRight: "1%" }}>
+                        <Text style={styles.TextSmallWhiteAlignedRight}>35 </Text>
+                        <Text style={styles.TextSmallWhiteAlignedRight}>KM </Text>
+                      </View>
                     </View>
                     <View style={styles.iconsBar}>
                       <View style={{ flexDirection: "row" }}>

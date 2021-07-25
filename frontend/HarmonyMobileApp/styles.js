@@ -168,9 +168,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flex: 1,
     borderRadius: 15,
-    padding: 10,
+    padding: 5,
     elevation: 2,
-    backgroundColor: "#4F6D7A",
+    backgroundColor: "#77A3B7",//"#6A92A4",
     color: "white"
   },
   tagBar: {
@@ -213,8 +213,15 @@ const styles = StyleSheet.create({
   TextSmallWhite: {
     fontFamily: "sans-serif-light",
     fontSize: 14,
-    color: "white"
+    color: "white",
+    textAlignVertical: "center"
 
+  },
+  TextSmallWhiteAlignedRight: {  //for location bar
+    fontFamily: "sans-serif-light",
+    fontSize: 14,
+    color: "white",
+    textAlign: "right"
   },
   regularImage: {
     width: 150,
@@ -239,6 +246,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 160,
     flex: 1,
+
   },
   tagsSection: {
     //Different from section because theres no padding on the right or left
