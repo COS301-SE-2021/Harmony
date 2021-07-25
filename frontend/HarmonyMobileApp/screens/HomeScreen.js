@@ -364,7 +364,7 @@ const HomeScreen = (props) => {
                       <View style={{ flexDirection: "row" }}>
                         <View style={{ flexDirection: "row", justifyContent: "center", paddingRight: "10%" }}>
                           <Feather name="arrow-down-circle" size={25} color="black" />
-                          <Text style={{ paddingLeft: "2%", paddingVertical: "1%" }}>45</Text>
+                          <Text style={{ paddingLeft: "2%", paddingRight: "5%", paddingVertical: "1%" }}>45</Text>
                         </View>
                         <View style={{ flexDirection: "row", justifyContent: "center" }}>
                           <Feather name="arrow-up-circle" size={25} color="black" />
@@ -376,7 +376,6 @@ const HomeScreen = (props) => {
                       </Pressable>
                     </View>
 
-                    <Text></Text>
                   </View>
                 </View>
               )}

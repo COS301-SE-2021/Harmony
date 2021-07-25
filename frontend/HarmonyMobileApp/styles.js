@@ -161,8 +161,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     width: "100%",
     paddingTop: "5%",
-    flex: 1
-
+    flex: 1,
+    paddingBottom: "2%"
   },
   locationBar: {
     flexDirection: "row",
