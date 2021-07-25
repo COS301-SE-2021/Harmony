@@ -255,7 +255,9 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 160,
     flex: 1,
-
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
+    overflow: "hidden"
   },
   tagsSection: {
     //Different from section because theres no padding on the right or left
