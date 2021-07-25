@@ -13,7 +13,7 @@ import {
 } from "react-native";
 import styles from "../styles";
 import {
-  Feather, SimpleLineIcons, FontAwesome, Entypo
+  Feather, SimpleLineIcons, FontAwesome, Entypo, AntDesign
 } from '@expo/vector-icons';
 import * as eva from '@eva-design/eva';
 import { default as theme } from '../theme.json';
@@ -82,6 +82,10 @@ const HomeScreen = (props) => {
   const [mealType, setMealType] = useState("None");
   const [favouriteIconColor, setFavouriteIconColor] = useState("black");
   const [favouriteIconOutline, setFavouriteIconOutline] = useState("heart-outlined");
+  const [upIconColor, setUpIconColor] = useState("black");
+  const [upIconOutline, setUpIconOutline] = useState("upcircleo");
+  const [downIconColor, setDownIconColor] = useState("black");
+  const [downIconOutline, setDownIconOutline] = useState("downcircleo");
 
   useEffect(() => {
     fetch(viewPairingURL)
@@ -347,22 +351,14 @@ const HomeScreen = (props) => {
                       </View>
                     </View>
 
-                    <View >
-
-                      <View style={{ paddingTop: "4%" }}>
-                        <Text style={{ textAlign: "center" }}>      "A koeksister is a traditional Afrikaner confectionery made of fried dough infused in syrup or honey. There is also a Cape Malay version of the dish, which is a fried ball of dough that is rolled in desiccated coconut. "
-                        </Text>
-                      </View>
-                    </View>
-
+                    <Divider />
                     <TagBar />
                     <Divider />
                     <View style={styles.locationBar}>
                       <SimpleLineIcons name="location-pin" style={{ paddingVertical: "3%", paddingRight: "2%" }} size={25} color="black" />
-                      <Text style={styles.TextSmall}>Prospect Street, Pretoria, Gauteng </Text>
                       <View style={{ alignContent: "flex-end", alignSelf: "flex-end", flex: 1, paddingRight: "1%" }}>
-                        <Text style={styles.TextSmallWhiteAlignedRight}>35 </Text>
-                        <Text style={styles.TextSmallWhiteAlignedRight}>KM </Text>
+                        <Text style={styles.TextSmall}>Prospect Street, Pretoria, Gauteng </Text>
+                        <Text style={styles.TextSmall}>35 KM</Text>
                       </View>
                     </View>
                     <Divider />
@@ -373,17 +369,27 @@ const HomeScreen = (props) => {
 
                     <View style={styles.iconsBar}>
                       <View style={{ flexDirection: "row" }}>
-                        <View style={{ flexDirection: "row", justifyContent: "center", paddingRight: "10%" }}>
-                          <Feather name="arrow-down-circle" size={25} color="black" />
-                          <Text style={{ paddingLeft: "2%", paddingRight: "5%", paddingVertical: "1%" }}>45</Text>
-                        </View>
-                        <View style={{ flexDirection: "row", justifyContent: "center" }}>
-                          <Feather name="arrow-up-circle" size={25} color="black" />
-                          <Text style={{ paddingLeft: "2%", paddingVertical: "1%" }}>100</Text>
-                        </View>
+                        <Pressable style={{ flexDirection: "row", justifyContent: "center", paddingRight: "10%" }} onPress={() => {
+                          setUpIconColor("#80CB41"),
+                            setUpIconOutline("upcircle"),
+                            console.log("pressed up")
+                        }
+                        }>
+                          <AntDesign name={upIconOutline} size={24} color={upIconColor} />
+                          <Text style={{ paddingLeft: "2%", paddingRight: "5%", paddingVertical: "1%", fontFamily: "sans-serif-light", }}>100</Text>
+                        </Pressable>
+                        <Pressable style={{ flexDirection: "row", justifyContent: "center" }} onPress={() => {
+                          setDownIconColor("#FF2727"),
+                            setDownIconOutline("downcircle"),
+                            console.log("pressed down")
+                        }
+                        }>
+                          <AntDesign name={downIconOutline} size={24} color={downIconColor} />
+                          <Text style={{ paddingLeft: "2%", paddingVertical: "1%", fontFamily: "sans-serif-light" }}>45</Text>
+                        </Pressable>
                       </View>
                       <Pressable onPress={() => {
-                        setFavouriteIconColor("red"),
+                        setFavouriteIconColor("#FF2763"),
                           setFavouriteIconOutline("heart")
                       }
                       }>
