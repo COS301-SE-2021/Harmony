@@ -151,6 +151,7 @@ const styles = StyleSheet.create({
     alignContent: "center",
     fontWeight: "bold",
     fontFamily: "sans-serif-light",
+    paddingVertical: "5%"
   },
 
   iconsBar: {
