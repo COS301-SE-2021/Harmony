@@ -1,27 +1,12 @@
-// import React, { useEffect, useState } from "react";
-
-// import { SafeAreaView, StyleSheet, StatusBar } from "react-native";
-// import { Layout, Text } from "@ui-kitten/components";
-
-// const SettingsScreen = (props) => {
-//   return (
-//     <Layout style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-//       <Text category="h1">Settings</Text>
-//     </Layout>
-//   );
-// };
-
-// export default SettingsScreen;
-
 import React from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
 import { Auth } from "aws-amplify";
 
-export default function SettingsScreen({ updateAuthState }) {
+export default function SettingsScreen({ navigation, updateAuthState }) {
   async function signOut() {
     try {
       await Auth.signOut();
-      // updateAuthState("loggedOut");
+      updateAuthState("loggedOut");
     } catch (error) {
       console.log("Error signing out: ", updateAuthState);
     }

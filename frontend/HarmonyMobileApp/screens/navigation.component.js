@@ -56,11 +56,15 @@ const TabNavigator = (props) => {
       <Screen name="Camera" component={CameraScreen} />
 
       <Screen name="Favourite" component={ViewFavouritesScreen} />
-      <Screen
-        name="Settings"
-        component={SettingsScreen}
-        updateAuthState={props.updateAuthState}
-      ></Screen>
+
+      <Screen name="Settings">
+        {(screenProps) => (
+          <SettingsScreen
+            {...screenProps}
+            updateAuthState={props.updateAuthState}
+          />
+        )}
+      </Screen>
     </Navigator>
   );
 };
