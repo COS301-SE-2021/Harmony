@@ -74,7 +74,7 @@ const response = {
 
 const HomeScreen = (props) => {
   const viewPairingURL =
-    "https://qkvdftfq7b.execute-api.eu-west-1.amazonaws.com/dev/viewpairings";
+    "https://qkvdftfq7b.execute-api.eu-west-1.amazonaws.com/dev";
   //The loading of the flatlist
   const [isLoading, setLoading] = useState(useIsFocused());
 
@@ -294,15 +294,6 @@ const HomeScreen = (props) => {
 
                     <View style={styles.iconsBar}>
                       <View style={{ flexDirection: "row" }}>
-                        <Pressable style={{ flexDirection: "row", justifyContent: "center", paddingRight: "10%" }} onPress={() => {
-                          setUpIconColor("#80CB41"),
-                            setUpIconOutline("upcircle"),
-                            console.log("pressed up ")
-                        }
-                        }>
-                          <AntDesign name={upIconOutline} size={24} color={upIconColor} />
-                          <Text style={{ paddingLeft: "2%", paddingRight: "5%", paddingVertical: "1%", fontFamily: "sans-serif-light", }}>100</Text>
-                        </Pressable>
                         <Pressable style={{ flexDirection: "row", justifyContent: "center" }} onPress={() => {
                           setDownIconColor("#FF2727"),
                             setDownIconOutline("downcircle"),
@@ -310,8 +301,18 @@ const HomeScreen = (props) => {
                         }
                         }>
                           <AntDesign name={downIconOutline} size={24} color={downIconColor} />
-                          <Text style={{ paddingLeft: "2%", paddingVertical: "1%", fontFamily: "sans-serif-light" }}>45</Text>
+                          <Text style={{ paddingLeft: "2%", paddingRight: "5%", paddingVertical: "1%", fontFamily: "sans-serif-light" }}>{item.Downvotes}</Text>
                         </Pressable>
+                        <Pressable style={{ flexDirection: "row", justifyContent: "center", paddingRight: "10%" }} onPress={() => {
+                          setUpIconColor("#80CB41"),
+                            setUpIconOutline("upcircle"),
+                            console.log("pressed up ")
+                        }
+                        }>
+                          <AntDesign name={upIconOutline} size={24} color={upIconColor} />
+                          <Text style={{ paddingLeft: "2%", paddingVertical: "1%", fontFamily: "sans-serif-light", }}>{item.Upvotes}</Text>
+                        </Pressable>
+
                       </View>
                       <Pressable onPress={() => {
                         setFavouriteIconColor("#FF2763"),
