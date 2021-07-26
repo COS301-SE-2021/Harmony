@@ -10,7 +10,8 @@ import {
   Modal,
   Pressable,
   Picker,
-  RefreshControl
+  RefreshControl,
+  StatusBar
 } from "react-native";
 import styles from "../styles";
 import {
@@ -168,6 +169,7 @@ const HomeScreen = (props) => {
 
   return (
     <ApplicationProvider  {...eva} theme={{ ...eva.light, ...theme }} style={styles.container}>
+      <StatusBar height="0%" barStyle="light-content" />
       <Header
         statusBarProps={{ elevated: 'true', backgroundColor: "white" }}
         //   leftComponent={searchButton}
@@ -278,7 +280,38 @@ const HomeScreen = (props) => {
                     </View>
 
                     <Divider />
-                    <TagBar />
+                    <View style={styles.tagsSection}>
+                      <ScrollView
+                        contentContainerStyle={{
+                          flexDirection: "row",
+                          flexWrap: "wrap",
+                        }}
+                        showsHorizontalScrollIndicator={false}
+                        horizontal={true}
+
+                      >
+                        <View style={styles.rowContainer}>
+                          {item.FoodTags.map((tag, index) => (
+                            <View style={styles.tagContainer} key={index}>
+                              <FontAwesome name="tag" size={14} color="#fff" />
+                              {/* Keeping outlined icons just incase we want to change to them for consistency overall */}
+                              {/* The filled icons look better in this case though */}
+                              {/* <Feather name="tag" size={16} color="#fff" /> */}
+                              <Text style={styles.tagText}>{tag}</Text>
+                            </View>
+                          ))}
+                          {item.DrinkTags.map((tag, index) => (
+                            <View style={styles.tagContainer} key={index}>
+                              <FontAwesome name="tag" size={14} color="#fff" />
+                              {/* Keeping outlined icons just incase we want to change to them for consistency overall */}
+                              {/* The filled icons look better in this case though */}
+                              {/* <Feather name="tag" size={16} color="#fff" /> */}
+                              <Text style={styles.tagText}>{tag}</Text>
+                            </View>
+                          ))}
+                        </View>
+                      </ScrollView>
+                    </View>
                     <Divider />
                     <View style={styles.locationBar}>
                       <SimpleLineIcons name="location-pin" style={{ paddingVertical: "3%", paddingRight: "2%" }} size={25} color="black" />
