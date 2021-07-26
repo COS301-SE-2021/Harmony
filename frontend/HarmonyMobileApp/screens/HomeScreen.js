@@ -75,20 +75,28 @@ const response = {
 const HomeScreen = (props) => {
   const viewPairingURL =
     "https://qkvdftfq7b.execute-api.eu-west-1.amazonaws.com/dev/viewpairings";
+  //The loading of the flatlist
   const [isLoading, setLoading] = useState(useIsFocused());
+
+  //the api data
   const [data, setData] = useState([]);
-  const [isModalVisible, setModalVisible] = useState(false);
-  const [flavourProfile, setFlavourProfile] = useState("None");
-  const [sortPairings, setSortPairings] = useState("Trending");
-  const [mealType, setMealType] = useState("None");
-  const [favouriteIconColor, setFavouriteIconColor] = useState("black");
-  const [favouriteIconOutline, setFavouriteIconOutline] = useState("heart-outlined");
+
+  //controls all the filters
+  const [isModalVisible, setModalVisible] = useState(false);                               //for the filter popup
+  const [flavourProfile, setFlavourProfile] = useState("None");                            // the flavour profile filter
+  const [sortPairings, setSortPairings] = useState("Trending");                            // the type of pairings shown filter
+  const [mealType, setMealType] = useState("None");                                        // the mealtype filter
+
+  //controls all the icons
+  const [favouriteIconColor, setFavouriteIconColor] = useState("black");                   // controls the favourite heart color (pink/black)
+  const [favouriteIconOutline, setFavouriteIconOutline] = useState("heart-outlined");      // controls whether the heart is filled in or outlined
   const [upIconColor, setUpIconColor] = useState("black");
   const [upIconOutline, setUpIconOutline] = useState("upcircleo");
   const [downIconColor, setDownIconColor] = useState("black");
   const [downIconOutline, setDownIconOutline] = useState("downcircleo");
   const [refreshing, setRefreshing] = React.useState(false);
 
+  //the refreshing of the flatlist
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
     wait(2000).then(() => setRefreshing(false));
@@ -96,6 +104,8 @@ const HomeScreen = (props) => {
   const wait = (timeout) => {
     return new Promise(resolve => setTimeout(resolve, timeout));
   }
+
+  //the api call for trending
   useEffect(() => {
     fetch(viewPairingURL)
       .then((response) => response.json())
@@ -103,33 +113,6 @@ const HomeScreen = (props) => {
       .catch((error) => alert(error))
       .then(setLoading(false));
   });
-  const showConfirmDialog = () => {
-    return Alert.alert(
-      "Add to Favourites",
-      "Are you sure you want to Favourite this pairing?",
-      [
-
-        // The "No" button
-        // Does nothing but dismiss the dialog when tapped
-        {
-          text: "No",
-          onPress: () => {
-            setFavouriteIconColor("black"),
-              setFavouriteIconOutline("heart-outlined")
-          },
-        },
-        // The "Yes" button
-        {
-          text: "Yes",
-          onPress: () => {
-            setFavouriteIconColor("red"),
-              setFavouriteIconOutline("heart")
-          },
-        },
-      ]
-    );
-  };
-
 
   const TagBar = () => (
     <View style={styles.tagsSection}>
@@ -157,71 +140,6 @@ const HomeScreen = (props) => {
     </View>
   );
 
-  const ModalView = () => (
-    <View style={styles.centeredView}>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={isModalVisible}
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-          setModalVisible(!isModalVisible);
-        }}
-      >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView} >
-            <Text>Flavour Profile</Text>
-            <Picker
-              flavourProfile={flavourProfile}
-              style={{ height: 50, width: 150 }}
-              onValueChange={(itemValue, itemIndex) => { setFlavourProfile(itemValue); console.log(itemValue) }}
-            >
-              <Picker.Item label="None" value="None" />
-              <Picker.Item label="Sweet" value="Sweet" />
-              <Picker.Item label="Salty" value="Salty" />
-              <Picker.Item label="Spicy" value="Spicy" />
-              <Picker.Item label="Sour" value="Sour" />
-            </Picker>
-            <Divider />
-            <Text>Meal Type</Text>
-            <Picker
-              mealType={mealType}
-              style={{ height: 50, width: 150 }}
-              onValueChange={(itemValue, itemIndex) => { setMealType(itemValue); console.log(itemValue) }}
-            >
-              <Picker.Item label="None" value="None" />
-              <Picker.Item label="Breakfast" value="Breakfast" />
-              <Picker.Item label="Brunch" value="Brunch" />
-              <Picker.Item label="Supper" value="Supper" />
-              <Picker.Item label="Dessert" value="Dessert" />
-            </Picker>
-            <Divider />
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!isModalVisible)}
-            >
-              <Text style={styles.textStyle}>close</Text>
-            </Pressable>
-          </View>
-        </View>
-      </Modal>
-      <Pressable
-        style={[styles.button, styles.buttonOpen]}
-        onPress={() => setModalVisible(true)}
-      >
-        <Text >
-          <Feather name="filter" size={20} color="white" />
-        </Text>
-      </Pressable>
-    </View>
-  );
-
-  const SearchBar = () => (<SearchBar
-    placeholder="Search here..."
-    onChangeText={this.updateSearch}
-    value={search}
-  />);
-
   const ShowTitle = () => (
     <Text style={styles.TextLarge}> {sortPairings} </Text>
   )
@@ -247,17 +165,16 @@ const HomeScreen = (props) => {
       </Pressable>
     </View>
   )
-  const searchButton = () => (
-    <Pressable
-      style={[styles.button, styles.buttonOpen]}
-      onPress={() => setModalVisible(true)}
-    >
-      <Text >
-        <Feather name="search" size={24} color="white" />
-      </Text>
-    </Pressable>
-  )
 
+  const LocationBar = () => (
+    <View style={styles.locationBar}>
+      <SimpleLineIcons name="location-pin" style={{ paddingVertical: "3%", paddingRight: "2%" }} size={25} color="black" />
+      <View style={{ alignContent: "flex-end", alignSelf: "flex-end", flex: 1, paddingRight: "1%" }}>
+        <Text style={styles.TextSmall}>Prospect Street, Pretoria, Gauteng </Text>
+        <Text style={styles.TextSmall}>35 KM</Text>
+      </View>
+    </View>
+  )
   return (
     <ApplicationProvider  {...eva} theme={{ ...eva.light, ...theme }} style={styles.container}>
       <Header
@@ -372,25 +289,15 @@ const HomeScreen = (props) => {
                     <Divider />
                     <TagBar />
                     <Divider />
-                    <View style={styles.locationBar}>
-                      <SimpleLineIcons name="location-pin" style={{ paddingVertical: "3%", paddingRight: "2%" }} size={25} color="black" />
-                      <View style={{ alignContent: "flex-end", alignSelf: "flex-end", flex: 1, paddingRight: "1%" }}>
-                        <Text style={styles.TextSmall}>Prospect Street, Pretoria, Gauteng </Text>
-                        <Text style={styles.TextSmall}>35 KM</Text>
-                      </View>
-                    </View>
+                    <LocationBar />
                     <Divider />
-
-
-
-
 
                     <View style={styles.iconsBar}>
                       <View style={{ flexDirection: "row" }}>
                         <Pressable style={{ flexDirection: "row", justifyContent: "center", paddingRight: "10%" }} onPress={() => {
                           setUpIconColor("#80CB41"),
                             setUpIconOutline("upcircle"),
-                            console.log("pressed up")
+                            console.log("pressed up ")
                         }
                         }>
                           <AntDesign name={upIconOutline} size={24} color={upIconColor} />
@@ -399,7 +306,7 @@ const HomeScreen = (props) => {
                         <Pressable style={{ flexDirection: "row", justifyContent: "center" }} onPress={() => {
                           setDownIconColor("#FF2727"),
                             setDownIconOutline("downcircle"),
-                            console.log("pressed down")
+                            console.log("pressed down ")
                         }
                         }>
                           <AntDesign name={downIconOutline} size={24} color={downIconColor} />
@@ -408,7 +315,8 @@ const HomeScreen = (props) => {
                       </View>
                       <Pressable onPress={() => {
                         setFavouriteIconColor("#FF2763"),
-                          setFavouriteIconOutline("heart")
+                          setFavouriteIconOutline("heart"),
+                          console.log("pressed heart ")
                       }
                       }>
                         <Entypo name={favouriteIconOutline} size={25} color={favouriteIconColor} />

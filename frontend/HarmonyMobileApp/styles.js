@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
+    //application provider container on home screen
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
@@ -10,6 +11,7 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   cardContainer: {
+    //the cards container from home screen
     height: "auto",
     flex: 1,
     borderRadius: 15,
@@ -25,11 +27,9 @@ const styles = StyleSheet.create({
      shadowRadius: 4,
      elevation: 5*/
   },
-  standardContainer: {
-    flex: 1,
-  },
-  scrollView: {
 
+  scrollView: {
+    //Styling for the scroll view, removed so the scroll bar can be all the way to the end
   },
 
   LoginContainer: {
@@ -71,24 +71,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#20b2aa",
   },
 
-  backgroundBarShowLatest: {
-    borderRadius: 25,
-    alignItems: "center",
-    justifyContent: "center",
-    width: "95%",
-    height: "auto",
-    marginTop: 40,
-    backgroundColor: "#fff",
-    padding: "5%",
-
-  },
-  modalContainer: {
-    flex: 1,
-    backgroundColor: "pink",
-    marginTop: 'auto',
-  },
-
   modalView: {
+    //styling for the filter pop up
     margin: 20,
     backgroundColor: "white",
     borderRadius: 20,
@@ -104,47 +88,35 @@ const styles = StyleSheet.create({
     elevation: 5
   },
   button: {
+    //styling for modal buttons
     borderRadius: 15,
     padding: 10,
     elevation: 2
   },
   buttonOpen: {
+    //not active modal button
     backgroundColor: "#C5C3C6",
   },
   buttonClose: {
+    //active modal button
     backgroundColor: "#4F6D7A",
   },
   textStyle: {
+    //close button on modal
     color: "white",
     fontWeight: "bold",
     textAlign: "center"
   },
-  modalText: {
-    marginBottom: 15,
-    textAlign: "center"
-  },
   centeredView: {
+    //centering the modal
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     marginTop: 22
   },
 
-  Header: {
-    alignItems: "center",
-    justifyContent: "center",
-    width: "100%",
-    height: "auto",
-    marginTop: 40,
-    backgroundColor: "#fff",
-    padding: "5%",
-    paddingBottom: "10%",
-    flex: 1,
-    flexDirection: "row",
-
-  },
-
   cardText: {
+    //text for the food and drink name
     flexDirection: "row",
     justifyContent: "space-around",
     textAlign: "center",
@@ -155,6 +127,7 @@ const styles = StyleSheet.create({
   },
 
   iconsBar: {
+    //card icons bar
     shadowColor: '#000000',
     shadowOffset: {
       width: 2,
@@ -172,16 +145,18 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingBottom: "2%"
   },
+
   locationBar: {
+    //card location bar
     flexDirection: "row",
     flex: 1,
-    //  borderRadius: 15,
     padding: 5,
-    // elevation: 2,
     backgroundColor: "white",//"#6A92A4",
     color: "black"
   },
+
   tagBar: {
+    //card tag bar
     flexDirection: "row",
     paddingBottom: "5%",
     flex: 1,
@@ -195,56 +170,44 @@ const styles = StyleSheet.create({
     color: "white"
   },
   Text: {
+    //To my knowledge (Tia) not used
     fontFamily: "sans-serif-light",
   },
 
   TextLarge: {
+    //used for the title
     fontFamily: "sans-serif-light",
     fontSize: 40,
     fontWeight: "bold",
     textAlignVertical: "center",
   },
-  TitleText: {
-    fontFamily: "sans-serif-light",
-    fontSize: 40,
-    textAlignVertical: "center",
-    backgroundColor: "white",
-    width: "100%",
-  },
   TextMedium: {
+    //To my knowledge (Tia) not used
     fontFamily: "sans-serif-light",
     fontSize: 23,
   },
   TextSmall: {
+    //used for text in location bar
     fontFamily: "sans-serif-light",
     fontSize: 14,
     textAlignVertical: "center"
 
-  },
-  TextSmallWhite: {
-    fontFamily: "sans-serif-light",
-    fontSize: 14,
-    color: "white",
-    textAlignVertical: "center"
-
-  },
-  TextSmallWhiteAlignedRight: {  //for location bar
-    fontFamily: "sans-serif-light",
-    fontSize: 14,
-    textAlign: "right"
   },
   regularImage: {
+    //To my knowledge (Tia) not used
     width: 150,
     height: 100,
     resizeMode: "contain",
   },
   smallImage: {
+    //To my knowledge (Tia) not used
     width: 20,
     height: 20,
     resizeMode: "contain",
   },
   standardImage: {
-    height: 160,  //for the homescreen images
+    // For the food+drink images on the cards
+    height: 160,
     width: "100%",
     resizeMode: "contain",
     borderWidth: 2,
@@ -252,6 +215,7 @@ const styles = StyleSheet.create({
 
   },
   imageContainer: {
+    // hold the food+drink images+text
     flexDirection: "row",
     width: "100%",
     height: 180,
@@ -260,6 +224,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 15,
     overflow: "hidden"
   },
+
   tagsSection: {
     //Different from section because theres no padding on the right or left
     //We do this so theres no visible cutoff as you scroll left or right
