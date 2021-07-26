@@ -9,7 +9,8 @@ import {
   Alert,
   Modal,
   Pressable,
-  Picker
+  Picker,
+  RefreshControl
 } from "react-native";
 import styles from "../styles";
 import {
@@ -86,7 +87,15 @@ const HomeScreen = (props) => {
   const [upIconOutline, setUpIconOutline] = useState("upcircleo");
   const [downIconColor, setDownIconColor] = useState("black");
   const [downIconOutline, setDownIconOutline] = useState("downcircleo");
+  const [refreshing, setRefreshing] = React.useState(false);
 
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
+  const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+  }
   useEffect(() => {
     fetch(viewPairingURL)
       .then((response) => response.json())
@@ -131,6 +140,7 @@ const HomeScreen = (props) => {
         }}
         showsHorizontalScrollIndicator={false}
         horizontal={true}
+
       >
         <View style={styles.rowContainer}>
           {response.data.tags.map((tag, index) => (
@@ -260,7 +270,14 @@ const HomeScreen = (props) => {
           backgroundColor: 'white',
         }}
         rightComponent={filterButton} />
-      <ScrollView style={styles.scrollView}>
+      <ScrollView style={styles.scrollView}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+          />
+        }
+      >
         <View style={{ height: "100%" }}>
           <View style={styles.centeredView}>
             <Modal
