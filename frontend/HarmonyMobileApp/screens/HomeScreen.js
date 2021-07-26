@@ -166,15 +166,6 @@ const HomeScreen = (props) => {
     </View>
   )
 
-  const LocationBar = () => (
-    <View style={styles.locationBar}>
-      <SimpleLineIcons name="location-pin" style={{ paddingVertical: "3%", paddingRight: "2%" }} size={25} color="black" />
-      <View style={{ alignContent: "flex-end", alignSelf: "flex-end", flex: 1, paddingRight: "1%" }}>
-        <Text style={styles.TextSmall}>Prospect Street, Pretoria, Gauteng </Text>
-        <Text style={styles.TextSmall}>35 KM</Text>
-      </View>
-    </View>
-  )
   return (
     <ApplicationProvider  {...eva} theme={{ ...eva.light, ...theme }} style={styles.container}>
       <Header
@@ -269,7 +260,7 @@ const HomeScreen = (props) => {
                     <View style={styles.imageContainer}>
                       <View style={{ flexDirection: "column", textAlign: "center", width: "50%", height: 180 }}>
                         <Image
-                          source={require("../assets/waffles.jpg")}
+                          source={{ uri: item.FoodImage }}
                           style={styles.standardImage}
                         />
                         <Text style={styles.cardText}>{item.FoodItem}</Text>
@@ -278,7 +269,7 @@ const HomeScreen = (props) => {
 
                       <View style={{ flexDirection: "column", textAlign: "center", width: "50%", height: 180 }}>
                         <Image
-                          source={require("../assets/milkshake.jpg")}
+                          source={{ uri: item.DrinkImage }}
                           style={styles.standardImage}
                         />
 
@@ -289,7 +280,13 @@ const HomeScreen = (props) => {
                     <Divider />
                     <TagBar />
                     <Divider />
-                    <LocationBar />
+                    <View style={styles.locationBar}>
+                      <SimpleLineIcons name="location-pin" style={{ paddingVertical: "3%", paddingRight: "2%" }} size={25} color="black" />
+                      <View style={{ alignContent: "flex-end", alignSelf: "flex-end", flex: 1, paddingRight: "1%" }}>
+                        <Text style={styles.TextSmall}>{item.Location} </Text>
+                        <Text style={styles.TextSmall}>35 KM</Text>
+                      </View>
+                    </View>
                     <Divider />
 
                     <View style={styles.iconsBar}>
