@@ -254,7 +254,7 @@ const styles = StyleSheet.create({
   imageContainer: {
     flexDirection: "row",
     width: "100%",
-    height: 160,
+    height: 180,
     flex: 1,
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,

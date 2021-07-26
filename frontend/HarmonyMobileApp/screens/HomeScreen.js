@@ -350,7 +350,7 @@ const HomeScreen = (props) => {
                 <View style={{ paddingBottom: 15 }}>
                   <View style={styles.cardContainer}>
                     <View style={styles.imageContainer}>
-                      <View style={{ flexDirection: "column", textAlign: "center", width: "50%", height: 160 }}>
+                      <View style={{ flexDirection: "column", textAlign: "center", width: "50%", height: 180 }}>
                         <Image
                           source={require("../assets/waffles.jpg")}
                           style={styles.standardImage}
@@ -359,7 +359,7 @@ const HomeScreen = (props) => {
 
                       </View>
 
-                      <View style={{ flexDirection: "column", textAlign: "center", width: "50%", height: 160 }}>
+                      <View style={{ flexDirection: "column", textAlign: "center", width: "50%", height: 180 }}>
                         <Image
                           source={require("../assets/milkshake.jpg")}
                           style={styles.standardImage}
