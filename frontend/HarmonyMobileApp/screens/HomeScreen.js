@@ -12,7 +12,6 @@ import {
   Picker,
   RefreshControl,
   StatusBar,
-  Slider
 } from "react-native";
 import styles from "../styles";
 import {
@@ -22,7 +21,7 @@ import * as eva from '@eva-design/eva';
 import { default as theme } from '../theme.json';
 import { ApplicationProvider, Layout, Divider, Card, Text } from '@ui-kitten/components';
 import { useIsFocused } from "@react-navigation/native";
-import { Header } from 'react-native-elements'
+import { Header, Slider } from 'react-native-elements'
 const MIN_HEIGHT = Platform.OS === "ios" ? 90 : 55;
 const MAX_HEIGHT = 300;
 
@@ -41,6 +40,7 @@ const HomeScreen = (props) => {
   const [flavourProfile, setFlavourProfile] = useState("None");                            // the flavour profile filter
   const [sortPairings, setSortPairings] = useState("Trending");                            // the type of pairings shown filter
   const [mealType, setMealType] = useState("None");                                        // the mealtype filter
+  const [locationValue, setLocationValue] = useState(100);                              //distance filer
 
   //controls all the icons
   const [favouriteIconChecked, setFavouriteIconChecked] = useState("unchecked");
@@ -242,10 +242,14 @@ const HomeScreen = (props) => {
                     <Picker.Item label="Dessert" value="Dessert" />
                   </Picker>
                   <Divider />
-                  <Text>Location</Text>
+                  <Text>Distance</Text>
                   <View style={{ flexDirection: "row" }}>
                     <Text>0</Text>
-                    <Slider maximumValue={300} style={{ width: "80%" }}></Slider>
+                    <Slider
+                      value={locationValue}
+                      maximumValue={300}
+                      onValueChange={(value) => (console.log(value), setLocationValue(value))}
+                      style={{ width: "80%" }} />
                     <Text>300</Text>
                   </View>
                   <Pressable
