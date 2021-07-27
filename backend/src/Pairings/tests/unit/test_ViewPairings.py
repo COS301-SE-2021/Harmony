@@ -1,10 +1,21 @@
-import unittest
+import json
+
+import pytest
+
+from backend.src.Pairings.ViewPairings import ViewPairings
 
 
-class MyTestCase(unittest.TestCase):
-    def test_something(self):
-        self.assertEqual(True, False)
+@pytest.fixture()
+def fixture_event():
+    return {
+        "UID": "u1"
+    }
 
 
-if __name__ == '__main__':
-    unittest.main()
+"""This function expects the status code 200, and the data to be in the response if executed"""
+
+
+def test_add_to_favourites(fixture_event):
+    ret = ViewPairings.View_Pairings(fixture_event, "")
+    assert ret["StatusCode"] == 200
+    assert "Data" in ret
