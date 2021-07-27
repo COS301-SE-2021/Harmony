@@ -9,13 +9,13 @@ export default function AppTextInput({
   ...otherProps
 }) {
   return (
-    <View style={[styles.container, validStyle(touched, error)]}>
+    <View style={[styles.container, borderStyle(touched, error)]}>
       {leftIcon && (
         <MaterialCommunityIcons
           name={leftIcon}
           size={22}
           color="#6e6869"
-          style={styles.icon}
+          style={styles.leftIcon}
         />
       )}
       <TextInput
@@ -29,18 +29,34 @@ export default function AppTextInput({
   );
 }
 
-const validStyle = (touched, error) => {
+const borderStyle = (touched, error) => {
   if (!touched) {
     return {
-      borderColor: "white",
+      borderColor: "#ffffff00",
     };
   } else if (error) {
     return {
-      borderColor: "red",
+      borderColor: "#FF9494",
     };
   } else
     return {
-      borderColor: "green",
+      borderColor: "#42ba96",
+    };
+};
+
+// not used for now
+const textStyle = (touched, error) => {
+  if (!touched) {
+    return {
+      placeholderTextColor: "#6e6869",
+    };
+  } else if (error) {
+    return {
+      placeholderTextColor: "#FF9494",
+    };
+  } else
+    return {
+      placeholderTextColor: "#42ba96",
     };
 };
 
@@ -50,13 +66,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     padding: 15,
     marginVertical: 10,
-    borderWidth: 1,
+    borderWidth: 0.5,
     backgroundColor: "#f9f9f9",
   },
   succes: {
     borderColor: "red",
   },
-  icon: {
+  leftIcon: {
     marginRight: 10,
   },
   input: {
