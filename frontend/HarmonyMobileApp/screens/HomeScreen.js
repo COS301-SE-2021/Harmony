@@ -71,32 +71,60 @@ const HomeScreen = (props) => {
       .then(setLoading(false));
   });
   handleDownIconPress = () => {
-    if (downIconChecked == "unchecked") {
-      setDownIconColor("#FF2727"),
-        setDownIconOutline("downcircle"),
-        console.log("pressed down checked"),
-        setDownIconChecked("checked")
+    if (upIconChecked == "unchecked") {
+      if (downIconChecked == "unchecked") {
+        setDownIconColor("#FF2727"),
+          setDownIconOutline("downcircle"),
+          console.log("pressed down checked"),
+          setDownIconChecked("checked")
+      }
+      else {
+        setDownIconColor("black"),
+          setDownIconOutline("downcircleo"),
+          console.log("pressed down unchecked"),
+          setDownIconChecked("unchecked")
+      }
     }
     else {
-      setDownIconColor("black"),
-        setDownIconOutline("downcircleo"),
-        console.log("pressed down unchecked"),
-        setDownIconChecked("unchecked")
+
+      setUpIconColor("black"),
+        setUpIconOutline("upcircleo"),
+        console.log("pressed up unchecked from else"),
+        setUpIconChecked("unchecked"),
+        setDownIconColor("#FF2727"),
+        setDownIconOutline("downcircle"),
+        console.log("pressed down checked from else"),
+        setDownIconChecked("checked")
+
     }
   }
 
   handleUpIconPress = () => {
-    if (upIconChecked == "unchecked") {
-      setUpIconColor("#80CB41"),
-        setUpIconOutline("upcircle"),
-        console.log("pressed up checked"),
-        setUpIconChecked("checked")
+    if (downIconChecked == "unchecked") {
+      if (upIconChecked == "unchecked") {
+        setUpIconColor("#80CB41"),
+          setUpIconOutline("upcircle"),
+          console.log("pressed up checked"),
+          setUpIconChecked("checked")
+      }
+      else {
+        setUpIconColor("black"),
+          setUpIconOutline("upcircleo"),
+          console.log("pressed up unchecked"),
+          setUpIconChecked("unchecked")
+      }
     }
     else {
-      setUpIconColor("black"),
-        setUpIconOutline("upcircleo"),
-        console.log("pressed up unchecked"),
-        setUpIconChecked("unchecked")
+
+      setDownIconColor("black"),
+        setDownIconOutline("downcircleo"),
+        console.log("pressed down unchecked from else"),
+        setDownIconChecked("unchecked"),
+        setUpIconColor("#80CB41"),
+        setUpIconOutline("upcircle"),
+        console.log("pressed up checked from else"),
+        setUpIconChecked("checked")
+
     }
   }
 
