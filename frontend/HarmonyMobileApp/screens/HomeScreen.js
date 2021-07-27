@@ -40,7 +40,7 @@ const HomeScreen = (props) => {
   const [flavourProfile, setFlavourProfile] = useState("None");                            // the flavour profile filter
   const [sortPairings, setSortPairings] = useState("Trending");                            // the type of pairings shown filter
   const [mealType, setMealType] = useState("None");                                        // the mealtype filter
-  const [locationValue, setLocationValue] = useState(100);                              //distance filer
+  const [locationValue, setLocationValue] = useState(30);                              //distance filer
 
   //controls all the icons
   const [favouriteIconChecked, setFavouriteIconChecked] = useState("unchecked");
@@ -203,7 +203,11 @@ const HomeScreen = (props) => {
             >
               <View style={styles.centeredView}>
                 <View style={styles.modalView} >
-                  <Text>Sort Pairings</Text>
+
+                  <View style={{ flexDirection: "row" }}>
+                    <Text>Sort Pairings</Text>
+                    <Text> {sortPairings} </Text>
+                  </View>
                   <Picker
                     sortPairings={sortPairings}
                     style={{ height: 50, width: 150 }}
@@ -216,7 +220,10 @@ const HomeScreen = (props) => {
                   </Picker>
                   <Divider />
 
-                  <Text>Flavour Profile</Text>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text>Flavour Profile</Text>
+                    <Text> {flavourProfile} </Text>
+                  </View>
                   <Picker
                     flavourProfile={flavourProfile}
                     style={{ height: 50, width: 150 }}
@@ -229,7 +236,12 @@ const HomeScreen = (props) => {
                     <Picker.Item label="Sour" value="Sour" />
                   </Picker>
                   <Divider />
-                  <Text>Meal Type</Text>
+
+
+                  <View style={{ flexDirection: "row" }}>
+                    <Text>Meal Type</Text>
+                    <Text> {mealType} </Text>
+                  </View>
                   <Picker
                     mealType={mealType}
                     style={{ height: 50, width: 150 }}
@@ -242,15 +254,20 @@ const HomeScreen = (props) => {
                     <Picker.Item label="Dessert" value="Dessert" />
                   </Picker>
                   <Divider />
-                  <Text>Distance</Text>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text>Distance</Text>
+                    <Text>{locationValue}</Text>
+                  </View>
                   <View style={{ flexDirection: "row" }}>
                     <Text>0</Text>
                     <Slider
                       value={locationValue}
-                      maximumValue={300}
+                      step={20}
+                      maximumValue={100}
                       onValueChange={(value) => (console.log(value), setLocationValue(value))}
-                      style={{ width: "80%" }} />
-                    <Text>300</Text>
+                      style={{ width: "80%", }}
+                      thumbStyle={{ width: 20, height: 20, backgroundColor: "grey" }} />
+                    <Text>100km</Text>
                   </View>
                   <Pressable
                     style={[styles.button, styles.buttonClose]}
