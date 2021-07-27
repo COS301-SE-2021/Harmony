@@ -202,15 +202,15 @@ const HomeScreen = (props) => {
               }}
             >
               <View style={styles.centeredView}>
-                <View style={styles.modalView} >
+                <View style={[styles.modalView, styles.TextSmall]} >
 
-                  <View style={{ flexDirection: "row" }}>
-                    <Text>Sort Pairings</Text>
-                    <Text> {sortPairings} </Text>
+                  <View style={styles.filterLabel}>
+                    <Text style={[styles.spaceLeft, styles.TextSmall]}>Sort Pairings</Text>
+                    <Text style={[styles.spaceRight, styles.TextSmaller]}> {sortPairings} </Text>
                   </View>
                   <Picker
                     sortPairings={sortPairings}
-                    style={{ height: 50, width: 150 }}
+                    style={[styles.TextSmall, { height: 50, width: 150 }]}
                     onValueChange={(itemValue, itemIndex) => { setSortPairings(itemValue); console.log(itemValue) }}
                   >
                     <Picker.Item label="Trending" value="Trending" />
@@ -218,15 +218,14 @@ const HomeScreen = (props) => {
                     <Picker.Item label="Newest" value="Newest" />
                     <Picker.Item label="Controversial" value="Controversial" />
                   </Picker>
-                  <Divider />
 
-                  <View style={{ flexDirection: "row" }}>
-                    <Text>Flavour Profile</Text>
-                    <Text> {flavourProfile} </Text>
+                  <View style={styles.filterLabel}>
+                    <Text style={[styles.spaceLeft, styles.TextSmall]}>Flavour Profile</Text>
+                    <Text style={[styles.spaceRight, styles.TextSmaller]}> {flavourProfile} </Text>
                   </View>
                   <Picker
                     flavourProfile={flavourProfile}
-                    style={{ height: 50, width: 150 }}
+                    style={{ height: 50, width: 150, }}
                     onValueChange={(itemValue, itemIndex) => { setFlavourProfile(itemValue); console.log(itemValue) }}
                   >
                     <Picker.Item label="None" value="None" />
@@ -235,12 +234,11 @@ const HomeScreen = (props) => {
                     <Picker.Item label="Spicy" value="Spicy" />
                     <Picker.Item label="Sour" value="Sour" />
                   </Picker>
-                  <Divider />
 
 
-                  <View style={{ flexDirection: "row" }}>
-                    <Text>Meal Type</Text>
-                    <Text> {mealType} </Text>
+                  <View style={styles.filterLabel}>
+                    <Text style={[styles.spaceLeft, styles.TextSmall]}>Meal Type</Text>
+                    <Text style={[styles.spaceRight, styles.TextSmaller]}> {mealType} </Text>
                   </View>
                   <Picker
                     mealType={mealType}
@@ -253,10 +251,11 @@ const HomeScreen = (props) => {
                     <Picker.Item label="Supper" value="Supper" />
                     <Picker.Item label="Dessert" value="Dessert" />
                   </Picker>
-                  <Divider />
-                  <View style={{ flexDirection: "row" }}>
-                    <Text>Distance</Text>
-                    <Text>{locationValue}</Text>
+
+
+                  <View style={styles.filterLabel}>
+                    <Text style={[styles.spaceLeft, styles.TextSmall]}>Distance</Text>
+                    <Text style={[styles.spaceRight, styles.TextSmaller]}>{locationValue}</Text>
                   </View>
                   <View style={{ flexDirection: "row" }}>
                     <Text>0</Text>
@@ -265,7 +264,7 @@ const HomeScreen = (props) => {
                       step={20}
                       maximumValue={100}
                       onValueChange={(value) => (console.log(value), setLocationValue(value))}
-                      style={{ width: "80%", }}
+                      style={{ width: "70%", }}
                       thumbStyle={{ width: 20, height: 20, backgroundColor: "grey" }} />
                     <Text>100km</Text>
                   </View>
@@ -273,7 +272,7 @@ const HomeScreen = (props) => {
                     style={[styles.button, styles.buttonClose]}
                     onPress={() => setModalVisible(!isModalVisible)}
                   >
-                    <Text style={styles.textStyle}>close</Text>
+                    <Text style={styles.textStyle}>Close</Text>
                   </Pressable>
                 </View>
               </View>

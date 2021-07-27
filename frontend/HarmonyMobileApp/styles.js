@@ -73,10 +73,10 @@ const styles = StyleSheet.create({
 
   modalView: {
     //styling for the filter pop up
-    margin: 20,
     backgroundColor: "white",
     borderRadius: 20,
-    padding: 35,
+    padding: 20,
+    width: "70%",
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
@@ -187,12 +187,18 @@ const styles = StyleSheet.create({
     fontSize: 23,
   },
   TextSmall: {
-    //used for text in location bar
+    //used for text in location bar + filter labels
+    fontFamily: "sans-serif-light",
+    fontSize: 18,
+    textAlignVertical: "center"
+  },
+  TextSmaller: {
+    //used for text in filter
     fontFamily: "sans-serif-light",
     fontSize: 14,
     textAlignVertical: "center"
-
   },
+
   regularImage: {
     //To my knowledge (Tia) not used
     width: 150,
@@ -252,6 +258,33 @@ const styles = StyleSheet.create({
     color: "#fff",
     marginLeft: 10, //Space between tag icon and text
   },
+
+
+  filterLabel: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingVertical: 5,
+    flex: 0,
+    width: "100%"
+  },
+
+  spaceLeft: {
+    textAlign: "left",
+    flex: 1,
+    fontWeight: "bold"
+  },
+
+  spaceRight: {
+    textAlign: "right",
+    flex: 1,
+    borderRadius: 10,
+    width: 20,
+    padding: 2,
+    elevation: 2,
+    backgroundColor: "#D6D5D7",
+
+
+  }
 });
 
 export default styles;
