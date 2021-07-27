@@ -22,7 +22,8 @@ import DrinkDetailsScreen from "../screens/DrinkDetailsScreen.js";
 
 import config from "../aws-exports";
 import SignIn from "../screens/SignInScreen";
-import SignUp from "../screens/SignUpScreen";
+// import SignUp from "../screens/SignUpScreen";
+import SignUp from "../screens/SignUp";
 import ConfirmSignUp from "../screens/ConfirmSignUpScreen";
 
 Amplify.configure(config);
