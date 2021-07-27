@@ -5,6 +5,9 @@ from boto3.dynamodb.conditions import Key
 client = boto3.resource('dynamodb')
 table = client.Table('Pairings')
 
+"""This function will take in the UID of the user, as a json event. This function returns 
+ the data in the pairings table, sorted by Total votes."""
+
 
 def View_Pairings(event, context):
     # add entire table to allresponse
@@ -14,8 +17,8 @@ def View_Pairings(event, context):
     item1 = response[0]
     # iterate through response and append total votes
     for i in response:
-        totalVotes = i['Upvotes'] + i['Downvotes']
-        i['TotalVotes'] = totalVotes
+        totalvotes = i['Upvotes'] + i['Downvotes']
+        i['TotalVotes'] = totalvotes
     # Sort response by total votes in decending order(Trending)
 
     sortedResponse = sorted(response, key=sortFunction, reverse=True)
