@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  StatusBar,
+} from "react-native";
 import { Auth } from "aws-amplify";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -24,6 +30,8 @@ export default function SignUp({ navigation }) {
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       <View style={styles.container}>
+        <StatusBar style="auto" />
+
         <Text style={styles.title}>Create a new account</Text>
         <AppTextInput
           value={username}

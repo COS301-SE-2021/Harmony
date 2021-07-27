@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, StatusBar } from "react-native";
 import { Auth } from "aws-amplify";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -26,6 +26,8 @@ export default function ConfirmSignUp({ navigation }) {
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       <View style={styles.container}>
+        <StatusBar style="auto" />
+
         <Text style={styles.title}>Confirm Sign Up</Text>
         <AppTextInput
           value={username}

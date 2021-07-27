@@ -20,9 +20,8 @@ export default function AppTextInput({
       )}
       <TextInput
         style={styles.input}
+        autoCapitalize="none"
         placeholderTextColor="#6e6869"
-        secureTextEntry={true}
-        textContentType="oneTimeCode"
         {...otherProps}
       />
     </View>
