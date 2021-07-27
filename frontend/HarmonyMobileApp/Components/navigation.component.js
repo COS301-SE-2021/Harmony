@@ -13,17 +13,17 @@ import {
   Icon,
 } from "@ui-kitten/components";
 
-import HomeScreen from "./HomeScreen.js";
-import ViewFavouritesScreen from "./ViewFavouritesScreen.js";
-import SettingsScreen from "./SettingsScreen.js";
-import CameraScreen from "./CameraScreen.js";
-import PairingResultsScreen from "./PairingResultsScreen.js";
-import DrinkDetailsScreen from "./DrinkDetailsScreen.js";
+import HomeScreen from "../screens/HomeScreen.js";
+import ViewFavouritesScreen from "../screens/ViewFavouritesScreen.js";
+import SettingsScreen from "../screens/SettingsScreen.js";
+import CameraScreen from "../screens/CameraScreen.js";
+import PairingResultsScreen from "../screens/PairingResultsScreen.js";
+import DrinkDetailsScreen from "../screens/DrinkDetailsScreen.js";
 
 import config from "../aws-exports";
-import SignIn from "./SignIn";
-import SignUp from "./SignUp";
-import ConfirmSignUp from "./ConfirmSignUp";
+import SignIn from "../screens/SignInScreen";
+import SignUp from "../screens/SignUpScreen";
+import ConfirmSignUp from "../screens/ConfirmSignUpScreen";
 
 Amplify.configure(config);
 
