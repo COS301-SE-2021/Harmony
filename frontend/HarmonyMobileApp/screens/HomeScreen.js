@@ -26,53 +26,6 @@ const MIN_HEIGHT = Platform.OS === "ios" ? 90 : 55;
 const MAX_HEIGHT = 300;
 
 
-const response = {
-  statusCode: 200,
-  data: {
-    imageURI:
-      "https://www.eatout.co.za/wp-content/uploads/2014/11/koeksuster-recipe-20Mar13-043451.jpg",
-    foodName: "Koeksister",
-    foodDesc:
-      "A koeksister also spelled koesister is a traditional Afrikaner confectionery made of fried dough infused in syrup or honey. There is also a Cape Malay version of the dish, which is a fried ball of dough that is rolled in desiccated coconut. ",
-    location: "Pretoria",
-    tags: ["Dessert", "Sweet", "Snack", "Warm", "Donut", "Baked"],
-
-    pairings: [
-      {
-        id: "1",
-        foodName: "Koeksister",
-        foodImageURI:
-          "https://www.eatout.co.za/wp-content/uploads/2014/11/koeksuster-recipe-20Mar13-043451.jpg",
-        drinkName: "Espresso",
-        drinkImageURI:
-          "https://cdn-a.william-reed.com/var/wrbm_gb_food_pharma/storage/images/publications/food-beverage-nutrition/beveragedaily.com/news/r-d/aussie-barista-helps-scientists-to-brew-the-perfect-espresso/10795433-1-eng-GB/Aussie-barista-helps-scientists-to-brew-the-perfect-espresso_wrbm_large.jpg",
-        pairingDesc:
-          "Espresso is a coffee-brewing method of Italian origin, in which a small amount of nearly boiling water is forced under 9–10 bars of pressure through finely-ground coffee beans.",
-        tags: ["Hot", "Sweet", "Healthy", "Gluten-Free"],
-        upVotes: "68",
-        downVotes: "12",
-        location: "Prospect Street, Pretoria, Gauteng"
-      },
-      {
-        id: "2",
-        foodName: "Koeksister",
-        foodImageURI:
-          "https://www.eatout.co.za/wp-content/uploads/2014/11/koeksuster-recipe-20Mar13-043451.jpg",
-        drinkName: "Iced coffee",
-        drinkImageURI:
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Blue_Bottle%2C_Kyoto_Style_Ice_Coffee_%285909775445%29.jpg/600px-Blue_Bottle%2C_Kyoto_Style_Ice_Coffee_%285909775445%29.jpg",
-        pairingDesc:
-          "Iced coffee is a coffee beverage served cold. It may be prepared either by brewing coffee in the normal way and then serving it over ice or in cold milk, or by brewing the coffee cold.",
-        tags: ["Hot", "Sweet", "Healthy", "Gluten-Free"],
-        upVotes: "59",
-        downVotes: "19",
-        location: "Prospect Street, Pretoria, Gauteng"
-
-      },
-    ],
-  },
-};
-
 const HomeScreen = (props) => {
   const viewPairingURL =
     "https://qkvdftfq7b.execute-api.eu-west-1.amazonaws.com/dev";
@@ -89,10 +42,13 @@ const HomeScreen = (props) => {
   const [mealType, setMealType] = useState("None");                                        // the mealtype filter
 
   //controls all the icons
+  const [favouriteIconChecked, setFavouriteIconChecked] = useState("unchecked");
   const [favouriteIconColor, setFavouriteIconColor] = useState("black");                   // controls the favourite heart color (pink/black)
   const [favouriteIconOutline, setFavouriteIconOutline] = useState("heart-outlined");      // controls whether the heart is filled in or outlined
+  const [upIconChecked, setUpIconChecked] = useState("unchecked");
   const [upIconColor, setUpIconColor] = useState("black");
   const [upIconOutline, setUpIconOutline] = useState("upcircleo");
+  const [downIconChecked, setDownIconChecked] = useState("unchecked");
   const [downIconColor, setDownIconColor] = useState("black");
   const [downIconOutline, setDownIconOutline] = useState("downcircleo");
   const [refreshing, setRefreshing] = React.useState(false);
@@ -114,33 +70,50 @@ const HomeScreen = (props) => {
       .catch((error) => alert(error))
       .then(setLoading(false));
   });
+  handleDownIconPress = () => {
+    if (downIconChecked == "unchecked") {
+      setDownIconColor("#FF2727"),
+        setDownIconOutline("downcircle"),
+        console.log("pressed down checked"),
+        setDownIconChecked("checked")
+    }
+    else {
+      setDownIconColor("black"),
+        setDownIconOutline("downcircleo"),
+        console.log("pressed down unchecked"),
+        setDownIconChecked("unchecked")
+    }
+  }
 
-  const TagBar = () => (
-    <View style={styles.tagsSection}>
-      <ScrollView
-        contentContainerStyle={{
-          flexDirection: "row",
-          flexWrap: "wrap",
-        }}
-        showsHorizontalScrollIndicator={false}
-        horizontal={true}
+  handleUpIconPress = () => {
+    if (upIconChecked == "unchecked") {
+      setUpIconColor("#80CB41"),
+        setUpIconOutline("upcircle"),
+        console.log("pressed up checked"),
+        setUpIconChecked("checked")
+    }
+    else {
+      setUpIconColor("black"),
+        setUpIconOutline("upcircleo"),
+        console.log("pressed up unchecked"),
+        setUpIconChecked("unchecked")
+    }
+  }
 
-      >
-        <View style={styles.rowContainer}>
-          {response.data.tags.map((tag, index) => (
-            <View style={styles.tagContainer} key={index}>
-              <FontAwesome name="tag" size={14} color="#fff" />
-              {/* Keeping outlined icons just incase we want to change to them for consistency overall */}
-              {/* The filled icons look better in this case though */}
-              {/* <Feather name="tag" size={16} color="#fff" /> */}
-              <Text style={styles.tagText}>{tag}</Text>
-            </View>
-          ))}
-        </View>
-      </ScrollView>
-    </View>
-  );
-
+  handleFavouriteIconPress = () => {
+    if (favouriteIconChecked == "unchecked") {
+      setFavouriteIconColor("#FF2763"),
+        setFavouriteIconOutline("heart"),
+        console.log("pressed favourite checked"),
+        setFavouriteIconChecked("checked")
+    }
+    else {
+      setFavouriteIconColor("black"),
+        setFavouriteIconOutline("heart-outlined"),
+        console.log("pressed favourite unchecked"),
+        setFavouriteIconChecked("unchecked")
+    }
+  }
   const ShowTitle = () => (
     <Text style={styles.TextLarge}> {sortPairings} </Text>
   )
@@ -314,7 +287,7 @@ const HomeScreen = (props) => {
                     </View>
                     <Divider />
                     <View style={styles.locationBar}>
-                      <SimpleLineIcons name="location-pin" style={{ paddingVertical: "3%", paddingRight: "2%" }} size={25} color="black" />
+                      <SimpleLineIcons name="location-pin" style={{ paddingVertical: "3%", paddingRight: "2%" }} size={26} color="black" />
                       <View style={{ alignContent: "flex-end", alignSelf: "flex-end", flex: 1, paddingRight: "1%" }}>
                         <Text style={styles.TextSmall}>{item.Location} </Text>
                         <Text style={styles.TextSmall}>35 KM</Text>
@@ -324,32 +297,17 @@ const HomeScreen = (props) => {
 
                     <View style={styles.iconsBar}>
                       <View style={{ flexDirection: "row" }}>
-                        <Pressable style={{ flexDirection: "row", justifyContent: "center" }} onPress={() => {
-                          setDownIconColor("#FF2727"),
-                            setDownIconOutline("downcircle"),
-                            console.log("pressed down ")
-                        }
-                        }>
+                        <Pressable style={{ flexDirection: "row", justifyContent: "center" }} onPress={handleDownIconPress}>
                           <AntDesign name={downIconOutline} size={24} color={downIconColor} />
                           <Text style={{ paddingLeft: "2%", paddingRight: "5%", paddingVertical: "1%", fontFamily: "sans-serif-light" }}>{item.Downvotes}</Text>
                         </Pressable>
-                        <Pressable style={{ flexDirection: "row", justifyContent: "center", paddingRight: "10%" }} onPress={() => {
-                          setUpIconColor("#80CB41"),
-                            setUpIconOutline("upcircle"),
-                            console.log("pressed up ")
-                        }
-                        }>
+                        <Pressable style={{ flexDirection: "row", justifyContent: "center", paddingRight: "10%" }} onPress={handleUpIconPress}>
                           <AntDesign name={upIconOutline} size={24} color={upIconColor} />
                           <Text style={{ paddingLeft: "2%", paddingVertical: "1%", fontFamily: "sans-serif-light", }}>{item.Upvotes}</Text>
                         </Pressable>
 
                       </View>
-                      <Pressable onPress={() => {
-                        setFavouriteIconColor("#FF2763"),
-                          setFavouriteIconOutline("heart"),
-                          console.log("pressed heart ")
-                      }
-                      }>
+                      <Pressable onPress={handleFavouriteIconPress}>
                         <Entypo name={favouriteIconOutline} size={25} color={favouriteIconColor} />
                       </Pressable>
                     </View>
