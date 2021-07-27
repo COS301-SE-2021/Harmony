@@ -8,7 +8,7 @@ export default function AppTextInput({ leftIcon, ...otherProps }) {
       {leftIcon && (
         <MaterialCommunityIcons
           name={leftIcon}
-          size={20}
+          size={22}
           color="#6e6869"
           style={styles.icon}
         />
@@ -16,6 +16,8 @@ export default function AppTextInput({ leftIcon, ...otherProps }) {
       <TextInput
         style={styles.input}
         placeholderTextColor="#6e6869"
+        secureTextEntry={true}
+        textContentType="oneTimeCode"
         {...otherProps}
       />
     </View>

@@ -100,7 +100,6 @@ const options = {
 };
 
 const AuthenticationStack = createStackNavigator();
-const AppStack = createStackNavigator();
 
 const AuthenticationNavigator = (props) => {
   return (
@@ -162,9 +161,3 @@ export const AppNavigator = (props) => {
     </NavigationContainer>
   );
 };
-
-// return (
-//   <NavigationContainer>
-//     <TabNavigator />
-//   </NavigationContainer>
-// );

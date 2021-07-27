@@ -6,6 +6,7 @@ import { AppNavigator } from "./screens/navigation.component";
 
 import Amplify from "aws-amplify";
 import awsExports from "./aws-exports";
+import { RootSiblingParent } from "react-native-root-siblings";
 
 Amplify.configure({
   ...awsExports,
@@ -18,10 +19,13 @@ import { withAuthenticator } from "aws-amplify-react-native";
 
 const App = () => (
   <>
-    <IconRegistry icons={EvaIconsPack} />
-    <ApplicationProvider {...eva} theme={eva.light}>
-      <AppNavigator />
-    </ApplicationProvider>
+    <RootSiblingParent>
+      {/* RootSiblingParent to allow toasts in any part of the app. */}
+      <IconRegistry icons={EvaIconsPack} />
+      <ApplicationProvider {...eva} theme={eva.light}>
+        <AppNavigator />
+      </ApplicationProvider>
+    </RootSiblingParent>
   </>
 );
 

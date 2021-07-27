@@ -5,6 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import AppTextInput from "./AppTextInput";
 import AppButton from "./AppButton";
+import Toast from "react-native-root-toast";
 
 export default function SignIn({ navigation, updateAuthState }) {
   const [username, setUsername] = useState("");
@@ -13,7 +14,17 @@ export default function SignIn({ navigation, updateAuthState }) {
   async function signIn() {
     try {
       await Auth.signIn(username, password);
-      console.log(" Success");
+      console.log("Success, Signed in");
+
+      // Add a Toast on screen.
+      Toast.show("Signed in", {
+        duration: Toast.durations.SHORT,
+        textColor: "#FFF",
+        backgroundColor: "#696969",
+        opacity: 1,
+        position: -65, //Above the bottom tab bar
+      });
+
       updateAuthState("loggedIn");
     } catch (error) {
       console.log(" Error signing in...", error);
@@ -64,6 +75,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
+    justifyContent: "center",
+    // backgroundColor: "red",
   },
   title: {
     fontSize: 20,
