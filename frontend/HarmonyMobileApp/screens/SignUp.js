@@ -1,9 +1,22 @@
 import React, { Component } from "react";
-import { TextInput, Text, Button, Alert, View, StyleSheet } from "react-native";
+import {
+  TextInput,
+  Text,
+  Button,
+  TouchableOpacity,
+  Alert,
+  View,
+  StyleSheet,
+} from "react-native";
 import * as yup from "yup";
 import { Formik } from "formik";
 
-export default function SignIn({ navigation, updateAuthState }) {
+import { Auth } from "aws-amplify";
+import { SafeAreaView } from "react-native-safe-area-context";
+import AppTextInput from "../Components/AppTextInput";
+import AppButton from "../Components/AppButton";
+import { AppToast } from "../Components/AppToast";
+export default function SignUp({ navigation }) {
   const inputStyle = {
     borderWidth: 1,
     borderColor: "#4e4e4e",
@@ -14,19 +27,25 @@ export default function SignIn({ navigation, updateAuthState }) {
   return (
     <Formik
       initialValues={{
-        name: "",
-        email: "",
-        password: "",
+        Username: "",
+        Email: "",
+        Password: "",
       }}
       onSubmit={(values) => Alert.alert(JSON.stringify(values))}
       validationSchema={yup.object().shape({
-        name: yup.string().required("Please, provide your name!"),
-        email: yup.string().email().required(),
-        password: yup
+        Username: yup
           .string()
-          .min(4)
-          .max(10, "Password should not excced 10 chars.")
-          .required(),
+          .min(2, "Too Short!")
+          .max(50, "Too Long!")
+          .required("Please, provide your Username!"),
+        Email: yup
+          .string()
+          .email("Invalid email")
+          .required("Please, provide your Email!"),
+        Password: yup
+          .string()
+          .min(8)
+          .required("Please, provide your Password!"),
       })}
     >
       {({
@@ -38,50 +57,65 @@ export default function SignIn({ navigation, updateAuthState }) {
         isValid,
         handleSubmit,
       }) => (
-        <View style={styles.formContainer}>
-          <TextInput
-            value={values.name}
-            style={inputStyle}
-            onChangeText={handleChange("name")}
-            onBlur={() => setFieldTouched("name")}
-            placeholder="Name"
+        <View style={styles.container}>
+          <Text style={styles.title}>Create a new account</Text>
+          <AppTextInput
+            value={values.Username}
+            onChangeText={handleChange("Username")}
+            onBlur={() => setFieldTouched("Username")}
+            leftIcon="account"
+            placeholder="Enter Username"
+            autoCapitalize="none"
+            keyboardType="email-address"
+            textContentType="emailAddress"
           />
-          {touched.name && errors.name && (
+          {touched.Username && errors.Username && (
             <Text style={{ fontSize: 12, color: "#FF0D10" }}>
-              {errors.name}
+              {errors.Username}
             </Text>
           )}
-          <TextInput
-            value={values.email}
-            style={inputStyle}
-            onChangeText={handleChange("email")}
-            onBlur={() => setFieldTouched("email")}
-            placeholder="E-mail"
+          <AppTextInput
+            value={values.Email}
+            onChangeText={handleChange("Email")}
+            onBlur={() => setFieldTouched("Email")}
+            leftIcon="email"
+            placeholder="Enter Email"
+            autoCapitalize="none"
+            keyboardType="email-address"
+            textContentType="emailAddress"
           />
-          {touched.email && errors.email && (
+          {touched.Email && errors.Email && (
             <Text style={{ fontSize: 12, color: "#FF0D10" }}>
-              {errors.email}
+              {errors.Email}
             </Text>
           )}
-          <TextInput
-            value={values.password}
-            style={inputStyle}
-            onChangeText={handleChange("password")}
-            placeholder="Password"
-            onBlur={() => setFieldTouched("password")}
+          <AppTextInput
+            value={values.Password}
+            onChangeText={handleChange("Password")}
+            leftIcon="lock"
+            placeholder="Enter Password"
+            autoCapitalize="none"
+            autoCorrect={false}
+            onBlur={() => setFieldTouched("Password")}
             secureTextEntry={true}
           />
-          {touched.password && errors.password && (
+          {touched.Password && errors.Password && (
             <Text style={{ fontSize: 12, color: "#FF0D10" }}>
-              {errors.password}
+              {errors.Password}
             </Text>
           )}
-          <Button
-            color="#3740FE"
-            title="Submit"
+          <AppButton
+            title="Sign Up"
             disabled={!isValid}
             onPress={handleSubmit}
           />
+          <View style={styles.footerButtonContainer}>
+            <TouchableOpacity onPress={() => navigation.navigate("SignIn")}>
+              <Text style={styles.forgotPasswordButtonText}>
+                Already have an account? Sign In
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
       )}
     </Formik>
@@ -91,6 +125,32 @@ export default function SignIn({ navigation, updateAuthState }) {
 const styles = StyleSheet.create({
   formContainer: {
     padding: 50,
+  },
+  safeAreaContainer: {
+    flex: 1,
+    backgroundColor: "white",
+  },
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    // backgroundColor: "red",
+  },
+  title: {
+    fontSize: 20,
+    color: "#202020",
+    fontWeight: "500",
+    marginVertical: 15,
+  },
+  footerButtonContainer: {
+    marginVertical: 15,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  forgotPasswordButtonText: {
+    color: "tomato",
+    fontSize: 18,
+    fontWeight: "600",
   },
 });
 
