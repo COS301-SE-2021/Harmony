@@ -208,50 +208,58 @@ const HomeScreen = (props) => {
                     <Text style={[styles.spaceLeft, styles.TextSmall]}>Sort Pairings</Text>
                     <Text style={[styles.spaceRight, styles.TextSmaller]}> {sortPairings} </Text>
                   </View>
-                  <Picker
-                    sortPairings={sortPairings}
-                    style={[styles.TextSmall, { height: 50, width: 150 }]}
-                    onValueChange={(itemValue, itemIndex) => { setSortPairings(itemValue); console.log(itemValue) }}
-                  >
-                    <Picker.Item label="Trending" value="Trending" />
-                    <Picker.Item label="Most Liked" value="Most Liked" />
-                    <Picker.Item label="Newest" value="Newest" />
-                    <Picker.Item label="Controversial" value="Controversial" />
-                  </Picker>
+                  <View style={{ opacity: 0.1, zIndex: 100, marginTop: -35, marginRight: "-80%" }}>
+                    <Picker
+                      sortPairings={sortPairings}
+                      style={[styles.TextSmall, { height: 50, width: 150 }]}
+                      onValueChange={(itemValue, itemIndex) => { setSortPairings(itemValue); console.log(itemValue) }}
+                    >
+                      <Picker.Item label="Trending" value="Trending" />
+                      <Picker.Item label="Most Liked" value="Most Liked" />
+                      <Picker.Item label="Newest" value="Newest" />
+                      <Picker.Item label="Controversial" value="Controversial" />
+                    </Picker>
+                  </View>
 
                   <View style={styles.filterLabel}>
                     <Text style={[styles.spaceLeft, styles.TextSmall]}>Flavour Profile</Text>
                     <Text style={[styles.spaceRight, styles.TextSmaller]}> {flavourProfile} </Text>
                   </View>
-                  <Picker
-                    flavourProfile={flavourProfile}
-                    style={{ height: 50, width: 150, }}
-                    onValueChange={(itemValue, itemIndex) => { setFlavourProfile(itemValue); console.log(itemValue) }}
-                  >
-                    <Picker.Item label="None" value="None" />
-                    <Picker.Item label="Sweet" value="Sweet" />
-                    <Picker.Item label="Salty" value="Salty" />
-                    <Picker.Item label="Spicy" value="Spicy" />
-                    <Picker.Item label="Sour" value="Sour" />
-                  </Picker>
+
+
+                  <View style={{ opacity: 0.1, zIndex: 100, marginTop: -35, marginRight: "-80%" }}>
+                    <Picker
+                      flavourProfile={flavourProfile}
+                      style={{ height: 50, width: 150, }}
+                      onValueChange={(itemValue, itemIndex) => { setFlavourProfile(itemValue); console.log(itemValue) }}
+                    >
+                      <Picker.Item label="None" value="None" />
+                      <Picker.Item label="Sweet" value="Sweet" />
+                      <Picker.Item label="Salty" value="Salty" />
+                      <Picker.Item label="Spicy" value="Spicy" />
+                      <Picker.Item label="Sour" value="Sour" />
+                    </Picker>
+                  </View>
 
 
                   <View style={styles.filterLabel}>
                     <Text style={[styles.spaceLeft, styles.TextSmall]}>Meal Type</Text>
                     <Text style={[styles.spaceRight, styles.TextSmaller]}> {mealType} </Text>
                   </View>
-                  <Picker
-                    mealType={mealType}
-                    style={{ height: 50, width: 150 }}
-                    onValueChange={(itemValue, itemIndex) => { setMealType(itemValue); console.log(itemValue) }}
-                  >
-                    <Picker.Item label="None" value="None" />
-                    <Picker.Item label="Breakfast" value="Breakfast" />
-                    <Picker.Item label="Brunch" value="Brunch" />
-                    <Picker.Item label="Supper" value="Supper" />
-                    <Picker.Item label="Dessert" value="Dessert" />
-                  </Picker>
 
+                  <View style={{ opacity: 0.1, zIndex: 100, marginTop: -35, marginRight: "-80%" }}>
+                    <Picker
+                      mealType={mealType}
+                      style={{ height: 50, width: 150 }}
+                      onValueChange={(itemValue, itemIndex) => { setMealType(itemValue); console.log(itemValue) }}
+                    >
+                      <Picker.Item label="None" value="None" />
+                      <Picker.Item label="Breakfast" value="Breakfast" />
+                      <Picker.Item label="Brunch" value="Brunch" />
+                      <Picker.Item label="Supper" value="Supper" />
+                      <Picker.Item label="Dessert" value="Dessert" />
+                    </Picker>
+                  </View>
 
                   <View style={styles.filterLabel}>
                     <Text style={[styles.spaceLeft, styles.TextSmall]}>Distance</Text>
