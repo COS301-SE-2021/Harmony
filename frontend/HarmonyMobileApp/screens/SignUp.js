@@ -3,8 +3,8 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { Auth } from "aws-amplify";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import AppTextInput from "./AppTextInput";
-import AppButton from "./AppButton";
+import AppTextInput from "../Components/AppTextInput";
+import AppButton from "../Components/AppButton";
 
 export default function SignUp({ navigation }) {
   const [username, setUsername] = useState("");

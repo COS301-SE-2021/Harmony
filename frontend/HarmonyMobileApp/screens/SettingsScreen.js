@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
 import { Auth } from "aws-amplify";
-import { AppToast } from "./AppToast";
+import { AppToast } from "../Components/AppToast";
 
 export default function SettingsScreen({ navigation, updateAuthState }) {
   async function signOut() {

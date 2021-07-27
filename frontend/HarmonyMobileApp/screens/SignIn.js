@@ -3,9 +3,9 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { Auth } from "aws-amplify";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import AppTextInput from "./AppTextInput";
-import AppButton from "./AppButton";
-import { AppToast } from "./AppToast";
+import AppTextInput from "../Components/AppTextInput";
+import AppButton from "../Components/AppButton";
+import { AppToast } from "../Components/AppToast";
 
 export default function SignIn({ navigation, updateAuthState }) {
   const [username, setUsername] = useState("");
