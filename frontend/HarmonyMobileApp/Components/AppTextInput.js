@@ -2,9 +2,14 @@ import React from "react";
 import { View, StyleSheet, TextInput } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-export default function AppTextInput({ leftIcon, ...otherProps }) {
+export default function AppTextInput({
+  leftIcon,
+  touched,
+  error,
+  ...otherProps
+}) {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, validStyle(touched, error)]}>
       {leftIcon && (
         <MaterialCommunityIcons
           name={leftIcon}
@@ -24,13 +29,32 @@ export default function AppTextInput({ leftIcon, ...otherProps }) {
   );
 }
 
+const validStyle = (touched, error) => {
+  if (!touched) {
+    return {
+      borderColor: "white",
+    };
+  } else if (error) {
+    return {
+      borderColor: "red",
+    };
+  } else
+    return {
+      borderColor: "green",
+    };
+};
+
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#f9f9f9",
     borderRadius: 25,
     flexDirection: "row",
     padding: 15,
     marginVertical: 10,
+    borderWidth: 1,
+    backgroundColor: "#f9f9f9",
+  },
+  succes: {
+    borderColor: "red",
   },
   icon: {
     marginRight: 10,

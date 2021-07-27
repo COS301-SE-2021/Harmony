@@ -17,13 +17,6 @@ import AppTextInput from "../Components/AppTextInput";
 import AppButton from "../Components/AppButton";
 import { AppToast } from "../Components/AppToast";
 export default function SignUp({ navigation }) {
-  const inputStyle = {
-    borderWidth: 1,
-    borderColor: "#4e4e4e",
-    padding: 12,
-    marginBottom: 5,
-  };
-
   return (
     <Formik
       initialValues={{
@@ -68,7 +61,10 @@ export default function SignUp({ navigation }) {
             autoCapitalize="none"
             keyboardType="email-address"
             textContentType="emailAddress"
+            error={errors.Username}
+            touched={touched.Username}
           />
+          {/* If the user has clicked on the input field and it is not valid */}
           {touched.Username && errors.Username && (
             <Text style={{ fontSize: 12, color: "#FF0D10" }}>
               {errors.Username}
@@ -83,6 +79,8 @@ export default function SignUp({ navigation }) {
             autoCapitalize="none"
             keyboardType="email-address"
             textContentType="emailAddress"
+            error={errors.Email}
+            touched={touched.Email}
           />
           {touched.Email && errors.Email && (
             <Text style={{ fontSize: 12, color: "#FF0D10" }}>
@@ -98,6 +96,8 @@ export default function SignUp({ navigation }) {
             autoCorrect={false}
             onBlur={() => setFieldTouched("Password")}
             secureTextEntry={true}
+            error={errors.Password}
+            touched={touched.Password}
           />
           {touched.Password && errors.Password && (
             <Text style={{ fontSize: 12, color: "#FF0D10" }}>
