@@ -11,7 +11,8 @@ import {
   Pressable,
   Picker,
   RefreshControl,
-  StatusBar
+  StatusBar,
+  Slider
 } from "react-native";
 import styles from "../styles";
 import {
@@ -93,7 +94,7 @@ const HomeScreen = (props) => {
         setUpIconChecked("unchecked"),
         setDownIconColor("#FF2727"),
         setDownIconOutline("downcircle"),
-        console.log("pressed down checked from else"),
+        console.log("pressed down checked from else "),
         setDownIconChecked("checked")
 
     }
@@ -211,6 +212,7 @@ const HomeScreen = (props) => {
                     <Picker.Item label="Trending" value="Trending" />
                     <Picker.Item label="Most Liked" value="Most Liked" />
                     <Picker.Item label="Newest" value="Newest" />
+                    <Picker.Item label="Controversial" value="Controversial" />
                   </Picker>
                   <Divider />
 
@@ -240,6 +242,12 @@ const HomeScreen = (props) => {
                     <Picker.Item label="Dessert" value="Dessert" />
                   </Picker>
                   <Divider />
+                  <Text>Location</Text>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text>0</Text>
+                    <Slider maximumValue={300} style={{ width: "80%" }}></Slider>
+                    <Text>300</Text>
+                  </View>
                   <Pressable
                     style={[styles.button, styles.buttonClose]}
                     onPress={() => setModalVisible(!isModalVisible)}
