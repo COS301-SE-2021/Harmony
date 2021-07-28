@@ -295,13 +295,13 @@ const HomeScreen = (props) => {
     }
   }
   handleFoodSavourySelected = () => {
-    if (FoodSalty == "#F3F2F2") {
+    if (FoodSavoury == "#F3F2F2") {
       setFoodSavourySelected("#C41ED4"),
-        console.log("Food Salty checked")
+        console.log("Food savoury checked")
     }
     else {
       setFoodSavourySelected("#F3F2F2"),
-        console.log(" Food Salty unchecked")
+        console.log(" Food Savoury unchecked")
     }
   }
   handleFoodSweetSelected = () => {
@@ -427,10 +427,10 @@ const HomeScreen = (props) => {
                         <Text style={[styles.TextSmaller,]}> {sortPairings} </Text>
                       </View>
                     </View>
-                    <View style={{ opacity: 0, zIndex: 100, marginTop: "-23%", marginRight: "-55%", }}>
+                    <View style={{ opacity: 0, zIndex: 100, marginTop: "-20%", marginRight: "-55%", }}>
                       <Picker
                         sortPairings={sortPairings}
-                        style={[styles.TextSmall, { height: 40, width: 120, }]}
+                        style={[styles.TextSmall, { height: 40, width: 300, }]}
                         onValueChange={(itemValue, itemIndex) => { setSortPairings(itemValue); console.log(itemValue) }}
                       >
                         <Picker.Item label="Trending" value="Trending" />
