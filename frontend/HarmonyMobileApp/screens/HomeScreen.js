@@ -11,6 +11,7 @@ import {
   Picker,
   RefreshControl,
   StatusBar,
+  TextInput
 } from "react-native";
 import styles from "../styles";
 import {
@@ -645,7 +646,20 @@ const HomeScreen = (props) => {
                       <Text style={[styles.TextSmall, { marginLeft: 4 }]}>100</Text>
                     </View>
                     <View style={{ flexDirection: "row", justifyContent: "center" }}>
-                      <Text style={[styles.TextSmall]}>{locationValue}</Text>
+                      <TextInput
+                        style={[styles.TextSmall, {
+                          borderRadius: 10,
+                          padding: 2,
+                          backgroundColor: "#F3F2F2",
+                          height: 30,
+                          width: 40
+                        }]}
+                        value={locationValue}
+                        onChangeText={(value) => (console.log(value), setLocationValue(parseInt(value)))}
+                        keyboardType="numeric"
+                        placeholder={locationValue.toString()}
+                        multiline={false}
+                      />
                       <Text style={[styles.TextSmaller]}>KM</Text>
                     </View>
                   </View>
