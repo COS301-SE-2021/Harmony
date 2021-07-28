@@ -24,7 +24,7 @@ export default function SignUp({ navigation }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [isLoading, setLoading] = useState(true);
+  const [isLoading, setLoading] = useState(false);
 
   async function signUp(values) {
     try {
@@ -52,6 +52,7 @@ export default function SignUp({ navigation }) {
       navigation.navigate("ConfirmSignUp");
     } catch (error) {
       console.log(" Error signing up...", error);
+      setLoading(false);
     }
   }
   const LoadingIcon = () => {

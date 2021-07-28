@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Text,
   Alert,
@@ -6,6 +6,7 @@ import {
   StyleSheet,
   StatusBar,
   Platform,
+  ActivityIndicator,
 } from "react-native";
 import * as yup from "yup";
 import { Formik } from "formik";
@@ -18,9 +19,15 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import * as Animatable from "react-native-animatable";
 
 export default function ConfirmSignUp({ navigation }) {
+  const [isLoading, setLoading] = useState(false);
+
   async function confirmSignUp(values) {
     try {
+      setLoading(true);
+
       await Auth.confirmSignUp(values.Username, values.authCode);
+      setLoading(false);
+
       console.log(" Code confirmed");
       navigation.navigate("SignIn");
 
@@ -31,8 +38,16 @@ export default function ConfirmSignUp({ navigation }) {
         " Verification code does not match. Please enter a valid verification code.",
         error.code
       );
+      setLoading(false);
     }
   }
+  const LoadingIcon = () => {
+    return (
+      <View style={styles.loadingIcon}>
+        <ActivityIndicator size="large" color="tomato" />
+      </View>
+    );
+  };
   return (
     <Formik
       initialValues={{
@@ -111,6 +126,7 @@ export default function ConfirmSignUp({ navigation }) {
               />
             </Animatable.View>
           </View>
+          {isLoading === true && <LoadingIcon />}
         </KeyboardAwareScrollView>
       )}
     </Formik>
@@ -144,5 +160,15 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 30,
     paddingHorizontal: 20,
     paddingVertical: 30,
+  },
+  loadingIcon: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#F5FCFF88",
   },
 });
