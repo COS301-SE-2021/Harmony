@@ -420,7 +420,7 @@ const HomeScreen = (props) => {
 
                   <View style={styles.filterView}>
                     <View style={[styles.filterLabel, { height: 50, justifyContent: "space-between", paddingVertical: 5, width: "100%", flexDirection: "row" }]}>
-                      <Text style={[styles.spaceLeft, styles.TextSmall, { paddingVertical: 5 }]}>Sort Pairings</Text>
+                      <Text style={[styles.spaceLeft, styles.TextSmall,]}>Sort Pairings</Text>
                       <View style={styles.spaceRight}>
                         <AntDesign name="caretdown" size={12} style={{ paddingVertical: "10%", marginLeft: 10 }} color="#7C7C7C" />
                         <Text style={[styles.TextSmaller]}> {sortPairings} </Text>
@@ -627,92 +627,14 @@ const HomeScreen = (props) => {
                     </View>
                   </View>
 
-                  {/*
-                  
-                  <View style={[styles.filterView, styles.centeredView]}>
-                    <View style={[styles.filterLabel, { flexDirection: "column" }]}>
-                      <Text style={[styles.spaceLeft, styles.TextSmall]}>Food</Text>
-                      <View style={styles.filterTagsContainer}>
-                        <View style={{ flexDirection: "row", }}>
-                          <Pressable
-                            onPress={handleFoodSaltySelected}
-                            style={[styles.tag, { backgroundColor: FoodSalty }]}
-                          >
-                            <Text style={styles.TextSmaller}>Salty</Text>
-
-                          </Pressable>
-                          <Pressable
-                            onPress={handleFoodSweetSelected}
-                            style={[styles.tag, { backgroundColor: FoodSweet }]}
-                          >
-                            <Text style={styles.TextSmaller}>Sweet</Text>
-
-                          </Pressable>
-
-                          <Pressable
-                            onPress={handleFoodSourSelected}
-                            style={[styles.tag, { backgroundColor: FoodSour }]}
-                          >
-                            <Text style={styles.TextSmaller}>Sour</Text>
-
-                          </Pressable>
-                        </View>
-                        <View style={{ flexDirection: "row" }}>
-                          <Pressable
-                            onPress={handleFoodSavourySelected}
-                            style={[styles.tag, { backgroundColor: FoodSavoury }]}
-                          >
-                            <Text style={styles.TextSmaller}>Savoury</Text>
-
-                          </Pressable>
-                        </View>
-                        <View style={{ flexDirection: "row", }}>
-
-                          <Pressable
-                            onPress={handleFoodHotSelected}
-                            style={[styles.tag, { backgroundColor: FoodHot }]}
-                          >
-                            <Text style={styles.TextSmaller}>Hot</Text>
-
-                          </Pressable>
-                          <Pressable
-                            onPress={handleFoodWarmSelected}
-                            style={[styles.tag, { backgroundColor: FoodWarm }]}
-                          >
-                            <Text style={styles.TextSmaller}>Warm</Text>
-
-                          </Pressable>
-
-                          <Pressable
-                            onPress={handleFoodColdSelected}
-                            style={[styles.tag, { backgroundColor: FoodCold }]}
-                          >
-                            <Text style={styles.TextSmaller}>Cold</Text>
-
-                          </Pressable>
-
-                        </View>
-
-
-                      </View>
-                    </View>
-                  </View>
-
-
-
-
-                */}
 
                   <Text style={{ height: 7 }}></Text>
                   <View style={styles.filterView}>
-                    <View style={[styles.filterLabel]}>
+                    <View style={[styles.filterLabel, { height: 50, justifyContent: "space-between", paddingVertical: 5, width: "100%", flexDirection: "row" }]}>
                       <Text style={[styles.spaceLeft, styles.TextSmall]}>Distance</Text>
-                      <View style={styles.spaceRight}>
-                        <Text></Text>
-                        <Text style={[styles.TextSmaller]}>{locationValue}KM</Text>
-                      </View>
                     </View>
-                    <View style={{ flexDirection: "row" }}>
+                    <View style={{ flexDirection: "row", justifyContent: "center" }}>
+                      <Text style={[styles.TextSmall, { marginRight: 4 }]}>0</Text>
                       <Slider
                         value={locationValue}
                         step={20}
@@ -720,6 +642,11 @@ const HomeScreen = (props) => {
                         onValueChange={(value) => (console.log(value), setLocationValue(value))}
                         style={{ width: "70%", }}
                         thumbStyle={{ width: 20, height: 20, backgroundColor: "grey" }} />
+                      <Text style={[styles.TextSmall, { marginLeft: 4 }]}>100</Text>
+                    </View>
+                    <View style={{ flexDirection: "row", justifyContent: "center" }}>
+                      <Text style={[styles.TextSmall]}>{locationValue}</Text>
+                      <Text style={[styles.TextSmaller]}>KM</Text>
                     </View>
                   </View>
                   <Text style={{ height: 7 }}></Text>
