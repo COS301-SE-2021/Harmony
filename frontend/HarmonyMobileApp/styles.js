@@ -280,13 +280,21 @@ const styles = StyleSheet.create({
     flex: 1,
     borderRadius: 10,
     padding: 2,
-    elevation: 2,
-    backgroundColor: "#D6D5D7",
+    backgroundColor: "#F3F2F2",
     flexDirection: "row",
     justifyContent: "space-between",
     height: 40,
     width: 120
 
+  },
+  filterView: {
+    borderWidth: 2,
+    borderColor: "grey",
+    paddingBottom: "7%",
+    marginHorizontal: -5,
+    paddingHorizontal: 5,
+    borderRadius: 10,
+    borderColor: "#F7F7F7",
   }
 });
 

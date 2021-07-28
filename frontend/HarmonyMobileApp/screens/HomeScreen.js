@@ -209,92 +209,104 @@ const HomeScreen = (props) => {
                   <View>
                     <Text style={[styles.TextMedium, { fontWeight: "bold", paddingBottom: "7%" }]}>Filter Pairings</Text>
                   </View>
-                  <View style={styles.filterLabel}>
-                    <Text style={[styles.spaceLeft, styles.TextSmall]}>Sort Pairings</Text>
-                    <View style={styles.spaceRight}>
-                      <AntDesign name="caretdown" size={12} style={{ paddingVertical: "10%", marginLeft: 10 }} color="#7C7C7C" />
-                      <Text style={[styles.TextSmaller]}> {sortPairings} </Text>
+
+                  <View style={styles.filterView}>
+                    <View style={styles.filterLabel}>
+                      <Text style={[styles.spaceLeft, styles.TextSmall]}>Sort Pairings</Text>
+                      <View style={styles.spaceRight}>
+                        <AntDesign name="caretdown" size={12} style={{ paddingVertical: "10%", marginLeft: 10 }} color="#7C7C7C" />
+                        <Text style={[styles.TextSmaller]}> {sortPairings} </Text>
+                      </View>
+                    </View>
+                    <View style={{ opacity: 0, zIndex: 100, marginTop: "-23%", marginRight: "-55%", }}>
+                      <Picker
+                        sortPairings={sortPairings}
+                        style={[styles.TextSmall, { height: 40, width: 120, }]}
+                        onValueChange={(itemValue, itemIndex) => { setSortPairings(itemValue); console.log(itemValue) }}
+                      >
+                        <Picker.Item label="Trending" value="Trending" />
+                        <Picker.Item label="Most Liked" value="Most Liked" />
+                        <Picker.Item label="Newest" value="Newest" />
+                        <Picker.Item label="Controversial" value="Controversial" />
+                      </Picker>
                     </View>
                   </View>
-                  <View style={{ opacity: 0, zIndex: 100, marginTop: "-23%", marginRight: "-55%", }}>
-                    <Picker
-                      sortPairings={sortPairings}
-                      style={[styles.TextSmall, { height: 40, width: 120, }]}
-                      onValueChange={(itemValue, itemIndex) => { setSortPairings(itemValue); console.log(itemValue) }}
-                    >
-                      <Picker.Item label="Trending" value="Trending" />
-                      <Picker.Item label="Most Liked" value="Most Liked" />
-                      <Picker.Item label="Newest" value="Newest" />
-                      <Picker.Item label="Controversial" value="Controversial" />
-                    </Picker>
-                  </View>
+                  <Text style={{ height: 7 }}></Text>
 
-                  <View style={[styles.filterLabel, { paddingTop: "10%" }]}>
-                    <Text style={[styles.spaceLeft, styles.TextSmall]}>Flavour Profile</Text>
-                    <View style={styles.spaceRight}>
-                      <AntDesign name="caretdown" size={12} style={{ paddingVertical: "10%", marginLeft: 10 }} color="#7C7C7C" />
-                      <Text style={[styles.TextSmaller]}> {flavourProfile} </Text>
+                  <View style={styles.filterView}>
+                    <View style={[styles.filterLabel]}>
+                      <Text style={[styles.spaceLeft, styles.TextSmall]}>Flavour Profile</Text>
+                      <View style={styles.spaceRight}>
+                        <AntDesign name="caretdown" size={12} style={{ paddingVertical: "10%", marginLeft: 10 }} color="#7C7C7C" />
+                        <Text style={[styles.TextSmaller]}> {flavourProfile} </Text>
+                      </View>
+                    </View>
+
+
+                    <View style={{ opacity: 0, zIndex: 100, marginTop: "-23%", marginRight: "-50%" }}>
+                      <Picker
+                        flavourProfile={flavourProfile}
+                        style={{ height: 40, width: 120, }}
+                        onValueChange={(itemValue, itemIndex) => { setFlavourProfile(itemValue); console.log(itemValue) }}
+                      >
+                        <Picker.Item label="None" value="None" />
+                        <Picker.Item label="Sweet" value="Sweet" />
+                        <Picker.Item label="Salty" value="Salty" />
+                        <Picker.Item label="Spicy" value="Spicy" />
+                        <Picker.Item label="Sour" value="Sour" />
+                      </Picker>
                     </View>
                   </View>
+                  <Text style={{ height: 7 }}></Text>
 
+                  <View style={styles.filterView}>
+                    <View style={[styles.filterLabel]}>
+                      <Text style={[styles.spaceLeft, styles.TextSmall]}>Meal Type</Text>
+                      <View style={styles.spaceRight}>
+                        <AntDesign name="caretdown" size={12} style={{ paddingVertical: "10%", marginLeft: 10 }} color="#7C7C7C" />
+                        <Text style={[styles.TextSmaller]}> {mealType} </Text>
+                      </View>
+                    </View>
 
-                  <View style={{ opacity: 0, zIndex: 100, marginTop: "-23%", marginRight: "-50%" }}>
-                    <Picker
-                      flavourProfile={flavourProfile}
-                      style={{ height: 40, width: 120, }}
-                      onValueChange={(itemValue, itemIndex) => { setFlavourProfile(itemValue); console.log(itemValue) }}
-                    >
-                      <Picker.Item label="None" value="None" />
-                      <Picker.Item label="Sweet" value="Sweet" />
-                      <Picker.Item label="Salty" value="Salty" />
-                      <Picker.Item label="Spicy" value="Spicy" />
-                      <Picker.Item label="Sour" value="Sour" />
-                    </Picker>
-                  </View>
-
-
-                  <View style={[styles.filterLabel, { paddingTop: "10%" }]}>
-                    <Text style={[styles.spaceLeft, styles.TextSmall]}>Meal Type</Text>
-                    <View style={styles.spaceRight}>
-                      <AntDesign name="caretdown" size={12} style={{ paddingVertical: "10%", marginLeft: 10 }} color="#7C7C7C" />
-                      <Text style={[styles.TextSmaller]}> {mealType} </Text>
+                    <View style={{ opacity: 0, zIndex: 100, marginTop: "-20%", marginRight: "-55%" }}>
+                      <Picker
+                        mealType={mealType}
+                        style={{ height: 40, width: 120 }}
+                        onValueChange={(itemValue, itemIndex) => { setMealType(itemValue); console.log(itemValue) }}
+                      >
+                        <Picker.Item label="None" value="None" />
+                        <Picker.Item label="Breakfast" value="Breakfast" />
+                        <Picker.Item label="Brunch" value="Brunch" />
+                        <Picker.Item label="Supper" value="Supper" />
+                        <Picker.Item label="Dessert" value="Dessert" />
+                      </Picker>
                     </View>
                   </View>
-
-                  <View style={{ opacity: 0, zIndex: 100, marginTop: "-20%", marginRight: "-55%" }}>
-                    <Picker
-                      mealType={mealType}
-                      style={{ height: 40, width: 120 }}
-                      onValueChange={(itemValue, itemIndex) => { setMealType(itemValue); console.log(itemValue) }}
-                    >
-                      <Picker.Item label="None" value="None" />
-                      <Picker.Item label="Breakfast" value="Breakfast" />
-                      <Picker.Item label="Brunch" value="Brunch" />
-                      <Picker.Item label="Supper" value="Supper" />
-                      <Picker.Item label="Dessert" value="Dessert" />
-                    </Picker>
-                  </View>
-                  <View style={[styles.filterLabel, { paddingTop: "10%" }]}>
-                    <Text style={[styles.spaceLeft, styles.TextSmall]}>Distance</Text>
-                    <View style={styles.spaceRight}>
-                      <Text></Text>
-                      <Text style={[styles.TextSmaller]}>{locationValue}KM</Text>
+                  <Text style={{ height: 7 }}></Text>
+                  <View style={styles.filterView}>
+                    <View style={[styles.filterLabel]}>
+                      <Text style={[styles.spaceLeft, styles.TextSmall]}>Distance</Text>
+                      <View style={styles.spaceRight}>
+                        <Text></Text>
+                        <Text style={[styles.TextSmaller]}>{locationValue}KM</Text>
+                      </View>
+                    </View>
+                    <View style={{ flexDirection: "row" }}>
+                      <Slider
+                        value={locationValue}
+                        step={20}
+                        maximumValue={100}
+                        onValueChange={(value) => (console.log(value), setLocationValue(value))}
+                        style={{ width: "70%", }}
+                        thumbStyle={{ width: 20, height: 20, backgroundColor: "grey" }} />
                     </View>
                   </View>
-                  <View style={{ flexDirection: "row" }}>
-                    <Slider
-                      value={locationValue}
-                      step={20}
-                      maximumValue={100}
-                      onValueChange={(value) => (console.log(value), setLocationValue(value))}
-                      style={{ width: "70%", }}
-                      thumbStyle={{ width: 20, height: 20, backgroundColor: "grey" }} />
-                  </View>
+                  <Text style={{ height: 7 }}></Text>
                   <Pressable
                     style={[styles.button, styles.buttonClose]}
                     onPress={() => setModalVisible(!isModalVisible)}
                   >
-                    <Text style={styles.textStyle}>Close</Text>
+                    <Text style={styles.textStyle}>Apply</Text>
                   </Pressable>
                 </View>
               </View>
