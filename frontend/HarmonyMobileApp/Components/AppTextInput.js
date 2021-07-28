@@ -1,8 +1,7 @@
 import React from "react";
 import { View, StyleSheet, TextInput } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
-import Feather from "react-native-vector-icons/Feather";
+
 export default function AppTextInput({
   leftIcon,
   rightIcon,
@@ -10,14 +9,53 @@ export default function AppTextInput({
   error,
   ...otherProps
 }) {
+  const RightIcon = () => {
+    if (!touched) {
+      return null;
+    } else if (error) {
+      return (
+        <MaterialCommunityIcons
+          name="close-circle"
+          size={22}
+          color="#FF9494"
+          style={styles.icon}
+        />
+      );
+    } else
+      return (
+        <MaterialCommunityIcons
+          name={"check-circle"}
+          size={22}
+          color="#42ba96"
+          style={styles.icon}
+        />
+      );
+  };
+
+  const borderStyle = () => {
+    if (!touched) {
+      return {
+        borderColor: "#ffffff00",
+      };
+    } else if (error) {
+      return {
+        borderColor: "#FF9494",
+      };
+    } else
+      return {
+        borderColor: "#42ba96",
+      };
+  };
+
   return (
     <View style={[styles.container, borderStyle(touched, error)]}>
+      {/* Not split into a function because there is no conditional rendering */}
       {leftIcon && (
         <MaterialCommunityIcons
           name={leftIcon}
           size={22}
           color="#6e6869"
-          style={styles.leftIcon}
+          style={styles.icon}
         />
       )}
       <TextInput
@@ -26,32 +64,11 @@ export default function AppTextInput({
         placeholderTextColor="#6e6869"
         {...otherProps}
       />
-      {rightIcon && (
-        <MaterialCommunityIcons
-          name={rightIcon}
-          size={22}
-          color="#6e6869"
-          style={styles.leftIcon}
-        />
-      )}
+      {/* Split into a function because there is no conditional rendering */}
+      <RightIcon />
     </View>
   );
 }
-
-const borderStyle = (touched, error) => {
-  if (!touched) {
-    return {
-      borderColor: "#ffffff00",
-    };
-  } else if (error) {
-    return {
-      borderColor: "#FF9494",
-    };
-  } else
-    return {
-      borderColor: "#42ba96",
-    };
-};
 
 // not used for now
 const textStyle = (touched, error) => {
@@ -82,7 +99,7 @@ const styles = StyleSheet.create({
   succes: {
     borderColor: "red",
   },
-  leftIcon: {
+  icon: {
     marginRight: 10,
   },
   input: {
