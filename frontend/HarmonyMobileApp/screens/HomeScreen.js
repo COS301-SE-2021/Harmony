@@ -206,12 +206,15 @@ const HomeScreen = (props) => {
 
                   <View style={styles.filterLabel}>
                     <Text style={[styles.spaceLeft, styles.TextSmall]}>Sort Pairings</Text>
-                    <Text style={[styles.spaceRight, styles.TextSmaller]}> {sortPairings} </Text>
+                    <View style={styles.spaceRight}>
+                      <AntDesign name="caretdown" size={12} style={{ paddingVertical: "10%", marginLeft: 10 }} color="#7C7C7C" />
+                      <Text style={[styles.TextSmaller]}> {sortPairings} </Text>
+                    </View>
                   </View>
-                  <View style={{ opacity: 0.1, zIndex: 100, marginTop: -35, marginRight: "-80%" }}>
+                  <View style={{ opacity: 0, zIndex: 100, marginTop: "-23%", marginRight: "-55%" }}>
                     <Picker
                       sortPairings={sortPairings}
-                      style={[styles.TextSmall, { height: 50, width: 150 }]}
+                      style={[styles.TextSmall, { height: 40, width: 120 }]}
                       onValueChange={(itemValue, itemIndex) => { setSortPairings(itemValue); console.log(itemValue) }}
                     >
                       <Picker.Item label="Trending" value="Trending" />
@@ -221,16 +224,19 @@ const HomeScreen = (props) => {
                     </Picker>
                   </View>
 
-                  <View style={styles.filterLabel}>
+                  <View style={[styles.filterLabel, { paddingTop: "10%" }]}>
                     <Text style={[styles.spaceLeft, styles.TextSmall]}>Flavour Profile</Text>
-                    <Text style={[styles.spaceRight, styles.TextSmaller]}> {flavourProfile} </Text>
+                    <View style={styles.spaceRight}>
+                      <AntDesign name="caretdown" size={12} style={{ paddingVertical: "10%", marginLeft: 10 }} color="#7C7C7C" />
+                      <Text style={[styles.TextSmaller]}> {flavourProfile} </Text>
+                    </View>
                   </View>
 
 
-                  <View style={{ opacity: 0.1, zIndex: 100, marginTop: -35, marginRight: "-80%" }}>
+                  <View style={{ opacity: 0, zIndex: 100, marginTop: "-23%", marginRight: "-50%" }}>
                     <Picker
                       flavourProfile={flavourProfile}
-                      style={{ height: 50, width: 150, }}
+                      style={{ height: 40, width: 120, }}
                       onValueChange={(itemValue, itemIndex) => { setFlavourProfile(itemValue); console.log(itemValue) }}
                     >
                       <Picker.Item label="None" value="None" />
@@ -242,15 +248,18 @@ const HomeScreen = (props) => {
                   </View>
 
 
-                  <View style={styles.filterLabel}>
+                  <View style={[styles.filterLabel, { paddingTop: "10%" }]}>
                     <Text style={[styles.spaceLeft, styles.TextSmall]}>Meal Type</Text>
-                    <Text style={[styles.spaceRight, styles.TextSmaller]}> {mealType} </Text>
+                    <View style={styles.spaceRight}>
+                      <AntDesign name="caretdown" size={12} style={{ paddingVertical: "10%", marginLeft: 10 }} color="#7C7C7C" />
+                      <Text style={[styles.TextSmaller]}> {mealType} </Text>
+                    </View>
                   </View>
 
-                  <View style={{ opacity: 0.1, zIndex: 100, marginTop: -35, marginRight: "-80%" }}>
+                  <View style={{ opacity: 0, zIndex: 100, marginTop: "-20%", marginRight: "-55%" }}>
                     <Picker
                       mealType={mealType}
-                      style={{ height: 50, width: 150 }}
+                      style={{ height: 40, width: 120 }}
                       onValueChange={(itemValue, itemIndex) => { setMealType(itemValue); console.log(itemValue) }}
                     >
                       <Picker.Item label="None" value="None" />
@@ -261,9 +270,12 @@ const HomeScreen = (props) => {
                     </Picker>
                   </View>
 
-                  <View style={styles.filterLabel}>
+                  <View style={[styles.filterLabel, { paddingTop: "10%" }]}>
                     <Text style={[styles.spaceLeft, styles.TextSmall]}>Distance</Text>
-                    <Text style={[styles.spaceRight, styles.TextSmaller]}>{locationValue}</Text>
+                    <View style={styles.spaceRight}>
+                      <Text></Text>
+                      <Text style={[styles.TextSmaller]}>{locationValue}KM</Text>
+                    </View>
                   </View>
                   <View style={{ flexDirection: "row" }}>
                     <Text>0</Text>
@@ -274,7 +286,7 @@ const HomeScreen = (props) => {
                       onValueChange={(value) => (console.log(value), setLocationValue(value))}
                       style={{ width: "70%", }}
                       thumbStyle={{ width: 20, height: 20, backgroundColor: "grey" }} />
-                    <Text>100km</Text>
+                    <Text>100</Text>
                   </View>
                   <Pressable
                     style={[styles.button, styles.buttonClose]}

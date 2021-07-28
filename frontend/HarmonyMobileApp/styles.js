@@ -265,7 +265,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingVertical: 5,
     flex: 0,
-    width: "100%"
+    width: "100%",
+    zIndex: 80
   },
 
   spaceLeft: {
@@ -278,11 +279,13 @@ const styles = StyleSheet.create({
     textAlign: "right",
     flex: 1,
     borderRadius: 10,
-    width: 20,
     padding: 2,
     elevation: 2,
     backgroundColor: "#D6D5D7",
-
+    flexDirection: "row",
+    justifyContent: "space-between",
+    height: 40,
+    width: 120
 
   }
 });
