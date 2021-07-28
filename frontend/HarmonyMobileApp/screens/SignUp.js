@@ -6,6 +6,7 @@ import {
   StyleSheet,
   StatusBar,
   Platform,
+  ActivityIndicator,
 } from "react-native";
 import * as yup from "yup";
 import { Formik } from "formik";
@@ -23,21 +24,27 @@ export default function SignUp({ navigation }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [isLoading, setLoading] = useState(true);
 
   async function signUp(values) {
     try {
       setUsername(values.Username);
       setPassword(values.Password);
       setEmail(values.Email);
+      setLoading(true);
 
       const { user } = await Auth.signUp({
         username,
         password,
         attributes: { email },
       });
-      // console.log(username);
-      // console.log(password);
-      // console.log(email);
+      setLoading(false);
+
+      //For some reason the authentication fails when the below logs are commented out
+      //[ERROR] 03:12.667 AuthError - Username cannot be empty
+      console.log(username);
+      console.log(password);
+      console.log(email);
 
       // console.log(user); //Output all user data
 
@@ -47,7 +54,13 @@ export default function SignUp({ navigation }) {
       console.log(" Error signing up...", error);
     }
   }
-
+  const LoadingIcon = () => {
+    return (
+      <View style={styles.loadingIcon}>
+        <ActivityIndicator size="large" color="tomato" />
+      </View>
+    );
+  };
   return (
     <Formik
       initialValues={{
@@ -163,6 +176,7 @@ export default function SignUp({ navigation }) {
               <SocialIcon type="google" />
             </Animatable.View>
           </View>
+          {isLoading === true && <LoadingIcon />}
         </KeyboardAwareScrollView>
       )}
     </Formik>
@@ -218,5 +232,15 @@ const styles = StyleSheet.create({
     color: "#788eec",
     fontSize: 19,
     fontWeight: "600",
+  },
+  loadingIcon: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#F5FCFF88",
   },
 });

@@ -36,10 +36,11 @@ export default function SignIn({ navigation, updateAuthState }) {
       updateAuthState("loggedIn");
     } catch (error) {
       console.log(" Error signing in...", error);
+      setLoading(false);
     }
   }
 
-  const Initializing = () => {
+  const LoadingIcon = () => {
     return (
       <View style={styles.loadingIcon}>
         <ActivityIndicator size="large" color="tomato" />
@@ -140,7 +141,7 @@ export default function SignIn({ navigation, updateAuthState }) {
               <SocialIcon type="google" />
             </Animatable.View>
           </View>
-          {isLoading === true && <Initializing />}
+          {isLoading === true && <LoadingIcon />}
         </KeyboardAwareScrollView>
       )}
     </Formik>
