@@ -108,16 +108,16 @@ const AuthenticationNavigator = (props) => {
   return (
     <View style={{ flex: 1, backgroundColor: "#009387" }}>
       <AuthenticationStack.Navigator headerMode="none">
-        <AuthenticationStack.Screen
-          name="ConfirmSignUp"
-          component={ConfirmSignUp}
-        />
         <AuthenticationStack.Screen name="SignIn">
           {(screenProps) => (
             <SignIn {...screenProps} updateAuthState={props.updateAuthState} />
           )}
         </AuthenticationStack.Screen>
         <AuthenticationStack.Screen name="SignUp" component={SignUp} />
+        <AuthenticationStack.Screen
+          name="ConfirmSignUp"
+          component={ConfirmSignUp}
+        />
       </AuthenticationStack.Navigator>
     </View>
   );

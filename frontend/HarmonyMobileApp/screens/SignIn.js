@@ -18,14 +18,28 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { SocialIcon } from "react-native-elements";
 import * as Animatable from "react-native-animatable";
 
-export default function SignIn({ navigation }) {
+export default function SignIn({ navigation, updateAuthState }) {
+  async function signIn(values) {
+    try {
+      await Auth.signIn(values.Username, values.Password);
+      console.log("Success, Signed in");
+
+      // Add a Toast on screen.
+      AppToast.ToastDisplay("Signed in");
+
+      updateAuthState("loggedIn");
+    } catch (error) {
+      console.log(" Error signing in...", error);
+    }
+  }
+
   return (
     <Formik
       initialValues={{
         Username: "",
         Password: "",
       }}
-      onSubmit={(values) => Alert.alert(JSON.stringify(values))}
+      onSubmit={(values) => signIn(values)}
       validationSchema={yup.object().shape({
         Username: yup
           .string()
