@@ -25,7 +25,8 @@ import config from "../aws-exports";
 import SignIn from "../screens/SignIn";
 // import SignUp from "../screens/SignUpScreen";
 import SignUp from "../screens/SignUp";
-import ConfirmSignUp from "../screens/ConfirmSignUpScreen";
+// import ConfirmSignUp from "../screens/ConfirmSignUpScreen";
+import ConfirmSignUp from "../screens/ConfirmSignUp";
 
 Amplify.configure(config);
 
@@ -107,16 +108,16 @@ const AuthenticationNavigator = (props) => {
   return (
     <View style={{ flex: 1, backgroundColor: "#009387" }}>
       <AuthenticationStack.Navigator headerMode="none">
+        <AuthenticationStack.Screen
+          name="ConfirmSignUp"
+          component={ConfirmSignUp}
+        />
         <AuthenticationStack.Screen name="SignIn">
           {(screenProps) => (
             <SignIn {...screenProps} updateAuthState={props.updateAuthState} />
           )}
         </AuthenticationStack.Screen>
         <AuthenticationStack.Screen name="SignUp" component={SignUp} />
-        <AuthenticationStack.Screen
-          name="ConfirmSignUp"
-          component={ConfirmSignUp}
-        />
       </AuthenticationStack.Navigator>
     </View>
   );
