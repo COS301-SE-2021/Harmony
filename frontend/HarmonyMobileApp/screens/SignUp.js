@@ -20,6 +20,7 @@ import AppTextInput from "../Components/AppTextInput";
 import AppButton from "../Components/AppButton";
 import { AppToast } from "../Components/AppToast";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { SocialIcon } from "react-native-elements";
 
 import * as Animatable from "react-native-animatable";
 
@@ -135,7 +136,10 @@ export default function SignUp({ navigation }) {
               </View>
             </Animatable.View>
 
-            <View style={styles.footer}></View>
+            <View style={styles.footer}>
+              <SocialIcon type="facebook" />
+              <SocialIcon type="google" />
+            </View>
           </View>
         </KeyboardAwareScrollView>
       )}
@@ -172,6 +176,7 @@ const styles = StyleSheet.create({
   },
   footer: {
     flex: 1,
+    flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
     paddingHorizontal: 20,
@@ -189,7 +194,7 @@ const styles = StyleSheet.create({
   },
   footerLink: {
     color: "#788eec",
-    fontSize: 18,
+    fontSize: 19,
     fontWeight: "600",
   },
 });
