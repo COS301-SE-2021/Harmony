@@ -20,8 +20,7 @@ import AppTextInput from "../Components/AppTextInput";
 import AppButton from "../Components/AppButton";
 import { AppToast } from "../Components/AppToast";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
-import Feather from "react-native-vector-icons/Feather";
+
 import * as Animatable from "react-native-animatable";
 
 export default function SignUp({ navigation }) {
@@ -78,6 +77,7 @@ export default function SignUp({ navigation }) {
                 textContentType="emailAddress"
                 error={errors.Username}
                 touched={touched.Username}
+                rightIcon="check-circle"
               />
               {/* If the user has clicked on the input field and it is not valid */}
               {touched.Username && errors.Username && (
@@ -95,6 +95,7 @@ export default function SignUp({ navigation }) {
                 textContentType="emailAddress"
                 error={errors.Email}
                 touched={touched.Email}
+                rightIcon="check-circle"
               />
               {touched.Email && errors.Email && (
                 <Text style={{ fontSize: 12, color: "#FF0D10" }}>
@@ -111,6 +112,7 @@ export default function SignUp({ navigation }) {
                 secureTextEntry={true}
                 error={errors.Password}
                 touched={touched.Password}
+                rightIcon="eye-off"
               />
               {touched.Password && errors.Password && (
                 <Text style={{ fontSize: 12, color: "#FF0D10" }}>

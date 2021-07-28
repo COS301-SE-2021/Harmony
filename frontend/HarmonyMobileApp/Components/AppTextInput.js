@@ -1,9 +1,11 @@
 import React from "react";
 import { View, StyleSheet, TextInput } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-
+import FontAwesome from "react-native-vector-icons/FontAwesome";
+import Feather from "react-native-vector-icons/Feather";
 export default function AppTextInput({
   leftIcon,
+  rightIcon,
   touched,
   error,
   ...otherProps
@@ -24,6 +26,14 @@ export default function AppTextInput({
         placeholderTextColor="#6e6869"
         {...otherProps}
       />
+      {rightIcon && (
+        <MaterialCommunityIcons
+          name={rightIcon}
+          size={22}
+          color="#6e6869"
+          style={styles.leftIcon}
+        />
+      )}
     </View>
   );
 }
@@ -67,6 +77,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     borderWidth: 0.5,
     backgroundColor: "#f9f9f9",
+    width: "100%",
   },
   succes: {
     borderColor: "red",
