@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Text,
   Alert,
@@ -6,6 +6,7 @@ import {
   StyleSheet,
   StatusBar,
   Platform,
+  ActivityIndicator,
 } from "react-native";
 import * as yup from "yup";
 import { Formik } from "formik";
@@ -17,11 +18,16 @@ import { AppToast } from "../Components/AppToast";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { SocialIcon } from "react-native-elements";
 import * as Animatable from "react-native-animatable";
+import AnimatedLoader from "react-native-animated-loader";
 
 export default function SignIn({ navigation, updateAuthState }) {
+  const [isLoading, setLoading] = useState(false);
+
   async function signIn(values) {
     try {
+      setLoading(true);
       await Auth.signIn(values.Username, values.Password);
+      setLoading(false);
       console.log("Success, Signed in");
 
       // Add a Toast on screen.
@@ -33,6 +39,13 @@ export default function SignIn({ navigation, updateAuthState }) {
     }
   }
 
+  const Initializing = () => {
+    return (
+      <View style={styles.loadingIcon}>
+        <ActivityIndicator size="large" color="tomato" />
+      </View>
+    );
+  };
   return (
     <Formik
       initialValues={{
@@ -66,10 +79,10 @@ export default function SignIn({ navigation, updateAuthState }) {
         >
           <View style={styles.container}>
             <StatusBar style="auto" />
-
             <View style={styles.header}>
               <Text style={styles.text_header}>Sign in to your account</Text>
             </View>
+
             <Animatable.View animation="fadeInUpBig" style={styles.body}>
               <AppTextInput
                 value={values.Username}
@@ -127,6 +140,7 @@ export default function SignIn({ navigation, updateAuthState }) {
               <SocialIcon type="google" />
             </Animatable.View>
           </View>
+          {isLoading === true && <Initializing />}
         </KeyboardAwareScrollView>
       )}
     </Formik>
@@ -182,5 +196,15 @@ const styles = StyleSheet.create({
     color: "#788eec",
     fontSize: 19,
     fontWeight: "600",
+  },
+  loadingIcon: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#F5FCFF88",
   },
 });
