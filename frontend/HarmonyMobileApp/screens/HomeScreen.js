@@ -7,7 +7,6 @@ import {
   ActivityIndicator,
   FlatList,
   Alert,
-  Modal,
   Pressable,
   Picker,
   RefreshControl,
@@ -17,6 +16,7 @@ import styles from "../styles";
 import {
   Feather, SimpleLineIcons, FontAwesome, Entypo, AntDesign
 } from '@expo/vector-icons';
+import Modal from "react-native-modal";
 import * as eva from '@eva-design/eva';
 import { default as theme } from '../theme.json';
 import { ApplicationProvider, Layout, Divider, Card, Text } from '@ui-kitten/components';
@@ -62,7 +62,10 @@ const HomeScreen = (props) => {
   const wait = (timeout) => {
     return new Promise(resolve => setTimeout(resolve, timeout));
   }
-
+  //toggles the modals visibility
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
   //the api call for trending
   useEffect(() => {
     fetch(viewPairingURL)
@@ -193,16 +196,19 @@ const HomeScreen = (props) => {
         <View style={{ height: "100%" }}>
           <View style={styles.centeredView}>
             <Modal
-              animationType="slide"
-              transparent={true}
-              visible={isModalVisible}
-              onRequestClose={() => {
-                setModalVisible(!isModalVisible);
-              }}
+              isVisible={isModalVisible}
+              onBackButtonPress={toggleModal}
+              onBackdropPress={toggleModal}
+              animationIn={"slideInRight"}
+              animationOut={"slideOutRight"}
+              swipeDirection={["up", "left", "right", "down"]}
+              onSwipeComplete={toggleModal}
             >
               <View style={styles.centeredView}>
                 <View style={[styles.modalView, styles.TextSmall]} >
-
+                  <View>
+                    <Text style={[styles.TextMedium, { fontWeight: "bold", paddingBottom: "7%" }]}>Filter Pairings</Text>
+                  </View>
                   <View style={styles.filterLabel}>
                     <Text style={[styles.spaceLeft, styles.TextSmall]}>Sort Pairings</Text>
                     <View style={styles.spaceRight}>
@@ -210,10 +216,10 @@ const HomeScreen = (props) => {
                       <Text style={[styles.TextSmaller]}> {sortPairings} </Text>
                     </View>
                   </View>
-                  <View style={{ opacity: 0, zIndex: 100, marginTop: "-23%", marginRight: "-55%" }}>
+                  <View style={{ opacity: 0, zIndex: 100, marginTop: "-23%", marginRight: "-55%", }}>
                     <Picker
                       sortPairings={sortPairings}
-                      style={[styles.TextSmall, { height: 40, width: 120 }]}
+                      style={[styles.TextSmall, { height: 40, width: 120, }]}
                       onValueChange={(itemValue, itemIndex) => { setSortPairings(itemValue); console.log(itemValue) }}
                     >
                       <Picker.Item label="Trending" value="Trending" />

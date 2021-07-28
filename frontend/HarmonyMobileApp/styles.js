@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 20,
     padding: 20,
-    width: "70%",
+    width: "88%",
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
@@ -182,9 +182,9 @@ const styles = StyleSheet.create({
     textAlignVertical: "center",
   },
   TextMedium: {
-    //To my knowledge (Tia) not used
+    // used as filter pairings title
     fontFamily: "sans-serif-light",
-    fontSize: 23,
+    fontSize: 25,
   },
   TextSmall: {
     //used for text in location bar + filter labels
