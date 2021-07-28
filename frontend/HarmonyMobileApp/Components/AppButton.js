@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
     padding: 15,
     width: "80%",
     backgroundColor: "tomato",
+    elevation: 2, //gives shadow/3D effect
   },
 
   buttonText: {

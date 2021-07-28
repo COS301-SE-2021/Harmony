@@ -1,19 +1,14 @@
-import React, { Component } from "react";
+import React from "react";
 import {
-  TextInput,
   Text,
-  Button,
-  TouchableOpacity,
   Alert,
   View,
   StyleSheet,
   StatusBar,
-  Dimensions,
   Platform,
 } from "react-native";
 import * as yup from "yup";
 import { Formik } from "formik";
-
 import { Auth } from "aws-amplify";
 import { SafeAreaView } from "react-native-safe-area-context";
 import AppTextInput from "../Components/AppTextInput";
@@ -21,7 +16,6 @@ import AppButton from "../Components/AppButton";
 import { AppToast } from "../Components/AppToast";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { SocialIcon } from "react-native-elements";
-
 import * as Animatable from "react-native-animatable";
 
 export default function SignUp({ navigation }) {
@@ -135,11 +129,10 @@ export default function SignUp({ navigation }) {
                 </Text>
               </View>
             </Animatable.View>
-
-            <View style={styles.footer}>
+            <Animatable.View animation="fadeInUpBig" style={styles.footer}>
               <SocialIcon type="facebook" />
               <SocialIcon type="google" />
-            </View>
+            </Animatable.View>
           </View>
         </KeyboardAwareScrollView>
       )}

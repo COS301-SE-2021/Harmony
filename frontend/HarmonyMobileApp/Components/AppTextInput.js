@@ -100,6 +100,7 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     backgroundColor: "#f9f9f9",
     width: "100%",
+    // elevation: 2, //gives shadow/3D effect
   },
   succes: {
     borderColor: "red",
