@@ -46,6 +46,7 @@ const HomeScreen = (props) => {
   const [FoodSweet, setFoodSweetSelected] = useState("#F3F2F2");
   const [FoodSour, setFoodSourSelected] = useState("#F3F2F2");
   const [FoodSavoury, setFoodSavourySelected] = useState("#F3F2F2");
+  const [FoodSpicy, setFoodSpicySelected] = useState("#F3F2F2");
   const [FoodHot, setFoodHotSelected] = useState("#F3F2F2");
   const [FoodWarm, setFoodWarmSelected] = useState("#F3F2F2");
   const [FoodCold, setFoodColdSelected] = useState("#F3F2F2");
@@ -53,6 +54,7 @@ const HomeScreen = (props) => {
   const [DrinkSalty, setDrinkSaltySelected] = useState("#F3F2F2");
   const [DrinkSweet, setDrinkSweetSelected] = useState("#F3F2F2");
   const [DrinkSour, setDrinkSourSelected] = useState("#F3F2F2");
+  const [DrinkAlcoholic, setDrinkAlcoholicSelected] = useState("#F3F2F2");
   const [DrinkHot, setDrinkHotSelected] = useState("#F3F2F2");
   const [DrinkWarm, setDrinkWarmSelected] = useState("#F3F2F2");
   const [DrinkCold, setDrinkColdSelected] = useState("#F3F2F2");
@@ -228,6 +230,16 @@ const HomeScreen = (props) => {
         console.log(" Drink cold unchecked")
     }
   }
+  handleDrinkAlcoholicSelected = () => {
+    if (DrinkAlcoholic == "#F3F2F2") {
+      setDrinkAlcoholicSelected("#1FBFBA"),
+        console.log("Drink alcoholic checked")
+    }
+    else {
+      setDrinkAlcoholicSelected("#F3F2F2"),
+        console.log(" Drink alcoholic unchecked")
+    }
+  }
   handleBreakfastSelected = () => {
     if (Breakfast == "#F3F2F2") {
       setBreakfastSelected("#DD6E42")
@@ -271,13 +283,23 @@ const HomeScreen = (props) => {
         console.log(" Food Salty unchecked")
     }
   }
+  handleFoodSpicySelected = () => {
+    if (FoodSpicy == "#F3F2F2") {
+      setFoodSpicySelected("#C41ED4"),
+        console.log("Food Spicy checked")
+    }
+    else {
+      setFoodSpicySelected("#F3F2F2"),
+        console.log(" Food Spicy unchecked")
+    }
+  }
   handleFoodSavourySelected = () => {
     if (FoodSalty == "#F3F2F2") {
       setFoodSavourySelected("#C41ED4"),
         console.log("Food Salty checked")
     }
     else {
-      setFoodSavoourySelected("#F3F2F2"),
+      setFoodSavourySelected("#F3F2F2"),
         console.log(" Food Salty unchecked")
     }
   }
@@ -397,8 +419,8 @@ const HomeScreen = (props) => {
                   </View>*/}
 
                   <View style={styles.filterView}>
-                    <View style={[styles.filterLabel, { height: "auto", justifyContent: "space-between", paddingVertical: 5, width: "100%", flexDirection: "row" }]}>
-                      <Text style={[styles.spaceLeft, styles.TextSmall]}>Sort Pairings</Text>
+                    <View style={[styles.filterLabel, { height: 50, justifyContent: "space-between", paddingVertical: 5, width: "100%", flexDirection: "row" }]}>
+                      <Text style={[styles.spaceLeft, styles.TextSmall, { paddingVertical: 5 }]}>Sort Pairings</Text>
                       <View style={styles.spaceRight}>
                         <AntDesign name="caretdown" size={12} style={{ paddingVertical: "10%", marginLeft: 10 }} color="#7C7C7C" />
                         <Text style={[styles.TextSmaller]}> {sortPairings} </Text>
@@ -422,7 +444,9 @@ const HomeScreen = (props) => {
 
                   <View style={styles.filterView}>
                     <View style={[styles.filterLabel]}>
-                      <Text style={[styles.spaceLeft, styles.TextSmall]}>Meal Type</Text>
+                      <View style={{ flexDirection: "row" }}>
+                        <Text style={[styles.spaceLeft, styles.TextSmall]}>Meal Type</Text>
+                      </View>
                       <View style={[styles.filterTagsContainer]}>
                         <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
                           <Pressable
@@ -463,7 +487,16 @@ const HomeScreen = (props) => {
 
                   <View style={styles.filterView}>
                     <View style={[styles.filterLabel]}>
-                      <Text style={[styles.spaceLeft, styles.TextSmall]}>Drinks</Text>
+                      <View style={{ flexDirection: "row" }}>
+                        <Text style={[styles.spaceLeft, styles.TextSmall]}>Drinks</Text>
+                        <Pressable
+                          onPress={handleDrinkAlcoholicSelected}
+                          style={[styles.filterTag, { backgroundColor: DrinkAlcoholic, }]}
+                        >
+                          <Text style={styles.TextSmaller}>Alcoholic</Text>
+
+                        </Pressable>
+                      </View>
                       <View style={[styles.filterTagsContainer, { flexDirection: "column" }]}>
                         <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
                           <Pressable
@@ -520,7 +553,24 @@ const HomeScreen = (props) => {
 
                   <View style={styles.filterView}>
                     <View style={[styles.filterLabel]}>
-                      <Text style={[styles.spaceLeft, styles.TextSmall]}>Food</Text>
+                      <View style={{ flexDirection: "row" }}>
+                        <Text style={[styles.spaceLeft, styles.TextSmall]}>Food</Text>
+                        <Pressable
+                          onPress={handleFoodSpicySelected}
+                          style={[styles.filterTag, { backgroundColor: FoodSpicy }]}
+                        >
+                          <Text style={styles.TextSmaller}>Spicy</Text>
+
+                        </Pressable>
+                        <Pressable
+                          onPress={handleFoodSavourySelected}
+                          style={[styles.filterTag, { backgroundColor: FoodSavoury }]}
+                        >
+                          <Text style={styles.TextSmaller}>Savoury</Text>
+
+                        </Pressable>
+
+                      </View>
                       <View style={[styles.filterTagsContainer, { flexDirection: "column" }]}>
                         <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
                           <Pressable
@@ -540,7 +590,7 @@ const HomeScreen = (props) => {
 
                           <Pressable
                             onPress={handleFoodSourSelected}
-                            style={[styles.filterTags, { backgroundColor: FoodSour }]}
+                            style={[styles.filterTag, { backgroundColor: FoodSour }]}
                           >
                             <Text style={styles.TextSmaller}>Sour</Text>
 
@@ -548,15 +598,6 @@ const HomeScreen = (props) => {
                         </View>
                         <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
 
-                          <Pressable
-                            onPress={handleFoodSavourySelected}
-                            style={[styles.filterTag, { backgroundColor: FoodSavoury }]}
-                          >
-                            <Text style={styles.TextSmaller}>Savoury</Text>
-
-                          </Pressable>
-                        </View>
-                        <View style={{ flexDirection: "row", }}>
 
                           <Pressable
                             onPress={handleFoodHotSelected}

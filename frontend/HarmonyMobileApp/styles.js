@@ -172,12 +172,48 @@ const styles = StyleSheet.create({
   filterTag: {
     borderRadius: 10,
     padding: 4,
-    height: 35,
+    height: 30,
     margin: 2,
     paddingHorizontal: 20
   },
   filterTagsContainer: {
     height: 40
+  },
+  filterLabel: {
+    justifyContent: "space-between",
+    paddingVertical: 5,
+    width: "100%",
+    flexDirection: "column",
+    height: 95,
+    paddingBottom: 20,
+    width: 230,
+    marginBottom: 5
+  },
+
+  spaceLeft: {
+    textAlign: "left",
+    fontWeight: "bold",
+  },
+
+  spaceRight: {
+    textAlign: "right",
+    flex: 1,
+    borderRadius: 10,
+    padding: 2,
+    backgroundColor: "#F3F2F2",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    height: 40,
+    width: 120
+
+  },
+  filterView: {
+    borderWidth: 2,
+    paddingBottom: "7%",
+    marginHorizontal: -5,
+    paddingHorizontal: 5,
+    borderRadius: 10,
+    borderColor: "#F7F7F7",
   },
   Text: {
     //To my knowledge (Tia) not used
@@ -270,42 +306,7 @@ const styles = StyleSheet.create({
   },
 
 
-  filterLabel: {
-    justifyContent: "space-between",
-    paddingVertical: 5,
-    width: "100%",
-    flexDirection: "column",
-    height: 95,
-    paddingBottom: 20,
-    width: 230,
-    marginBottom: 5
-  },
 
-  spaceLeft: {
-    textAlign: "left",
-    fontWeight: "bold",
-  },
-
-  spaceRight: {
-    textAlign: "right",
-    flex: 1,
-    borderRadius: 10,
-    padding: 2,
-    backgroundColor: "#F3F2F2",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    height: 40,
-    width: 120
-
-  },
-  filterView: {
-    borderWidth: 2,
-    paddingBottom: "7%",
-    marginHorizontal: -5,
-    paddingHorizontal: 5,
-    borderRadius: 10,
-    borderColor: "#F7F7F7",
-  }
 });
 
 export default styles;
