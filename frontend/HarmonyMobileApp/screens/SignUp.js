@@ -64,9 +64,9 @@ export default function SignUp({ navigation }) {
             <StatusBar style="auto" />
 
             <View style={styles.header}>
-              <Text style={styles.text_header}>Create a new account</Text>
+              <Text style={styles.text_header}>Create an account</Text>
             </View>
-            <Animatable.View animation="fadeInUpBig" style={styles.footer}>
+            <Animatable.View animation="fadeInUpBig" style={styles.body}>
               <AppTextInput
                 value={values.Username}
                 onChangeText={handleChange("Username")}
@@ -77,7 +77,6 @@ export default function SignUp({ navigation }) {
                 textContentType="emailAddress"
                 error={errors.Username}
                 touched={touched.Username}
-                rightIcon="check-circle"
               />
               {/* If the user has clicked on the input field and it is not valid */}
               {touched.Username && errors.Username && (
@@ -95,7 +94,6 @@ export default function SignUp({ navigation }) {
                 textContentType="emailAddress"
                 error={errors.Email}
                 touched={touched.Email}
-                rightIcon="check-circle"
               />
               {touched.Email && errors.Email && (
                 <Text style={{ fontSize: 12, color: "#FF0D10" }}>
@@ -112,7 +110,6 @@ export default function SignUp({ navigation }) {
                 secureTextEntry={true}
                 error={errors.Password}
                 touched={touched.Password}
-                rightIcon="eye-off"
               />
               {touched.Password && errors.Password && (
                 <Text style={{ fontSize: 12, color: "#FF0D10" }}>
@@ -125,13 +122,20 @@ export default function SignUp({ navigation }) {
                 onPress={handleSubmit}
               />
               <View style={styles.footerButtonContainer}>
-                <TouchableOpacity onPress={() => navigation.navigate("SignIn")}>
-                  <Text style={styles.forgotPasswordButtonText}>
-                    Already have an account? Sign In
+                <Text style={styles.footerText}>
+                  Already have an account?
+                  <Text
+                    onPress={() => navigation.navigate("SignIn")}
+                    style={styles.footerLink}
+                  >
+                    {" "}
+                    Sign In
                   </Text>
-                </TouchableOpacity>
+                </Text>
               </View>
             </Animatable.View>
+
+            <View style={styles.footer}></View>
           </View>
         </KeyboardAwareScrollView>
       )}
@@ -174,13 +178,21 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    paddingHorizontal: 20,
+    paddingVertical: 30,
   },
-  footer: {
+  body: {
     alignItems: "center",
     flex: Platform.OS === "ios" ? 3 : 1,
     backgroundColor: "#fff",
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
+    borderRadius: 30,
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+  },
+  footer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
     paddingHorizontal: 20,
     paddingVertical: 30,
   },
@@ -228,5 +240,20 @@ const styles = StyleSheet.create({
   },
   color_textPrivate: {
     color: "grey",
+  },
+  footerView: {
+    flex: 1,
+    alignItems: "center",
+    marginTop: 20,
+  },
+  footerText: {
+    color: "#2e2e2d",
+    fontSize: 18,
+    fontWeight: "600",
+  },
+  footerLink: {
+    color: "#788eec",
+    fontSize: 18,
+    fontWeight: "600",
   },
 });

@@ -1,6 +1,7 @@
 import React from "react";
 import { View, StyleSheet, TextInput } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import * as Animatable from "react-native-animatable";
 
 export default function AppTextInput({
   leftIcon,
@@ -14,21 +15,25 @@ export default function AppTextInput({
       return null;
     } else if (error) {
       return (
+        // <Animatable.View animation="bounceIn">
         <MaterialCommunityIcons
           name="close-circle"
           size={22}
           color="#FF9494"
           style={styles.icon}
         />
+        // </Animatable.View>
       );
     } else
       return (
+        // <Animatable.View animation="bounceIn">
         <MaterialCommunityIcons
           name={"check-circle"}
           size={22}
           color="#42ba96"
           style={styles.icon}
         />
+        // </Animatable.View>
       );
   };
 
