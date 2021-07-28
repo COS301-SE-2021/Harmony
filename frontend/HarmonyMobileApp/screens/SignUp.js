@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Text,
   Alert,
@@ -19,6 +19,35 @@ import { SocialIcon } from "react-native-elements";
 import * as Animatable from "react-native-animatable";
 
 export default function SignUp({ navigation }) {
+  //Using consts because im not sure how to destructure correctly
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+
+  async function signUp(values) {
+    try {
+      setUsername(values.Username);
+      setPassword(values.Password);
+      setEmail(values.Email);
+
+      const { user } = await Auth.signUp({
+        username,
+        password,
+        attributes: { email },
+      });
+      // console.log(username);
+      // console.log(password);
+      // console.log(email);
+
+      // console.log(user); //Output all user data
+
+      console.log("Sign-up Confirmed");
+      navigation.navigate("ConfirmSignUp");
+    } catch (error) {
+      console.log(" Error signing up...", error);
+    }
+  }
+
   return (
     <Formik
       initialValues={{
@@ -26,7 +55,7 @@ export default function SignUp({ navigation }) {
         Email: "",
         Password: "",
       }}
-      onSubmit={(values) => Alert.alert(JSON.stringify(values))}
+      onSubmit={(values) => signUp(values)}
       validationSchema={yup.object().shape({
         Username: yup
           .string()
