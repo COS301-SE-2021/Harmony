@@ -169,6 +169,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#DD6E42",
     color: "white"
   },
+  filterTag: {
+    borderRadius: 10,
+    padding: 4,
+    height: 35,
+    margin: 2,
+    paddingHorizontal: 20
+  },
+  filterTagsContainer: {
+    height: 40
+  },
   Text: {
     //To my knowledge (Tia) not used
     fontFamily: "sans-serif-light",
@@ -261,18 +271,19 @@ const styles = StyleSheet.create({
 
 
   filterLabel: {
-    flexDirection: "row",
     justifyContent: "space-between",
     paddingVertical: 5,
-    flex: 0,
     width: "100%",
-    zIndex: 80
+    flexDirection: "column",
+    height: 95,
+    paddingBottom: 20,
+    width: 230,
+    marginBottom: 5
   },
 
   spaceLeft: {
     textAlign: "left",
-    flex: 1,
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
 
   spaceRight: {
@@ -289,7 +300,6 @@ const styles = StyleSheet.create({
   },
   filterView: {
     borderWidth: 2,
-    borderColor: "grey",
     paddingBottom: "7%",
     marginHorizontal: -5,
     paddingHorizontal: 5,
