@@ -121,7 +121,7 @@ export default function SignUp({ navigation }) {
                 disabled={!isValid}
                 onPress={handleSubmit}
               />
-              <View style={styles.footerButtonContainer}>
+              <View style={styles.footerTextContainer}>
                 <Text style={styles.footerText}>
                   Already have an account?
                   <Text
@@ -144,36 +144,17 @@ export default function SignUp({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  formContainer: {
-    padding: 50,
-  },
-  safeAreaContainer: {
-    flex: 1,
-    backgroundColor: "white",
-  },
   container: {
     flex: 1,
     // alignItems: "center",
     // justifyContent: "center",
     backgroundColor: "#009387",
   },
-  title: {
-    fontSize: 20,
-    color: "#202020",
-    fontWeight: "500",
-    marginVertical: 15,
+  text_header: {
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 30,
   },
-  footerButtonContainer: {
-    marginVertical: 15,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  forgotPasswordButtonText: {
-    color: "tomato",
-    fontSize: 18,
-    fontWeight: "600",
-  },
-
   header: {
     flex: 1,
     justifyContent: "center",
@@ -196,55 +177,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 30,
   },
-  text_header: {
-    color: "#fff",
-    fontWeight: "bold",
-    fontSize: 30,
-  },
-  text_footer: {
-    color: "#05375a",
-    fontSize: 18,
-  },
-  action: {
-    flexDirection: "row",
-    marginTop: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "#f2f2f2",
-    paddingBottom: 5,
-  },
-  textInput: {
-    flex: 1,
-    marginTop: Platform.OS === "ios" ? 0 : -12,
-    paddingLeft: 10,
-    color: "#05375a",
-  },
-  button: {
-    alignItems: "center",
-    marginTop: 50,
-  },
-  signIn: {
-    width: "100%",
-    height: 50,
+  footerTextContainer: {
+    marginVertical: 15,
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 10,
-  },
-  textSign: {
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  textPrivate: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    marginTop: 20,
-  },
-  color_textPrivate: {
-    color: "grey",
-  },
-  footerView: {
-    flex: 1,
-    alignItems: "center",
-    marginTop: 20,
   },
   footerText: {
     color: "#2e2e2d",
