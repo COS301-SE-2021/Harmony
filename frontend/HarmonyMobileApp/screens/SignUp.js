@@ -22,6 +22,8 @@ import { AppToast } from "../Components/AppToast";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
+import * as Animatable from "react-native-animatable";
+
 export default function SignUp({ navigation }) {
   return (
     <Formik
@@ -59,13 +61,13 @@ export default function SignUp({ navigation }) {
         <KeyboardAwareScrollView
           contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
         >
-          <StatusBar style="auto" />
-
           <View style={styles.container}>
+            <StatusBar style="auto" />
+
             <View style={styles.header}>
               <Text style={styles.text_header}>Create a new account</Text>
             </View>
-            <View style={styles.footer}>
+            <Animatable.View animation="fadeInUpBig" style={styles.footer}>
               <AppTextInput
                 value={values.Username}
                 onChangeText={handleChange("Username")}
@@ -127,7 +129,7 @@ export default function SignUp({ navigation }) {
                   </Text>
                 </TouchableOpacity>
               </View>
-            </View>
+            </Animatable.View>
           </View>
         </KeyboardAwareScrollView>
       )}
@@ -168,11 +170,11 @@ const styles = StyleSheet.create({
 
   header: {
     flex: 1,
-    justifyContent: "flex-end",
-    paddingHorizontal: 20,
-    paddingBottom: 50,
+    justifyContent: "center",
+    alignItems: "center",
   },
   footer: {
+    alignItems: "center",
     flex: Platform.OS === "ios" ? 3 : 1,
     backgroundColor: "#fff",
     borderTopLeftRadius: 30,
