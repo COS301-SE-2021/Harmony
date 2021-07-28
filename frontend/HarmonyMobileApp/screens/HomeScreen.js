@@ -422,9 +422,9 @@ const HomeScreen = (props) => {
                   <View style={styles.filterView}>
                     <View style={[styles.filterLabel, { height: 50, justifyContent: "space-between", paddingVertical: 5, width: "100%", flexDirection: "row" }]}>
                       <Text style={[styles.spaceLeft, styles.TextSmall,]}>Sort Pairings</Text>
-                      <View style={styles.spaceRight}>
+                      <View style={[styles.spaceRight, { flex: 0 }]}>
                         <AntDesign name="caretdown" size={12} style={{ paddingVertical: "10%", marginLeft: 10 }} color="#7C7C7C" />
-                        <Text style={[styles.TextSmaller]}> {sortPairings} </Text>
+                        <Text style={[styles.TextSmaller,]}> {sortPairings} </Text>
                       </View>
                     </View>
                     <View style={{ opacity: 0, zIndex: 100, marginTop: "-23%", marginRight: "-55%", }}>
@@ -442,6 +442,40 @@ const HomeScreen = (props) => {
                   </View>
                   <Text style={{ height: 7 }}></Text>
 
+                  <View style={styles.filterView}>
+                    <View style={[styles.filterLabel, { height: 50, justifyContent: "space-between", paddingVertical: 5, width: "100%", flexDirection: "row" }]}>
+                      <Text style={[styles.spaceLeft, styles.TextSmall]}>Distance</Text>
+                    </View>
+                    <View style={{ flexDirection: "row", justifyContent: "center", marginTop: -25 }}>
+                      <Text style={[styles.TextSmall, { marginRight: 4 }]}>0</Text>
+                      <Slider
+                        value={locationValue}
+                        step={20}
+                        maximumValue={100}
+                        onValueChange={(value) => (console.log(value), setLocationValue(value))}
+                        style={{ width: "70%", }}
+                        thumbStyle={{ width: 20, height: 20, backgroundColor: "grey" }} />
+                      <Text style={[styles.TextSmall, { marginLeft: 4 }]}>100</Text>
+                    </View>
+                    <View style={{ flexDirection: "row", justifyContent: "center" }}>
+                      <TextInput
+                        style={[styles.TextSmall, {
+                          borderRadius: 10,
+                          padding: 2,
+                          backgroundColor: "#F3F2F2",
+                          height: 30,
+                          width: 40
+                        }]}
+                        value={locationValue}
+                        onChangeText={(value) => (console.log(value), setLocationValue(parseInt(value)))}
+                        keyboardType="numeric"
+                        placeholder={locationValue.toString()}
+                        multiline={false}
+                      />
+                      <Text style={[styles.TextSmaller]}>KM</Text>
+                    </View>
+                  </View>
+                  <Text style={{ height: 7 }}></Text>
 
                   <View style={styles.filterView}>
                     <View style={[styles.filterLabel]}>
@@ -485,14 +519,15 @@ const HomeScreen = (props) => {
                       </View>
                     </View>
                   </View>
+                  <Text style={{ height: 7 }}></Text>
 
                   <View style={styles.filterView}>
                     <View style={[styles.filterLabel]}>
-                      <View style={{ flexDirection: "row" }}>
+                      <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
                         <Text style={[styles.spaceLeft, styles.TextSmall]}>Drinks</Text>
                         <Pressable
                           onPress={handleDrinkAlcoholicSelected}
-                          style={[styles.filterTag, { backgroundColor: DrinkAlcoholic, }]}
+                          style={[styles.filterTag, { backgroundColor: DrinkAlcoholic, marginRight: 50 }]}
                         >
                           <Text style={styles.TextSmaller}>Alcoholic</Text>
 
@@ -551,6 +586,7 @@ const HomeScreen = (props) => {
                       </View>
                     </View>
                   </View>
+                  <Text style={{ height: 7 }}></Text>
 
                   <View style={styles.filterView}>
                     <View style={[styles.filterLabel]}>
@@ -558,7 +594,7 @@ const HomeScreen = (props) => {
                         <Text style={[styles.spaceLeft, styles.TextSmall]}>Food</Text>
                         <Pressable
                           onPress={handleFoodSpicySelected}
-                          style={[styles.filterTag, { backgroundColor: FoodSpicy }]}
+                          style={[styles.filterTag, { backgroundColor: FoodSpicy, marginLeft: 20 }]}
                         >
                           <Text style={styles.TextSmaller}>Spicy</Text>
 
@@ -629,40 +665,7 @@ const HomeScreen = (props) => {
                   </View>
 
 
-                  <Text style={{ height: 7 }}></Text>
-                  <View style={styles.filterView}>
-                    <View style={[styles.filterLabel, { height: 50, justifyContent: "space-between", paddingVertical: 5, width: "100%", flexDirection: "row" }]}>
-                      <Text style={[styles.spaceLeft, styles.TextSmall]}>Distance</Text>
-                    </View>
-                    <View style={{ flexDirection: "row", justifyContent: "center" }}>
-                      <Text style={[styles.TextSmall, { marginRight: 4 }]}>0</Text>
-                      <Slider
-                        value={locationValue}
-                        step={20}
-                        maximumValue={100}
-                        onValueChange={(value) => (console.log(value), setLocationValue(value))}
-                        style={{ width: "70%", }}
-                        thumbStyle={{ width: 20, height: 20, backgroundColor: "grey" }} />
-                      <Text style={[styles.TextSmall, { marginLeft: 4 }]}>100</Text>
-                    </View>
-                    <View style={{ flexDirection: "row", justifyContent: "center" }}>
-                      <TextInput
-                        style={[styles.TextSmall, {
-                          borderRadius: 10,
-                          padding: 2,
-                          backgroundColor: "#F3F2F2",
-                          height: 30,
-                          width: 40
-                        }]}
-                        value={locationValue}
-                        onChangeText={(value) => (console.log(value), setLocationValue(parseInt(value)))}
-                        keyboardType="numeric"
-                        placeholder={locationValue.toString()}
-                        multiline={false}
-                      />
-                      <Text style={[styles.TextSmaller]}>KM</Text>
-                    </View>
-                  </View>
+
                   <Text style={{ height: 7 }}></Text>
                   <Pressable
                     style={[styles.button, styles.buttonClose]}

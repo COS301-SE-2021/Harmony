@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 20,
     padding: 20,
-    width: "88%",
+    width: "92%",
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
@@ -186,7 +186,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     height: 95,
     paddingBottom: 20,
-    width: 230,
     marginBottom: 5
   },
 
@@ -209,11 +208,12 @@ const styles = StyleSheet.create({
   },
   filterView: {
     borderWidth: 2,
-    paddingBottom: "7%",
+    paddingBottom: "4%",
     marginHorizontal: -5,
     paddingHorizontal: 5,
     borderRadius: 10,
     borderColor: "#F7F7F7",
+    width: "100%"
   },
   Text: {
     //To my knowledge (Tia) not used
