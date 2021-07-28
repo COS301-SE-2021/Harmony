@@ -197,7 +197,6 @@ const HomeScreen = (props) => {
               transparent={true}
               visible={isModalVisible}
               onRequestClose={() => {
-                Alert.alert("Modal has been closed.");
                 setModalVisible(!isModalVisible);
               }}
             >
@@ -269,7 +268,6 @@ const HomeScreen = (props) => {
                       <Picker.Item label="Dessert" value="Dessert" />
                     </Picker>
                   </View>
-
                   <View style={[styles.filterLabel, { paddingTop: "10%" }]}>
                     <Text style={[styles.spaceLeft, styles.TextSmall]}>Distance</Text>
                     <View style={styles.spaceRight}>
@@ -278,7 +276,6 @@ const HomeScreen = (props) => {
                     </View>
                   </View>
                   <View style={{ flexDirection: "row" }}>
-                    <Text>0</Text>
                     <Slider
                       value={locationValue}
                       step={20}
@@ -286,7 +283,6 @@ const HomeScreen = (props) => {
                       onValueChange={(value) => (console.log(value), setLocationValue(value))}
                       style={{ width: "70%", }}
                       thumbStyle={{ width: 20, height: 20, backgroundColor: "grey" }} />
-                    <Text>100</Text>
                   </View>
                   <Pressable
                     style={[styles.button, styles.buttonClose]}
