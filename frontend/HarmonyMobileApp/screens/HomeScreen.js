@@ -37,13 +37,31 @@ const HomeScreen = (props) => {
 
   //controls all the filters
   const [isModalVisible, setModalVisible] = useState(false);                               //for the filter popup
-  const [flavourProfile, setFlavourProfile] = useState("None");                            // the flavour profile filter
   const [sortPairings, setSortPairings] = useState("Trending");                            // the type of pairings shown filter
   const [mealType, setMealType] = useState("None");                                        // the mealtype filter
   const [locationValue, setLocationValue] = useState(30);                              //distance filer
 
+
+  const [FoodSalty, setFoodSaltySelected] = useState("#F3F2F2");
+  const [FoodSweet, setFoodSweetSelected] = useState("#F3F2F2");
+  const [FoodSour, setFoodSourSelected] = useState("#F3F2F2");
+  const [FoodSavoury, setFoodSavourySelected] = useState("#F3F2F2");
+  const [FoodHot, setFoodHotSelected] = useState("#F3F2F2");
+  const [FoodWarm, setFoodWarmSelected] = useState("#F3F2F2");
+  const [FoodCold, setFoodColdSelected] = useState("#F3F2F2");
+
   const [DrinkSalty, setDrinkSaltySelected] = useState("#F3F2F2");
   const [DrinkSweet, setDrinkSweetSelected] = useState("#F3F2F2");
+  const [DrinkSour, setDrinkSourSelected] = useState("#F3F2F2");
+  const [DrinkHot, setDrinkHotSelected] = useState("#F3F2F2");
+  const [DrinkWarm, setDrinkWarmSelected] = useState("#F3F2F2");
+  const [DrinkCold, setDrinkColdSelected] = useState("#F3F2F2");
+
+  const [Breakfast, setBreakfastSelected] = useState("#F3F2F2");
+  const [Lunch, setLunchSelected] = useState("#F3F2F2");
+  const [Supper, setSupperSelected] = useState("#F3F2F2");
+  const [Snack, setSnackSelected] = useState("#F3F2F2");
+
   //controls all the icons
   const [favouriteIconChecked, setFavouriteIconChecked] = useState("unchecked");
   const [favouriteIconColor, setFavouriteIconColor] = useState("black");                   // controls the favourite heart color (pink/black)
@@ -170,6 +188,150 @@ const HomeScreen = (props) => {
         console.log(" Drink sweet unchecked")
     }
   }
+  handleDrinkSourSelected = () => {
+    if (DrinkSour == "#F3F2F2") {
+      setDrinkSourSelected("#1FBFBA"),
+        console.log("Drink sour checked")
+    }
+    else {
+      setDrinkSourSelected("#F3F2F2"),
+        console.log(" Drink sour unchecked")
+    }
+  }
+  handleDrinkHotSelected = () => {
+    if (DrinkHot == "#F3F2F2") {
+      setDrinkHotSelected("#1FBFBA"),
+        console.log("Drink Hot checked")
+    }
+    else {
+      setDrinkHotSelected("#F3F2F2"),
+        console.log(" Drink Hot unchecked")
+    }
+  }
+  handleDrinkWarmSelected = () => {
+    if (DrinkWarm == "#F3F2F2") {
+      setDrinkWarmSelected("#1FBFBA"),
+        console.log("Drink warm checked")
+    }
+    else {
+      setDrinkWarmSelected("#F3F2F2"),
+        console.log(" Drink warm unchecked")
+    }
+  }
+  handleDrinkColdSelected = () => {
+    if (DrinkCold == "#F3F2F2") {
+      setDrinkColdSelected("#1FBFBA"),
+        console.log("Drink cold checked")
+    }
+    else {
+      setDrinkColdSelected("#F3F2F2"),
+        console.log(" Drink cold unchecked")
+    }
+  }
+  handleBreakfastSelected = () => {
+    if (Breakfast == "#F3F2F2") {
+      setBreakfastSelected("#DD6E42")
+    }
+    else {
+      setBreakfastSelected("#F3F2F2")
+    }
+  }
+  handleLunchSelected = () => {
+    if (Lunch == "#F3F2F2") {
+      setLunchSelected("#DD6E42")
+    }
+    else {
+      setLunchSelected("#F3F2F2")
+    }
+  }
+  handleSupperSelected = () => {
+    if (Supper == "#F3F2F2") {
+      setSupperSelected("#DD6E42")
+    }
+    else {
+      setSupperSelected("#F3F2F2")
+    }
+  }
+  handleSnackSelected = () => {
+    if (Snack == "#F3F2F2") {
+      setSnackSelected("#DD6E42")
+    }
+    else {
+      setSnackSelected("#F3F2F2")
+    }
+  }
+
+  handleFoodSaltySelected = () => {
+    if (FoodSalty == "#F3F2F2") {
+      setFoodSaltySelected("#1FBFBA"),
+        console.log("Food Salty checked")
+    }
+    else {
+      setFoodSaltySelected("#F3F2F2"),
+        console.log(" Food Salty unchecked")
+    }
+  }
+  handleFoodSavourySelected = () => {
+    if (FoodSalty == "#F3F2F2") {
+      setFoodSavourySelected("#1FBFBA"),
+        console.log("Food Salty checked")
+    }
+    else {
+      setFoodSavoourySelected("#F3F2F2"),
+        console.log(" Food Salty unchecked")
+    }
+  }
+  handleFoodSweetSelected = () => {
+    if (FoodSweet == "#F3F2F2") {
+      setFoodSweetSelected("#1FBFBA"),
+        console.log("Food sweet checked")
+    }
+    else {
+      setFoodSweetSelected("#F3F2F2"),
+        console.log(" Food sweet unchecked")
+    }
+  }
+  handleFoodSourSelected = () => {
+    if (FoodSour == "#F3F2F2") {
+      setFoodSourSelected("#1FBFBA"),
+        console.log("Food sour checked")
+    }
+    else {
+      setFoodSourSelected("#F3F2F2"),
+        console.log(" Food sour unchecked")
+    }
+  }
+  handleFoodHotSelected = () => {
+    if (FoodHot == "#F3F2F2") {
+      setFoodHotSelected("#1FBFBA"),
+        console.log("Food Hot checked")
+    }
+    else {
+      setFoodHotSelected("#F3F2F2"),
+        console.log(" Food Hot unchecked")
+    }
+  }
+  handleFoodWarmSelected = () => {
+    if (FoodWarm == "#F3F2F2") {
+      setFoodWarmSelected("#1FBFBA"),
+        console.log("Food warm checked")
+    }
+    else {
+      setFoodWarmSelected("#F3F2F2"),
+        console.log(" Food warm unchecked")
+    }
+  }
+  handleFoodColdSelected = () => {
+    if (FoodCold == "#F3F2F2") {
+      setFoodColdSelected("#1FBFBA"),
+        console.log("Food cold checked")
+    }
+    else {
+      setFoodColdSelected("#F3F2F2"),
+        console.log(" Food cold unchecked")
+    }
+  }
+
   const ShowTitle = () => (
     <Text style={styles.TextLarge}> {sortPairings} </Text>
   )
@@ -258,95 +420,173 @@ const HomeScreen = (props) => {
                   <Text style={{ height: 7 }}></Text>
 
 
-
-                  <View style={styles.filterView}>
-                    <View style={[styles.filterLabel]}>
-                      <Text style={[styles.spaceLeft, styles.TextSmall]}>Drinks</Text>
-                    </View>
-                    <CheckBox
-                      title='Hot'
-                      uncheckedColor="#F3F2F2"
-                      checkedColor="#1FBFBA"
-                      style={{ borderRadius: 20, width: 15 }}
-                      onPress={() => (console.log("pressed Hot"))}
-                    />
-                    <CheckBox
-                      title='Cold'
-                    />
-                    <CheckBox
-                      title='Warm'
-                    />
-                    <CheckBox
-                      title='Sweet'
-                    />
-                    <Pressable
-                      onPress={handleDrinkSaltySelected}
-                      style={[styles.tag, { backgroundColor: DrinkSalty }]}
-                    >
-                      <Text>Salty</Text>
-
-                    </Pressable>
-                    <Pressable
-                      onPress={handleDrinkSweetSelected}
-                      style={[styles.tag, { backgroundColor: DrinkSweet }]}
-                    >
-                      <Text>Sweet</Text>
-
-                    </Pressable>
-                  </View>
-
-
-
-
-
-                  <View style={styles.filterView}>
-                    <View style={[styles.filterLabel]}>
-                      <Text style={[styles.spaceLeft, styles.TextSmall]}>Flavour Profile</Text>
-                      <View style={styles.spaceRight}>
-                        <AntDesign name="caretdown" size={12} style={{ paddingVertical: "10%", marginLeft: 10 }} color="#7C7C7C" />
-                        <Text style={[styles.TextSmaller]}> {flavourProfile} </Text>
-                      </View>
-                    </View>
-
-
-                    <View style={{ opacity: 0, zIndex: 100, marginTop: "-23%", marginRight: "-50%" }}>
-                      <Picker
-                        flavourProfile={flavourProfile}
-                        style={{ height: 40, width: 120, }}
-                        onValueChange={(itemValue, itemIndex) => { setFlavourProfile(itemValue); console.log(itemValue) }}
-                      >
-                        <Picker.Item label="None" value="None" />
-                        <Picker.Item label="Sweet" value="Sweet" />
-                        <Picker.Item label="Salty" value="Salty" />
-                        <Picker.Item label="Spicy" value="Spicy" />
-                        <Picker.Item label="Sour" value="Sour" />
-                      </Picker>
-                    </View>
-                  </View>
-                  <Text style={{ height: 7 }}></Text>
-
                   <View style={styles.filterView}>
                     <View style={[styles.filterLabel]}>
                       <Text style={[styles.spaceLeft, styles.TextSmall]}>Meal Type</Text>
-                      <View style={styles.spaceRight}>
-                        <AntDesign name="caretdown" size={12} style={{ paddingVertical: "10%", marginLeft: 10 }} color="#7C7C7C" />
-                        <Text style={[styles.TextSmaller]}> {mealType} </Text>
+
+                      <Pressable
+                        onPress={handleBreakfastSelected}
+                        style={[styles.tag, { backgroundColor: Breakfast }]}
+                      >
+                        <Text style={styles.TextSmaller}>Breakfast</Text>
+
+                      </Pressable>
+                      <Pressable
+                        onPress={handleLunchSelected}
+                        style={[styles.tag, { backgroundColor: Lunch }]}
+                      >
+                        <Text style={styles.TextSmaller}>Lunch</Text>
+
+                      </Pressable>
+                      <Pressable
+                        onPress={handleSupperSelected}
+                        style={[styles.tag, { backgroundColor: Supper }]}
+                      >
+                        <Text style={styles.TextSmaller}>Supper</Text>
+
+                      </Pressable>
+                      <Pressable
+                        onPress={handleSnackSelected}
+                        style={[styles.tag, { backgroundColor: Snack }]}
+                      >
+                        <Text style={styles.TextSmaller}>Snack</Text>
+
+                      </Pressable>
+                    </View>
+
+
+                    <View style={[styles.filterView, styles.centeredView]}>
+                      <View style={[styles.filterLabel]}>
+                        <Text style={[styles.spaceLeft, styles.TextSmall]}>Drinks</Text>
+                      </View>
+                      <View style={{ flexDirection: "row", }}>
+                        <Pressable
+                          onPress={handleDrinkSaltySelected}
+                          style={[styles.tag, { backgroundColor: DrinkSalty }]}
+                        >
+                          <Text style={styles.TextSmaller}>Salty</Text>
+
+                        </Pressable>
+                        <Pressable
+                          onPress={handleDrinkSweetSelected}
+                          style={[styles.tag, { backgroundColor: DrinkSweet }]}
+                        >
+                          <Text style={styles.TextSmaller}>Sweet</Text>
+
+                        </Pressable>
+
+                        <Pressable
+                          onPress={handleDrinkSourSelected}
+                          style={[styles.tag, { backgroundColor: DrinkSour }]}
+                        >
+                          <Text style={styles.TextSmaller}>Sour</Text>
+
+                        </Pressable>
+                      </View>
+                      <View style={{ flexDirection: "row", }}>
+
+                        <Pressable
+                          onPress={handleDrinkHotSelected}
+                          style={[styles.tag, { backgroundColor: DrinkHot }]}
+                        >
+                          <Text style={styles.TextSmaller}>Hot</Text>
+
+                        </Pressable>
+                        <Pressable
+                          onPress={handleDrinkWarmSelected}
+                          style={[styles.tag, { backgroundColor: DrinkWarm }]}
+                        >
+                          <Text style={styles.TextSmaller}>Warm</Text>
+
+                        </Pressable>
+
+                        <Pressable
+                          onPress={handleDrinkColdSelected}
+                          style={[styles.tag, { backgroundColor: DrinkCold }]}
+                        >
+                          <Text style={styles.TextSmaller}>Cold</Text>
+
+                        </Pressable>
+
+
+
+
                       </View>
                     </View>
 
-                    <View style={{ opacity: 0, zIndex: 100, marginTop: "-20%", marginRight: "-55%" }}>
-                      <Picker
-                        mealType={mealType}
-                        style={{ height: 40, width: 120 }}
-                        onValueChange={(itemValue, itemIndex) => { setMealType(itemValue); console.log(itemValue) }}
-                      >
-                        <Picker.Item label="None" value="None" />
-                        <Picker.Item label="Breakfast" value="Breakfast" />
-                        <Picker.Item label="Brunch" value="Brunch" />
-                        <Picker.Item label="Supper" value="Supper" />
-                        <Picker.Item label="Dessert" value="Dessert" />
-                      </Picker>
+
+                    <View style={[styles.filterView, styles.centeredView]}>
+                      <View style={[styles.filterLabel]}>
+                        <Text style={[styles.spaceLeft, styles.TextSmall]}>Food</Text>
+                      </View>
+                      <View style={{ flexDirection: "row", }}>
+                        <Pressable
+                          onPress={handleFoodSaltySelected}
+                          style={[styles.tag, { backgroundColor: FoodSalty }]}
+                        >
+                          <Text style={styles.TextSmaller}>Salty</Text>
+
+                        </Pressable>
+                        <Pressable
+                          onPress={handleFoodSweetSelected}
+                          style={[styles.tag, { backgroundColor: FoodSweet }]}
+                        >
+                          <Text style={styles.TextSmaller}>Sweet</Text>
+
+                        </Pressable>
+
+                        <Pressable
+                          onPress={handleFoodSourSelected}
+                          style={[styles.tag, { backgroundColor: FoodSour }]}
+                        >
+                          <Text style={styles.TextSmaller}>Sour</Text>
+
+                        </Pressable>
+
+                        <Pressable
+                          onPress={handleFoodSavourySelected}
+                          style={[styles.tag, { backgroundColor: FoodSavoury }]}
+                        >
+                          <Text style={styles.TextSmaller}>Savoury</Text>
+
+                        </Pressable>
+                      </View>
+                      <View style={{ flexDirection: "row", }}>
+
+                        <Pressable
+                          onPress={handleFoodHotSelected}
+                          style={[styles.tag, { backgroundColor: FoodHot }]}
+                        >
+                          <Text style={styles.TextSmaller}>Hot</Text>
+
+                        </Pressable>
+                        <Pressable
+                          onPress={handleFoodWarmSelected}
+                          style={[styles.tag, { backgroundColor: FoodWarm }]}
+                        >
+                          <Text style={styles.TextSmaller}>Warm</Text>
+
+                        </Pressable>
+
+                        <Pressable
+                          onPress={handleFoodColdSelected}
+                          style={[styles.tag, { backgroundColor: FoodCold }]}
+                        >
+                          <Text style={styles.TextSmaller}>Cold</Text>
+
+                        </Pressable>
+
+
+
+
+                      </View>
                     </View>
+
+
+
+
+
+
                   </View>
                   <Text style={{ height: 7 }}></Text>
                   <View style={styles.filterView}>
@@ -432,7 +672,7 @@ const HomeScreen = (props) => {
                           ))}
 
                           {item.FoodTags.map((tag, index) => (
-                            <View style={[styles.tagContainer, { backgroundColor: "#E97802" }]} key={index}>
+                            <View style={[styles.tagContainer, { backgroundColor: "#C41ED4" }]} key={index}>
                               {/*<FontAwesome name="tag" size={14} color="#fff" />*/}
                               <FontAwesome5 name="hamburger" size={14} color="#fff" />
                               {/* Keeping outlined icons just incase we want to change to them for consistency overall */}
@@ -489,7 +729,7 @@ const HomeScreen = (props) => {
           )}
         </View>
       </ScrollView>
-    </ApplicationProvider>
+    </ApplicationProvider >
   );
 
 
