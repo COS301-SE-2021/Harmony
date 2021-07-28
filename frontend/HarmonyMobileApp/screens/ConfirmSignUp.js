@@ -18,13 +18,28 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import * as Animatable from "react-native-animatable";
 
 export default function ConfirmSignUp({ navigation }) {
+  async function confirmSignUp(values) {
+    try {
+      await Auth.confirmSignUp(values.Username, values.authCode);
+      console.log(" Code confirmed");
+      navigation.navigate("SignIn");
+
+      // Add a Toast on screen.
+      AppToast.ToastDisplay("Success");
+    } catch (error) {
+      console.log(
+        " Verification code does not match. Please enter a valid verification code.",
+        error.code
+      );
+    }
+  }
   return (
     <Formik
       initialValues={{
         Username: "",
         authCode: "",
       }}
-      onSubmit={(values) => Alert.alert(JSON.stringify(values))}
+      onSubmit={(values) => confirmSignUp(values)}
       validationSchema={yup.object().shape({
         Username: yup
           .string()
