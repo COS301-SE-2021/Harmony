@@ -14,14 +14,14 @@ import {
 } from "react-native";
 import styles from "../styles";
 import {
-  Feather, SimpleLineIcons, FontAwesome, Entypo, AntDesign
+  Feather, SimpleLineIcons, FontAwesome, Entypo, AntDesign, FontAwesome5, MaterialCommunityIcons, MaterialIcons
 } from '@expo/vector-icons';
 import Modal from "react-native-modal";
 import * as eva from '@eva-design/eva';
 import { default as theme } from '../theme.json';
 import { ApplicationProvider, Layout, Divider, Card, Text } from '@ui-kitten/components';
 import { useIsFocused } from "@react-navigation/native";
-import { Header, Slider } from 'react-native-elements'
+import { Header, Slider, CheckBox } from 'react-native-elements'
 const MIN_HEIGHT = Platform.OS === "ios" ? 90 : 55;
 const MAX_HEIGHT = 300;
 
@@ -42,6 +42,8 @@ const HomeScreen = (props) => {
   const [mealType, setMealType] = useState("None");                                        // the mealtype filter
   const [locationValue, setLocationValue] = useState(30);                              //distance filer
 
+  const [DrinkSalty, setDrinkSaltySelected] = useState("#F3F2F2");
+  const [DrinkSweet, setDrinkSweetSelected] = useState("#F3F2F2");
   //controls all the icons
   const [favouriteIconChecked, setFavouriteIconChecked] = useState("unchecked");
   const [favouriteIconColor, setFavouriteIconColor] = useState("black");                   // controls the favourite heart color (pink/black)
@@ -146,6 +148,28 @@ const HomeScreen = (props) => {
         setFavouriteIconChecked("unchecked")
     }
   }
+
+
+  handleDrinkSaltySelected = () => {
+    if (DrinkSalty == "#F3F2F2") {
+      setDrinkSaltySelected("#1FBFBA"),
+        console.log("Drink Salty checked")
+    }
+    else {
+      setDrinkSaltySelected("#F3F2F2"),
+        console.log(" Drink Salty unchecked")
+    }
+  }
+  handleDrinkSweetSelected = () => {
+    if (DrinkSweet == "#F3F2F2") {
+      setDrinkSweetSelected("#1FBFBA"),
+        console.log("Drink sweet checked")
+    }
+    else {
+      setDrinkSweetSelected("#F3F2F2"),
+        console.log(" Drink sweet unchecked")
+    }
+  }
   const ShowTitle = () => (
     <Text style={styles.TextLarge}> {sortPairings} </Text>
   )
@@ -232,6 +256,48 @@ const HomeScreen = (props) => {
                     </View>
                   </View>
                   <Text style={{ height: 7 }}></Text>
+
+
+
+                  <View style={styles.filterView}>
+                    <View style={[styles.filterLabel]}>
+                      <Text style={[styles.spaceLeft, styles.TextSmall]}>Drinks</Text>
+                    </View>
+                    <CheckBox
+                      title='Hot'
+                      uncheckedColor="#F3F2F2"
+                      checkedColor="#1FBFBA"
+                      style={{ borderRadius: 20, width: 15 }}
+                      onPress={() => (console.log("pressed Hot"))}
+                    />
+                    <CheckBox
+                      title='Cold'
+                    />
+                    <CheckBox
+                      title='Warm'
+                    />
+                    <CheckBox
+                      title='Sweet'
+                    />
+                    <Pressable
+                      onPress={handleDrinkSaltySelected}
+                      style={[styles.tag, { backgroundColor: DrinkSalty }]}
+                    >
+                      <Text>Salty</Text>
+
+                    </Pressable>
+                    <Pressable
+                      onPress={handleDrinkSweetSelected}
+                      style={[styles.tag, { backgroundColor: DrinkSweet }]}
+                    >
+                      <Text>Sweet</Text>
+
+                    </Pressable>
+                  </View>
+
+
+
+
 
                   <View style={styles.filterView}>
                     <View style={[styles.filterLabel]}>
@@ -356,7 +422,19 @@ const HomeScreen = (props) => {
                         <View style={styles.rowContainer}>
                           {item.FoodTags.map((tag, index) => (
                             <View style={styles.tagContainer} key={index}>
-                              <FontAwesome name="tag" size={14} color="#fff" />
+                              {/*<FontAwesome name="tag" size={14} color="#fff" />*/}
+                              <MaterialIcons name="fastfood" size={14} color="#fff" />
+                              {/* Keeping outlined icons just incase we want to change to them for consistency overall */}
+                              {/* The filled icons look better in this case though */}
+                              {/* <Feather name="tag" size={16} color="#fff" /> */}
+                              <Text style={styles.tagText}>{tag}</Text>
+                            </View>
+                          ))}
+
+                          {item.FoodTags.map((tag, index) => (
+                            <View style={[styles.tagContainer, { backgroundColor: "#E97802" }]} key={index}>
+                              {/*<FontAwesome name="tag" size={14} color="#fff" />*/}
+                              <FontAwesome5 name="hamburger" size={14} color="#fff" />
                               {/* Keeping outlined icons just incase we want to change to them for consistency overall */}
                               {/* The filled icons look better in this case though */}
                               {/* <Feather name="tag" size={16} color="#fff" /> */}
@@ -364,8 +442,10 @@ const HomeScreen = (props) => {
                             </View>
                           ))}
                           {item.DrinkTags.map((tag, index) => (
-                            <View style={styles.tagContainer} key={index}>
-                              <FontAwesome name="tag" size={14} color="#fff" />
+                            <View style={[styles.tagContainer, { backgroundColor: "#1FBFBA" }]}
+                              key={index}>
+                              {/*<FontAwesome name="tag" size={14} color="#fff" />*/}
+                              <MaterialCommunityIcons name="cup" size={14} color="#fff" />
                               {/* Keeping outlined icons just incase we want to change to them for consistency overall */}
                               {/* The filled icons look better in this case though */}
                               {/* <Feather name="tag" size={16} color="#fff" /> */}
