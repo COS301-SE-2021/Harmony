@@ -17,14 +17,14 @@ export default function ForgotPassword({ navigation, updateAuthState }) {
   async function forgotPassword(values) {
     try {
       setLoading(true);
-      await Auth.forgotPassword(values.Username);
+      //   await Auth.forgotPassword(values.Username);
       setLoading(false);
       console.log("Email sent");
 
       // Add a Toast on screen.
       AppToast.ToastDisplay("Email sent");
 
-      navigation.navigate("ConfirmSignUp");
+      navigation.navigate("ConfirmForgotPassword");
     } catch (error) {
       console.log(" Error sending password reset code...", error);
       setLoading(false);

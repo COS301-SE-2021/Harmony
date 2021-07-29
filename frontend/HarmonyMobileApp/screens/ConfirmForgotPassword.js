@@ -20,12 +20,16 @@ export default function ConfirmForgotPassword({ navigation, updateAuthState }) {
   async function confirmForgotPassword(values) {
     try {
       setLoading(true);
-      await Auth.confirmForgotPassword(values.Username, values.Password);
+      await Auth.confirmForgotPassword(
+        values.Username,
+        values.authCode,
+        values.Password
+      );
       setLoading(false);
       console.log("Success, Signed in");
 
       // Add a Toast on screen.
-      AppToast.ToastDisplay("Signed in");
+      AppToast.ToastDisplay("Success");
 
       updateAuthState("loggedIn");
     } catch (error) {
@@ -38,6 +42,7 @@ export default function ConfirmForgotPassword({ navigation, updateAuthState }) {
     <Formik
       initialValues={{
         Username: "",
+        authCode: "",
         Password: "",
       }}
       onSubmit={(values) => confirmForgotPassword(values)}
@@ -47,6 +52,11 @@ export default function ConfirmForgotPassword({ navigation, updateAuthState }) {
           .min(2)
           .max(20)
           .required("Please, provide your Username!"),
+        authCode: yup
+          .string()
+          .min(6)
+          .max(6)
+          .required("Please, provide your Authetication Code!"),
         Password: yup
           .string()
           .min(8)
@@ -68,7 +78,7 @@ export default function ConfirmForgotPassword({ navigation, updateAuthState }) {
           <View style={styles.container}>
             <StatusBar style="auto" />
             <View style={styles.header}>
-              <Text style={styles.text_header}>Sign in to your account</Text>
+              <Text style={styles.text_header}>Reset your password</Text>
             </View>
 
             <Animatable.View animation="fadeInUpBig" style={styles.body}>
@@ -89,6 +99,23 @@ export default function ConfirmForgotPassword({ navigation, updateAuthState }) {
                   {errors.Username}
                 </Text>
               )}
+
+              <AppTextInput
+                value={values.authCode}
+                onChangeText={handleChange("authCode")}
+                leftIcon="numeric"
+                placeholder="Enter verification code"
+                keyboardType="numeric"
+                onBlur={() => setFieldTouched("authCode")}
+                error={errors.authCode}
+                touched={touched.authCode}
+              />
+              {touched.authCode && errors.authCode && (
+                <Text style={{ fontSize: 12, color: "#FF0D10" }}>
+                  {errors.authCode}
+                </Text>
+              )}
+
               <AppTextInput
                 value={values.Password}
                 onChangeText={handleChange("Password")}
@@ -106,26 +133,10 @@ export default function ConfirmForgotPassword({ navigation, updateAuthState }) {
                 </Text>
               )}
               <AppButton
-                title="Login"
+                title="Save"
                 disabled={!isValid}
                 onPress={handleSubmit}
               />
-              <View style={styles.footerTextContainer}>
-                <Text style={styles.footerText}>
-                  Don't have an account?
-                  <Text
-                    onPress={() => navigation.navigate("SignUp")}
-                    style={styles.footerLink}
-                  >
-                    {" "}
-                    Sign Up
-                  </Text>
-                </Text>
-              </View>
-            </Animatable.View>
-            <Animatable.View animation="fadeInUpBig" style={styles.footer}>
-              <SocialIcon type="facebook" />
-              <SocialIcon type="google" />
             </Animatable.View>
           </View>
           {isLoading === true && <AppLoadingIcon />}
@@ -158,31 +169,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flex: Platform.OS === "ios" ? 3 : 1,
     backgroundColor: "#fff",
-    borderRadius: 30,
+    borderTopRightRadius: 30,
+    borderTopLeftRadius: 30,
     paddingHorizontal: 20,
     paddingVertical: 30,
-  },
-  footer: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    paddingHorizontal: 20,
-    paddingVertical: 30,
-  },
-  footerTextContainer: {
-    marginVertical: 15,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  footerText: {
-    color: "#2e2e2d",
-    fontSize: 18,
-    fontWeight: "600",
-  },
-  footerLink: {
-    color: "#788eec",
-    fontSize: 19,
-    fontWeight: "600",
   },
 });
