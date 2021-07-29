@@ -1,13 +1,5 @@
 import React, { useState } from "react";
-import {
-  Text,
-  Alert,
-  View,
-  StyleSheet,
-  StatusBar,
-  Platform,
-  ActivityIndicator,
-} from "react-native";
+import { Text, View, StyleSheet, StatusBar, Platform } from "react-native";
 import * as yup from "yup";
 import { Formik } from "formik";
 import { Auth } from "aws-amplify";
@@ -18,6 +10,7 @@ import { AppToast } from "../Components/AppToast";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { SocialIcon } from "react-native-elements";
 import * as Animatable from "react-native-animatable";
+import AppLoadingIcon from "../Components/AppLoadingIcon";
 
 export default function SignUp({ navigation }) {
   //Using consts because im not sure how to destructure correctly
@@ -55,13 +48,6 @@ export default function SignUp({ navigation }) {
       setLoading(false);
     }
   }
-  const LoadingIcon = () => {
-    return (
-      <View style={styles.loadingIcon}>
-        <ActivityIndicator size="large" color="tomato" />
-      </View>
-    );
-  };
   return (
     <Formik
       initialValues={{
@@ -177,7 +163,7 @@ export default function SignUp({ navigation }) {
               <SocialIcon type="google" />
             </Animatable.View>
           </View>
-          {isLoading === true && <LoadingIcon />}
+          {isLoading === true && <AppLoadingIcon />}
         </KeyboardAwareScrollView>
       )}
     </Formik>
@@ -233,15 +219,5 @@ const styles = StyleSheet.create({
     color: "#788eec",
     fontSize: 19,
     fontWeight: "600",
-  },
-  loadingIcon: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#F5FCFF88",
   },
 });
