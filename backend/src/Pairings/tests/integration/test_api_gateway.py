@@ -8,7 +8,7 @@ import requests
 Make sure env variable AWS_SAM_STACK_NAME exists with the name of the stack we are going to test. 
 """
 
-
+os.environ['AWS_SAM_STACK_NAME'] = 'tester'
 class TestApiGateway(TestCase):
     api_endpoint: str
 
@@ -26,7 +26,7 @@ class TestApiGateway(TestCase):
     def setUp(self) -> None:
         """
         Based on the provided env variable AWS_SAM_STACK_NAME,
-        here we use cloudformation API to find out what the HelloWorldApi URL is
+        here we use cloudformation API to find out what the ViewPairingsApi URL is
         """
         stack_name = TestApiGateway.get_stack_name()
 
@@ -42,14 +42,14 @@ class TestApiGateway(TestCase):
         stacks = response["Stacks"]
 
         stack_outputs = stacks[0]["Outputs"]
-        api_outputs = [output for output in stack_outputs if output["OutputKey"] == "HelloWorldApi"]
-        self.assertTrue(api_outputs, f"Cannot find output HelloWorldApi in stack {stack_name}")
+        api_outputs = [output for output in stack_outputs if output["OutputKey"] == "ViewPairingsApi"]
+        self.assertTrue(api_outputs, f"Cannot find output ViewPairingsApi in stack {stack_name}")
 
         self.api_endpoint = api_outputs[0]["OutputValue"]
 
     def test_api_gateway(self):
         """
-        Call the API Gateway endpoint and check the response
+        Call the API Gateway endpoint and check the response status code
         """
         response = requests.get(self.api_endpoint)
-        self.assertDictEqual(response.json(), {"message": "hello world"})
+      
