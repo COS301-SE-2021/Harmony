@@ -8,6 +8,7 @@ import Amplify from "aws-amplify";
 import awsExports from "./aws-exports";
 import { RootSiblingParent } from "react-native-root-siblings";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import FlashMessage from "react-native-flash-message";
 
 Amplify.configure({
   ...awsExports,
@@ -26,6 +27,8 @@ const App = () => (
         <IconRegistry icons={EvaIconsPack} />
         <ApplicationProvider {...eva} theme={eva.light}>
           <AppNavigator />
+          {/* FlashMessage Must be the last component */}
+          <FlashMessage position="bottom" autoHide={false} icon="auto" />
         </ApplicationProvider>
       </RootSiblingParent>
     </SafeAreaProvider>

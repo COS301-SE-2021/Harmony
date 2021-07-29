@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Text, View, StyleSheet, StatusBar, Platform } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  StatusBar,
+  Platform,
+  Alert,
+} from "react-native";
 import * as yup from "yup";
 import { Formik } from "formik";
 import { Auth } from "aws-amplify";
@@ -13,6 +20,7 @@ import AppLoadingIcon from "../Components/AppLoadingIcon";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { SocialIcon } from "react-native-elements";
 import * as Animatable from "react-native-animatable";
+import { showMessage, hideMessage } from "react-native-flash-message";
 
 export default function SignIn({ navigation, updateAuthState }) {
   const [isLoading, setLoading] = useState(false);
@@ -30,6 +38,13 @@ export default function SignIn({ navigation, updateAuthState }) {
       updateAuthState("loggedIn");
     } catch (error) {
       console.log(" Error signing in...", error);
+      // Alert.alert("Error", error.message);
+      showMessage({
+        message: "Error",
+        description: error.message,
+        type: "danger",
+      });
+
       setLoading(false);
     }
   }
