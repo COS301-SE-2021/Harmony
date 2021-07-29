@@ -105,27 +105,40 @@ export default function SignIn({ navigation, updateAuthState }) {
                   {errors.Password}
                 </Text>
               )}
+
               <AppButton
                 title="Login"
                 disabled={!isValid}
                 onPress={handleSubmit}
               />
               <View style={styles.footerTextContainer}>
+                <Text
+                  onPress={() => navigation.navigate("ForgotPassword")}
+                  style={styles.footerLink}
+                >
+                  {" "}
+                  Forgot Password
+                </Text>
+              </View>
+            </Animatable.View>
+            <Animatable.View animation="fadeInUpBig" style={styles.footer}>
+              <View style={styles.footerIcons}>
+                <SocialIcon type="facebook" />
+                <SocialIcon type="google" />
+              </View>
+
+              <View style={styles.footerTextContainer}>
                 <Text style={styles.footerText}>
                   Don't have an account?
                   <Text
                     onPress={() => navigation.navigate("SignUp")}
-                    style={styles.footerLink}
+                    style={styles.signUpLink}
                   >
                     {" "}
                     Sign Up
                   </Text>
                 </Text>
               </View>
-            </Animatable.View>
-            <Animatable.View animation="fadeInUpBig" style={styles.footer}>
-              <SocialIcon type="facebook" />
-              <SocialIcon type="google" />
             </Animatable.View>
           </View>
           {isLoading === true && <AppLoadingIcon />}
@@ -162,13 +175,17 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 30,
   },
+
   footer: {
     flex: 1,
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  footerIcons: {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    paddingHorizontal: 20,
-    paddingVertical: 30,
   },
   footerTextContainer: {
     marginVertical: 15,
@@ -176,12 +193,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   footerText: {
-    color: "#2e2e2d",
+    color: "#fff",
     fontSize: 18,
     fontWeight: "600",
   },
   footerLink: {
     color: "#788eec",
+    fontSize: 19,
+    fontWeight: "600",
+  },
+  signUpLink: {
+    // color: "#ffa07a",
+    color: "#afeeee",
+    // color: "#00ffff",
     fontSize: 19,
     fontWeight: "600",
   },
