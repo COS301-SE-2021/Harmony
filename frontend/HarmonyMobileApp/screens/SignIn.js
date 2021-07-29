@@ -1,24 +1,18 @@
 import React, { useState } from "react";
-import {
-  Text,
-  Alert,
-  View,
-  StyleSheet,
-  StatusBar,
-  Platform,
-  ActivityIndicator,
-} from "react-native";
+import { Text, View, StyleSheet, StatusBar, Platform } from "react-native";
 import * as yup from "yup";
 import { Formik } from "formik";
 import { Auth } from "aws-amplify";
 import { SafeAreaView } from "react-native-safe-area-context";
+
 import AppTextInput from "../Components/AppTextInput";
 import AppButton from "../Components/AppButton";
 import { AppToast } from "../Components/AppToast";
+import AppLoadingIcon from "../Components/AppLoadingIcon";
+
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { SocialIcon } from "react-native-elements";
 import * as Animatable from "react-native-animatable";
-import AnimatedLoader from "react-native-animated-loader";
 
 export default function SignIn({ navigation, updateAuthState }) {
   const [isLoading, setLoading] = useState(false);
@@ -40,13 +34,6 @@ export default function SignIn({ navigation, updateAuthState }) {
     }
   }
 
-  const LoadingIcon = () => {
-    return (
-      <View style={styles.loadingIcon}>
-        <ActivityIndicator size="large" color="tomato" />
-      </View>
-    );
-  };
   return (
     <Formik
       initialValues={{
@@ -141,7 +128,7 @@ export default function SignIn({ navigation, updateAuthState }) {
               <SocialIcon type="google" />
             </Animatable.View>
           </View>
-          {isLoading === true && <LoadingIcon />}
+          {isLoading === true && <AppLoadingIcon />}
         </KeyboardAwareScrollView>
       )}
     </Formik>
@@ -197,15 +184,5 @@ const styles = StyleSheet.create({
     color: "#788eec",
     fontSize: 19,
     fontWeight: "600",
-  },
-  loadingIcon: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#F5FCFF88",
   },
 });
