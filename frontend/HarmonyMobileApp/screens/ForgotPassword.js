@@ -14,19 +14,19 @@ import AppLoadingIcon from "../Components/AppLoadingIcon";
 export default function ForgotPassword({ navigation, updateAuthState }) {
   const [isLoading, setLoading] = useState(false);
 
-  async function signIn(values) {
+  async function forgotPassword(values) {
     try {
       setLoading(true);
-      await Auth.signIn(values.Username, values.Password);
+      await Auth.forgotPassword(values.Username);
       setLoading(false);
-      console.log("Success, Signed in");
+      console.log("Email sent");
 
       // Add a Toast on screen.
-      AppToast.ToastDisplay("Signed in");
+      AppToast.ToastDisplay("Email sent");
 
-      updateAuthState("loggedIn");
+      //   updateAuthState("loggedIn");
     } catch (error) {
-      console.log(" Error signing in...", error);
+      console.log(" Error sending password reset code...", error);
       setLoading(false);
     }
   }
@@ -36,7 +36,7 @@ export default function ForgotPassword({ navigation, updateAuthState }) {
       initialValues={{
         Username: "",
       }}
-      onSubmit={(values) => signIn(values)}
+      onSubmit={(values) => forgotPassword(values)}
       validationSchema={yup.object().shape({
         Username: yup
           .string()
