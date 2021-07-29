@@ -14,26 +14,28 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { SocialIcon } from "react-native-elements";
 import * as Animatable from "react-native-animatable";
 
-export default function ConfirmForgotPassword({ navigation, updateAuthState }) {
+export default function ConfirmForgotPassword({ navigation }) {
   const [isLoading, setLoading] = useState(false);
 
   async function confirmForgotPassword(values) {
     try {
       setLoading(true);
-      await Auth.confirmForgotPassword(
+      // Collect confirmation code and new password, then
+      await Auth.forgotPasswordSubmit(
         values.Username,
         values.authCode,
         values.Password
       );
+
       setLoading(false);
-      console.log("Success, Signed in");
+      console.log("Success, Password changed");
 
       // Add a Toast on screen.
-      AppToast.ToastDisplay("Success");
+      AppToast.ToastDisplay("Password changed");
 
-      updateAuthState("loggedIn");
+      navigation.navigate("SignIn");
     } catch (error) {
-      console.log(" Error signing in...", error);
+      console.log(" Error resetting password...", error);
       setLoading(false);
     }
   }
