@@ -443,14 +443,14 @@ const HomeScreen = (props) => {
                   </View>*/}
 
                   <View style={styles.filterView}>
-                    <View style={[styles.filterLabel, { height: 50, justifyContent: "space-between", paddingVertical: 5, width: "100%", flexDirection: "row" }]}>
+                    <View style={[styles.filterLabelRow]}>
                       <Text style={[styles.spaceLeft, styles.TextSmall, { paddingTop: 5 }]}>Sort Pairings</Text>
                       <View style={[styles.spaceRight, { flex: 0 }]}>
                         <AntDesign name="caretdown" size={12} style={{ paddingVertical: "10%", marginLeft: 10 }} color="#7C7C7C" />
-                        <Text style={[styles.TextSmaller,]}> {sortPairings} </Text>
+                        <Text style={[styles.TextSmaller, { flex: 1, textAlign: "center", justifyContent: "center" }]}> {sortPairings} </Text>
                       </View>
                     </View>
-                    <View style={{ opacity: 0, zIndex: 100, marginTop: "-20%", marginRight: "-55%", }}>
+                    <View style={styles.pickerView}>
                       <Picker
                         sortPairings={sortPairings}
                         style={[styles.TextSmall, { height: 40, width: 300, }]}
@@ -466,7 +466,7 @@ const HomeScreen = (props) => {
                   <Text style={{ height: 7 }}></Text>
 
                   <View style={styles.filterView}>
-                    <View style={[styles.filterLabel, { height: 50, justifyContent: "space-between", paddingVertical: 5, width: "100%", flexDirection: "row" }]}>
+                    <View style={[styles.filterLabelRow]}>
                       <Text style={[styles.spaceLeft, styles.TextSmall]}>Distance</Text>
                     </View>
                     <View style={{ flexDirection: "row", justifyContent: "center", marginTop: -25 }}>
@@ -476,21 +476,15 @@ const HomeScreen = (props) => {
                         step={20}
                         maximumValue={100}
                         onValueChange={(value) => (console.log(value), setLocationValue(value))}
-                        style={{ width: "70%", }}
+                        style={{ width: "70%" }}
                         thumbStyle={{ width: 20, height: 20, backgroundColor: "grey" }} />
                       <Text style={[styles.TextSmall, { marginLeft: 4 }]}>100</Text>
                     </View>
                     <View style={{ flexDirection: "row", justifyContent: "center" }}>
                       <TextInput
-                        style={[styles.TextSmall, {
-                          borderRadius: 10,
-                          padding: 2,
-                          backgroundColor: "#F3F2F2",
-                          height: 30,
-                          width: 40
-                        }]}
+                        style={[styles.TextSmall, styles.TextInputStyling]}
                         value={locationValue}
-                        onChangeText={(value) => (console.log(value), setLocationValue(parseInt(value)))}
+                        onChangeText={(value) => (setLocationValue(parseInt(value)))}
                         keyboardType="numeric"
                         placeholder={locationValue.toString()}
                         multiline={false}

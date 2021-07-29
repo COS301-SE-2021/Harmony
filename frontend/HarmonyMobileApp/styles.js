@@ -188,7 +188,29 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     marginBottom: 5
   },
-
+  filterLabelRow: {
+    height: 50,
+    justifyContent: "space-between",
+    paddingVertical: 5,
+    width: "100%",
+    flexDirection: "row"
+  },
+  TextInputStyling: {
+    borderRadius: 10,
+    padding: 2,
+    backgroundColor: "#F3F2F2",
+    height: 30,
+    width: 40,
+    textAlign: "center",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  pickerView: {
+    opacity: 0,
+    zIndex: 100,
+    marginTop: "-20%",
+    marginRight: "-55%",
+  },
   spaceLeft: {
     textAlign: "left",
     fontWeight: "bold",
