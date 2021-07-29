@@ -24,6 +24,9 @@ import { default as theme } from '../theme.json';
 import { ApplicationProvider, Layout, Divider, Card, Text } from '@ui-kitten/components';
 import { useIsFocused } from "@react-navigation/native";
 import { Header, Slider, CheckBox } from 'react-native-elements'
+
+import FilterTag from "../Components/FilterTag";
+
 const MIN_HEIGHT = Platform.OS === "ios" ? 90 : 55;
 const MAX_HEIGHT = 300;
 
@@ -504,13 +507,18 @@ const HomeScreen = (props) => {
                       </View>
                       <View style={[styles.filterTagsContainer]}>
                         <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
-                          <Pressable
+                          {/*} <Pressable
                             onPress={handleBreakfastSelected}
                             style={[styles.filterTag, { backgroundColor: Breakfast }]}
                           >
                             <Text style={styles.TextSmaller}>Breakfast</Text>
 
                           </Pressable>
+                      */}
+                          <FilterTag
+                            color="#FF6347"
+                            title="Breakfast"
+                          />
                           <Pressable
                             onPress={handleLunchSelected}
                             style={[styles.filterTag, { backgroundColor: Lunch }]}
