@@ -52,7 +52,19 @@ def get_user_response(uid):
 
 def add_userdata(response, userFavourites, userUpvotes, userDownvotes):
     for i in response:
+        i['isUpvoted'] = "False"
+        i['isDownvoted'] = "False"
+        i['isFavourited'] = "False"
         for favs in userFavourites:
             if favs == i["PID"]:
-                print(favs)
+                i['isFavourited'] = "True"
+
+        for up in userUpvotes:
+            if up == i["PID"]:
+                i['isUpvoted'] = "True"
+
+        for down in userDownvotes:
+            if down == i["PID"]:
+                i['isDownvoted'] = "True"
+
     return response
