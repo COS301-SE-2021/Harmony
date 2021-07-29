@@ -17,7 +17,7 @@ export default function ForgotPassword({ navigation, updateAuthState }) {
   async function forgotPassword(values) {
     try {
       setLoading(true);
-      //   await Auth.forgotPassword(values.Username);
+      await Auth.forgotPassword(values.Username);
       setLoading(false);
       console.log("Email sent");
 
