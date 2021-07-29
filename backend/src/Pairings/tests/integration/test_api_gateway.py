@@ -52,4 +52,4 @@ class TestApiGateway(TestCase):
         Call the API Gateway endpoint and check the response status code
         """
         response = requests.get(self.api_endpoint)
-      
+        self.assertEqual(response.status_code, 200)
