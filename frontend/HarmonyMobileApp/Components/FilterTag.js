@@ -5,11 +5,18 @@ import {
 } from "react-native";
 import { Text } from '@ui-kitten/components';
 
-
 export default function FilterTag({ clicked, color, title, ...otherProps }) {
+    var grey = "#F3F2F2";
+    var background = grey;
+
+    handlePress = () => {
+        background = color
+    };
+
     return (
         <Pressable
-            style={[personalStyles.filterTag, { backgroundColor: color }]}
+            style={[personalStyles.filterTag, { backgroundColor: background }]}
+            onPress={handlePress()}
         >
             <Text style={personalStyles.TextSmaller}>{title}</Text>
 

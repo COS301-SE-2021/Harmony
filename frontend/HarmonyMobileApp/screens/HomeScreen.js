@@ -507,42 +507,29 @@ const HomeScreen = (props) => {
                       </View>
                       <View style={[styles.filterTagsContainer]}>
                         <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
-                          {/*} <Pressable
-                            onPress={handleBreakfastSelected}
-                            style={[styles.filterTag, { backgroundColor: Breakfast }]}
-                          >
-                            <Text style={styles.TextSmaller}>Breakfast</Text>
 
+                          <Pressable
+                            onPress={() => (console.log("yes"))}>
+                            <FilterTag
+                              color="#FF6347"
+                              title="Breakfast"
+                            />
                           </Pressable>
-                      */}
                           <FilterTag
                             color="#FF6347"
-                            title="Breakfast"
+                            title="Lunch"
                           />
-                          <Pressable
-                            onPress={handleLunchSelected}
-                            style={[styles.filterTag, { backgroundColor: Lunch }]}
-                          >
-                            <Text style={styles.TextSmaller}>Lunch</Text>
-
-                          </Pressable>
                         </View>
                         <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
 
-                          <Pressable
-                            onPress={handleSupperSelected}
-                            style={[styles.filterTag, { backgroundColor: Supper }]}
-                          >
-                            <Text style={styles.TextSmaller}>Supper</Text>
-
-                          </Pressable>
-                          <Pressable
-                            onPress={handleSnackSelected}
-                            style={[styles.filterTag, { backgroundColor: Snack }]}
-                          >
-                            <Text style={styles.TextSmaller}>Snack</Text>
-
-                          </Pressable>
+                          <FilterTag
+                            color="#FF6347"
+                            title="Supper"
+                          />
+                          <FilterTag
+                            color="#FF6347"
+                            title="Snack"
+                          />
                         </View>
                       </View>
                     </View>
