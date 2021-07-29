@@ -11,7 +11,8 @@ import {
   Picker,
   RefreshControl,
   StatusBar,
-  TextInput
+  TextInput,
+  Animated
 } from "react-native";
 import styles from "../styles";
 import {
@@ -88,6 +89,25 @@ const HomeScreen = (props) => {
   //toggles the modals visibility
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
+    setDrinkSaltySelected("#F3F2F2")
+    setDrinkSweetSelected("#F3F2F2");
+    setDrinkSourSelected("#F3F2F2");
+    setDrinkHotSelected("#F3F2F2");
+    setDrinkWarmSelected("#F3F2F2");
+    setDrinkColdSelected("#F3F2F2");
+    setDrinkAlcoholicSelected("#F3F2F2");
+    setBreakfastSelected("#F3F2F2");
+    setLunchSelected("#F3F2F2");
+    setSupperSelected("#F3F2F2");
+    setSnackSelected("#F3F2F2");
+    setFoodSaltySelected("#F3F2F2");
+    setFoodSpicySelected("#F3F2F2");
+    setFoodSavourySelected("#F3F2F2");
+    setFoodSweetSelected("#F3F2F2");
+    setFoodSourSelected("#F3F2F2");
+    setFoodHotSelected("#F3F2F2");
+    setFoodWarmSelected("#F3F2F2");
+    setFoodColdSelected("#F3F2F2");
   };
   //the api call for trending
   useEffect(() => {
@@ -421,7 +441,7 @@ const HomeScreen = (props) => {
 
                   <View style={styles.filterView}>
                     <View style={[styles.filterLabel, { height: 50, justifyContent: "space-between", paddingVertical: 5, width: "100%", flexDirection: "row" }]}>
-                      <Text style={[styles.spaceLeft, styles.TextSmall,]}>Sort Pairings</Text>
+                      <Text style={[styles.spaceLeft, styles.TextSmall, { paddingTop: 5 }]}>Sort Pairings</Text>
                       <View style={[styles.spaceRight, { flex: 0 }]}>
                         <AntDesign name="caretdown" size={12} style={{ paddingVertical: "10%", marginLeft: 10 }} color="#7C7C7C" />
                         <Text style={[styles.TextSmaller,]}> {sortPairings} </Text>
