@@ -3,30 +3,33 @@ import { Text, View, StyleSheet, StatusBar, Platform } from "react-native";
 import * as yup from "yup";
 import { Formik } from "formik";
 import { Auth } from "aws-amplify";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import * as Animatable from "react-native-animatable";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import AppTextInput from "../Components/AppTextInput";
 import AppButton from "../Components/AppButton";
 import { AppToast } from "../Components/AppToast";
 import AppLoadingIcon from "../Components/AppLoadingIcon";
 
-export default function ForgotPassword({ navigation, updateAuthState }) {
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { SocialIcon } from "react-native-elements";
+import * as Animatable from "react-native-animatable";
+
+export default function ConfirmForgotPassword({ navigation, updateAuthState }) {
   const [isLoading, setLoading] = useState(false);
 
-  async function forgotPassword(values) {
+  async function confirmForgotPassword(values) {
     try {
       setLoading(true);
-      await Auth.forgotPassword(values.Username);
+      await Auth.confirmForgotPassword(values.Username, values.Password);
       setLoading(false);
-      console.log("Email sent");
+      console.log("Success, Signed in");
 
       // Add a Toast on screen.
-      AppToast.ToastDisplay("Email sent");
+      AppToast.ToastDisplay("Signed in");
 
-      navigation.navigate("ConfirmSignUp");
+      updateAuthState("loggedIn");
     } catch (error) {
-      console.log(" Error sending password reset code...", error);
+      console.log(" Error signing in...", error);
       setLoading(false);
     }
   }
@@ -35,14 +38,19 @@ export default function ForgotPassword({ navigation, updateAuthState }) {
     <Formik
       initialValues={{
         Username: "",
+        Password: "",
       }}
-      onSubmit={(values) => forgotPassword(values)}
+      onSubmit={(values) => confirmForgotPassword(values)}
       validationSchema={yup.object().shape({
         Username: yup
           .string()
           .min(2)
           .max(20)
           .required("Please, provide your Username!"),
+        Password: yup
+          .string()
+          .min(8)
+          .required("Please, provide your Password!"),
       })}
     >
       {({
@@ -60,7 +68,7 @@ export default function ForgotPassword({ navigation, updateAuthState }) {
           <View style={styles.container}>
             <StatusBar style="auto" />
             <View style={styles.header}>
-              <Text style={styles.text_header}>Forgot Password?</Text>
+              <Text style={styles.text_header}>Sign in to your account</Text>
             </View>
 
             <Animatable.View animation="fadeInUpBig" style={styles.body}>
@@ -81,23 +89,43 @@ export default function ForgotPassword({ navigation, updateAuthState }) {
                   {errors.Username}
                 </Text>
               )}
+              <AppTextInput
+                value={values.Password}
+                onChangeText={handleChange("Password")}
+                leftIcon="lock"
+                placeholder="Enter Password"
+                autoCorrect={false}
+                onBlur={() => setFieldTouched("Password")}
+                secureTextEntry={true}
+                error={errors.Password}
+                touched={touched.Password}
+              />
+              {touched.Password && errors.Password && (
+                <Text style={{ fontSize: 12, color: "#FF0D10" }}>
+                  {errors.Password}
+                </Text>
+              )}
               <AppButton
-                title="Reset password"
+                title="Login"
                 disabled={!isValid}
                 onPress={handleSubmit}
               />
               <View style={styles.footerTextContainer}>
                 <Text style={styles.footerText}>
-                  Not working?
+                  Don't have an account?
                   <Text
                     onPress={() => navigation.navigate("SignUp")}
                     style={styles.footerLink}
                   >
                     {" "}
-                    Try another way
+                    Sign Up
                   </Text>
                 </Text>
               </View>
+            </Animatable.View>
+            <Animatable.View animation="fadeInUpBig" style={styles.footer}>
+              <SocialIcon type="facebook" />
+              <SocialIcon type="google" />
             </Animatable.View>
           </View>
           {isLoading === true && <AppLoadingIcon />}
@@ -130,8 +158,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flex: Platform.OS === "ios" ? 3 : 1,
     backgroundColor: "#fff",
-    borderTopRightRadius: 30,
-    borderTopLeftRadius: 30,
+    borderRadius: 30,
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+  },
+  footer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     paddingHorizontal: 20,
     paddingVertical: 30,
   },

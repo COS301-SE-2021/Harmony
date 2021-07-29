@@ -28,6 +28,7 @@ import SignUp from "../screens/SignUp";
 // import ConfirmSignUp from "../screens/ConfirmSignUpScreen";
 import ConfirmSignUp from "../screens/ConfirmSignUp";
 import ForgotPassword from "../screens/ForgotPassword";
+import ConfirmForgotPassword from "../screens/ConfirmForgotPassword";
 
 Amplify.configure(config);
 
@@ -112,6 +113,10 @@ const AuthenticationNavigator = (props) => {
         <AuthenticationStack.Screen
           name="ForgotPassword"
           component={ForgotPassword}
+        />
+        <AuthenticationStack.Screen
+          name="ConfirmForgotPassword"
+          component={ConfirmForgotPassword}
         />
 
         <AuthenticationStack.Screen name="SignIn">
