@@ -20,12 +20,13 @@ def sort_and_filter(event, context):
     allresponse = table.scan()
     # edit the response to only show items
     response = allresponse['Items']
-    item1 = response[0]
 
     if event['Sort'] == 'New':
         sortedResponse = sortbynew(response)
     elif event['Sort'] == 'Best':
         sortedResponse = sortbybest(response)
+    elif event['Sort'] == 'Trending':
+        sortedResponse = sortbytrending(response)
 
 
 
@@ -53,8 +54,14 @@ def sortbybest(response):
     return sortedResponse
 
 
-def sortbytrending(a):
-    return 0
+def sortbytrending(response):
+    # iterate through response and append total votes
+    for i in response:
+        totalvotes = i['Upvotes'] + i['Downvotes']
+        i['TotalVotes'] = totalvotes
+    # Sort response by total votes in decending order(Trending)
+    sortedResponse = sorted(response, key=totalvotes_function, reverse=True)
+    return sortedResponse
 
 
 def filtertags(a):
@@ -67,5 +74,9 @@ def filterdistance(a):
 # this functions returns the json value we will want to sort by
 def upvotes_function(value):
     return value["Upvotes"]
+
+# this functions returns the json value we will want to sort by
+def totalvotes_function(value):
+    return value["TotalVotes"]
 
 
