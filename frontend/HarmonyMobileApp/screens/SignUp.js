@@ -145,22 +145,25 @@ export default function SignUp({ navigation }) {
                 disabled={!isValid}
                 onPress={handleSubmit}
               />
+            </Animatable.View>
+            <Animatable.View animation="fadeInUpBig" style={styles.footer}>
+              <View style={styles.footerIcons}>
+                <SocialIcon type="facebook" />
+                <SocialIcon type="google" />
+              </View>
+
               <View style={styles.footerTextContainer}>
                 <Text style={styles.footerText}>
                   Already have an account?
                   <Text
                     onPress={() => navigation.navigate("SignIn")}
-                    style={styles.footerLink}
+                    style={styles.signUpLink}
                   >
                     {" "}
                     Sign In
                   </Text>
                 </Text>
               </View>
-            </Animatable.View>
-            <Animatable.View animation="fadeInUpBig" style={styles.footer}>
-              <SocialIcon type="facebook" />
-              <SocialIcon type="google" />
             </Animatable.View>
           </View>
           {isLoading === true && <AppLoadingIcon />}
@@ -199,11 +202,14 @@ const styles = StyleSheet.create({
   },
   footer: {
     flex: 1,
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  footerIcons: {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    paddingHorizontal: 20,
-    paddingVertical: 30,
   },
   footerTextContainer: {
     marginVertical: 15,
@@ -211,12 +217,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   footerText: {
-    color: "#2e2e2d",
+    color: "#fff",
     fontSize: 18,
     fontWeight: "600",
   },
   footerLink: {
     color: "#788eec",
+    fontSize: 19,
+    fontWeight: "600",
+  },
+  signUpLink: {
+    // color: "#ffa07a",
+    color: "#afeeee",
+    // color: "#00ffff",
     fontSize: 19,
     fontWeight: "600",
   },
