@@ -22,8 +22,11 @@ def sort_and_filter(event, context):
     response = allresponse['Items']
     item1 = response[0]
 
-    if event['sort'] == 'New':
+    if event['Sort'] == 'New':
         sortedResponse = sortbynew(response)
+    elif event['Sort'] == 'Best':
+        sortedResponse = sortbybest(response)
+
 
 
 
@@ -34,9 +37,7 @@ def sort_and_filter(event, context):
     }
 
 
-# this functions returns the json value we will want to sort by
-def sortFunction(value):
-    return value["Upvotes"]
+
 
 
 def sortbynew(response):
@@ -47,8 +48,9 @@ def sortbycontroversial(a):
     return 0
 
 
-def sortbybest(a):
-    return 0
+def sortbybest(response):
+    sortedResponse = sorted(response, key=upvotes_function, reverse=True)
+    return sortedResponse
 
 
 def sortbytrending(a):
@@ -61,3 +63,9 @@ def filtertags(a):
 
 def filterdistance(a):
     return 0
+
+# this functions returns the json value we will want to sort by
+def upvotes_function(value):
+    return value["Upvotes"]
+
+
