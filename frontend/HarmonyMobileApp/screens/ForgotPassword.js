@@ -3,16 +3,13 @@ import { Text, View, StyleSheet, StatusBar, Platform } from "react-native";
 import * as yup from "yup";
 import { Formik } from "formik";
 import { Auth } from "aws-amplify";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import * as Animatable from "react-native-animatable";
 
 import AppTextInput from "../Components/AppTextInput";
 import AppButton from "../Components/AppButton";
 import { AppToast } from "../Components/AppToast";
 import AppLoadingIcon from "../Components/AppLoadingIcon";
-
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { SocialIcon } from "react-native-elements";
-import * as Animatable from "react-native-animatable";
 
 export default function ForgotPassword({ navigation, updateAuthState }) {
   const [isLoading, setLoading] = useState(false);
@@ -38,7 +35,6 @@ export default function ForgotPassword({ navigation, updateAuthState }) {
     <Formik
       initialValues={{
         Username: "",
-        Password: "",
       }}
       onSubmit={(values) => signIn(values)}
       validationSchema={yup.object().shape({
@@ -47,10 +43,6 @@ export default function ForgotPassword({ navigation, updateAuthState }) {
           .min(2)
           .max(20)
           .required("Please, provide your Username!"),
-        Password: yup
-          .string()
-          .min(8)
-          .required("Please, provide your Password!"),
       })}
     >
       {({
@@ -68,7 +60,7 @@ export default function ForgotPassword({ navigation, updateAuthState }) {
           <View style={styles.container}>
             <StatusBar style="auto" />
             <View style={styles.header}>
-              <Text style={styles.text_header}>Forgot Password</Text>
+              <Text style={styles.text_header}>Forgot Password?</Text>
             </View>
 
             <Animatable.View animation="fadeInUpBig" style={styles.body}>
@@ -89,43 +81,23 @@ export default function ForgotPassword({ navigation, updateAuthState }) {
                   {errors.Username}
                 </Text>
               )}
-              <AppTextInput
-                value={values.Password}
-                onChangeText={handleChange("Password")}
-                leftIcon="lock"
-                placeholder="Enter Password"
-                autoCorrect={false}
-                onBlur={() => setFieldTouched("Password")}
-                secureTextEntry={true}
-                error={errors.Password}
-                touched={touched.Password}
-              />
-              {touched.Password && errors.Password && (
-                <Text style={{ fontSize: 12, color: "#FF0D10" }}>
-                  {errors.Password}
-                </Text>
-              )}
               <AppButton
-                title="Login"
+                title="Reset password"
                 disabled={!isValid}
                 onPress={handleSubmit}
               />
               <View style={styles.footerTextContainer}>
                 <Text style={styles.footerText}>
-                  Don't have an account?
+                  Not working?
                   <Text
                     onPress={() => navigation.navigate("SignUp")}
                     style={styles.footerLink}
                   >
                     {" "}
-                    Sign Up
+                    Try another way
                   </Text>
                 </Text>
               </View>
-            </Animatable.View>
-            <Animatable.View animation="fadeInUpBig" style={styles.footer}>
-              <SocialIcon type="facebook" />
-              <SocialIcon type="google" />
             </Animatable.View>
           </View>
           {isLoading === true && <AppLoadingIcon />}
@@ -158,15 +130,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flex: Platform.OS === "ios" ? 3 : 1,
     backgroundColor: "#fff",
-    borderRadius: 30,
-    paddingHorizontal: 20,
-    paddingVertical: 30,
-  },
-  footer: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
+    borderTopRightRadius: 30,
+    borderTopLeftRadius: 30,
     paddingHorizontal: 20,
     paddingVertical: 30,
   },
