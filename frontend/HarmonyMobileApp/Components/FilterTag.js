@@ -31,7 +31,8 @@ export default function FilterTag({ color, title, ...otherProps }) {
     return (
         <Pressable
             style={[personalStyles.filterTag, tagColor()]}
-            onPress={() => handlePress()}
+            onPress={() => (console.log("hello from " + title),
+                setClicked(!clicked))}
         >
             <Text style={personalStyles.TextSmaller}>{title}</Text>
 
