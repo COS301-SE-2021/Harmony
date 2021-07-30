@@ -15,34 +15,24 @@ import * as Animatable from "react-native-animatable";
 import AppLoadingIcon from "../Components/AppLoadingIcon";
 
 export default function SignUp({ navigation }) {
-  //Using consts because im not sure how to destructure correctly
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
   const [isLoading, setLoading] = useState(false);
   const [isErrorAlertVisible, setErrorAlertVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   async function signUp(values) {
     try {
-      setUsername(values.Username);
-      setPassword(values.Password);
-      setEmail(values.Email);
       setLoading(true);
       setErrorAlertVisible(false);
 
       const { user } = await Auth.signUp({
-        username,
-        password,
-        attributes: { email },
+        username: values.Username,
+        password: values.Password,
+        attributes: { email: values.Email },
       });
       setLoading(false);
 
-      //For some reason the authentication fails when the below logs are commented out
-      //[ERROR] 03:12.667 AuthError - Username cannot be empty
-      console.log(username);
-      console.log(password);
-      console.log(email);
-
+      // console.log(values.Username);
+      // console.log(values.Password);
+      // console.log(values.Email);
       // console.log(user); //Output all user data
 
       console.log("Sign-up Confirmed");
