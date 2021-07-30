@@ -130,6 +130,21 @@ def filtertags(sortedResponse, event):
                 # only increment counter when not deleted
                 counter = counter + 1
 
+    counter = 0
+    for i in range(len(sortedResponse)):
+        founddrink = False
+        for drinks in drinktags:
+            for drinksinpairings in sortedResponse[counter]["DrinkTags"]:
+                if drinks == drinksinpairings:
+                    founddrink = True
+
+            if not founddrink:
+                del sortedResponse[counter]
+                break
+
+        if founddrink:
+            counter = counter + 1
+
     return sortedResponse
 
 
