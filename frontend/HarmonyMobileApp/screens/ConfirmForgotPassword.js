@@ -9,6 +9,7 @@ import AppTextInput from "../Components/AppTextInput";
 import AppButton from "../Components/AppButton";
 import { AppToast } from "../Components/AppToast";
 import AppLoadingIcon from "../Components/AppLoadingIcon";
+import AppAlert from "../Components/AppAlert";
 
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { SocialIcon } from "react-native-elements";
@@ -16,10 +17,13 @@ import * as Animatable from "react-native-animatable";
 
 export default function ConfirmForgotPassword({ navigation }) {
   const [isLoading, setLoading] = useState(false);
-
+  const [isErrorAlertVisible, setErrorAlertVisible] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
   async function confirmForgotPassword(values) {
     try {
       setLoading(true);
+      setErrorAlertVisible(false);
+
       // Collect confirmation code and new password, then
       await Auth.forgotPasswordSubmit(
         values.Username,
@@ -36,6 +40,9 @@ export default function ConfirmForgotPassword({ navigation }) {
       navigation.navigate("SignIn");
     } catch (error) {
       console.log(" Error resetting password...", error);
+      //setModalMessage must come before setErrorAlertVisible
+      setModalMessage(error.message);
+      setErrorAlertVisible(true);
       setLoading(false);
     }
   }
@@ -47,7 +54,10 @@ export default function ConfirmForgotPassword({ navigation }) {
         authCode: "",
         Password: "",
       }}
-      onSubmit={(values) => confirmForgotPassword(values)}
+      onSubmit={async (values, { resetForm }) => {
+        await confirmForgotPassword(values);
+        resetForm();
+      }}
       validationSchema={yup.object().shape({
         Username: yup
           .string()
@@ -141,6 +151,9 @@ export default function ConfirmForgotPassword({ navigation }) {
               />
             </Animatable.View>
           </View>
+          {isErrorAlertVisible === true && (
+            <AppAlert visible={true} message={modalMessage} type={"Error"} />
+          )}
           {isLoading === true && <AppLoadingIcon />}
         </KeyboardAwareScrollView>
       )}
