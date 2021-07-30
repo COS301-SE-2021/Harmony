@@ -11,7 +11,18 @@ table = client.Table(table_name)
 usertable = client.Table(User_table)
 
 """This function will take in the UID of the user, as a json event. This function returns 
- the data in the pairings table"""
+ the data in the pairings table
+ event format:
+ {
+    "UID" : "username",
+    "Location" : "coordinates",
+    "Sort" : "typeOfSort",
+    "MealTag" : "Tag",
+    "FoodTag" : ["Tags",...,...,...],
+    "DrinkTag" : ["Tags",...,...,...],
+    "Distance" : "XXm"
+
+ }"""
 
 
 def sort_and_filter(event, context):
