@@ -160,7 +160,7 @@ export default function SignIn({ navigation, updateAuthState }) {
             </Animatable.View>
           </View>
           {isErrorAlertVisible === true && (
-            <AppAlert visible={true} message={modalMessage} type={"error"} />
+            <AppAlert visible={true} message={modalMessage} type={"Error"} />
           )}
           {isLoading === true && <AppLoadingIcon />}
         </KeyboardAwareScrollView>

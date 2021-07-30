@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Modal from "react-native-modal";
 import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
+import AppButton from "./AppButton";
+
 export default function AppAlert({ visible, message, type }) {
   const [isModalVisible, setModalVisible] = useState(visible);
   const toggleModal = () => {
@@ -21,49 +23,14 @@ export default function AppAlert({ visible, message, type }) {
     >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
-          <TouchableOpacity
-            style={[styles.closeButton]}
-            onPress={() => setModalVisible(!isModalVisible)}
-          >
-            <MaterialCommunityIcons
-              name="close-circle-outline"
-              size={30}
-              color="black"
-            />
-          </TouchableOpacity>
-          <View style={[styles.modalHeaderSection]}>
-            <Text style={styles.title}>{message} </Text>
+          <View style={styles.icon}>
+            <MaterialIcons name="error" size={50} color="tomato" />
           </View>
-          <Text style={styles.modalText}>
-            Is the food correctly identified?
-          </Text>
+
+          <Text style={styles.title}>{type} </Text>
+          <Text style={styles.modalText}>{message}</Text>
           <View style={styles.rowContainer}>
-            <TouchableOpacity
-              style={[styles.button, styles.buttonIncorrect]}
-              onPress={() => setModalVisible(!isModalVisible)}
-            >
-              {/* Keeping outlined icons just incase we want to change to them for consistency overall */}
-              {/* The filled icons look better in this case though */}
-              {/* <MaterialIcons
-                      name="thumb-down-off-alt"
-                      size={40}
-                      color="white"
-                    /> */}
-              <MaterialIcons name="thumb-down" size={40} color="white" />
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[styles.button, styles.buttonCorrect]}
-              onPress={() => setModalVisible(!isModalVisible)}
-            >
-              {/* Keeping outlined icons just incase we want to change to them for consistency overall */}
-              {/* The filled icons look better in this case though */}
-              {/* <MaterialIcons
-                      name="thumb-up-off-alt"
-                      size={40}
-                      color="white"
-                    /> */}
-              <MaterialIcons name="thumb-up" size={40} color="white" />
-            </TouchableOpacity>
+            <AppButton title="Try again" onPress={toggleModal} />
           </View>
         </View>
       </View>
@@ -72,9 +39,15 @@ export default function AppAlert({ visible, message, type }) {
 }
 
 const styles = StyleSheet.create({
+  title: {
+    fontSize: 22,
+    alignSelf: "center",
+    fontWeight: "bold",
+  },
   centeredView: {
     flex: 1,
     justifyContent: "center",
+    // justifyContent: "flex-end",
     alignItems: "center",
   },
   modalView: {
@@ -92,31 +65,12 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 4,
-    margin: 5,
-  },
-  buttonCorrect: {
-    backgroundColor: "#56a211",
-  },
-  buttonIncorrect: {
-    backgroundColor: "#e9430f",
-  },
-  closeButton: {
-    position: "absolute",
-    right: 10,
-    top: 5,
-  },
-  modalHeaderSection: {
-    borderBottomWidth: 1,
-    borderBottomColor: "#cccccc",
-    backgroundColor: "white",
-  },
   modalText: {
     paddingVertical: 10,
     fontSize: 20,
     textAlign: "center",
+  },
+  icon: {
+    padding: 10,
   },
 });
