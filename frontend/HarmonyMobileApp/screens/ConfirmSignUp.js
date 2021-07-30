@@ -10,13 +10,16 @@ import { AppToast } from "../Components/AppToast";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import * as Animatable from "react-native-animatable";
 import AppLoadingIcon from "../Components/AppLoadingIcon";
+import AppAlert from "../Components/AppAlert";
 
 export default function ConfirmSignUp({ navigation }) {
   const [isLoading, setLoading] = useState(false);
-
+  const [isErrorAlertVisible, setErrorAlertVisible] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
   async function confirmSignUp(values) {
     try {
       setLoading(true);
+      setErrorAlertVisible(false);
 
       await Auth.confirmSignUp(values.Username, values.authCode);
       setLoading(false);
@@ -31,6 +34,9 @@ export default function ConfirmSignUp({ navigation }) {
         " Verification code does not match. Please enter a valid verification code.",
         error.code
       );
+      //setModalMessage must come before setErrorAlertVisible
+      setModalMessage(error.message);
+      setErrorAlertVisible(true);
       setLoading(false);
     }
   }
@@ -41,7 +47,10 @@ export default function ConfirmSignUp({ navigation }) {
         Username: "",
         authCode: "",
       }}
-      onSubmit={(values) => confirmSignUp(values)}
+      onSubmit={async (values, { resetForm }) => {
+        await confirmSignUp(values);
+        resetForm();
+      }}
       validationSchema={yup.object().shape({
         Username: yup
           .string()
@@ -113,6 +122,9 @@ export default function ConfirmSignUp({ navigation }) {
               />
             </Animatable.View>
           </View>
+          {isErrorAlertVisible === true && (
+            <AppAlert visible={true} message={modalMessage} type={"Error"} />
+          )}
           {isLoading === true && <AppLoadingIcon />}
         </KeyboardAwareScrollView>
       )}
