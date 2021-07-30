@@ -90,10 +90,15 @@ export default function SignIn({ navigation, updateAuthState }) {
           <View style={styles.container}>
             <StatusBar style="auto" />
             <View style={styles.header}>
-              <Text style={styles.text_header}>Sign in to your account</Text>
+              <Text style={styles.text_header}>Welcome back</Text>
             </View>
 
             <Animatable.View animation="fadeInUpBig" style={styles.body}>
+              <View style={styles.bodyTitle}>
+                <Text style={styles.bodyText}>
+                  Fill in your details below to Sign into your account
+                </Text>
+              </View>
               <AppTextInput
                 value={values.Username}
                 onChangeText={handleChange("Username")}
@@ -129,7 +134,7 @@ export default function SignIn({ navigation, updateAuthState }) {
               )}
 
               <AppButton
-                title="Login"
+                title="Sign in"
                 disabled={!isValid}
                 onPress={handleSubmit}
               />
@@ -191,6 +196,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 20,
     paddingVertical: 30,
+  },
+  bodyText: {
+    fontSize: 16,
+    color: "#6e6869",
+    textAlign: "center",
+  },
+  bodyTitle: {
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+    // paddingBottom: 20,
   },
   body: {
     alignItems: "center",
