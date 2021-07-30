@@ -1,22 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     StyleSheet,
     Pressable,
 } from "react-native";
 import { Text } from '@ui-kitten/components';
 
-export default function FilterTag({ clicked, color, title, ...otherProps }) {
+export default function FilterTag({ color, title, ...otherProps }) {
+    const [clicked, setClicked] = useState(false);
+
     var grey = "#F3F2F2";
-    var background = grey;
 
     handlePress = () => {
-        background = color
+        console.log("hello from " + title);
+        setClicked(!clicked)
+    };
+
+    const tagColor = () => {
+        if (clicked) {
+            return {
+                backgroundColor: color
+            };
+        }
+        else {
+            return {
+                backgroundColor: "#F3F2F2"
+            };
+        }
     };
 
     return (
         <Pressable
-            style={[personalStyles.filterTag, { backgroundColor: background }]}
-            onPress={handlePress()}
+            style={[personalStyles.filterTag, tagColor()]}
+            onPress={() => handlePress()}
         >
             <Text style={personalStyles.TextSmaller}>{title}</Text>
 

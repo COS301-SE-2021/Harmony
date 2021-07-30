@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     //styling for the filter pop up
     backgroundColor: "white",
     borderRadius: 20,
-    padding: 20,
+    padding: 10,
     width: "92%",
     alignItems: "center",
     shadowColor: "#000",

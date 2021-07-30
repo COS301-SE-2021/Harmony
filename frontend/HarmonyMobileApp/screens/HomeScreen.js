@@ -12,7 +12,8 @@ import {
   RefreshControl,
   StatusBar,
   TextInput,
-  Animated
+  Animated,
+  TouchableOpacity
 } from "react-native";
 import styles from "../styles";
 import {
@@ -438,9 +439,19 @@ const HomeScreen = (props) => {
             >
               <View style={styles.centeredView}>
                 <View style={[styles.modalView, styles.TextSmall]} >
-                  {/*<View>
+                  <View style={{ flexDirection: "row" }}>
                     <Text style={[styles.TextMedium, { fontWeight: "bold", paddingBottom: "7%" }]}>Filter Pairings</Text>
-                  </View>*/}
+                    <TouchableOpacity
+                      style={[styles.closeButton]}
+                      onPress={() => setModalVisible(!isModalVisible)}
+                    >
+                      <MaterialCommunityIcons
+                        name="close-circle-outline"
+                        size={30}
+                        color="black"
+                      />
+                    </TouchableOpacity>
+                  </View>
 
                   <View style={styles.filterView}>
                     <View style={[styles.filterLabelRow]}>
@@ -469,7 +480,7 @@ const HomeScreen = (props) => {
                     <View style={[styles.filterLabelRow]}>
                       <Text style={[styles.spaceLeft, styles.TextSmall]}>Distance</Text>
                     </View>
-                    <View style={{ flexDirection: "row", justifyContent: "center", marginTop: -25 }}>
+                    <View style={{ flexDirection: "row", justifyContent: "center", marginTop: -10 }}>
                       <Text style={[styles.TextSmall, { marginRight: 4 }]}>0</Text>
                       <Slider
                         value={locationValue}
@@ -502,13 +513,10 @@ const HomeScreen = (props) => {
                       <View style={[styles.filterTagsContainer]}>
                         <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
 
-                          <Pressable
-                            onPress={() => (console.log("yes"))}>
-                            <FilterTag
-                              color="#FF6347"
-                              title="Breakfast"
-                            />
-                          </Pressable>
+                          <FilterTag
+                            color="#FF6347"
+                            title="Breakfast"
+                          />
                           <FilterTag
                             color="#FF6347"
                             title="Lunch"
