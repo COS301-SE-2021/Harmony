@@ -38,7 +38,7 @@ def sort_and_filter(event, context):
 
     # check json passed in to see what sort to do for the response
     if event['Sort'] == 'New':
-        sortedResponse = sortbynew(response)
+        sortedResponse = sortbynew()
     elif event['Sort'] == 'Best':
         sortedResponse = sortbybest(response)
     elif event['Sort'] == 'Trending':
@@ -55,7 +55,7 @@ def sort_and_filter(event, context):
     }
 
 
-def sortbynew(response):
+def sortbynew():
 
     # set the number of days we want to subract for the new filter
     td = timedelta(7)
