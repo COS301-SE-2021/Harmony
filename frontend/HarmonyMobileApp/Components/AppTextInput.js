@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, StyleSheet, TextInput } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as Animatable from "react-native-animatable";
@@ -8,33 +8,58 @@ export default function AppTextInput({
   rightIcon,
   touched,
   error,
+  type,
   ...otherProps
 }) {
+  const [isPasswordVisible, setPasswordVisible] = useState(false);
+
   const RightIcon = () => {
     if (!touched) {
       return null;
-    } else if (error) {
-      return (
-        // <Animatable.View animation="bounceIn">
-        <MaterialCommunityIcons
-          name="close-circle"
-          size={22}
-          color="#FF9494"
-          style={styles.icon}
-        />
-        // </Animatable.View>
-      );
-    } else
-      return (
-        // <Animatable.View animation="bounceIn">
-        <MaterialCommunityIcons
-          name={"check-circle"}
-          size={22}
-          color="#42ba96"
-          style={styles.icon}
-        />
-        // </Animatable.View>
-      );
+    } else if (type === "Password") {
+      if (isPasswordVisible) {
+        return (
+          <MaterialCommunityIcons
+            name="eye-outline"
+            size={22}
+            color="#6e6869"
+            style={styles.icon}
+            //Password is on and is clicked so it becomes invisible
+            onPress={() => setPasswordVisible(false)}
+          />
+        );
+      } else if (!isPasswordVisible) {
+        return (
+          <MaterialCommunityIcons
+            name="eye-off-outline"
+            size={22}
+            color="#6e6869"
+            style={styles.icon}
+            //Password is off and is clicked so it becomes visible
+            onPress={() => setPasswordVisible(true)}
+          />
+        );
+      }
+    } else {
+      if (error) {
+        return (
+          <MaterialCommunityIcons
+            name="close-circle"
+            size={22}
+            color="#FF9494"
+            style={styles.icon}
+          />
+        );
+      } else
+        return (
+          <MaterialCommunityIcons
+            name={"check-circle"}
+            size={22}
+            color="#42ba96"
+            style={styles.icon}
+          />
+        );
+    }
   };
 
   const borderStyle = () => {
@@ -67,6 +92,7 @@ export default function AppTextInput({
         style={styles.input}
         autoCapitalize="none"
         placeholderTextColor="#6e6869"
+        secureTextEntry={isPasswordVisible}
         {...otherProps}
       />
       {/* Split into a function because there is no conditional rendering */}

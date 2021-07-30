@@ -65,14 +65,9 @@ export default function SignIn({ navigation, updateAuthState }) {
       validationSchema={yup.object().shape({
         Username: yup
           .string()
-          .min(2)
-          .max(20)
           .matches(/^\S*$/, "Username may not contain spaces") //Contains no spaces
           .required("Please, provide your Username!"),
-        Password: yup
-          .string()
-          .min(8)
-          .required("Please, provide your Password!"),
+        Password: yup.string().required("Please, provide your Password!"),
       })}
     >
       {({
@@ -90,15 +85,21 @@ export default function SignIn({ navigation, updateAuthState }) {
           <View style={styles.container}>
             <StatusBar style="auto" />
             <View style={styles.header}>
-              <Text style={styles.text_header}>Welcome back</Text>
+              {/* V2 */}
+              {/* <Text style={styles.text_header}>Welcome back</Text> */}
+              {/* V1 */}
+              <Text style={styles.text_header}>Sign in to your account</Text>
+              {/* V2 */}
+              {/* <Text style={styles.bodyText}>Sign in below</Text> */}
             </View>
 
             <Animatable.View animation="fadeInUpBig" style={styles.body}>
-              <View style={styles.bodyTitle}>
+              {/* V3 */}
+              {/* <View style={styles.bodyTitle}>
                 <Text style={styles.bodyText}>
                   Fill in your details below to Sign into your account
                 </Text>
-              </View>
+              </View> */}
               <AppTextInput
                 value={values.Username}
                 onChangeText={handleChange("Username")}
@@ -123,9 +124,10 @@ export default function SignIn({ navigation, updateAuthState }) {
                 placeholder="Enter Password"
                 autoCorrect={false}
                 onBlur={() => setFieldTouched("Password")}
-                secureTextEntry={true}
+                // secureTextEntry={true}
                 error={errors.Password}
                 touched={touched.Password}
+                type="Password"
               />
               {touched.Password && errors.Password && (
                 <Text style={{ fontSize: 12, color: "#FF0D10" }}>
@@ -199,8 +201,10 @@ const styles = StyleSheet.create({
   },
   bodyText: {
     fontSize: 16,
-    color: "#6e6869",
+    color: "#6e6869", //V1
+    // color: "#fff",//V2
     textAlign: "center",
+    // paddingVertical: 10,//V2
   },
   bodyTitle: {
     justifyContent: "center",
