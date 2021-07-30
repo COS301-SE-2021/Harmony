@@ -21,8 +21,8 @@ usertable = client.Table(User_table)
     "Location" : "coordinates",
     "Sort" : "typeOfSort",
     "MealTag" : "Tag",
-    "FoodTag" : ["Tags",...,...,...],
-    "DrinkTag" : ["Tags",...,...,...],
+    "FoodTags" : ["Tags",...,...,...],
+    "DrinkTags" : ["Tags",...,...,...],
     "Distance" : "XXm"
 
  }"""
@@ -48,6 +48,8 @@ def sort_and_filter(event, context):
 
     sortedResponse = add_userdata(sortedResponse, userResponse)
 
+    "Now after the response has been sorted, we will filter the sortedResponse"
+    sortedResponse = filtertags(sortedResponse, event)
     return {
         # returns all items stored in response
         "StatusCode": 200,
@@ -56,7 +58,6 @@ def sort_and_filter(event, context):
 
 
 def sortbynew():
-
     # set the number of days we want to subract for the new filter
     td = timedelta(7)
 
@@ -107,8 +108,25 @@ def sortbytrending(response):
     return sortedResponse
 
 
-def filtertags(a):
-    return 0
+def filtertags(sortedResponse, event):
+    mealtags = event["MealTags"]
+    drinktags = event["DrinkTags"]
+    foodtags = event["FoodTags"]
+
+    counter = 0
+    for i in range(len(sortedResponse)):
+
+        foundmeal = False
+        if len(mealtags) > 0:
+            for meals in mealtags:
+                if meals == sortedResponse[counter]["MealTag"]:
+                    foundmeal = True
+            if not foundmeal:
+                del sortedResponse[counter]
+            else:
+                counter = counter + 1
+
+    return sortedResponse
 
 
 def filterdistance(a):
