@@ -28,6 +28,8 @@ def sort_and_filter(event, context):
         sortedResponse = sortbybest(response)
     elif event['Sort'] == 'Trending':
         sortedResponse = sortbytrending(response)
+    elif event['Sort'] == 'Controversial':
+        sortedResponse = sortbycontroversial(response)
 
     sortedResponse = add_userdata(sortedResponse, userResponse)
 
@@ -42,8 +44,10 @@ def sortbynew(response):
     return 0
 
 
-def sortbycontroversial(a):
-    return 0
+def sortbycontroversial(response):
+    # Sort response by total down votes votes in descending order(Controversial)
+    sortedResponse = sorted(response, key=downvotes_function, reverse=True)
+    return sortedResponse
 
 
 def sortbybest(response):
@@ -77,6 +81,10 @@ def upvotes_function(value):
 # this functions returns the json value we will want to sort by
 def totalvotes_function(value):
     return value["TotalVotes"]
+
+# this functions returns the json value we will want to sort by
+def downvotes_function(value):
+    return value["Downvotes"]
 
 
 def get_user_response(uid):
