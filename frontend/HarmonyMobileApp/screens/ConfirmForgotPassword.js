@@ -74,6 +74,15 @@ export default function ConfirmForgotPassword({ navigation }) {
           .string()
           .min(8)
           .required("Please, provide your Password!"),
+        ConfirmPassword: yup
+          .string()
+          .when("Password", {
+            is: (val) => (val && val.length > 0 ? true : false),
+            then: yup
+              .string()
+              .oneOf([yup.ref("Password")], "Passwords do not match!"),
+          })
+          .required("Please, confirm your Password!"),
       })}
     >
       {({
@@ -122,13 +131,13 @@ export default function ConfirmForgotPassword({ navigation }) {
                 onBlur={() => setFieldTouched("authCode")}
                 error={errors.authCode}
                 touched={touched.authCode}
+                secureTextEntry={false}
               />
               {touched.authCode && errors.authCode && (
                 <Text style={{ fontSize: 12, color: "#FF0D10" }}>
                   {errors.authCode}
                 </Text>
               )}
-
               <AppTextInput
                 value={values.Password}
                 onChangeText={handleChange("Password")}
@@ -136,13 +145,29 @@ export default function ConfirmForgotPassword({ navigation }) {
                 placeholder="Enter Password"
                 autoCorrect={false}
                 onBlur={() => setFieldTouched("Password")}
-                secureTextEntry={true}
                 error={errors.Password}
                 touched={touched.Password}
+                type="Password"
               />
               {touched.Password && errors.Password && (
                 <Text style={{ fontSize: 12, color: "#FF0D10" }}>
                   {errors.Password}
+                </Text>
+              )}
+              <AppTextInput
+                value={values.ConfirmPassword}
+                onChangeText={handleChange("ConfirmPassword")}
+                leftIcon="lock"
+                placeholder="Confirm Password"
+                autoCorrect={false}
+                onBlur={() => setFieldTouched("ConfirmPassword")}
+                error={errors.ConfirmPassword}
+                touched={touched.ConfirmPassword}
+                type="Password"
+              />
+              {touched.ConfirmPassword && errors.ConfirmPassword && (
+                <Text style={{ fontSize: 12, color: "#FF0D10" }}>
+                  {errors.ConfirmPassword}
                 </Text>
               )}
               <AppButton

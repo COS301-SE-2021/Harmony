@@ -110,6 +110,7 @@ export default function ConfirmSignUp({ navigation }) {
                 onBlur={() => setFieldTouched("authCode")}
                 error={errors.authCode}
                 touched={touched.authCode}
+                secureTextEntry={false}
               />
               {touched.authCode && errors.authCode && (
                 <Text style={{ fontSize: 12, color: "#FF0D10" }}>
