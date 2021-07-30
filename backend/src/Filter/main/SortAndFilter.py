@@ -131,18 +131,27 @@ def filtertags(sortedResponse, event):
                 counter = counter + 1
 
     counter = 0
+    """This for loop will remove the FoodTags that aren't needed by the user"""
     for i in range(len(sortedResponse)):
         founddrink = False
+        """in the double for loop below, we first iterate through the tags that the user wants
+        then we iterate through the tags of each pairing, remember all tags from the user need
+        to match the the drink of the pairing, so if tags not found then var:founddrink will
+        stay false"""
         for drinks in drinktags:
             for drinksinpairings in sortedResponse[counter]["DrinkTags"]:
                 if drinks == drinksinpairings:
                     founddrink = True
 
             if not founddrink:
+                # when deleted the objects below will move up the list hence why counter
+                # is not increased here
                 del sortedResponse[counter]
+                # we break because once the first tag has not been found there is no need to continue
                 break
 
         if founddrink:
+            # only increment counter when not deleted
             counter = counter + 1
 
     return sortedResponse
