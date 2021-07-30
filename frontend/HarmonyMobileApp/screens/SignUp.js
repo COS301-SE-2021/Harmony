@@ -7,6 +7,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import AppTextInput from "../Components/AppTextInput";
 import AppButton from "../Components/AppButton";
 import { AppToast } from "../Components/AppToast";
+import AppAlert from "../Components/AppAlert";
+
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { SocialIcon } from "react-native-elements";
 import * as Animatable from "react-native-animatable";
@@ -18,13 +20,15 @@ export default function SignUp({ navigation }) {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [isLoading, setLoading] = useState(false);
-
+  const [isErrorAlertVisible, setErrorAlertVisible] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
   async function signUp(values) {
     try {
       setUsername(values.Username);
       setPassword(values.Password);
       setEmail(values.Email);
       setLoading(true);
+      setErrorAlertVisible(false);
 
       const { user } = await Auth.signUp({
         username,
@@ -45,6 +49,9 @@ export default function SignUp({ navigation }) {
       navigation.navigate("ConfirmSignUp");
     } catch (error) {
       console.log(" Error signing up...", error);
+      //setModalMessage must come before setErrorAlertVisible
+      setModalMessage(error.message);
+      setErrorAlertVisible(true);
       setLoading(false);
     }
   }
@@ -56,6 +63,10 @@ export default function SignUp({ navigation }) {
         Password: "",
       }}
       onSubmit={(values) => signUp(values)}
+      onSubmit={async (values, { resetForm }) => {
+        await signUp(values);
+        resetForm();
+      }}
       validationSchema={yup.object().shape({
         Username: yup
           .string()
@@ -166,6 +177,9 @@ export default function SignUp({ navigation }) {
               </View>
             </Animatable.View>
           </View>
+          {isErrorAlertVisible === true && (
+            <AppAlert visible={true} message={modalMessage} type={"Error"} />
+          )}
           {isLoading === true && <AppLoadingIcon />}
         </KeyboardAwareScrollView>
       )}
