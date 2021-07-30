@@ -22,6 +22,7 @@ def sort_and_filter(event, context):
     # edit the response to only show items
     response = allresponse['Items']
 
+    # check json passed in to see what sort to do for the response
     if event['Sort'] == 'New':
         sortedResponse = sortbynew(response)
     elif event['Sort'] == 'Best':
@@ -51,6 +52,7 @@ def sortbycontroversial(response):
 
 
 def sortbybest(response):
+    # Sort response by total up votes votes in descending order(Best)
     sortedResponse = sorted(response, key=upvotes_function, reverse=True)
     return sortedResponse
 
@@ -88,6 +90,7 @@ def downvotes_function(value):
 
 
 def get_user_response(uid):
+    # return all the data from the user table for specific user
     response = usertable.get_item(
         Key={'UID': uid}
     )
@@ -96,15 +99,24 @@ def get_user_response(uid):
 
 
 def add_userdata(pairingresponse, user_response):
+    """This function passes in the list of pairings as pairingresponse
+    and also passes in  all the data for the user from the database as user_response.
+    The function will then go through the user database and see what pairings have been
+    upvoted, downvoted and favourited, then we will iterate through the pairingresponse to append
+    user data"""
+
+    # get user data as a list in the following variables
     userUpvotes = user_response['UserUpvoted']
     userDownvotes = user_response['UserDownvoted']
     userFavourites = user_response['FavouritePairings']
 
     for i in pairingresponse:
+        # initially set user data to false in each pairing
         i['isUpvoted'] = "False"
         i['isDownvoted'] = "False"
         i['isFavourited'] = "False"
         for favs in userFavourites:
+            # if user data matches pairing then add it to the response with True
             if favs == i["PID"]:
                 i['isFavourited'] = "True"
 
