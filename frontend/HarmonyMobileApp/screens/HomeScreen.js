@@ -542,62 +542,42 @@ const HomeScreen = (props) => {
                     <View style={[styles.filterLabel]}>
                       <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
                         <Text style={[styles.spaceLeft, styles.TextSmall]}>Drinks</Text>
-                        <Pressable
-                          onPress={handleDrinkAlcoholicSelected}
-                          style={[styles.filterTag, { backgroundColor: DrinkAlcoholic, marginRight: 50 }]}
-                        >
-                          <Text style={styles.TextSmaller}>Alcoholic</Text>
 
-                        </Pressable>
+                        <FilterTag
+                          color="#1FBFBA"
+                          title="Alcoholic"
+                        />
                       </View>
                       <View style={[styles.filterTagsContainer, { flexDirection: "column" }]}>
                         <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
-                          <Pressable
-                            onPress={handleDrinkSaltySelected}
-                            style={[styles.filterTag, { backgroundColor: DrinkSalty, }]}
-                          >
-                            <Text style={styles.TextSmaller}>Salty</Text>
+                          <FilterTag
+                            color="#1FBFBA"
+                            title="Fizzy"
+                          />
+                          <FilterTag
+                            color="#1FBFBA"
+                            title="Sweet"
+                          />
 
-                          </Pressable>
-                          <Pressable
-                            onPress={handleDrinkSweetSelected}
-                            style={[styles.filterTag, { backgroundColor: DrinkSweet }]}
-                          >
-                            <Text style={styles.TextSmaller}>Sweet</Text>
-
-                          </Pressable>
-
-                          <Pressable
-                            onPress={handleDrinkSourSelected}
-                            style={[styles.filterTag, { backgroundColor: DrinkSour }]}
-                          >
-                            <Text style={styles.TextSmaller}>Sour</Text>
-
-                          </Pressable>
+                          <FilterTag
+                            color="#1FBFBA"
+                            title="Sour"
+                          />
                         </View>
                         <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
 
-                          <Pressable
-                            onPress={handleDrinkHotSelected}
-                            style={[styles.filterTag, { backgroundColor: DrinkHot }]}
-                          >
-                            <Text style={styles.TextSmaller}>Hot</Text>
-
-                          </Pressable>
-                          <Pressable
-                            onPress={handleDrinkWarmSelected}
-                            style={[styles.filterTag, { backgroundColor: DrinkWarm }]}
-                          >
-                            <Text style={styles.TextSmaller}>Warm</Text>
-
-                          </Pressable>
-                          <Pressable
-                            onPress={handleDrinkColdSelected}
-                            style={[styles.filterTag, { backgroundColor: DrinkCold }]}
-                          >
-                            <Text style={styles.TextSmaller}>Cold</Text>
-
-                          </Pressable>
+                          <FilterTag
+                            color="#1FBFBA"
+                            title="Hot"
+                          />
+                          <FilterTag
+                            color="#1FBFBA"
+                            title="Warm"
+                          />
+                          <FilterTag
+                            color="#1FBFBA"
+                            title="Cold"
+                          />
 
                         </View>
                       </View>
@@ -609,72 +589,47 @@ const HomeScreen = (props) => {
                     <View style={[styles.filterLabel]}>
                       <View style={{ flexDirection: "row" }}>
                         <Text style={[styles.spaceLeft, styles.TextSmall]}>Food</Text>
-                        <Pressable
-                          onPress={handleFoodSpicySelected}
-                          style={[styles.filterTag, { backgroundColor: FoodSpicy, marginLeft: 20 }]}
-                        >
-                          <Text style={styles.TextSmaller}>Spicy</Text>
-
-                        </Pressable>
-                        <Pressable
-                          onPress={handleFoodSavourySelected}
-                          style={[styles.filterTag, { backgroundColor: FoodSavoury }]}
-                        >
-                          <Text style={styles.TextSmaller}>Savoury</Text>
-
-                        </Pressable>
-
+                        <FilterTag
+                          color="#C41ED4"
+                          title="Spicy"
+                        />
+                        <FilterTag
+                          color="#C41ED4"
+                          title="Savoury"
+                        />
                       </View>
                       <View style={[styles.filterTagsContainer, { flexDirection: "column" }]}>
                         <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
-                          <Pressable
-                            onPress={handleFoodSaltySelected}
-                            style={[styles.filterTag, { backgroundColor: FoodSalty }]}
-                          >
-                            <Text style={styles.TextSmaller}>Salty</Text>
+                          <FilterTag
+                            color="#C41ED4"
+                            title="Salty"
+                          />
+                          <FilterTag
+                            color="#C41ED4"
+                            title="Sweet"
+                          />
 
-                          </Pressable>
-                          <Pressable
-                            onPress={handleFoodSweetSelected}
-                            style={[styles.filterTag, { backgroundColor: FoodSweet }]}
-                          >
-                            <Text style={styles.TextSmaller}>Sweet</Text>
-
-                          </Pressable>
-
-                          <Pressable
-                            onPress={handleFoodSourSelected}
-                            style={[styles.filterTag, { backgroundColor: FoodSour }]}
-                          >
-                            <Text style={styles.TextSmaller}>Sour</Text>
-
-                          </Pressable>
+                          <FilterTag
+                            color="#C41ED4"
+                            title="Sour"
+                          />
                         </View>
                         <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
 
 
-                          <Pressable
-                            onPress={handleFoodHotSelected}
-                            style={[styles.filterTag, { backgroundColor: FoodHot }]}
-                          >
-                            <Text style={styles.TextSmaller}>Hot</Text>
+                          <FilterTag
+                            color="#C41ED4"
+                            title="Hot"
+                          />
+                          <FilterTag
+                            color="#C41ED4"
+                            title="Warm"
+                          />
 
-                          </Pressable>
-                          <Pressable
-                            onPress={handleFoodWarmSelected}
-                            style={[styles.filterTag, { backgroundColor: FoodWarm }]}
-                          >
-                            <Text style={styles.TextSmaller}>Warm</Text>
-
-                          </Pressable>
-
-                          <Pressable
-                            onPress={handleFoodColdSelected}
-                            style={[styles.filterTag, { backgroundColor: FoodCold }]}
-                          >
-                            <Text style={styles.TextSmaller}>Cold</Text>
-
-                          </Pressable>
+                          <FilterTag
+                            color="#C41ED4"
+                            title="Cold"
+                          />
 
                         </View>
                       </View>

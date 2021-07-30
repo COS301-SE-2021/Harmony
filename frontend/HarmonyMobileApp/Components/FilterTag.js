@@ -8,33 +8,42 @@ import { Text } from '@ui-kitten/components';
 export default function FilterTag({ color, title, ...otherProps }) {
     const [clicked, setClicked] = useState(false);
 
-    var grey = "#F3F2F2";
-
     handlePress = () => {
-        console.log("hello from " + title);
         setClicked(!clicked)
     };
 
     const tagColor = () => {
         if (clicked) {
             return {
-                backgroundColor: color
+                backgroundColor: color,
             };
         }
         else {
             return {
-                backgroundColor: "#F3F2F2"
+                backgroundColor: "#F3F2F2",
             };
         }
     };
-
+    const textColor = () => {
+        if (clicked) {
+            return {
+                color: "white"
+            };
+        }
+        else {
+            return {
+                color: "black"
+            };
+        }
+    };
     return (
         <Pressable
             style={[personalStyles.filterTag, tagColor()]}
-            onPress={() => (console.log("hello from " + title),
-                setClicked(!clicked))}
+            onPress={() => (//if i put this in a seperate function it only calls snack instead of the one pressed,
+                setClicked(!clicked)
+            )}
         >
-            <Text style={personalStyles.TextSmaller}>{title}</Text>
+            <Text style={[personalStyles.TextSmaller, textColor()]}>{title}</Text>
 
         </Pressable>
     );
