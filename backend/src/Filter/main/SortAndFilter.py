@@ -114,6 +114,7 @@ def filtertags(sortedResponse, event):
     foodtags = event["FoodTags"]
 
     counter = 0
+    """This for loop will remove the MealTags that aren't needed by the user"""
     for i in range(len(sortedResponse)):
 
         foundmeal = False
@@ -122,8 +123,11 @@ def filtertags(sortedResponse, event):
                 if meals == sortedResponse[counter]["MealTag"]:
                     foundmeal = True
             if not foundmeal:
+                # when deleted the objects below will move up the list hence why counter
+                # is not increased here
                 del sortedResponse[counter]
             else:
+                # only increment counter when not deleted
                 counter = counter + 1
 
     return sortedResponse
