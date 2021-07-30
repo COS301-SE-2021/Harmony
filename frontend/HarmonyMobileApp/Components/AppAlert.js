@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
-
-export default function AppAlert({ title, onPress }) {
-  const [isModalVisible, setModalVisible] = useState(false);
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import Modal from "react-native-modal";
+import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
+export default function AppAlert({ visible }) {
+  const [isModalVisible, setModalVisible] = useState(visible);
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
-  const FeedbackModal = () => (
+
+  return (
     <Modal
       isVisible={isModalVisible}
       onBackButtonPress={toggleModal}
@@ -44,10 +46,10 @@ export default function AppAlert({ title, onPress }) {
               {/* Keeping outlined icons just incase we want to change to them for consistency overall */}
               {/* The filled icons look better in this case though */}
               {/* <MaterialIcons
-                        name="thumb-down-off-alt"
-                        size={40}
-                        color="white"
-                      /> */}
+                      name="thumb-down-off-alt"
+                      size={40}
+                      color="white"
+                    /> */}
               <MaterialIcons name="thumb-down" size={40} color="white" />
             </TouchableOpacity>
             <TouchableOpacity
@@ -57,10 +59,10 @@ export default function AppAlert({ title, onPress }) {
               {/* Keeping outlined icons just incase we want to change to them for consistency overall */}
               {/* The filled icons look better in this case though */}
               {/* <MaterialIcons
-                        name="thumb-up-off-alt"
-                        size={40}
-                        color="white"
-                      /> */}
+                      name="thumb-up-off-alt"
+                      size={40}
+                      color="white"
+                    /> */}
               <MaterialIcons name="thumb-up" size={40} color="white" />
             </TouchableOpacity>
           </View>
@@ -68,8 +70,6 @@ export default function AppAlert({ title, onPress }) {
       </View>
     </Modal>
   );
-
-  return <FeedbackModal />;
 }
 
 const styles = StyleSheet.create({

@@ -17,17 +17,13 @@ import AppTextInput from "../Components/AppTextInput";
 import AppButton from "../Components/AppButton";
 import { AppToast } from "../Components/AppToast";
 import AppLoadingIcon from "../Components/AppLoadingIcon";
+import AppAlert from "../Components/AppAlert";
 
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { SocialIcon } from "react-native-elements";
 import * as Animatable from "react-native-animatable";
 import { showMessage, hideMessage } from "react-native-flash-message";
-import Modal from "react-native-modal";
-import {
-  FontAwesome,
-  MaterialIcons,
-  MaterialCommunityIcons,
-} from "@expo/vector-icons";
+
 export default function SignIn({ navigation, updateAuthState }) {
   const [isLoading, setLoading] = useState(false);
   const [isModalVisible, setModalVisible] = useState(false);
@@ -45,12 +41,15 @@ export default function SignIn({ navigation, updateAuthState }) {
       updateAuthState("loggedIn");
     } catch (error) {
       console.log(" Error signing in...", error);
+      // AppAlert();
+      setModalVisible(true);
       // Alert.alert("Error", error.message);
       // showMessage({
       //   message: "Error",
       //   description: error.message,
       //   type: "danger",
       // });
+      // setModalVisible(false);
 
       setLoading(false);
     }
@@ -163,7 +162,7 @@ export default function SignIn({ navigation, updateAuthState }) {
               </View>
             </Animatable.View>
           </View>
-
+          {isModalVisible === true && <AppAlert visible={true} />}
           {isLoading === true && <AppLoadingIcon />}
         </KeyboardAwareScrollView>
       )}
