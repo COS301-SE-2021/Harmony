@@ -51,6 +51,7 @@ export default function SignUp({ navigation }) {
         Username: "",
         Email: "",
         Password: "",
+        ConfirmPassword: "",
       }}
       onSubmit={(values) => signUp(values)}
       onSubmit={async (values, { resetForm }) => {
@@ -72,6 +73,16 @@ export default function SignUp({ navigation }) {
           .string()
           .min(8)
           .required("Please, provide your Password!"),
+
+        ConfirmPassword: yup
+          .string()
+          .when("Password", {
+            is: (val) => (val && val.length > 0 ? true : false),
+            then: yup
+              .string()
+              .oneOf([yup.ref("Password")], "Passwords do not match!"),
+          })
+          .required("Please, confirm your Password!"),
       })}
     >
       {({
@@ -140,6 +151,22 @@ export default function SignUp({ navigation }) {
               {touched.Password && errors.Password && (
                 <Text style={{ fontSize: 12, color: "#FF0D10" }}>
                   {errors.Password}
+                </Text>
+              )}
+              <AppTextInput
+                value={values.ConfirmPassword}
+                onChangeText={handleChange("ConfirmPassword")}
+                leftIcon="lock"
+                placeholder="Confirm Password"
+                autoCorrect={false}
+                onBlur={() => setFieldTouched("ConfirmPassword")}
+                error={errors.ConfirmPassword}
+                touched={touched.ConfirmPassword}
+                type="Password"
+              />
+              {touched.ConfirmPassword && errors.ConfirmPassword && (
+                <Text style={{ fontSize: 12, color: "#FF0D10" }}>
+                  {errors.ConfirmPassword}
                 </Text>
               )}
               <AppButton
