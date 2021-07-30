@@ -181,7 +181,7 @@ const HomeScreen = (props) => {
 
   return (
     <ApplicationProvider  {...eva} theme={{ ...eva.light, ...theme }} style={styles.container}>
-      <StatusBar height="0%" barStyle="light-content" />
+      <StatusBar hidden={true} />
       <Header
         statusBarProps={{ elevated: 'true', backgroundColor: "white" }}
         //   leftComponent={searchButton}
@@ -211,6 +211,8 @@ const HomeScreen = (props) => {
               swipeDirection={["up", "left", "right", "down"]}
               onSwipeComplete={toggleModal}
             >
+              <StatusBar hidden={true} />
+
               <View style={styles.centeredView}>
                 <View style={styles.modalView} >
                   <View style={{ flexDirection: "row", width: "100%", textAlign: "center" }}>
