@@ -72,6 +72,7 @@ export default function SignUp({ navigation }) {
           .string()
           .min(2)
           .max(20)
+          .matches(/^\S*$/, "Username may not contain spaces") //Contains no spaces
           .required("Please, provide your Username!"),
         Email: yup
           .string()
