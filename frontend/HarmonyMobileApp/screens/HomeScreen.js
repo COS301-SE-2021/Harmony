@@ -44,31 +44,8 @@ const HomeScreen = (props) => {
   //controls all the filters
   const [isModalVisible, setModalVisible] = useState(false);                               //for the filter popup
   const [sortPairings, setSortPairings] = useState("Trending");                            // the type of pairings shown filter
-  const [mealType, setMealType] = useState("None");                                        // the mealtype filter
   const [locationValue, setLocationValue] = useState(30);                              //distance filer
 
-
-  const [FoodSalty, setFoodSaltySelected] = useState("#F3F2F2");
-  const [FoodSweet, setFoodSweetSelected] = useState("#F3F2F2");
-  const [FoodSour, setFoodSourSelected] = useState("#F3F2F2");
-  const [FoodSavoury, setFoodSavourySelected] = useState("#F3F2F2");
-  const [FoodSpicy, setFoodSpicySelected] = useState("#F3F2F2");
-  const [FoodHot, setFoodHotSelected] = useState("#F3F2F2");
-  const [FoodWarm, setFoodWarmSelected] = useState("#F3F2F2");
-  const [FoodCold, setFoodColdSelected] = useState("#F3F2F2");
-
-  const [DrinkSalty, setDrinkSaltySelected] = useState("#F3F2F2");
-  const [DrinkSweet, setDrinkSweetSelected] = useState("#F3F2F2");
-  const [DrinkSour, setDrinkSourSelected] = useState("#F3F2F2");
-  const [DrinkAlcoholic, setDrinkAlcoholicSelected] = useState("#F3F2F2");
-  const [DrinkHot, setDrinkHotSelected] = useState("#F3F2F2");
-  const [DrinkWarm, setDrinkWarmSelected] = useState("#F3F2F2");
-  const [DrinkCold, setDrinkColdSelected] = useState("#F3F2F2");
-
-  const [Breakfast, setBreakfastSelected] = useState("#F3F2F2");
-  const [Lunch, setLunchSelected] = useState("#F3F2F2");
-  const [Supper, setSupperSelected] = useState("#F3F2F2");
-  const [Snack, setSnackSelected] = useState("#F3F2F2");
 
   //controls all the icons
   const [favouriteIconChecked, setFavouriteIconChecked] = useState("unchecked");
@@ -93,25 +70,6 @@ const HomeScreen = (props) => {
   //toggles the modals visibility
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
-    setDrinkSaltySelected("#F3F2F2")
-    setDrinkSweetSelected("#F3F2F2");
-    setDrinkSourSelected("#F3F2F2");
-    setDrinkHotSelected("#F3F2F2");
-    setDrinkWarmSelected("#F3F2F2");
-    setDrinkColdSelected("#F3F2F2");
-    setDrinkAlcoholicSelected("#F3F2F2");
-    setBreakfastSelected("#F3F2F2");
-    setLunchSelected("#F3F2F2");
-    setSupperSelected("#F3F2F2");
-    setSnackSelected("#F3F2F2");
-    setFoodSaltySelected("#F3F2F2");
-    setFoodSpicySelected("#F3F2F2");
-    setFoodSavourySelected("#F3F2F2");
-    setFoodSweetSelected("#F3F2F2");
-    setFoodSourSelected("#F3F2F2");
-    setFoodHotSelected("#F3F2F2");
-    setFoodWarmSelected("#F3F2F2");
-    setFoodColdSelected("#F3F2F2");
   };
   //the api call for trending
   useEffect(() => {
@@ -195,190 +153,6 @@ const HomeScreen = (props) => {
   }
 
 
-  handleDrinkSaltySelected = () => {
-    if (DrinkSalty == "#F3F2F2") {
-      setDrinkSaltySelected("#1FBFBA"),
-        console.log("Drink Salty checked")
-    }
-    else {
-      setDrinkSaltySelected("#F3F2F2"),
-        console.log(" Drink Salty unchecked")
-    }
-  }
-  handleDrinkSweetSelected = () => {
-    if (DrinkSweet == "#F3F2F2") {
-      setDrinkSweetSelected("#1FBFBA"),
-        console.log("Drink sweet checked")
-    }
-    else {
-      setDrinkSweetSelected("#F3F2F2"),
-        console.log(" Drink sweet unchecked")
-    }
-  }
-  handleDrinkSourSelected = () => {
-    if (DrinkSour == "#F3F2F2") {
-      setDrinkSourSelected("#1FBFBA"),
-        console.log("Drink sour checked")
-    }
-    else {
-      setDrinkSourSelected("#F3F2F2"),
-        console.log(" Drink sour unchecked")
-    }
-  }
-  handleDrinkHotSelected = () => {
-    if (DrinkHot == "#F3F2F2") {
-      setDrinkHotSelected("#1FBFBA"),
-        console.log("Drink Hot checked")
-    }
-    else {
-      setDrinkHotSelected("#F3F2F2"),
-        console.log(" Drink Hot unchecked")
-    }
-  }
-  handleDrinkWarmSelected = () => {
-    if (DrinkWarm == "#F3F2F2") {
-      setDrinkWarmSelected("#1FBFBA"),
-        console.log("Drink warm checked")
-    }
-    else {
-      setDrinkWarmSelected("#F3F2F2"),
-        console.log(" Drink warm unchecked")
-    }
-  }
-  handleDrinkColdSelected = () => {
-    if (DrinkCold == "#F3F2F2") {
-      setDrinkColdSelected("#1FBFBA"),
-        console.log("Drink cold checked")
-    }
-    else {
-      setDrinkColdSelected("#F3F2F2"),
-        console.log(" Drink cold unchecked")
-    }
-  }
-  handleDrinkAlcoholicSelected = () => {
-    if (DrinkAlcoholic == "#F3F2F2") {
-      setDrinkAlcoholicSelected("#1FBFBA"),
-        console.log("Drink alcoholic checked")
-    }
-    else {
-      setDrinkAlcoholicSelected("#F3F2F2"),
-        console.log(" Drink alcoholic unchecked")
-    }
-  }
-  handleBreakfastSelected = () => {
-    if (Breakfast == "#F3F2F2") {
-      setBreakfastSelected("#DD6E42")
-    }
-    else {
-      setBreakfastSelected("#F3F2F2")
-    }
-  }
-  handleLunchSelected = () => {
-    if (Lunch == "#F3F2F2") {
-      setLunchSelected("#DD6E42")
-    }
-    else {
-      setLunchSelected("#F3F2F2")
-    }
-  }
-  handleSupperSelected = () => {
-    if (Supper == "#F3F2F2") {
-      setSupperSelected("#DD6E42")
-    }
-    else {
-      setSupperSelected("#F3F2F2")
-    }
-  }
-  handleSnackSelected = () => {
-    if (Snack == "#F3F2F2") {
-      setSnackSelected("#DD6E42")
-    }
-    else {
-      setSnackSelected("#F3F2F2")
-    }
-  }
-
-  handleFoodSaltySelected = () => {
-    if (FoodSalty == "#F3F2F2") {
-      setFoodSaltySelected("#C41ED4"),
-        console.log("Food Salty checked")
-    }
-    else {
-      setFoodSaltySelected("#F3F2F2"),
-        console.log(" Food Salty unchecked")
-    }
-  }
-  handleFoodSpicySelected = () => {
-    if (FoodSpicy == "#F3F2F2") {
-      setFoodSpicySelected("#C41ED4"),
-        console.log("Food Spicy checked")
-    }
-    else {
-      setFoodSpicySelected("#F3F2F2"),
-        console.log(" Food Spicy unchecked")
-    }
-  }
-  handleFoodSavourySelected = () => {
-    if (FoodSavoury == "#F3F2F2") {
-      setFoodSavourySelected("#C41ED4"),
-        console.log("Food savoury checked")
-    }
-    else {
-      setFoodSavourySelected("#F3F2F2"),
-        console.log(" Food Savoury unchecked")
-    }
-  }
-  handleFoodSweetSelected = () => {
-    if (FoodSweet == "#F3F2F2") {
-      setFoodSweetSelected("#C41ED4"),
-        console.log("Food sweet checked")
-    }
-    else {
-      setFoodSweetSelected("#F3F2F2"),
-        console.log(" Food sweet unchecked")
-    }
-  }
-  handleFoodSourSelected = () => {
-    if (FoodSour == "#F3F2F2") {
-      setFoodSourSelected("#C41ED4"),
-        console.log("Food sour checked")
-    }
-    else {
-      setFoodSourSelected("#F3F2F2"),
-        console.log(" Food sour unchecked")
-    }
-  }
-  handleFoodHotSelected = () => {
-    if (FoodHot == "#F3F2F2") {
-      setFoodHotSelected("#C41ED4"),
-        console.log("Food Hot checked")
-    }
-    else {
-      setFoodHotSelected("#F3F2F2"),
-        console.log(" Food Hot unchecked")
-    }
-  }
-  handleFoodWarmSelected = () => {
-    if (FoodWarm == "#F3F2F2") {
-      setFoodWarmSelected("#C41ED4"),
-        console.log("Food warm checked")
-    }
-    else {
-      setFoodWarmSelected("#F3F2F2"),
-        console.log(" Food warm unchecked")
-    }
-  }
-  handleFoodColdSelected = () => {
-    if (FoodCold == "#F3F2F2") {
-      setFoodColdSelected("#C41ED4"),
-        console.log("Food cold checked")
-    }
-    else {
-      setFoodColdSelected("#F3F2F2"),
-        console.log(" Food cold unchecked")
-    }
-  }
-
   const ShowTitle = () => (
     <Text style={styles.TextLarge}> {sortPairings} </Text>
   )
@@ -438,9 +212,9 @@ const HomeScreen = (props) => {
               onSwipeComplete={toggleModal}
             >
               <View style={styles.centeredView}>
-                <View style={[styles.modalView, styles.TextSmall]} >
-                  <View style={{ flexDirection: "row" }}>
-                    <Text style={[styles.TextMedium, { fontWeight: "bold", paddingBottom: "7%" }]}>Filter Pairings</Text>
+                <View style={styles.modalView} >
+                  <View style={{ flexDirection: "row", width: "100%", textAlign: "center" }}>
+                    <Text style={[styles.TextMedium, { fontWeight: "bold", flex: 1, justifyContent: "center", paddingBottom: "7%" }]}>Filter Pairings</Text>
                     <TouchableOpacity
                       style={[styles.closeButton]}
                       onPress={() => setModalVisible(!isModalVisible)}
@@ -508,6 +282,7 @@ const HomeScreen = (props) => {
                   <View style={styles.filterView}>
                     <View style={[styles.filterLabel]}>
                       <View style={{ flexDirection: "row" }}>
+                        <MaterialIcons name="fastfood" size={18} style={{ paddingTop: 3, marginRight: 5 }} color="black" />
                         <Text style={[styles.spaceLeft, styles.TextSmall]}>Meal Type</Text>
                       </View>
                       <View style={[styles.filterTagsContainer]}>
@@ -540,7 +315,8 @@ const HomeScreen = (props) => {
 
                   <View style={styles.filterView}>
                     <View style={[styles.filterLabel]}>
-                      <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+                      <View style={{ flexDirection: "row" }}>
+                        <MaterialCommunityIcons name="cup" size={18} style={{ paddingTop: 9, marginRight: 5 }} color="black" />
                         <Text style={[styles.spaceLeft, styles.TextSmall]}>Drinks</Text>
 
                         <FilterTag
@@ -588,6 +364,7 @@ const HomeScreen = (props) => {
                   <View style={styles.filterView}>
                     <View style={[styles.filterLabel]}>
                       <View style={{ flexDirection: "row" }}>
+                        <FontAwesome5 name="hamburger" size={18} style={{ paddingTop: 9, marginRight: 5 }} color="black" />
                         <Text style={[styles.spaceLeft, styles.TextSmall]}>Food</Text>
                         <FilterTag
                           color="#C41ED4"

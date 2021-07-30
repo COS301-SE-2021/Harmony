@@ -101,6 +101,11 @@ const styles = StyleSheet.create({
     //active modal button
     backgroundColor: "#4F6D7A",
   },
+  closeButtonOnFilter: {
+    //button for x
+    flex: 1,
+    justifyContent: "flex-end"
+  },
   textStyle: {
     //close button on modal
     color: "white",
@@ -186,7 +191,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     height: 95,
     paddingBottom: 20,
-    marginBottom: 5
+    marginBottom: 5,
   },
   filterLabelRow: {
     height: 50,
