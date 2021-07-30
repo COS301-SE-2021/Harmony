@@ -417,10 +417,10 @@ const HomeScreen = (props) => {
 
                   <Text style={{ height: 7 }}></Text>
                   <Pressable
-                    style={[styles.button, styles.buttonClose]}
+                    style={[styles.applyButton]}
                     onPress={() => setModalVisible(!isModalVisible)}
                   >
-                    <Text style={styles.textStyle}>Apply</Text>
+                    <Text style={[styles.TextSmall, { fontWeight: "bold", color: "white", textAlign: "center" }]}>Apply</Text>
                   </Pressable>
                 </View>
               </View>

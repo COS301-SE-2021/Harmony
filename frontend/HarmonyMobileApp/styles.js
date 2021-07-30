@@ -93,6 +93,15 @@ const styles = StyleSheet.create({
     padding: 10,
     elevation: 2
   },
+  applyButton: {
+    //styling for modal buttons
+    borderRadius: 10,
+    width: "40%",
+    padding: 5,
+    elevation: 2,
+    backgroundColor: "#4F6D7A",
+
+  },
   buttonOpen: {
     //not active modal button
     backgroundColor: "#C5C3C6",
