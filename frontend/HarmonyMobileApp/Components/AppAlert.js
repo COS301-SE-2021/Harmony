@@ -3,9 +3,8 @@ import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Modal from "react-native-modal";
 import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
-export default function AppAlert({ visible }) {
+export default function AppAlert({ visible, message, type }) {
   const [isModalVisible, setModalVisible] = useState(visible);
-
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
@@ -33,7 +32,7 @@ export default function AppAlert({ visible }) {
             />
           </TouchableOpacity>
           <View style={[styles.modalHeaderSection]}>
-            <Text style={styles.title}>Help us improve </Text>
+            <Text style={styles.title}>{message} </Text>
           </View>
           <Text style={styles.modalText}>
             Is the food correctly identified?

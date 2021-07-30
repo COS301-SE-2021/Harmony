@@ -26,11 +26,14 @@ import { showMessage, hideMessage } from "react-native-flash-message";
 
 export default function SignIn({ navigation, updateAuthState }) {
   const [isLoading, setLoading] = useState(false);
-  const [isModalVisible, setModalVisible] = useState(false);
+  const [isErrorAlertVisible, setErrorAlertVisible] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
   async function signIn(values) {
     try {
       setLoading(true);
+      setErrorAlertVisible(false);
+
       await Auth.signIn(values.Username, values.Password);
       setLoading(false);
       console.log("Success, Signed in");
@@ -41,16 +44,10 @@ export default function SignIn({ navigation, updateAuthState }) {
       updateAuthState("loggedIn");
     } catch (error) {
       console.log(" Error signing in...", error);
-      // AppAlert();
-      setModalVisible(true);
-      // Alert.alert("Error", error.message);
-      // showMessage({
-      //   message: "Error",
-      //   description: error.message,
-      //   type: "danger",
-      // });
-      // setModalVisible(false);
 
+      //setModalMessage must come before setErrorAlertVisible
+      setModalMessage(error.message);
+      setErrorAlertVisible(true);
       setLoading(false);
     }
   }
@@ -162,7 +159,9 @@ export default function SignIn({ navigation, updateAuthState }) {
               </View>
             </Animatable.View>
           </View>
-          {isModalVisible === true && <AppAlert visible={true} />}
+          {isErrorAlertVisible === true && (
+            <AppAlert visible={true} message={modalMessage} type={"error"} />
+          )}
           {isLoading === true && <AppLoadingIcon />}
         </KeyboardAwareScrollView>
       )}
