@@ -1,6 +1,9 @@
 import json
 import boto3
 from boto3.dynamodb.conditions import Key
+from datetime import date, timedelta
+from datetime import time
+from datetime import datetime
 
 table_name = 'Pairings'
 User_table = 'Users'
@@ -53,7 +56,33 @@ def sort_and_filter(event, context):
 
 
 def sortbynew(response):
-    return 0
+
+    # set the number of days we want to subract for the new filter
+    td = timedelta(7)
+
+    # get today's date
+    today = date.today()
+
+    # get the filter date by subtracting the td from today's date
+    filter_date = today - td
+
+    # retrieve the data of the filter date
+    day = filter_date.day
+    month = filter_date.month
+    year = filter_date.year
+
+    # build query string for formatting purposes
+    if month == 10 or 11 or 12:
+        query_string = str(year) + "-" + str(month) + "-" + str(day)
+    else:
+        query_string = str(year) + "-0" + str(month) + "-" + str(day)
+
+    sortedresponse = table.query(
+        IndexName='UID-DateAdded-index',
+        KeyConditionExpression=Key('UID').eq('u9') & Key('DateAdded').gt(query_string)
+    )
+
+    return sortedresponse
 
 
 def sortbycontroversial(response):
@@ -94,6 +123,7 @@ def upvotes_function(value):
 # this functions returns the json value we will want to sort by
 def totalvotes_function(value):
     return value["TotalVotes"]
+
 
 # this functions returns the json value we will want to sort by
 def downvotes_function(value):
