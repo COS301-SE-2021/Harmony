@@ -16,10 +16,11 @@ export default function AppAlert({ visible, message, type }) {
       isVisible={isModalVisible}
       onBackButtonPress={toggleModal}
       onBackdropPress={toggleModal}
-      animationIn={"slideInRight"}
-      animationOut={"slideOutRight"}
+      animationIn={"slideInUp"}
+      animationOut={"slideOutDown"}
       swipeDirection={["up", "left", "right", "down"]}
       onSwipeComplete={toggleModal}
+      backdropTransitionOutTiming={0}
     >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
@@ -46,15 +47,16 @@ const styles = StyleSheet.create({
   },
   centeredView: {
     flex: 1,
-    justifyContent: "center",
-    // justifyContent: "flex-end",
-    alignItems: "center",
+    // justifyContent: "center",
+    justifyContent: "flex-end",
+    // alignItems: "center",
   },
   modalView: {
     margin: 20,
     backgroundColor: "white",
-    borderRadius: 20,
-    padding: 20,
+    borderRadius: 30,
+    paddingVertical: 20,
+    paddingHorizontal: 40,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
