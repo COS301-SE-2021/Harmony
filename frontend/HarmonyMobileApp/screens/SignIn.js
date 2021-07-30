@@ -58,7 +58,10 @@ export default function SignIn({ navigation, updateAuthState }) {
         Username: "",
         Password: "",
       }}
-      onSubmit={(values) => signIn(values)}
+      onSubmit={async (values, { resetForm }) => {
+        await signIn(values);
+        resetForm();
+      }}
       validationSchema={yup.object().shape({
         Username: yup
           .string()
