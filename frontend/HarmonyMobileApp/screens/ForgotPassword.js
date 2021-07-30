@@ -10,13 +10,17 @@ import AppTextInput from "../Components/AppTextInput";
 import AppButton from "../Components/AppButton";
 import { AppToast } from "../Components/AppToast";
 import AppLoadingIcon from "../Components/AppLoadingIcon";
+import AppAlert from "../Components/AppAlert";
 
 export default function ForgotPassword({ navigation, updateAuthState }) {
   const [isLoading, setLoading] = useState(false);
-
+  const [isErrorAlertVisible, setErrorAlertVisible] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
   async function forgotPassword(values) {
     try {
       setLoading(true);
+      setErrorAlertVisible(false);
+
       await Auth.forgotPassword(values.Username);
       setLoading(false);
       console.log("Email sent");
@@ -27,6 +31,9 @@ export default function ForgotPassword({ navigation, updateAuthState }) {
       navigation.navigate("ConfirmForgotPassword");
     } catch (error) {
       console.log(" Error sending password reset code...", error);
+      //setModalMessage must come before setErrorAlertVisible
+      setModalMessage(error.message);
+      setErrorAlertVisible(true);
       setLoading(false);
     }
   }
@@ -36,7 +43,10 @@ export default function ForgotPassword({ navigation, updateAuthState }) {
       initialValues={{
         Username: "",
       }}
-      onSubmit={(values) => forgotPassword(values)}
+      onSubmit={async (values, { resetForm }) => {
+        await forgotPassword(values);
+        resetForm();
+      }}
       validationSchema={yup.object().shape({
         Username: yup
           .string()
@@ -100,6 +110,9 @@ export default function ForgotPassword({ navigation, updateAuthState }) {
               </View>
             </Animatable.View>
           </View>
+          {isErrorAlertVisible === true && (
+            <AppAlert visible={true} message={modalMessage} type={"Error"} />
+          )}
           {isLoading === true && <AppLoadingIcon />}
         </KeyboardAwareScrollView>
       )}
