@@ -133,9 +133,9 @@ export default function SignUp({ navigation }) {
                 placeholder="Enter Password"
                 autoCorrect={false}
                 onBlur={() => setFieldTouched("Password")}
-                secureTextEntry={true}
                 error={errors.Password}
                 touched={touched.Password}
+                type="Password"
               />
               {touched.Password && errors.Password && (
                 <Text style={{ fontSize: 12, color: "#FF0D10" }}>

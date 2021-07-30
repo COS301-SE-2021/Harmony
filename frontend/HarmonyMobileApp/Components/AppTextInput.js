@@ -14,9 +14,7 @@ export default function AppTextInput({
   const [isPasswordVisible, setPasswordVisible] = useState(false);
 
   const RightIcon = () => {
-    if (!touched) {
-      return null;
-    } else if (type === "Password") {
+    if (type === "Password") {
       if (isPasswordVisible) {
         return (
           <MaterialCommunityIcons
@@ -41,7 +39,9 @@ export default function AppTextInput({
         );
       }
     } else {
-      if (error) {
+      if (!touched) {
+        return null;
+      } else if (error) {
         return (
           <MaterialCommunityIcons
             name="close-circle"
@@ -92,7 +92,7 @@ export default function AppTextInput({
         style={styles.input}
         autoCapitalize="none"
         placeholderTextColor="#6e6869"
-        secureTextEntry={isPasswordVisible}
+        secureTextEntry={!isPasswordVisible}
         {...otherProps}
       />
       {/* Split into a function because there is no conditional rendering */}
