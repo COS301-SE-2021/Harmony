@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 15,
     width: "80%",
-    backgroundColor: "tomato",
+    backgroundColor: "#ef476f",
     elevation: 2, //gives shadow/3D effect
   },
 

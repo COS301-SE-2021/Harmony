@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     flex: 1,
     // alignItems: "center",
     // justifyContent: "center",
-    backgroundColor: "#009387",
+    backgroundColor: "#118AB2",
   },
   text_header: {
     color: "#fff",

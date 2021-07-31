@@ -108,7 +108,7 @@ const AuthenticationStack = createStackNavigator();
 
 const AuthenticationNavigator = (props) => {
   return (
-    <View style={{ flex: 1, backgroundColor: "#009387" }}>
+    <View style={{ flex: 1, backgroundColor: "#118AB2" }}>
       <AuthenticationStack.Navigator headerMode="none">
         <AuthenticationStack.Screen name="SignIn">
           {(screenProps) => (
@@ -136,7 +136,7 @@ const AuthenticationNavigator = (props) => {
 const Initializing = () => {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <ActivityIndicator size="large" color="tomato" />
+      <ActivityIndicator size="large" color="#118AB2" />
     </View>
   );
 };

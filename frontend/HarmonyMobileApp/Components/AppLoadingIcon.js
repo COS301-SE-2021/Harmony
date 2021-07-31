@@ -6,7 +6,7 @@ import AnimatedLoader from "react-native-animated-loader";
 export default function AppLoadingIcon() {
   return (
     <View style={styles.loadingIcon}>
-      <ActivityIndicator size={80} color="tomato" />
+      <ActivityIndicator size={80} color="#118AB2" />
     </View>
   );
   // return (

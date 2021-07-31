@@ -25,7 +25,7 @@ export default function AppAlert({ visible, message, type }) {
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
           <View style={styles.icon}>
-            <MaterialIcons name="error" size={50} color="tomato" />
+            <MaterialIcons name="error" size={50} color="#ef476f" />
           </View>
 
           <Text style={styles.title}>{type} </Text>

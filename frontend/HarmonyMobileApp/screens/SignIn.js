@@ -86,11 +86,11 @@ export default function SignIn({ navigation, updateAuthState }) {
             <StatusBar style="auto" />
             <View style={styles.header}>
               {/* V2 */}
-              {/* <Text style={styles.text_header}>Welcome back</Text> */}
+              <Text style={styles.text_header}>Welcome back</Text>
               {/* V1 */}
-              <Text style={styles.text_header}>Sign in to your account</Text>
+              {/* <Text style={styles.text_header}>Sign in to your account</Text> */}
               {/* V2 */}
-              {/* <Text style={styles.bodyText}>Sign in below</Text> */}
+              <Text style={styles.bodyText}>Sign in below</Text>
             </View>
 
             <Animatable.View animation="fadeInUpBig" style={styles.body}>
@@ -146,7 +146,7 @@ export default function SignIn({ navigation, updateAuthState }) {
                   style={styles.footerLink}
                 >
                   {" "}
-                  Forgot Password
+                  Forgot Password?
                 </Text>
               </View>
             </Animatable.View>
@@ -185,7 +185,8 @@ const styles = StyleSheet.create({
     flex: 1,
     // alignItems: "center",
     // justifyContent: "center",
-    backgroundColor: "#009387",
+    // backgroundColor: "#118AB2",
+    backgroundColor: "#118AB2",
   },
   text_header: {
     color: "#fff",
@@ -201,10 +202,10 @@ const styles = StyleSheet.create({
   },
   bodyText: {
     fontSize: 16,
-    color: "#6e6869", //V1
-    // color: "#fff",//V2
+    // color: "#6e6869", //V1
+    color: "#fff", //V2
     textAlign: "center",
-    // paddingVertical: 10,//V2
+    paddingVertical: 10, //V2
   },
   bodyTitle: {
     justifyContent: "center",
@@ -252,6 +253,7 @@ const styles = StyleSheet.create({
     // color: "#ffa07a",
     color: "#afeeee",
     // color: "#00ffff",
+    // color: "#cdedf6",
     fontSize: 19,
     fontWeight: "600",
   },
