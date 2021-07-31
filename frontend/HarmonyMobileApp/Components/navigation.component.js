@@ -56,12 +56,9 @@ const BottomTabBar = ({ navigation, state }) => (
 const TabNavigator = (props) => {
   return (
     <Navigator tabBar={(props) => <BottomTabBar {...props} />}>
-      <Screen name="Results" component={Results} />
-      {/* <Screen name="Home" component={HomeScreen} /> */}
+      <Screen name="Home" component={HomeScreen} />
       <Screen name="Camera" component={CameraScreen} />
-
       <Screen name="Favourite" component={ViewFavouritesScreen} />
-
       <Screen name="Settings">
         {(screenProps) => (
           <SettingsScreen
@@ -70,6 +67,7 @@ const TabNavigator = (props) => {
           />
         )}
       </Screen>
+      <Screen name="Results" component={Results} />
     </Navigator>
   );
 };

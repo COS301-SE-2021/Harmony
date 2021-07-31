@@ -15,6 +15,7 @@ import { Icon } from "@ui-kitten/components";
 import * as ImagePicker from "expo-image-picker";
 import { useIsFocused } from "@react-navigation/native";
 import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
+import * as FileSystem from "expo-file-system";
 
 export default function CameraScreen() {
   const cameraRef = useRef();
@@ -43,7 +44,8 @@ export default function CameraScreen() {
 
   const windowWidth = Dimensions.get("window").width;
   const windowHeight = Dimensions.get("window").height;
-
+  const uploadImageURL =
+    "https://jkwhidy1cf.execute-api.eu-west-1.amazonaws.com/dev";
   useEffect(() => {
     onHandlePermission();
   }, []);
@@ -79,6 +81,22 @@ export default function CameraScreen() {
     console.log(result);
     if (!result.cancelled) {
       setImage(result.uri);
+      const base64 = await FileSystem.readAsStringAsync(result.uri, {
+        encoding: "base64",
+      });
+
+      fetch(uploadImageURL, {
+        method: "POST",
+        body: JSON.stringify({
+          data: base64,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => console.log(json))
+        .catch((error) => console.log(error));
       setIsPreview(true);
       setisGalleryImage(true);
     }
@@ -96,31 +114,20 @@ export default function CameraScreen() {
         setIsPreview(true);
         setisGalleryImage(false);
 
-        // let base64Img = `data:image/jpg;base64,${source}`;
-        // let apiUrl =
-        //   "https://api.aws.s3.com";//WAITING ON API URL FROM BACKEND
+        fetch(uploadImageURL, {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            data: source,
+          }),
+        })
+          .then((response) => response.json())
+          .then((json) => console.log(json))
 
-        // let data = {
-        //   file: base64Img,
-        //   upload_preset: "<your-upload-preset>",
-        // };
-
-        // fetch(apiUrl, {
-        //   body: JSON.stringify(data),
-        //   headers: {
-        //     "content-type": "application/json",
-        //   },
-        //   method: "POST",
-        // })
-        //   .then(async (response) => {
-        //     let data = await response.json();
-        //     if (data.secure_url) {
-        //       alert("Upload successful");
-        //     }
-        //   })
-        //   .catch((err) => {
-        //     alert("Cannot upload");
-        //   });
+          .catch((error) => alert(error));
       }
     }
   };

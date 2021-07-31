@@ -1,7 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { View } from "react-native";
 import { AppNavigator } from "./Components/navigation.component";
-
+import * as eva from "@eva-design/eva";
+import { ApplicationProvider, IconRegistry } from "@ui-kitten/components";
+import { EvaIconsPack } from "@ui-kitten/eva-icons";
 import Amplify from "aws-amplify";
 import awsExports from "./aws-exports";
 import { RootSiblingParent } from "react-native-root-siblings";
@@ -57,8 +59,11 @@ export default function App() {
         {/* RootSiblingParent to allow toasts in any part of the app. */}
         <RootSiblingParent>
           {/* View below is needed as it allows the app to be displayed only once all the resources have loaded in */}
-          <View onLayout={onLayoutRootView} />
-          <AppNavigator />
+          <IconRegistry icons={EvaIconsPack} />
+          <ApplicationProvider {...eva} theme={eva.light}>
+            <View onLayout={onLayoutRootView} />
+            <AppNavigator />
+          </ApplicationProvider>
         </RootSiblingParent>
       </SafeAreaProvider>
     </>
