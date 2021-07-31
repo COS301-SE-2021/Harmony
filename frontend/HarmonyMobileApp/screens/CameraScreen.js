@@ -85,18 +85,7 @@ export default function CameraScreen() {
         encoding: "base64",
       });
 
-      fetch(uploadImageURL, {
-        method: "POST",
-        body: JSON.stringify({
-          data: base64,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((response) => response.json())
-        .then((json) => console.log(json))
-        .catch((error) => console.log(error));
+      uploadImage(base64);
       setIsPreview(true);
       setisGalleryImage(true);
     }
@@ -113,23 +102,24 @@ export default function CameraScreen() {
         setImage(data.uri);
         setIsPreview(true);
         setisGalleryImage(false);
-
-        fetch(uploadImageURL, {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            data: source,
-          }),
-        })
-          .then((response) => response.json())
-          .then((json) => console.log(json))
-
-          .catch((error) => alert(error));
+        uploadImage(source);
       }
     }
+  };
+
+  const uploadImage = async (img) => {
+    fetch(uploadImageURL, {
+      method: "POST",
+      body: JSON.stringify({
+        data: img,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => console.log(json))
+      .catch((error) => console.log(error));
   };
 
   const cancelPreview = async () => {
