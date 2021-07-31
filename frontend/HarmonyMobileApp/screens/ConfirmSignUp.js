@@ -21,7 +21,7 @@ export default function ConfirmSignUp({ navigation }) {
       setLoading(true);
       setErrorAlertVisible(false);
 
-      await Auth.confirmSignUp(values.Username, values.authCode);
+      await Auth.confirmSignUp(values.Username, values.Code);
       setLoading(false);
 
       console.log(" Code confirmed");
@@ -45,7 +45,7 @@ export default function ConfirmSignUp({ navigation }) {
     <Formik
       initialValues={{
         Username: "",
-        authCode: "",
+        Code: "",
       }}
       onSubmit={async (values, { resetForm }) => {
         await confirmSignUp(values);
@@ -58,7 +58,7 @@ export default function ConfirmSignUp({ navigation }) {
           .max(20)
           .matches(/^\S*$/, "Username may not contain spaces") //Contains no spaces
           .required("Please, provide your Username!"),
-        authCode: yup
+        Code: yup
           .string()
           .min(6)
           .max(6)
@@ -82,6 +82,10 @@ export default function ConfirmSignUp({ navigation }) {
 
             <View style={styles.header}>
               <Text style={styles.text_header}>Confirm Sign Up</Text>
+              <Text style={styles.subtitle}>
+                Provide your username and the reset code sent to your account
+                email below
+              </Text>
             </View>
             <Animatable.View animation="fadeInUpBig" style={styles.body}>
               <AppTextInput
@@ -102,19 +106,19 @@ export default function ConfirmSignUp({ navigation }) {
                 </Text>
               )}
               <AppTextInput
-                value={values.authCode}
-                onChangeText={handleChange("authCode")}
+                value={values.Code}
+                onChangeText={handleChange("Code")}
                 leftIcon="numeric"
                 placeholder="Enter verification code"
                 keyboardType="numeric"
-                onBlur={() => setFieldTouched("authCode")}
-                error={errors.authCode}
-                touched={touched.authCode}
+                onBlur={() => setFieldTouched("Code")}
+                error={errors.Code}
+                touched={touched.Code}
                 secureTextEntry={false}
               />
-              {touched.authCode && errors.authCode && (
+              {touched.Code && errors.Code && (
                 <Text style={{ fontSize: 12, color: "#FF0D10" }}>
-                  {errors.authCode}
+                  {errors.Code}
                 </Text>
               )}
               <AppButton
@@ -152,6 +156,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 20,
     paddingVertical: 30,
+  },
+  subtitle: {
+    fontSize: 16,
+    color: "#fff",
+    textAlign: "center",
+    paddingTop: 20,
+    width: "90%",
   },
   body: {
     alignItems: "center",

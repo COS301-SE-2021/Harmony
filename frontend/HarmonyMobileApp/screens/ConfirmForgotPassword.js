@@ -27,7 +27,7 @@ export default function ConfirmForgotPassword({ navigation }) {
       // Collect confirmation code and new password, then
       await Auth.forgotPasswordSubmit(
         values.Username,
-        values.authCode,
+        values.Code,
         values.Password
       );
 
@@ -51,7 +51,7 @@ export default function ConfirmForgotPassword({ navigation }) {
     <Formik
       initialValues={{
         Username: "",
-        authCode: "",
+        Code: "",
         Password: "",
       }}
       onSubmit={async (values, { resetForm }) => {
@@ -65,7 +65,7 @@ export default function ConfirmForgotPassword({ navigation }) {
           .max(20)
           .matches(/^\S*$/, "Username may not contain spaces") //Contains no spaces
           .required("Please, provide your Username!"),
-        authCode: yup
+        Code: yup
           .string()
           .min(6)
           .max(6)
@@ -101,6 +101,10 @@ export default function ConfirmForgotPassword({ navigation }) {
             <StatusBar style="auto" />
             <View style={styles.header}>
               <Text style={styles.text_header}>Reset your password</Text>
+              <Text style={styles.subtitle}>
+                Provide your details and the reset code sent to your account
+                email below
+              </Text>
             </View>
 
             <Animatable.View animation="fadeInUpBig" style={styles.body}>
@@ -123,19 +127,19 @@ export default function ConfirmForgotPassword({ navigation }) {
               )}
 
               <AppTextInput
-                value={values.authCode}
-                onChangeText={handleChange("authCode")}
+                value={values.Code}
+                onChangeText={handleChange("Code")}
                 leftIcon="numeric"
                 placeholder="Enter verification code"
                 keyboardType="numeric"
-                onBlur={() => setFieldTouched("authCode")}
-                error={errors.authCode}
-                touched={touched.authCode}
+                onBlur={() => setFieldTouched("Code")}
+                error={errors.Code}
+                touched={touched.Code}
                 secureTextEntry={false}
               />
-              {touched.authCode && errors.authCode && (
+              {touched.Code && errors.Code && (
                 <Text style={{ fontSize: 12, color: "#FF0D10" }}>
-                  {errors.authCode}
+                  {errors.Code}
                 </Text>
               )}
               <AppTextInput
@@ -205,6 +209,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 20,
     paddingVertical: 30,
+  },
+  subtitle: {
+    fontSize: 16,
+    color: "#fff",
+    textAlign: "center",
+    paddingTop: 20,
+    width: "90%",
   },
   body: {
     alignItems: "center",

@@ -85,21 +85,11 @@ export default function SignIn({ navigation, updateAuthState }) {
           <View style={styles.container}>
             <StatusBar style="auto" />
             <View style={styles.header}>
-              {/* V2 */}
               <Text style={styles.text_header}>Welcome back</Text>
-              {/* V1 */}
-              {/* <Text style={styles.text_header}>Sign in to your account</Text> */}
-              {/* V2 */}
-              <Text style={styles.bodyText}>Sign in below</Text>
+              <Text style={styles.subtitle}>Sign in below</Text>
             </View>
 
             <Animatable.View animation="fadeInUpBig" style={styles.body}>
-              {/* V3 */}
-              {/* <View style={styles.bodyTitle}>
-                <Text style={styles.bodyText}>
-                  Fill in your details below to Sign into your account
-                </Text>
-              </View> */}
               <AppTextInput
                 value={values.Username}
                 onChangeText={handleChange("Username")}
@@ -200,19 +190,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 30,
   },
-  bodyText: {
+  subtitle: {
     fontSize: 16,
-    // color: "#6e6869", //V1
-    color: "#fff", //V2
+    color: "#fff",
     textAlign: "center",
-    paddingVertical: 10, //V2
-  },
-  bodyTitle: {
-    justifyContent: "center",
-    alignItems: "center",
-    paddingHorizontal: 20,
-    paddingVertical: 20,
-    // paddingBottom: 20,
+    paddingVertical: 10,
   },
   body: {
     alignItems: "center",
@@ -222,7 +204,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 30,
   },
-
   footer: {
     flex: 1,
     flexDirection: "column",

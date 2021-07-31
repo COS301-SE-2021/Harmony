@@ -72,6 +72,9 @@ export default function ForgotPassword({ navigation, updateAuthState }) {
             <StatusBar style="auto" />
             <View style={styles.header}>
               <Text style={styles.text_header}>Forgot Password?</Text>
+              <Text style={styles.subtitle}>
+                We'll send a reset code to your account email
+              </Text>
             </View>
 
             <Animatable.View animation="fadeInUpBig" style={styles.body}>
@@ -148,6 +151,13 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 30,
     paddingHorizontal: 20,
     paddingVertical: 30,
+  },
+  subtitle: {
+    fontSize: 16,
+    color: "#fff",
+    textAlign: "center",
+    paddingTop: 20,
+    width: "80%",
   },
   footerTextContainer: {
     marginVertical: 15,

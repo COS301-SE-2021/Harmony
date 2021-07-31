@@ -102,6 +102,7 @@ export default function SignUp({ navigation }) {
 
             <View style={styles.header}>
               <Text style={styles.text_header}>Create an account</Text>
+              <Text style={styles.subtitle}>Sign up below</Text>
             </View>
             <Animatable.View animation="fadeInUpBig" style={styles.body}>
               <AppTextInput
@@ -230,7 +231,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderRadius: 30,
     paddingHorizontal: 20,
-    paddingVertical: 30,
+    paddingVertical: 10,
+  },
+  subtitle: {
+    fontSize: 16,
+    color: "#fff",
+    textAlign: "center",
+    paddingVertical: 10,
   },
   footer: {
     flex: 1,
