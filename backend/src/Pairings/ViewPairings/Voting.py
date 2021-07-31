@@ -60,8 +60,8 @@ def addvote(vote_type, num_votes):
         num_votes = num_votes + 1
     else:
         if num_votes == 0:
-            print("Num votes already 0. Debug")
-            exit()
+            #Votes already 0. No need to subtract
+            return num_votes
         else:
             num_votes = num_votes - 1
 
