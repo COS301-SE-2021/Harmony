@@ -66,3 +66,6 @@ def addvote(vote_type, num_votes):
             num_votes = num_votes - 1
 
     return num_votes
+
+def vote_userdatabase(pairingresponse, type):
+    return
