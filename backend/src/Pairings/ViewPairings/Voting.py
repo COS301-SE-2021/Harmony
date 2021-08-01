@@ -20,7 +20,7 @@ def vote(event, context):
     print("Test the code")
 
     type = 'Upvotes'  # or Down and must be passed in from frontend
-    id = '60dyrtjoucir6556'  # must be passed in from frontend
+    id = 'p1'  # must be passed in from frontend
     vote_type = 'Checked'
 
     """Gets the pairing that the vote was made to as well as its data."""
@@ -30,20 +30,13 @@ def vote(event, context):
     except ClientError as e:
         print(e.response['Error']['Message'])
 
-    """ extracts the number of votes from the pairing response string depending
+    """ Extracts the number of votes from the pairing response string depending
      on the type, either: Upvotes/Downvotes"""
 
-    num_votes = pairing_data['Item'][type]
-    print(num_votes)
+    current_num_votes = pairing_data['Item'][type]
+    print(current_num_votes)
 
-    if vote_type == 'Checked':
-        num_votes = num_votes + 1
-    else:
-        if num_votes == 0:
-            print("Num votes already 0. Debug")
-            exit()
-        else:
-            num_votes = num_votes - 1
+    num_votes = addvote(vote_type, current_num_votes)
 
     """ The new value of numvotes is written back to the database"""
     response = table.update_item(
@@ -60,3 +53,19 @@ def vote(event, context):
     # ADD/REMOVE the pairing from the user favourites DB still needs to be done.
 
     return response
+
+
+def addvote(vote_type, num_votes):
+    if vote_type == 'Checked':
+        num_votes = num_votes + 1
+    else:
+        if num_votes == 0:
+            #Votes already 0. No need to subtract
+            return num_votes
+        else:
+            num_votes = num_votes - 1
+
+    return num_votes
+
+def vote_userdatabase(pairingresponse, type):
+    return
