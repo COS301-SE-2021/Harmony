@@ -17,7 +17,7 @@ import { useIsFocused } from "@react-navigation/native";
 import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
 import * as FileSystem from "expo-file-system";
 
-export default function CameraScreen() {
+export default function CameraScreen({ navigation }) {
   const cameraRef = useRef();
   const [isPreview, setIsPreview] = useState(false);
   const [isGalleryImage, setisGalleryImage] = useState(false);
@@ -27,6 +27,7 @@ export default function CameraScreen() {
   const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
 
   const [image, setImage] = useState(null);
+  const [b64Image, setb64Image] = useState(null);
   const isFocused = useIsFocused();
   const [flashMode, setFlashMode] = React.useState("off");
   // const [flashIcon, setFlashIcon] = useState("flash-off-outline");
@@ -85,7 +86,7 @@ export default function CameraScreen() {
         encoding: "base64",
       });
 
-      uploadImage(base64);
+      setb64Image(base64);
       setIsPreview(true);
       setisGalleryImage(true);
     }
@@ -95,20 +96,20 @@ export default function CameraScreen() {
     if (cameraRef.current) {
       const options = { quality: 1, base64: true, skipProcessing: true };
       const data = await cameraRef.current.takePictureAsync(options);
-      const source = data.base64;
+      const base64 = data.base64;
 
-      if (source) {
+      if (base64) {
         // await cameraRef.current.pausePreview();
         setImage(data.uri);
         setIsPreview(true);
         setisGalleryImage(false);
-        uploadImage(source);
+        setb64Image(base64);
       }
     }
   };
 
   const uploadImage = async (img) => {
-    fetch(uploadImageURL, {
+    await fetch(uploadImageURL, {
       method: "POST",
       body: JSON.stringify({
         data: img,
@@ -118,7 +119,14 @@ export default function CameraScreen() {
       },
     })
       .then((response) => response.json())
-      .then((json) => console.log(json))
+      .then((json) => {
+        // console.log(json);
+        navigation.navigate("Results", {
+          screen: "PairingResults",
+          // params: { id: "1", name: "jd" },
+          params: { id: "1", response: json },
+        });
+      })
       .catch((error) => console.log(error));
   };
 
@@ -284,7 +292,7 @@ export default function CameraScreen() {
                 />
               </TouchableOpacity>
 
-              <TouchableOpacity onPress={cancelPreview}>
+              <TouchableOpacity onPress={() => uploadImage(b64Image)}>
                 <Icon
                   style={styles.icon}
                   fill="#fff"
