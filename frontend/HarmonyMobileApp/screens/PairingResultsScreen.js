@@ -14,11 +14,11 @@ import Modal from "react-native-modal";
 import { ImageHeaderScrollView } from "react-native-image-header-scroll-view";
 import { SharedElement } from "react-navigation-shared-element";
 import { useIsFocused, useFocusEffect } from "@react-navigation/native";
-
 import {
   FontAwesome,
   MaterialIcons,
   MaterialCommunityIcons,
+  Ionicons,
 } from "@expo/vector-icons";
 import * as Animatable from "react-native-animatable";
 
@@ -115,7 +115,8 @@ const PairingResultsScreen = ({ navigation, route }) => {
         }}
         onPress={() => setModalVisible(true)}
       >
-        <MaterialIcons name="error-outline" size={24} color="red" />
+        {/* <MaterialIcons name="error-outline" size={24} color="red" /> */}
+        <Ionicons name="ios-flag-outline" size={24} color="red" />
         <FeedbackModal />
       </TouchableOpacity>
     </View>

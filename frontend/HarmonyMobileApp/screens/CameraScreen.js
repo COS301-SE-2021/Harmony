@@ -11,7 +11,6 @@ import {
   StatusBar,
 } from "react-native";
 import { Camera } from "expo-camera";
-import { Icon } from "@ui-kitten/components";
 import * as ImagePicker from "expo-image-picker";
 import { useIsFocused } from "@react-navigation/native";
 import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
@@ -128,6 +127,7 @@ export default function CameraScreen({ navigation }) {
       .then((json) => {
         // console.log(json);
         setLoading(false);
+        cancelPreview();
         navigation.navigate("Results", {
           screen: "PairingResults",
           params: { id: "1", response: json },
@@ -135,6 +135,7 @@ export default function CameraScreen({ navigation }) {
       })
       .catch((error) => {
         console.log(error);
+        cancelPreview();
         setLoading(false);
       });
   };
@@ -294,18 +295,18 @@ export default function CameraScreen({ navigation }) {
             {/* )} */}
             <View style={styles.previewButtonsContainer}>
               <TouchableOpacity onPress={cancelPreview}>
-                <Icon
-                  style={styles.icon}
-                  fill="#fff"
-                  name="close-circle-outline"
+                <MaterialCommunityIcons
+                  name="close"
+                  size={80}
+                  style={styles.previewIcon}
                 />
               </TouchableOpacity>
 
               <TouchableOpacity onPress={() => uploadImage(b64Image)}>
-                <Icon
-                  style={styles.icon}
-                  fill="#fff"
-                  name="checkmark-circle-2-outline"
+                <MaterialCommunityIcons
+                  name="check"
+                  size={80}
+                  style={styles.previewIcon}
                 />
               </TouchableOpacity>
             </View>
@@ -334,7 +335,6 @@ export default function CameraScreen({ navigation }) {
                 disabled={!isCameraReady}
                 onPress={pickImage}
               >
-                {/* <Icon style={styles.icon} fill="#fff" name="image-outline" /> */}
                 <MaterialCommunityIcons
                   name="image-multiple-outline"
                   size={60}
@@ -395,9 +395,11 @@ const styles = StyleSheet.create({
     height: 60,
     top: "2.5%",
   },
-  icon: {
-    width: 80,
-    height: 80,
+  previewIcon: {
+    borderRadius: 60,
+    backgroundColor: "rgba(52, 52, 52, 0.4)",
+    marginHorizontal: 5,
+    color: "#fff",
   },
   toolbarContainer: {
     position: "absolute",
