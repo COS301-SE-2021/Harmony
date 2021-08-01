@@ -16,6 +16,7 @@ import * as ImagePicker from "expo-image-picker";
 import { useIsFocused } from "@react-navigation/native";
 import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
 import * as FileSystem from "expo-file-system";
+import AppLoadingIcon from "../Components/AppLoadingIcon";
 
 export default function CameraScreen({ navigation }) {
   const cameraRef = useRef();
@@ -45,6 +46,9 @@ export default function CameraScreen({ navigation }) {
 
   const windowWidth = Dimensions.get("window").width;
   const windowHeight = Dimensions.get("window").height;
+
+  const [isLoading, setLoading] = useState(false);
+
   const uploadImageURL =
     "https://jkwhidy1cf.execute-api.eu-west-1.amazonaws.com/dev";
   useEffect(() => {
@@ -109,6 +113,8 @@ export default function CameraScreen({ navigation }) {
   };
 
   const uploadImage = async (img) => {
+    setLoading(true);
+
     await fetch(uploadImageURL, {
       method: "POST",
       body: JSON.stringify({
@@ -121,13 +127,16 @@ export default function CameraScreen({ navigation }) {
       .then((response) => response.json())
       .then((json) => {
         // console.log(json);
+        setLoading(false);
         navigation.navigate("Results", {
           screen: "PairingResults",
-          // params: { id: "1", name: "jd" },
           params: { id: "1", response: json },
         });
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
   };
 
   const cancelPreview = async () => {
@@ -349,6 +358,7 @@ export default function CameraScreen({ navigation }) {
           </View>
         )}
       </View>
+      {isLoading === true && <AppLoadingIcon />}
     </View>
   );
 }
