@@ -26,7 +26,7 @@ class TestApiGateway(TestCase):
     def setUp(self) -> None:
         """
         Based on the provided env variable AWS_SAM_STACK_NAME,
-        here we use cloudformation API to find out what the HelloWorldApi URL is
+        here we use cloudformation API to find out what the AddtoFavouritesAPI URL is
         """
         stack_name = TestApiGateway.get_stack_name()
 
@@ -43,13 +43,13 @@ class TestApiGateway(TestCase):
 
         stack_outputs = stacks[0]["Outputs"]
         api_outputs = [output for output in stack_outputs if output["OutputKey"] == "AddtoFavouritesApi"]
-        self.assertTrue(api_outputs, f"Cannot find output API in stack {stack_name}")
+        self.assertTrue(api_outputs, f"Cannot find output AddtoFavourites API in stack {stack_name}")
 
         self.api_endpoint = api_outputs[0]["OutputValue"]
 
     def test_api_gateway(self):
         """
-        Call the API Gateway endpoint and check the response
+        Call the API Gateway endpoint and check the response status code
         """
         response = requests.get(self.api_endpoint)
         self.assertEqual(response.status_code, 200)
