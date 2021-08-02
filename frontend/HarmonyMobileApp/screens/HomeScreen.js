@@ -203,214 +203,210 @@ const HomeScreen = (props) => {
         }}
         rightComponent={filterButton}
       />
-      <ScrollView
-        style={styles.scrollView}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-      >
-        <View style={{ height: "100%" }}>
-          <View style={styles.centeredView}>
-            {isModalVisible && <FilterModal />}
-          </View>
+      <View style={{ height: "100%" }}>
+        <View style={styles.centeredView}>
+          {isModalVisible && <FilterModal />}
+        </View>
 
-          {isLoading ? (
-            <ActivityIndicator />
-          ) : (
-            <FlatList
-              data={data}
-              keyExtractor={({ PID }, index) => PID}
-              renderItem={({ item }) => (
-                <View style={{ paddingBottom: 15 }}>
-                  <View style={styles.cardContainer}>
-                    <View style={styles.imageContainer}>
-                      <View
-                        style={{
-                          flexDirection: "column",
-                          textAlign: "center",
-                          width: "50%",
-                          height: 180,
-                        }}
-                      >
-                        <Image
-                          source={{ uri: item.FoodImage }}
-                          style={styles.standardImage}
-                        />
-                        <Text style={styles.cardText}>{item.FoodItem}</Text>
-                      </View>
-
-                      <View
-                        style={{
-                          flexDirection: "column",
-                          textAlign: "center",
-                          width: "50%",
-                          height: 180,
-                        }}
-                      >
-                        <Image
-                          source={{ uri: item.DrinkImage }}
-                          style={styles.standardImage}
-                        />
-
-                        <Text style={styles.cardText}>{item.DrinkItem}</Text>
-                      </View>
-                    </View>
-
-                    <Divider />
-                    <View style={styles.tagsSection}>
-                      <ScrollView
-                        contentContainerStyle={{
-                          flexDirection: "row",
-                          flexWrap: "wrap",
-                        }}
-                        showsHorizontalScrollIndicator={false}
-                        horizontal={true}
-                      >
-                        <View style={styles.rowContainer}>
-                          {item.FoodTags.map((tag, index) => (
-                            <View style={styles.tagContainer} key={index}>
-                              {/*<FontAwesome name="tag" size={14} color="#fff" />*/}
-                              <MaterialIcons
-                                name="fastfood"
-                                size={14}
-                                color="#fff"
-                              />
-                              {/* Keeping outlined icons just incase we want to change to them for consistency overall */}
-                              {/* The filled icons look better in this case though */}
-                              {/* <Feather name="tag" size={16} color="#fff" /> */}
-                              <Text style={styles.tagText}>{tag}</Text>
-                            </View>
-                          ))}
-
-                          {item.FoodTags.map((tag, index) => (
-                            <View
-                              style={[
-                                styles.tagContainer,
-                                { backgroundColor: "#C41ED4" },
-                              ]}
-                              key={index}
-                            >
-                              {/*<FontAwesome name="tag" size={14} color="#fff" />*/}
-                              <FontAwesome5
-                                name="hamburger"
-                                size={14}
-                                color="#fff"
-                              />
-                              {/* Keeping outlined icons just incase we want to change to them for consistency overall */}
-                              {/* The filled icons look better in this case though */}
-                              {/* <Feather name="tag" size={16} color="#fff" /> */}
-                              <Text style={styles.tagText}>{tag}</Text>
-                            </View>
-                          ))}
-                          {item.DrinkTags.map((tag, index) => (
-                            <View
-                              style={[
-                                styles.tagContainer,
-                                { backgroundColor: "#1FBFBA" },
-                              ]}
-                              key={index}
-                            >
-                              {/*<FontAwesome name="tag" size={14} color="#fff" />*/}
-                              <MaterialCommunityIcons
-                                name="cup"
-                                size={14}
-                                color="#fff"
-                              />
-                              {/* Keeping outlined icons just incase we want to change to them for consistency overall */}
-                              {/* The filled icons look better in this case though */}
-                              {/* <Feather name="tag" size={16} color="#fff" /> */}
-                              <Text style={styles.tagText}>{tag}</Text>
-                            </View>
-                          ))}
-                        </View>
-                      </ScrollView>
-                    </View>
-                    <Divider />
-                    <View style={styles.locationBar}>
-                      <SimpleLineIcons
-                        name="location-pin"
-                        style={{ paddingVertical: "3%", paddingRight: "2%" }}
-                        size={26}
-                        color="black"
+        {isLoading ? (
+          <ActivityIndicator />
+        ) : (
+          <FlatList
+            data={data}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
+            keyExtractor={({ PID }, index) => PID}
+            renderItem={({ item }) => (
+              <View style={{ paddingBottom: 15 }}>
+                <View style={styles.cardContainer}>
+                  <View style={styles.imageContainer}>
+                    <View
+                      style={{
+                        flexDirection: "column",
+                        textAlign: "center",
+                        width: "50%",
+                        height: 180,
+                      }}
+                    >
+                      <Image
+                        source={{ uri: item.FoodImage }}
+                        style={styles.standardImage}
                       />
-                      <View
-                        style={{
-                          alignContent: "flex-end",
-                          alignSelf: "flex-end",
-                          flex: 1,
-                          paddingRight: "1%",
-                        }}
-                      >
-                        <Text style={styles.TextSmall}>{item.Location} </Text>
-                        <Text style={styles.TextSmall}>35 KM</Text>
-                      </View>
+                      <Text style={styles.cardText}>{item.FoodItem}</Text>
                     </View>
-                    <Divider />
 
-                    <View style={styles.iconsBar}>
-                      <View style={{ flexDirection: "row" }}>
-                        <Pressable
-                          style={{
-                            flexDirection: "row",
-                            justifyContent: "center",
-                          }}
-                          onPress={handleDownIconPress}
-                        >
-                          <AntDesign
-                            name={downIconOutline}
-                            size={24}
-                            color={downIconColor}
-                          />
-                          <Text
-                            style={{
-                              paddingLeft: "2%",
-                              paddingRight: "5%",
-                              paddingVertical: "1%",
-                              fontFamily: "sans-serif-light",
-                            }}
-                          >
-                            {item.Downvotes}
-                          </Text>
-                        </Pressable>
-                        <Pressable
-                          style={{
-                            flexDirection: "row",
-                            justifyContent: "center",
-                            paddingRight: "10%",
-                          }}
-                          onPress={handleUpIconPress}
-                        >
-                          <AntDesign
-                            name={upIconOutline}
-                            size={24}
-                            color={upIconColor}
-                          />
-                          <Text
-                            style={{
-                              paddingLeft: "2%",
-                              paddingVertical: "1%",
-                              fontFamily: "sans-serif-light",
-                            }}
-                          >
-                            {item.Upvotes}
-                          </Text>
-                        </Pressable>
-                      </View>
-                      <Pressable onPress={handleFavouriteIconPress}>
-                        <Entypo
-                          name={favouriteIconOutline}
-                          size={25}
-                          color={favouriteIconColor}
-                        />
-                      </Pressable>
+                    <View
+                      style={{
+                        flexDirection: "column",
+                        textAlign: "center",
+                        width: "50%",
+                        height: 180,
+                      }}
+                    >
+                      <Image
+                        source={{ uri: item.DrinkImage }}
+                        style={styles.standardImage}
+                      />
+
+                      <Text style={styles.cardText}>{item.DrinkItem}</Text>
                     </View>
                   </View>
+
+                  <Divider />
+                  <View style={styles.tagsSection}>
+                    <ScrollView
+                      contentContainerStyle={{
+                        flexDirection: "row",
+                        flexWrap: "wrap",
+                      }}
+                      showsHorizontalScrollIndicator={false}
+                      horizontal={true}
+                    >
+                      <View style={styles.rowContainer}>
+                        {item.FoodTags.map((tag, index) => (
+                          <View style={styles.tagContainer} key={index}>
+                            {/*<FontAwesome name="tag" size={14} color="#fff" />*/}
+                            <MaterialIcons
+                              name="fastfood"
+                              size={14}
+                              color="#fff"
+                            />
+                            {/* Keeping outlined icons just incase we want to change to them for consistency overall */}
+                            {/* The filled icons look better in this case though */}
+                            {/* <Feather name="tag" size={16} color="#fff" /> */}
+                            <Text style={styles.tagText}>{tag}</Text>
+                          </View>
+                        ))}
+
+                        {item.FoodTags.map((tag, index) => (
+                          <View
+                            style={[
+                              styles.tagContainer,
+                              { backgroundColor: "#C41ED4" },
+                            ]}
+                            key={index}
+                          >
+                            {/*<FontAwesome name="tag" size={14} color="#fff" />*/}
+                            <FontAwesome5
+                              name="hamburger"
+                              size={14}
+                              color="#fff"
+                            />
+                            {/* Keeping outlined icons just incase we want to change to them for consistency overall */}
+                            {/* The filled icons look better in this case though */}
+                            {/* <Feather name="tag" size={16} color="#fff" /> */}
+                            <Text style={styles.tagText}>{tag}</Text>
+                          </View>
+                        ))}
+                        {item.DrinkTags.map((tag, index) => (
+                          <View
+                            style={[
+                              styles.tagContainer,
+                              { backgroundColor: "#1FBFBA" },
+                            ]}
+                            key={index}
+                          >
+                            {/*<FontAwesome name="tag" size={14} color="#fff" />*/}
+                            <MaterialCommunityIcons
+                              name="cup"
+                              size={14}
+                              color="#fff"
+                            />
+                            {/* Keeping outlined icons just incase we want to change to them for consistency overall */}
+                            {/* The filled icons look better in this case though */}
+                            {/* <Feather name="tag" size={16} color="#fff" /> */}
+                            <Text style={styles.tagText}>{tag}</Text>
+                          </View>
+                        ))}
+                      </View>
+                    </ScrollView>
+                  </View>
+                  <Divider />
+                  <View style={styles.locationBar}>
+                    <SimpleLineIcons
+                      name="location-pin"
+                      style={{ paddingVertical: "3%", paddingRight: "2%" }}
+                      size={26}
+                      color="black"
+                    />
+                    <View
+                      style={{
+                        alignContent: "flex-end",
+                        alignSelf: "flex-end",
+                        flex: 1,
+                        paddingRight: "1%",
+                      }}
+                    >
+                      <Text style={styles.TextSmall}>{item.Location} </Text>
+                      <Text style={styles.TextSmall}>35 KM</Text>
+                    </View>
+                  </View>
+                  <Divider />
+
+                  <View style={styles.iconsBar}>
+                    <View style={{ flexDirection: "row" }}>
+                      <Pressable
+                        style={{
+                          flexDirection: "row",
+                          justifyContent: "center",
+                        }}
+                        onPress={handleDownIconPress}
+                      >
+                        <AntDesign
+                          name={downIconOutline}
+                          size={24}
+                          color={downIconColor}
+                        />
+                        <Text
+                          style={{
+                            paddingLeft: "2%",
+                            paddingRight: "5%",
+                            paddingVertical: "1%",
+                            fontFamily: "sans-serif-light",
+                          }}
+                        >
+                          {item.Downvotes}
+                        </Text>
+                      </Pressable>
+                      <Pressable
+                        style={{
+                          flexDirection: "row",
+                          justifyContent: "center",
+                          paddingRight: "10%",
+                        }}
+                        onPress={handleUpIconPress}
+                      >
+                        <AntDesign
+                          name={upIconOutline}
+                          size={24}
+                          color={upIconColor}
+                        />
+                        <Text
+                          style={{
+                            paddingLeft: "2%",
+                            paddingVertical: "1%",
+                            fontFamily: "sans-serif-light",
+                          }}
+                        >
+                          {item.Upvotes}
+                        </Text>
+                      </Pressable>
+                    </View>
+                    <Pressable onPress={handleFavouriteIconPress}>
+                      <Entypo
+                        name={favouriteIconOutline}
+                        size={25}
+                        color={favouriteIconColor}
+                      />
+                    </Pressable>
+                  </View>
                 </View>
-              )}
-            />
-          )}
-        </View>
-      </ScrollView>
+              </View>
+            )}
+          />
+        )}
+      </View>
     </ApplicationProvider>
   );
 };
