@@ -23,6 +23,30 @@ export default function FilterModal({ color, title, ...otherProps }) {
   const [locationValue, setLocationValue] = useState(30); //distance filer
   const [isModalVisible, setModalVisible] = useState(true); //for the filter popup
 
+  const filters = {
+    mealTypes: ["Breakfast", "Lunch", "Supper", "Snack"],
+    foods: [
+      "Spicy",
+      "Savoury",
+      "Salty",
+      "Sweet",
+      "Sour",
+      "Hot",
+      "Warm",
+      "Cold",
+    ],
+    drinks: [
+      "Alcoholic",
+      "Non-Alcoholic",
+      "Fizzy",
+      "Sweet",
+      "Sour",
+      "Hot",
+      "Warm",
+      "Cold",
+    ],
+  };
+
   //toggles the modals visibility
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
@@ -149,14 +173,14 @@ export default function FilterModal({ color, title, ...otherProps }) {
               <Text style={[styles.TextSmall, { marginLeft: 4 }]}>100</Text>
             </View>
             <View style={{ flexDirection: "row", justifyContent: "center" }}>
-              {/* <TextInput
-                  style={[styles.TextSmall, styles.TextInputStyling]}
-                  value={locationValue}
-                  onChangeText={(value) => setLocationValue(parseInt(value))}
-                  keyboardType="numeric"
-                  placeholder={locationValue.toString()}
-                  multiline={false}
-                /> */}
+              <TextInput
+                style={[styles.TextSmall, styles.TextInputStyling]}
+                value={locationValue.toString()}
+                onChangeText={(value) => setLocationValue(parseInt(value))}
+                keyboardType="numeric"
+                placeholder={locationValue.toString()}
+                multiline={false}
+              />
               <Text style={[styles.TextSmaller]}>KM</Text>
             </View>
           </View>
@@ -172,27 +196,23 @@ export default function FilterModal({ color, title, ...otherProps }) {
                   color="black"
                 />
                 <Text style={[styles.spaceLeft, styles.TextSmall]}>
-                  Meal Type
+                  Meal Types
                 </Text>
               </View>
               <View style={[styles.filterTagsContainer]}>
                 <View
                   style={{
                     flexDirection: "row",
+                    flexWrap: "wrap",
                     justifyContent: "space-evenly",
                   }}
                 >
-                  <FilterTag color="#FF6347" title="Breakfast" />
-                  <FilterTag color="#FF6347" title="Lunch" />
-                </View>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-evenly",
-                  }}
-                >
-                  <FilterTag color="#FF6347" title="Supper" />
-                  <FilterTag color="#FF6347" title="Snack" />
+                  {/* Mapping of the tags from the JSON to the components*/}
+                  {filters.mealTypes.map((tag, index) => (
+                    <View key={index}>
+                      <FilterTag color="#FF6347" title={tag} />
+                    </View>
+                  ))}
                 </View>
               </View>
             </View>
@@ -209,8 +229,6 @@ export default function FilterModal({ color, title, ...otherProps }) {
                   color="black"
                 />
                 <Text style={[styles.spaceLeft, styles.TextSmall]}>Drinks</Text>
-
-                <FilterTag color="#1FBFBA" title="Alcoholic" />
               </View>
               <View
                 style={[
@@ -221,23 +239,16 @@ export default function FilterModal({ color, title, ...otherProps }) {
                 <View
                   style={{
                     flexDirection: "row",
+                    flexWrap: "wrap",
                     justifyContent: "space-evenly",
                   }}
                 >
-                  <FilterTag color="#1FBFBA" title="Fizzy" />
-                  <FilterTag color="#1FBFBA" title="Sweet" />
-
-                  <FilterTag color="#1FBFBA" title="Sour" />
-                </View>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-around",
-                  }}
-                >
-                  <FilterTag color="#1FBFBA" title="Hot" />
-                  <FilterTag color="#1FBFBA" title="Warm" />
-                  <FilterTag color="#1FBFBA" title="Cold" />
+                  {/* Mapping of the tags from the JSON to the components*/}
+                  {filters.drinks.map((tag, index) => (
+                    <View key={index}>
+                      <FilterTag color="#FF6347" title={tag} />
+                    </View>
+                  ))}
                 </View>
               </View>
             </View>
@@ -253,9 +264,7 @@ export default function FilterModal({ color, title, ...otherProps }) {
                   style={{ paddingTop: 9, marginRight: 5 }}
                   color="black"
                 />
-                <Text style={[styles.spaceLeft, styles.TextSmall]}>Food</Text>
-                <FilterTag color="#C41ED4" title="Spicy" />
-                <FilterTag color="#C41ED4" title="Savoury" />
+                <Text style={[styles.spaceLeft, styles.TextSmall]}>Foods</Text>
               </View>
               <View
                 style={[
@@ -266,24 +275,16 @@ export default function FilterModal({ color, title, ...otherProps }) {
                 <View
                   style={{
                     flexDirection: "row",
+                    flexWrap: "wrap",
                     justifyContent: "space-evenly",
                   }}
                 >
-                  <FilterTag color="#C41ED4" title="Salty" />
-                  <FilterTag color="#C41ED4" title="Sweet" />
-
-                  <FilterTag color="#C41ED4" title="Sour" />
-                </View>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-around",
-                  }}
-                >
-                  <FilterTag color="#C41ED4" title="Hot" />
-                  <FilterTag color="#C41ED4" title="Warm" />
-
-                  <FilterTag color="#C41ED4" title="Cold" />
+                  {/* Mapping of the tags from the JSON to the components*/}
+                  {filters.foods.map((tag, index) => (
+                    <View key={index}>
+                      <FilterTag color="#FF6347" title={tag} />
+                    </View>
+                  ))}
                 </View>
               </View>
             </View>
