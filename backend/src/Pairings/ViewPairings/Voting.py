@@ -26,7 +26,7 @@ def vote(event, context):
     usertable = dynamodb.Table(user_table_name)
     print("Test the code")
 
-    type = 'Upvotes'  # or Down and must be passed in from frontend
+    type = 'Downvotes'  # or Down and must be passed in from frontend
     id = 'p1'  # must be passed in from frontend
     uid = 'u1'
     vote_type = 'Checked'
@@ -77,7 +77,16 @@ def addvote(vote_type, num_votes):
 
 def vote_userdatabase(uid, type, table, pid):
 
+    response = table.get_item(Key={'UID': uid})
     if type == "Upvotes":
+        index = 0
+        lengthOfRemoved = len(response['Item']['UserDownvoted'])
+        for key in response['Item']['UserDownvoted']:
+            # traverse each item in Pairings and search for id the list
+            # find id the break, because index is incrementing till id is found
+            if key == pid:
+                break
+            index = index + 1
         response = table.update_item(
             Key={
                 'UID': uid
@@ -87,18 +96,48 @@ def vote_userdatabase(uid, type, table, pid):
             ReturnValues="UPDATED_NEW"
 
         )
+        if index < lengthOfRemoved:
+            table.update_item(
+                Key={
+                    'UID': uid
+                },
+                # remove id at index of UserDownvoted list
+                UpdateExpression=f"remove UserDownvoted[{index}]",
+                ConditionExpression=f"contains(UserDownvoted, :pair)",
+                ExpressionAttributeValues={':pair': pid},
+                ReturnValues="UPDATED_NEW"
+            )
         print(response['ResponseMetadata']['HTTPStatusCode'])
         return
     elif type == "Downvotes":
+        index = 0
+        lengthOfRemoved = len(response['Item']['UserUpvoted'])
+        for key in response['Item']['UserUpvoted']:
+            # traverse each item in Pairings and search for id the list
+            # find id the break, because index is incrementing till id is found
+            if key == pid:
+                break
+            index = index + 1
         response = table.update_item(
             Key={
                 'UID': uid
             },
-            UpdateExpression="SET UserDownvoted = list_append(UserDownvoted, :pair)",
+            UpdateExpression=f"SET UserDownvoted = list_append(UserDownvoted, :pair)",
             ExpressionAttributeValues={':pair': [pid]},
-            ReturnValues="UPDATED_NEW"
-
+            ReturnValues="UPDATED_NEW",
         )
+        if index < lengthOfRemoved:
+            table.update_item(
+                Key={
+                    'UID': uid
+                },
+                # remove id at index of UserUpvoted list
+                UpdateExpression=f"remove UserUpvoted[{index}]",
+                ConditionExpression=f"contains(UserUpvoted, :pair)",
+                ExpressionAttributeValues={':pair': pid},
+                ReturnValues="UPDATED_NEW"
+            )
+        print(response['ResponseMetadata']['HTTPStatusCode'])
         return
 
 
