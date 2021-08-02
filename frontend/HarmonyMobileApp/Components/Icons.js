@@ -5,8 +5,8 @@ import {
 } from "react-native";
 import { Text } from '@ui-kitten/components';
 
-export default function FilterTag({ color, title, style, ...otherProps }) {
-    const [clicked, setClicked] = useState(false);
+export default function Icons({ iconName, filledInColor, ...otherProps }) {
+    const [color, setColor] = useState(false);
 
     handlePress = () => {
         setClicked(!clicked)
@@ -37,15 +37,8 @@ export default function FilterTag({ color, title, style, ...otherProps }) {
         }
     };
     return (
-        <Pressable
-            style={[personalStyles.filterTag, tagColor(), { style }]}
-            onPress={() => (//if i put this in a seperate function it only calls snack instead of the one pressed,
-                setClicked(!clicked)
-            )}
-        >
-            <Text style={[personalStyles.TextSmaller, textColor()]}>{title}</Text>
+        <AntDesign name={iconName} size={24} color={downIconColor} />
 
-        </Pressable>
     );
 };
 

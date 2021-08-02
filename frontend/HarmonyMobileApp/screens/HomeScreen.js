@@ -55,21 +55,25 @@ const HomeScreen = (props) => {
   const [data, setData] = useState([]);
 
   //controls all the filters
-  const [isModalVisible, setModalVisible] = useState(false); //for the filter popup
-  const [sortPairings, setSortPairings] = useState("Trending"); // the type of pairings shown filter
+  const [isModalVisible, setModalVisible] = useState(false);                               //for the filter popup
+  const [sortPairings, setSortPairings] = useState("Trending");                            // the type of pairings shown filter
+  const [locationValue, setLocationValue] = useState(30);                              //distance filer
+
 
   //controls all the icons
   const [favouriteIconChecked, setFavouriteIconChecked] = useState("unchecked");
-  const [favouriteIconColor, setFavouriteIconColor] = useState("black"); // controls the favourite heart color (pink/black)
-  const [favouriteIconOutline, setFavouriteIconOutline] =
-    useState("heart-outlined"); // controls whether the heart is filled in or outlined
+  const [favouriteIconColor, setFavouriteIconColor] = useState("black");                   // controls the favourite heart color (pink/black)
+  const [favouriteIconOutline, setFavouriteIconOutline] = useState("hearto");      // controls whether the heart is filled in or outlined
   const [upIconChecked, setUpIconChecked] = useState("unchecked");
   const [upIconColor, setUpIconColor] = useState("black");
   const [upIconOutline, setUpIconOutline] = useState("upcircleo");
   const [downIconChecked, setDownIconChecked] = useState("unchecked");
   const [downIconColor, setDownIconColor] = useState("black");
   const [downIconOutline, setDownIconOutline] = useState("downcircleo");
+
   const [refreshing, setRefreshing] = React.useState(false);
+  const [userLocation, setUserLocation] = useState();
+
 
   //the refreshing of the flatlist
   const onRefresh = React.useCallback(() => {
@@ -149,7 +153,7 @@ const HomeScreen = (props) => {
         setFavouriteIconChecked("checked");
     } else {
       setFavouriteIconColor("black"),
-        setFavouriteIconOutline("heart-outlined"),
+        setFavouriteIconOutline("hearto"),
         console.log("pressed favourite unchecked"),
         setFavouriteIconChecked("unchecked");
     }
@@ -344,112 +348,32 @@ const HomeScreen = (props) => {
                   </View>
                   <Divider />
 
-                  <View style={styles.iconsBar}>
-                    <View style={{ flexDirection: "row" }}>
-                      <Pressable
-                        style={{
-                          flexDirection: "row",
-                          justifyContent: "center",
-                        }}
-                        onPress={handleDownIconPress}
-                      >
-                        <AntDesign
-                          name={downIconOutline}
-                          size={24}
-                          color={downIconColor}
-                        />
-                        <Text
-                          style={{
-                            paddingLeft: "2%",
-                            paddingRight: "5%",
-                            paddingVertical: "1%",
-                            fontFamily: "sans-serif-light",
-                          }}
-                        >
-                          {item.Downvotes}
-                        </Text>
-                      </Pressable>
-                      <Pressable
-                        style={{
-                          flexDirection: "row",
-                          justifyContent: "center",
-                          paddingRight: "10%",
-                        }}
-                        onPress={handleUpIconPress}
-                      >
-                        <AntDesign
-                          name={upIconOutline}
-                          size={24}
-                          color={upIconColor}
-                        />
-                        <Text
-                          style={{
-                            paddingLeft: "2%",
-                            paddingVertical: "1%",
-                            fontFamily: "sans-serif-light",
-                          }}
-                        >
-                          {item.Upvotes}
-                        </Text>
+                    <View style={styles.iconsBar}>
+                      <View style={{ flexDirection: "row" }}>
+                        <Pressable style={{ flexDirection: "row", justifyContent: "center" }} onPress={handleDownIconPress}>
+                          <AntDesign name={downIconOutline} size={24} color={downIconColor} />
+                          <Text style={{ paddingLeft: "2%", paddingRight: "5%", paddingVertical: "1%", fontFamily: "sans-serif-light" }}>{item.Downvotes}</Text>
+                        </Pressable>
+                        <Pressable style={{ flexDirection: "row", justifyContent: "center", paddingRight: "10%" }} onPress={handleUpIconPress}>
+                          <AntDesign name={upIconOutline} size={24} color={upIconColor} />
+                          <Text style={{ paddingLeft: "2%", paddingVertical: "1%", fontFamily: "sans-serif-light", }}>{item.Upvotes}</Text>
+                        </Pressable>
+
+                      </View>
+                      <Pressable onPress={handleFavouriteIconPress}>
+                        <AntDesign name={favouriteIconOutline} size={24} color={favouriteIconColor} />
                       </Pressable>
                     </View>
-                    <Pressable onPress={handleFavouriteIconPress}>
-                      <Entypo
-                        name={favouriteIconOutline}
-                        size={25}
-                        color={favouriteIconColor}
-                      />
-                    </Pressable>
+
                   </View>
                 </View>
-              </View>
-            )}
-          />
-        )}
-      </View>
-    </ApplicationProvider>
+              )}
+            />
+          )}
+        </View>
+    </ApplicationProvider >
   );
 };
 
-const personalStyles = StyleSheet.create({
-  text: {
-    fontSize: 42,
-  },
-  addToFavouriteBtn: {
-    width: "80%",
-    borderRadius: 25,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 40,
-    backgroundColor: "#8d918d",
-    flexDirection: "row",
-  },
-  drinkCard: {
-    //Card style for drinks
-    // borderRadius: 20,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    margin: 5,
-    padding: 10,
-    // shadowColor: "#000",
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 2,
-    // },
-    // shadowOpacity: 0.25,
-    // shadowRadius: 4,
-    // elevation: 3,
-    resizeMode: "cover",
-  },
-  smallDrinkCard: {
-    width: 150,
-    height: 150,
-  },
-  bigDrinkCard: {
-    width: 300,
-    height: 300,
-  },
-});
 
 export default HomeScreen;
