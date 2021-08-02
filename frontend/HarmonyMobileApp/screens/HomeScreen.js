@@ -50,14 +50,17 @@ const HomeScreen = (props) => {
   //controls all the icons
   const [favouriteIconChecked, setFavouriteIconChecked] = useState("unchecked");
   const [favouriteIconColor, setFavouriteIconColor] = useState("black");                   // controls the favourite heart color (pink/black)
-  const [favouriteIconOutline, setFavouriteIconOutline] = useState("heart-outlined");      // controls whether the heart is filled in or outlined
+  const [favouriteIconOutline, setFavouriteIconOutline] = useState("hearto");      // controls whether the heart is filled in or outlined
   const [upIconChecked, setUpIconChecked] = useState("unchecked");
   const [upIconColor, setUpIconColor] = useState("black");
   const [upIconOutline, setUpIconOutline] = useState("upcircleo");
   const [downIconChecked, setDownIconChecked] = useState("unchecked");
   const [downIconColor, setDownIconColor] = useState("black");
   const [downIconOutline, setDownIconOutline] = useState("downcircleo");
+
   const [refreshing, setRefreshing] = React.useState(false);
+  const [userLocation, setUserLocation] = useState();
+
 
   //the refreshing of the flatlist
   const onRefresh = React.useCallback(() => {
@@ -78,7 +81,7 @@ const HomeScreen = (props) => {
       .then((json) => setData(json.Data))
       .catch((error) => alert(error))
       .then(setLoading(false));
-  });
+  }, [refreshing]);
   handleDownIconPress = () => {
     if (upIconChecked == "unchecked") {
       if (downIconChecked == "unchecked") {
@@ -146,7 +149,7 @@ const HomeScreen = (props) => {
     }
     else {
       setFavouriteIconColor("black"),
-        setFavouriteIconOutline("heart-outlined"),
+        setFavouriteIconOutline("hearto"),
         console.log("pressed favourite unchecked"),
         setFavouriteIconChecked("unchecked")
     }
@@ -418,12 +421,21 @@ const HomeScreen = (props) => {
 
 
                   <Text style={{ height: 7 }}></Text>
-                  <Pressable
-                    style={[styles.applyButton]}
-                    onPress={() => setModalVisible(!isModalVisible)}
-                  >
-                    <Text style={[styles.TextSmall, { fontWeight: "bold", color: "white", textAlign: "center" }]}>Apply</Text>
-                  </Pressable>
+                  <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
+                    <Pressable
+                      style={[styles.applyButton]}
+                      onPress={() => setModalVisible(!isModalVisible)}
+                    >
+                      <Text style={[styles.filterText]}>Clear All</Text>
+                    </Pressable>
+                    <Pressable
+                      style={[styles.applyButton]}
+                      onPress={() => setModalVisible(!isModalVisible)}
+                    >
+                      <Text style={[styles.filterText,]}>Apply</Text>
+                    </Pressable>
+
+                  </View>
                 </View>
               </View>
             </Modal>
@@ -528,7 +540,7 @@ const HomeScreen = (props) => {
 
                       </View>
                       <Pressable onPress={handleFavouriteIconPress}>
-                        <Entypo name={favouriteIconOutline} size={25} color={favouriteIconColor} />
+                        <AntDesign name={favouriteIconOutline} size={24} color={favouriteIconColor} />
                       </Pressable>
                     </View>
 
@@ -548,47 +560,6 @@ const HomeScreen = (props) => {
 
 };
 
-const personalStyles = StyleSheet.create({
-
-  text: {
-    fontSize: 42,
-  },
-  addToFavouriteBtn: {
-    width: "80%",
-    borderRadius: 25,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 40,
-    backgroundColor: "#8d918d",
-    flexDirection: "row",
-  },
-  drinkCard: {
-    //Card style for drinks
-    // borderRadius: 20,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    margin: 5,
-    padding: 10,
-    // shadowColor: "#000",
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 2,
-    // },
-    // shadowOpacity: 0.25,
-    // shadowRadius: 4,
-    // elevation: 3,
-    resizeMode: "cover",
-  },
-  smallDrinkCard: {
-    width: 150,
-    height: 150,
-  },
-  bigDrinkCard: {
-    width: 300,
-    height: 300,
-  },
-});
 
 export default HomeScreen;
 

@@ -95,12 +95,20 @@ const styles = StyleSheet.create({
   },
   applyButton: {
     //styling for modal buttons
-    borderRadius: 10,
-    width: "40%",
+    borderRadius: 15,
+    width: "35%",
     padding: 5,
     elevation: 2,
     backgroundColor: "#4F6D7A",
-
+    marginHorizontal: 20
+  },
+  filterText: {
+    fontFamily: "sans-serif-light",
+    fontSize: 18,
+    textAlignVertical: "center",
+    fontWeight: "bold",
+    color: "white",
+    textAlign: "center"
   },
   buttonOpen: {
     //not active modal button
