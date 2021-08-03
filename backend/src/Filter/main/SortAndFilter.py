@@ -137,22 +137,23 @@ def filtertags(sortedResponse, event):
         then we iterate through the tags of each pairing, remember all tags from the user need
         to match the the drink of the pairing, so if tags not found then var:founddrink will
         stay false"""
-        for drinks in drinktags:
-            founddrink = False
-            for drinksinpairings in sortedResponse[counter]["DrinkTags"]:
-                if drinks == drinksinpairings:
-                    founddrink = True
+        if len(drinktags) > 0:
+            for drinks in drinktags:
+                founddrink = False
+                for drinksinpairings in sortedResponse[counter]["DrinkTags"]:
+                    if drinks == drinksinpairings:
+                        founddrink = True
 
-            if not founddrink:
-                # when deleted the objects below will move up the list hence why counter
-                # is not increased here
-                del sortedResponse[counter]
-                # we break because once the first tag has not been found there is no need to continue
-                break
+                if not founddrink:
+                    # when deleted the objects below will move up the list hence why counter
+                    # is not increased here
+                    del sortedResponse[counter]
+                    # we break because once the first tag has not been found there is no need to continue
+                    break
 
-        if founddrink:
-            # only increment counter when not deleted
-            counter = counter + 1
+            if founddrink:
+                # only increment counter when not deleted
+                counter = counter + 1
 
     counter = 0
     """This for loop will remove the FoodTags that aren't needed by the user"""
@@ -161,22 +162,23 @@ def filtertags(sortedResponse, event):
         then we iterate through the tags of each pairing, remember all tags from the user need
         to match the the food of the pairing, so if tags not found then var:foundfood will
         stay false"""
-        for foods in foodtags:
-            foundfood = False
-            for foodsinpairings in sortedResponse[counter]["FoodTags"]:
-                if foods == foodsinpairings:
-                    foundfood = True
+        if len(foodtags) > 0:
+            for foods in foodtags:
+                foundfood = False
+                for foodsinpairings in sortedResponse[counter]["FoodTags"]:
+                    if foods == foodsinpairings:
+                        foundfood = True
 
-            if not foundfood:
-                # when deleted the objects below will move up the list hence why counter
-                # is not increased here
-                del sortedResponse[counter]
-                # we break because once the first tag has not been found there is no need to continue
-                break
+                if not foundfood:
+                    # when deleted the objects below will move up the list hence why counter
+                    # is not increased here
+                    del sortedResponse[counter]
+                    # we break because once the first tag has not been found there is no need to continue
+                    break
 
-        if foundfood:
-            # only increment counter when not deleted
-            counter = counter + 1
+            if foundfood:
+                # only increment counter when not deleted
+                counter = counter + 1
 
     return sortedResponse
 
