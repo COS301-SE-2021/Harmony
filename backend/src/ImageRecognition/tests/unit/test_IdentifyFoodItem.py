@@ -1,8 +1,5 @@
-import json
-
 import pytest
-from backend.src.ImageRecognition.IdentifyFoodItem import identify_food_item
-from backend.src.ImageRecognition.IdentifyFoodItem import validatestring
+from backend.src.ImageRecognition.main.IdentifyFoodItem import validatestring
 
 
 @pytest.fixture()
