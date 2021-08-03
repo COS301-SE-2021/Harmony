@@ -5,7 +5,8 @@ import {
   StatusBar,
   TextInput,
   TouchableOpacity,
-  ScrollView
+  ScrollView,
+  StyleSheet
 } from "react-native";
 import styles from "../styles";
 import {
@@ -25,7 +26,7 @@ export default function FilterModal({ color, title, ...otherProps }) {
   const [isModalVisible, setModalVisible] = useState(true); //for the filter popup
 
   const filters = {
-    mealTypes: ["Breakfast", "Lunch", "Supper", "Snack"],
+    mealTypes: ["Breakfast", "Lunch", "Supper", "Snack", "Vegetarian", "Dairy-Free", "Nut-Free"],
     foods: [
       "Spicy",
       "Savoury",
@@ -42,6 +43,7 @@ export default function FilterModal({ color, title, ...otherProps }) {
       "Fizzy",
       "Sweet",
       "Sour",
+      "Bitter",
       "Hot",
       "Warm",
       "Cold",
@@ -60,6 +62,7 @@ export default function FilterModal({ color, title, ...otherProps }) {
       onBackdropPress={toggleModal}
       animationIn={"slideInRight"}
       animationOut={"slideOutRight"}
+      // removed swipe direction because it was hard to use the scrollview and slider with it
       // swipeDirection={["up", "left", "right", "down"]}
       // swipeDirection={["left", "right"]}
       onSwipeComplete={toggleModal}
@@ -99,7 +102,7 @@ export default function FilterModal({ color, title, ...otherProps }) {
               />
             </TouchableOpacity>
           </View>
-          <ScrollView style={{ width: "100%", height: "85%" }}>
+          <ScrollView style={{ width: "100%", height: "85%", }}>
             <View style={styles.filterView}>
               <View style={[styles.filterLabelRow]}>
                 <Text
@@ -223,12 +226,12 @@ export default function FilterModal({ color, title, ...otherProps }) {
             <Text style={{ height: 7 }}></Text>
 
             <View style={styles.filterView}>
-              <View style={[styles.filterLabel, { marginBottom: 35 }]}>
+              <View style={[styles.filterLabel]}>
                 <View style={{ flexDirection: "row" }}>
                   <MaterialCommunityIcons
                     name="cup"
                     size={18}
-                    style={{ paddingTop: 9, marginRight: 5 }}
+                    style={{ paddingTop: 3, marginRight: 5 }}
                     color="black"
                   />
                   <Text style={[styles.spaceLeft, styles.TextSmall]}>Drinks</Text>
@@ -259,12 +262,12 @@ export default function FilterModal({ color, title, ...otherProps }) {
             <Text style={{ height: 7 }}></Text>
 
             <View style={styles.filterView}>
-              <View style={[styles.filterLabel, { marginBottom: 35 }]}>
+              <View style={[styles.filterLabel]}>
                 <View style={{ flexDirection: "row" }}>
                   <FontAwesome5
                     name="hamburger"
                     size={18}
-                    style={{ paddingTop: 9, marginRight: 5 }}
+                    style={{ paddingTop: 3, marginRight: 5 }}
                     color="black"
                   />
                   <Text style={[styles.spaceLeft, styles.TextSmall]}>Foods</Text>
@@ -315,4 +318,15 @@ export default function FilterModal({ color, title, ...otherProps }) {
       </View>
     </Modal>
   );
-}
+};
+
+const personalStyles = StyleSheet.create({
+
+  dataText: {
+    paddingLeft: "2%",
+    paddingVertical: "1%",
+    fontFamily: "sans-serif-light"
+  }
+
+});
+

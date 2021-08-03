@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 20,
     padding: 10,
-    width: "92%",
+    width: "95%",
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
@@ -199,15 +199,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20
   },
   filterTagsContainer: {
-    height: 40
+    height: "auto",
   },
   filterLabel: {
     justifyContent: "space-between",
-    paddingVertical: 5,
     width: "100%",
     flexDirection: "column",
-    paddingBottom: 20,
-    marginBottom: 5,
   },
   filterLabelRow: {
     height: 50,
@@ -252,7 +249,6 @@ const styles = StyleSheet.create({
   filterView: {
     borderWidth: 2,
     paddingBottom: "4%",
-    marginHorizontal: -5,
     paddingHorizontal: 5,
     borderRadius: 10,
     borderColor: "#F7F7F7",
