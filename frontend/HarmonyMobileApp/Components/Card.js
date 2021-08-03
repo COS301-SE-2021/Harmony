@@ -26,34 +26,24 @@ export default function Card({ dataSet, ...otherProps }) {
             <View style={styles.cardContainer}>
                 <View style={styles.imageContainer}>
                     <View
-                        style={{
-                            flexDirection: "column",
-                            textAlign: "center",
-                            width: "50%",
-                            height: 180,
-                        }}
+                        style={personalStyles.image}
                     >
                         <Image
                             source={{ uri: dataSet.FoodImage }}
                             style={styles.standardImage}
                         />
-                        <Text style={styles.cardText}>{dataSet.FooddataSet}</Text>
+                        <Text style={styles.cardText}>{dataSet.FoodItem}</Text>
                     </View>
 
                     <View
-                        style={{
-                            flexDirection: "column",
-                            textAlign: "center",
-                            width: "50%",
-                            height: 180,
-                        }}
+                        style={personalStyles.image}
                     >
                         <Image
                             source={{ uri: dataSet.DrinkImage }}
                             style={styles.standardImage}
                         />
 
-                        <Text style={styles.cardText}>{dataSet.DrinkdataSet}</Text>
+                        <Text style={styles.cardText}>{dataSet.DrinkItem}</Text>
                     </View>
                 </View>
 
@@ -70,15 +60,11 @@ export default function Card({ dataSet, ...otherProps }) {
                         <View style={styles.rowContainer}>
                             {dataSet.FoodTags.map((tag, index) => (
                                 <View style={styles.tagContainer} key={index}>
-                                    {/*<FontAwesome name="tag" size={14} color="#fff" />*/}
                                     <MaterialIcons
                                         name="fastfood"
                                         size={14}
                                         color="#fff"
                                     />
-                                    {/* Keeping outlined icons just incase we want to change to them for consistency overall */}
-                                    {/* The filled icons look better in this case though */}
-                                    {/* <Feather name="tag" size={16} color="#fff" /> */}
                                     <Text style={styles.tagText}>{tag}</Text>
                                 </View>
                             ))}
@@ -91,15 +77,11 @@ export default function Card({ dataSet, ...otherProps }) {
                                     ]}
                                     key={index}
                                 >
-                                    {/*<FontAwesome name="tag" size={14} color="#fff" />*/}
                                     <FontAwesome5
                                         name="hamburger"
                                         size={14}
                                         color="#fff"
                                     />
-                                    {/* Keeping outlined icons just incase we want to change to them for consistency overall */}
-                                    {/* The filled icons look better in this case though */}
-                                    {/* <Feather name="tag" size={16} color="#fff" /> */}
                                     <Text style={styles.tagText}>{tag}</Text>
                                 </View>
                             ))}
@@ -111,15 +93,11 @@ export default function Card({ dataSet, ...otherProps }) {
                                     ]}
                                     key={index}
                                 >
-                                    {/*<FontAwesome name="tag" size={14} color="#fff" />*/}
                                     <MaterialCommunityIcons
                                         name="cup"
                                         size={14}
                                         color="#fff"
                                     />
-                                    {/* Keeping outlined icons just incase we want to change to them for consistency overall */}
-                                    {/* The filled icons look better in this case though */}
-                                    {/* <Feather name="tag" size={16} color="#fff" /> */}
                                     <Text style={styles.tagText}>{tag}</Text>
                                 </View>
                             ))}
@@ -130,28 +108,21 @@ export default function Card({ dataSet, ...otherProps }) {
                 <View style={styles.locationBar}>
                     <SimpleLineIcons
                         name="location-pin"
-                        style={{ paddingVertical: "3%", paddingRight: "2%" }}
+                        style={personalStyles.locationPinPadding}
                         size={26}
                         color="black"
                     />
                     <View
-                        style={{
-                            alignContent: "flex-end",
-                            alignSelf: "flex-end",
-                            flex: 1,
-                            paddingRight: "1%",
-                        }}
+                        style={personalStyles.locationResultBox}
                     >
                         <Text style={styles.TextSmall}>{dataSet.Location} </Text>
                         <Text style={styles.TextSmall}>35 KM</Text>
                     </View>
                 </View>
                 <Divider />
-
                 <IconsBar
                     dataSet={dataSet}
                 />
-
             </View>
         </View>
     );
@@ -159,6 +130,21 @@ export default function Card({ dataSet, ...otherProps }) {
 
 const personalStyles = StyleSheet.create({
 
-
+    image: {
+        flexDirection: "column",
+        textAlign: "center",
+        width: "50%",
+        height: 180,
+    },
+    locationResultBox: {
+        alignContent: "flex-end",
+        alignSelf: "flex-end",
+        flex: 1,
+        paddingRight: "1%",
+    },
+    locationPinPadding: {
+        paddingVertical: "3%",
+        paddingRight: "2%"
+    }
 
 });

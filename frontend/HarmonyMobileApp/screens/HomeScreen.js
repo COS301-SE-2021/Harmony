@@ -135,7 +135,8 @@ const HomeScreen = (props) => {
             keyExtractor={({ PID }, index) => PID}
             renderItem={({ item }) => (
               <Card
-                dataSet={item} />
+                dataSet={item}
+              />
             )}
           />
         )}
