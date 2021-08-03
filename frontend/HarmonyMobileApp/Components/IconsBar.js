@@ -11,13 +11,16 @@ import {
 } from "@expo/vector-icons";
 import styles from "../styles";
 
+// make api call with dataSet.PID
 export default function IconsBar({ dataSet, ...otherProps }) {
     const [favouriteIconChecked, setFavouriteIconChecked] = useState("unchecked");
     const [favouriteIconColor, setFavouriteIconColor] = useState("black");                   // controls the favourite heart color (pink/black)
     const [favouriteIconOutline, setFavouriteIconOutline] = useState("hearto");      // controls whether the heart is filled in or outlined
+
     const [upIconChecked, setUpIconChecked] = useState("unchecked");
     const [upIconColor, setUpIconColor] = useState("black");
     const [upIconOutline, setUpIconOutline] = useState("upcircleo");
+
     const [downIconChecked, setDownIconChecked] = useState("unchecked");
     const [downIconColor, setDownIconColor] = useState("black");
     const [downIconOutline, setDownIconOutline] = useState("downcircleo");
@@ -25,77 +28,89 @@ export default function IconsBar({ dataSet, ...otherProps }) {
     handleDownIconPress = () => {
         if (upIconChecked == "unchecked") {
             if (downIconChecked == "unchecked") {
-                setDownIconColor("#FF2727"),
-                    setDownIconOutline("downcircle"),
-                    console.log("pressed down checked"),
-                    setDownIconChecked("checked");
+                setDownIconColor("#FF2727");
+                setDownIconOutline("downcircle");
+                setDownIconChecked("checked");
             } else {
-                setDownIconColor("black"),
-                    setDownIconOutline("downcircleo"),
-                    console.log("pressed down unchecked"),
-                    setDownIconChecked("unchecked");
+                setDownIconColor("black");
+                setDownIconOutline("downcircleo");
+                console.log("pressed down unchecked");
+                setDownIconChecked("unchecked");
             }
         } else {
-            setUpIconColor("black"),
-                setUpIconOutline("upcircleo"),
-                console.log("pressed up unchecked from else"),
-                setUpIconChecked("unchecked"),
-                setDownIconColor("#FF2727"),
-                setDownIconOutline("downcircle"),
-                console.log("pressed down checked from else "),
-                setDownIconChecked("checked");
+            // uncheck up and then check down
+            setUpIconColor("black");
+            setUpIconOutline("upcircleo");
+            setUpIconChecked("unchecked");
+
+            setDownIconColor("#FF2727");
+            setDownIconOutline("downcircle");
+            setDownIconChecked("checked");
         }
     };
 
     handleUpIconPress = () => {
         if (downIconChecked == "unchecked") {
             if (upIconChecked == "unchecked") {
-                setUpIconColor("#80CB41"),
-                    setUpIconOutline("upcircle"),
-                    console.log("pressed up checked"),
-                    setUpIconChecked("checked");
+                setUpIconColor("#80CB41");
+                setUpIconOutline("upcircle");
+                setUpIconChecked("checked");
             } else {
-                setUpIconColor("black"),
-                    setUpIconOutline("upcircleo"),
-                    console.log("pressed up unchecked"),
-                    setUpIconChecked("unchecked");
+                setUpIconColor("black");
+                setUpIconOutline("upcircleo");
+                setUpIconChecked("unchecked");
             }
         } else {
-            setDownIconColor("black"),
-                setDownIconOutline("downcircleo"),
-                console.log("pressed down unchecked from else"),
-                setDownIconChecked("unchecked"),
-                setUpIconColor("#80CB41"),
-                setUpIconOutline("upcircle"),
-                console.log("pressed up checked from else"),
-                setUpIconChecked("checked");
+            // uncheck down then check up
+            setDownIconColor("black");
+            setDownIconOutline("downcircleo");
+            setDownIconChecked("unchecked");
+
+            setUpIconColor("#80CB41");
+            setUpIconOutline("upcircle");
+            setUpIconChecked("checked");
         }
     };
 
     handleFavouriteIconPress = () => {
         if (favouriteIconChecked == "unchecked") {
-            setFavouriteIconColor("#FF2763"),
-                setFavouriteIconOutline("heart"),
-                console.log("pressed favourite checked"),
-                setFavouriteIconChecked("checked");
+            setFavouriteIconColor("#FF2763");
+            setFavouriteIconOutline("heart");
+            setFavouriteIconChecked("checked");
         } else {
-            setFavouriteIconColor("black"),
-                setFavouriteIconOutline("hearto"),
-                console.log("pressed favourite unchecked"),
-                setFavouriteIconChecked("unchecked");
+            setFavouriteIconColor("black");
+            setFavouriteIconOutline("hearto");
+            setFavouriteIconChecked("unchecked");
         }
     };
 
     return (
         <View style={styles.iconsBar}>
-            <View style={{ flexDirection: "row" }}>
-                <Pressable style={{ flexDirection: "row", justifyContent: "center" }} onPress={handleDownIconPress}>
-                    <AntDesign name={downIconOutline} size={24} color={downIconColor} />
-                    <Text style={{ paddingLeft: "2%", paddingRight: "5%", paddingVertical: "1%", fontFamily: "sans-serif-light" }}>{dataSet.Downvotes}</Text>
+            <View style={styles.flexRow}>
+                <Pressable
+                    style={styles.flexRowJustCenter}
+                    onPress={handleDownIconPress}
+                >
+                    <AntDesign
+                        name={downIconOutline}
+                        size={24}
+                        color={downIconColor}
+                    />
+                    <Text style={[personalStyles.dataText, { paddingRight: "5%" }]}>{dataSet.Downvotes}</Text>
+
                 </Pressable>
-                <Pressable style={{ flexDirection: "row", justifyContent: "center", paddingRight: "10%" }} onPress={handleUpIconPress}>
-                    <AntDesign name={upIconOutline} size={24} color={upIconColor} />
-                    <Text style={{ paddingLeft: "2%", paddingVertical: "1%", fontFamily: "sans-serif-light", }}>{dataSet.Upvotes}</Text>
+
+                <Pressable
+                    style={[styles.flexRowJustCenter, { paddingRight: "10%" }]}
+                    onPress={handleUpIconPress}
+                >
+                    <AntDesign
+                        name={upIconOutline}
+                        size={24}
+                        color={upIconColor}
+                    />
+
+                    <Text style={personalStyles.dataText}>{dataSet.Upvotes}</Text>
                 </Pressable>
 
             </View>
@@ -108,17 +123,10 @@ export default function IconsBar({ dataSet, ...otherProps }) {
 
 const personalStyles = StyleSheet.create({
 
-    filterTag: {
-        borderRadius: 10,
-        padding: 4,
-        height: 30,
-        margin: 2,
-        paddingHorizontal: 20
-    },
-    TextSmaller: {
-        //used for text in filter
-        fontFamily: "sans-serif-light",
-        fontSize: 14,
-        textAlignVertical: "center"
-    },
+    dataText: {
+        paddingLeft: "2%",
+        paddingVertical: "1%",
+        fontFamily: "sans-serif-light"
+    }
+
 });

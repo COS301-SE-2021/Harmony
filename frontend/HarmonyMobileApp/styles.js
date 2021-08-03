@@ -348,6 +348,13 @@ const styles = StyleSheet.create({
     marginLeft: 10, //Space between tag icon and text
   },
 
+  flexRow: {
+    flexDirection: "row"
+  },
+  flexRowJustCenter: {
+    flexDirection: "row",
+    justifyContent: "center"
+  }
 
 
 });
