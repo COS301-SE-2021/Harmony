@@ -55,8 +55,12 @@ export default function ConfirmForgotPassword({ navigation }) {
         Password: "",
       }}
       onSubmit={async (values, { resetForm }) => {
-        await confirmForgotPassword(values);
+        //Form must be reset before confirmForgotPassword is called
+        //This is because confirmForgotPassword will lead to navigating the user to the homeScreen
+        //Then try to update the form
+        //but because the confirmForgotPassword screen will be unmounted react native wont know what to do
         resetForm();
+        await confirmForgotPassword(values);
       }}
       validationSchema={yup.object().shape({
         Username: yup

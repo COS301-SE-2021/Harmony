@@ -48,8 +48,12 @@ export default function ConfirmSignUp({ navigation }) {
         Code: "",
       }}
       onSubmit={async (values, { resetForm }) => {
-        await confirmSignUp(values);
+        //Form must be reset before confirmSignUp is called
+        //This is because confirmSignUp will lead to navigating the user to the homeScreen
+        //Then try to update the form
+        //but because the confirmSignUp screen will be unmounted react native wont know what to do
         resetForm();
+        await confirmSignUp(values);
       }}
       validationSchema={yup.object().shape({
         Username: yup

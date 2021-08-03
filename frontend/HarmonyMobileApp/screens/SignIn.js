@@ -28,7 +28,6 @@ export default function SignIn({ navigation, updateAuthState }) {
   const [isLoading, setLoading] = useState(false);
   const [isErrorAlertVisible, setErrorAlertVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
-
   async function signIn(values) {
     try {
       setLoading(true);
@@ -59,8 +58,12 @@ export default function SignIn({ navigation, updateAuthState }) {
         Password: "",
       }}
       onSubmit={async (values, { resetForm }) => {
-        await signIn(values);
+        //Form must be reset before signIn is called
+        //This is because signIn will lead to navigating the user to the homeScreen
+        //Then try to update the form
+        //but because the signIn screen will be unmounted react native wont know what to do
         resetForm();
+        await signIn(values);
       }}
       validationSchema={yup.object().shape({
         Username: yup

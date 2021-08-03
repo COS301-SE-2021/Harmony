@@ -55,8 +55,12 @@ export default function SignUp({ navigation }) {
       }}
       onSubmit={(values) => signUp(values)}
       onSubmit={async (values, { resetForm }) => {
-        await signUp(values);
+        //Form must be reset before signUp is called
+        //This is because signUp will lead to navigating the user to the homeScreen
+        //Then try to update the form
+        //but because the signUp screen will be unmounted react native wont know what to do
         resetForm();
+        await signUp(values);
       }}
       validationSchema={yup.object().shape({
         Username: yup
