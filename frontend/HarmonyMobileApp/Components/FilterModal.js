@@ -140,11 +140,9 @@ export default function FilterModal({ color, title, ...otherProps }) {
                 <Text style={[styles.spaceLeft, styles.TextSmall]}>Distance</Text>
               </View>
               <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "center",
+                style={[styles.flexRowJustCenter, {
                   marginTop: -10,
-                }}
+                }]}
               >
                 <Text style={[styles.TextSmall, { marginRight: 4 }]}>0</Text>
                 <Slider
@@ -163,7 +161,7 @@ export default function FilterModal({ color, title, ...otherProps }) {
                 />
                 <Text style={[styles.TextSmall, { marginLeft: 4 }]}>100</Text>
               </View>
-              <View style={{ flexDirection: "row", justifyContent: "center" }}>
+              <View style={styles.flexRowJustCenter}>
                 <TextInput
                   style={[styles.TextSmall, styles.TextInputStyling]}
                   value={locationValue}
@@ -180,7 +178,7 @@ export default function FilterModal({ color, title, ...otherProps }) {
 
             <View style={styles.filterView}>
               <View style={[styles.filterLabel]}>
-                <View style={{ flexDirection: "row" }}>
+                <View style={styles.flexRow}>
                   <MaterialIcons
                     name="fastfood"
                     size={18}
@@ -193,11 +191,7 @@ export default function FilterModal({ color, title, ...otherProps }) {
                 </View>
                 <View style={[styles.filterTagsContainer]}>
                   <View
-                    style={{
-                      flexDirection: "row",
-                      flexWrap: "wrap",
-                      justifyContent: "space-evenly",
-                    }}
+                    style={personalStyles.filterContainer}
                   >
                     {/* Mapping of the tags from the JSON to the components*/}
                     {filters.mealTypes.map((tag, index) => (
@@ -229,11 +223,7 @@ export default function FilterModal({ color, title, ...otherProps }) {
                   ]}
                 >
                   <View
-                    style={{
-                      flexDirection: "row",
-                      flexWrap: "wrap",
-                      justifyContent: "space-evenly",
-                    }}
+                    style={personalStyles.filterContainer}
                   >
                     {/* Mapping of the tags from the JSON to the components*/}
                     {filters.drinks.map((tag, index) => (
@@ -249,7 +239,7 @@ export default function FilterModal({ color, title, ...otherProps }) {
 
             <View style={styles.filterView}>
               <View style={[styles.filterLabel]}>
-                <View style={{ flexDirection: "row" }}>
+                <View style={styles.flexRow}>
                   <FontAwesome5
                     name="hamburger"
                     size={18}
@@ -265,11 +255,7 @@ export default function FilterModal({ color, title, ...otherProps }) {
                   ]}
                 >
                   <View
-                    style={{
-                      flexDirection: "row",
-                      flexWrap: "wrap",
-                      justifyContent: "space-evenly",
-                    }}
+                    style={personalStyles.filterContainer}
                   >
                     {/* Mapping of the tags from the JSON to the components*/}
                     {filters.foods.map((tag, index) => (
@@ -347,6 +333,11 @@ const personalStyles = StyleSheet.create({
   iconStyle: {
     paddingTop: 3,
     marginRight: 5
+  },
+  filterContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-evenly",
   }
 
 });
