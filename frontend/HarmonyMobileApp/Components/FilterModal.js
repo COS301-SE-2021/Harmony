@@ -72,23 +72,9 @@ export default function FilterModal({ color, title, ...otherProps }) {
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
           <View
-            style={{
-              flexDirection: "row",
-              width: "100%",
-              textAlign: "center",
-            }}
-          >
+            style={personalStyles.headingContainer}>
             <Text
-              style={[
-                styles.TextMedium,
-                {
-                  fontWeight: "bold",
-                  flex: 1,
-                  justifyContent: "center",
-                  paddingBottom: "7%",
-                },
-              ]}
-            >
+              style={[styles.TextMedium, personalStyles.modalHeading,]} >
               Filter Pairings
             </Text>
             <TouchableOpacity
@@ -102,7 +88,7 @@ export default function FilterModal({ color, title, ...otherProps }) {
               />
             </TouchableOpacity>
           </View>
-          <ScrollView style={{ width: "100%", height: "85%", }}>
+          <ScrollView style={personalStyles.scrollView}>
             <View style={styles.filterView}>
               <View style={[styles.filterLabelRow]}>
                 <Text
@@ -198,7 +184,7 @@ export default function FilterModal({ color, title, ...otherProps }) {
                   <MaterialIcons
                     name="fastfood"
                     size={18}
-                    style={{ paddingTop: 3, marginRight: 5 }}
+                    style={personalStyles.iconStyle}
                     color="black"
                   />
                   <Text style={[styles.spaceLeft, styles.TextSmall]}>
@@ -231,7 +217,7 @@ export default function FilterModal({ color, title, ...otherProps }) {
                   <MaterialCommunityIcons
                     name="cup"
                     size={18}
-                    style={{ paddingTop: 3, marginRight: 5 }}
+                    style={personalStyles.iconStyle}
                     color="black"
                   />
                   <Text style={[styles.spaceLeft, styles.TextSmall]}>Drinks</Text>
@@ -267,7 +253,7 @@ export default function FilterModal({ color, title, ...otherProps }) {
                   <FontAwesome5
                     name="hamburger"
                     size={18}
-                    style={{ paddingTop: 3, marginRight: 5 }}
+                    style={personalStyles.iconStyle}
                     color="black"
                   />
                   <Text style={[styles.spaceLeft, styles.TextSmall]}>Foods</Text>
@@ -297,23 +283,34 @@ export default function FilterModal({ color, title, ...otherProps }) {
             </View>
           </ScrollView>
           <Text style={{ height: 7 }}></Text>
-          <Pressable
-            style={[styles.applyButton]}
-            onPress={() => setModalVisible(!isModalVisible)}
-          >
-            <Text
-              style={[
-                styles.TextSmall,
-                {
-                  fontWeight: "bold",
-                  color: "white",
-                  textAlign: "center",
-                },
-              ]}
+          <View style={styles.flexRow}>
+            <Pressable
+              style={[styles.applyButton]}
+              onPress={() => setModalVisible(!isModalVisible)}
             >
-              Apply
-            </Text>
-          </Pressable>
+              <Text
+                style={[
+                  styles.TextSmall,
+                  personalStyles.buttonText,
+                ]}
+              >
+                Apply
+              </Text>
+            </Pressable>
+            <Pressable
+              style={[styles.applyButton]}
+              onPress={() => setModalVisible(!isModalVisible)}
+            >
+              <Text
+                style={[
+                  styles.TextSmall,
+                  personalStyles.buttonText,
+                ]}
+              >
+                Clear All
+              </Text>
+            </Pressable>
+          </View>
         </View>
       </View>
     </Modal>
@@ -326,6 +323,30 @@ const personalStyles = StyleSheet.create({
     paddingLeft: "2%",
     paddingVertical: "1%",
     fontFamily: "sans-serif-light"
+  },
+  modalHeading: {
+    fontWeight: "bold",
+    flex: 1,
+    justifyContent: "center",
+    paddingBottom: "7%",
+  },
+  headingContainer: {
+    flexDirection: "row",
+    width: "100%",
+    textAlign: "center",
+  },
+  scrollView: {
+    width: "100%",
+    height: "85%",
+  },
+  buttonText: {
+    fontWeight: "bold",
+    color: "white",
+    textAlign: "center",
+  },
+  iconStyle: {
+    paddingTop: 3,
+    marginRight: 5
   }
 
 });
