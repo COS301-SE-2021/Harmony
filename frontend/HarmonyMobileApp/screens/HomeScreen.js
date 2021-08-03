@@ -1,37 +1,27 @@
 import React, { useEffect, useState } from "react";
 import {
   View,
-  Image,
-  ScrollView,
-  StyleSheet,
   ActivityIndicator,
   FlatList,
   Pressable,
+  StyleSheet,
   RefreshControl,
 } from "react-native";
 import styles from "../styles";
 import {
   Feather,
-  SimpleLineIcons,
-  FontAwesome5,
-  MaterialCommunityIcons,
-  MaterialIcons,
 } from "@expo/vector-icons";
 import * as eva from "@eva-design/eva";
 import { default as theme } from "../theme.json";
 import {
   ApplicationProvider,
-  Divider,
   Text,
 } from "@ui-kitten/components";
 import { useIsFocused } from "@react-navigation/native";
 import { Header } from "react-native-elements";
 
 import FilterModal from "../Components/FilterModal";
-import IconsBar from "../Components/IconsBar";
 import Card from "../Components/Card"
-const MIN_HEIGHT = Platform.OS === "ios" ? 90 : 55;
-const MAX_HEIGHT = 300;
 
 const HomeScreen = (props) => {
   const viewPairingURL =
@@ -76,12 +66,11 @@ const HomeScreen = (props) => {
   );
 
   const filterButton = () => (
-    <View style={{ flexDirection: "row" }}>
+    <View style={styles.flexRow}>
       <Pressable
         style={[styles.button, styles.buttonOpen]}
         onPress={() => {
           toggleModal();
-          // console.log("Was modal showing? " + isModalVisible);
         }}
       >
         <Text>
@@ -144,6 +133,7 @@ const HomeScreen = (props) => {
     </ApplicationProvider >
   );
 };
+
 
 
 export default HomeScreen;
