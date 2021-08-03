@@ -6,42 +6,29 @@ import {
   StyleSheet,
   ActivityIndicator,
   FlatList,
-  Alert,
   Pressable,
-  Picker,
   RefreshControl,
-  StatusBar,
-  TextInput,
-  Animated,
-  TouchableOpacity,
 } from "react-native";
 import styles from "../styles";
 import {
   Feather,
   SimpleLineIcons,
-  FontAwesome,
-  Entypo,
-  AntDesign,
   FontAwesome5,
   MaterialCommunityIcons,
   MaterialIcons,
 } from "@expo/vector-icons";
-import Modal from "react-native-modal";
 import * as eva from "@eva-design/eva";
 import { default as theme } from "../theme.json";
 import {
   ApplicationProvider,
-  Layout,
   Divider,
-  Card,
   Text,
 } from "@ui-kitten/components";
 import { useIsFocused } from "@react-navigation/native";
-import { Header, Slider, CheckBox } from "react-native-elements";
+import { Header } from "react-native-elements";
 
-import FilterTag from "../Components/FilterTag";
 import FilterModal from "../Components/FilterModal";
-
+import IconsBar from "../Components/IconsBar";
 const MIN_HEIGHT = Platform.OS === "ios" ? 90 : 55;
 const MAX_HEIGHT = 300;
 
@@ -57,19 +44,6 @@ const HomeScreen = (props) => {
   //controls all the filters
   const [isModalVisible, setModalVisible] = useState(false);                               //for the filter popup
   const [sortPairings, setSortPairings] = useState("Trending");                            // the type of pairings shown filter
-  const [locationValue, setLocationValue] = useState(30);                              //distance filer
-
-
-  //controls all the icons
-  const [favouriteIconChecked, setFavouriteIconChecked] = useState("unchecked");
-  const [favouriteIconColor, setFavouriteIconColor] = useState("black");                   // controls the favourite heart color (pink/black)
-  const [favouriteIconOutline, setFavouriteIconOutline] = useState("hearto");      // controls whether the heart is filled in or outlined
-  const [upIconChecked, setUpIconChecked] = useState("unchecked");
-  const [upIconColor, setUpIconColor] = useState("black");
-  const [upIconOutline, setUpIconOutline] = useState("upcircleo");
-  const [downIconChecked, setDownIconChecked] = useState("unchecked");
-  const [downIconColor, setDownIconColor] = useState("black");
-  const [downIconOutline, setDownIconOutline] = useState("downcircleo");
 
   const [refreshing, setRefreshing] = React.useState(false);
   const [userLocation, setUserLocation] = useState();
@@ -95,69 +69,6 @@ const HomeScreen = (props) => {
       .catch((error) => alert(error))
       .then(setLoading(false));
   }, [refreshing]);
-  handleDownIconPress = () => {
-    if (upIconChecked == "unchecked") {
-      if (downIconChecked == "unchecked") {
-        setDownIconColor("#FF2727"),
-          setDownIconOutline("downcircle"),
-          console.log("pressed down checked"),
-          setDownIconChecked("checked");
-      } else {
-        setDownIconColor("black"),
-          setDownIconOutline("downcircleo"),
-          console.log("pressed down unchecked"),
-          setDownIconChecked("unchecked");
-      }
-    } else {
-      setUpIconColor("black"),
-        setUpIconOutline("upcircleo"),
-        console.log("pressed up unchecked from else"),
-        setUpIconChecked("unchecked"),
-        setDownIconColor("#FF2727"),
-        setDownIconOutline("downcircle"),
-        console.log("pressed down checked from else "),
-        setDownIconChecked("checked");
-    }
-  };
-
-  handleUpIconPress = () => {
-    if (downIconChecked == "unchecked") {
-      if (upIconChecked == "unchecked") {
-        setUpIconColor("#80CB41"),
-          setUpIconOutline("upcircle"),
-          console.log("pressed up checked"),
-          setUpIconChecked("checked");
-      } else {
-        setUpIconColor("black"),
-          setUpIconOutline("upcircleo"),
-          console.log("pressed up unchecked"),
-          setUpIconChecked("unchecked");
-      }
-    } else {
-      setDownIconColor("black"),
-        setDownIconOutline("downcircleo"),
-        console.log("pressed down unchecked from else"),
-        setDownIconChecked("unchecked"),
-        setUpIconColor("#80CB41"),
-        setUpIconOutline("upcircle"),
-        console.log("pressed up checked from else"),
-        setUpIconChecked("checked");
-    }
-  };
-
-  handleFavouriteIconPress = () => {
-    if (favouriteIconChecked == "unchecked") {
-      setFavouriteIconColor("#FF2763"),
-        setFavouriteIconOutline("heart"),
-        console.log("pressed favourite checked"),
-        setFavouriteIconChecked("checked");
-    } else {
-      setFavouriteIconColor("black"),
-        setFavouriteIconOutline("hearto"),
-        console.log("pressed favourite unchecked"),
-        setFavouriteIconChecked("unchecked");
-    }
-  };
 
   const ShowTitle = () => (
     <Text style={styles.TextLarge}> {sortPairings} </Text>
@@ -348,29 +259,16 @@ const HomeScreen = (props) => {
                   </View>
                   <Divider />
 
-                    <View style={styles.iconsBar}>
-                      <View style={{ flexDirection: "row" }}>
-                        <Pressable style={{ flexDirection: "row", justifyContent: "center" }} onPress={handleDownIconPress}>
-                          <AntDesign name={downIconOutline} size={24} color={downIconColor} />
-                          <Text style={{ paddingLeft: "2%", paddingRight: "5%", paddingVertical: "1%", fontFamily: "sans-serif-light" }}>{item.Downvotes}</Text>
-                        </Pressable>
-                        <Pressable style={{ flexDirection: "row", justifyContent: "center", paddingRight: "10%" }} onPress={handleUpIconPress}>
-                          <AntDesign name={upIconOutline} size={24} color={upIconColor} />
-                          <Text style={{ paddingLeft: "2%", paddingVertical: "1%", fontFamily: "sans-serif-light", }}>{item.Upvotes}</Text>
-                        </Pressable>
+                  <IconsBar
+                    dataSet={item}
+                  />
 
-                      </View>
-                      <Pressable onPress={handleFavouriteIconPress}>
-                        <AntDesign name={favouriteIconOutline} size={24} color={favouriteIconColor} />
-                      </Pressable>
-                    </View>
-
-                  </View>
                 </View>
-              )}
-            />
-          )}
-        </View>
+              </View>
+            )}
+          />
+        )}
+      </View>
     </ApplicationProvider >
   );
 };
