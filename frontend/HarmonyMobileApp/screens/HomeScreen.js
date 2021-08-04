@@ -40,9 +40,7 @@ const HomeScreen = (props) => {
 
   const [refreshing, setRefreshing] = React.useState(false);
 
-  const [locationReady, setLocationReady] = useState(false);
-  const [whereocation, setWhereLocation] = useState({ lat: null, lng: null });
-  const [locationError, setLocationError] = useState(null);
+  const [userLocation, setUserLocation] = useState({ lat: null, lng: null });
 
   //the refreshing of the flatlist
   const onRefresh = React.useCallback(() => {
@@ -75,26 +73,10 @@ const HomeScreen = (props) => {
     console.log(status);
     const location = await Location.getCurrentPositionAsync({});
     console.log(location);
+    setUserLocation({ lat: location.coords.latitude, lng: location.coords.longitude });
+    console.log("user location: " + userLocation.lat + ' ' + userLocation.lng);
   }
-  // const GetLocation = () => {
-  //   console.log("Test");
-  //   let geoOptions = {
-  //     enableHighAccuracy: true,      //true = using gps, false = uses bluetooth or wifi
-  //     timeOut: 20000,     //in milliseconds so this is actually wait 2 seconds
-  //     maximumAge: 60 * 60 //how long can you keep the value for: 60 seconds *60minutes = 1 hour
-  //   };
-  //   setLocationReady(false);
-  //   navigator.geolocation.getCurrentPosition(LocationSuccess, LocationFail, geoOptions);
-  // };
 
-  // const LocationSuccess = (position) => {
-  //   console.log("location found");
-  // };
-
-  // const LocationFail = (err) => {
-  //   console.log("location error");
-
-  // };
   const filterButton = () => (
     <View style={styles.flexRow}>
       <Pressable
