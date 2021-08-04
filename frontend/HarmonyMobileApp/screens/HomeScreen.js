@@ -45,6 +45,7 @@ const HomeScreen = (props) => {
   //the refreshing of the flatlist
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
+    GetLocation();
     wait(2000).then(() => setRefreshing(false));
   }, []);
   const wait = (timeout) => {
@@ -68,11 +69,9 @@ const HomeScreen = (props) => {
   );
 
   const GetLocation = async () => {
-    const { status } = await Location.requestForegroundPermissionsAsync();
     //status is response from permission
-    console.log(status);
+    const { status } = await Location.requestForegroundPermissionsAsync();
     const location = await Location.getCurrentPositionAsync({});
-    console.log(location);
     setUserLocation({ lat: location.coords.latitude, lng: location.coords.longitude });
     console.log("user location: " + userLocation.lat + ' ' + userLocation.lng);
   }
@@ -92,7 +91,7 @@ const HomeScreen = (props) => {
       <Text style={{ width: "8%" }}></Text>
       <Pressable
         style={[styles.button, styles.buttonOpen]}
-        onPress={() => GetLocation()}
+        onPress={() => toggleModal()}
       >
         <Text>
           <Feather name="search" size={22} color="white" />
