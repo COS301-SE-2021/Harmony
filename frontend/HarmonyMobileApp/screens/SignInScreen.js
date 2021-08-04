@@ -1,25 +1,40 @@
 import React, { useState } from "react";
 import {
-  View,
   Text,
-  TouchableOpacity,
+  View,
   StyleSheet,
   StatusBar,
+  Platform,
+  Alert,
+  TouchableOpacity,
 } from "react-native";
+import * as yup from "yup";
+import { Formik } from "formik";
 import { Auth } from "aws-amplify";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import AppTextInput from "../Components/AppTextInput";
 import AppButton from "../Components/AppButton";
 import { AppToast } from "../Components/AppToast";
+import AppLoadingIcon from "../Components/AppLoadingIcon";
+import AppAlert from "../Components/AppAlert";
+
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { SocialIcon } from "react-native-elements";
+import * as Animatable from "react-native-animatable";
+import { showMessage, hideMessage } from "react-native-flash-message";
 
 export default function SignIn({ navigation, updateAuthState }) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-
-  async function signIn() {
+  const [isLoading, setLoading] = useState(false);
+  const [isErrorAlertVisible, setErrorAlertVisible] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+  async function signIn(values) {
     try {
-      await Auth.signIn(username, password);
+      setLoading(true);
+      setErrorAlertVisible(false);
+
+      await Auth.signIn(values.Username, values.Password);
+      setLoading(false);
       console.log("Success, Signed in");
 
       // Add a Toast on screen.
@@ -28,72 +43,202 @@ export default function SignIn({ navigation, updateAuthState }) {
       updateAuthState("loggedIn");
     } catch (error) {
       console.log(" Error signing in...", error);
+
+      //setModalMessage must come before setErrorAlertVisible
+      setModalMessage(error.message);
+      setErrorAlertVisible(true);
+      setLoading(false);
     }
   }
 
   return (
-    <SafeAreaView style={styles.safeAreaContainer}>
-      <View style={styles.container}>
-        <StatusBar style="auto" />
+    <Formik
+      initialValues={{
+        Username: "",
+        Password: "",
+      }}
+      onSubmit={async (values, { resetForm }) => {
+        //Form must be reset before signIn is called
+        //This is because signIn will lead to navigating the user to the homeScreen
+        //Then try to update the form
+        //but because the signIn screen will be unmounted react native wont know what to do
+        resetForm();
+        await signIn(values);
+      }}
+      validationSchema={yup.object().shape({
+        Username: yup
+          .string()
+          .matches(/^\S*$/, "Username may not contain spaces") //Contains no spaces
+          .required("Please, provide your Username!"),
+        Password: yup.string().required("Please, provide your Password!"),
+      })}
+    >
+      {({
+        values,
+        handleChange,
+        errors,
+        setFieldTouched,
+        touched,
+        isValid,
+        handleSubmit,
+      }) => (
+        <KeyboardAwareScrollView
+          contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
+        >
+          <View style={styles.container}>
+            <StatusBar style="auto" />
+            <View style={styles.header}>
+              <Text style={styles.text_header}>Welcome back</Text>
+              <Text style={styles.subtitle}>Sign in below</Text>
+            </View>
 
-        <Text style={styles.title}>Sign in to your account</Text>
-        <AppTextInput
-          value={username}
-          onChangeText={(text) => setUsername(text)}
-          leftIcon="account"
-          placeholder="Enter username"
-          autoCapitalize="none"
-          keyboardType="email-address"
-          textContentType="emailAddress"
-        />
-        <AppTextInput
-          value={password}
-          onChangeText={(text) => setPassword(text)}
-          leftIcon="lock"
-          placeholder="Enter password"
-          autoCapitalize="none"
-          autoCorrect={false}
-          secureTextEntry
-          textContentType="password"
-        />
-        <AppButton title="Login" onPress={signIn} />
-        <View style={styles.footerButtonContainer}>
-          <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
-            <Text style={styles.forgotPasswordButtonText}>
-              Don't have an account? Sign Up
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    </SafeAreaView>
+            <Animatable.View animation="fadeInUpBig" style={styles.body}>
+              <AppTextInput
+                value={values.Username}
+                onChangeText={handleChange("Username")}
+                onBlur={() => setFieldTouched("Username")}
+                leftIcon="account"
+                placeholder="Enter Username"
+                keyboardType="email-address"
+                textContentType="emailAddress"
+                error={errors.Username}
+                touched={touched.Username}
+              />
+              {/* If the user has clicked on the input field and it is not valid */}
+              {touched.Username && errors.Username && (
+                <Text style={{ fontSize: 12, color: "#FF0D10" }}>
+                  {errors.Username}
+                </Text>
+              )}
+              <AppTextInput
+                value={values.Password}
+                onChangeText={handleChange("Password")}
+                leftIcon="lock"
+                placeholder="Enter Password"
+                autoCorrect={false}
+                onBlur={() => setFieldTouched("Password")}
+                // secureTextEntry={true}
+                error={errors.Password}
+                touched={touched.Password}
+                type="Password"
+              />
+              {touched.Password && errors.Password && (
+                <Text style={{ fontSize: 12, color: "#FF0D10" }}>
+                  {errors.Password}
+                </Text>
+              )}
+
+              <AppButton
+                title="Sign in"
+                disabled={!isValid}
+                onPress={handleSubmit}
+              />
+              <View style={styles.footerTextContainer}>
+                <Text
+                  onPress={() => navigation.navigate("ForgotPassword")}
+                  style={styles.footerLink}
+                >
+                  {" "}
+                  Forgot Password?
+                </Text>
+              </View>
+            </Animatable.View>
+            <Animatable.View animation="fadeInUpBig" style={styles.footer}>
+              <View style={styles.footerIcons}>
+                <SocialIcon type="facebook" />
+                <SocialIcon type="google" />
+              </View>
+
+              <View style={styles.footerTextContainer}>
+                <Text style={styles.footerText}>
+                  Don't have an account?
+                  <Text
+                    onPress={() => navigation.navigate("SignUp")}
+                    style={styles.signUpLink}
+                  >
+                    {" "}
+                    Sign Up
+                  </Text>
+                </Text>
+              </View>
+            </Animatable.View>
+          </View>
+          {isErrorAlertVisible === true && (
+            <AppAlert visible={true} message={modalMessage} type={"Error"} />
+          )}
+          {isLoading === true && <AppLoadingIcon />}
+        </KeyboardAwareScrollView>
+      )}
+    </Formik>
   );
 }
 
 const styles = StyleSheet.create({
-  safeAreaContainer: {
-    flex: 1,
-    backgroundColor: "white",
-  },
   container: {
     flex: 1,
-    alignItems: "center",
+    // alignItems: "center",
+    // justifyContent: "center",
+    // backgroundColor: "#118AB2",
+    backgroundColor: "#118AB2",
+  },
+  text_header: {
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 30,
+  },
+  header: {
+    flex: 1,
     justifyContent: "center",
-    // backgroundColor: "red",
+    alignItems: "center",
+    paddingHorizontal: 20,
+    paddingVertical: 30,
   },
-  title: {
-    fontSize: 20,
-    color: "#202020",
-    fontWeight: "500",
-    marginVertical: 15,
+  subtitle: {
+    fontSize: 16,
+    color: "#fff",
+    textAlign: "center",
+    paddingVertical: 10,
   },
-  footerButtonContainer: {
+  body: {
+    alignItems: "center",
+    flex: Platform.OS === "ios" ? 3 : 1,
+    backgroundColor: "#fff",
+    borderRadius: 30,
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+  },
+  footer: {
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  footerIcons: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  footerTextContainer: {
     marginVertical: 15,
     justifyContent: "center",
     alignItems: "center",
   },
-  forgotPasswordButtonText: {
-    color: "tomato",
+  footerText: {
+    color: "#fff",
     fontSize: 18,
+    fontWeight: "600",
+  },
+  footerLink: {
+    color: "#788eec",
+    fontSize: 19,
+    fontWeight: "600",
+  },
+  signUpLink: {
+    // color: "#ffa07a",
+    color: "#afeeee",
+    // color: "#00ffff",
+    // color: "#cdedf6",
+    fontSize: 19,
     fontWeight: "600",
   },
 });
