@@ -75,16 +75,15 @@ export default function SettingsScreen({ navigation, updateAuthState }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#ecf0f1",
     padding: 3,
+    backgroundColor: "#fff",
   },
   list: {
     padding: 20,
-    backgroundColor: "white",
-    borderRadius: 5,
     marginTop: 1,
-    flexDirection: "row",
-    // justifyContent: "center",
+    borderBottomWidth: 1,
+    width: "100%",
+    borderBottomColor: "#cccccc",
   },
   listText: {
     fontSize: 18,

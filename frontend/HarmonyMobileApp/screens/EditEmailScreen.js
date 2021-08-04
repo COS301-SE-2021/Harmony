@@ -50,6 +50,7 @@ export default function EditEmailScreen({ navigation }) {
   return (
     <Formik
       initialValues={{
+        Username: "",
         Email: "",
       }}
       onSubmit={(values) => signUp(values)}
@@ -62,6 +63,12 @@ export default function EditEmailScreen({ navigation }) {
         await signUp(values);
       }}
       validationSchema={yup.object().shape({
+        Username: yup
+          .string()
+          .min(2)
+          .max(20)
+          .matches(/^\S*$/, "Username may not contain spaces") //Contains no spaces
+          .required("Please, provide your Username!"),
         Email: yup
           .string()
           .email("Invalid email")
@@ -88,6 +95,23 @@ export default function EditEmailScreen({ navigation }) {
               duration={300}
               style={styles.body}
             >
+              <AppTextInput
+                value={values.Username}
+                onChangeText={handleChange("Username")}
+                onBlur={() => setFieldTouched("Username")}
+                leftIcon="account"
+                placeholder="Enter Username"
+                keyboardType="email-address"
+                textContentType="emailAddress"
+                error={errors.Username}
+                touched={touched.Username}
+              />
+              {/* If the user has clicked on the input field and it is not valid */}
+              {touched.Username && errors.Username && (
+                <Text style={{ fontSize: 12, color: "#FF0D10" }}>
+                  {errors.Username}
+                </Text>
+              )}
               <AppTextInput
                 value={values.Email}
                 onChangeText={handleChange("Email")}

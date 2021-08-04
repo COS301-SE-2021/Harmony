@@ -5,7 +5,6 @@ import {
   StyleSheet,
   TouchableOpacity,
   StatusBar,
-  Alert,
 } from "react-native";
 export default function EditAccountScreen({ navigation }) {
   const RightIcon = () => <Text style={styles.rightIcon}>EDIT</Text>;
@@ -13,19 +12,14 @@ export default function EditAccountScreen({ navigation }) {
     <View style={styles.container}>
       <StatusBar style="auto" />
 
-      <TouchableOpacity
-        onPress={() => navigation.navigate("Edit Account Details")}
-      >
-        <View style={styles.list}>
-          <View>
-            <Text style={[styles.listText, styles.placeholderText]}>
-              Username
-            </Text>
-            <Text style={styles.listText}>Example1234</Text>
-          </View>
-          <RightIcon />
+      <View style={styles.list}>
+        <View>
+          <Text style={[styles.listText, styles.placeholderText]}>
+            Username
+          </Text>
+          <Text style={styles.listText}>Example1234</Text>
         </View>
-      </TouchableOpacity>
+      </View>
       <TouchableOpacity onPress={() => navigation.navigate("Edit Email")}>
         <View style={styles.list}>
           <View>
@@ -54,20 +48,18 @@ export default function EditAccountScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#ecf0f1",
     padding: 3,
+    backgroundColor: "#fff",
   },
   list: {
     padding: 20,
-    backgroundColor: "white",
-    borderRadius: 5,
     marginTop: 1,
-    flexDirection: "row",
-    // justifyContent: "center",
+    borderBottomWidth: 1,
+    width: "100%",
+    borderBottomColor: "#cccccc",
   },
   listText: {
     fontSize: 18,
-    // alignSelf: "center",
   },
   placeholderText: {
     color: "#888",
