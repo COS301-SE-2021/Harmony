@@ -63,43 +63,25 @@ def sort_and_filter(event, context):
 
 
 def sortbynew(response):
-    # # set the number of days we want to subract for the new filter
-    # td = timedelta(7)
-    #
-    # # get today's date
-    # today = date.today()
-    #
-    # # get the filter date by subtracting the td from today's date
-    # filter_date = today - td
-    #
-    # # retrieve the data of the filter date
-    # day = filter_date.day
-    # month = filter_date.month
-    # year = filter_date.year
-    #
-    # # build query string for formatting purposes
-    # if month == 10 or 11 or 12:
-    #     query_string = str(year) + "-" + str(month) + "-" + str(day)
-    # else:
-    #     query_string = str(year) + "-0" + str(month) + "-" + str(day)
-    #
-    # sortedresponse = table.query(
-    #     IndexName='UID-DateAdded-index',
-    #     KeyConditionExpression=Key('UID').eq('u9') & Key('DateAdded').gt(query_string)
-    # )
+    # this function sorts the dateadded from new to old
     sortedresponse = sorted(response, key=lambda x: datetime.strptime(x['DateAdded'], '%Y-%m-%d'), reverse=True)
     return sortedresponse
 
 def range_of_days(response):
+    """The following function filters any paiings response within a range of 30days"""
+    # this takes the current time and subtract 30 days to get a range
     d = datetime.today() - timedelta(days=30)
+    # this gets rid of the time, because we only work with dates
     d = d.replace(hour=0, minute=0, second=0, microsecond=0)  # Returns a copy
     counter = 0
+    # this simple for loop removes any item in the response that is out of range of 30 days
     for i in range(len(response)):
         date = datetime.strptime(response[counter]['DateAdded'], '%Y-%m-%d')
         if date >= d:
             counter = counter + 1
         else:
             del response[counter]
+    # returns adjusted response with only items within time range
     return response
 
 
