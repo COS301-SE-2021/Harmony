@@ -48,21 +48,22 @@ const BottomTabBar = ({ navigation, state }) => (
   </BottomNavigation>
 );
 
-// const TabNavigator = () => (
 const TabNavigator = (props) => {
   return (
     <Navigator tabBar={(props) => <BottomTabBar {...props} />}>
       <Screen name="Home" component={HomeScreen} />
       <Screen name="Camera" component={CameraScreen} />
       <Screen name="Favourite" component={ViewFavouritesScreen} />
+      {/* <Screen name="Settings" component={SettingsNavigator} /> */}
       <Screen name="Settings">
         {(screenProps) => (
-          <SettingsScreen
+          <SettingsNavigator
             {...screenProps}
             updateAuthState={props.updateAuthState}
           />
         )}
       </Screen>
+
       <Screen name="Results" component={Results} />
     </Navigator>
   );
@@ -77,6 +78,21 @@ const Results = () => (
       options={() => options}
     />
   </Stack.Navigator>
+);
+
+const SettingsStack = createStackNavigator();
+
+const SettingsNavigator = (props) => (
+  <SettingsStack.Navigator headerMode="none" initialRouteName="SettingsStack">
+    <SettingsStack.Screen name="Settings">
+      {(screenProps) => (
+        <SettingsScreen
+          {...screenProps}
+          updateAuthState={props.updateAuthState}
+        />
+      )}
+    </SettingsStack.Screen>
+  </SettingsStack.Navigator>
 );
 
 const options = {
