@@ -2,6 +2,12 @@ import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createSharedElementStackNavigator } from "react-navigation-shared-element";
+import {
+  createDrawerNavigator,
+  DrawerContentScrollView,
+  DrawerItemList,
+  DrawerItem,
+} from "@react-navigation/drawer";
 
 import { ActivityIndicator, View } from "react-native";
 import Amplify, { Auth } from "aws-amplify";
@@ -31,6 +37,7 @@ Amplify.configure(config);
 
 const { Navigator, Screen } = createBottomTabNavigator();
 const Stack = createSharedElementStackNavigator();
+const Drawer = createDrawerNavigator();
 
 const HomeIcon = (props) => <Icon {...props} name="home-outline" />;
 const CameraIcon = (props) => <Icon {...props} name="camera-outline" />;
@@ -56,19 +63,33 @@ const TabNavigator = (props) => {
       <Screen name="Home" component={HomeScreen} />
       <Screen name="Camera" component={CameraScreen} />
       <Screen name="Favourite" component={ViewFavouritesScreen} />
-      <Screen name="Settings">
-        {(screenProps) => (
-          <SettingsScreen
-            {...screenProps}
-            updateAuthState={props.updateAuthState}
-          />
-        )}
-      </Screen>
+      <Screen name="Settings" component={SettingsDrawer} />
       <Screen name="Results" component={Results} />
     </Navigator>
   );
 };
-
+const SettingsDrawer = (props) => (
+  <Drawer.Navigator
+    drawerContent={(props) => <CustomDrawerContent {...props} />}
+  >
+    <Drawer.Screen name="Settings">
+      {(screenProps) => (
+        <SettingsScreen
+          {...screenProps}
+          updateAuthState={props.updateAuthState}
+        />
+      )}
+    </Drawer.Screen>
+  </Drawer.Navigator>
+);
+function CustomDrawerContent(props) {
+  return (
+    <DrawerContentScrollView {...props}>
+      <DrawerItemList {...props} />
+      <DrawerItem label="Help" onPress={() => alert("Link to help")} />
+    </DrawerContentScrollView>
+  );
+}
 const Results = () => (
   <Stack.Navigator headerMode="none" initialRouteName="Results">
     <Stack.Screen name="PairingResults" component={PairingResultsScreen} />
