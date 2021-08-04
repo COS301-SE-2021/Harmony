@@ -23,14 +23,14 @@ export default function ForgotPassword({ navigation, updateAuthState }) {
 
       await Auth.forgotPassword(values.Username);
       setLoading(false);
-      console.log("Email sent");
+      //console.log("Email sent");
 
       // Add a Toast on screen.
       AppToast.ToastDisplay("Email sent");
 
       navigation.navigate("ConfirmForgotPassword");
     } catch (error) {
-      console.log(" Error sending password reset code...", error);
+      //console.log(" Error sending password reset code...", error);
       //setModalMessage must come before setErrorAlertVisible
       setModalMessage(error.message);
       setErrorAlertVisible(true);
@@ -75,7 +75,7 @@ export default function ForgotPassword({ navigation, updateAuthState }) {
           <View style={styles.container}>
             <StatusBar style="auto" />
             <View style={styles.header}>
-              <Text style={styles.text_header}>Forgot Password?</Text>
+              <Text style={styles.headerText}>Forgot Password?</Text>
               <Text style={styles.subtitle}>
                 We'll send a reset code to your account email
               </Text>
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     // justifyContent: "center",
     backgroundColor: "#118AB2",
   },
-  text_header: {
+  headerText: {
     color: "#fff",
     fontWeight: "bold",
     fontSize: 30,

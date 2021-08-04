@@ -3,7 +3,6 @@ import { Text, View, StyleSheet, StatusBar, Platform } from "react-native";
 import * as yup from "yup";
 import { Formik } from "formik";
 import { Auth } from "aws-amplify";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 import AppTextInput from "../Components/AppTextInput";
 import AppButton from "../Components/AppButton";
@@ -12,7 +11,6 @@ import AppLoadingIcon from "../Components/AppLoadingIcon";
 import AppAlert from "../Components/AppAlert";
 
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { SocialIcon } from "react-native-elements";
 import * as Animatable from "react-native-animatable";
 
 export default function ConfirmForgotPassword({ navigation }) {
@@ -32,14 +30,14 @@ export default function ConfirmForgotPassword({ navigation }) {
       );
 
       setLoading(false);
-      console.log("Success, Password changed");
+      //console.log("Success, Password changed");
 
       // Add a Toast on screen.
       AppToast.ToastDisplay("Password changed");
 
       navigation.navigate("SignIn");
     } catch (error) {
-      console.log(" Error resetting password...", error);
+      //console.log(" Error resetting password...", error);
       //setModalMessage must come before setErrorAlertVisible
       setModalMessage(error.message);
       setErrorAlertVisible(true);
@@ -104,7 +102,7 @@ export default function ConfirmForgotPassword({ navigation }) {
           <View style={styles.container}>
             <StatusBar style="auto" />
             <View style={styles.header}>
-              <Text style={styles.text_header}>Reset your password</Text>
+              <Text style={styles.headerText}>Reset your password</Text>
               <Text style={styles.subtitle}>
                 Provide your details and the reset code sent to your account
                 email below
@@ -202,7 +200,7 @@ const styles = StyleSheet.create({
     // justifyContent: "center",
     backgroundColor: "#118AB2",
   },
-  text_header: {
+  headerText: {
     color: "#fff",
     fontWeight: "bold",
     fontSize: 30,

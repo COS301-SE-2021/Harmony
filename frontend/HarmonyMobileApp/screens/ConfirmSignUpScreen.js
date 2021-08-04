@@ -3,7 +3,6 @@ import { Text, View, StyleSheet, StatusBar, Platform } from "react-native";
 import * as yup from "yup";
 import { Formik } from "formik";
 import { Auth } from "aws-amplify";
-import { SafeAreaView } from "react-native-safe-area-context";
 import AppTextInput from "../Components/AppTextInput";
 import AppButton from "../Components/AppButton";
 import { AppToast } from "../Components/AppToast";
@@ -24,16 +23,16 @@ export default function ConfirmSignUp({ navigation }) {
       await Auth.confirmSignUp(values.Username, values.Code);
       setLoading(false);
 
-      console.log(" Code confirmed");
+      //console.log(" Code confirmed");
       navigation.navigate("SignIn");
 
       // Add a Toast on screen.
-      AppToast.ToastDisplay("Success");
+      AppToast.ToastDisplay("Code confirmed");
     } catch (error) {
-      console.log(
-        " Verification code does not match. Please enter a valid verification code.",
-        error.code
-      );
+      // console.log(
+      //   " Verification code does not match. Please enter a valid verification code.",
+      //   error.code
+      // );
       //setModalMessage must come before setErrorAlertVisible
       setModalMessage(error.message);
       setErrorAlertVisible(true);
@@ -85,7 +84,7 @@ export default function ConfirmSignUp({ navigation }) {
             <StatusBar style="auto" />
 
             <View style={styles.header}>
-              <Text style={styles.text_header}>Confirm Sign Up</Text>
+              <Text style={styles.headerText}>Confirm Sign Up</Text>
               <Text style={styles.subtitle}>
                 Provide your username and the reset code sent to your account
                 email below
@@ -149,7 +148,7 @@ const styles = StyleSheet.create({
     // justifyContent: "center",
     backgroundColor: "#118AB2",
   },
-  text_header: {
+  headerText: {
     color: "#fff",
     fontWeight: "bold",
     fontSize: 30,

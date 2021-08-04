@@ -1,17 +1,8 @@
 import React, { useState } from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  StatusBar,
-  Platform,
-  Alert,
-  TouchableOpacity,
-} from "react-native";
+import { Text, View, StyleSheet, StatusBar, Platform } from "react-native";
 import * as yup from "yup";
 import { Formik } from "formik";
 import { Auth } from "aws-amplify";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 import AppTextInput from "../Components/AppTextInput";
 import AppButton from "../Components/AppButton";
@@ -35,14 +26,14 @@ export default function SignIn({ navigation, updateAuthState }) {
 
       await Auth.signIn(values.Username, values.Password);
       setLoading(false);
-      console.log("Success, Signed in");
+      //console.log("Success, Signed in");
 
       // Add a Toast on screen.
       AppToast.ToastDisplay("Signed in");
 
       updateAuthState("loggedIn");
     } catch (error) {
-      console.log(" Error signing in...", error);
+      //console.log(" Error signing in...", error);
 
       //setModalMessage must come before setErrorAlertVisible
       setModalMessage(error.message);
@@ -88,7 +79,7 @@ export default function SignIn({ navigation, updateAuthState }) {
           <View style={styles.container}>
             <StatusBar style="auto" />
             <View style={styles.header}>
-              <Text style={styles.text_header}>Welcome back</Text>
+              <Text style={styles.headerText}>Welcome back</Text>
               <Text style={styles.subtitle}>Sign in below</Text>
             </View>
 
@@ -181,7 +172,7 @@ const styles = StyleSheet.create({
     // backgroundColor: "#118AB2",
     backgroundColor: "#118AB2",
   },
-  text_header: {
+  headerText: {
     color: "#fff",
     fontWeight: "bold",
     fontSize: 30,

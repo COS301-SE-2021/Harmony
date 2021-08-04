@@ -3,7 +3,6 @@ import { Text, View, StyleSheet, StatusBar, Platform } from "react-native";
 import * as yup from "yup";
 import { Formik } from "formik";
 import { Auth } from "aws-amplify";
-import { SafeAreaView } from "react-native-safe-area-context";
 import AppTextInput from "../Components/AppTextInput";
 import AppButton from "../Components/AppButton";
 import { AppToast } from "../Components/AppToast";
@@ -35,10 +34,13 @@ export default function SignUp({ navigation }) {
       // console.log(values.Email);
       // console.log(user); //Output all user data
 
-      console.log("Sign-up Confirmed");
+      //console.log("Sign-up Confirmed");
+      // Add a Toast on screen.
+      AppToast.ToastDisplay("Email sent");
+
       navigation.navigate("ConfirmSignUp");
     } catch (error) {
-      console.log(" Error signing up...", error);
+      //console.log(" Error signing up...", error);
       //setModalMessage must come before setErrorAlertVisible
       setModalMessage(error.message);
       setErrorAlertVisible(true);
@@ -105,7 +107,7 @@ export default function SignUp({ navigation }) {
             <StatusBar style="auto" />
 
             <View style={styles.header}>
-              <Text style={styles.text_header}>Create an account</Text>
+              <Text style={styles.headerText}>Create an account</Text>
               <Text style={styles.subtitle}>Sign up below</Text>
             </View>
             <Animatable.View animation="fadeInUpBig" style={styles.body}>
@@ -217,7 +219,7 @@ const styles = StyleSheet.create({
     // justifyContent: "center",
     backgroundColor: "#118AB2",
   },
-  text_header: {
+  headerText: {
     color: "#fff",
     fontWeight: "bold",
     fontSize: 30,
@@ -262,11 +264,6 @@ const styles = StyleSheet.create({
   footerText: {
     color: "#fff",
     fontSize: 18,
-    fontWeight: "600",
-  },
-  footerLink: {
-    color: "#788eec",
-    fontSize: 19,
     fontWeight: "600",
   },
   signUpLink: {
