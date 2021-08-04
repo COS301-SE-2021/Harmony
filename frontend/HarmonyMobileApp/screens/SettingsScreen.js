@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { Auth } from "aws-amplify";
 import { AppToast } from "../Components/AppToast";
-
+import { Entypo } from "@expo/vector-icons";
 export default function SettingsScreen({ navigation, updateAuthState }) {
   async function signOut() {
     try {
@@ -22,33 +22,42 @@ export default function SettingsScreen({ navigation, updateAuthState }) {
     }
   }
 
-  return (
-    // <View style={styles.container}>
-    //   <StatusBar style="auto" />
-    //   <Button title="Sign Out" color="tomato" onPress={signOut} />
-    // </View>
+  const Icon = () => (
+    <Entypo
+      name="chevron-thin-right"
+      size={24}
+      color="black"
+      // color="#118AB2"
+      style={styles.rightIcon}
+    />
+  );
 
+  return (
     <View style={styles.container}>
       <StatusBar style="auto" />
 
       <TouchableOpacity onPress={() => navigation.navigate("EditProfile")}>
-        <View style={styles.list}>
-          <Text style={styles.listText}>Personal details</Text>
+        <View style={[styles.list, styles.listContainer]}>
+          <Text style={styles.listText}>Account details</Text>
+          <Icon />
         </View>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate("EditProfile")}>
-        <View style={styles.list}>
+        <View style={[styles.list, styles.listContainer]}>
           <Text style={styles.listText}>About</Text>
+          <Icon />
         </View>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate("EditProfile")}>
-        <View style={styles.list}>
+        <View style={[styles.list, styles.listContainer]}>
           <Text style={styles.listText}>Theme</Text>
+          <Icon />
         </View>
       </TouchableOpacity>
       <TouchableOpacity onPress={signOut}>
-        <View style={styles.list}>
+        <View style={[styles.list, styles.listContainer]}>
           <Text style={styles.listText}>Signout</Text>
+          <Icon />
         </View>
       </TouchableOpacity>
     </View>
@@ -66,9 +75,18 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 5,
     marginTop: 10,
+    flexDirection: "row",
+    justifyContent: "center",
   },
   listText: {
     fontSize: 18,
     alignSelf: "center",
+  },
+  rightIcon: {
+    flex: 1,
+    justifyContent: "flex-end",
+    position: "absolute",
+    right: "3%",
+    top: "75%",
   },
 });
