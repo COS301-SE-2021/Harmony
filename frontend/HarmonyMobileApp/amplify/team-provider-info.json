@@ -1,31 +1,20 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-harmonymobileapp-dev-10402-authRole",
-      "UnauthRoleArn": "arn:aws:iam::294481406452:role/amplify-harmonymobileapp-dev-10402-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::294481406452:role/amplify-harmonymobileapp-dev-10402-authRole",
+      "AuthRoleName": "amplify-harmonymobileapp-dev-11105-authRole",
+      "UnauthRoleArn": "arn:aws:iam::294481406452:role/amplify-harmonymobileapp-dev-11105-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::294481406452:role/amplify-harmonymobileapp-dev-11105-authRole",
       "Region": "eu-west-1",
-      "DeploymentBucketName": "amplify-harmonymobileapp-dev-10402-deployment",
-      "UnauthRoleName": "amplify-harmonymobileapp-dev-10402-unauthRole",
-      "StackName": "amplify-harmonymobileapp-dev-10402",
-      "StackId": "arn:aws:cloudformation:eu-west-1:294481406452:stack/amplify-harmonymobileapp-dev-10402/a6ceb460-d152-11eb-a345-06553b827601",
-      "AmplifyAppId": "d348oorcqc4y9s"
+      "DeploymentBucketName": "amplify-harmonymobileapp-dev-11105-deployment",
+      "UnauthRoleName": "amplify-harmonymobileapp-dev-11105-unauthRole",
+      "StackName": "amplify-harmonymobileapp-dev-11105",
+      "StackId": "arn:aws:cloudformation:eu-west-1:294481406452:stack/amplify-harmonymobileapp-dev-11105/f3bc39e0-e5c1-11eb-922c-02ea7024c1c7",
+      "AmplifyAppId": "d35yqwhycpwdqz"
+    },
+    "categories": {
+      "auth": {
+        "harmonymobileappdd7fa753": {}
+      }
     }
-<<<<<<< HEAD
-  },
-  "hmnynviro": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-harmonymobileapp-hmnynviro-120001-authRole",
-      "UnauthRoleArn": "arn:aws:iam::294481406452:role/amplify-harmonymobileapp-hmnynviro-120001-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::294481406452:role/amplify-harmonymobileapp-hmnynviro-120001-authRole",
-      "Region": "eu-west-1",
-      "DeploymentBucketName": "amplify-harmonymobileapp-hmnynviro-120001-deployment",
-      "UnauthRoleName": "amplify-harmonymobileapp-hmnynviro-120001-unauthRole",
-      "StackName": "amplify-harmonymobileapp-hmnynviro-120001",
-      "StackId": "arn:aws:cloudformation:eu-west-1:294481406452:stack/amplify-harmonymobileapp-hmnynviro-120001/4a7be3c0-d1ae-11eb-93bf-0aa2eb738a15",
-      "AmplifyAppId": "d348oorcqc4y9s"
-    }
-=======
->>>>>>> 655afea719954c95baac6bc0e899b0f36f2f5539
   }
 }

@@ -11,12 +11,13 @@ import {
   StatusBar,
 } from "react-native";
 import { Camera } from "expo-camera";
-import { Icon } from "@ui-kitten/components";
 import * as ImagePicker from "expo-image-picker";
 import { useIsFocused } from "@react-navigation/native";
 import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
+import * as FileSystem from "expo-file-system";
+import AppLoadingIcon from "../Components/AppLoadingIcon";
 
-export default function CameraScreen() {
+export default function CameraScreen({ navigation }) {
   const cameraRef = useRef();
   const [isPreview, setIsPreview] = useState(false);
   const [isGalleryImage, setisGalleryImage] = useState(false);
@@ -26,6 +27,7 @@ export default function CameraScreen() {
   const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
 
   const [image, setImage] = useState(null);
+  const [b64Image, setb64Image] = useState(null);
   const isFocused = useIsFocused();
   const [flashMode, setFlashMode] = React.useState("off");
   // const [flashIcon, setFlashIcon] = useState("flash-off-outline");
@@ -44,6 +46,10 @@ export default function CameraScreen() {
   const windowWidth = Dimensions.get("window").width;
   const windowHeight = Dimensions.get("window").height;
 
+  const [isLoading, setLoading] = useState(false);
+
+  const uploadImageURL =
+    "https://jkwhidy1cf.execute-api.eu-west-1.amazonaws.com/dev";
   useEffect(() => {
     onHandlePermission();
   }, []);
@@ -79,6 +85,11 @@ export default function CameraScreen() {
     console.log(result);
     if (!result.cancelled) {
       setImage(result.uri);
+      const base64 = await FileSystem.readAsStringAsync(result.uri, {
+        encoding: "base64",
+      });
+
+      setb64Image(base64);
       setIsPreview(true);
       setisGalleryImage(true);
     }
@@ -88,41 +99,45 @@ export default function CameraScreen() {
     if (cameraRef.current) {
       const options = { quality: 1, base64: true, skipProcessing: true };
       const data = await cameraRef.current.takePictureAsync(options);
-      const source = data.base64;
+      const base64 = data.base64;
 
-      if (source) {
+      if (base64) {
         // await cameraRef.current.pausePreview();
         setImage(data.uri);
         setIsPreview(true);
         setisGalleryImage(false);
-
-        // let base64Img = `data:image/jpg;base64,${source}`;
-        // let apiUrl =
-        //   "https://api.aws.s3.com";//WAITING ON API URL FROM BACKEND
-
-        // let data = {
-        //   file: base64Img,
-        //   upload_preset: "<your-upload-preset>",
-        // };
-
-        // fetch(apiUrl, {
-        //   body: JSON.stringify(data),
-        //   headers: {
-        //     "content-type": "application/json",
-        //   },
-        //   method: "POST",
-        // })
-        //   .then(async (response) => {
-        //     let data = await response.json();
-        //     if (data.secure_url) {
-        //       alert("Upload successful");
-        //     }
-        //   })
-        //   .catch((err) => {
-        //     alert("Cannot upload");
-        //   });
+        setb64Image(base64);
       }
     }
+  };
+
+  const uploadImage = async (img) => {
+    setLoading(true);
+
+    await fetch(uploadImageURL, {
+      method: "POST",
+      body: JSON.stringify({
+        data: img,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        // console.log(json);
+        setLoading(false);
+        cancelPreview();
+        navigation.navigate("Results", {
+          screen: "PairingResults",
+          params: { id: "1", response: json },
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        cancelPreview();
+        setLoading(false);
+      });
   };
 
   const cancelPreview = async () => {
@@ -280,18 +295,18 @@ export default function CameraScreen() {
             {/* )} */}
             <View style={styles.previewButtonsContainer}>
               <TouchableOpacity onPress={cancelPreview}>
-                <Icon
-                  style={styles.icon}
-                  fill="#fff"
-                  name="close-circle-outline"
+                <MaterialCommunityIcons
+                  name="close"
+                  size={80}
+                  style={styles.previewIcon}
                 />
               </TouchableOpacity>
 
-              <TouchableOpacity onPress={cancelPreview}>
-                <Icon
-                  style={styles.icon}
-                  fill="#fff"
-                  name="checkmark-circle-2-outline"
+              <TouchableOpacity onPress={() => uploadImage(b64Image)}>
+                <MaterialCommunityIcons
+                  name="check"
+                  size={80}
+                  style={styles.previewIcon}
                 />
               </TouchableOpacity>
             </View>
@@ -320,7 +335,6 @@ export default function CameraScreen() {
                 disabled={!isCameraReady}
                 onPress={pickImage}
               >
-                {/* <Icon style={styles.icon} fill="#fff" name="image-outline" /> */}
                 <MaterialCommunityIcons
                   name="image-multiple-outline"
                   size={60}
@@ -344,6 +358,7 @@ export default function CameraScreen() {
           </View>
         )}
       </View>
+      {isLoading === true && <AppLoadingIcon />}
     </View>
   );
 }
@@ -380,9 +395,11 @@ const styles = StyleSheet.create({
     height: 60,
     top: "2.5%",
   },
-  icon: {
-    width: 80,
-    height: 80,
+  previewIcon: {
+    borderRadius: 60,
+    backgroundColor: "rgba(52, 52, 52, 0.4)",
+    marginHorizontal: 5,
+    color: "#fff",
   },
   toolbarContainer: {
     position: "absolute",

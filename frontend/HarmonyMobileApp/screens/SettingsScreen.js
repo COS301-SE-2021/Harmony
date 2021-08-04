@@ -1,14 +1,31 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { View, Text, StyleSheet, Button } from "react-native";
+import { Auth } from "aws-amplify";
+import { AppToast } from "../Components/AppToast";
 
-import { SafeAreaView, StyleSheet, StatusBar } from "react-native";
-import { Layout, Text } from "@ui-kitten/components";
+export default function SettingsScreen({ navigation, updateAuthState }) {
+  async function signOut() {
+    try {
+      await Auth.signOut();
+      updateAuthState("loggedOut");
+      AppToast.ToastDisplay("Signed out");
+      console.log("Success, Signed out");
+    } catch (error) {
+      console.log("Error signing out: ", updateAuthState);
+    }
+  }
 
-const SettingsScreen = (props) => {
   return (
-    <Layout style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text category="h1">Settings</Text>
-    </Layout>
+    <View style={styles.container}>
+      <Button title="Sign Out" color="tomato" onPress={signOut} />
+    </View>
   );
-};
+}
 
-export default SettingsScreen;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    marginTop: 20,
+  },
+});

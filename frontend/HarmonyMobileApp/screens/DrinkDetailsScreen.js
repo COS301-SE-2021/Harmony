@@ -14,9 +14,10 @@ import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 
 const MAX_HEIGHT = 400;
 
-// const DrinkDetailsScreen = ({ navigation, props }) => {
 const DrinkDetailsScreen = ({ navigation, route }) => {
   const { item } = route.params;
+  // console.log(item);
+
   const buttonRef = React.useRef();
 
   const CloseButton = () => (
@@ -100,10 +101,7 @@ const DrinkDetailsScreen = ({ navigation, route }) => {
       horizontal={false}
     >
       <View style={{ flex: 1, backgroundColor: "white" }}>
-        {/* <SharedElement id={item.id}> */}
-
-        <SharedElement id={item.PID}>
-          {/* Temp ID used above as an ID was not provided by the API yet */}
+        <SharedElement id={item.DrinkID}>
           <Image
             source={{ uri: item.DrinkImage }}
             style={{
@@ -127,8 +125,7 @@ DrinkDetailsScreen.sharedElements = (route) => {
   const { item } = route.params;
   return [
     {
-      // id: item.id,
-      id: item.PID, //temp ID used because API does not yet return the needed IDs
+      id: item.DrinkID,
       animation: "move",
       resize: "clip",
     },
