@@ -19,7 +19,8 @@ import {
 } from "@ui-kitten/components";
 import { useIsFocused } from "@react-navigation/native";
 import { Header } from "react-native-elements";
-
+import { Location } from "expo";
+import * as Permissions from 'expo-permissions';
 import FilterModal from "../Components/FilterModal";
 import Card from "../Components/Card"
 
@@ -37,8 +38,10 @@ const HomeScreen = (props) => {
   const [sortPairings, setSortPairings] = useState("Trending");                            // the type of pairings shown filter
 
   const [refreshing, setRefreshing] = React.useState(false);
-  const [userLocation, setUserLocation] = useState();
 
+  const [locationReady, setLocationReady] = useState(false);
+  const [whereocation, setWhereLocation] = useState({ lat: null, lng: null });
+  const [locationError, setLocationError] = useState(null);
 
   //the refreshing of the flatlist
   const onRefresh = React.useCallback(() => {
@@ -65,6 +68,30 @@ const HomeScreen = (props) => {
     <Text style={styles.TextLarge}> {sortPairings} </Text>
   );
 
+  const GetLocation = async () => {
+    const { status } = await Permissions.askAsync(Permissions.LOCATION);
+    //status is response from permission
+    console.log(status);
+  }
+  // const GetLocation = () => {
+  //   console.log("Test");
+  //   let geoOptions = {
+  //     enableHighAccuracy: true,      //true = using gps, false = uses bluetooth or wifi
+  //     timeOut: 20000,     //in milliseconds so this is actually wait 2 seconds
+  //     maximumAge: 60 * 60 //how long can you keep the value for: 60 seconds *60minutes = 1 hour
+  //   };
+  //   setLocationReady(false);
+  //   navigator.geolocation.getCurrentPosition(LocationSuccess, LocationFail, geoOptions);
+  // };
+
+  // const LocationSuccess = (position) => {
+  //   console.log("location found");
+  // };
+
+  // const LocationFail = (err) => {
+  //   console.log("location error");
+
+  // };
   const filterButton = () => (
     <View style={styles.flexRow}>
       <Pressable
@@ -80,7 +107,7 @@ const HomeScreen = (props) => {
       <Text style={{ width: "8%" }}></Text>
       <Pressable
         style={[styles.button, styles.buttonOpen]}
-        onPress={() => setModalVisible(true)}
+        onPress={() => GetLocation()}
       >
         <Text>
           <Feather name="search" size={22} color="white" />
