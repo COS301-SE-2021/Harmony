@@ -85,6 +85,18 @@ def sortbynew(response):
     sortedresponse = sorted(response, key= lambda x: datetime.strptime(x['DateAdded'], '%Y-%m-%d'), reverse=True)
     return sortedresponse
 
+def range_of_days(response):
+    d = datetime.today() - timedelta(days=8)
+    d = d.replace(hour=0, minute=0, second=0, microsecond=0)  # Returns a copy
+    counter = 0
+    for i in range(len(response)):
+        date = datetime.strptime(response[counter]['DateAdded'], '%Y-%m-%d')
+        if date >= d:
+            counter = counter + 1
+        else:
+            del response[counter]
+    return response
+
 
 def sortbycontroversial(response):
     # Sort response by total down votes votes in descending order(Controversial)
