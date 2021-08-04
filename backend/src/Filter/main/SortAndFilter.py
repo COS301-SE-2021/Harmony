@@ -91,7 +91,7 @@ def sortbynew(response):
     return sortedresponse
 
 def range_of_days(response):
-    d = datetime.today() - timedelta(days=8)
+    d = datetime.today() - timedelta(days=30)
     d = d.replace(hour=0, minute=0, second=0, microsecond=0)  # Returns a copy
     counter = 0
     for i in range(len(response)):
@@ -122,6 +122,7 @@ def sortbytrending(response):
         i['TotalVotes'] = totalvotes
     # Sort response by total votes in decending order(Trending)
     sortedResponse = sorted(response, key=totalvotes_function, reverse=True)
+    sortedResponse = range_of_days(sortedResponse)
     return sortedResponse
 
 
