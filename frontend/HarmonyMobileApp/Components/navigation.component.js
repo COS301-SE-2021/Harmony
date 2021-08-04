@@ -83,7 +83,20 @@ const Results = () => (
 const SettingsStack = createStackNavigator();
 
 const SettingsNavigator = (props) => (
-  <SettingsStack.Navigator headerMode="none" initialRouteName="SettingsStack">
+  <SettingsStack.Navigator
+    screenOptions={{
+      headerMode: "screen",
+      headerStyle: {
+        height: 80, // Specify the height of your custom header
+      },
+      headerTitleStyle: {
+        fontSize: 30,
+        alignSelf: "center",
+        fontWeight: "bold",
+      },
+    }}
+    initialRouteName="SettingsStack"
+  >
     <SettingsStack.Screen name="Settings">
       {(screenProps) => (
         <SettingsScreen

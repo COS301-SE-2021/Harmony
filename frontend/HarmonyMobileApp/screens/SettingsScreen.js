@@ -33,22 +33,22 @@ export default function SettingsScreen({ navigation, updateAuthState }) {
 
       <TouchableOpacity onPress={() => navigation.navigate("EditProfile")}>
         <View style={styles.list}>
-          <Text>Personal details</Text>
+          <Text style={styles.listText}>Personal details</Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate("EditProfile")}>
         <View style={styles.list}>
-          <Text>About</Text>
+          <Text style={styles.listText}>About</Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate("EditProfile")}>
         <View style={styles.list}>
-          <Text>Theme</Text>
+          <Text style={styles.listText}>Theme</Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity onPress={signOut}>
         <View style={styles.list}>
-          <Text>Signout</Text>
+          <Text style={styles.listText}>Signout</Text>
         </View>
       </TouchableOpacity>
     </View>
@@ -66,5 +66,9 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 5,
     marginTop: 10,
+  },
+  listText: {
+    fontSize: 18,
+    alignSelf: "center",
   },
 });
