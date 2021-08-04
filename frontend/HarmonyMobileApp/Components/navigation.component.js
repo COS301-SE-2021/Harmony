@@ -27,6 +27,8 @@ import ConfirmSignUp from "../screens/ConfirmSignUpScreen";
 import ForgotPassword from "../screens/ForgotPasswordScreen";
 import ConfirmForgotPassword from "../screens/ConfirmForgotPasswordScreen";
 
+import EditAccountScreen from "../screens/EditAccountScreen";
+
 Amplify.configure(config);
 
 const { Navigator, Screen } = createBottomTabNavigator();
@@ -90,9 +92,11 @@ const SettingsNavigator = (props) => (
         height: 80, // Specify the height of your custom header
       },
       headerTitleStyle: {
-        fontSize: 30,
+        fontSize: 28,
         alignSelf: "center",
-        fontWeight: "bold",
+      },
+      headerTitleContainerStyle: {
+        left: 0, // Needed else the header will be offset towards the right when theres a back button
       },
     }}
     initialRouteName="SettingsStack"
@@ -105,6 +109,10 @@ const SettingsNavigator = (props) => (
         />
       )}
     </SettingsStack.Screen>
+    <SettingsStack.Screen
+      name="Edit Account Details"
+      component={EditAccountScreen}
+    />
   </SettingsStack.Navigator>
 );
 
