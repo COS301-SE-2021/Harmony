@@ -4,46 +4,40 @@ import {
     Pressable,
 } from "react-native";
 import { Text } from '@ui-kitten/components';
+import { set } from "react-native-reanimated";
 
-export default function FilterTag({ color, title, style, ...otherProps }) {
+export default function FilterTag({ color, title, style, cleared, ...otherProps }) {
     const [clicked, setClicked] = useState(false);
-
+    const [filterColor, setFilterColor] = useState("#F3F2F2");
+    const [filterTextColor, setTextColor] = useState("black");
     handlePress = () => {
         setClicked(!clicked)
     };
 
     const tagColor = () => {
-        if (clicked) {
-            return {
-                backgroundColor: color,
-            };
+        if (clicked && !cleared) {
+            setFilterColor(color);
         }
         else {
-            return {
-                backgroundColor: "#F3F2F2",
-            };
+            setFilterColor("#F3F2F2");
         }
     };
     const textColor = () => {
-        if (clicked) {
-            return {
-                color: "white"
-            };
+        if (clicked && !cleared) {
+            setTextColor("white")
         }
         else {
-            return {
-                color: "black"
-            };
+            setTextColor("black")
         }
     };
     return (
         <Pressable
-            style={[personalStyles.filterTag, tagColor(), { style }]}
+            style={[personalStyles.filterTag, { backgroundColor: filterColor }]}
             onPress={() => (//if i put this in a seperate function it only calls snack instead of the one pressed,
-                setClicked(!clicked)
-            )}
+                setClicked(!clicked),
+                tagColor(), textColor())}
         >
-            <Text style={[personalStyles.TextSmaller, textColor()]}>{title}</Text>
+            <Text style={[personalStyles.TextSmaller, { color: filterTextColor }]}>{title}</Text>
 
         </Pressable>
     );

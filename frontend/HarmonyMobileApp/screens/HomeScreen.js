@@ -98,7 +98,7 @@ const HomeScreen = (props) => {
       {/* <StatusBar hidden={true} />
        */}
       <Header
-        statusBarProps={{ elevated: "true", backgroundColor: "white" }}
+        statusBarProps={{ elevated: "true", backgroundColor: "black" }}
         //   leftComponent={searchButton}
         placement="left"
         centerComponent={<ShowTitle />}

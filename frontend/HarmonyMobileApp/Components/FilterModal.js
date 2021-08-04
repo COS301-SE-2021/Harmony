@@ -24,37 +24,24 @@ export default function FilterModal({ color, title, ...otherProps }) {
   const [sortPairings, setSortPairings] = useState("Trending"); // the type of pairings shown filter
   const [locationValue, setLocationValue] = useState(30); //distance filer
   const [isModalVisible, setModalVisible] = useState(true); //for the filter popup
-
+  const [clearFilters, setClearFilters] = useState(false);
   const filters = {
     mealTypes: ["Breakfast", "Lunch", "Supper", "Snack", "Vegetarian", "Dairy-Free", "Nut-Free"],
-    foods: [
-      "Spicy",
-      "Savoury",
-      "Salty",
-      "Sweet",
-      "Sour",
-      "Hot",
-      "Warm",
-      "Cold",
-    ],
-    drinks: [
-      "Alcoholic",
-      "Non-Alcoholic",
-      "Fizzy",
-      "Sweet",
-      "Sour",
-      "Bitter",
-      "Hot",
-      "Warm",
-      "Cold",
-    ],
+    foods: ["Spicy", "Savoury", "Salty", "Sweet", "Sour", "Hot", "Warm", "Cold",],
+    drinks: ["Alcoholic", "Non-Alcoholic", "Fizzy", "Sweet", "Sour", "Bitter", "Hot", "Warm", "Cold",],
   };
 
   //toggles the modals visibility
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
-
+  const ClearAll = () => {
+    setClearFilters(true);
+    wait(2000).then(() => setClearFilters(false));
+  }
+  const wait = (timeout) => {
+    return new Promise((resolve) => setTimeout(resolve, timeout));
+  };
   return (
     <Modal
       isVisible={isModalVisible}
@@ -81,11 +68,7 @@ export default function FilterModal({ color, title, ...otherProps }) {
               style={[styles.closeButton]}
               onPress={() => setModalVisible(!isModalVisible)}
             >
-              <MaterialCommunityIcons
-                name="close-circle-outline"
-                size={30}
-                color="black"
-              />
+              <MaterialIcons name="close" size={30} color="black" />
             </TouchableOpacity>
           </View>
           <ScrollView style={personalStyles.scrollView}>
@@ -196,7 +179,7 @@ export default function FilterModal({ color, title, ...otherProps }) {
                     {/* Mapping of the tags from the JSON to the components*/}
                     {filters.mealTypes.map((tag, index) => (
                       <View key={index}>
-                        <FilterTag color="#FF6347" title={tag} />
+                        <FilterTag color="#FF6347" title={tag} cleared={clearFilters} />
                       </View>
                     ))}
                   </View>
@@ -228,7 +211,7 @@ export default function FilterModal({ color, title, ...otherProps }) {
                     {/* Mapping of the tags from the JSON to the components*/}
                     {filters.drinks.map((tag, index) => (
                       <View key={index}>
-                        <FilterTag color="#1FBFBA" title={tag} />
+                        <FilterTag color="#1FBFBA" title={tag} cleared={clearFilters} />
                       </View>
                     ))}
                   </View>
@@ -260,7 +243,7 @@ export default function FilterModal({ color, title, ...otherProps }) {
                     {/* Mapping of the tags from the JSON to the components*/}
                     {filters.foods.map((tag, index) => (
                       <View key={index}>
-                        <FilterTag color="#C41ED4" title={tag} />
+                        <FilterTag color="#C41ED4" title={tag} cleared={clearFilters} />
                       </View>
                     ))}
                   </View>
@@ -280,7 +263,7 @@ export default function FilterModal({ color, title, ...otherProps }) {
                   personalStyles.buttonText,
                 ]}
               >
-                Apply
+                Clear All
               </Text>
             </Pressable>
             <Pressable
@@ -293,7 +276,7 @@ export default function FilterModal({ color, title, ...otherProps }) {
                   personalStyles.buttonText,
                 ]}
               >
-                Clear All
+                Apply
               </Text>
             </Pressable>
           </View>
@@ -315,6 +298,7 @@ const personalStyles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     paddingBottom: "7%",
+    textAlign: "center"
   },
   headingContainer: {
     flexDirection: "row",
