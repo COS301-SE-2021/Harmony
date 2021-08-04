@@ -12,7 +12,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import * as Animatable from "react-native-animatable";
 import AppLoadingIcon from "../Components/AppLoadingIcon";
 
-export default function EditEmailScreen({ navigation }) {
+export default function EditAccountPasswordScreen({ navigation }) {
   const [isLoading, setLoading] = useState(false);
   const [isErrorAlertVisible, setErrorAlertVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
@@ -37,7 +37,7 @@ export default function EditEmailScreen({ navigation }) {
       // Add a Toast on screen.
       AppToast.ToastDisplay("Email sent");
 
-      navigation.navigate("Settings");
+      navigation.navigate("ConfirmSignUp");
     } catch (error) {
       //console.log(" Error signing up...", error);
       //setModalMessage must come before setErrorAlertVisible
@@ -51,6 +51,8 @@ export default function EditEmailScreen({ navigation }) {
       initialValues={{
         Username: "",
         Email: "",
+        Password: "",
+        ConfirmPassword: "",
       }}
       onSubmit={(values) => signUp(values)}
       onSubmit={async (values, { resetForm }) => {
@@ -68,10 +70,20 @@ export default function EditEmailScreen({ navigation }) {
           .max(20)
           .matches(/^\S*$/, "Username may not contain spaces") //Contains no spaces
           .required("Please, provide your Username!"),
-        Email: yup
+        Password: yup
           .string()
-          .email("Invalid email")
-          .required("Please, provide your Email!"),
+          .min(8)
+          .required("Please, provide your Password!"),
+
+        ConfirmPassword: yup
+          .string()
+          .when("Password", {
+            is: (val) => (val && val.length > 0 ? true : false),
+            then: yup
+              .string()
+              .oneOf([yup.ref("Password")], "Passwords do not match!"),
+          })
+          .required("Please, confirm your Password!"),
       })}
     >
       {({
@@ -112,19 +124,35 @@ export default function EditEmailScreen({ navigation }) {
                 </Text>
               )}
               <AppTextInput
-                value={values.Email}
-                onChangeText={handleChange("Email")}
-                onBlur={() => setFieldTouched("Email")}
-                leftIcon="email"
-                placeholder="Enter Email"
-                keyboardType="email-address"
-                textContentType="emailAddress"
-                error={errors.Email}
-                touched={touched.Email}
+                value={values.Password}
+                onChangeText={handleChange("Password")}
+                leftIcon="lock"
+                placeholder="Enter Password"
+                autoCorrect={false}
+                onBlur={() => setFieldTouched("Password")}
+                error={errors.Password}
+                touched={touched.Password}
+                type="Password"
               />
-              {touched.Email && errors.Email && (
+              {touched.Password && errors.Password && (
                 <Text style={{ fontSize: 12, color: "#FF0D10" }}>
-                  {errors.Email}
+                  {errors.Password}
+                </Text>
+              )}
+              <AppTextInput
+                value={values.ConfirmPassword}
+                onChangeText={handleChange("ConfirmPassword")}
+                leftIcon="lock"
+                placeholder="Confirm Password"
+                autoCorrect={false}
+                onBlur={() => setFieldTouched("ConfirmPassword")}
+                error={errors.ConfirmPassword}
+                touched={touched.ConfirmPassword}
+                type="Password"
+              />
+              {touched.ConfirmPassword && errors.ConfirmPassword && (
+                <Text style={{ fontSize: 12, color: "#FF0D10" }}>
+                  {errors.ConfirmPassword}
                 </Text>
               )}
               <AppButton

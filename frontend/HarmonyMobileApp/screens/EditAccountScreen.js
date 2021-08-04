@@ -29,9 +29,7 @@ export default function EditAccountScreen({ navigation }) {
           <RightIcon />
         </View>
       </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => navigation.navigate("Edit Account Details")}
-      >
+      <TouchableOpacity onPress={() => navigation.navigate("Edit Password")}>
         <View style={styles.list}>
           <View>
             <Text style={[styles.listText, styles.placeholderText]}>
