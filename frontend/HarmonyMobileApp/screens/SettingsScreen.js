@@ -6,8 +6,8 @@ import { AppToast } from "../Components/AppToast";
 export default function SettingsScreen({ navigation, updateAuthState }) {
   async function signOut() {
     try {
-      await Auth.signOut();
-      updateAuthState("loggedOut");
+      // await Auth.signOut();
+      // updateAuthState("loggedOut");
       AppToast.ToastDisplay("Signed out");
       console.log("Success, Signed out");
     } catch (error) {
