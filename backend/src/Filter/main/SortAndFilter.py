@@ -4,6 +4,9 @@ from boto3.dynamodb.conditions import Key
 from datetime import date, timedelta, datetime
 from datetime import time
 from datetime import datetime
+import geopy
+from geopy import distance
+from geopy.geocoders import Nominatim
 
 table_name = 'Pairings'
 User_table = 'Users'
@@ -45,6 +48,8 @@ def sort_and_filter(event, context):
         sortedResponse = sortbytrending(response)
     elif event['Sort'] == 'Controversial':
         sortedResponse = sortbycontroversial(response)
+    elif event['Sort'] == 'Distance':
+        sortedResponse = sortbydistance(response, event['Coordinates'][0], event['Coordinates'][1])
 
     sortedResponse = add_userdata(sortedResponse, userResponse)
 
@@ -82,7 +87,7 @@ def sortbynew(response):
     #     IndexName='UID-DateAdded-index',
     #     KeyConditionExpression=Key('UID').eq('u9') & Key('DateAdded').gt(query_string)
     # )
-    sortedresponse = sorted(response, key= lambda x: datetime.strptime(x['DateAdded'], '%Y-%m-%d'), reverse=True)
+    sortedresponse = sorted(response, key=lambda x: datetime.strptime(x['DateAdded'], '%Y-%m-%d'), reverse=True)
     return sortedresponse
 
 
@@ -105,6 +110,20 @@ def sortbytrending(response):
         i['TotalVotes'] = totalvotes
     # Sort response by total votes in decending order(Trending)
     sortedResponse = sorted(response, key=totalvotes_function, reverse=True)
+    return sortedResponse
+
+
+def sortbydistance(response, latitude, longitude):
+    # must be called for geolocation to work
+    geoLoc = Nominatim(user_agent="GetLoc")
+
+    for i in response:
+        # calculating distance between pairs and the user
+        calcdist = distance.distance((i['Coordinates'][0], i['Coordinates'][1]), (latitude, longitude)).kilometers
+        i['Distance'] = calcdist
+
+    # sort by distance in descending order
+    sortedResponse = sorted(response, key=dist_func)
     return sortedResponse
 
 
@@ -200,6 +219,11 @@ def totalvotes_function(value):
 # this functions returns the json value we will want to sort by
 def downvotes_function(value):
     return value["Downvotes"]
+
+
+# this functions returns the json value we will want to sort by
+def dist_func(value):
+    return value["Distance"]
 
 
 def get_user_response(uid):
