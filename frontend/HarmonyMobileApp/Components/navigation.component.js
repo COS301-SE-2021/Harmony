@@ -28,6 +28,7 @@ import ForgotPassword from "../screens/ForgotPasswordScreen";
 import ConfirmForgotPassword from "../screens/ConfirmForgotPasswordScreen";
 
 import EditAccountScreen from "../screens/EditAccountScreen";
+import EditEmailScreen from "../screens/EditEmailScreen";
 
 Amplify.configure(config);
 
@@ -113,6 +114,7 @@ const SettingsNavigator = (props) => (
       name="Edit Account Details"
       component={EditAccountScreen}
     />
+    <SettingsStack.Screen name="Edit Email" component={EditEmailScreen} />
   </SettingsStack.Navigator>
 );
 
