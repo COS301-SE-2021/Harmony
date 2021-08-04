@@ -1,7 +1,7 @@
 import json
 import boto3
 from boto3.dynamodb.conditions import Key
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime
 from datetime import time
 from datetime import datetime
 
@@ -38,7 +38,7 @@ def sort_and_filter(event, context):
 
     # check json passed in to see what sort to do for the response
     if event['Sort'] == 'New':
-        sortedResponse = sortbynew()
+        sortedResponse = sortbynew(response)
     elif event['Sort'] == 'Best':
         sortedResponse = sortbybest(response)
     elif event['Sort'] == 'Trending':
@@ -57,32 +57,32 @@ def sort_and_filter(event, context):
     }
 
 
-def sortbynew():
-    # set the number of days we want to subract for the new filter
-    td = timedelta(7)
-
-    # get today's date
-    today = date.today()
-
-    # get the filter date by subtracting the td from today's date
-    filter_date = today - td
-
-    # retrieve the data of the filter date
-    day = filter_date.day
-    month = filter_date.month
-    year = filter_date.year
-
-    # build query string for formatting purposes
-    if month == 10 or 11 or 12:
-        query_string = str(year) + "-" + str(month) + "-" + str(day)
-    else:
-        query_string = str(year) + "-0" + str(month) + "-" + str(day)
-
-    sortedresponse = table.query(
-        IndexName='UID-DateAdded-index',
-        KeyConditionExpression=Key('UID').eq('u9') & Key('DateAdded').gt(query_string)
-    )
-
+def sortbynew(response):
+    # # set the number of days we want to subract for the new filter
+    # td = timedelta(7)
+    #
+    # # get today's date
+    # today = date.today()
+    #
+    # # get the filter date by subtracting the td from today's date
+    # filter_date = today - td
+    #
+    # # retrieve the data of the filter date
+    # day = filter_date.day
+    # month = filter_date.month
+    # year = filter_date.year
+    #
+    # # build query string for formatting purposes
+    # if month == 10 or 11 or 12:
+    #     query_string = str(year) + "-" + str(month) + "-" + str(day)
+    # else:
+    #     query_string = str(year) + "-0" + str(month) + "-" + str(day)
+    #
+    # sortedresponse = table.query(
+    #     IndexName='UID-DateAdded-index',
+    #     KeyConditionExpression=Key('UID').eq('u9') & Key('DateAdded').gt(query_string)
+    # )
+    sortedresponse = sorted(response, key= lambda x: datetime.strptime(x['DateAdded'], '%Y-%m-%d'), reverse=True)
     return sortedresponse
 
 
