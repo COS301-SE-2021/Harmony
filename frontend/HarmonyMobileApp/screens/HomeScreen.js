@@ -19,8 +19,9 @@ import {
 } from "@ui-kitten/components";
 import { useIsFocused } from "@react-navigation/native";
 import { Header } from "react-native-elements";
-import { Location } from "expo";
-import * as Permissions from 'expo-permissions';
+import * as Location from 'expo-location';
+// import { Location } from "expo";
+// import * as Permissions from 'expo-permissions';
 import FilterModal from "../Components/FilterModal";
 import Card from "../Components/Card"
 
@@ -69,9 +70,11 @@ const HomeScreen = (props) => {
   );
 
   const GetLocation = async () => {
-    const { status } = await Permissions.askAsync(Permissions.LOCATION);
+    const { status } = await Location.requestForegroundPermissionsAsync();
     //status is response from permission
     console.log(status);
+    const location = await Location.getCurrentPositionAsync({});
+    console.log(location);
   }
   // const GetLocation = () => {
   //   console.log("Test");
