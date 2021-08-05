@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -6,7 +6,20 @@ import {
   TouchableOpacity,
   StatusBar,
 } from "react-native";
+import { Auth } from "aws-amplify";
+
 export default function EditAccountScreen({ navigation }) {
+  const [user, setUser] = useState("");
+  const [email, setEmail] = useState("");
+  useEffect(() => {
+    Auth.currentAuthenticatedUser({}) //Get user information
+      .then((data) => {
+        setUser(data.username);
+        setEmail(data.attributes.email);
+      })
+      .catch((err) => console.log(err));
+  }, []); // Pass empty array to only run once on mount.
+
   const RightIcon = () => <Text style={styles.rightIcon}>EDIT</Text>;
   return (
     <View style={styles.container}>
@@ -17,14 +30,14 @@ export default function EditAccountScreen({ navigation }) {
           <Text style={[styles.listText, styles.placeholderText]}>
             Username
           </Text>
-          <Text style={styles.listText}>Example1234</Text>
+          <Text style={styles.listText}>{user}</Text>
         </View>
       </View>
       <TouchableOpacity onPress={() => navigation.navigate("Edit Email")}>
         <View style={styles.list}>
           <View>
             <Text style={[styles.listText, styles.placeholderText]}>Email</Text>
-            <Text style={styles.listText}>example@gmail.com</Text>
+            <Text style={styles.listText}>{email}</Text>
           </View>
           <RightIcon />
         </View>
