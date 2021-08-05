@@ -20,6 +20,9 @@ import { Text } from "@ui-kitten/components";
 import { Slider } from "react-native-elements";
 import FilterTag from "./FilterTag";
 import { Picker } from "@react-native-picker/picker";
+import { createStore } from "redux";
+
+
 export default function FilterModal({ color, title, ...otherProps }) {
   const [sortPairings, setSortPairings] = useState("Trending"); // the type of pairings shown filter
   const [locationValue, setLocationValue] = useState(30); //distance filer

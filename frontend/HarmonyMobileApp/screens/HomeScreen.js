@@ -20,8 +20,9 @@ import {
 import { useIsFocused } from "@react-navigation/native";
 import { Header } from "react-native-elements";
 import * as Location from 'expo-location';
-// import { Location } from "expo";
-// import * as Permissions from 'expo-permissions';
+
+import { createStore } from "redux";
+
 import FilterModal from "../Components/FilterModal";
 import Card from "../Components/Card"
 
@@ -41,6 +42,43 @@ const HomeScreen = (props) => {
   const [refreshing, setRefreshing] = React.useState(false);
 
   const [userLocation, setUserLocation] = useState({ lat: null, lng: null });
+
+  //reducer -method that takes the actions and changes the state
+  //parameters are passed with redux
+  const reducer = (state, action) => {
+    switch (action.type) {
+      //handles all the actions
+      case "ADD":
+        state = state + action.payload;
+        break;
+      case "SUBTRACT":
+        state = state - action.payload;
+
+        break;
+    }
+    return state;
+  };
+  //takes 2 params, a reducer and an initial state[can be an object, array etc]
+  const store = createStore(reducer, 1);
+
+  //subscribes get triggered when the store is updated
+  store.subscribe(() => {
+    console.log("Store updated ", store.getState());
+  });
+
+  //dispatch this javascript object to the reducer, triggers the actions
+  store.dispatch({
+    type: "ADD",
+    //payload is the standard adopted name for the state value
+    payload: 10
+  });
+
+  store.dispatch({
+    type: "SUBTRACT",
+    //payload is the standard adopted name for the state value
+    payload: 50
+  });
+
 
   //the refreshing of the flatlist
   const onRefresh = React.useCallback(() => {
@@ -72,6 +110,7 @@ const HomeScreen = (props) => {
     //status is response from permission
     const { status } = await Location.requestForegroundPermissionsAsync();
     const location = await Location.getCurrentPositionAsync({});
+    // const location = await Location.watchPositionAsync({timeInterval:2000},{});
     setUserLocation({ lat: location.coords.latitude, lng: location.coords.longitude });
     console.log("user location: " + userLocation.lat + ' ' + userLocation.lng);
   }

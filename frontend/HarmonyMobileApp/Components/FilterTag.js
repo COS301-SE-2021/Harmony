@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     StyleSheet,
     Pressable,
@@ -8,14 +8,25 @@ import { Text } from '@ui-kitten/components';
 export default function FilterTag({ color, title, style, cleared, ...otherProps }) {
     const [filterColor, setFilterColor] = useState("#F3F2F2");
     const [filterTextColor, setTextColor] = useState("black");
+    const [clicked, setClicked] = useState();
 
+    //use effect is a hook that detects when a variable is changed and will act when its changed
+    useEffect(() => {
+        console.log("color changed " + filterColor);
+    }, [filterColor]);
 
     const tagColor = () => {
-        if (filterColor == "#F3F2F2") {
-            setFilterColor(color);
+        if (clicked == true) {
+            if (filterColor == "#F3F2F2") {
+                setFilterColor(color);
+            }
+            else {
+                setFilterColor("#F3F2F2");
+            }
         }
         else {
             setFilterColor("#F3F2F2");
+
         }
     };
     const textColor = () => {
@@ -30,12 +41,15 @@ export default function FilterTag({ color, title, style, cleared, ...otherProps 
         <Pressable
             style={[personalStyles.filterTag, { backgroundColor: filterColor }]}
             onPress={() => (//if i put this in a seperate function it only calls snack instead of the one pressed,
+                console.log("was pressed"),
+                setClicked(true),
                 tagColor(),
-                textColor())}
+                textColor())
+            }
         >
             <Text style={[personalStyles.TextSmaller, { color: filterTextColor }]}>{title}</Text>
 
-        </Pressable>
+        </Pressable >
     );
 };
 
