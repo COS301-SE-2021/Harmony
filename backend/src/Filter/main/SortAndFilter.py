@@ -49,7 +49,8 @@ def sort_and_filter(event, context):
     elif event['Sort'] == 'Controversial':
         sortedResponse = sortbycontroversial(response)
     elif event['Sort'] == 'Distance':
-        sortedResponse = sortbydistance(response, event['Coordinates'][0], event['Coordinates'][1])
+        sortedResponse = sortbydistance(response, event['Coordinates'][0], event['Coordinates'][1],
+                                        event['Filt_distance'])
 
     sortedResponse = add_userdata(sortedResponse, userResponse)
 
@@ -66,6 +67,7 @@ def sortbynew(response):
     # this function sorts the dateadded from new to old
     sortedresponse = sorted(response, key=lambda x: datetime.strptime(x['DateAdded'], '%Y-%m-%d'), reverse=True)
     return sortedresponse
+
 
 def range_of_days(response):
     """The following function filters any paiings response within a range of 30days"""
@@ -109,14 +111,26 @@ def sortbytrending(response):
     return sortedResponse
 
 
-def sortbydistance(response, latitude, longitude):
+def sortbydistance(response, latitude, longitude, filterdist):
     # must be called for geolocation to work
     geoLoc = Nominatim(user_agent="GetLoc")
 
+    counter = 0
     for i in response:
         # calculating distance between pairs and the user
         calcdist = distance.distance((i['Coordinates'][0], i['Coordinates'][1]), (latitude, longitude)).kilometers
-        i['Distance'] = round(calcdist, 2)
+        i['Distance'] = round(calcdist)
+
+    # first loop ensures "Distance" is added to response
+    # second loop to delete the distances greater than the filter
+    for i in range(len(response)):
+        # get calculated distance between pairs and the user
+        calcdist = response[counter]['Distance']
+
+        if filterdist < calcdist:
+            del response[counter]
+        else:
+            counter = counter + 1
 
     # sort by distance in descending order
     sortedResponse = sorted(response, key=dist_func)
