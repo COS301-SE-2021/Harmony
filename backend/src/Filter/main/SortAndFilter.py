@@ -21,12 +21,13 @@ usertable = client.Table(User_table)
  event format:
  {
     "UID" : "username",
-    "Location" : "coordinates",
     "Sort" : "typeOfSort",
-    "MealTag" : "Tag",
+    "MealTag" : ["Tags",...,...,...],
     "FoodTags" : ["Tags",...,...,...],
     "DrinkTags" : ["Tags",...,...,...],
-    "Distance" : "XXm"
+    "Distance" : xxx,
+    "Longitude" : xxx,
+    "Latitude" : xxx
 
  }"""
 
@@ -38,7 +39,7 @@ def sort_and_filter(event, context):
     allresponse = table.scan()
     # edit the response to only show items
     response = allresponse['Items']
-
+    response = add_distances(response, event['Longitude'], event['Latitude'])
     # check json passed in to see what sort to do for the response
     if event['Sort'] == 'New':
         sortedResponse = sortbynew(response)
@@ -49,13 +50,15 @@ def sort_and_filter(event, context):
     elif event['Sort'] == 'Controversial':
         sortedResponse = sortbycontroversial(response)
     elif event['Sort'] == 'Distance':
-        sortedResponse = sortbydistance(response, event['Coordinates'][0], event['Coordinates'][1],
-                                        event['Filt_distance'])
+        sortedResponse = sortbydistance(response)
 
     sortedResponse = add_userdata(sortedResponse, userResponse)
-
     "Now after the response has been sorted, we will filter the sortedResponse"
     sortedResponse = filtertags(sortedResponse, event)
+
+    range = event['Distance']
+    if range is not None:
+        sortedResponse = filter_by_range(response,event['Distance'])
     return {
         # returns all items stored in response
         "StatusCode": 200,
@@ -111,27 +114,7 @@ def sortbytrending(response):
     return sortedResponse
 
 
-def sortbydistance(response, latitude, longitude, filterdist):
-    # must be called for geolocation to work
-    geoLoc = Nominatim(user_agent="GetLoc")
-
-    counter = 0
-    for i in response:
-        # calculating distance between pairs and the user
-        calcdist = distance.distance((i['Coordinates'][0], i['Coordinates'][1]), (latitude, longitude)).kilometers
-        i['Distance'] = round(calcdist)
-
-    # first loop ensures "Distance" is added to response
-    # second loop to delete the distances greater than the filter
-    for i in range(len(response)):
-        # get calculated distance between pairs and the user
-        calcdist = response[counter]['Distance']
-
-        if filterdist < calcdist:
-            del response[counter]
-        else:
-            counter = counter + 1
-
+def sortbydistance(response):
     # sort by distance in descending order
     sortedResponse = sorted(response, key=dist_func)
     return sortedResponse
@@ -212,10 +195,6 @@ def filtertags(sortedResponse, event):
     return sortedResponse
 
 
-def filterdistance(a):
-    return 0
-
-
 # this functions returns the json value we will want to sort by
 def upvotes_function(value):
     return value["Upvotes"]
@@ -276,3 +255,32 @@ def add_userdata(pairingresponse, user_response):
                 i['isDownvoted'] = "True"
 
     return pairingresponse
+
+
+def add_distances(response, latitude, longitude):
+    # must be called for geolocation to work
+    geoLoc = Nominatim(user_agent="GetLoc")
+
+    for i in response:
+        # calculating distance between pairs and the user
+        calcdist = distance.distance((i['Coordinates'][0], i['Coordinates'][1]), (latitude, longitude)).kilometers
+        i['Distance'] = round(calcdist)
+
+    return response
+
+
+def filter_by_range(response, filterdist):
+    counter = 0
+
+    # first loop ensures "Distance" is added to response
+    # second loop to delete the distances greater than the filter
+    for i in range(len(response)):
+        # get calculated distance between pairs and the user
+        calcdist = response[counter]['Distance']
+
+        if filterdist < calcdist:
+            del response[counter]
+        else:
+            counter = counter + 1
+
+    return response
