@@ -33,9 +33,7 @@ export default function EditEmailScreen({ navigation }) {
       // Add a Toast on screen.
       AppToast.ToastDisplay("Email sent");
 
-      navigation.navigate("Confirm Edit Email", {
-        email: values.Email,
-      });
+      navigation.navigate("Confirm Edit Email");
     } catch (error) {
       //setModalMessage must come before setErrorAlertVisible
       setModalMessage(error.message);
@@ -98,7 +96,7 @@ export default function EditEmailScreen({ navigation }) {
                 </Text>
               )}
               <AppButton
-                title="Save"
+                title="Verify new email"
                 disabled={!isValid}
                 onPress={handleSubmit}
               />
