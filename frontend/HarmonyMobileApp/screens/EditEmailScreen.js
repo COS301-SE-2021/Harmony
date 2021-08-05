@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, StatusBar } from "react-native";
 import * as yup from "yup";
 import { Formik } from "formik";
@@ -16,30 +16,27 @@ export default function EditEmailScreen({ navigation }) {
   const [isLoading, setLoading] = useState(false);
   const [isErrorAlertVisible, setErrorAlertVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
-  async function signUp(values) {
+
+  async function editEmail(values) {
     try {
       setLoading(true);
       setErrorAlertVisible(false);
 
-      const { user } = await Auth.signUp({
-        username: values.Username,
-        password: values.Password,
-        attributes: { email: values.Email },
+      const user = await Auth.currentAuthenticatedUser();
+      const result = await Auth.updateUserAttributes(user, {
+        email: values.Email,
       });
+      console.log(result);
+
       setLoading(false);
 
-      // console.log(values.Username);
-      // console.log(values.Password);
-      // console.log(values.Email);
-      // console.log(user); //Output all user data
-
-      //console.log("Sign-up Confirmed");
       // Add a Toast on screen.
       AppToast.ToastDisplay("Email sent");
 
-      navigation.navigate("Settings");
+      navigation.navigate("Confirm Edit Email", {
+        email: values.Email,
+      });
     } catch (error) {
-      //console.log(" Error signing up...", error);
       //setModalMessage must come before setErrorAlertVisible
       setModalMessage(error.message);
       setErrorAlertVisible(true);
@@ -52,22 +49,12 @@ export default function EditEmailScreen({ navigation }) {
         Username: "",
         Email: "",
       }}
-      onSubmit={(values) => signUp(values)}
       onSubmit={async (values, { resetForm }) => {
-        //Form must be reset before signUp is called
-        //This is because signUp will lead to navigating the user to the homeScreen
-        //Then try to update the form
-        //but because the signUp screen will be unmounted react native wont know what to do
+        //Form must be reset before editEmail is called
         resetForm();
-        await signUp(values);
+        await editEmail(values);
       }}
       validationSchema={yup.object().shape({
-        Username: yup
-          .string()
-          .min(2)
-          .max(20)
-          .matches(/^\S*$/, "Username may not contain spaces") //Contains no spaces
-          .required("Please, provide your Username!"),
         Email: yup
           .string()
           .email("Invalid email")
@@ -95,28 +82,11 @@ export default function EditEmailScreen({ navigation }) {
               style={styles.body}
             >
               <AppTextInput
-                value={values.Username}
-                onChangeText={handleChange("Username")}
-                onBlur={() => setFieldTouched("Username")}
-                leftIcon="account"
-                placeholder="Enter Username"
-                keyboardType="email-address"
-                textContentType="emailAddress"
-                error={errors.Username}
-                touched={touched.Username}
-              />
-              {/* If the user has clicked on the input field and it is not valid */}
-              {touched.Username && errors.Username && (
-                <Text style={{ fontSize: 12, color: "#FF0D10" }}>
-                  {errors.Username}
-                </Text>
-              )}
-              <AppTextInput
                 value={values.Email}
                 onChangeText={handleChange("Email")}
                 onBlur={() => setFieldTouched("Email")}
                 leftIcon="email"
-                placeholder="Enter Email"
+                placeholder="Enter new email"
                 keyboardType="email-address"
                 textContentType="emailAddress"
                 error={errors.Email}

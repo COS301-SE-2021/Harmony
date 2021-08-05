@@ -9,7 +9,7 @@ import {
 import { Auth } from "aws-amplify";
 
 export default function EditAccountScreen({ navigation }) {
-  const [user, setUser] = useState("");
+  const [username, setUser] = useState("");
   const [email, setEmail] = useState("");
   useEffect(() => {
     Auth.currentAuthenticatedUser({}) //Get user information
@@ -30,7 +30,7 @@ export default function EditAccountScreen({ navigation }) {
           <Text style={[styles.listText, styles.placeholderText]}>
             Username
           </Text>
-          <Text style={styles.listText}>{user}</Text>
+          <Text style={styles.listText}>{username}</Text>
         </View>
       </View>
       <TouchableOpacity onPress={() => navigation.navigate("Edit Email")}>
