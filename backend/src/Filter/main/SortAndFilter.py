@@ -79,6 +79,7 @@ def range_of_days(response):
         date = datetime.strptime(response[counter]['DateAdded'], '%Y-%m-%d')
         if date >= d:
             counter = counter + 1
+
         else:
             del response[counter]
     # returns adjusted response with only items within time range
@@ -115,7 +116,7 @@ def sortbydistance(response, latitude, longitude):
     for i in response:
         # calculating distance between pairs and the user
         calcdist = distance.distance((i['Coordinates'][0], i['Coordinates'][1]), (latitude, longitude)).kilometers
-        i['Distance'] = calcdist
+        i['Distance'] = round(calcdist, 2)
 
     # sort by distance in descending order
     sortedResponse = sorted(response, key=dist_func)
