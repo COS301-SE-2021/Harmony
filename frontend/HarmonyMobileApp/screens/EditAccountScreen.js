@@ -5,10 +5,19 @@ import {
   StyleSheet,
   TouchableOpacity,
   StatusBar,
+  Alert,
 } from "react-native";
+import { AppToast } from "../Components/AppToast";
+import AppAlert from "../Components/AppAlert";
+import AppLoadingIcon from "../Components/AppLoadingIcon";
 import { Auth } from "aws-amplify";
+import { AntDesign } from "@expo/vector-icons";
 
 export default function EditAccountScreen({ navigation }) {
+  const [isLoading, setLoading] = useState(false);
+  const [isErrorAlertVisible, setErrorAlertVisible] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+
   const [username, setUser] = useState("");
   const [email, setEmail] = useState("");
   useEffect(() => {
@@ -20,7 +29,53 @@ export default function EditAccountScreen({ navigation }) {
       .catch((err) => console.log(err));
   }, []); // Pass empty array to only run once on mount.
 
-  const RightIcon = () => <Text style={styles.rightIcon}>EDIT</Text>;
+  const RightIcon = ({ iconName }) => {
+    if (!iconName) {
+      return <Text style={styles.rightIconText}>EDIT</Text>;
+    } else if (iconName) {
+      return (
+        // <Text style={[styles.rightIcon, { color: "red" }]}>{iconName}</Text>
+        <AntDesign style={[styles.rightIcon]} name="delete" size={28} />
+      );
+    }
+  };
+
+  async function DeleteUser() {
+    try {
+      setLoading(true);
+      setErrorAlertVisible(false);
+
+      const user = await Auth.currentAuthenticatedUser();
+      // let result = await Auth.deleteUser(user);//Does not exist?
+      console.log(result); // SUCCESS
+
+      setLoading(false);
+
+      // Add a Toast on screen.
+      AppToast.ToastDisplay("Account deleted");
+
+      // navigation.navigate("Confirm Edit Email");
+    } catch (error) {
+      //setModalMessage must come before setErrorAlertVisible
+      console.log(error);
+      setModalMessage(error.message);
+      setErrorAlertVisible(true);
+      setLoading(false);
+    }
+  }
+
+  const deleteAccountAlert = () =>
+    Alert.alert(
+      "Delete account",
+      "Are you sure you want to delete your account?",
+      [
+        {
+          text: "Cancel",
+        },
+        { text: "Confirm", onPress: () => DeleteUser() },
+      ]
+    );
+
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
@@ -53,6 +108,16 @@ export default function EditAccountScreen({ navigation }) {
           <RightIcon />
         </View>
       </TouchableOpacity>
+      <TouchableOpacity onPress={deleteAccountAlert}>
+        <View style={styles.list}>
+          <View>
+            <Text style={[styles.listText, { color: "red" }]}>
+              Delete account
+            </Text>
+          </View>
+          <RightIcon iconName="DELETE" />
+        </View>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -76,7 +141,7 @@ const styles = StyleSheet.create({
     color: "#888",
     marginBottom: 10,
   },
-  rightIcon: {
+  rightIconText: {
     flex: 1,
     justifyContent: "flex-end",
     position: "absolute",
@@ -84,5 +149,13 @@ const styles = StyleSheet.create({
     top: "75%",
     fontSize: 18,
     color: "#118AB2",
+  },
+  rightIcon: {
+    flex: 1,
+    justifyContent: "flex-end",
+    position: "absolute",
+    right: "10%",
+    top: "75%",
+    color: "red",
   },
 });
