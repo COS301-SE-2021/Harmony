@@ -55,7 +55,6 @@ export default function SignUp({ navigation }) {
         Password: "",
         ConfirmPassword: "",
       }}
-      onSubmit={(values) => signUp(values)}
       onSubmit={async (values, { resetForm }) => {
         //Form must be reset before signUp is called
         //This is because signUp will lead to navigating the user to the homeScreen
