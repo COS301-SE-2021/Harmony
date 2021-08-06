@@ -37,7 +37,7 @@ export default function ConfirmEditEmailScreen({ navigation }) {
       // Add a Toast on screen.
       AppToast.ToastDisplay("Email changed");
 
-      navigation.navigate("Edit Account Details");
+      navigation.navigate("Edit Account Details", { refresh: true });
     } catch (error) {
       //setModalMessage must come before setErrorAlertVisible
       setModalMessage(error.message);

@@ -13,13 +13,14 @@ import AppLoadingIcon from "../Components/AppLoadingIcon";
 import { Auth } from "aws-amplify";
 import { AntDesign } from "@expo/vector-icons";
 
-export default function EditAccountScreen({ navigation }) {
+export default function EditAccountScreen({ navigation, route }) {
   const [isLoading, setLoading] = useState(false);
   const [isErrorAlertVisible, setErrorAlertVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
 
   const [username, setUser] = useState("");
   const [email, setEmail] = useState("");
+
   useEffect(() => {
     Auth.currentAuthenticatedUser({}) //Get user information
       .then((data) => {
@@ -27,16 +28,13 @@ export default function EditAccountScreen({ navigation }) {
         setEmail(data.attributes.email);
       })
       .catch((err) => console.log(err));
-  }, []); // Pass empty array to only run once on mount.
+  });
 
   const RightIcon = ({ iconName }) => {
     if (!iconName) {
       return <Text style={styles.rightIconText}>EDIT</Text>;
     } else if (iconName) {
-      return (
-        // <Text style={[styles.rightIcon, { color: "red" }]}>{iconName}</Text>
-        <AntDesign style={[styles.rightIcon]} name="delete" size={28} />
-      );
+      return <AntDesign style={[styles.rightIcon]} name="delete" size={28} />;
     }
   };
 
@@ -108,7 +106,7 @@ export default function EditAccountScreen({ navigation }) {
           <RightIcon />
         </View>
       </TouchableOpacity>
-      <TouchableOpacity onPress={deleteAccountAlert}>
+      {/* <TouchableOpacity onPress={deleteAccountAlert}>
         <View style={styles.list}>
           <View>
             <Text style={[styles.listText, { color: "red" }]}>
@@ -117,7 +115,7 @@ export default function EditAccountScreen({ navigation }) {
           </View>
           <RightIcon iconName="DELETE" />
         </View>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 }
