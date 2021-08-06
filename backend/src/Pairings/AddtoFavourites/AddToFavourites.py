@@ -45,7 +45,7 @@ def add_to_favourites(event, context):
         else:
             raise
     else:
-        return json.dumps({'isSuccessful': 'true', 'PID': pid})
+        return json.dumps({'StatusCode': 200, 'PID': pid})
 
 
 def validate_event(uid, pid):
