@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -10,16 +10,27 @@ import {
 } from "react-native";
 import { Auth } from "aws-amplify";
 import { AppToast } from "../Components/AppToast";
+import AppLoadingIcon from "../Components/AppLoadingIcon";
+import AppAlert from "../Components/AppAlert";
 import { Entypo, AntDesign } from "@expo/vector-icons";
 export default function SettingsScreen({ navigation, updateAuthState }) {
+  const [isLoading, setLoading] = useState(false);
+  const [isErrorAlertVisible, setErrorAlertVisible] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
   async function signOut() {
     try {
+      setLoading(true);
+      setErrorAlertVisible(false);
       await Auth.signOut();
-      updateAuthState("loggedOut");
+      setLoading(false);
       AppToast.ToastDisplay("Signed out");
       console.log("Success, Signed out");
+      updateAuthState("loggedOut");
     } catch (error) {
-      console.log("Error signing out: ", updateAuthState);
+      //setModalMessage must come before setErrorAlertVisible
+      setModalMessage(error.message);
+      setErrorAlertVisible(true);
+      setLoading(false);
     }
   }
 
@@ -73,6 +84,10 @@ export default function SettingsScreen({ navigation, updateAuthState }) {
           />
         </View>
       </TouchableOpacity>
+      {isErrorAlertVisible === true && (
+        <AppAlert visible={true} message={modalMessage} type={"Error"} />
+      )}
+      {isLoading === true && <AppLoadingIcon />}
     </View>
   );
 }
