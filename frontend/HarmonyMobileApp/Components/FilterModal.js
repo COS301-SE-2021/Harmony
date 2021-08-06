@@ -39,21 +39,19 @@ export default function FilterModal({ color, title, ...otherProps }) {
     console.log("Store updated in modal", ReduxStore.getState());
   });
 
-  //dispatch this javascript object to the reducer, triggers the actions
-  // ReduxStore.dispatch({
-  //   type: "NEW",
-  //   //payload is the standard adopted name for the state value
-  //   payload: 2
-  // });
-
   //toggles the modals visibility
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
   const ClearAll = () => {
-    setClearFilters(true);
-    wait(2000).then(() => setClearFilters(false));
-  }
+    ReduxStore.dispatch({
+      type: "CLEAR",
+      //payload is the standard adopted name for the state value
+      payload: {}
+    });
+    setModalVisible(!isModalVisible);
+
+  };
   const wait = (timeout) => {
     return new Promise((resolve) => setTimeout(resolve, timeout));
   };
@@ -270,7 +268,7 @@ export default function FilterModal({ color, title, ...otherProps }) {
           <View style={styles.flexRow}>
             <Pressable
               style={[styles.applyButton]}
-              onPress={() => setModalVisible(!isModalVisible)}
+              onPress={() => ClearAll()}
             >
               <Text
                 style={[

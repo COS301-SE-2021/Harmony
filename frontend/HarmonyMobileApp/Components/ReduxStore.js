@@ -1,12 +1,7 @@
 import { createStore } from 'redux';
 
 const initialState = {
-    result: 1,
     Checked: [],
-    // mealTypes: [{ "Breakfast": { "backgroundColor": "#F3F2F2", "textColor": "black" } },
-    // { "Lunch": { "backgroundColor": "#F3F2F2", "textColor": "black" } }, { "Supper": { "backgroundColor": "#F3F2F2", "textColor": "black" } }, { "Snack": { "backgroundColor": "#F3F2F2", "textColor": "black" } }, { "Vegetarian": { "backgroundColor": "#F3F2F2", "textColor": "black" } }, { "Dairy-Free": { "backgroundColor": "#F3F2F2", "textColor": "black" } }, { "Nut-Free": { "backgroundColor": "#F3F2F2", "textColor": "black" } }],
-    // foods: [{ "Spicy": "#F3F2F2" }, { "Savoury": "#F3F2F2" }, { "Salty": "#F3F2F2" }, { "Sweet": "#F3F2F2" }, { "Sour": "#F3F2F2" }, { "Hot": "#F3F2F2" }, { "Warm": "#F3F2F2" }, { "Cold": "#F3F2F2" }],
-    // drinks: [{ "Alcoholic": "#F3F2F2" }, { "Non-Alcoholic": "#F3F2F2" }, { "Fizzy": "#F3F2F2" }, { "Sweet": "#F3F2F2" }, { "Sour": "#F3F2F2" }, { "Bitter": "#F3F2F2" }, { "Hot": "#F3F2F2" }, { "Warm": "#F3F2F2" }, { "Cold": "#F3F2F2" },],
 };
 
 //reducer -method that takes the actions and changes the state
@@ -23,6 +18,9 @@ const reducer = (state = initialState, action) => {
                     state.Checked.splice(i, i)
                 }
             }
+            break;
+        case "CLEAR":
+            state.Checked = [];
             break;
     }
     return state;
