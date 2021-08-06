@@ -16,12 +16,6 @@ Resources:
       CodeUri: ViewPairings/
       Handler: ViewPairings.View_Pairings
       Runtime: python3.8
-      Events:
-        ViewPairings:
-          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
-          Properties:
-            Path: /
-            Method: post
 
   VotingFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
@@ -29,9 +23,3 @@ Resources:
       CodeUri: ViewPairings/
       Handler: Voting.vote
       Runtime: python3.8
-      Events:
-        Vote:
-          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
-          Properties:
-            Path: /
-            Method: post
