@@ -32,6 +32,8 @@ import EditEmailScreen from "../screens/EditEmailScreen";
 import ConfirmEditEmailScreen from "../screens/ConfirmEditEmailScreen";
 import EditAccountPassword from "../screens/EditAccountPasswordScreen";
 
+import { TransitionSpecs, TransitionPresets } from "@react-navigation/stack";
+
 Amplify.configure(config);
 
 const { Navigator, Screen } = createBottomTabNavigator();
@@ -101,6 +103,7 @@ const SettingsNavigator = (props) => (
       headerTitleContainerStyle: {
         left: 0, // Needed else the header will be offset towards the right when theres a back button
       },
+      ...TransitionPresets.SlideFromRightIOS,
     }}
     initialRouteName="SettingsStack"
   >

@@ -86,42 +86,36 @@ export default function EditEmailScreen({ navigation }) {
         <KeyboardAwareScrollView
           contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
         >
-          <View style={styles.container}>
+          <View style={[styles.container, styles.body]}>
             <StatusBar style="auto" />
 
-            <Animatable.View
-              animation="slideInRight"
-              duration={300}
-              style={styles.body}
-            >
-              <View style={styles.list}>
-                <Text style={[styles.listText, styles.placeholderText]}>
-                  Current email
-                </Text>
-                <Text style={styles.listText}>{email}</Text>
-              </View>
-              <AppTextInput
-                value={values.Email}
-                onChangeText={handleChange("Email")}
-                onBlur={() => setFieldTouched("Email")}
-                leftIcon="email"
-                placeholder="Enter new email"
-                keyboardType="email-address"
-                textContentType="emailAddress"
-                error={errors.Email}
-                touched={touched.Email}
-              />
-              {touched.Email && errors.Email && (
-                <Text style={{ fontSize: 12, color: "#FF0D10" }}>
-                  {errors.Email}
-                </Text>
-              )}
-              <AppButton
-                title="Verify new email"
-                disabled={!isValid}
-                onPress={handleSubmit}
-              />
-            </Animatable.View>
+            <View style={styles.list}>
+              <Text style={[styles.listText, styles.placeholderText]}>
+                Current email
+              </Text>
+              <Text style={styles.listText}>{email}</Text>
+            </View>
+            <AppTextInput
+              value={values.Email}
+              onChangeText={handleChange("Email")}
+              onBlur={() => setFieldTouched("Email")}
+              leftIcon="email"
+              placeholder="Enter new email"
+              keyboardType="email-address"
+              textContentType="emailAddress"
+              error={errors.Email}
+              touched={touched.Email}
+            />
+            {touched.Email && errors.Email && (
+              <Text style={{ fontSize: 12, color: "#FF0D10" }}>
+                {errors.Email}
+              </Text>
+            )}
+            <AppButton
+              title="Verify new email"
+              disabled={!isValid}
+              onPress={handleSubmit}
+            />
           </View>
           {isErrorAlertVisible === true && (
             <AppAlert visible={true} message={modalMessage} type={"Error"} />
