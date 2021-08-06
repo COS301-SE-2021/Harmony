@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, StatusBar } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  StatusBar,
+  TouchableOpacity,
+} from "react-native";
 import * as yup from "yup";
 import { Formik } from "formik";
 import { Auth } from "aws-amplify";
@@ -16,6 +22,15 @@ export default function EditEmailScreen({ navigation }) {
   const [isLoading, setLoading] = useState(false);
   const [isErrorAlertVisible, setErrorAlertVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
+  const [email, setEmail] = useState("");
+
+  useEffect(() => {
+    Auth.currentAuthenticatedUser({}) //Get user information
+      .then((data) => {
+        setEmail(data.attributes.email);
+      })
+      .catch((err) => console.log(err));
+  });
 
   async function editEmail(values) {
     try {
@@ -79,6 +94,12 @@ export default function EditEmailScreen({ navigation }) {
               duration={300}
               style={styles.body}
             >
+              <View style={styles.list}>
+                <Text style={[styles.listText, styles.placeholderText]}>
+                  Current email
+                </Text>
+                <Text style={styles.listText}>{email}</Text>
+              </View>
               <AppTextInput
                 value={values.Email}
                 onChangeText={handleChange("Email")}
@@ -122,5 +143,18 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     paddingHorizontal: 20,
     paddingVertical: 10,
+  },
+  list: {
+    padding: 20,
+    marginTop: 1,
+    // backgroundColor: "red",
+    width: "100%",
+  },
+  listText: {
+    fontSize: 18,
+  },
+  placeholderText: {
+    color: "#888",
+    marginBottom: 10,
   },
 });
