@@ -39,7 +39,7 @@ def sort_and_filter(event, context):
     allresponse = table.scan()
     # edit the response to only show items
     response = allresponse['Items']
-    response = add_distances(response, event['Longitude'], event['Latitude'])
+    response = add_distances(response, event['Latitude'], event['Longitude'])
     # check json passed in to see what sort to do for the response
     if event['Sort'] == 'New':
         sortedResponse = sortbynew(response)
