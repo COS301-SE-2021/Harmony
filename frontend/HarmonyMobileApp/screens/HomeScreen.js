@@ -53,7 +53,9 @@ const HomeScreen = (props) => {
         break;
       case "SUBTRACT":
         state = state - action.payload;
-
+        break;
+      case "NEW":
+        state = state * action.payload;
         break;
     }
     return state;

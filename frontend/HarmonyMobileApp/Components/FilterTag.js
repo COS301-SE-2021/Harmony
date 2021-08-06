@@ -16,18 +16,18 @@ export default function FilterTag({ color, title, style, cleared, ...otherProps 
     }, [filterColor]);
 
     const tagColor = () => {
-        if (clicked == true) {
-            if (filterColor == "#F3F2F2") {
-                setFilterColor(color);
-            }
-            else {
-                setFilterColor("#F3F2F2");
-            }
+        //    if (clicked == true) {
+        if (filterColor == "#F3F2F2") {
+            setFilterColor(color);
         }
         else {
             setFilterColor("#F3F2F2");
-
         }
+        //  }
+        //else {
+        //  setFilterColor("#F3F2F2");
+
+        // }
     };
     const textColor = () => {
         if (filterTextColor == "black") {
