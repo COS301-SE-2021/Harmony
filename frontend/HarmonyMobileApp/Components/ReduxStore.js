@@ -14,15 +14,15 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         //handles all the actions
-        case "Breakfast":
-            state.mealTypes[0].Breakfast.backgroundColor = action.payload.backgroundColor;
-            state.mealTypes[0].Breakfast.textColor = action.payload.textColor;
-            break;
         case "APPEND":
             state.Checked.push(action.payload);
             break;
-        case "NEW":
-            state.result = state.result * action.payload;
+        case "REMOVE":
+            for (var i = 0; i < state.Checked.length; i++) {
+                if (state.Checked[i] == action.payload) {
+                    state.Checked.splice(i, i)
+                }
+            }
             break;
     }
     return state;

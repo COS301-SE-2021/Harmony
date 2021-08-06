@@ -11,7 +11,9 @@ export default function FilterTag({ color, title, style, cleared, filterType, ..
 
     const [filterColor, setFilterColor] = useState("#F3F2F2");
     const [filterTextColor, setTextColor] = useState("black");
+    //variable gets set on load so its used to set the colours on load also
     const [load, setLoad] = useState(true);
+
     //use effect is a hook that detects when a variable is changed and will act when its changed
     useEffect(() => {
         console.log("load set " + title);
@@ -23,14 +25,32 @@ export default function FilterTag({ color, title, style, cleared, filterType, ..
         }
     }, [load]);
 
+    const checkTag = () => {
+        ReduxStore.dispatch({
+            type: "APPEND",
+            //payload is the standard adopted name for the state value
+            payload: title
+        })
 
+    };
+
+    const uncheckTag = () => {
+        ReduxStore.dispatch({
+            type: "REMOVE",
+            //payload is the standard adopted name for the state value
+            payload: title
+        })
+
+    };
 
     const tagColor = () => {
         if (filterColor == "#F3F2F2") {
             setFilterColor(color);
+            checkTag()
         }
         else {
             setFilterColor("#F3F2F2");
+            uncheckTag()
         }
 
     };
@@ -49,12 +69,7 @@ export default function FilterTag({ color, title, style, cleared, filterType, ..
                 //console.log("was pressed"),
                 //  setClicked(true),
                 tagColor(),
-                textColor(),
-                ReduxStore.dispatch({
-                    type: "APPEND",
-                    //payload is the standard adopted name for the state value
-                    payload: title
-                })
+                textColor()
             )
             }
         >
