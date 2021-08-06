@@ -11,6 +11,7 @@ event = {
     "UID" : "userid"
     "PID" : "pairingid"
     "VoteType" : "Upvotes" || "Downvotes"
+    "IsChecked" : "Checked" ||"Unchecked"
 }
 """
 
@@ -26,10 +27,10 @@ def vote(event, context):
     usertable = dynamodb.Table(user_table_name)
     print("Test the code")
 
-    type = 'Downvotes'  # or Down and must be passed in from frontend
-    id = 'p1'  # must be passed in from frontend
-    uid = 'u1'
-    vote_type = 'Checked'
+    type = event["VoteType"]  # or Down and must be passed in from frontend
+    id = event["PID"] # must be passed in from frontend
+    uid = event["UID"]
+    vote_type = event["IsChecked"]
 
     """Gets the pairing that the vote was made to as well as its data."""
     try:
@@ -60,7 +61,9 @@ def vote(event, context):
     )
     # ADD/REMOVE the pairing from the user favourites DB still needs to be done.
     vote_userdatabase(uid ,type,usertable , id)
-    return response
+    return {
+        "StatusCode" : 200
+    }
 
 
 def addvote(vote_type, num_votes):
