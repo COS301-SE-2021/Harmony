@@ -4,7 +4,6 @@ import * as yup from "yup";
 import { Formik } from "formik";
 import { Auth } from "aws-amplify";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import * as Animatable from "react-native-animatable";
 
 import AppTextInput from "../Components/AppTextInput";
 import AppButton from "../Components/AppButton";
@@ -81,7 +80,7 @@ export default function ForgotPassword({ navigation, updateAuthState }) {
               </Text>
             </View>
 
-            <Animatable.View animation="fadeInUpBig" style={styles.body}>
+            <View style={styles.body}>
               <AppTextInput
                 value={values.Username}
                 onChangeText={handleChange("Username")}
@@ -116,7 +115,7 @@ export default function ForgotPassword({ navigation, updateAuthState }) {
                   </Text>
                 </Text>
               </View>
-            </Animatable.View>
+            </View>
           </View>
           {isErrorAlertVisible === true && (
             <AppAlert visible={true} message={modalMessage} type={"Error"} />

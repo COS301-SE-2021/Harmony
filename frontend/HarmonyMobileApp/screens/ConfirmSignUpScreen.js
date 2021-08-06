@@ -7,7 +7,6 @@ import AppTextInput from "../Components/AppTextInput";
 import AppButton from "../Components/AppButton";
 import { AppToast } from "../Components/AppToast";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import * as Animatable from "react-native-animatable";
 import AppLoadingIcon from "../Components/AppLoadingIcon";
 import AppAlert from "../Components/AppAlert";
 
@@ -90,7 +89,7 @@ export default function ConfirmSignUp({ navigation }) {
                 email below
               </Text>
             </View>
-            <Animatable.View animation="fadeInUpBig" style={styles.body}>
+            <View style={styles.body}>
               <AppTextInput
                 value={values.Username}
                 onChangeText={handleChange("Username")}
@@ -129,7 +128,7 @@ export default function ConfirmSignUp({ navigation }) {
                 disabled={!isValid}
                 onPress={handleSubmit}
               />
-            </Animatable.View>
+            </View>
           </View>
           {isErrorAlertVisible === true && (
             <AppAlert visible={true} message={modalMessage} type={"Error"} />

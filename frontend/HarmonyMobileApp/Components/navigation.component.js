@@ -32,7 +32,7 @@ import EditEmailScreen from "../screens/EditEmailScreen";
 import ConfirmEditEmailScreen from "../screens/ConfirmEditEmailScreen";
 import EditAccountPassword from "../screens/EditAccountPasswordScreen";
 
-import { TransitionSpecs, TransitionPresets } from "@react-navigation/stack";
+import { TransitionPresets } from "@react-navigation/stack";
 
 Amplify.configure(config);
 
@@ -155,7 +155,12 @@ const AuthenticationStack = createStackNavigator();
 const AuthenticationNavigator = (props) => {
   return (
     <View style={{ flex: 1, backgroundColor: "#118AB2" }}>
-      <AuthenticationStack.Navigator headerMode="none">
+      <AuthenticationStack.Navigator
+        headerMode="none"
+        screenOptions={{
+          ...TransitionPresets.ModalSlideFromBottomIOS,
+        }}
+      >
         <AuthenticationStack.Screen name="SignIn">
           {(screenProps) => (
             <SignIn {...screenProps} updateAuthState={props.updateAuthState} />

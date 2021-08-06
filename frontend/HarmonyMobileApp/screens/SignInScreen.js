@@ -12,8 +12,6 @@ import AppAlert from "../Components/AppAlert";
 
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { SocialIcon } from "react-native-elements";
-import * as Animatable from "react-native-animatable";
-import { showMessage, hideMessage } from "react-native-flash-message";
 
 export default function SignIn({ navigation, updateAuthState }) {
   const [isLoading, setLoading] = useState(false);
@@ -83,7 +81,7 @@ export default function SignIn({ navigation, updateAuthState }) {
               <Text style={styles.subtitle}>Sign in below</Text>
             </View>
 
-            <Animatable.View animation="fadeInUpBig" style={styles.body}>
+            <View style={styles.body}>
               <AppTextInput
                 value={values.Username}
                 onChangeText={handleChange("Username")}
@@ -136,8 +134,8 @@ export default function SignIn({ navigation, updateAuthState }) {
                   Forgot Password?
                 </Text>
               </View>
-            </Animatable.View>
-            <Animatable.View animation="fadeInUpBig" style={styles.footer}>
+            </View>
+            <View style={styles.footer}>
               <View style={styles.footerIcons}>
                 <SocialIcon type="facebook" />
                 <SocialIcon type="google" />
@@ -155,7 +153,7 @@ export default function SignIn({ navigation, updateAuthState }) {
                   </Text>
                 </Text>
               </View>
-            </Animatable.View>
+            </View>
           </View>
           {isErrorAlertVisible === true && (
             <AppAlert visible={true} message={modalMessage} type={"Error"} />

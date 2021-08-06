@@ -11,7 +11,6 @@ import AppLoadingIcon from "../Components/AppLoadingIcon";
 import AppAlert from "../Components/AppAlert";
 
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import * as Animatable from "react-native-animatable";
 
 export default function ConfirmForgotPassword({ navigation }) {
   const [isLoading, setLoading] = useState(false);
@@ -109,7 +108,7 @@ export default function ConfirmForgotPassword({ navigation }) {
               </Text>
             </View>
 
-            <Animatable.View animation="fadeInUpBig" style={styles.body}>
+            <View style={styles.body}>
               <AppTextInput
                 value={values.Username}
                 onChangeText={handleChange("Username")}
@@ -181,7 +180,7 @@ export default function ConfirmForgotPassword({ navigation }) {
                 disabled={!isValid}
                 onPress={handleSubmit}
               />
-            </Animatable.View>
+            </View>
           </View>
           {isErrorAlertVisible === true && (
             <AppAlert visible={true} message={modalMessage} type={"Error"} />
