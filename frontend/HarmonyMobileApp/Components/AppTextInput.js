@@ -9,6 +9,8 @@ export default function AppTextInput({
   touched,
   error,
   type,
+  hideRightIcon,
+  hideBorder,
   ...otherProps
 }) {
   const [isPasswordVisible, setPasswordVisible] = useState(false);
@@ -41,6 +43,8 @@ export default function AppTextInput({
     } else {
       if (!touched) {
         return null;
+      } else if (hideRightIcon === true) {
+        return null;
       } else if (error) {
         return (
           <MaterialCommunityIcons
@@ -70,6 +74,10 @@ export default function AppTextInput({
     } else if (error) {
       return {
         borderColor: "#FF9494",
+      };
+    } else if (hideBorder === true) {
+      return {
+        borderColor: "#ffffff00",
       };
     } else
       return {

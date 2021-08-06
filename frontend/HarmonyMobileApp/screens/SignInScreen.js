@@ -79,7 +79,7 @@ export default function SignIn({ navigation, updateAuthState }) {
           <View style={styles.container}>
             <StatusBar style="auto" />
             <View style={styles.header}>
-              <Text style={styles.headerText}>Welcome back</Text>
+              <Text style={styles.headerText}>Harmony</Text>
               <Text style={styles.subtitle}>Sign in below</Text>
             </View>
 
@@ -94,6 +94,8 @@ export default function SignIn({ navigation, updateAuthState }) {
                 textContentType="emailAddress"
                 error={errors.Username}
                 touched={touched.Username}
+                hideBorder={true}
+                hideRightIcon={true}
               />
               {/* If the user has clicked on the input field and it is not valid */}
               {touched.Username && errors.Username && (
@@ -112,6 +114,7 @@ export default function SignIn({ navigation, updateAuthState }) {
                 error={errors.Password}
                 touched={touched.Password}
                 type="Password"
+                hideBorder={true}
               />
               {touched.Password && errors.Password && (
                 <Text style={{ fontSize: 12, color: "#FF0D10" }}>
