@@ -40,11 +40,12 @@ export default function FilterModal({ color, title, ...otherProps }) {
   });
 
   //dispatch this javascript object to the reducer, triggers the actions
-  ReduxStore.dispatch({
-    type: "NEW",
-    //payload is the standard adopted name for the state value
-    payload: 2
-  });
+  // ReduxStore.dispatch({
+  //   type: "NEW",
+  //   //payload is the standard adopted name for the state value
+  //   payload: 2
+  // });
+
   //toggles the modals visibility
   const toggleModal = () => {
     setModalVisible(!isModalVisible);

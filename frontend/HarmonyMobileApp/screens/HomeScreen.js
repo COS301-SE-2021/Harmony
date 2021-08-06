@@ -44,43 +44,6 @@ const HomeScreen = (props) => {
 
   const [userLocation, setUserLocation] = useState({ lat: null, lng: null });
 
-
-  // const reducer = (state, action) => {
-  //   switch (action.type) {
-  //     //handles all the actions
-  //     case "ADD":
-  //       state = state + action.payload;
-  //       break;
-  //     case "SUBTRACT":
-  //       state = state - action.payload;
-  //       break;
-  //     case "NEW":
-  //       state = state * action.payload;
-  //       break;
-  //   }
-  //   return state;
-  // };
-  // const store = createStore(reducer, 1);
-
-  //subscribes get triggered when the store is updated
-  ReduxStore.subscribe(() => {
-    console.log("Store updated in hs", ReduxStore.getState());
-  });
-
-  //dispatch this javascript object to the reducer, triggers the actions
-  ReduxStore.dispatch({
-    type: "ADD",
-    //payload is the standard adopted name for the state value
-    payload: 10
-  });
-
-  ReduxStore.dispatch({
-    type: "SUBTRACT",
-    //payload is the standard adopted name for the state value
-    payload: 50
-  });
-
-
   //the refreshing of the flatlist
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);

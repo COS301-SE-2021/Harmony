@@ -4,10 +4,13 @@ import {
     Pressable,
 } from "react-native";
 import { Text } from '@ui-kitten/components';
+import ReduxStore from "../Components/ReduxStore"
 
 export default function FilterTag({ color, title, style, cleared, ...otherProps }) {
-    const [filterColor, setFilterColor] = useState("#F3F2F2");
-    const [filterTextColor, setTextColor] = useState("black");
+    const state = ReduxStore.getState();
+
+    const [filterColor, setFilterColor] = useState(state.mealTypes[0].Breakfast.backgroundColor);
+    const [filterTextColor, setTextColor] = useState(state.mealTypes[0].Breakfast.textColor);
     const [clicked, setClicked] = useState();
 
     //use effect is a hook that detects when a variable is changed and will act when its changed
@@ -15,19 +18,16 @@ export default function FilterTag({ color, title, style, cleared, ...otherProps 
         console.log("color changed " + filterColor);
     }, [filterColor]);
 
+
+
     const tagColor = () => {
-        //    if (clicked == true) {
         if (filterColor == "#F3F2F2") {
             setFilterColor(color);
         }
         else {
             setFilterColor("#F3F2F2");
         }
-        //  }
-        //else {
-        //  setFilterColor("#F3F2F2");
 
-        // }
     };
     const textColor = () => {
         if (filterTextColor == "black") {
@@ -44,7 +44,13 @@ export default function FilterTag({ color, title, style, cleared, ...otherProps 
                 console.log("was pressed"),
                 setClicked(true),
                 tagColor(),
-                textColor())
+                textColor(),
+                ReduxStore.dispatch({
+                    type: title,
+                    //payload is the standard adopted name for the state value
+                    payload: { "backgroundColor": filterColor, "textColor": filterTextColor }
+                })
+            )
             }
         >
             <Text style={[personalStyles.TextSmaller, { color: filterTextColor }]}>{title}</Text>
