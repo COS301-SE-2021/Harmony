@@ -16,12 +16,13 @@ export default function FilterTag({ color, title, style, cleared, filterType, ..
 
     //use effect is a hook that detects when a variable is changed and will act when its changed
     useEffect(() => {
-        console.log("load set " + title);
         //cant be on its own so this leverages the fact that it reset to reset it again
-        if (state.Checked.includes(title)) {
-            console.log("checked contains " + title);
-            setFilterColor(color);
-            setTextColor("white");
+        for (var i = 0; i < state.Checked.length; i++) {
+            if (state.Checked[i].tagName == title && state.Checked[i].tagType == filterType) {
+                console.log("checked contains " + title);
+                setFilterColor(color);
+                setTextColor("white");
+            }
         }
     }, [load]);
 
@@ -29,7 +30,7 @@ export default function FilterTag({ color, title, style, cleared, filterType, ..
         ReduxStore.dispatch({
             type: "APPEND",
             //payload is the standard adopted name for the state value
-            payload: title
+            payload: { "tagName": title, "tagType": filterType }
         })
 
     };

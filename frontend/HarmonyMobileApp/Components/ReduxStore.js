@@ -19,7 +19,7 @@ const reducer = (state = initialState, action) => {
             break;
         case "REMOVE":
             for (var i = 0; i < state.Checked.length; i++) {
-                if (state.Checked[i] == action.payload) {
+                if ((state.Checked[i].tagName == action.payload.tagName) && (state.Checked[i].tagType == action.payload.tagType)) {
                     state.Checked.splice(i, i)
                 }
             }
