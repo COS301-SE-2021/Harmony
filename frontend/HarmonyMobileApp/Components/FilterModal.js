@@ -194,7 +194,7 @@ export default function FilterModal({ color, title, ...otherProps }) {
                     {/* Mapping of the tags from the JSON to the components*/}
                     {filters.mealTypes.map((tag, index) => (
                       <View key={index}>
-                        <FilterTag color="#FF6347" title={tag} cleared={clearFilters} />
+                        <FilterTag color="#FF6347" title={tag} filterType="mealTypes" cleared={clearFilters} />
                       </View>
                     ))}
                   </View>
@@ -226,7 +226,7 @@ export default function FilterModal({ color, title, ...otherProps }) {
                     {/* Mapping of the tags from the JSON to the components*/}
                     {filters.drinks.map((tag, index) => (
                       <View key={index}>
-                        <FilterTag color="#1FBFBA" title={tag} cleared={clearFilters} />
+                        <FilterTag color="#1FBFBA" title={tag} filterType="drinks" cleared={clearFilters} />
                       </View>
                     ))}
                   </View>
@@ -258,7 +258,7 @@ export default function FilterModal({ color, title, ...otherProps }) {
                     {/* Mapping of the tags from the JSON to the components*/}
                     {filters.foods.map((tag, index) => (
                       <View key={index}>
-                        <FilterTag color="#C41ED4" title={tag} cleared={clearFilters} />
+                        <FilterTag color="#C41ED4" title={tag} filterType="food" cleared={clearFilters} />
                       </View>
                     ))}
                   </View>
