@@ -20,7 +20,7 @@ import { Text } from "@ui-kitten/components";
 import { Slider } from "react-native-elements";
 import FilterTag from "./FilterTag";
 import { Picker } from "@react-native-picker/picker";
-import { createStore } from "redux";
+import ReduxStore from "../Components/ReduxStore"
 
 
 export default function FilterModal({ color, title, ...otherProps }) {
@@ -34,6 +34,17 @@ export default function FilterModal({ color, title, ...otherProps }) {
     drinks: ["Alcoholic", "Non-Alcoholic", "Fizzy", "Sweet", "Sour", "Bitter", "Hot", "Warm", "Cold",],
   };
 
+  //subscribes get triggered when the store is updated
+  ReduxStore.subscribe(() => {
+    console.log("Store updated in modal", ReduxStore.getState());
+  });
+
+  //dispatch this javascript object to the reducer, triggers the actions
+  ReduxStore.dispatch({
+    type: "NEW",
+    //payload is the standard adopted name for the state value
+    payload: 2
+  });
   //toggles the modals visibility
   const toggleModal = () => {
     setModalVisible(!isModalVisible);

@@ -21,7 +21,8 @@ import { useIsFocused } from "@react-navigation/native";
 import { Header } from "react-native-elements";
 import * as Location from 'expo-location';
 
-import { createStore } from "redux";
+// import { createStore } from "redux";
+import ReduxStore from "../Components/ReduxStore"
 
 import FilterModal from "../Components/FilterModal";
 import Card from "../Components/Card"
@@ -43,39 +44,37 @@ const HomeScreen = (props) => {
 
   const [userLocation, setUserLocation] = useState({ lat: null, lng: null });
 
-  //reducer -method that takes the actions and changes the state
-  //parameters are passed with redux
-  const reducer = (state, action) => {
-    switch (action.type) {
-      //handles all the actions
-      case "ADD":
-        state = state + action.payload;
-        break;
-      case "SUBTRACT":
-        state = state - action.payload;
-        break;
-      case "NEW":
-        state = state * action.payload;
-        break;
-    }
-    return state;
-  };
-  //takes 2 params, a reducer and an initial state[can be an object, array etc]
-  const store = createStore(reducer, 1);
+
+  // const reducer = (state, action) => {
+  //   switch (action.type) {
+  //     //handles all the actions
+  //     case "ADD":
+  //       state = state + action.payload;
+  //       break;
+  //     case "SUBTRACT":
+  //       state = state - action.payload;
+  //       break;
+  //     case "NEW":
+  //       state = state * action.payload;
+  //       break;
+  //   }
+  //   return state;
+  // };
+  // const store = createStore(reducer, 1);
 
   //subscribes get triggered when the store is updated
-  store.subscribe(() => {
-    console.log("Store updated ", store.getState());
+  ReduxStore.subscribe(() => {
+    console.log("Store updated in hs", ReduxStore.getState());
   });
 
   //dispatch this javascript object to the reducer, triggers the actions
-  store.dispatch({
+  ReduxStore.dispatch({
     type: "ADD",
     //payload is the standard adopted name for the state value
     payload: 10
   });
 
-  store.dispatch({
+  ReduxStore.dispatch({
     type: "SUBTRACT",
     //payload is the standard adopted name for the state value
     payload: 50
