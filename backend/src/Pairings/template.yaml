@@ -15,17 +15,8 @@ Resources:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: removeFromFavourites/
-      Handler: app.lambda_handler
+      Handler: RemoveFromFavourites.remove_from_favourites
       Runtime: python3.8
-
-
-Outputs:
-  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
-  # Find out more about other implicit resources you can reference within SAM
-  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
-  RemoveFromFavouritesFunction:
-    Description: "Hello World Lambda Function ARN"
-    Value: !GetAtt RemoveFromFavouritesFunction.Arn
-  RemoveFromFavouritesFunctionIamRole:
-    Description: "Implicit IAM Role created for Hello World function"
-    Value: !GetAtt RemoveFromFavouritesFunctionRole.Arn
+      Policies:
+        # Give DynamoDB Full Access to your Lambda Function
+        - AmazonDynamoDBFullAccess

@@ -30,7 +30,7 @@ def remove_from_favourites(event, context):
 
     response = table.get_item(Key={'UID': uid})
     # convert number to integer
-    amount = int(response['Item']['SizeOfFavs'])
+    amount = len(response['Item']['FavouritePairings'])
     index = 0
     for key in response['Item']['FavouritePairings']:
         # traverse each item in Pairings and search for id the list
@@ -57,11 +57,11 @@ def remove_from_favourites(event, context):
         if e.response['Error']['Code'] == "ConditionalCheckFailedException":
             print(e.response['Error']['Message'])
             # fix this, return false when fixed, test edge cases
-            return json.dumps({'isSuccessful': 'true', 'PID': pid})
+            return json.dumps({'StatusCode': 200, 'PID': pid})
         else:
             raise
     else:
-        return json.dumps({'isSuccessful': 'true', 'PID': pid})
+        return json.dumps({'StatusCode': 200, 'PID': pid})
 
 
 def validate_request(pid, uid):
