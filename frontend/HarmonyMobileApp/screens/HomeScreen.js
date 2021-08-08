@@ -57,6 +57,7 @@ const HomeScreen = (props) => {
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
+
   //the api call for trending
   useEffect(() => {
     fetch(viewPairingURL)

@@ -30,6 +30,10 @@ export default function IconsBar({ dataSet, ...otherProps }) {
         console.log("use effect up triggered " + dataSet.PID + " " + upIconChecked);
         fetch("https://56kdfhsnac.execute-api.eu-west-1.amazonaws.com/dev", {
             method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
             body: JSON.stringify({
                 "UID": "u1",
                 "PID": dataSet.PID,
@@ -38,9 +42,10 @@ export default function IconsBar({ dataSet, ...otherProps }) {
             })
         })
             .then((response) => response.json())
-            .then((json) => setData(json.Data))
+            .then((json) => setData(json))
+            .then(console.log(data))
             .catch((error) => alert(error));
-        console.log(data);
+
     }, [upIconChecked]);
 
     useEffect(() => {
@@ -55,7 +60,7 @@ export default function IconsBar({ dataSet, ...otherProps }) {
             })
         })
             .then((response) => response.json())
-            .then((json) => setData(json.Data))
+            .then((json) => setData(json))
             .catch((error) => alert(error));
         console.log(data);
 
