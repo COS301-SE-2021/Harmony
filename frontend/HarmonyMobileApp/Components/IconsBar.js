@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     StyleSheet,
     Pressable,
@@ -13,74 +13,109 @@ import styles from "../styles";
 
 // make api call with dataSet.PID
 export default function IconsBar({ dataSet, ...otherProps }) {
-    const [favouriteIconChecked, setFavouriteIconChecked] = useState("unchecked");
+    const [favouriteIconChecked, setFavouriteIconChecked] = useState("Unchecked");
     const [favouriteIconColor, setFavouriteIconColor] = useState("black");                   // controls the favourite heart color (pink/black)
     const [favouriteIconOutline, setFavouriteIconOutline] = useState("hearto");      // controls whether the heart is filled in or outlined
 
-    const [upIconChecked, setUpIconChecked] = useState("unchecked");
+    const [upIconChecked, setUpIconChecked] = useState("Unchecked");
     const [upIconColor, setUpIconColor] = useState("black");
     const [upIconOutline, setUpIconOutline] = useState("upcircleo");
 
-    const [downIconChecked, setDownIconChecked] = useState("unchecked");
+    const [downIconChecked, setDownIconChecked] = useState("Unchecked");
     const [downIconColor, setDownIconColor] = useState("black");
     const [downIconOutline, setDownIconOutline] = useState("downcircleo");
 
+    const [data, setData] = useState([]);
+    useEffect(() => {
+        console.log("use effect up triggered " + dataSet.PID + " " + upIconChecked);
+        fetch("https://56kdfhsnac.execute-api.eu-west-1.amazonaws.com/dev", {
+            method: "POST",
+            body: JSON.stringify({
+                "UID": "u1",
+                "PID": dataSet.PID,
+                "VoteType": "Upvotes",
+                "IsChecked": upIconChecked
+            })
+        })
+            .then((response) => response.json())
+            .then((json) => setData(json.Data))
+            .catch((error) => alert(error));
+        console.log(data);
+    }, [upIconChecked]);
+
+    useEffect(() => {
+        console.log("use effect down triggered " + dataSet.PID + " " + downIconChecked);
+        fetch("https://56kdfhsnac.execute-api.eu-west-1.amazonaws.com/dev", {
+            method: "POST",
+            body: JSON.stringify({
+                "UID": "u1",
+                "PID": dataSet.PID,
+                "VoteType": "Downvotes",
+                "IsChecked": downIconChecked
+            })
+        })
+            .then((response) => response.json())
+            .then((json) => setData(json.Data))
+            .catch((error) => alert(error));
+        console.log(data);
+
+    }, [downIconChecked]);
+
     handleDownIconPress = () => {
-        if (upIconChecked == "unchecked") {
-            if (downIconChecked == "unchecked") {
+        if (upIconChecked == "Unchecked") {
+            if (downIconChecked == "Unchecked") {
                 setDownIconColor("#FF2727");
                 setDownIconOutline("downcircle");
-                setDownIconChecked("checked");
+                setDownIconChecked("Checked");
             } else {
                 setDownIconColor("black");
                 setDownIconOutline("downcircleo");
-                console.log("pressed down unchecked");
-                setDownIconChecked("unchecked");
+                setDownIconChecked("Unchecked");
             }
         } else {
             // uncheck up and then check down
             setUpIconColor("black");
             setUpIconOutline("upcircleo");
-            setUpIconChecked("unchecked");
+            setUpIconChecked("Unchecked");
 
             setDownIconColor("#FF2727");
             setDownIconOutline("downcircle");
-            setDownIconChecked("checked");
+            setDownIconChecked("Checked");
         }
     };
 
     handleUpIconPress = () => {
-        if (downIconChecked == "unchecked") {
-            if (upIconChecked == "unchecked") {
+        if (downIconChecked == "Unchecked") {
+            if (upIconChecked == "Unchecked") {
                 setUpIconColor("#80CB41");
                 setUpIconOutline("upcircle");
-                setUpIconChecked("checked");
+                setUpIconChecked("Checked");
             } else {
                 setUpIconColor("black");
                 setUpIconOutline("upcircleo");
-                setUpIconChecked("unchecked");
+                setUpIconChecked("Unchecked");
             }
         } else {
             // uncheck down then check up
             setDownIconColor("black");
             setDownIconOutline("downcircleo");
-            setDownIconChecked("unchecked");
+            setDownIconChecked("Unchecked");
 
             setUpIconColor("#80CB41");
             setUpIconOutline("upcircle");
-            setUpIconChecked("checked");
+            setUpIconChecked("Checked");
         }
     };
 
     handleFavouriteIconPress = () => {
-        if (favouriteIconChecked == "unchecked") {
+        if (favouriteIconChecked == "Unchecked") {
             setFavouriteIconColor("#FF2763");
             setFavouriteIconOutline("heart");
-            setFavouriteIconChecked("checked");
+            setFavouriteIconChecked("Checked");
         } else {
             setFavouriteIconColor("black");
             setFavouriteIconOutline("hearto");
-            setFavouriteIconChecked("unchecked");
+            setFavouriteIconChecked("Unchecked");
         }
     };
 
