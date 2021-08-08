@@ -66,6 +66,39 @@ export default function IconsBar({ dataSet, ...otherProps }) {
 
     }, [downIconChecked]);
 
+
+    useEffect(() => {
+        console.log("use effect fav triggered " + dataSet.PID + " " + favouriteIconChecked);
+        if (favouriteIconChecked == "Checked") {
+            fetch("https://bqwmc4qpkd.execute-api.eu-west-1.amazonaws.com/dev", {
+                method: "POST",
+                body: JSON.stringify({
+                    "UID": "u1",
+                    "PID": dataSet.PID,
+                })
+            })
+                .then((response) => response.json())
+                .then((json) => setData(json))
+                .catch((error) => alert(error));
+            console.log(data);
+        }
+        else {
+            fetch("https://blzyl8bowc.execute-api.eu-west-1.amazonaws.com/dev", {
+                method: "POST",
+                body: JSON.stringify({
+                    "UID": "u1",
+                    "PID": dataSet.PID,
+                })
+            })
+                .then((response) => response.json())
+                .then((json) => setData(json))
+                .catch((error) => alert(error));
+            console.log(data);
+
+        }
+
+    }, [favouriteIconChecked]);
+
     handleDownIconPress = () => {
         if (upIconChecked == "Unchecked") {
             if (downIconChecked == "Unchecked") {
