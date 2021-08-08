@@ -2,6 +2,9 @@ import { createStore } from 'redux';
 
 const initialState = {
     Checked: [],
+    MealTags: [],
+    FoodTags: [],
+    DrinkTags: [],
 };
 
 //reducer -method that takes the actions and changes the state
@@ -10,7 +13,16 @@ const reducer = (state = initialState, action) => {
     switch (action.type) {
         //handles all the actions
         case "APPEND":
-            state.Checked.push(action.payload);
+            //state.Checked.push(action.payload);
+            if (action.payload.tagType == "drinks") {
+                state.DrinkTags.push(action.payload.tagName)
+            }
+            else if (action.payload.tagType == "mealTypes") {
+                state.MealTags.push(action.payload.tagName)
+            }
+            else if (action.payload.tagType == "food") {
+                state.FoodTags.push(action.payload.tagName)
+            }
             break;
         case "REMOVE":
             for (var i = 0; i < state.Checked.length; i++) {
@@ -21,6 +33,9 @@ const reducer = (state = initialState, action) => {
             break;
         case "CLEAR":
             state.Checked = [];
+            state.MealTags = [];
+            state.FoodTags = [];
+            state.DrinkTags = [];
             break;
     }
     return state;

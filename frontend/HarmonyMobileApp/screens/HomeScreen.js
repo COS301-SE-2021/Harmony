@@ -61,6 +61,8 @@ const HomeScreen = (props) => {
 
   //the api call for trending
   useEffect(() => {
+    const state = ReduxStore.getState();
+    console.log(state);
     fetch(viewPairingURL, {
       method: "POST",
       headers: {
@@ -70,9 +72,9 @@ const HomeScreen = (props) => {
       body: JSON.stringify({
         "UID": "u1",
         "Sort": "Trending",
-        "MealTags": [],
-        "FoodTags": [],
-        "DrinkTags": [],
+        "MealTags": state.MealTags,
+        "FoodTags": state.FoodTags,
+        "DrinkTags": state.DrinkTags,
         "Distance": 10000,
         "Longitude": userLocationLongitude,
         "Latitude": userLocationLatitude

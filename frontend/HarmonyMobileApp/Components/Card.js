@@ -58,7 +58,15 @@ export default function Card({ dataSet, ...otherProps }) {
                         horizontal={true}
                     >
                         <View style={styles.rowContainer}>
-                            {dataSet.FoodTags.map((tag, index) => (
+                            <View style={styles.tagContainer} >
+                                <MaterialIcons
+                                    name="fastfood"
+                                    size={14}
+                                    color="#fff"
+                                />
+                                <Text style={styles.tagText}>{dataSet.MealTag}</Text>
+                            </View>
+                            {/* {dataSet.FoodTags.map((tag, index) => (
                                 <View style={styles.tagContainer} key={index}>
                                     <MaterialIcons
                                         name="fastfood"
@@ -67,7 +75,7 @@ export default function Card({ dataSet, ...otherProps }) {
                                     />
                                     <Text style={styles.tagText}>{tag}</Text>
                                 </View>
-                            ))}
+                            ))} */}
 
                             {dataSet.FoodTags.map((tag, index) => (
                                 <View
