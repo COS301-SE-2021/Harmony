@@ -29,7 +29,7 @@ import Card from "../Components/Card"
 
 const HomeScreen = (props) => {
   const viewPairingURL =
-    "https://qkvdftfq7b.execute-api.eu-west-1.amazonaws.com/dev";
+    "https://9vk5hcie79.execute-api.eu-west-1.amazonaws.com/dev";
   //The loading of the flatlist
   const [isLoading, setLoading] = useState(useIsFocused());
 
@@ -42,7 +42,8 @@ const HomeScreen = (props) => {
 
   const [refreshing, setRefreshing] = React.useState(false);
 
-  const [userLocation, setUserLocation] = useState({ lat: null, lng: null });
+  const [userLocationLatitude, setUserLocationLatitude] = useState(null);
+  const [userLocationLongitude, setUserLocationLongitude] = useState(null);
 
   //the refreshing of the flatlist
   const onRefresh = React.useCallback(() => {
@@ -60,9 +61,26 @@ const HomeScreen = (props) => {
 
   //the api call for trending
   useEffect(() => {
-    fetch(viewPairingURL)
+    fetch(viewPairingURL, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        "UID": "u1",
+        "Sort": "Trending",
+        "MealTags": [],
+        "FoodTags": [],
+        "DrinkTags": [],
+        "Distance": 10000,
+        "Longitude": userLocationLongitude,
+        "Latitude": userLocationLatitude
+      })
+    })
       .then((response) => response.json())
       .then((json) => setData(json.Data))
+      .then(console.log(data))
       .catch((error) => alert(error))
       .then(setLoading(false));
   }, [refreshing]);
@@ -76,8 +94,10 @@ const HomeScreen = (props) => {
     const { status } = await Location.requestForegroundPermissionsAsync();
     const location = await Location.getCurrentPositionAsync({});
     // const location = await Location.watchPositionAsync({timeInterval:2000},{});
-    setUserLocation({ lat: location.coords.latitude, lng: location.coords.longitude });
-    console.log("user location: " + userLocation.lat + ' ' + userLocation.lng);
+    // setUserLocation({ lat: location.coords.latitude, lng: location.coords.longitude });
+    setUserLocationLatitude(location.coords.latitude);
+    setUserLocationLongitude(location.coords.longitude);
+    console.log("user location: " + userLocationLatitude + ' ' + userLocationLongitude);
   }
 
   const filterButton = () => (
