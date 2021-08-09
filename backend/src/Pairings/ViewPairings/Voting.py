@@ -47,6 +47,8 @@ def vote(event, context):
 
     num_votes = addvote(vote_type, current_num_votes)
 
+
+
     """ The new value of numvotes is written back to the database"""
     response = table.update_item(
         TableName=table_name,
@@ -62,7 +64,8 @@ def vote(event, context):
     # ADD/REMOVE the pairing from the user favourites DB still needs to be done.
     vote_userdatabase(uid ,type,usertable , id)
     return {
-        "StatusCode" : 200
+        "StatusCode" : 200,
+        "Response": response
     }
 
 
@@ -145,3 +148,24 @@ def vote_userdatabase(uid, type, table, pid):
 
 
     return
+
+
+def findDuplicatePairing(uid, type, table, pid):
+    response = table.get_item(Key={'UID': uid})
+
+    if type == "Upvotes":
+
+        for key in response['Item']['UserUpvoted']:
+            # traverse each item in Pairings and search for id the list
+            # find id the break, because index is incrementing till id is found
+            if key == pid:
+                return False
+    elif type == "Downvotes":
+
+        for key in response['Item']['UserDownvoted']:
+            # traverse each item in Pairings and search for id the list
+            # find id the break, because index is incrementing till id is found
+            if key == pid:
+                return False
+
+    return True
