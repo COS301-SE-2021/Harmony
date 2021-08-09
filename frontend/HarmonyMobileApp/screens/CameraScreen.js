@@ -299,11 +299,7 @@ export default function CameraScreen({ navigation }) {
             ]}
           >
             {/* {isGalleryImage && ( */}
-            <Image source={{ uri: image }} style={styles.container}></Image>
-            {/* <Image
-              source={{ uri: image }}
-              style={{ resizeMode: "cover", height: 100, width: 200 }}
-            ></Image> */}
+            <Image source={{ uri: image }} style={[styles.container, { resizeMode: "contain" }]}></Image>
             {/* )} */}
             <View style={styles.previewButtonsContainer}>
               <TouchableOpacity onPress={cancelPreview}>
