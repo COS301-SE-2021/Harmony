@@ -45,6 +45,12 @@ def vote(event, context):
     current_num_votes = pairing_data['Item'][type]
     print(current_num_votes)
 
+    if findDuplicatePairing(uid, type, usertable, id) == False:
+        return {
+            "StatusCode": 400,
+            "Error": "Duplicate item found in User table. Unable to complete processing"
+        }
+
     num_votes = addvote(vote_type, current_num_votes)
 
 
