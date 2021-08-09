@@ -45,7 +45,7 @@ def vote(event, context):
     current_num_votes = pairing_data['Item'][type]
     print(current_num_votes)
 
-    if findDuplicatePairing(uid, type, usertable, id) == False:
+    if findDuplicatePairing(uid, type, usertable, id, vote_type) == False:
         return {
             "StatusCode": 400,
             "Error": "Duplicate item found in User table. Unable to complete processing"
@@ -56,7 +56,7 @@ def vote(event, context):
 
 
     """ The new value of numvotes is written back to the database"""
-    response = table.update_item(
+    table.update_item(
         TableName=table_name,
         Key={
             'PID': id
@@ -67,11 +67,16 @@ def vote(event, context):
         ReturnValues="UPDATED_NEW"
 
     )
+    response = table.get_item(Key={'PID': id})
     # ADD/REMOVE the pairing from the user favourites DB still needs to be done.
     vote_userdatabase(uid ,type,usertable , id)
+    newUpvotes = response["Item"]["Upvotes"]
+    newDownvotes = response["Item"]["Downvotes"]
+
     return {
         "StatusCode" : 200,
-        "Response": response
+        "Upvotes" : newUpvotes,
+        "Downvotes" : newDownvotes
     }
 
 
@@ -156,17 +161,17 @@ def vote_userdatabase(uid, type, table, pid):
     return
 
 
-def findDuplicatePairing(uid, type, table, pid):
+def findDuplicatePairing(uid, type, table, pid, votetype):
     response = table.get_item(Key={'UID': uid})
 
-    if type == "Upvotes":
+    if type == "Upvotes" and votetype == "Checked":
 
         for key in response['Item']['UserUpvoted']:
             # traverse each item in Pairings and search for id the list
             # find id the break, because index is incrementing till id is found
             if key == pid:
                 return False
-    elif type == "Downvotes":
+    elif type == "Downvotes" and votetype == "Checked":
 
         for key in response['Item']['UserDownvoted']:
             # traverse each item in Pairings and search for id the list
