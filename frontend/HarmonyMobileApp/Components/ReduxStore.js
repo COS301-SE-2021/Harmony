@@ -5,6 +5,9 @@ const initialState = {
     MealTags: [],
     FoodTags: [],
     DrinkTags: [],
+    Range: 30,
+    userLocationLat: null,
+    userLocationLong: null,
 };
 
 //reducer -method that takes the actions and changes the state
@@ -25,11 +28,32 @@ const reducer = (state = initialState, action) => {
             }
             break;
         case "REMOVE":
-            for (var i = 0; i < state.Checked.length; i++) {
-                if ((state.Checked[i].tagName == action.payload.tagName) && (state.Checked[i].tagType == action.payload.tagType)) {
-                    state.Checked.splice(i, i)
+            if (action.payload.tagType == "drinks") {
+                for (var i = 0; i < state.DrinkTags.length; i++) {
+                    if (state.DrinkTags[i].tagName == action.payload.tagName)
+                        state.DrinkTags.splice(i, i);
                 }
             }
+            else if (action.payload.tagType == "mealTypes") {
+                for (var i = 0; i < state.MealTags.length; i++) {
+                    if (state.MealTags[i].tagName == action.payload.tagName)
+                        state.MealTags.splice(i, i);
+                }
+            }
+            else if (action.payload.tagType == "food") {
+                console.log("in food " + state.FoodTags.length);
+                for (var i = 0; i < state.FoodTags.length; i++) {
+                    if (state.FoodTags[i].tagName == action.payload.tagName)
+                        state.FoodTags.splice(i, i);
+                }
+            }
+            break;
+        case "RANGE":
+            state.Range = action.payload.Range
+            break;
+        case "ADDLOCATION":
+            state.userLocationLat = action.payload.latitude;
+            state.userLocationLong = action.payload.longitude;
             break;
         case "CLEAR":
             state.Checked = [];

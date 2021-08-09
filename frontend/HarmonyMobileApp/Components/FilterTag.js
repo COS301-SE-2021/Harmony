@@ -7,7 +7,6 @@ import { Text } from '@ui-kitten/components';
 import ReduxStore from "../Components/ReduxStore"
 
 export default function FilterTag({ color, title, style, cleared, filterType, ...otherProps }) {
-    const state = ReduxStore.getState();
 
     const [filterColor, setFilterColor] = useState("#F3F2F2");
     const [filterTextColor, setTextColor] = useState("black");
@@ -16,14 +15,16 @@ export default function FilterTag({ color, title, style, cleared, filterType, ..
 
     //use effect is a hook that detects when a variable is changed and will act when its changed
     useEffect(() => {
+        const state = ReduxStore.getState();
+        console.log("detect use effect " + filterType + " " + title)
         //cant be on its own so this leverages the fact that it reset to reset it again
-        for (var i = 0; i < state.Checked.length; i++) {
-            if (state.Checked[i].tagName == title && state.Checked[i].tagType == filterType) {
-                console.log("checked contains " + title);
-                setFilterColor(color);
-                setTextColor("white");
-            }
+        if ((state.MealTags.includes(title) && filterType == "mealTypes")
+            || (state.DrinkTags.includes(title) && filterType == "drinks")
+            || (state.FoodTags.includes(title) && filterType == "food")) {
+            setFilterColor(color);
+            setTextColor("white");
         }
+
     }, [load]);
 
     const checkTag = () => {

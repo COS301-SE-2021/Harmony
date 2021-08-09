@@ -76,8 +76,8 @@ const HomeScreen = (props) => {
         "FoodTags": state.FoodTags,
         "DrinkTags": state.DrinkTags,
         "Distance": 10000,
-        "Longitude": userLocationLongitude,
-        "Latitude": userLocationLatitude
+        "Longitude": state.userLocationLat,
+        "Latitude": state.userLocationLong
       })
     })
       .then((response) => response.json())
@@ -97,9 +97,11 @@ const HomeScreen = (props) => {
     const location = await Location.getCurrentPositionAsync({});
     // const location = await Location.watchPositionAsync({timeInterval:2000},{});
     // setUserLocation({ lat: location.coords.latitude, lng: location.coords.longitude });
-    setUserLocationLatitude(location.coords.latitude);
-    setUserLocationLongitude(location.coords.longitude);
-    console.log("user location: " + userLocationLatitude + ' ' + userLocationLongitude);
+    ReduxStore.dispatch({
+      type: "ADDLOCATION",
+      //payload is the standard adopted name for the state value
+      payload: { "latitude": userLocationLatitude, "longitude": userLocationLongitude }
+    });
   }
 
   const filterButton = () => (

@@ -55,6 +55,11 @@ export default function FilterModal({ color, title, ...otherProps }) {
   const wait = (timeout) => {
     return new Promise((resolve) => setTimeout(resolve, timeout));
   };
+
+  const applyFilters = () => {
+
+  }
+
   return (
     <Modal
       isVisible={isModalVisible}
