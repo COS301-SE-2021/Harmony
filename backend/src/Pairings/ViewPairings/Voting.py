@@ -160,6 +160,14 @@ def vote_userdatabase(uid, type, table, pid):
 
     return
 
+"""
+    This function validates the user-pairing relation.
+    There are 4 voting scenarios a user can take part in and all cases need to ensure that
+    that when they are occur they keep the integrity of the user-pairing relation.
+    No duplicate pairings should be in a users row.
+    When a user 'Unchecks' a vote we need to ensure that they actually have voted
+    before to keep the integrity of the voting system.
+"""
 
 def validate_user_pairing_relation(uid, type, table, pid, votetype):
     response = table.get_item(Key={'UID': uid})
