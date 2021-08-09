@@ -45,7 +45,7 @@ def vote(event, context):
     current_num_votes = pairing_data['Item'][type]
     print(current_num_votes)
 
-    if findDuplicatePairing(uid, type, usertable, id, vote_type) == False:
+    if not validate_user_pairing_relation(uid, type, usertable, id, vote_type):
         return {
             "StatusCode": 400,
             "Error": "Duplicate item found in User table. Unable to complete processing"
@@ -161,22 +161,34 @@ def vote_userdatabase(uid, type, table, pid):
     return
 
 
-def findDuplicatePairing(uid, type, table, pid, votetype):
+def validate_user_pairing_relation(uid, type, table, pid, votetype):
     response = table.get_item(Key={'UID': uid})
 
     if type == "Upvotes" and votetype == "Checked":
 
         for key in response['Item']['UserUpvoted']:
             # traverse each item in Pairings and search for id the list
-            # find id the break, because index is incrementing till id is found
             if key == pid:
                 return False
+
     elif type == "Downvotes" and votetype == "Checked":
 
         for key in response['Item']['UserDownvoted']:
             # traverse each item in Pairings and search for id the list
-            # find id the break, because index is incrementing till id is found
             if key == pid:
                 return False
 
+    elif type == "Upvotes" and votetype == "Unchecked":
+        for key in response['Item']['UserUpvoted']:
+            # traverse each item in Pairings and search for id the list
+            if key == pid:
+                return True
+        return False
+
+    elif type == "Downvotes" and votetype == "Unchecked":
+        for key in response['Item']['UserDownvoted']:
+            # traverse each item in Pairings and search for id the list
+            if key == pid:
+                return True
+        return False
     return True
