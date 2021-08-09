@@ -27,7 +27,6 @@ export default function IconsBar({ dataSet, ...otherProps }) {
 
     const [data, setData] = useState([]);
     useEffect(() => {
-        console.log("use effect up triggered " + dataSet.PID + " " + upIconChecked);
         fetch("https://56kdfhsnac.execute-api.eu-west-1.amazonaws.com/dev", {
             method: "POST",
             headers: {
@@ -49,7 +48,6 @@ export default function IconsBar({ dataSet, ...otherProps }) {
     }, [upIconChecked]);
 
     useEffect(() => {
-        console.log("use effect down triggered " + dataSet.PID + " " + downIconChecked);
         fetch("https://56kdfhsnac.execute-api.eu-west-1.amazonaws.com/dev", {
             method: "POST",
             body: JSON.stringify({

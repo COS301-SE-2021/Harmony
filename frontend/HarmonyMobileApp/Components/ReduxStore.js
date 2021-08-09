@@ -1,7 +1,6 @@
 import { createStore } from 'redux';
 
 const initialState = {
-    Checked: [],
     MealTags: [],
     FoodTags: [],
     DrinkTags: [],
@@ -30,21 +29,22 @@ const reducer = (state = initialState, action) => {
         case "REMOVE":
             if (action.payload.tagType == "drinks") {
                 for (var i = 0; i < state.DrinkTags.length; i++) {
-                    if (state.DrinkTags[i].tagName == action.payload.tagName)
-                        state.DrinkTags.splice(i, i);
+                    if (state.DrinkTags[i] == action.payload.tagName) {
+                        state.DrinkTags.splice(i, 1);
+                    }
                 }
             }
             else if (action.payload.tagType == "mealTypes") {
                 for (var i = 0; i < state.MealTags.length; i++) {
-                    if (state.MealTags[i].tagName == action.payload.tagName)
-                        state.MealTags.splice(i, i);
+                    if (state.MealTags[i] == action.payload.tagName)
+                        state.MealTags.splice(i, 1);
                 }
             }
             else if (action.payload.tagType == "food") {
                 console.log("in food " + state.FoodTags.length);
                 for (var i = 0; i < state.FoodTags.length; i++) {
-                    if (state.FoodTags[i].tagName == action.payload.tagName)
-                        state.FoodTags.splice(i, i);
+                    if (state.FoodTags[i] == action.payload.tagName)
+                        state.FoodTags.splice(i, 1);
                 }
             }
             break;

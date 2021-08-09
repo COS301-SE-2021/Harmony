@@ -16,7 +16,6 @@ export default function FilterTag({ color, title, style, cleared, filterType, ..
     //use effect is a hook that detects when a variable is changed and will act when its changed
     useEffect(() => {
         const state = ReduxStore.getState();
-        console.log("detect use effect " + filterType + " " + title)
         //cant be on its own so this leverages the fact that it reset to reset it again
         if ((state.MealTags.includes(title) && filterType == "mealTypes")
             || (state.DrinkTags.includes(title) && filterType == "drinks")
@@ -37,6 +36,7 @@ export default function FilterTag({ color, title, style, cleared, filterType, ..
     };
 
     const uncheckTag = () => {
+        console.log("unchecking " + title + " " + filterType);
         ReduxStore.dispatch({
             type: "REMOVE",
             //payload is the standard adopted name for the state value
