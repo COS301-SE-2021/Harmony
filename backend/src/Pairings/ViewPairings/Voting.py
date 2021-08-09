@@ -46,11 +46,11 @@ def vote(event, context):
     print(current_num_votes)
 
     # TODO : Uncomment this once add to user database is fixed
-    # if not validate_user_pairing_relation(uid, type, usertable, id, vote_type):
-    #     return {
-    #         "StatusCode": 400,
-    #         "Error": "Duplicate item found in User table. Unable to complete processing"
-    #     }
+    if not validate_user_pairing_relation(uid, type, usertable, id, vote_type):
+        return {
+            "StatusCode": 400,
+            "Error": "Duplicate item found in User table. Unable to complete processing"
+        }
 
     num_votes = addvote(vote_type, current_num_votes)
 
@@ -71,7 +71,7 @@ def vote(event, context):
     response = table.get_item(Key={'PID': id})
     # ADD/REMOVE the pairing from the user favourites DB still needs to be done.
     # TODO: Fix function below
-    # vote_userdatabase(uid ,type,usertable , id)
+    vote_userdatabase(uid ,type,usertable , id, vote_type)
     newUpvotes = response["Item"]["Upvotes"]
     newDownvotes = response["Item"]["Downvotes"]
 
@@ -94,10 +94,10 @@ def addvote(vote_type, num_votes):
 
     return num_votes
 
-def vote_userdatabase(uid, type, table, pid):
+def vote_userdatabase(uid, type, table, pid, votetype):
 
     response = table.get_item(Key={'UID': uid})
-    if type == "Upvotes":
+    if type == "Upvotes" and votetype == "Checked":
         index = 0
         lengthOfRemoved = len(response['Item']['UserDownvoted'])
         for key in response['Item']['UserDownvoted']:
@@ -128,7 +128,7 @@ def vote_userdatabase(uid, type, table, pid):
             )
         print(response['ResponseMetadata']['HTTPStatusCode'])
         return
-    elif type == "Downvotes":
+    elif type == "Downvotes" and votetype == "Checked":
         index = 0
         lengthOfRemoved = len(response['Item']['UserUpvoted'])
         for key in response['Item']['UserUpvoted']:
@@ -158,7 +158,48 @@ def vote_userdatabase(uid, type, table, pid):
             )
         print(response['ResponseMetadata']['HTTPStatusCode'])
         return
-
+    elif type == "Upvotes" and votetype == "Unchecked":
+        index = 0
+        lengthOfRemoved = len(response['Item']['UserUpvoted'])
+        for key in response['Item']['UserUpvoted']:
+            # traverse each item in Pairings and search for id the list
+            # find id the break, because index is incrementing till id is found
+            if key == pid:
+                break
+            index = index + 1
+        if index < lengthOfRemoved:
+            table.update_item(
+                Key={
+                    'UID': uid
+                },
+                # remove id at index of UserUpvoted list
+                UpdateExpression=f"remove UserUpvoted[{index}]",
+                ConditionExpression=f"contains(UserUpvoted, :pair)",
+                ExpressionAttributeValues={':pair': pid},
+                ReturnValues="UPDATED_NEW"
+            )
+        return
+    elif type == "Downvotes" and votetype == "Unchecked":
+        index = 0
+        lengthOfRemoved = len(response['Item']['UserDownvoted'])
+        for key in response['Item']['UserDownvoted']:
+            # traverse each item in Pairings and search for id the list
+            # find id the break, because index is incrementing till id is found
+            if key == pid:
+                break
+            index = index + 1
+        if index < lengthOfRemoved:
+            table.update_item(
+                Key={
+                    'UID': uid
+                },
+                # remove id at index of UserDownvoted list
+                UpdateExpression=f"remove UserDownvoted[{index}]",
+                ConditionExpression=f"contains(UserDownvoted, :pair)",
+                ExpressionAttributeValues={':pair': pid},
+                ReturnValues="UPDATED_NEW"
+            )
+        return
 
     return
 
