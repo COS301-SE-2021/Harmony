@@ -45,11 +45,12 @@ def vote(event, context):
     current_num_votes = pairing_data['Item'][type]
     print(current_num_votes)
 
-    if not validate_user_pairing_relation(uid, type, usertable, id, vote_type):
-        return {
-            "StatusCode": 400,
-            "Error": "Duplicate item found in User table. Unable to complete processing"
-        }
+    # TODO : Uncomment this once add to user database is fixed
+    # if not validate_user_pairing_relation(uid, type, usertable, id, vote_type):
+    #     return {
+    #         "StatusCode": 400,
+    #         "Error": "Duplicate item found in User table. Unable to complete processing"
+    #     }
 
     num_votes = addvote(vote_type, current_num_votes)
 
@@ -69,7 +70,8 @@ def vote(event, context):
     )
     response = table.get_item(Key={'PID': id})
     # ADD/REMOVE the pairing from the user favourites DB still needs to be done.
-    vote_userdatabase(uid ,type,usertable , id)
+    # TODO: Fix function below
+    # vote_userdatabase(uid ,type,usertable , id)
     newUpvotes = response["Item"]["Upvotes"]
     newDownvotes = response["Item"]["Downvotes"]
 
