@@ -4,9 +4,10 @@ const initialState = {
     MealTags: [],
     FoodTags: [],
     DrinkTags: [],
-    Range: 30,
+    Range: null,
     userLocationLat: null,
     userLocationLong: null,
+    ApplyFilter: false
 };
 
 //reducer -method that takes the actions and changes the state
@@ -47,7 +48,7 @@ const reducer = (state = initialState, action) => {
                 }
             }
             break;
-        case "RANGE":
+        case "UPDATERANGE":
             state.Range = action.payload.Range
             break;
         case "ADDLOCATION":
@@ -59,6 +60,9 @@ const reducer = (state = initialState, action) => {
             state.MealTags = [];
             state.FoodTags = [];
             state.DrinkTags = [];
+            break;
+        case "APPLYFILTER":
+            state.ApplyFilter = action.payload.ApplyFilter;
             break;
     }
     return state;

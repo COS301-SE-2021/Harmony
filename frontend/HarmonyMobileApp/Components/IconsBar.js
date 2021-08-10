@@ -57,7 +57,7 @@ export default function IconsBar({ dataSet, ...otherProps }) {
             .then((json) => setUpvotes(json.Upvotes))
             // .then((json) => setData(json))
             //.then(console.log(dataSet))
-            .then(console.log(upvotes))
+            //     .then(console.log(upvotes))
             .catch((error) => alert(error));
 
     }, [upIconChecked]);
@@ -76,7 +76,7 @@ export default function IconsBar({ dataSet, ...otherProps }) {
             .then((json) => setDownvotes(json.Downvotes))
             // .then(console.log(downvotes))
             .catch((error) => alert(error));
-        console.log(data);
+        //    console.log(data);
 
     }, [downIconChecked]);
 
@@ -177,7 +177,7 @@ export default function IconsBar({ dataSet, ...otherProps }) {
                         size={24}
                         color={downIconColor}
                     />
-                    {/* <Text style={[personalStyles.dataText, { paddingRight: "5%" }]}>{dataSet.Downvotes}</Text> */}
+                    {/* <Text style= {[personalStyles.dataText, { paddingRight: "5%" }]}>{dataSet.Downvotes}</Text> */}
                     <Text style={[personalStyles.dataText, { paddingRight: "5%" }]}>{downvotes}</Text>
 
                 </Pressable>

@@ -56,6 +56,20 @@ const HomeScreen = (props) => {
     setModalVisible(!isModalVisible);
   };
 
+  ReduxStore.subscribe(() => {
+    const state = ReduxStore.getState();
+    if (state.ApplyFilter) {
+      console.log("Applying filter");
+      setRefreshing(true);
+      ReduxStore.dispatch({
+        type: "APPLYFILTER",
+        payload: { "ApplyFilter": false }
+      })
+      wait(2000).then(() => setRefreshing(false));
+
+    }
+  });
+
   //the api call for trending
   useEffect(() => {
     GetLocation();
@@ -73,14 +87,14 @@ const HomeScreen = (props) => {
         "MealTags": state.MealTags,
         "FoodTags": state.FoodTags,
         "DrinkTags": state.DrinkTags,
-        "Distance": 10000,
+        "Distance": state.Range,
         "Longitude": state.userLocationLat,
         "Latitude": state.userLocationLong
       })
     })
       .then((response) => response.json())
       .then((json) => setData(json.Data))
-      //  .then(console.log(data))
+      //.then(console.log(data))
       .catch((error) => alert(error))
       .then(setLoading(false));
   }, [refreshing]);

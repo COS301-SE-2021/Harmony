@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Pressable,
@@ -25,19 +25,13 @@ import ReduxStore from "../Components/ReduxStore"
 
 export default function FilterModal({ color, title, ...otherProps }) {
   const [sortPairings, setSortPairings] = useState("Trending"); // the type of pairings shown filter
-  const [locationValue, setLocationValue] = useState(30); //distance filer
+  const [locationValue, setLocationValue] = useState(0); //distance filter
   const [isModalVisible, setModalVisible] = useState(true); //for the filter popup
-  const [clearFilters, setClearFilters] = useState(false);
   const filters = {
     mealTypes: ["Breakfast", "Lunch", "Supper", "Snack", "Vegetarian", "Dairy-Free", "Nut-Free"],
     foods: ["Spicy", "Savoury", "Salty", "Sweet", "Sour", "Hot", "Warm", "Cold",],
     drinks: ["Alcoholic", "Non-Alcoholic", "Fizzy", "Sweet", "Sour", "Bitter", "Hot", "Warm", "Cold",],
   };
-
-  //subscribes get triggered when the store is updated
-  ReduxStore.subscribe(() => {
-    console.log("Store updated in modal", ReduxStore.getState());
-  });
 
   //toggles the modals visibility
   const toggleModal = () => {
@@ -58,29 +52,21 @@ export default function FilterModal({ color, title, ...otherProps }) {
 
   const applyFilters = () => {
     setModalVisible(!isModalVisible);
-    const state = ReduxStore.getState();
-    fetch("https://9vk5hcie79.execute-api.eu-west-1.amazonaws.com/dev", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        "UID": "u1",
-        "Sort": "Trending",
-        "MealTags": state.MealTags,
-        "FoodTags": state.FoodTags,
-        "DrinkTags": state.DrinkTags,
-        "Distance": 10000,
-        "Longitude": state.userLocationLat,
-        "Latitude": state.userLocationLong
-      })
+    ReduxStore.dispatch({
+      type: "APPLYFILTER",
+      payload: { "ApplyFilter": true }
     })
-      .then((response) => response.json())
-      .then((json) => setData(json.Data))
-      //  .then(console.log(data))
-      .catch((error) => alert(error))
   }
+
+  useEffect(() => {
+    console.log("location value updated " + locationValue)
+    if (locationValue != 0) {
+      ReduxStore.dispatch({
+        type: "UPDATERANGE",
+        payload: { "Range": locationValue }
+      })
+    }
+  }, [locationValue]);
 
   return (
     <Modal
@@ -146,7 +132,7 @@ export default function FilterModal({ color, title, ...otherProps }) {
                   style={[styles.TextSmall, { height: 40, width: 300 }]}
                   onValueChange={(itemValue, itemIndex) => {
                     setSortPairings(itemValue);
-                    console.log(itemValue);
+                    // console.log(itemValue);
                   }}
                 >
                   <Picker.Item label="Trending" value="Trending" />
@@ -173,7 +159,8 @@ export default function FilterModal({ color, title, ...otherProps }) {
                   step={20}
                   maximumValue={100}
                   onValueChange={(value) => (
-                    console.log(value), setLocationValue(value)
+                    // console.log(value), 
+                    setLocationValue(value)
                   )}
                   style={{ width: "70%" }}
                   thumbStyle={{
@@ -219,7 +206,7 @@ export default function FilterModal({ color, title, ...otherProps }) {
                     {/* Mapping of the tags from the JSON to the components*/}
                     {filters.mealTypes.map((tag, index) => (
                       <View key={index}>
-                        <FilterTag color="#FF6347" title={tag} filterType="mealTypes" cleared={clearFilters} />
+                        <FilterTag color="#FF6347" title={tag} filterType="mealTypes" />
                       </View>
                     ))}
                   </View>
@@ -251,7 +238,7 @@ export default function FilterModal({ color, title, ...otherProps }) {
                     {/* Mapping of the tags from the JSON to the components*/}
                     {filters.drinks.map((tag, index) => (
                       <View key={index}>
-                        <FilterTag color="#1FBFBA" title={tag} filterType="drinks" cleared={clearFilters} />
+                        <FilterTag color="#1FBFBA" title={tag} filterType="drinks" />
                       </View>
                     ))}
                   </View>
@@ -283,7 +270,7 @@ export default function FilterModal({ color, title, ...otherProps }) {
                     {/* Mapping of the tags from the JSON to the components*/}
                     {filters.foods.map((tag, index) => (
                       <View key={index}>
-                        <FilterTag color="#C41ED4" title={tag} filterType="food" cleared={clearFilters} />
+                        <FilterTag color="#C41ED4" title={tag} filterType="food" />
                       </View>
                     ))}
                   </View>
