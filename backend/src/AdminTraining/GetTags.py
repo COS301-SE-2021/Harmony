@@ -5,7 +5,7 @@ url = "https://eastus.api.cognitive.microsoft.com/customvision/v3.0/training/pro
 
 body = {}
 headers = {
-    'Training-Key': '660f5ff2178347299730d1dbee11d350',
+    'Training-Key': '',
     'Content-Type': 'application/json'
 
 }
