@@ -47,7 +47,14 @@ export default function IconsBar({ dataSet, upVoteVal, downVoteVal, ...otherProp
                 })
             })
                 .then((response) => response.json())
-                .then((json) => setUpvote(json.Upvotes))
+                .then((json) => {
+                    //Only updates the value if there is NO error
+                    //And if there is an error, the value will NOT be updated
+                    //We can display a toast with the message "Error occured..."
+                    if ((json.Upvotes)) {
+                        setUpvote(json.Upvotes)
+                    }
+                })
                 .catch((error) => alert(error));
         }
     }, [upIconChecked]);
@@ -64,7 +71,12 @@ export default function IconsBar({ dataSet, upVoteVal, downVoteVal, ...otherProp
                 })
             })
                 .then((response) => response.json())
-                .then((json) => setDownvote(json.Downvotes))
+                .then((json) => {
+
+                    if ((json.Downvotes)) {
+                        setUpvote(json.Downvotes)
+                    }
+                })
                 .catch((error) => alert(error));
         }
     }, [downIconChecked]);
@@ -125,7 +137,6 @@ export default function IconsBar({ dataSet, upVoteVal, downVoteVal, ...otherProp
                 setUpIconColor("#80CB41");
                 setUpIconOutline("upcircle");
                 setUpIconChecked("Checked");
-                // vote();
             } else {
                 setUpIconColor("black");
                 setUpIconOutline("upcircleo");
@@ -169,7 +180,6 @@ export default function IconsBar({ dataSet, upVoteVal, downVoteVal, ...otherProp
                     />
                     {/* <Text style= {[personalStyles.dataText, { paddingRight: "5%" }]}>{dataSet.Downvotes}</Text> */}
                     <Text style={[personalStyles.dataText, { paddingRight: "5%" }]}>{downvote}</Text>
-
                 </Pressable>
 
                 <Pressable
@@ -185,7 +195,6 @@ export default function IconsBar({ dataSet, upVoteVal, downVoteVal, ...otherProp
                     {/* <Text style={personalStyles.dataText}>{dataSet.Upvotes}</Text> */}
                     <Text style={personalStyles.dataText}>{upvote}</Text>
                 </Pressable>
-
             </View>
             <Pressable onPress={handleFavouriteIconPress}>
                 <AntDesign name={favouriteIconOutline} size={24} color={favouriteIconColor} />
