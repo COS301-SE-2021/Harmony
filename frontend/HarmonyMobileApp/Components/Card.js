@@ -124,7 +124,7 @@ export default function Card({ dataSet, ...otherProps }) {
                         style={personalStyles.locationResultBox}
                     >
                         <Text style={styles.TextSmall}>{dataSet.Location} </Text>
-                        <Text style={styles.TextSmall}>35 KM</Text>
+                        <Text style={styles.TextSmall}>{dataSet.Distance} KM</Text>
                     </View>
                 </View>
                 <Divider />

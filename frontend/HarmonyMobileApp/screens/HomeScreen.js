@@ -88,8 +88,8 @@ const HomeScreen = (props) => {
         "FoodTags": state.FoodTags,
         "DrinkTags": state.DrinkTags,
         "Distance": state.Range,
-        "Longitude": state.userLocationLat,
-        "Latitude": state.userLocationLong
+        "Longitude": state.userLocationLong,
+        "Latitude": state.userLocationLat
       })
     })
       .then((response) => response.json())
