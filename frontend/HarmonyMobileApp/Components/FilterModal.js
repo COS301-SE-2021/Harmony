@@ -57,7 +57,29 @@ export default function FilterModal({ color, title, ...otherProps }) {
   };
 
   const applyFilters = () => {
-
+    setModalVisible(!isModalVisible);
+    const state = ReduxStore.getState();
+    fetch("https://9vk5hcie79.execute-api.eu-west-1.amazonaws.com/dev", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        "UID": "u1",
+        "Sort": "Trending",
+        "MealTags": state.MealTags,
+        "FoodTags": state.FoodTags,
+        "DrinkTags": state.DrinkTags,
+        "Distance": 10000,
+        "Longitude": state.userLocationLat,
+        "Latitude": state.userLocationLong
+      })
+    })
+      .then((response) => response.json())
+      .then((json) => setData(json.Data))
+      //  .then(console.log(data))
+      .catch((error) => alert(error))
   }
 
   return (
@@ -286,7 +308,7 @@ export default function FilterModal({ color, title, ...otherProps }) {
             </Pressable>
             <Pressable
               style={[styles.applyButton]}
-              onPress={() => setModalVisible(!isModalVisible)}
+              onPress={() => applyFilters()}
             >
               <Text
                 style={[

@@ -42,9 +42,6 @@ const HomeScreen = (props) => {
 
   const [refreshing, setRefreshing] = React.useState(false);
 
-  const [userLocationLatitude, setUserLocationLatitude] = useState(null);
-  const [userLocationLongitude, setUserLocationLongitude] = useState(null);
-
   //the refreshing of the flatlist
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
@@ -61,6 +58,7 @@ const HomeScreen = (props) => {
 
   //the api call for trending
   useEffect(() => {
+    GetLocation();
     const state = ReduxStore.getState();
     console.log(state);
     fetch(viewPairingURL, {
@@ -82,7 +80,7 @@ const HomeScreen = (props) => {
     })
       .then((response) => response.json())
       .then((json) => setData(json.Data))
-      .then(console.log(data))
+      //  .then(console.log(data))
       .catch((error) => alert(error))
       .then(setLoading(false));
   }, [refreshing]);
@@ -100,7 +98,7 @@ const HomeScreen = (props) => {
     ReduxStore.dispatch({
       type: "ADDLOCATION",
       //payload is the standard adopted name for the state value
-      payload: { "latitude": userLocationLatitude, "longitude": userLocationLongitude }
+      payload: { "latitude": location.coords.latitude, "longitude": location.coords.longitude }
     });
   }
 

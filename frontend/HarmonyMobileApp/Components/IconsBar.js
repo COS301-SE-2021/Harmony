@@ -26,8 +26,21 @@ export default function IconsBar({ dataSet, ...otherProps }) {
     const [downIconOutline, setDownIconOutline] = useState("downcircleo");
 
     const [data, setData] = useState([]);
+    const [upvotes, setUpvotes] = useState(dataSet.Upvotes);
+    const [downvotes, setDownvotes] = useState(dataSet.Downvotes);
+
+    //used to give up and down votes initial values
+    const [load, setLoad] = useState(true);
+    // useEffect(() => {
+    //     initialiseData();
+    // }, [load]);
+
+    // const initialiseData=(dataSet)=>{
+    //     setUpvotes(dataSet.Upvotes);
+    //     setDownvotes(dataSet.Downvotes);
+    // }
     useEffect(() => {
-        fetch("https://56kdfhsnac.execute-api.eu-west-1.amazonaws.com/dev", {
+        fetch("https://duj0glvi9d.execute-api.eu-west-1.amazonaws.com/dev", {
             method: "POST",
             headers: {
                 Accept: "application/json",
@@ -41,14 +54,16 @@ export default function IconsBar({ dataSet, ...otherProps }) {
             })
         })
             .then((response) => response.json())
-            .then((json) => setData(json))
-            .then(console.log(data))
+            .then((json) => setUpvotes(json.Upvotes))
+            // .then((json) => setData(json))
+            //.then(console.log(dataSet))
+            .then(console.log(upvotes))
             .catch((error) => alert(error));
 
     }, [upIconChecked]);
 
     useEffect(() => {
-        fetch("https://56kdfhsnac.execute-api.eu-west-1.amazonaws.com/dev", {
+        fetch("https://duj0glvi9d.execute-api.eu-west-1.amazonaws.com/dev", {
             method: "POST",
             body: JSON.stringify({
                 "UID": "u1",
@@ -58,7 +73,8 @@ export default function IconsBar({ dataSet, ...otherProps }) {
             })
         })
             .then((response) => response.json())
-            .then((json) => setData(json))
+            .then((json) => setDownvotes(json.Downvotes))
+            // .then(console.log(downvotes))
             .catch((error) => alert(error));
         console.log(data);
 
@@ -66,7 +82,6 @@ export default function IconsBar({ dataSet, ...otherProps }) {
 
 
     useEffect(() => {
-        console.log("use effect fav triggered " + dataSet.PID + " " + favouriteIconChecked);
         if (favouriteIconChecked == "Checked") {
             fetch("https://bqwmc4qpkd.execute-api.eu-west-1.amazonaws.com/dev", {
                 method: "POST",
@@ -76,9 +91,7 @@ export default function IconsBar({ dataSet, ...otherProps }) {
                 })
             })
                 .then((response) => response.json())
-                .then((json) => setData(json))
                 .catch((error) => alert(error));
-            console.log(data);
         }
         else {
             fetch("https://blzyl8bowc.execute-api.eu-west-1.amazonaws.com/dev", {
@@ -89,10 +102,7 @@ export default function IconsBar({ dataSet, ...otherProps }) {
                 })
             })
                 .then((response) => response.json())
-                .then((json) => setData(json))
                 .catch((error) => alert(error));
-            console.log(data);
-
         }
 
     }, [favouriteIconChecked]);
@@ -167,7 +177,8 @@ export default function IconsBar({ dataSet, ...otherProps }) {
                         size={24}
                         color={downIconColor}
                     />
-                    <Text style={[personalStyles.dataText, { paddingRight: "5%" }]}>{dataSet.Downvotes}</Text>
+                    {/* <Text style={[personalStyles.dataText, { paddingRight: "5%" }]}>{dataSet.Downvotes}</Text> */}
+                    <Text style={[personalStyles.dataText, { paddingRight: "5%" }]}>{downvotes}</Text>
 
                 </Pressable>
 
@@ -181,7 +192,8 @@ export default function IconsBar({ dataSet, ...otherProps }) {
                         color={upIconColor}
                     />
 
-                    <Text style={personalStyles.dataText}>{dataSet.Upvotes}</Text>
+                    {/* <Text style={personalStyles.dataText}>{dataSet.Upvotes}</Text> */}
+                    <Text style={personalStyles.dataText}>{upvotes}</Text>
                 </Pressable>
 
             </View>

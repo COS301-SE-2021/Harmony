@@ -36,7 +36,6 @@ export default function FilterTag({ color, title, style, cleared, filterType, ..
     };
 
     const uncheckTag = () => {
-        console.log("unchecking " + title + " " + filterType);
         ReduxStore.dispatch({
             type: "REMOVE",
             //payload is the standard adopted name for the state value

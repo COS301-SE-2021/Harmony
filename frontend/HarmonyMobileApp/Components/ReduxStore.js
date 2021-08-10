@@ -41,7 +41,6 @@ const reducer = (state = initialState, action) => {
                 }
             }
             else if (action.payload.tagType == "food") {
-                console.log("in food " + state.FoodTags.length);
                 for (var i = 0; i < state.FoodTags.length; i++) {
                     if (state.FoodTags[i] == action.payload.tagName)
                         state.FoodTags.splice(i, 1);
