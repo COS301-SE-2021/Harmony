@@ -49,7 +49,7 @@ def sort_and_filter(event, context):
         sortedResponse = sortbytrending(response)
     elif event['Sort'] == 'Controversial':
         sortedResponse = sortbycontroversial(response)
-    elif event['Sort'] == 'Distance':
+    elif event['Sort'] == 'Closest':
         sortedResponse = sortbydistance(response)
 
     sortedResponse = add_userdata(sortedResponse, userResponse)
