@@ -162,7 +162,7 @@ const HomeScreen = (props) => {
       />
       <View style={{ height: "100%" }}>
         <View style={styles.centeredView}>
-          {isModalVisible && <FilterModal />}
+          {isModalVisible && <FilterModal sortPairingsName={ReduxStore.getState().sortPairings} />}
         </View>
 
         {isLoading ? (
