@@ -17,58 +17,56 @@ export default function IconsBar({ dataSet, upVoteVal, downVoteVal, ...otherProp
     const [favouriteIconColor, setFavouriteIconColor] = useState("black");                   // controls the favourite heart color (pink/black)
     const [favouriteIconOutline, setFavouriteIconOutline] = useState("hearto");      // controls whether the heart is filled in or outlined
 
-    const [upIconChecked, setUpIconChecked] = useState("Unchecked");
+    const [upIconChecked, setUpIconChecked] = useState("");
     const [upIconColor, setUpIconColor] = useState("black");
     const [upIconOutline, setUpIconOutline] = useState("upcircleo");
 
-    const [downIconChecked, setDownIconChecked] = useState("Unchecked");
+    const [downIconChecked, setDownIconChecked] = useState("");
     const [downIconColor, setDownIconColor] = useState("black");
     const [downIconOutline, setDownIconOutline] = useState("downcircleo");
 
     const [upvote, setUpvote] = useState(upVoteVal);
     const [downvote, setDownvote] = useState(downVoteVal);
-    useEffect(() => {
-        console.log("upvote val changed " + upvote);
-    }, [upvote]);
-    useEffect(() => {
-        fetch("https://duj0glvi9d.execute-api.eu-west-1.amazonaws.com/dev", {
-            method: "POST",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                "UID": "u1",
-                "PID": dataSet.PID,
-                "VoteType": "Upvotes",
-                "IsChecked": upIconChecked
-            })
-        })
-            .then((response) => response.json())
-            .then((json) => setUpvote(json.Upvotes))
-            // .then((json) => setData(json))
-            //.then(console.log(dataSet))
-            //     .then(console.log(upvotes))
-            .catch((error) => alert(error));
 
+    const voteURL =
+        "https://duj0glvi9d.execute-api.eu-west-1.amazonaws.com/dev";
+
+    useEffect(() => {
+        if (upIconChecked != "") {
+            fetch("https://duj0glvi9d.execute-api.eu-west-1.amazonaws.com/dev", {
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    "UID": "u1",
+                    "PID": dataSet.PID,
+                    "VoteType": "Upvotes",
+                    "IsChecked": upIconChecked
+                })
+            })
+                .then((response) => response.json())
+                .then((json) => setUpvote(json.Upvotes))
+                .catch((error) => alert(error));
+        }
     }, [upIconChecked]);
 
     useEffect(() => {
-        fetch("https://duj0glvi9d.execute-api.eu-west-1.amazonaws.com/dev", {
-            method: "POST",
-            body: JSON.stringify({
-                "UID": "u1",
-                "PID": dataSet.PID,
-                "VoteType": "Downvotes",
-                "IsChecked": downIconChecked
+        if (downIconChecked != "") {
+            fetch("https://duj0glvi9d.execute-api.eu-west-1.amazonaws.com/dev", {
+                method: "POST",
+                body: JSON.stringify({
+                    "UID": "u1",
+                    "PID": dataSet.PID,
+                    "VoteType": "Downvotes",
+                    "IsChecked": downIconChecked
+                })
             })
-        })
-            .then((response) => response.json())
-            .then((json) => setDownvote(json.Downvotes))
-            // .then(console.log(downvotes))
-            .catch((error) => alert(error));
-        //    console.log(data);
-
+                .then((response) => response.json())
+                .then((json) => setDownvote(json.Downvotes))
+                .catch((error) => alert(error));
+        }
     }, [downIconChecked]);
 
 
@@ -99,8 +97,8 @@ export default function IconsBar({ dataSet, upVoteVal, downVoteVal, ...otherProp
     }, [favouriteIconChecked]);
 
     handleDownIconPress = () => {
-        if (upIconChecked == "Unchecked") {
-            if (downIconChecked == "Unchecked") {
+        if (upIconChecked == "Unchecked" || upIconChecked == "") {
+            if (downIconChecked == "Unchecked" || downIconChecked == "") {
                 setDownIconColor("#FF2727");
                 setDownIconOutline("downcircle");
                 setDownIconChecked("Checked");
@@ -122,11 +120,12 @@ export default function IconsBar({ dataSet, upVoteVal, downVoteVal, ...otherProp
     };
 
     handleUpIconPress = () => {
-        if (downIconChecked == "Unchecked") {
-            if (upIconChecked == "Unchecked") {
+        if (downIconChecked == "Unchecked" || downIconChecked == "") {
+            if (upIconChecked == "Unchecked" || upIconChecked == "") {
                 setUpIconColor("#80CB41");
                 setUpIconOutline("upcircle");
                 setUpIconChecked("Checked");
+                // vote();
             } else {
                 setUpIconColor("black");
                 setUpIconOutline("upcircleo");
