@@ -26,7 +26,7 @@ def remove_from_favourites(event, context):
 
     # validate request edge case
     if validate_request(pid, uid) == "false":
-        return json.dumps({'isSuccessful': 'false', 'PID': pid})
+        return json.dumps({'StatusCode': 400, 'PID': pid})
 
     response = table.get_item(Key={'UID': uid})
     # convert number to integer
@@ -57,7 +57,7 @@ def remove_from_favourites(event, context):
         if e.response['Error']['Code'] == "ConditionalCheckFailedException":
             print(e.response['Error']['Message'])
             # fix this, return false when fixed, test edge cases
-            return json.dumps({'StatusCode': 200, 'PID': pid})
+            return json.dumps({'StatusCode': 400, 'PID': pid})
         else:
             raise
     else:
