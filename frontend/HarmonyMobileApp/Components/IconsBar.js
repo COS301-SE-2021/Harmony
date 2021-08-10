@@ -66,7 +66,6 @@ export default function IconsBar({
             .catch((error) => alert(error));
     };
 
-
     useEffect(() => {
         if (favouriteIconChecked == "Checked") {
             addRemoveFavourites(addToFavURL);
@@ -88,61 +87,71 @@ export default function IconsBar({
             .catch((error) => alert(error));
 
     };
+
+    const uncheckDownvote = () => {
+        setDownIconColor("black");
+        setDownIconOutline("downcircleo");
+        setDownIconChecked("Unchecked");
+    }
+    const checkDownvote = () => {
+        setDownIconColor("#FF2727");
+        setDownIconOutline("downcircle");
+        setDownIconChecked("Checked");
+    }
+    const checkUpvote = () => {
+        setUpIconColor("#80CB41");
+        setUpIconOutline("upcircle");
+        setUpIconChecked("Checked");
+    }
+    const uncheckUpvote = () => {
+        setUpIconColor("black");
+        setUpIconOutline("upcircleo");
+        setUpIconChecked("Unchecked");
+    }
+    const checkFavourite = () => {
+        setFavouriteIconColor("#FF2763");
+        setFavouriteIconOutline("heart");
+        setFavouriteIconChecked("Checked");
+    }
+    const uncheckFavourite = () => {
+        setFavouriteIconColor("black");
+        setFavouriteIconOutline("hearto");
+        setFavouriteIconChecked("Unchecked");
+    }
+
     handleDownIconPress = () => {
         if (upIconChecked == "Unchecked" || upIconChecked == "") {
             if (downIconChecked == "Unchecked" || downIconChecked == "") {
-                setDownIconColor("#FF2727");
-                setDownIconOutline("downcircle");
-                setDownIconChecked("Checked");
+                checkDownvote();
             } else {
-                setDownIconColor("black");
-                setDownIconOutline("downcircleo");
-                setDownIconChecked("Unchecked");
+                uncheckDownvote();
             }
         } else {
             // uncheck up and then check down
-            setUpIconColor("black");
-            setUpIconOutline("upcircleo");
-            setUpIconChecked("Unchecked");
-
-            setDownIconColor("#FF2727");
-            setDownIconOutline("downcircle");
-            setDownIconChecked("Checked");
+            uncheckUpvote()
+            checkDownvote();
         }
     };
 
     handleUpIconPress = () => {
         if (downIconChecked == "Unchecked" || downIconChecked == "") {
             if (upIconChecked == "Unchecked" || upIconChecked == "") {
-                setUpIconColor("#80CB41");
-                setUpIconOutline("upcircle");
-                setUpIconChecked("Checked");
+                checkUpvote();
             } else {
-                setUpIconColor("black");
-                setUpIconOutline("upcircleo");
-                setUpIconChecked("Unchecked");
+                uncheckUpvote()
             }
         } else {
             // uncheck down then check up
-            setDownIconColor("black");
-            setDownIconOutline("downcircleo");
-            setDownIconChecked("Unchecked");
-
-            setUpIconColor("#80CB41");
-            setUpIconOutline("upcircle");
-            setUpIconChecked("Checked");
+            uncheckDownvote();
+            checkUpvote();
         }
     };
 
     handleFavouriteIconPress = () => {
         if (favouriteIconChecked == "Unchecked") {
-            setFavouriteIconColor("#FF2763");
-            setFavouriteIconOutline("heart");
-            setFavouriteIconChecked("Checked");
+            checkFavourite();
         } else {
-            setFavouriteIconColor("black");
-            setFavouriteIconOutline("hearto");
-            setFavouriteIconChecked("Unchecked");
+            uncheckFavourite();
         }
     };
 
@@ -159,7 +168,6 @@ export default function IconsBar({
                         {downvote}
                     </Text>
                 </Pressable>
-
                 <Pressable
                     style={[styles.flexRowJustCenter, { paddingRight: "10%" }]}
                     onPress={handleUpIconPress}
