@@ -1,21 +1,18 @@
 import React, { useState, useEffect } from "react";
-import {
-    StyleSheet,
-    Pressable,
-    View,
-
-} from "react-native";
-import { Text } from '@ui-kitten/components';
-import {
-    AntDesign,
-} from "@expo/vector-icons";
+import { StyleSheet, Pressable, View } from "react-native";
+import { Text } from "@ui-kitten/components";
+import { AntDesign } from "@expo/vector-icons";
 import styles from "../styles";
 
 // make api call with dataSet.PID
-export default function IconsBar({ dataSet, upVoteVal, downVoteVal, ...otherProps }) {
+export default function IconsBar({
+    dataSet,
+    upVoteVal,
+    downVoteVal,
+}) {
     const [favouriteIconChecked, setFavouriteIconChecked] = useState("Unchecked");
-    const [favouriteIconColor, setFavouriteIconColor] = useState("black");                   // controls the favourite heart color (pink/black)
-    const [favouriteIconOutline, setFavouriteIconOutline] = useState("hearto");      // controls whether the heart is filled in or outlined
+    const [favouriteIconColor, setFavouriteIconColor] = useState("black"); // controls the favourite heart color (pink/black)
+    const [favouriteIconOutline, setFavouriteIconOutline] = useState("hearto"); // controls whether the heart is filled in or outlined
 
     const [upIconChecked, setUpIconChecked] = useState("");
     const [upIconColor, setUpIconColor] = useState("black");
@@ -28,84 +25,66 @@ export default function IconsBar({ dataSet, upVoteVal, downVoteVal, ...otherProp
     const [upvote, setUpvote] = useState(upVoteVal);
     const [downvote, setDownvote] = useState(downVoteVal);
 
-    const voteURL =
-        "https://duj0glvi9d.execute-api.eu-west-1.amazonaws.com/dev";
+    const voteURL = "https://duj0glvi9d.execute-api.eu-west-1.amazonaws.com/dev";
 
     useEffect(() => {
         if (upIconChecked != "") {
-            fetch("https://duj0glvi9d.execute-api.eu-west-1.amazonaws.com/dev", {
-                method: "POST",
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    "UID": "u1",
-                    "PID": dataSet.PID,
-                    "VoteType": "Upvotes",
-                    "IsChecked": upIconChecked
-                })
-            })
-                .then((response) => response.json())
-                .then((json) => {
-                    //Only updates the value if there is NO error
-                    //And if there is an error, the value will NOT be updated
-                    //We can display a toast with the message "Error occured..."
-                    if ((json.Upvotes)) {
-                        setUpvote(json.Upvotes)
-                    }
-                })
-                .catch((error) => alert(error));
+            vote(dataSet.PID, "Upvotes", upIconChecked);
         }
     }, [upIconChecked]);
 
     useEffect(() => {
         if (downIconChecked != "") {
-            fetch("https://duj0glvi9d.execute-api.eu-west-1.amazonaws.com/dev", {
-                method: "POST",
-                body: JSON.stringify({
-                    "UID": "u1",
-                    "PID": dataSet.PID,
-                    "VoteType": "Downvotes",
-                    "IsChecked": downIconChecked
-                })
-            })
-                .then((response) => response.json())
-                .then((json) => {
-
-                    if ((json.Downvotes)) {
-                        setUpvote(json.Downvotes)
-                    }
-                })
-                .catch((error) => alert(error));
+            vote(dataSet.PID, "Downvotes", downIconChecked);
         }
     }, [downIconChecked]);
 
-
+    const vote = async (PID, VoteType, iconChecked) => {
+        await fetch(voteURL, {
+            method: "POST",
+            body: JSON.stringify({
+                UID: "u1",
+                PID: PID,
+                VoteType: VoteType,
+                IsChecked: iconChecked,
+            }),
+        })
+            .then((response) => response.json())
+            .then((json) => {
+                if (VoteType == "Downvotes") {
+                    if (json.Downvotes) {
+                        setDownvote(json.Downvotes);
+                    }
+                } else if (VoteType == "Upvotes") {
+                    if (json.Upvotes) {
+                        setUpvote(json.Upvotes);
+                    }
+                }
+            })
+            .catch((error) => alert(error));
+    };
     useEffect(() => {
         if (favouriteIconChecked == "Checked") {
             fetch("https://bqwmc4qpkd.execute-api.eu-west-1.amazonaws.com/dev", {
                 method: "POST",
                 body: JSON.stringify({
-                    "UID": "u1",
-                    "PID": dataSet.PID,
-                })
+                    UID: "u1",
+                    PID: dataSet.PID,
+                }),
             })
                 .then((response) => response.json())
                 .catch((error) => alert(error));
-        }
-        else {
+        } else {
             fetch("https://blzyl8bowc.execute-api.eu-west-1.amazonaws.com/dev", {
                 method: "POST",
                 body: JSON.stringify({
-                    "UID": "u1",
-                    "PID": dataSet.PID,
-                })
+                    UID: "u1",
+                    PID: dataSet.PID,
+                }),
             })
                 .then((response) => response.json())
                 .catch((error) => alert(error));
         }
-
     }, [favouriteIconChecked]);
 
     handleDownIconPress = () => {
@@ -173,42 +152,38 @@ export default function IconsBar({ dataSet, upVoteVal, downVoteVal, ...otherProp
                     style={styles.flexRowJustCenter}
                     onPress={handleDownIconPress}
                 >
-                    <AntDesign
-                        name={downIconOutline}
-                        size={24}
-                        color={downIconColor}
-                    />
+                    <AntDesign name={downIconOutline} size={24} color={downIconColor} />
                     {/* <Text style= {[personalStyles.dataText, { paddingRight: "5%" }]}>{dataSet.Downvotes}</Text> */}
-                    <Text style={[personalStyles.dataText, { paddingRight: "5%" }]}>{downvote}</Text>
+                    <Text style={[personalStyles.dataText, { paddingRight: "5%" }]}>
+                        {downvote}
+                    </Text>
                 </Pressable>
 
                 <Pressable
                     style={[styles.flexRowJustCenter, { paddingRight: "10%" }]}
                     onPress={handleUpIconPress}
                 >
-                    <AntDesign
-                        name={upIconOutline}
-                        size={24}
-                        color={upIconColor}
-                    />
+                    <AntDesign name={upIconOutline} size={24} color={upIconColor} />
 
                     {/* <Text style={personalStyles.dataText}>{dataSet.Upvotes}</Text> */}
                     <Text style={personalStyles.dataText}>{upvote}</Text>
                 </Pressable>
             </View>
             <Pressable onPress={handleFavouriteIconPress}>
-                <AntDesign name={favouriteIconOutline} size={24} color={favouriteIconColor} />
+                <AntDesign
+                    name={favouriteIconOutline}
+                    size={24}
+                    color={favouriteIconColor}
+                />
             </Pressable>
         </View>
     );
-};
+}
 
 const personalStyles = StyleSheet.create({
-
     dataText: {
         paddingLeft: "2%",
         paddingVertical: "1%",
-        fontFamily: "sans-serif-light"
-    }
-
+        fontFamily: "sans-serif-light",
+    },
 });
