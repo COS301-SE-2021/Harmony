@@ -26,25 +26,27 @@ export default function IconsBar({
     const [downvote, setDownvote] = useState(downVoteVal);
 
     const voteURL = "https://duj0glvi9d.execute-api.eu-west-1.amazonaws.com/dev";
-
+    const addToFavURL = "https://bqwmc4qpkd.execute-api.eu-west-1.amazonaws.com/dev";
+    const removeFromFavURL = "https://blzyl8bowc.execute-api.eu-west-1.amazonaws.com/dev";
     useEffect(() => {
-        if (upIconChecked != "") {
-            vote(dataSet.PID, "Upvotes", upIconChecked);
+        if (upIconChecked != "") {//If the value has been set
+            vote("Upvotes", upIconChecked);
         }
     }, [upIconChecked]);
 
     useEffect(() => {
-        if (downIconChecked != "") {
-            vote(dataSet.PID, "Downvotes", downIconChecked);
+        if (downIconChecked != "") {//If the value has been set
+            vote("Downvotes", downIconChecked);
         }
     }, [downIconChecked]);
 
-    const vote = async (PID, VoteType, iconChecked) => {
+    //Upvotes or Downvotes depending on the button clicked
+    const vote = async (VoteType, iconChecked) => {
         await fetch(voteURL, {
             method: "POST",
             body: JSON.stringify({
                 UID: "u1",
-                PID: PID,
+                PID: dataSet.PID,
                 VoteType: VoteType,
                 IsChecked: iconChecked,
             }),
@@ -63,30 +65,29 @@ export default function IconsBar({
             })
             .catch((error) => alert(error));
     };
+
+
     useEffect(() => {
         if (favouriteIconChecked == "Checked") {
-            fetch("https://bqwmc4qpkd.execute-api.eu-west-1.amazonaws.com/dev", {
-                method: "POST",
-                body: JSON.stringify({
-                    UID: "u1",
-                    PID: dataSet.PID,
-                }),
-            })
-                .then((response) => response.json())
-                .catch((error) => alert(error));
+            addRemoveFavourites(addToFavURL);
         } else {
-            fetch("https://blzyl8bowc.execute-api.eu-west-1.amazonaws.com/dev", {
-                method: "POST",
-                body: JSON.stringify({
-                    UID: "u1",
-                    PID: dataSet.PID,
-                }),
-            })
-                .then((response) => response.json())
-                .catch((error) => alert(error));
+            addRemoveFavourites(removeFromFavURL);
         }
     }, [favouriteIconChecked]);
 
+    //Adds and removes pairings from user favourites
+    const addRemoveFavourites = async (URL) => {
+        fetch(URL, {
+            method: "POST",
+            body: JSON.stringify({
+                UID: "u1",
+                PID: dataSet.PID,
+            }),
+        })
+            .then((response) => response.json())
+            .catch((error) => alert(error));
+
+    };
     handleDownIconPress = () => {
         if (upIconChecked == "Unchecked" || upIconChecked == "") {
             if (downIconChecked == "Unchecked" || downIconChecked == "") {
