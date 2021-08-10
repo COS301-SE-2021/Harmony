@@ -23,7 +23,7 @@ def add_to_favourites(event, context):
     validate1 = validate_event(uid, pid)
     validate2 = check_if_fav_exists(uid, pid)
     if validate1 == "false" or validate2 == "false":
-        return json.dumps({'isSuccessful': 'false', 'PID': pid})
+        return json.dumps({'StatusCode': 400, 'PID': pid})
 
     try:
         response = table.update_item(
@@ -41,7 +41,7 @@ def add_to_favourites(event, context):
         if e.response['Error']['Code'] == "ConditionalCheckFailedException":
             print(e.response['Error']['Message'])
             # fix this, return false when fixed, test edge cases
-            return json.dumps({'isSuccessful': 'false', 'PID': pid})
+            return json.dumps({'StatusCode': 400, 'PID': pid})
         else:
             raise
     else:
