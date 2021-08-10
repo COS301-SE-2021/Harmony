@@ -116,16 +116,23 @@ def vote_userdatabase(uid, type, table, pid, votetype):
 
         )
         if index < lengthOfRemoved:
-            table.update_item(
-                Key={
-                    'UID': uid
-                },
-                # remove id at index of UserDownvoted list
-                UpdateExpression=f"remove UserDownvoted[{index}]",
-                ConditionExpression=f"contains(UserDownvoted, :pair)",
-                ExpressionAttributeValues={':pair': pid},
-                ReturnValues="UPDATED_NEW"
-            )
+            try:
+                table.update_item(
+                    Key={
+                        'UID': uid
+                    },
+                    # remove id at index of UserDownvoted list
+                    UpdateExpression=f"remove UserDownvoted[{index}]",
+                    ConditionExpression=f"contains(UserDownvoted, :pair)",
+                    ExpressionAttributeValues={':pair': pid},
+                    ReturnValues="UPDATED_NEW"
+                )
+            except ClientError as e:
+                if e.response['Error']['Code'] == "ConditionalCheckFailedException":
+                    print(e.response['Error']['Message'])
+                    return
+                else:
+                    raise
         print(response['ResponseMetadata']['HTTPStatusCode'])
         return
     elif type == "Downvotes" and votetype == "Checked":
@@ -146,16 +153,23 @@ def vote_userdatabase(uid, type, table, pid, votetype):
             ReturnValues="UPDATED_NEW",
         )
         if index < lengthOfRemoved:
-            table.update_item(
-                Key={
-                    'UID': uid
-                },
-                # remove id at index of UserUpvoted list
-                UpdateExpression=f"remove UserUpvoted[{index}]",
-                ConditionExpression=f"contains(UserUpvoted, :pair)",
-                ExpressionAttributeValues={':pair': pid},
-                ReturnValues="UPDATED_NEW"
-            )
+            try:
+                table.update_item(
+                    Key={
+                        'UID': uid
+                    },
+                    # remove id at index of UserUpvoted list
+                    UpdateExpression=f"remove UserUpvoted[{index}]",
+                    ConditionExpression=f"contains(UserUpvoted, :pair)",
+                    ExpressionAttributeValues={':pair': pid},
+                    ReturnValues="UPDATED_NEW"
+                )
+            except ClientError as e:
+                if e.response['Error']['Code'] == "ConditionalCheckFailedException":
+                    print(e.response['Error']['Message'])
+                    return
+                else:
+                    raise
         print(response['ResponseMetadata']['HTTPStatusCode'])
         return
     elif type == "Upvotes" and votetype == "Unchecked":
@@ -168,16 +182,23 @@ def vote_userdatabase(uid, type, table, pid, votetype):
                 break
             index = index + 1
         if index < lengthOfRemoved:
-            table.update_item(
-                Key={
-                    'UID': uid
-                },
-                # remove id at index of UserUpvoted list
-                UpdateExpression=f"remove UserUpvoted[{index}]",
-                ConditionExpression=f"contains(UserUpvoted, :pair)",
-                ExpressionAttributeValues={':pair': pid},
-                ReturnValues="UPDATED_NEW"
-            )
+            try:
+                table.update_item(
+                    Key={
+                        'UID': uid
+                    },
+                    # remove id at index of UserUpvoted list
+                    UpdateExpression=f"remove UserUpvoted[{index}]",
+                    ConditionExpression=f"contains(UserUpvoted, :pair)",
+                    ExpressionAttributeValues={':pair': pid},
+                    ReturnValues="UPDATED_NEW"
+                )
+            except ClientError as e:
+                if e.response['Error']['Code'] == "ConditionalCheckFailedException":
+                    print(e.response['Error']['Message'])
+                    return
+                else:
+                    raise
         return
     elif type == "Downvotes" and votetype == "Unchecked":
         index = 0
@@ -189,16 +210,24 @@ def vote_userdatabase(uid, type, table, pid, votetype):
                 break
             index = index + 1
         if index < lengthOfRemoved:
-            table.update_item(
-                Key={
-                    'UID': uid
-                },
-                # remove id at index of UserDownvoted list
-                UpdateExpression=f"remove UserDownvoted[{index}]",
-                ConditionExpression=f"contains(UserDownvoted, :pair)",
-                ExpressionAttributeValues={':pair': pid},
-                ReturnValues="UPDATED_NEW"
-            )
+            try:
+
+                table.update_item(
+                    Key={
+                        'UID': uid
+                    },
+                    # remove id at index of UserDownvoted list
+                    UpdateExpression=f"remove UserDownvoted[{index}]",
+                    ConditionExpression=f"contains(UserDownvoted, :pair)",
+                    ExpressionAttributeValues={':pair': pid},
+                    ReturnValues="UPDATED_NEW"
+                )
+            except ClientError as e:
+                if e.response['Error']['Code'] == "ConditionalCheckFailedException":
+                    print(e.response['Error']['Message'])
+                    return
+                else:
+                    raise
         return
 
     return
