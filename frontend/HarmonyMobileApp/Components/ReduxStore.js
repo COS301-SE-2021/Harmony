@@ -61,6 +61,7 @@ const reducer = (state = initialState, action) => {
             state.MealTags = [];
             state.FoodTags = [];
             state.DrinkTags = [];
+            state.ApplyFilter = action.payload.ApplyFilter;
             break;
         case "APPLYFILTER":
             state.ApplyFilter = action.payload.ApplyFilter;

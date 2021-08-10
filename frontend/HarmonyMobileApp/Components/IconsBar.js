@@ -12,7 +12,7 @@ import {
 import styles from "../styles";
 
 // make api call with dataSet.PID
-export default function IconsBar({ dataSet, ...otherProps }) {
+export default function IconsBar({ dataSet, upVoteVal, downVoteVal, ...otherProps }) {
     const [favouriteIconChecked, setFavouriteIconChecked] = useState("Unchecked");
     const [favouriteIconColor, setFavouriteIconColor] = useState("black");                   // controls the favourite heart color (pink/black)
     const [favouriteIconOutline, setFavouriteIconOutline] = useState("hearto");      // controls whether the heart is filled in or outlined
@@ -25,20 +25,11 @@ export default function IconsBar({ dataSet, ...otherProps }) {
     const [downIconColor, setDownIconColor] = useState("black");
     const [downIconOutline, setDownIconOutline] = useState("downcircleo");
 
-    const [data, setData] = useState([]);
-    const [upvotes, setUpvotes] = useState(dataSet.Upvotes);
-    const [downvotes, setDownvotes] = useState(dataSet.Downvotes);
-
-    //used to give up and down votes initial values
-    const [load, setLoad] = useState(true);
-    // useEffect(() => {
-    //     initialiseData();
-    // }, [load]);
-
-    // const initialiseData=(dataSet)=>{
-    //     setUpvotes(dataSet.Upvotes);
-    //     setDownvotes(dataSet.Downvotes);
-    // }
+    const [upvote, setUpvote] = useState(upVoteVal);
+    const [downvote, setDownvote] = useState(downVoteVal);
+    useEffect(() => {
+        console.log("upvote val changed " + upvote);
+    }, [upvote]);
     useEffect(() => {
         fetch("https://duj0glvi9d.execute-api.eu-west-1.amazonaws.com/dev", {
             method: "POST",
@@ -54,7 +45,7 @@ export default function IconsBar({ dataSet, ...otherProps }) {
             })
         })
             .then((response) => response.json())
-            .then((json) => setUpvotes(json.Upvotes))
+            .then((json) => setUpvote(json.Upvotes))
             // .then((json) => setData(json))
             //.then(console.log(dataSet))
             //     .then(console.log(upvotes))
@@ -73,7 +64,7 @@ export default function IconsBar({ dataSet, ...otherProps }) {
             })
         })
             .then((response) => response.json())
-            .then((json) => setDownvotes(json.Downvotes))
+            .then((json) => setDownvote(json.Downvotes))
             // .then(console.log(downvotes))
             .catch((error) => alert(error));
         //    console.log(data);
@@ -178,7 +169,7 @@ export default function IconsBar({ dataSet, ...otherProps }) {
                         color={downIconColor}
                     />
                     {/* <Text style= {[personalStyles.dataText, { paddingRight: "5%" }]}>{dataSet.Downvotes}</Text> */}
-                    <Text style={[personalStyles.dataText, { paddingRight: "5%" }]}>{downvotes}</Text>
+                    <Text style={[personalStyles.dataText, { paddingRight: "5%" }]}>{downvote}</Text>
 
                 </Pressable>
 
@@ -193,7 +184,7 @@ export default function IconsBar({ dataSet, ...otherProps }) {
                     />
 
                     {/* <Text style={personalStyles.dataText}>{dataSet.Upvotes}</Text> */}
-                    <Text style={personalStyles.dataText}>{upvotes}</Text>
+                    <Text style={personalStyles.dataText}>{upvote}</Text>
                 </Pressable>
 
             </View>

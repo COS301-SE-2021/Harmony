@@ -130,6 +130,8 @@ export default function Card({ dataSet, ...otherProps }) {
                 <Divider />
                 <IconsBar
                     dataSet={dataSet}
+                    upVoteVal={dataSet.Upvotes}
+                    downVoteVal={dataSet.Downvotes}
                 />
             </View>
         </View>

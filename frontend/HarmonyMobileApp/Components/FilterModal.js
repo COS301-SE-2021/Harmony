@@ -42,7 +42,7 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
     ReduxStore.dispatch({
       type: "CLEAR",
       //payload is the standard adopted name for the state value
-      payload: {}
+      payload: { "ApplyFilter": true }
     });
     setModalVisible(!isModalVisible);
 
