@@ -27,11 +27,17 @@ import ConfirmSignUp from "../screens/ConfirmSignUpScreen";
 import ForgotPassword from "../screens/ForgotPasswordScreen";
 import ConfirmForgotPassword from "../screens/ConfirmForgotPasswordScreen";
 
+import EditAccountScreen from "../screens/EditAccountScreen";
+import EditEmailScreen from "../screens/EditEmailScreen";
+import ConfirmEditEmailScreen from "../screens/ConfirmEditEmailScreen";
+import EditAccountPassword from "../screens/EditAccountPasswordScreen";
+
+import { TransitionPresets } from "@react-navigation/stack";
+
 Amplify.configure(config);
 
 const { Navigator, Screen } = createBottomTabNavigator();
 const Stack = createSharedElementStackNavigator();
-
 const HomeIcon = (props) => <Icon {...props} name="home-outline" />;
 const CameraIcon = (props) => <Icon {...props} name="camera-outline" />;
 const HeartIcon = (props) => <Icon {...props} name="heart-outline" />;
@@ -49,21 +55,22 @@ const BottomTabBar = ({ navigation, state }) => (
   </BottomNavigation>
 );
 
-// const TabNavigator = () => (
 const TabNavigator = (props) => {
   return (
     <Navigator tabBar={(props) => <BottomTabBar {...props} />}>
       <Screen name="Home" component={HomeScreen} />
       <Screen name="Camera" component={CameraScreen} />
       <Screen name="Favourite" component={ViewFavouritesScreen} />
+      {/* <Screen name="Settings" component={SettingsNavigator} /> */}
       <Screen name="Settings">
         {(screenProps) => (
-          <SettingsScreen
+          <SettingsNavigator
             {...screenProps}
             updateAuthState={props.updateAuthState}
           />
         )}
       </Screen>
+
       <Screen name="Results" component={Results} />
     </Navigator>
   );
@@ -78,6 +85,50 @@ const Results = () => (
       options={() => options}
     />
   </Stack.Navigator>
+);
+
+const SettingsStack = createStackNavigator();
+
+const SettingsNavigator = (props) => (
+  <SettingsStack.Navigator
+    screenOptions={{
+      headerMode: "screen",
+      headerStyle: {
+        height: 80, // Specify the height of your custom header
+      },
+      headerTitleStyle: {
+        fontSize: 28,
+        alignSelf: "center",
+      },
+      headerTitleContainerStyle: {
+        left: 0, // Needed else the header will be offset towards the right when theres a back button
+      },
+      ...TransitionPresets.SlideFromRightIOS,
+    }}
+    initialRouteName="SettingsStack"
+  >
+    <SettingsStack.Screen name="Settings">
+      {(screenProps) => (
+        <SettingsScreen
+          {...screenProps}
+          updateAuthState={props.updateAuthState}
+        />
+      )}
+    </SettingsStack.Screen>
+    <SettingsStack.Screen
+      name="Edit Account Details"
+      component={EditAccountScreen}
+    />
+    <SettingsStack.Screen name="Edit Email" component={EditEmailScreen} />
+    <SettingsStack.Screen
+      name="Confirm Edit Email"
+      component={ConfirmEditEmailScreen}
+    />
+    <SettingsStack.Screen
+      name="Edit Password"
+      component={EditAccountPassword}
+    />
+  </SettingsStack.Navigator>
 );
 
 const options = {
@@ -104,7 +155,12 @@ const AuthenticationStack = createStackNavigator();
 const AuthenticationNavigator = (props) => {
   return (
     <View style={{ flex: 1, backgroundColor: "#118AB2" }}>
-      <AuthenticationStack.Navigator headerMode="none">
+      <AuthenticationStack.Navigator
+        headerMode="none"
+        screenOptions={{
+          ...TransitionPresets.ModalSlideFromBottomIOS,
+        }}
+      >
         <AuthenticationStack.Screen name="SignIn">
           {(screenProps) => (
             <SignIn {...screenProps} updateAuthState={props.updateAuthState} />

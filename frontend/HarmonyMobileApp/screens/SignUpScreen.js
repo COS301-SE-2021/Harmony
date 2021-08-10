@@ -10,7 +10,6 @@ import AppAlert from "../Components/AppAlert";
 
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { SocialIcon } from "react-native-elements";
-import * as Animatable from "react-native-animatable";
 import AppLoadingIcon from "../Components/AppLoadingIcon";
 
 export default function SignUp({ navigation }) {
@@ -55,7 +54,6 @@ export default function SignUp({ navigation }) {
         Password: "",
         ConfirmPassword: "",
       }}
-      onSubmit={(values) => signUp(values)}
       onSubmit={async (values, { resetForm }) => {
         //Form must be reset before signUp is called
         //This is because signUp will lead to navigating the user to the homeScreen
@@ -110,7 +108,7 @@ export default function SignUp({ navigation }) {
               <Text style={styles.headerText}>Create an account</Text>
               <Text style={styles.subtitle}>Sign up below</Text>
             </View>
-            <Animatable.View animation="fadeInUpBig" style={styles.body}>
+            <View style={styles.body}>
               <AppTextInput
                 value={values.Username}
                 onChangeText={handleChange("Username")}
@@ -181,8 +179,8 @@ export default function SignUp({ navigation }) {
                 disabled={!isValid}
                 onPress={handleSubmit}
               />
-            </Animatable.View>
-            <Animatable.View animation="fadeInUpBig" style={styles.footer}>
+            </View>
+            <View style={styles.footer}>
               <View style={styles.footerIcons}>
                 <SocialIcon type="facebook" />
                 <SocialIcon type="google" />
@@ -200,7 +198,7 @@ export default function SignUp({ navigation }) {
                   </Text>
                 </Text>
               </View>
-            </Animatable.View>
+            </View>
           </View>
           {isErrorAlertVisible === true && (
             <AppAlert visible={true} message={modalMessage} type={"Error"} />

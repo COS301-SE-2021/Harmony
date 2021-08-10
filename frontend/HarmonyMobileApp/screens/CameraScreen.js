@@ -16,6 +16,7 @@ import { useIsFocused } from "@react-navigation/native";
 import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
 import * as FileSystem from "expo-file-system";
 import AppLoadingIcon from "../Components/AppLoadingIcon";
+import { Auth } from "aws-amplify";
 
 export default function CameraScreen({ navigation }) {
   const cameraRef = useRef();
@@ -113,6 +114,12 @@ export default function CameraScreen({ navigation }) {
 
   const uploadImage = async (img) => {
     setLoading(true);
+    let JWTToken = "";
+    await Auth.currentAuthenticatedUser({}) //Get user information
+      .then((data) => {
+        JWTToken = data.signInUserSession.idToken.jwtToken;
+      })
+      .catch((err) => console.log(err));
 
     await fetch(uploadImageURL, {
       method: "POST",
@@ -121,6 +128,7 @@ export default function CameraScreen({ navigation }) {
       }),
       headers: {
         "Content-Type": "application/json",
+        Authorization: JWTToken,
       },
     })
       .then((response) => response.json())
@@ -291,7 +299,7 @@ export default function CameraScreen({ navigation }) {
             ]}
           >
             {/* {isGalleryImage && ( */}
-            <Image source={{ uri: image }} style={styles.container}></Image>
+            <Image source={{ uri: image }} style={[styles.container, { resizeMode: "contain" }]}></Image>
             {/* )} */}
             <View style={styles.previewButtonsContainer}>
               <TouchableOpacity onPress={cancelPreview}>
@@ -346,7 +354,7 @@ export default function CameraScreen({ navigation }) {
                 style={styles.capture}
                 disabled={!isCameraReady}
                 onPress={onCapture}
-                // style={styles.capture}
+              // style={styles.capture}
               >
                 <MaterialCommunityIcons
                   name="circle-outline"

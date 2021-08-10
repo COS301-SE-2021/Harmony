@@ -1,27 +1,26 @@
 import React from "react";
-
-import { View, StyleSheet, ActivityIndicator } from "react-native";
-import AnimatedLoader from "react-native-animated-loader";
-
+import { View, StyleSheet, Image, Text } from "react-native";
 export default function AppLoadingIcon() {
   return (
-    <View style={styles.loadingIcon}>
-      <ActivityIndicator size={80} color="#118AB2" />
+    // Container needed to overlay full screen
+    <View style={styles.container}>
+      <View style={styles.centerContainer}>
+        {/* 
+        centerContainer needed to wrap both the gif and the text
+        the gif edges cannot be rounded so I wrapped it in a view and rounded the View instead
+        */}
+        <Image
+          style={styles.loadingIcon}
+          source={require("../assets/food-animation-white-background.gif")}
+        />
+        <Text style={{ alignSelf: "center" }}>Loading...</Text>
+      </View>
     </View>
   );
-  // return (
-  //   <AnimatedLoader
-  //     visible={isLoading}
-  //     overlayColor="rgba(255,255,255,0.75)"
-  //     source={require("../assets/lottieloader2.json")}
-  //     animationStyle={styles.lottie}
-  //     speed={1}
-  //   ></AnimatedLoader>
-  // );
 }
 
 const styles = StyleSheet.create({
-  loadingIcon: {
+  container: {
     position: "absolute",
     left: 0,
     right: 0,
@@ -29,10 +28,19 @@ const styles = StyleSheet.create({
     bottom: 0,
     alignItems: "center",
     justifyContent: "center",
+    // backgroundColor: "#ffff",
     backgroundColor: "#F5FCFF88",
   },
-  lottie: {
+  loadingIcon: {
     width: 100,
     height: 100,
+  },
+  centerContainer: {
+    width: 150,
+    height: 150,
+    borderRadius: 100,
+    backgroundColor: "#ffff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

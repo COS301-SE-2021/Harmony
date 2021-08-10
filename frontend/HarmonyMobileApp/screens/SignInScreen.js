@@ -12,8 +12,6 @@ import AppAlert from "../Components/AppAlert";
 
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { SocialIcon } from "react-native-elements";
-import * as Animatable from "react-native-animatable";
-import { showMessage, hideMessage } from "react-native-flash-message";
 
 export default function SignIn({ navigation, updateAuthState }) {
   const [isLoading, setLoading] = useState(false);
@@ -79,11 +77,11 @@ export default function SignIn({ navigation, updateAuthState }) {
           <View style={styles.container}>
             <StatusBar style="auto" />
             <View style={styles.header}>
-              <Text style={styles.headerText}>Welcome back</Text>
+              <Text style={styles.headerText}>Harmony</Text>
               <Text style={styles.subtitle}>Sign in below</Text>
             </View>
 
-            <Animatable.View animation="fadeInUpBig" style={styles.body}>
+            <View style={styles.body}>
               <AppTextInput
                 value={values.Username}
                 onChangeText={handleChange("Username")}
@@ -94,6 +92,8 @@ export default function SignIn({ navigation, updateAuthState }) {
                 textContentType="emailAddress"
                 error={errors.Username}
                 touched={touched.Username}
+                hideBorder={true}
+                hideRightIcon={true}
               />
               {/* If the user has clicked on the input field and it is not valid */}
               {touched.Username && errors.Username && (
@@ -112,6 +112,7 @@ export default function SignIn({ navigation, updateAuthState }) {
                 error={errors.Password}
                 touched={touched.Password}
                 type="Password"
+                hideBorder={true}
               />
               {touched.Password && errors.Password && (
                 <Text style={{ fontSize: 12, color: "#FF0D10" }}>
@@ -133,8 +134,8 @@ export default function SignIn({ navigation, updateAuthState }) {
                   Forgot Password?
                 </Text>
               </View>
-            </Animatable.View>
-            <Animatable.View animation="fadeInUpBig" style={styles.footer}>
+            </View>
+            <View style={styles.footer}>
               <View style={styles.footerIcons}>
                 <SocialIcon type="facebook" />
                 <SocialIcon type="google" />
@@ -152,7 +153,7 @@ export default function SignIn({ navigation, updateAuthState }) {
                   </Text>
                 </Text>
               </View>
-            </Animatable.View>
+            </View>
           </View>
           {isErrorAlertVisible === true && (
             <AppAlert visible={true} message={modalMessage} type={"Error"} />
