@@ -49,7 +49,7 @@ def sort_and_filter(event, context):
         sortedResponse = sortbytrending(response)
     elif event['Sort'] == 'Controversial':
         sortedResponse = sortbycontroversial(response)
-    elif event['Sort'] == 'Distance':
+    elif event['Sort'] == 'Closest':
         sortedResponse = sortbydistance(response)
 
     sortedResponse = add_userdata(sortedResponse, userResponse)
@@ -58,7 +58,7 @@ def sort_and_filter(event, context):
 
     range = event['Distance']
     if range is not None:
-        sortedResponse = filter_by_range(response,event['Distance'])
+        sortedResponse = filter_by_range(sortedResponse,event['Distance'])
     return {
         # returns all items stored in response
         "StatusCode": 200,
