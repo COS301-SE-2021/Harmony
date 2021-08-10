@@ -35,6 +35,7 @@ export default function FilterModal({ color, title, ...otherProps }) {
 
   //toggles the modals visibility
   const toggleModal = () => {
+    //    setSortPairings(ReduxStore.getState().sortPairings)
     setModalVisible(!isModalVisible);
   };
   const ClearAll = () => {
@@ -67,6 +68,16 @@ export default function FilterModal({ color, title, ...otherProps }) {
       })
     }
   }, [locationValue]);
+
+  useEffect(() => {
+    console.log("sort pairings updated " + sortPairings)
+
+    ReduxStore.dispatch({
+      type: "CHANGESORT",
+      payload: { "sort": sortPairings }
+    })
+
+  }, [sortPairings]);
 
   return (
     <Modal
@@ -136,9 +147,10 @@ export default function FilterModal({ color, title, ...otherProps }) {
                   }}
                 >
                   <Picker.Item label="Trending" value="Trending" />
-                  <Picker.Item label="Most Liked" value="Most Liked" />
-                  <Picker.Item label="Newest" value="Newest" />
+                  <Picker.Item label="New" value="New" />
+                  <Picker.Item label="Best" value="Best" />
                   <Picker.Item label="Controversial" value="Controversial" />
+                  <Picker.Item label="Closest" value="Closest" />
                 </Picker>
               </View>
             </View>

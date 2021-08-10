@@ -7,7 +7,8 @@ const initialState = {
     Range: null,
     userLocationLat: null,
     userLocationLong: null,
-    ApplyFilter: false
+    ApplyFilter: false,
+    sortPairings: "Trending"
 };
 
 //reducer -method that takes the actions and changes the state
@@ -63,6 +64,9 @@ const reducer = (state = initialState, action) => {
             break;
         case "APPLYFILTER":
             state.ApplyFilter = action.payload.ApplyFilter;
+            break;
+        case "CHANGESORT":
+            state.sortPairings = action.payload.sort;
             break;
     }
     return state;

@@ -75,6 +75,7 @@ const HomeScreen = (props) => {
     GetLocation();
     const state = ReduxStore.getState();
     console.log(state);
+    setSortPairings(state.sortPairings);
     fetch(viewPairingURL, {
       method: "POST",
       headers: {
@@ -83,7 +84,7 @@ const HomeScreen = (props) => {
       },
       body: JSON.stringify({
         "UID": "u1",
-        "Sort": "Trending",
+        "Sort": state.sortPairings,
         "MealTags": state.MealTags,
         "FoodTags": state.FoodTags,
         "DrinkTags": state.DrinkTags,
