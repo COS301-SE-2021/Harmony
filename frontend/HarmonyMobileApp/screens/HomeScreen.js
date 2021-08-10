@@ -64,7 +64,7 @@ const HomeScreen = (props) => {
       ReduxStore.dispatch({
         type: "APPLYFILTER",
         payload: { "ApplyFilter": false }
-      })
+      });
       wait(2000).then(() => setRefreshing(false));
 
     }
