@@ -42,6 +42,8 @@ const HomeScreen = (props) => {
 
   const [refreshing, setRefreshing] = React.useState(false);
 
+  const [loadOnce, setLoadOnce] = useState(true);
+
   //the refreshing of the flatlist
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
@@ -69,6 +71,13 @@ const HomeScreen = (props) => {
 
     }
   });
+
+  useEffect(() => {
+    GetLocation();
+    console.log("loaded");
+    setLoadOnce(false);
+
+  }, [loadOnce])
 
   //the api call for trending
   useEffect(() => {
