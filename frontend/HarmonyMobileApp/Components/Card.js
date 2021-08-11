@@ -132,6 +132,9 @@ export default function Card({ dataSet, ...otherProps }) {
                     dataSet={dataSet}
                     upVoteVal={dataSet.Upvotes}
                     downVoteVal={dataSet.Downvotes}
+                    isDV={dataSet.isDownvoted}
+                    isUV={dataSet.isUpvoted}
+                    isF={dataSet.isFavourited}
                 />
             </View>
         </View>

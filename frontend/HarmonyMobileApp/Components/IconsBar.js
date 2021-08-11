@@ -9,6 +9,10 @@ export default function IconsBar({
     dataSet,
     upVoteVal,
     downVoteVal,
+    isDV,
+    isUV,
+    isF,
+    ...otherProps
 }) {
     const [favouriteIconChecked, setFavouriteIconChecked] = useState("Unchecked");
     const [favouriteIconColor, setFavouriteIconColor] = useState("black"); // controls the favourite heart color (pink/black)
@@ -25,9 +29,45 @@ export default function IconsBar({
     const [upvote, setUpvote] = useState(upVoteVal);
     const [downvote, setDownvote] = useState(downVoteVal);
 
+    // const [isUp, setIsUp] = useState(isUV);
+    // const [isDown, setIsDown] = useState(isDV);
+    // const [isFave, setIsFave] = useState(isF);
+
     const voteURL = "https://duj0glvi9d.execute-api.eu-west-1.amazonaws.com/dev";
     const addToFavURL = "https://bqwmc4qpkd.execute-api.eu-west-1.amazonaws.com/dev";
     const removeFromFavURL = "https://blzyl8bowc.execute-api.eu-west-1.amazonaws.com/dev";
+
+    const [load, setLoad] = useState(true);
+
+    useEffect(() => {
+        //      console.log(load + " load var")
+        console.log("prev votes " + dataSet.isUpvoted + " " + dataSet.isDownvoted + " " + dataSet.isFavourited);
+        // console.log(dataSet);
+        //  test();
+        if (load) {
+            setLoad(false);
+
+            if (dataSet.isUpvoted == "True") {
+                setUpIconColor("#80CB41");
+                setUpIconOutline("upcircle");
+                setUpIconChecked("Checked");
+            }
+            if (dataSet.isDownvoted == "True") {
+                setDownIconColor("#FF2727");
+                setDownIconOutline("downcircle");
+                setDownIconChecked("Checked");
+            }
+            if (dataSet.isFavourited == "True") {
+                setFavouriteIconColor("#FF2763");
+                setFavouriteIconOutline("heart");
+                setFavouriteIconChecked("Checked");
+            }
+        }
+    }, []);
+
+    // const test = () => {
+    //     console.log("in test " + isUp + " " + isDown + " " + isFave);
+    // }
     useEffect(() => {
         if (upIconChecked != "") {//If the value has been set
             vote("Upvotes", upIconChecked);
@@ -37,7 +77,8 @@ export default function IconsBar({
     useEffect(() => {
         if (downIconChecked != "") {//If the value has been set
             vote("Downvotes", downIconChecked);
-        }
+        };
+        //  console.log(dataSet);
     }, [downIconChecked]);
 
     //Upvotes or Downvotes depending on the button clicked
