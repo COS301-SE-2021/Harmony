@@ -41,7 +41,7 @@ export default function IconsBar({
 
     useEffect(() => {
         //      console.log(load + " load var")
-        console.log("prev votes " + dataSet.isUpvoted + " " + dataSet.isDownvoted + " " + dataSet.isFavourited);
+        // console.log("prev votes " + dataSet.isUpvoted + " " + dataSet.isDownvoted + " " + dataSet.isFavourited);
         // console.log(dataSet);
         //  test();
         if (load) {

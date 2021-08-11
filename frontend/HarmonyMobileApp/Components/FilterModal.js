@@ -25,7 +25,6 @@ import ReduxStore from "../Components/ReduxStore"
 
 export default function FilterModal({ sortPairingsName, ...otherProps }) {
   const [sortPairings, setSortPairings] = useState(sortPairingsName); // the type of pairings shown filter
-  const [locationValue, setLocationValue] = useState(0); //distance filter
   const [locationValueSlider, setLocationValueSlider] = useState(0); //distance filter
   const [locationValueTextInput, setLocationValueTextInput] = useState(0); //distance filter
   const [isModalVisible, setModalVisible] = useState(true); //for the filter popup

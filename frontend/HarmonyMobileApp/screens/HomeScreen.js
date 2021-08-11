@@ -60,6 +60,7 @@ const HomeScreen = (props) => {
 
   ReduxStore.subscribe(() => {
     const state = ReduxStore.getState();
+    setSortPairings(state.sortPairings);
     if (state.ApplyFilter) {
       console.log("Applying filter");
       setRefreshing(true);
@@ -72,19 +73,23 @@ const HomeScreen = (props) => {
     }
   });
 
-  useEffect(() => {
-    GetLocation();
-    console.log("loaded");
-    setLoadOnce(false);
+  // useEffect(() => {
+  //   GetLocation();
+  //   console.log("loaded");
+  //   setLoadOnce(false);
 
-  }, [loadOnce])
+  // }, [])
 
   //the api call for trending
   useEffect(() => {
-    GetLocation();
-    const state = ReduxStore.getState();
+    console.log("called on first")
+    var state = ReduxStore.getState();
     console.log(state);
-    setSortPairings(state.sortPairings);
+    if (state.userLocationLong == null || state.userLocationLat == null) {
+      GetLocation();
+      state = ReduxStore.getState();
+      console.log("location updated " + state.userLocationLong);
+    }
     fetch(viewPairingURL, {
       method: "POST",
       headers: {
@@ -124,6 +129,10 @@ const HomeScreen = (props) => {
       //payload is the standard adopted name for the state value
       payload: { "latitude": location.coords.latitude, "longitude": location.coords.longitude }
     });
+    console.log("location loaded");
+    setRefreshing(true);
+    wait(2000).then(() => setRefreshing(false));
+
   }
 
   const filterButton = () => (
