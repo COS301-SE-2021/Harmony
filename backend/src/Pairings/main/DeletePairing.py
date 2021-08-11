@@ -38,7 +38,7 @@ def delete_pairing(event, context):
         )
         # once pairing has been deleted from pairings database, we need to delete pairings from user favourites
         remove_favourite(pid)
-
+        remove_user_upvoted(pid)
     except ClientError as e:
         # throw error if failed
         if e.response['Error']['Code'] == "ConditionalCheckFailedException":
@@ -86,6 +86,35 @@ def remove_favourite(pid):
 
     return json.dumps({'isSuccessful': 'true', 'PID': pid})
 
+def remove_user_upvoted(pid):
+    # this function deletes the pairing from user upvotes in user table
+    # here we scan the whole table and store it's json in allresponse var
+    allresponse = table2.scan()
+    # edit the response to only show items
+    response = allresponse['Items']
+
+    for items in response:
+        # iterate through response to go through every item in user table
+        uid = items["UID"]
+        index = 0
+
+        for fav in items["UserUpvoted"]:
+            # iterate through the favourite pairings array
+            if fav == pid:
+                # when id is found then update the item by removing it.
+                table2.update_item(
+                    Key={
+                        'UID': uid
+                    },
+                    # remove id at index of UserUpvoted list
+                    UpdateExpression=f"remove UserUpvoted[{index}]",
+                    ConditionExpression=f"contains(UserUpvoted, :pair)",
+                    ExpressionAttributeValues={':pair': pid},
+                    ReturnValues="UPDATED_NEW"
+                )
+            index = index + 1
+
+    return json.dumps({'isSuccessful': 'true', 'PID': pid})
 
 def validate_request(pid):
     testrequest = None
