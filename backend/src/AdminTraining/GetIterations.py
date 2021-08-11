@@ -7,6 +7,8 @@ def get_iterations(event, context):
     url = "https://eastus.api.cognitive.microsoft.com/customvision/v3.0/training/projects/b2c99ecb-e43e-4a59-ac87-a189c109e267/iterations"
 
     body = {}
+
+    # training key not set for security purposes
     headers = {
         'Training-Key': '',
         'Content-Type': 'application/json'
