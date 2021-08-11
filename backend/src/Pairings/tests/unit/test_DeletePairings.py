@@ -2,7 +2,7 @@ import json
 
 import pytest
 
-from backend.src.Pairings.DeletePairing import DeletePairing
+from backend.src.Pairings.main import DeletePairing
 
 
 @pytest.fixture()
