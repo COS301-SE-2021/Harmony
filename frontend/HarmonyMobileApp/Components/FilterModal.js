@@ -26,6 +26,8 @@ import ReduxStore from "../Components/ReduxStore"
 export default function FilterModal({ sortPairingsName, ...otherProps }) {
   const [sortPairings, setSortPairings] = useState(sortPairingsName); // the type of pairings shown filter
   const [locationValue, setLocationValue] = useState(0); //distance filter
+  const [locationValueSlider, setLocationValueSlider] = useState(0); //distance filter
+  const [locationValueTextInput, setLocationValueTextInput] = useState(0); //distance filter
   const [isModalVisible, setModalVisible] = useState(true); //for the filter popup
   const filters = {
     mealTypes: ["Breakfast", "Lunch", "Supper", "Snack", "Vegetarian", "Dairy-Free", "Nut-Free"],
@@ -60,14 +62,26 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
   }
 
   useEffect(() => {
-    console.log("location value updated " + locationValue)
-    if (locationValue != 0) {
+    console.log("location value updated " + locationValueSlider)
+    setLocationValueTextInput(locationValueSlider);
+    if (locationValueSlider != 0) {
       ReduxStore.dispatch({
         type: "UPDATERANGE",
-        payload: { "Range": locationValue }
+        payload: { "Range": locationValueSlider }
       })
     }
-  }, [locationValue]);
+  }, [locationValueSlider]);
+
+  useEffect(() => {
+    console.log("location value updated " + locationValueTextInput)
+    setLocationValueSlider(locationValueTextInput);
+    if (locationValueTextInput != 0) {
+      ReduxStore.dispatch({
+        type: "UPDATERANGE",
+        payload: { "Range": locationValueTextInput }
+      })
+    }
+  }, [locationValueTextInput]);
 
   useEffect(() => {
     console.log("sort pairings updated " + sortPairings)
@@ -167,12 +181,12 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
               >
                 <Text style={[styles.TextSmall, { marginRight: 4 }]}>0</Text>
                 <Slider
-                  value={locationValue}
+                  value={locationValueSlider}
                   step={20}
                   maximumValue={100}
                   onValueChange={(value) => (
                     // console.log(value), 
-                    setLocationValue(value)
+                    setLocationValueSlider(value)
                   )}
                   style={{ width: "70%" }}
                   thumbStyle={{
@@ -186,11 +200,12 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
               <View style={styles.flexRowJustCenter}>
                 <TextInput
                   style={[styles.TextSmall, styles.TextInputStyling]}
-                  value={locationValue}
+                  // value={locationValueTextInput}
+                  //    value={locationValueTextInput.toString()}
                   // when you use to string it causes errors with the slider
-                  onChangeText={(value) => setLocationValue(parseInt(value))}
+                  onChangeText={(value) => setLocationValueTextInput(parseInt(value))}
                   keyboardType="numeric"
-                  placeholder={locationValue.toString()}
+                  placeholder={locationValueTextInput.toString()}
                   multiline={false}
                 />
                 <Text style={[styles.TextSmaller]}>KM</Text>
