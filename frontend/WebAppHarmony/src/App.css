@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  width: 100%;
 }
 
 .App-logo {
@@ -7,6 +8,15 @@
   pointer-events: none;
 }
 
+#Header{
+  width:100%;
+  background-color: #61dafb;
+  text-align: right;
+}
+
+p{
+  font-size: x-large;
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
