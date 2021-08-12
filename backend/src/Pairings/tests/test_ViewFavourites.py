@@ -2,7 +2,7 @@ import json
 
 import pytest
 
-from backend.src.Pairings.viewFavourites import ViewFavourites
+from backend.src.Pairings.main import ViewFavourites
 
 
 @pytest.fixture()
