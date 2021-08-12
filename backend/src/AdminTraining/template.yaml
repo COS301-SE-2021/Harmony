@@ -19,14 +19,43 @@ Resources:
       Runtime: python3.8
 
 
+  GetIterationsFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: main/
+      Handler: GetIterations.get_iterations
+      Runtime: python3.8
+
+  CreateTagFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: main/
+      Handler: CreateTag.create_tag
+      Runtime: python3.8
+
+
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
   # Find out more about other implicit resources you can reference within SAM
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
-  grtTagsFunction:
+  getTagsFunction:
     Description: "Hello World Lambda Function ARN"
     Value: !GetAtt getTagsFunction.Arn
   getTagsFunctionIamRole:
     Description: "Implicit IAM Role created for Hello World function"
     Value: !GetAtt getTagsFunctionRole.Arn
+
+  getIterationsFunction:
+    Description: "Hello World Lambda Function ARN"
+    Value: !GetAtt getIterationsFunction.Arn
+  getIterationsFunctionIamRole:
+    Description: "Implicit IAM Role created for Hello World function"
+    Value: !GetAtt getIterationsFunctionRole.Arn
+
+  createTagFunction:
+    Description: "Hello World Lambda Function ARN"
+    Value: !GetAtt createTagFunction.Arn
+  createTagFunctionIamRole:
+    Description: "Implicit IAM Role created for Hello World function"
+    Value: !GetAtt createTagFunctionRole.Arn
 
