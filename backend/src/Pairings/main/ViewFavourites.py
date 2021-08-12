@@ -39,6 +39,10 @@ def view_favourites(event, context):
     allresponse = table.scan()
     # edit the response to only show items
     response = allresponse['Items']
+
+    #Removes the items that are not in the favourites.
+    #response = keepfav(response, userResponse)
+
     response = add_distances(response, event['Latitude'], event['Longitude'])
     # check json passed in to see what sort to do for the response
     if event['Sort'] == 'New':
@@ -284,3 +288,24 @@ def filter_by_range(response, filterdist):
             counter = counter + 1
 
     return response
+
+"""
+def keepfav(response, user_response):
+    counter = 0
+
+    userFavourites = user_response['FavouritePairings']
+    print(response)
+    # first loop ensures "Distance" is added to response
+    # second loop to delete the distances greater than the filter
+    for i in range(len(response)):
+        print(i)
+        for favs in userFavourites:
+            print(favs)
+            # if user data matches pairing then add it to the response with True
+            if favs == response[counter]:
+                del response[counter]
+            else:
+                counter = counter + 1
+
+    return response
+    """
