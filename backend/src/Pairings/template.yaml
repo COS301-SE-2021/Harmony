@@ -14,16 +14,25 @@ Resources:
   NewPairingsFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: NewPairing/
+      CodeUri: main/
       Handler: NewPairing.newpairing
       Runtime: python3.8
 
   viewFavouritesFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: viewFavourites/
+      CodeUri: main/
       Handler: ViewFavourites.view_favourites
       Runtime: python3.8
+      Policies:
+        # Give DynamoDB Full Access to your Lambda Function
+        - AmazonDynamoDBFullAccess
+      Events:
+        viewFavourites:
+          Type: AWS::ApiGateway::RestApi # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /viewFavourites
+            Method: post
 
 
 Outputs:
