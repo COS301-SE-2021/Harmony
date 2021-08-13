@@ -22,7 +22,7 @@ usertable = client.Table(User_table)
  {
     "UID" : "username",
     "Sort" : "typeOfSort",
-    "MealTag" : ["Tags",...,...,...],
+    "MealTags" : ["Tags",...,...,...],
     "FoodTags" : ["Tags",...,...,...],
     "DrinkTags" : ["Tags",...,...,...],
     "Distance" : xxx,
@@ -59,11 +59,18 @@ def sort_and_filter(event, context):
     range = event['Distance']
     if range is not None:
         sortedResponse = filter_by_range(sortedResponse,event['Distance'])
-    return {
-        # returns all items stored in response
-        "StatusCode": 200,
-        "Data": sortedResponse
-    }
+
+    if len(sortedResponse) == 0:
+        return {
+            "StatusCode": 204,
+            "Data": "No data available"
+        }
+    else:
+        return {
+            # returns all items stored in response
+            "StatusCode": 200,
+            "Data": sortedResponse
+        }
 
 
 def sortbynew(response):
