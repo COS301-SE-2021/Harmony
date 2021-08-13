@@ -1,5 +1,2 @@
 requests
-json
-uuid
-boto3
-pytest
+geopy
