@@ -17,11 +17,11 @@ All the relevant data is then returned as a JSON object back to the frontend.
 """
 
 def identify_food_item(event, context):
-    url = "https://aiharmony-prediction.cognitiveservices.azure.com/customvision/v3.0/Prediction/b2c99ecb-e43e-4a59-ac87-a189c109e267/classify/iterations/Iteration3/image"
+    url = "https://aiharmony-prediction.cognitiveservices.azure.com/customvision/v3.0/Prediction/b2c99ecb-e43e-4a59-ac87-a189c109e267/classify/iterations/Iteration4/image"
 
     headers = {
         # Request headers
-        'Prediction-key': '606bb8fd69394bc2bf192a8453995342',
+        'Prediction-key': '',
         'Content-Type': 'application/octet-stream',
     }
     t = event['data'].encode("ascii")
@@ -33,13 +33,22 @@ def identify_food_item(event, context):
     if keyVal in data:
         a = data['predictions'][0]['tagName']
         b = data['predictions'][0]['probability']
-        # print("Harmony has predicted a", a, " with a probability of", b)
+        if b < 0.6:
+            return {
+                "statusCode": 204,
+                "data": "Image cannot be Identified"
+            }
+
     else:
         # print("Predictions is not found in JSON data")
         # TODO: If error occures terminate.
         a = "An error has occurred"
         b = data
         # print(a,b)
+        return {
+            "statusCode": 204,
+            "data": "Image cannot be Identified"
+        }
 
     dynamodb = boto3.resource('dynamodb')
 
@@ -65,10 +74,16 @@ def identify_food_item(event, context):
     )
     # If no item.
     # Format response to have only one food item and multiple drink items.
-    return {
-        "statusCode": 200,
-        "data": response['Items']
-    }
+    if len(response['Items']) == 0:
+        return {
+            "statusCode": 204,
+            "data": "Image cannot be Identified"
+        }
+    else:
+        return {
+            "statusCode": 200,
+            "data": response['Items']
+        }
 
 """
 This function validates a string. 
