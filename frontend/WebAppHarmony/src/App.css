@@ -18,6 +18,9 @@
   width:90%;
   height:400px;
   background-color: grey;
+  border-radius: 15;
+  border-width: 2;
+  align-self: center;
 }
 p{
   font-size: x-large;
