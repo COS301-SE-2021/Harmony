@@ -54,6 +54,17 @@ function Dashboard() {
         transform: 'translate(0, -50%)',
         lineHeight: '24px',
     };
+
+    const dashboardContainer = {
+        width: 400,
+        height: 250,
+        padding: 15,
+        borderRadius: 15,
+        backgroundColor: "white",
+        margin: "auto",
+        boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
+    };
+
     const values = [
         {
             name: 'Page A',
@@ -109,10 +120,22 @@ function Dashboard() {
     return (
         <div style={{ flexDirection: "row", justifyContent: "space-around" }}>
             <div style={{ display: "flex" }}>
-                <div style={{ width: 400, height: 250, padding: 15, borderRadius: 15, backgroundColor: "white", margin: "auto", }}>
-                    <Chart data={data} axes={axes} />
-                </div>
-                <div style={{ width: 400, height: 250, padding: 15, borderRadius: 15, backgroundColor: "white", margin: "auto", }}>
+                <div style={dashboardContainer}>
+                    <LineChart
+                        width={350}
+                        height={200}
+                        data={values}
+                        margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
+                    >
+                        <XAxis dataKey="name" />
+                        {/* <YAxis /> */}
+                        {/* <Tooltip /> */}
+                        <Legend />
+                        {/* <CartesianGrid stroke="#f5f5f5" /> */}
+                        <Line type="monotone" dataKey="uv" stroke="#ff7300" yAxisId={0} />
+                        <Line type="monotone" dataKey="pv" stroke="#387908" yAxisId={1} />
+                    </LineChart>                </div>
+                <div style={{ width: 400, height: 250, padding: 15, borderRadius: 15, backgroundColor: "white", margin: "auto", boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)", textAlign: "center" }}>
                     <p>User flavour preferences</p>
 
                     <BarChart width={350} height={200} data={values}>
@@ -121,7 +144,7 @@ function Dashboard() {
                         <YAxis />
                     </BarChart>
                 </div>
-                <div style={{ width: 400, height: 250, padding: 15, borderRadius: 15, backgroundColor: "white", margin: "auto", }}>
+                <div style={dashboardContainer}>
                     <LineChart
                         width={350}
                         height={200}
@@ -140,9 +163,9 @@ function Dashboard() {
             </div>
             <br />
             <div style={{ display: "flex", justifyContent: "space-around" }}>
-                <div>
-                    <div style={{ padding: 15, borderRadius: 15, backgroundColor: "white",/* margin: "auto", marginLeft: "auto", marginRight: "auto", */height: 120, width: 300 }}>
-                        <div>
+                <div style={{ textAlign: "center", alignItems: "center", marginLeft: 25 }}>
+                    <div style={{ padding: 15, borderRadius: 15, backgroundColor: "white", display: "block", /* margin: "auto", marginLeft: "auto", marginRight: "auto", */height: 120, width: 300, boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)", textAlign: "center" }}>
+                        <div style={{ display: "flex", justifyContent: "center" }}>
                             <h1 style={{ color: "green", fontFamily: "sans-serif-light", fontSize: 35, float: "left" }}>75</h1>
                             <h1 style={{ color: "black", fontFamily: "sans-serif-light", fontSize: 35, float: "left" }}>:</h1>
                             <h1 style={{ color: "red", fontFamily: "sans-serif-light", fontSize: 35, float: "left" }}>1</h1>
@@ -150,19 +173,19 @@ function Dashboard() {
                         <p>ratio of hits to misses</p>
                     </div>
                     <br />
-                    <div style={{ padding: 15, borderRadius: 15, backgroundColor: "white",/* margin: "auto", marginLeft: "auto", marginRight: "auto", */height: 120, width: 300 }}>
-                        <div>
+                    <div style={{ padding: 15, borderRadius: 15, backgroundColor: "white", display: "block",/* margin: "auto", marginLeft: "auto", marginRight: "auto", */height: 120, width: 300, boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)", textAlign: "center" }}>
+                        <div style={{ display: "flex", justifyContent: "center" }}>
                             <h1 style={{ color: "blue", fontFamily: "sans-serif-light", fontSize: 35, float: "left" }}>35128</h1>
                         </div>
                         <p>Active users</p>
                     </div>
                 </div>
-                <div style={{ padding: 15, borderRadius: 15, backgroundColor: "white" }}>
+                <div style={dashboardContainer}>
                     <p>Locations Most Used</p>
 
                     <BarChart
-                        width={400}
-                        height={250}
+                        width={350}
+                        height={200}
                         data={values}
                         margin={{
                             top: 5,
@@ -180,14 +203,14 @@ function Dashboard() {
                         <Bar dataKey="uv" fill="#82ca9d" />
                     </BarChart>
                 </div>
-                <div style={{ padding: 15, borderRadius: 15, backgroundColor: "white" }}>
+                <div style={dashboardContainer}>
                     <p>Free Tier Usage</p>
 
-                    <RadialBarChart cx="50%" cy="50%" innerRadius="10%" width={400}
-                        height={250} outerRadius="80%" barSize={10} data={values}>
+                    <RadialBarChart cx="50%" cy="50%" innerRadius="10%" width={350}
+                        height={200} outerRadius="80%" barSize={10} data={values}>
                         <RadialBar
                             minAngle={15}
-                            label={{ position: 'insideStart', fill: '#fff' }}
+                            // label={{ position: 'insideStart', fill: '#fff' }}
                             background
                             clockWise
                             dataKey="uv"
