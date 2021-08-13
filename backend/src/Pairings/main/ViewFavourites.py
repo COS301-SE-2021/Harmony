@@ -22,7 +22,7 @@ usertable = client.Table(User_table)
  {
     "UID" : "username",
     "Sort" : "typeOfSort",
-    "MealTag" : ["Tags",...,...,...],
+    "MealTags" : ["Tags",...,...,...],
     "FoodTags" : ["Tags",...,...,...],
     "DrinkTags" : ["Tags",...,...,...],
     "Distance" : xxx,
@@ -41,7 +41,7 @@ def view_favourites(event, context):
     response = allresponse['Items']
 
     #Removes the items that are not in the favourites.
-    #response = keepfav(response, userResponse)
+    response = keepfav(response, userResponse)
 
     response = add_distances(response, event['Latitude'], event['Longitude'])
     # check json passed in to see what sort to do for the response
@@ -63,11 +63,18 @@ def view_favourites(event, context):
     range = event['Distance']
     if range is not None:
         sortedResponse = filter_by_range(sortedResponse,event['Distance'])
-    return {
-        # returns all items stored in response
-        "StatusCode": 200,
-        "Data": sortedResponse
-    }
+
+    if len(sortedResponse) == 0:
+        return {
+            "StatusCode": 204,
+            "Data": "No data available"
+        }
+    else:
+        return {
+            # returns all items stored in response
+            "StatusCode": 200,
+            "Data": sortedResponse
+        }
 
 
 def sortbynew(response):
@@ -289,23 +296,23 @@ def filter_by_range(response, filterdist):
 
     return response
 
-"""
+
 def keepfav(response, user_response):
     counter = 0
 
     userFavourites = user_response['FavouritePairings']
-    print(response)
-    # first loop ensures "Distance" is added to response
-    # second loop to delete the distances greater than the filter
+
     for i in range(len(response)):
-        print(i)
+        notfound = False
         for favs in userFavourites:
             print(favs)
             # if user data matches pairing then add it to the response with True
-            if favs == response[counter]:
-                del response[counter]
-            else:
+            if favs == response[counter]["PID"]:
                 counter = counter + 1
+                notfound = True
+                break
+        if not notfound:
+            del response[counter]
 
     return response
-    """
+
