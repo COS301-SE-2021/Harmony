@@ -2,11 +2,13 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Header from '../components/Header';
+import Dashboard from "../components/Dashboard";
+
 function App() {
   return (
-    <div className="App">
+    <div style={{ width: "100%", alignItems: "center" }}>
       <Header></Header>
-      <div style={{ borderRadius: 15, backgroundColor: "grey", width: "90%", height: "400px" }}></div>
+      <Dashboard></Dashboard>
       {/* <img src={logo} className="App-logo" alt="logo" />
       <p>
         Edit <code>src/App.js</code> and save to reload.
