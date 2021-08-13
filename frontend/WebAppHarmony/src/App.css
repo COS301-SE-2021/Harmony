@@ -28,6 +28,16 @@ p{
   font-family: "sans-serif-light";
 }
 
+chartContainer{
+  width: 400;
+  height: 250;
+  padding: 15;
+  border-radius: 15;
+  background-color: "white";
+  margin: "auto";
+  float: "left"
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
