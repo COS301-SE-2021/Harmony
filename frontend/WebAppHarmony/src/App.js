@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
       <Header></Header>
-      <div id="dashboard"></div>
+      <div style={{ borderRadius: 15, backgroundColor: "grey", width: "90%", height: "400px" }}></div>
       {/* <img src={logo} className="App-logo" alt="logo" />
       <p>
         Edit <code>src/App.js</code> and save to reload.
