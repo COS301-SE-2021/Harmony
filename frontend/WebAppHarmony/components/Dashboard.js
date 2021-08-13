@@ -2,7 +2,7 @@ import React from 'react';
 import '../src/App.css';
 import { Chart } from 'react-charts'
 import CanvasJSReact from './canvasjs.react';
-import { LineChart, XAxis, Legend, YAxis, CartesianGrid, Line, BarChart, Bar, Cell, Tooltip, ResponsiveContainer } from 'recharts';
+import { LineChart, XAxis, Legend, YAxis, CartesianGrid, Line, BarChart, Bar, Cell, Tooltip, RadialBarChart, RadialBar } from 'recharts';
 //var CanvasJSReact = require('./canvasjs.react');
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
@@ -48,49 +48,61 @@ function Dashboard() {
             ]
         }]
     }
-
+    const style = {
+        top: '50%',
+        right: 0,
+        transform: 'translate(0, -50%)',
+        lineHeight: '24px',
+    };
     const values = [
         {
             name: 'Page A',
             uv: 4000,
             pv: 2400,
             amt: 2400,
+            fill: '#8884d8',
         },
         {
             name: 'Page B',
             uv: 3000,
             pv: 1398,
             amt: 2210,
+            fill: '#83a6ed',
         },
         {
             name: 'Page C',
             uv: 2000,
             pv: 9800,
             amt: 2290,
+            fill: '#8dd1e1',
         },
         {
             name: 'Page D',
             uv: 2780,
             pv: 3908,
             amt: 2000,
+            fill: '#d0ed57',
         },
         {
             name: 'Page E',
             uv: 1890,
             pv: 4800,
             amt: 2181,
+            fill: '#ffc658',
         },
         {
             name: 'Page F',
             uv: 2390,
             pv: 3800,
             amt: 2500,
+            fill: '#a4de6c',
         },
         {
             name: 'Page G',
             uv: 3490,
             pv: 4300,
             amt: 2100,
+            fill: '#82ca9d',
         },
     ];
 
@@ -101,14 +113,18 @@ function Dashboard() {
                     <Chart data={data} axes={axes} />
                 </div>
                 <div style={{ width: 400, height: 250, padding: 15, borderRadius: 15, backgroundColor: "white", margin: "auto", }}>
-                    <CanvasJSChart options={options}
-                    /* onRef = {ref => this.chart = ref} */
-                    />
+                    <p>User flavour preferences</p>
+
+                    <BarChart width={350} height={200} data={values}>
+                        <Bar dataKey="uv" fill="#8884d8" />
+                        <XAxis dataKey="name" />
+                        <YAxis />
+                    </BarChart>
                 </div>
                 <div style={{ width: 400, height: 250, padding: 15, borderRadius: 15, backgroundColor: "white", margin: "auto", }}>
                     <LineChart
-                        width={400}
-                        height={250}
+                        width={350}
+                        height={200}
                         data={values}
                         margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
                     >
@@ -123,36 +139,62 @@ function Dashboard() {
                 </div>
             </div>
             <br />
-            <div style={{ display: "flex" }}>
-                <div style={{ padding: 15, borderRadius: 15, backgroundColor: "white", margin: "auto", marginLeft: "auto", marginRight: "auto", height: "auto", width: "auto" }}>
-                    <div>
-                        <h1 style={{ color: "green", fontFamily: "sans-serif-light", fontSize: 35, float: "left" }}>75</h1>
-                        <h1 style={{ color: "black", fontFamily: "sans-serif-light", fontSize: 35, float: "left" }}>:</h1>
-                        <h1 style={{ color: "red", fontFamily: "sans-serif-light", fontSize: 35, float: "left" }}>1</h1>
+            <div style={{ display: "flex", justifyContent: "space-around" }}>
+                <div>
+                    <div style={{ padding: 15, borderRadius: 15, backgroundColor: "white",/* margin: "auto", marginLeft: "auto", marginRight: "auto", */height: 120, width: 300 }}>
+                        <div>
+                            <h1 style={{ color: "green", fontFamily: "sans-serif-light", fontSize: 35, float: "left" }}>75</h1>
+                            <h1 style={{ color: "black", fontFamily: "sans-serif-light", fontSize: 35, float: "left" }}>:</h1>
+                            <h1 style={{ color: "red", fontFamily: "sans-serif-light", fontSize: 35, float: "left" }}>1</h1>
+                        </div>
+                        <p>ratio of hits to misses</p>
                     </div>
-                    <p>ratio of hits to misses</p>
+                    <br />
+                    <div style={{ padding: 15, borderRadius: 15, backgroundColor: "white",/* margin: "auto", marginLeft: "auto", marginRight: "auto", */height: 120, width: 300 }}>
+                        <div>
+                            <h1 style={{ color: "blue", fontFamily: "sans-serif-light", fontSize: 35, float: "left" }}>35128</h1>
+                        </div>
+                        <p>Active users</p>
+                    </div>
                 </div>
-                {/* <ResponsiveContainer width="100%" height="100%">
-                <BarChart
-                    width={400}
-                    height={250}
-                    data={values}
-                    margin={{
-                        top: 5,
-                        right: 30,
-                        left: 20,
-                        bottom: 5,
-                    }}
-                >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name" />
-                    <YAxis />
-                    <Tooltip />
-                    <Legend />
-                    <Bar dataKey="pv" fill="#8884d8" />
-                    <Bar dataKey="uv" fill="#82ca9d" />
-                </BarChart>
-                </ResponsiveContainer> */}
+                <div style={{ padding: 15, borderRadius: 15, backgroundColor: "white" }}>
+                    <p>Locations Most Used</p>
+
+                    <BarChart
+                        width={400}
+                        height={250}
+                        data={values}
+                        margin={{
+                            top: 5,
+                            right: 30,
+                            left: 20,
+                            bottom: 5,
+                        }}
+                    >
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="name" />
+                        <YAxis />
+                        <Tooltip />
+                        <Legend />
+                        <Bar dataKey="pv" fill="#8884d8" />
+                        <Bar dataKey="uv" fill="#82ca9d" />
+                    </BarChart>
+                </div>
+                <div style={{ padding: 15, borderRadius: 15, backgroundColor: "white" }}>
+                    <p>Free Tier Usage</p>
+
+                    <RadialBarChart cx="50%" cy="50%" innerRadius="10%" width={400}
+                        height={250} outerRadius="80%" barSize={10} data={values}>
+                        <RadialBar
+                            minAngle={15}
+                            label={{ position: 'insideStart', fill: '#fff' }}
+                            background
+                            clockWise
+                            dataKey="uv"
+                        />
+                        <Legend iconSize={10} layout="vertical" verticalAlign="middle" wrapperStyle={style} />
+                    </RadialBarChart>
+                </div>
             </div>
         </div>
 
