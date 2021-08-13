@@ -6,7 +6,7 @@ import Dashboard from "../components/Dashboard";
 
 function App() {
   return (
-    <div style={{ width: "100%", alignItems: "center" }}>
+    <div style={{ width: "100%", alignItems: "center", backgroundColor: "#F3F3F3" }}>
       <Header></Header>
       <Dashboard></Dashboard>
       {/* <img src={logo} className="App-logo" alt="logo" />

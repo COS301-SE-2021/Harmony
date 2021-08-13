@@ -16,7 +16,7 @@ function Header() {
                 <Nav.Item eventKey="home" >
                     Home
                 </Nav.Item>
-                <Nav.Item eventKey="news">News</Nav.Item>
+                <Nav.Item eventKey="news" href="../src/tab1.js">tab1</Nav.Item>
                 <Nav.Item eventKey="solutions">Solutions</Nav.Item>
                 <Nav.Item eventKey="products">Products</Nav.Item>
                 <Nav.Item eventKey="about">About</Nav.Item>
@@ -27,7 +27,7 @@ function Header() {
         setActiveTab(activeKey)
     }
     return (
-        <div >
+        <div style={{ backgroundColor: "white" }}>
             <div id="adminWord"> <p style={{ fontFamily: "sans-serif-light" }}>Admin</p></div>
             <div>
                 <CustomNav appearance="subtle" active={activeTab} onSelect={handleSelect} />
