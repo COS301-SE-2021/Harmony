@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { createSharedElementStackNavigator } from "react-navigation-shared-element";
 
 import { ActivityIndicator, View } from "react-native";
@@ -12,6 +13,8 @@ import {
   BottomNavigationTab,
   Icon,
 } from "@ui-kitten/components";
+import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
+
 
 import HomeScreen from "../screens/HomeScreen.js";
 import ViewFavouritesScreen from "../screens/ViewFavouritesScreen.js";
@@ -60,7 +63,7 @@ const TabNavigator = (props) => {
     <Navigator tabBar={(props) => <BottomTabBar {...props} />}>
       <Screen name="Home" component={HomeScreen} />
       <Screen name="Camera" component={CameraScreen} />
-      <Screen name="Favourite" component={ViewFavouritesScreen} />
+      <Screen name="Favourite" component={UserPairingsTopTabs} />
       {/* <Screen name="Settings" component={SettingsNavigator} /> */}
       <Screen name="Settings">
         {(screenProps) => (
@@ -86,6 +89,82 @@ const Results = () => (
     />
   </Stack.Navigator>
 );
+const Tab = createMaterialTopTabNavigator();
+// function UserPairingsTopTabs() {
+const UserPairingsTopTabs = () => (
+
+  // return (
+  <Tab.Navigator
+    initialRouteName="Favourites"
+    // tabBarOptions={{
+    //   labelStyle: {
+    //     textAlign: "center",
+    //     textTransform: "none", //Needed else the table titles will be all caps
+    //     fontSize: 20,
+    //   },
+    //   showIcon: true, //Required for icon to show
+    //   // showLabel: false,// to hide tab text
+    //   activeTintColor: "#3366FF", //When this is the active tab, this will be the color of the text and icons
+    //   inactiveTintColor: "rgba(0,0,0,0.4)",
+    //   // backgroundColor: "rgba(0,0,0,0.1)",
+
+    //   tabStyle: {
+    //     flexDirection: "row",
+    //     height: 70,
+    //   },
+    //   indicatorStyle: {
+    //     //Style of the scroll bar at the bottom of the tabs
+    //     borderBottomColor: "#3366FF",
+    //     borderBottomWidth: 4,
+    //   },
+    // }}
+
+    screenOptions={{
+      tabBarActiveTintColor: "#3366FF",
+      tabBarInactiveTintColor: "rgba(0,0,0,0.4)",
+      tabBarShowIcon: true,
+      tabBarLabelStyle: {
+        textAlign: "center",
+        textTransform: "none",
+        fontSize: 20
+      },
+      tabBarItemStyle: {
+        flexDirection: "row",
+        height: 70
+      },
+      tabBarIndicatorStyle: {
+        borderBottomColor: "#3366FF",
+        borderBottomWidth: 4
+      }
+    }}
+  >
+    <Tab.Screen
+      name="UserFavourites"
+      component={ViewFavouritesScreen}
+      options={{
+        tabBarLabel: "My Favourites",
+        tabBarIcon: ({ color }) => (
+          <FontAwesome name="heart-o" color={color} size={24} />
+        ),
+      }}
+    />
+    <Tab.Screen
+      name="UserPairings"
+      component={ViewFavouritesScreen}
+      options={{
+        tabBarLabel: "My Pairings",
+        tabBarIcon: ({ color }) => (
+          <MaterialCommunityIcons
+            name="cards-outline"
+            color={color}
+            size={24}
+          />
+        ),
+      }}
+    />
+  </Tab.Navigator>
+);
+// }
 
 const SettingsStack = createStackNavigator();
 
