@@ -164,7 +164,7 @@ const SettingsNavigator = (props) => (
     }}
     initialRouteName="SettingsStack"
   >
-    <SettingsStack.Screen name="Settings">
+    <SettingsStack.Screen name="SettingsScreen">
       {(screenProps) => (
         <SettingsScreen
           {...screenProps}
