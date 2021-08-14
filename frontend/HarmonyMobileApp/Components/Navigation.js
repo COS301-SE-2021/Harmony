@@ -1,47 +1,41 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { StyleSheet, Dimensions } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { createSharedElementStackNavigator } from "react-navigation-shared-element";
-
-import { ActivityIndicator, View } from "react-native";
-import Amplify, { Auth } from "aws-amplify";
-import { createStackNavigator } from "@react-navigation/stack";
+import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 
 import {
   BottomNavigation,
   BottomNavigationTab,
+  Layout,
+  Text,
   Icon,
 } from "@ui-kitten/components";
 
-import HomeScreen from "../screens/HomeScreen.js";
 import ViewFavouritesScreen from "../screens/ViewFavouritesScreen.js";
+import HomeScreen from "../screens/HomeScreen";
 import SettingsScreen from "../screens/SettingsScreen.js";
-import CameraScreen from "../screens/CameraScreen.js";
 import PairingResultsScreen from "../screens/PairingResultsScreen.js";
 import DrinkDetailsScreen from "../screens/DrinkDetailsScreen.js";
 
-import config from "../aws-exports";
-import SignIn from "../screens/SignInScreen";
-import SignUp from "../screens/SignUpScreen";
-import ConfirmSignUp from "../screens/ConfirmSignUpScreen";
-import ForgotPassword from "../screens/ForgotPasswordScreen";
-import ConfirmForgotPassword from "../screens/ConfirmForgotPasswordScreen";
-
-import EditAccountScreen from "../screens/EditAccountScreen";
-import EditEmailScreen from "../screens/EditEmailScreen";
-import ConfirmEditEmailScreen from "../screens/ConfirmEditEmailScreen";
-import EditAccountPassword from "../screens/EditAccountPasswordScreen";
-
-import { TransitionPresets } from "@react-navigation/stack";
-
-Amplify.configure(config);
-
 const { Navigator, Screen } = createBottomTabNavigator();
 const Stack = createSharedElementStackNavigator();
+const Tab = createMaterialTopTabNavigator();
+
 const HomeIcon = (props) => <Icon {...props} name="home-outline" />;
-const CameraIcon = (props) => <Icon {...props} name="camera-outline" />;
+const CameraIcon = (props) => (
+  <Icon {...props} name="camera-outline" width="32" height="32" />
+);
 const HeartIcon = (props) => <Icon {...props} name="heart-outline" />;
 const SettingsIcon = (props) => <Icon {...props} name="settings-2-outline" />;
+
+const CameraScreen = () => (
+  <Layout style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+    <Text category="h1">Camera</Text>
+  </Layout>
+);
 
 const BottomTabBar = ({ navigation, state }) => (
   <BottomNavigation
@@ -55,26 +49,17 @@ const BottomTabBar = ({ navigation, state }) => (
   </BottomNavigation>
 );
 
-const TabNavigator = (props) => {
-  return (
-    <Navigator tabBar={(props) => <BottomTabBar {...props} />}>
-      <Screen name="Home" component={HomeScreen} />
-      <Screen name="Camera" component={CameraScreen} />
-      <Screen name="Favourite" component={ViewFavouritesScreen} />
-      {/* <Screen name="Settings" component={SettingsNavigator} /> */}
-      <Screen name="Settings">
-        {(screenProps) => (
-          <SettingsNavigator
-            {...screenProps}
-            updateAuthState={props.updateAuthState}
-          />
-        )}
-      </Screen>
-
-      <Screen name="Results" component={Results} />
-    </Navigator>
-  );
-};
+const TabNavigator = () => (
+  <Navigator tabBar={(props) => <BottomTabBar {...props} />}>
+    <Screen name="Results" component={Results} />
+    {/* <Screen name="Home" component={HomeScreen} /> */}
+    <Screen name="Camera" component={CameraScreen} />
+    {/* <Screen name="Favourite" component={ViewFavouritesScreen} /> */}
+    <Screen name="Favourite" component={UserPairingsTopTabs} />
+    {/* <Screen name="Favourite" component={UserPairingsScreen} /> */}
+    <Screen name="Settings" component={SettingsScreen} />
+  </Navigator>
+);
 
 const Results = () => (
   <Stack.Navigator headerMode="none" initialRouteName="Results">
@@ -87,49 +72,60 @@ const Results = () => (
   </Stack.Navigator>
 );
 
-const SettingsStack = createStackNavigator();
+function UserPairingsTopTabs() {
+  return (
+    <Tab.Navigator
+      initialRouteName="Favourites"
+      tabBarOptions={{
+        labelStyle: {
+          textAlign: "center",
+          textTransform: "none", //Needed else the table titles will be all caps
+          fontSize: 20,
+        },
+        showIcon: true, //Required for icon to show
+        // showLabel: false,// to hide tab text
+        activeTintColor: "#3366FF", //When this is the active tab, this will be the color of the text and icons
+        inactiveTintColor: "rgba(0,0,0,0.4)",
+        // backgroundColor: "rgba(0,0,0,0.1)",
 
-const SettingsNavigator = (props) => (
-  <SettingsStack.Navigator
-    screenOptions={{
-      headerMode: "screen",
-      headerStyle: {
-        height: 80, // Specify the height of your custom header
-      },
-      headerTitleStyle: {
-        fontSize: 28,
-        alignSelf: "center",
-      },
-      headerTitleContainerStyle: {
-        left: 0, // Needed else the header will be offset towards the right when theres a back button
-      },
-      ...TransitionPresets.SlideFromRightIOS,
-    }}
-    initialRouteName="SettingsStack"
-  >
-    <SettingsStack.Screen name="Settings">
-      {(screenProps) => (
-        <SettingsScreen
-          {...screenProps}
-          updateAuthState={props.updateAuthState}
-        />
-      )}
-    </SettingsStack.Screen>
-    <SettingsStack.Screen
-      name="Edit Account Details"
-      component={EditAccountScreen}
-    />
-    <SettingsStack.Screen name="Edit Email" component={EditEmailScreen} />
-    <SettingsStack.Screen
-      name="Confirm Edit Email"
-      component={ConfirmEditEmailScreen}
-    />
-    <SettingsStack.Screen
-      name="Edit Password"
-      component={EditAccountPassword}
-    />
-  </SettingsStack.Navigator>
-);
+        tabStyle: {
+          flexDirection: "row",
+          height: 70,
+        },
+        indicatorStyle: {
+          //Style of the scroll bar at the bottom of the tabs
+          borderBottomColor: "#3366FF",
+          borderBottomWidth: 4,
+        },
+      }}
+    >
+      <Tab.Screen
+        name="UserFavourites"
+        component={ViewFavouritesScreen}
+        options={{
+          tabBarLabel: "My Favourites",
+          tabBarIcon: ({ color }) => (
+            <FontAwesome name="heart-o" color={color} size={24} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="UserPairings"
+        component={HomeScreen}
+        options={{
+          tabBarLabel: "My Pairings",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="cards-outline"
+              color={color}
+              size={24}
+            />
+          ),
+        }}
+      />
+    </Tab.Navigator>
+  );
+}
 
 const options = {
   transitionSpec: {
@@ -150,80 +146,21 @@ const options = {
   },
 };
 
-const AuthenticationStack = createStackNavigator();
-
-const AuthenticationNavigator = (props) => {
-  return (
-    <View style={{ flex: 1, backgroundColor: "#118AB2" }}>
-      <AuthenticationStack.Navigator
-        headerMode="none"
-        screenOptions={{
-          ...TransitionPresets.ModalSlideFromBottomIOS,
-        }}
-      >
-        <AuthenticationStack.Screen name="SignIn">
-          {(screenProps) => (
-            <SignIn {...screenProps} updateAuthState={props.updateAuthState} />
-          )}
-        </AuthenticationStack.Screen>
-        <AuthenticationStack.Screen name="SignUp" component={SignUp} />
-        <AuthenticationStack.Screen
-          name="ConfirmSignUp"
-          component={ConfirmSignUp}
-        />
-        <AuthenticationStack.Screen
-          name="ForgotPassword"
-          component={ForgotPassword}
-        />
-        <AuthenticationStack.Screen
-          name="ConfirmForgotPassword"
-          component={ConfirmForgotPassword}
-        />
-      </AuthenticationStack.Navigator>
-    </View>
-  );
-};
-
-const Initializing = () => {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <ActivityIndicator size="large" color="#118AB2" />
-    </View>
-  );
-};
-
-export const AppNavigator = (props) => {
-  // function AppNavigator() {
-  const [isUserLoggedIn, setUserLoggedIn] = useState("initializing");
-
-  useEffect(() => {
-    checkAuthState();
-  }, []);
-
-  async function checkAuthState() {
-    try {
-      await Auth.currentAuthenticatedUser();
-      console.log(" User is signed in");
-      setUserLoggedIn("loggedIn");
-    } catch (err) {
-      console.log(" User is not signed in");
-      setUserLoggedIn("loggedOut");
-    }
-  }
-
-  function updateAuthState(isUserLoggedIn) {
-    setUserLoggedIn(isUserLoggedIn);
-  }
-
-  return (
-    <NavigationContainer>
-      {isUserLoggedIn === "initializing" && <Initializing />}
-      {isUserLoggedIn === "loggedIn" && (
-        <TabNavigator updateAuthState={updateAuthState} />
-      )}
-      {isUserLoggedIn === "loggedOut" && (
-        <AuthenticationNavigator updateAuthState={updateAuthState} />
-      )}
-    </NavigationContainer>
-  );
-};
+export const AppNavigator = () => (
+  <NavigationContainer>
+    <TabNavigator />
+  </NavigationContainer>
+);
+const styles = StyleSheet.create({
+  tabHeader: {
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 10,
+  },
+  tabContainer: {
+    height: Dimensions.get("window").height,
+    width: Dimensions.get("window").width,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
