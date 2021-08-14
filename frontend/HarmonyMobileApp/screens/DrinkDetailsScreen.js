@@ -12,11 +12,12 @@ import { SharedElement } from "react-navigation-shared-element";
 import * as Animatable from "react-native-animatable";
 import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 
-const MAX_HEIGHT = 300;
+const MAX_HEIGHT = 400;
 
-// const DrinkDetailsScreen = ({ navigation, props }) => {
 const DrinkDetailsScreen = ({ navigation, route }) => {
   const { item } = route.params;
+  // console.log(item);
+
   const buttonRef = React.useRef();
 
   const CloseButton = () => (
@@ -47,7 +48,7 @@ const DrinkDetailsScreen = ({ navigation, route }) => {
   );
 
   const TitleBar = () => (
-    <SharedElement id={item.drinkName}>
+    <SharedElement id={item.DrinkItem}>
       <View
         style={[
           styles.section,
@@ -57,14 +58,14 @@ const DrinkDetailsScreen = ({ navigation, route }) => {
           },
         ]}
       >
-        <Text style={styles.title}>{item.drinkName}</Text>
+        <Text style={styles.title}>{item.DrinkItem}</Text>
       </View>
     </SharedElement>
   );
 
   const FoodDescription = () => (
     <View style={[styles.section]}>
-      <Text style={styles.sectionText}>{item.drinkDesc}</Text>
+      <Text style={styles.sectionText}>{item.DrinkDesc}</Text>
     </View>
   );
 
@@ -79,7 +80,7 @@ const DrinkDetailsScreen = ({ navigation, route }) => {
         horizontal={true}
       >
         <View style={styles.rowContainer}>
-          {item.tags.map((tag, index) => (
+          {item.DrinkTags.map((tag, index) => (
             <View style={styles.tagContainer} key={index}>
               <FontAwesome name="tag" size={16} color="#fff" />
               <Text style={styles.tagText}>{tag}</Text>
@@ -91,35 +92,45 @@ const DrinkDetailsScreen = ({ navigation, route }) => {
   );
 
   return (
-    <View style={{ flex: 1, backgroundColor: "white" }}>
-      <SharedElement id={item.id}>
-        <Image
-          source={{ uri: item.imageURI }}
-          style={{
-            width: "100%",
-            height: MAX_HEIGHT,
-          }}
-          resizeMode="cover"
-        />
-      </SharedElement>
+    <ScrollView
+      style={styles.otherDrinkCardsContainer}
+      contentContainerStyle={{
+        flexDirection: "row",
+        flexWrap: "wrap",
+      }}
+      horizontal={false}
+    >
+      <View style={{ flex: 1, backgroundColor: "white" }}>
+        <SharedElement id={item.DrinkID}>
+          <Image
+            source={{ uri: item.DrinkImage }}
+            style={{
+              width: "100%",
+              height: MAX_HEIGHT,
+              // height: "70%",
+            }}
+            resizeMode="cover"
+          />
+        </SharedElement>
 
-      <CloseButton />
-      <TitleBar />
-      <FoodDescription />
-      <TagBar />
-    </View>
+        <CloseButton />
+        <TitleBar />
+        <FoodDescription />
+        <TagBar />
+      </View>
+    </ScrollView>
   );
 };
 DrinkDetailsScreen.sharedElements = (route) => {
   const { item } = route.params;
   return [
     {
-      id: item.id,
+      id: item.DrinkID,
       animation: "move",
       resize: "clip",
     },
     {
-      id: item.drinkName,
+      id: item.DrinkItem,
       animation: "fade",
       resize: "clip",
     },

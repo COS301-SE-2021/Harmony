@@ -1,15 +1,38 @@
 {
   "providers": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-harmonymobileapp-hmnynviro-120001-authRole",
-      "UnauthRoleArn": "arn:aws:iam::294481406452:role/amplify-harmonymobileapp-hmnynviro-120001-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::294481406452:role/amplify-harmonymobileapp-hmnynviro-120001-authRole",
+      "AuthRoleName": "amplify-harmonymobileapp-harmonydev-214351-authRole",
+      "UnauthRoleArn": "arn:aws:iam::294481406452:role/amplify-harmonymobileapp-harmonydev-214351-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::294481406452:role/amplify-harmonymobileapp-harmonydev-214351-authRole",
       "Region": "eu-west-1",
-      "DeploymentBucketName": "amplify-harmonymobileapp-hmnynviro-120001-deployment",
-      "UnauthRoleName": "amplify-harmonymobileapp-hmnynviro-120001-unauthRole",
-      "StackName": "amplify-harmonymobileapp-hmnynviro-120001",
-      "StackId": "arn:aws:cloudformation:eu-west-1:294481406452:stack/amplify-harmonymobileapp-hmnynviro-120001/4a7be3c0-d1ae-11eb-93bf-0aa2eb738a15",
-      "AmplifyAppId": "d348oorcqc4y9s"
+      "DeploymentBucketName": "amplify-harmonymobileapp-harmonydev-214351-deployment",
+      "UnauthRoleName": "amplify-harmonymobileapp-harmonydev-214351-unauthRole",
+      "StackName": "amplify-harmonymobileapp-harmonydev-214351",
+      "StackId": "arn:aws:cloudformation:eu-west-1:294481406452:stack/amplify-harmonymobileapp-harmonydev-214351/a23fd500-fba5-11eb-8d40-0a3e9be0e88b",
+      "AmplifyAppId": "d1qpxs9oyxo6xc"
+    }
+  },
+  "auth": {
+    "harmonymobileappdd7fa753": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-harmonymobileapp-harmonydev-214351-deployment/amplify-cfn-templates/auth/harmonymobileappdd7fa753-cloudformation-template.yml",
+        "logicalId": "authharmonymobileappdd7fa753"
+      },
+      "lastPushTimeStamp": "2021-08-12T19:55:59.557Z",
+      "output": {
+        "UserPoolId": "eu-west-1_tWd98APor",
+        "AppClientIDWeb": "2cst820sedan6a5167l9tmg5hj",
+        "AppClientID": "3hahucrdeq7u73fv4ct75ngu7s",
+        "IdentityPoolId": "eu-west-1:61b11dd8-d92c-4080-906a-872f136f7055",
+        "UserPoolArn": "arn:aws:cognito-idp:eu-west-1:294481406452:userpool/eu-west-1_tWd98APor",
+        "IdentityPoolName": "harmonymobileappdd7fa753_identitypool_dd7fa753__harmonydev",
+        "UserPoolName": "harmonymobileappdd7fa753_userpool_dd7fa753"
+      },
+      "lastPushDirHash": "YhSWY0EJ3COybtP6FqZx+kfMDCk="
     }
   }
 }
