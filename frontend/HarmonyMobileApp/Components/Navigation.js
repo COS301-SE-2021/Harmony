@@ -14,12 +14,11 @@ import {
   Icon,
 } from "@ui-kitten/components";
 
-import HomeScreen from "./HomeScreen.js";
-import ViewFavouritesScreen from "./ViewFavouritesScreen.js";
-import ShowLatestPairingsScreen from "./ShowLatestPairingsScreen";
-import SettingsScreen from "./SettingsScreen.js";
-import PairingResultsScreen from "./PairingResultsScreen.js";
-import DrinkDetailsScreen from "./DrinkDetailsScreen.js";
+import ViewFavouritesScreen from "../screens/ViewFavouritesScreen.js";
+import HomeScreen from "../screens/HomeScreen";
+import SettingsScreen from "../screens/SettingsScreen.js";
+import PairingResultsScreen from "../screens/PairingResultsScreen.js";
+import DrinkDetailsScreen from "../screens/DrinkDetailsScreen.js";
 
 const { Navigator, Screen } = createBottomTabNavigator();
 const Stack = createSharedElementStackNavigator();
@@ -112,7 +111,7 @@ function UserPairingsTopTabs() {
       />
       <Tab.Screen
         name="UserPairings"
-        component={ShowLatestPairingsScreen}
+        component={HomeScreen}
         options={{
           tabBarLabel: "My Pairings",
           tabBarIcon: ({ color }) => (
