@@ -68,9 +68,6 @@ Outputs:
     Description: "Implicit IAM Role created for Hello World function"
     Value: !GetAtt NewPairingsFunctionRole.Arn
 
-  ViewUserPairingsmApi:
-    Description: "API Gateway endpoint URL for Prod stage for ViewUserPairings function"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/ViewUserPairings/"
   ViewUserPairingsFunction:
     Description: "ViewUserPairings Lambda Function ARN"
     Value: !GetAtt ViewUserPairingsFunction.Arn

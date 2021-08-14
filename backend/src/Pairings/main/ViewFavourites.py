@@ -305,7 +305,6 @@ def keepfav(response, user_response):
     for i in range(len(response)):
         notfound = False
         for favs in userFavourites:
-            print(favs)
             # if user data matches pairing then add it to the response with True
             if favs == response[counter]["PID"]:
                 counter = counter + 1
