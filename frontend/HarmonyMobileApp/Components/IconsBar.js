@@ -14,7 +14,7 @@ export default function IconsBar({
     isF,
     ...otherProps
 }) {
-    const [favouriteIconChecked, setFavouriteIconChecked] = useState("Unchecked");
+    const [favouriteIconChecked, setFavouriteIconChecked] = useState("");
     const [favouriteIconColor, setFavouriteIconColor] = useState("black"); // controls the favourite heart color (pink/black)
     const [favouriteIconOutline, setFavouriteIconOutline] = useState("hearto"); // controls whether the heart is filled in or outlined
 
@@ -110,7 +110,7 @@ export default function IconsBar({
     useEffect(() => {
         if (favouriteIconChecked == "Checked") {
             addRemoveFavourites(addToFavURL);
-        } else {
+        } else if (favouriteIconChecked == "Unchecked") {
             addRemoveFavourites(removeFromFavURL);
         }
     }, [favouriteIconChecked]);
@@ -189,7 +189,7 @@ export default function IconsBar({
     };
 
     handleFavouriteIconPress = () => {
-        if (favouriteIconChecked == "Unchecked") {
+        if (favouriteIconChecked == "Unchecked" || favouriteIconChecked == "") {
             checkFavourite();
         } else {
             uncheckFavourite();
