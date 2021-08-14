@@ -27,12 +27,6 @@ Resources:
       Policies:
         # Give DynamoDB Full Access to your Lambda Function
         - AmazonDynamoDBFullAccess
-      Events:
-        viewFavourites:
-          Type: AWS::ApiGateway::RestApi # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
-          Properties:
-            Path: /viewFavourites
-            Method: post
 
   ViewUserPairingsFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
@@ -43,34 +37,3 @@ Resources:
       Policies:
         # Give DynamoDB Full Access to your Lambda Function
         - AmazonDynamoDBFullAccess
-      Events:
-        ViewUserPairings:
-          Type: AWS::ApiGateway::RestApi # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
-          Properties:
-            Path: /viewUserPairings
-            Method: post
-
-Outputs:
-  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
-  # Find out more about other implicit resources you can reference within SAM
-  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
-  viewFavouritesFunction:
-    Description: "Hello World Lambda Function ARN"
-    Value: !GetAtt viewFavouritesFunction.Arn
-  viewFavouritesFunctionIamRole:
-    Description: "Implicit IAM Role created for Hello World function"
-    Value: !GetAtt viewFavouritesFunctionRole.Arn
-
-  NewPairingsFunction:
-    Description: "Hello World Lambda Function ARN"
-    Value: !GetAtt NewPairingsFunction.Arn
-  NewPairingsFunctionIamRole:
-    Description: "Implicit IAM Role created for Hello World function"
-    Value: !GetAtt NewPairingsFunctionRole.Arn
-
-  ViewUserPairingsFunction:
-    Description: "ViewUserPairings Lambda Function ARN"
-    Value: !GetAtt ViewUserPairingsFunction.Arn
-  ViewUserPairingsIamRole:
-    Description: "Implicit IAM Role created for ViewUserPairings function"
-    Value: !GetAtt ViewUserPairingsRole.Arn
