@@ -178,7 +178,7 @@ const HomeScreen = (props) => {
         }}
         rightComponent={filterButton}
       />
-      <View style={{ height: "100%" }}>
+      <View style={{ flex: 1 }}>
         <View style={styles.centeredView}>
           {isModalVisible && <FilterModal sortPairingsName={ReduxStore.getState().sortPairings} />}
         </View>
