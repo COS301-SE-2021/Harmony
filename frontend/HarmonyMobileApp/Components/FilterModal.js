@@ -243,38 +243,6 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
 
             <View style={styles.filterView}>
               <View style={[styles.filterLabel]}>
-                <View style={{ flexDirection: "row" }}>
-                  <MaterialCommunityIcons
-                    name="cup"
-                    size={18}
-                    style={personalStyles.iconStyle}
-                    color="black"
-                  />
-                  <Text style={[styles.spaceLeft, styles.TextSmall]}>Drinks</Text>
-                </View>
-                <View
-                  style={[
-                    styles.filterTagsContainer,
-                    { flexDirection: "column" },
-                  ]}
-                >
-                  <View
-                    style={personalStyles.filterContainer}
-                  >
-                    {/* Mapping of the tags from the JSON to the components*/}
-                    {filters.drinks.map((tag, index) => (
-                      <View key={index}>
-                        <FilterTag color="#1FBFBA" title={tag} filterType="drinks" />
-                      </View>
-                    ))}
-                  </View>
-                </View>
-              </View>
-            </View>
-            <Text style={{ height: 7 }}></Text>
-
-            <View style={styles.filterView}>
-              <View style={[styles.filterLabel]}>
                 <View style={styles.flexRow}>
                   <FontAwesome5
                     name="hamburger"
@@ -303,6 +271,40 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
                 </View>
               </View>
             </View>
+            <Text style={{ height: 7 }}></Text>
+
+            <View style={styles.filterView}>
+              <View style={[styles.filterLabel]}>
+                <View style={{ flexDirection: "row" }}>
+                  <MaterialCommunityIcons
+                    name="cup"
+                    size={18}
+                    style={personalStyles.iconStyle}
+                    color="black"
+                  />
+                  <Text style={[styles.spaceLeft, styles.TextSmall]}>Drinks</Text>
+                </View>
+                <View
+                  style={[
+                    styles.filterTagsContainer,
+                    { flexDirection: "column" },
+                  ]}
+                >
+                  <View
+                    style={personalStyles.filterContainer}
+                  >
+                    {/* Mapping of the tags from the JSON to the components*/}
+                    {filters.drinks.map((tag, index) => (
+                      <View key={index}>
+                        <FilterTag color="#1FBFBA" title={tag} filterType="drinks" />
+                      </View>
+                    ))}
+                  </View>
+                </View>
+              </View>
+            </View>
+
+
           </ScrollView>
           <Text style={{ height: 7 }}></Text>
           <View style={styles.flexRow}>
