@@ -149,7 +149,7 @@ const CardScreen = ({ URL, headerVisible }) => {
   }
 
   const filterButton = () => (
-    <View style={styles.flexRow}>
+    <View style={[styles.flexRow, { paddingTop: "8%" }]}>
       <Pressable
         style={[styles.button, styles.buttonOpen]}
         onPress={() => {
@@ -183,7 +183,6 @@ const CardScreen = ({ URL, headerVisible }) => {
           statusBarProps={{ elevated: "true", backgroundColor: "black" }}
           placement="left"
           centerComponent={<ShowTitle />}
-          // centerContainerStyle={{ height: "15%" }}
           containerStyle={{
             backgroundColor: "white",
           }}
