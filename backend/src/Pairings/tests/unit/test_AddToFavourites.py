@@ -2,7 +2,7 @@ import json
 
 import pytest
 
-from backend.src.Pairings.AddtoFavourites import AddToFavourites
+from backend.src.Pairings.main import AddToFavourites
 
 
 @pytest.fixture()
