@@ -294,7 +294,6 @@ def filter_by_range(response, filterdist):
 
 def get_user_created(uid,response):
     counter = 0
-    print(response)
     for i in range(len(response)):
         if response[counter]["UID"] != uid:
             del response[counter]
