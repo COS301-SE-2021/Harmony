@@ -2,7 +2,7 @@ import json
 
 import pytest
 
-from backend.src.Pairings.removeFromFavourites import RemoveFromFavourites
+from backend.src.Pairings.main import RemoveFromFavourites
 
 
 @pytest.fixture()

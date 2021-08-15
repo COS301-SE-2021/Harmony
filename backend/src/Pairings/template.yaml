@@ -14,7 +14,7 @@ Resources:
   RemoveFromFavouritesFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: removeFromFavourites/
+      CodeUri: main/
       Handler: RemoveFromFavourites.remove_from_favourites
       Runtime: python3.8
       Policies:
