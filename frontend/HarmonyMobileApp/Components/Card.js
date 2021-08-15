@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
     View,
     Image,
@@ -18,7 +18,6 @@ import {
 } from "@ui-kitten/components";
 import IconsBar from "../Components/IconsBar";
 
-// make api call with dataSet.PID
 export default function Card({ dataSet, ...otherProps }) {
 
     return (
@@ -66,17 +65,6 @@ export default function Card({ dataSet, ...otherProps }) {
                                 />
                                 <Text style={styles.tagText}>{dataSet.MealTag}</Text>
                             </View>
-                            {/* {dataSet.FoodTags.map((tag, index) => (
-                                <View style={styles.tagContainer} key={index}>
-                                    <MaterialIcons
-                                        name="fastfood"
-                                        size={14}
-                                        color="#fff"
-                                    />
-                                    <Text style={styles.tagText}>{tag}</Text>
-                                </View>
-                            ))} */}
-
                             {dataSet.FoodTags.map((tag, index) => (
                                 <View
                                     style={[
