@@ -26,8 +26,9 @@ import ReduxStore from "../Components/ReduxStore"
 
 import FilterModal from "../Components/FilterModal";
 import Card from "../Components/Card"
+import AppAlert from "../Components/AppAlert";
 
-const HomeScreen = (props) => {
+const HomeScreen = () => {
   const viewPairingURL =
     "https://9vk5hcie79.execute-api.eu-west-1.amazonaws.com/dev";
   //The loading of the flatlist
@@ -41,8 +42,8 @@ const HomeScreen = (props) => {
   const [sortPairings, setSortPairings] = useState("Trending");                            // the type of pairings shown filter
 
   const [refreshing, setRefreshing] = React.useState(false);
-
-  const [loadOnce, setLoadOnce] = useState(true);
+  const [isErrorAlertVisible, setErrorAlertVisible] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
   //the refreshing of the flatlist
   const onRefresh = React.useCallback(() => {
@@ -50,6 +51,7 @@ const HomeScreen = (props) => {
     GetLocation();
     wait(2000).then(() => setRefreshing(false));
   }, []);
+
   const wait = (timeout) => {
     return new Promise((resolve) => setTimeout(resolve, timeout));
   };
@@ -69,20 +71,12 @@ const HomeScreen = (props) => {
         payload: { "ApplyFilter": false }
       });
       wait(2000).then(() => setRefreshing(false));
-
     }
   });
 
-  // useEffect(() => {
-  //   GetLocation();
-  //   console.log("loaded");
-  //   setLoadOnce(false);
-
-  // }, [])
-
   //the api call for trending
   useEffect(() => {
-    console.log("called on first")
+    console.log("Calling API...")
     var state = ReduxStore.getState();
     console.log(state);
     if (state.userLocationLong == null || state.userLocationLat == null) {
@@ -108,8 +102,21 @@ const HomeScreen = (props) => {
       })
     })
       .then((response) => response.json())
-      .then((json) => setData(json.Data))
-      //.then(console.log(data))
+      .then((json) => {
+        if (json.StatusCode === 200) {
+          setData(json.Data)
+          console.log("StatusCode Returned: " + json.StatusCode)
+          setErrorAlertVisible(false);
+        }
+        else if (json.StatusCode === 204) {
+          console.log(json)
+          console.log("ERRROR ENCOUNTERED");
+          ClearAllFilters();
+          //setModalMessage must come before setErrorAlertVisible
+          setModalMessage(json.Data);
+          setErrorAlertVisible(true);
+        }
+      })
       .catch((error) => alert(error))
       .then(setLoading(false));
   }, [refreshing]);
@@ -117,6 +124,14 @@ const HomeScreen = (props) => {
   const ShowTitle = () => (
     <Text style={styles.TextLarge}> {sortPairings} </Text>
   );
+
+  const ClearAllFilters = () => {
+    ReduxStore.dispatch({
+      type: "CLEAR",
+      //payload is the standard adopted name for the state value
+      payload: { "ApplyFilter": true }
+    });
+  };
 
   const GetLocation = async () => {
     //status is response from permission
@@ -132,7 +147,6 @@ const HomeScreen = (props) => {
     console.log("location loaded");
     setRefreshing(true);
     wait(2000).then(() => setRefreshing(false));
-
   }
 
   const filterButton = () => (
@@ -165,11 +179,8 @@ const HomeScreen = (props) => {
       theme={{ ...eva.light, ...theme }}
       style={styles.container}
     >
-      {/* <StatusBar hidden={true} />
-       */}
       <Header
         statusBarProps={{ elevated: "true", backgroundColor: "black" }}
-        //   leftComponent={searchButton}
         placement="left"
         centerComponent={<ShowTitle />}
         centerContainerStyle={{ height: "15%" }}
@@ -200,10 +211,10 @@ const HomeScreen = (props) => {
           />
         )}
       </View>
+      {isErrorAlertVisible === true && (
+        <AppAlert visible={true} message={modalMessage} type={"Error"} />
+      )}
     </ApplicationProvider >
   );
 };
-
-
-
 export default HomeScreen;
