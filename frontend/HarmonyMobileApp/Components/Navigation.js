@@ -20,7 +20,7 @@ import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 
 import HomeScreen from "../screens/HomeScreen.js";
 import FavouritesScreen from "../screens/FavouritesScreen.js";
-import PairingsScreen from "../screens/PairingsScreen.js";
+import CreatedPairingsScreen from "../screens/CreatedPairingsScreen.js";
 import SettingsScreen from "../screens/SettingsScreen.js";
 import CameraScreen from "../screens/CameraScreen.js";
 import PairingResultsScreen from "../screens/PairingResultsScreen.js";
@@ -130,7 +130,7 @@ const UserPairingsTopTabs = () => (
     />
     <Tab.Screen
       name="UserPairings"
-      component={PairingsScreen}
+      component={CreatedPairingsScreen}
       options={{
         tabBarLabel: "My Pairings",
         tabBarIcon: ({ color }) => (

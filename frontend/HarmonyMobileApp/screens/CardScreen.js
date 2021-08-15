@@ -29,9 +29,7 @@ import Card from "../Components/Card"
 import AppAlert from "../Components/AppAlert";
 
 const CardScreen = ({ URL }) => {
-  const viewPairingURL =
-    // "https://9vk5hcie79.execute-api.eu-west-1.amazonaws.com/dev";
-    URL;
+  const API_URL = URL;
   //The loading of the flatlist
   const [isLoading, setLoading] = useState(useIsFocused());
 
@@ -85,7 +83,7 @@ const CardScreen = ({ URL }) => {
       state = ReduxStore.getState();
       console.log("location updated " + state.userLocationLong);
     }
-    fetch(viewPairingURL, {
+    fetch(API_URL, {
       method: "POST",
       headers: {
         Accept: "application/json",

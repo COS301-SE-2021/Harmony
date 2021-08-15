@@ -2,9 +2,9 @@ import React from "react";
 import CardScreen from "./CardScreen";
 
 const FavouritesScreen = () => {
-  const userFavourites = "https://w6gduongvk.execute-api.eu-west-1.amazonaws.com/dev/viewfavourites"
+  const USER_FAVOURITED_PAIRINGS = "https://w6gduongvk.execute-api.eu-west-1.amazonaws.com/dev/viewfavourites"
   return (
-    <CardScreen URL={userFavourites} />
+    <CardScreen URL={USER_FAVOURITED_PAIRINGS} />
   )
 };
 export default FavouritesScreen;
