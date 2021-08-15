@@ -2,7 +2,7 @@ import json
 
 import pytest
 
-from backend.src.Pairings.ViewPairings import ViewPairings
+from backend.src.Pairings.main import ViewPairings
 
 
 @pytest.fixture()

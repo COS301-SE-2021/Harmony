@@ -25,7 +25,6 @@ def vote(event, context):
     user_table_name = 'Users'
     table = dynamodb.Table(table_name)
     usertable = dynamodb.Table(user_table_name)
-    print("Test the code")
 
     type = event["VoteType"]  # or Down and must be passed in from frontend
     id = event["PID"] # must be passed in from frontend
@@ -35,7 +34,6 @@ def vote(event, context):
     """Gets the pairing that the vote was made to as well as its data."""
     try:
         pairing_data = table.get_item(Key={'PID': id})
-        print(pairing_data)
     except ClientError as e:
         print(e.response['Error']['Message'])
 
@@ -43,7 +41,6 @@ def vote(event, context):
      on the type, either: Upvotes/Downvotes"""
 
     current_num_votes = pairing_data['Item'][type]
-    print(current_num_votes)
 
     # TODO : Uncomment this once add to user database is fixed
     if not validate_user_pairing_relation(uid, type, usertable, id, vote_type):
@@ -133,7 +130,6 @@ def vote_userdatabase(uid, type, table, pid, votetype):
                     return
                 else:
                     raise
-        print(response['ResponseMetadata']['HTTPStatusCode'])
         return
     elif type == "Downvotes" and votetype == "Checked":
         index = 0
@@ -170,7 +166,6 @@ def vote_userdatabase(uid, type, table, pid, votetype):
                     return
                 else:
                     raise
-        print(response['ResponseMetadata']['HTTPStatusCode'])
         return
     elif type == "Upvotes" and votetype == "Unchecked":
         index = 0

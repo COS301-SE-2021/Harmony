@@ -2,7 +2,7 @@ import unittest
 import json
 
 import pytest
-from backend.src.Pairings.ViewPairings.Voting import addvote
+from backend.src.Pairings.main.Voting import addvote
 
 
 @pytest.fixture()
