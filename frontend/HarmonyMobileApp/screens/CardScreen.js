@@ -28,7 +28,7 @@ import FilterModal from "../Components/FilterModal";
 import Card from "../Components/Card"
 import AppAlert from "../Components/AppAlert";
 
-const CardScreen = ({ URL }) => {
+const CardScreen = ({ URL, headerVisible }) => {
   const API_URL = URL;
   //The loading of the flatlist
   const [isLoading, setLoading] = useState(useIsFocused());
@@ -178,16 +178,18 @@ const CardScreen = ({ URL }) => {
       theme={{ ...eva.light, ...theme }}
       style={styles.container}
     >
-      <Header
-        statusBarProps={{ elevated: "true", backgroundColor: "black" }}
-        placement="left"
-        centerComponent={<ShowTitle />}
-        centerContainerStyle={{ height: "15%" }}
-        containerStyle={{
-          backgroundColor: "white",
-        }}
-        rightComponent={filterButton}
-      />
+      {headerVisible &&
+        <Header
+          statusBarProps={{ elevated: "true", backgroundColor: "black" }}
+          placement="left"
+          centerComponent={<ShowTitle />}
+          // centerContainerStyle={{ height: "15%" }}
+          containerStyle={{
+            backgroundColor: "white",
+          }}
+          rightComponent={filterButton}
+        />
+      }
       <View style={{ flex: 1 }}>
         <View style={styles.centeredView}>
           {isModalVisible && <FilterModal sortPairingsName={ReduxStore.getState().sortPairings} />}
