@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -67,7 +68,7 @@ const TabNavigator = (props) => {
       <Screen name="Home" component={HomeScreen} />
       <Screen name="Camera" component={CameraScreen} />
       <Screen name="Favourite" component={UserPairingsTopTabs} />
-      <Screen name="Settings">
+      <Screen name="SettingsScreen">
         {(screenProps) => (
           <SettingsNavigator
             {...screenProps}
@@ -76,14 +77,20 @@ const TabNavigator = (props) => {
         )}
       </Screen>
 
-      <Screen name="Results" component={Results} />
+      {/* <Screen name="Results" component={Results} /> */}
+      <Screen name="PairingResults" component={PairingResultsScreen} />
+
     </Navigator>
   );
 };
 
 const Results = () => (
-  <Stack.Navigator headerMode="none" initialRouteName="Results">
-    <Stack.Screen name="PairingResults" component={PairingResultsScreen} />
+  <Stack.Navigator initialRouteName="Results"
+    screenOptions={{
+      headerShown: false,
+    }}
+  >
+    <Stack.Screen name="PairingResultsScreen" component={PairingResultsScreen} />
     <Stack.Screen
       name="DrinkDetailsScreen"
       component={DrinkDetailsScreen}
@@ -152,7 +159,7 @@ const SettingsNavigator = (props) => (
     screenOptions={{
       headerMode: "screen",
       headerStyle: {
-        height: 80, // Specify the height of your custom header
+        height: 100, // Specify the height of your custom header
       },
       headerTitleStyle: {
         fontSize: 28,
@@ -165,7 +172,7 @@ const SettingsNavigator = (props) => (
     }}
     initialRouteName="SettingsStack"
   >
-    <SettingsStack.Screen name="SettingsScreen">
+    <SettingsStack.Screen name="Settings">
       {(screenProps) => (
         <SettingsScreen
           {...screenProps}
@@ -214,8 +221,8 @@ const AuthenticationNavigator = (props) => {
   return (
     <View style={{ flex: 1, backgroundColor: "#118AB2" }}>
       <AuthenticationStack.Navigator
-        headerMode="none"
         screenOptions={{
+          headerShown: false,
           ...TransitionPresets.ModalSlideFromBottomIOS,
         }}
       >
