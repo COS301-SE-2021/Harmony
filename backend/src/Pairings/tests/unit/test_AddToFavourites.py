@@ -9,14 +9,22 @@ from backend.src.Pairings.main import AddToFavourites
 def fixture_event():
     return {
         "PID": "p1",
-        "UID": "u1"
+        "UID": "u2"
     }
 
 
 def test_add_to_favourites(fixture_event):
     ret = AddToFavourites.add_to_favourites(fixture_event, "")
     data = json.loads(ret)
-    assert data["isSuccessful"] == "false"
+    print(ret)
+    assert data["StatusCode"] == 200
+    assert "PID" in data
+
+def test_add_to_favourites_twice_error(fixture_event):
+    ret = AddToFavourites.add_to_favourites(fixture_event, "")
+    data = json.loads(ret)
+    print(ret)
+    assert data["StatusCode"] == 400
     assert "PID" in data
 
 
