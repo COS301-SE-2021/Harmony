@@ -5,7 +5,7 @@ import Dashboard from "../components/Dashboard";
 
 function Homepage() {
     return (
-        <div style={{ width: "100%", alignItems: "center", backgroundColor: "#F3F3F3" }}>
+        <div style={{ width: "100vw", alignItems: "center", backgroundColor: "#F3F3F3" }}>
             <Dashboard></Dashboard>
         </div>
     );

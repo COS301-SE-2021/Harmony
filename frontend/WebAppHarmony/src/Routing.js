@@ -20,16 +20,13 @@ import PropTypes from "prop-types";
 const CustomNav = ({ active, onSelect, ...props }) => {
   return (
     <div>
-      <Nav {...props} activeKey={active} onSelect={onSelect} style={styles}>
+      <Nav {...props} activeKey={active} onSelect={onSelect} style={{ marginBottom: 10 }}>
         <Nav.Item eventKey="HOME" > Home</Nav.Item>
         <Nav.Item eventKey="MODERATEPAIRING">Moderate Pairings</Nav.Item>
 
       </Nav>
     </div>
   );
-};
-const styles = {
-  marginBottom: 50
 };
 class Routing extends Component {
   constructor() {
@@ -50,12 +47,41 @@ class Routing extends Component {
   }
   render() {
     return (
-      <div>
-        <div id="adminWord"> <p style={{ fontFamily: "sans-serif-light" }}>Admin</p></div>
-        <div>
-          <CustomNav appearance="subtle" active={this.state.active} onSelect={this.handleSelect} />
+      <div style={{ width: "100vw", alignItems: "center", backgroundColor: "#F3F3F3" }}>
+        <div style={{ backgroundColor: "white" }}>
+          <Router>
+
+            <div id="adminWord"> <p style={{ fontFamily: "sans-serif-light" }}>Admin</p></div>
+            <nav>
+              <div>
+                {/* <CustomNav appearance="subtle" active={this.state.active} onSelect={this.handleSelect} /> */}
+                <Nav appearance="subtle" activeKey={this.state.active} onSelect={this.handleSelect} style={{ marginBottom: 10 }}>
+                  <Nav.Item eventKey="HOME" >
+                    <Link to="/home">Home</Link>
+                  </Nav.Item>
+                  <Nav.Item eventKey="MODERATEPAIRING">
+                    <Link to="/moderatePairings">Moderate Pairings</Link>
+                  </Nav.Item>
+
+                </Nav>
+              </div>
+            </nav>
+            <Switch>
+              <Route exact path="/">
+                <Redirect to="/home" />
+              </Route>
+              <Route path="/home" >
+                <ReturnHomepage />
+              </Route>
+              <Route path="/moderatePairings">
+                <Moderate />
+              </Route>
+
+            </Switch>
+          </Router>
+
         </div>
-        <Router>
+        {/* <Router>
           <div>
             <nav>
               <ul>
@@ -67,9 +93,6 @@ class Routing extends Component {
                 </li>
               </ul>
             </nav>
-
-            {/* A <Switch> looks through its children <Route>s and
-renders the first one that matches the current URL. */}
             <Switch>
               <Route exact path="/">
                 <Redirect to="/home" />
@@ -83,7 +106,7 @@ renders the first one that matches the current URL. */}
 
             </Switch>
           </div>
-        </Router>
+        </Router> */}
       </div>
     );
   }
