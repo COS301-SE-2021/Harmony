@@ -114,7 +114,7 @@ function Dashboard() {
     ];
 
     return (
-        <div style={{ flexDirection: "row", justifyContent: "space-around" }}>
+        <div style={{ flexDirection: "row", justifyContent: "space-around", paddingTop: 15, backgroundColor: "#F3F3F3" }}>
             <div style={{ display: "flex" }}>
                 <div style={dashboardContainer}>
                     <LineChart

@@ -55,12 +55,12 @@ class Routing extends Component {
             <nav>
               <div>
                 {/* <CustomNav appearance="subtle" active={this.state.active} onSelect={this.handleSelect} /> */}
-                <Nav appearance="subtle" activeKey={this.state.active} onSelect={this.handleSelect} style={{ marginBottom: 10 }}>
+                <Nav appearance="subtle" activeKey={this.state.active} onSelect={this.handleSelect}>
                   <Nav.Item eventKey="HOME" >
-                    <Link to="/home">Home</Link>
+                    <Link to="/home" style={{ color: "#4D4D4D", fontFamily: "sans-serif-light", fontSize: 20, textDecoration: "none" }}>Home</Link>
                   </Nav.Item>
                   <Nav.Item eventKey="MODERATEPAIRING">
-                    <Link to="/moderatePairings">Moderate Pairings</Link>
+                    <Link to="/moderatePairings" style={{ color: "#4D4D4D", fontFamily: "sans-serif-light", fontSize: 20, textDecoration: "none" }}>Moderate Pairings</Link>
                   </Nav.Item>
 
                 </Nav>
