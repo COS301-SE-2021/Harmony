@@ -46,7 +46,7 @@ class Routing extends Component {
     fontSize: 20,
     textDecoration: "none",
     paddingLeft: 5,
-    paddingRight: 10
+    paddingRight: 25
   };
 
   iconStyling = {
