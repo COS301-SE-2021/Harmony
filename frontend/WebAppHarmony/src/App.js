@@ -3,26 +3,51 @@ import logo from './logo.svg';
 import './App.css';
 import Header from '../components/Header';
 import Dashboard from "../components/Dashboard";
+import Homepage from '../src/Homepage';
+import ModeratePairing from '../src/ModeratePairing';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 function App() {
   return (
-    <div style={{ width: "100%", alignItems: "center", backgroundColor: "#F3F3F3" }}>
-      <Header></Header>
-      <Dashboard></Dashboard>
-      {/* <img src={logo} className="App-logo" alt="logo" />
-      <p>
-        Edit <code>src/App.js</code> and save to reload.
-      </p>
-      <a
-        className="App-link"
-        href="https://reactjs.org"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Learn React
-      </a> */}
-    </div>
+    <Router>
+      <div>
+        <nav>
+          <ul>
+            <li>
+              <Link to="../src/Homepage.js">Home</Link>
+            </li>
+            <li>
+              <Link to="../src/ModeratePairing.js">Moderate Pairings</Link>
+            </li>
+            <li>
+              <Link to="/test">Test</Link>
+            </li>
+          </ul>
+        </nav>
+
+        {/* A <Switch> looks through its children <Route>s and
+renders the first one that matches the current URL. */}
+        <Switch>
+          <Route path="../src/Homepage.js" component={Homepage} />
+          <Route path="../src/ModeratePairing.js">
+            <ModeratePairing />
+          </Route>
+          <Route path="/test">
+            <Test />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+
   );
 }
 
+function Test() {
+  return <h2>Home</h2>;
+}
 export default App;
