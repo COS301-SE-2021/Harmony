@@ -9,7 +9,8 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  Redirect
 } from "react-router-dom";
 
 function Routing() {
@@ -30,6 +31,9 @@ function Routing() {
         {/* A <Switch> looks through its children <Route>s and
 renders the first one that matches the current URL. */}
         <Switch>
+          <Route exact path="/">
+            <Redirect to="/ReturnHomepage" />
+          </Route>
           <Route path="/ReturnHomepage" >
             <ReturnHomepage />
           </Route>
