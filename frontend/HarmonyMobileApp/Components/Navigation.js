@@ -83,8 +83,7 @@ const TabNavigator = (props) => {
   );
 };
 
-// const Stack = createSharedElementStackNavigator();
-const Stack = createStackNavigator();
+const Stack = createSharedElementStackNavigator();
 
 const Results = () => (
   <Stack.Navigator initialRouteName="PairingResultsScreen"
