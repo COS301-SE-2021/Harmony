@@ -136,16 +136,10 @@ export default function CameraScreen({ navigation }) {
         // console.log(json);
         setLoading(false);
         cancelPreview();
-        // navigation.navigate("Results", {
-        //   screen: "PairingResults",
-        //   // params: { response: json },
-        // });
-        // navigation.navigate("Home");
-        // navigation.navigate("PairingResults",);
-        navigation.navigate("PairingResults", {
-          response: json
+        navigation.navigate("Results", {
+          screen: "PairingResultsScreen",
+          params: { response: json },
         });
-
       })
       .catch((error) => {
         console.log(error);

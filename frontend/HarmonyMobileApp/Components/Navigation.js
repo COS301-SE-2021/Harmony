@@ -44,7 +44,6 @@ import { TransitionPresets } from "@react-navigation/stack";
 Amplify.configure(config);
 
 const { Navigator, Screen } = createBottomTabNavigator();
-const Stack = createSharedElementStackNavigator();
 const HomeIcon = (props) => <Icon {...props} name="home-outline" />;
 const CameraIcon = (props) => <Icon {...props} name="camera-outline" />;
 const HeartIcon = (props) => <Icon {...props} name="heart-outline" />;
@@ -77,15 +76,18 @@ const TabNavigator = (props) => {
         )}
       </Screen>
 
-      {/* <Screen name="Results" component={Results} /> */}
-      <Screen name="PairingResults" component={PairingResultsScreen} />
+      <Screen name="Results" component={Results} />
+      {/* <Screen name="PairingResults" component={PairingResultsScreen} /> */}
 
     </Navigator>
   );
 };
 
+// const Stack = createSharedElementStackNavigator();
+const Stack = createStackNavigator();
+
 const Results = () => (
-  <Stack.Navigator initialRouteName="Results"
+  <Stack.Navigator initialRouteName="PairingResultsScreen"
     screenOptions={{
       headerShown: false,
     }}
