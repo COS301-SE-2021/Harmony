@@ -145,7 +145,8 @@ const styles = StyleSheet.create({
     alignContent: "center",
     fontWeight: "bold",
     fontFamily: "sans-serif-light",
-    paddingVertical: "5%"
+    paddingVertical: "5%",
+    fontSize: 18,
   },
 
   iconsBar: {
@@ -339,8 +340,9 @@ const styles = StyleSheet.create({
     elevation: 2, //gives shadow/3D effect
   },
   tagText: {
-    fontSize: 12,
+    fontSize: 14,
     color: "#fff",
+    fontWeight: "bold",
     marginLeft: 10, //Space between tag icon and text
   },
 

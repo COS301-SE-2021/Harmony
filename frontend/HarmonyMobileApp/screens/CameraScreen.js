@@ -137,8 +137,8 @@ export default function CameraScreen({ navigation }) {
         setLoading(false);
         cancelPreview();
         navigation.navigate("Results", {
-          screen: "PairingResults",
-          params: { id: "1", response: json },
+          screen: "PairingResultsScreen",
+          params: { response: json },
         });
       })
       .catch((error) => {

@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -19,7 +20,8 @@ import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 
 
 import HomeScreen from "../screens/HomeScreen.js";
-import ViewFavouritesScreen from "../screens/ViewFavouritesScreen.js";
+import FavouritesScreen from "../screens/FavouritesScreen.js";
+import CreatedPairingsScreen from "../screens/CreatedPairingsScreen.js";
 import SettingsScreen from "../screens/SettingsScreen.js";
 import CameraScreen from "../screens/CameraScreen.js";
 import PairingResultsScreen from "../screens/PairingResultsScreen.js";
@@ -42,7 +44,6 @@ import { TransitionPresets } from "@react-navigation/stack";
 Amplify.configure(config);
 
 const { Navigator, Screen } = createBottomTabNavigator();
-const Stack = createSharedElementStackNavigator();
 const HomeIcon = (props) => <Icon {...props} name="home-outline" />;
 const CameraIcon = (props) => <Icon {...props} name="camera-outline" />;
 const HeartIcon = (props) => <Icon {...props} name="heart-outline" />;
@@ -66,7 +67,7 @@ const TabNavigator = (props) => {
       <Screen name="Home" component={HomeScreen} />
       <Screen name="Camera" component={CameraScreen} />
       <Screen name="Favourite" component={UserPairingsTopTabs} />
-      <Screen name="Settings">
+      <Screen name="SettingsScreen">
         {(screenProps) => (
           <SettingsNavigator
             {...screenProps}
@@ -76,13 +77,21 @@ const TabNavigator = (props) => {
       </Screen>
 
       <Screen name="Results" component={Results} />
+      {/* <Screen name="PairingResults" component={PairingResultsScreen} /> */}
+
     </Navigator>
   );
 };
 
+const Stack = createSharedElementStackNavigator();
+
 const Results = () => (
-  <Stack.Navigator headerMode="none" initialRouteName="Results">
-    <Stack.Screen name="PairingResults" component={PairingResultsScreen} />
+  <Stack.Navigator initialRouteName="PairingResultsScreen"
+    screenOptions={{
+      headerShown: false,
+    }}
+  >
+    <Stack.Screen name="PairingResultsScreen" component={PairingResultsScreen} />
     <Stack.Screen
       name="DrinkDetailsScreen"
       component={DrinkDetailsScreen}
@@ -96,30 +105,34 @@ const UserPairingsTopTabs = () => (
 
   <Tab.Navigator
     initialRouteName="Favourites"
-    screenOptions={{
-      tabBarActiveTintColor: "#3366FF",//When this is the active tab, this will be the color of the text and icons
-      tabBarInactiveTintColor: "rgba(0,0,0,0.4)",
-      tabBarShowIcon: true,
-      tabBarLabelStyle: {
+
+    tabBarOptions={{
+      labelStyle: {
         textAlign: "center",
-        textTransform: "none",//Needed else the table titles will be all caps
-        fontSize: 20
+        textTransform: "none", //Needed else the table titles will be all caps
+        fontSize: 21,
       },
-      tabBarItemStyle: {
+      showIcon: true, //Required for icon to show
+      // showLabel: false,// to hide tab text
+      activeTintColor: "#3366FF", //When this is the active tab, this will be the color of the text and icons
+      inactiveTintColor: "rgba(0,0,0,0.4)",
+      // backgroundColor: "rgba(0,0,0,0.1)",
+
+      tabStyle: {
         flexDirection: "row",
         height: 110,
         paddingTop: StatusBar.currentHeight,
-
       },
-      tabBarIndicatorStyle: {
+      indicatorStyle: {
+        //Style of the scroll bar at the bottom of the tabs
         borderBottomColor: "#3366FF",
-        borderBottomWidth: 4
-      }
+        borderBottomWidth: 4,
+      },
     }}
   >
     <Tab.Screen
       name="UserFavourites"
-      component={ViewFavouritesScreen}
+      component={FavouritesScreen}
       options={{
         tabBarLabel: "My Favourites",
         tabBarIcon: ({ color }) => (
@@ -129,7 +142,7 @@ const UserPairingsTopTabs = () => (
     />
     <Tab.Screen
       name="UserPairings"
-      component={ViewFavouritesScreen}
+      component={CreatedPairingsScreen}
       options={{
         tabBarLabel: "My Pairings",
         tabBarIcon: ({ color }) => (
@@ -151,7 +164,7 @@ const SettingsNavigator = (props) => (
     screenOptions={{
       headerMode: "screen",
       headerStyle: {
-        height: 80, // Specify the height of your custom header
+        height: 100, // Specify the height of your custom header
       },
       headerTitleStyle: {
         fontSize: 28,
@@ -213,8 +226,8 @@ const AuthenticationNavigator = (props) => {
   return (
     <View style={{ flex: 1, backgroundColor: "#118AB2" }}>
       <AuthenticationStack.Navigator
-        headerMode="none"
         screenOptions={{
+          headerShown: false,
           ...TransitionPresets.ModalSlideFromBottomIOS,
         }}
       >

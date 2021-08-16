@@ -14,7 +14,7 @@ export default function IconsBar({
     isF,
     ...otherProps
 }) {
-    const [favouriteIconChecked, setFavouriteIconChecked] = useState("Unchecked");
+    const [favouriteIconChecked, setFavouriteIconChecked] = useState("");
     const [favouriteIconColor, setFavouriteIconColor] = useState("black"); // controls the favourite heart color (pink/black)
     const [favouriteIconOutline, setFavouriteIconOutline] = useState("hearto"); // controls whether the heart is filled in or outlined
 
@@ -110,7 +110,7 @@ export default function IconsBar({
     useEffect(() => {
         if (favouriteIconChecked == "Checked") {
             addRemoveFavourites(addToFavURL);
-        } else {
+        } else if (favouriteIconChecked == "Unchecked") {
             addRemoveFavourites(removeFromFavURL);
         }
     }, [favouriteIconChecked]);
@@ -189,7 +189,7 @@ export default function IconsBar({
     };
 
     handleFavouriteIconPress = () => {
-        if (favouriteIconChecked == "Unchecked") {
+        if (favouriteIconChecked == "Unchecked" || favouriteIconChecked == "") {
             checkFavourite();
         } else {
             uncheckFavourite();
@@ -200,24 +200,22 @@ export default function IconsBar({
         <View style={styles.iconsBar}>
             <View style={styles.flexRow}>
                 <Pressable
+                    style={[styles.flexRowJustCenter, { paddingRight: 20 }]}
+                    onPress={handleUpIconPress}
+                >
+                    <AntDesign name={upIconOutline} size={24} color={upIconColor} />
+                    <Text style={personalStyles.dataText}>{upvote}</Text>
+                </Pressable>
+                <Pressable
                     style={styles.flexRowJustCenter}
                     onPress={handleDownIconPress}
                 >
                     <AntDesign name={downIconOutline} size={24} color={downIconColor} />
-                    {/* <Text style= {[personalStyles.dataText, { paddingRight: "5%" }]}>{dataSet.Downvotes}</Text> */}
-                    <Text style={[personalStyles.dataText, { paddingRight: "5%" }]}>
+                    <Text style={[personalStyles.dataText, { paddingRight: 20 }]}>
                         {downvote}
                     </Text>
                 </Pressable>
-                <Pressable
-                    style={[styles.flexRowJustCenter, { paddingRight: "10%" }]}
-                    onPress={handleUpIconPress}
-                >
-                    <AntDesign name={upIconOutline} size={24} color={upIconColor} />
 
-                    {/* <Text style={personalStyles.dataText}>{dataSet.Upvotes}</Text> */}
-                    <Text style={personalStyles.dataText}>{upvote}</Text>
-                </Pressable>
             </View>
             <Pressable onPress={handleFavouriteIconPress}>
                 <AntDesign
