@@ -14,20 +14,10 @@ import {
   Link,
   Redirect
 } from "react-router-dom";
-
+import { AiOutlineHome, AiOutlineSecurityScan } from "react-icons/ai";
 import PropTypes from "prop-types";
 //icon={<Icon icon="home" />} add to nav elements when decided
-const CustomNav = ({ active, onSelect, ...props }) => {
-  return (
-    <div>
-      <Nav {...props} activeKey={active} onSelect={onSelect} style={{ marginBottom: 10 }}>
-        <Nav.Item eventKey="HOME" > Home</Nav.Item>
-        <Nav.Item eventKey="MODERATEPAIRING">Moderate Pairings</Nav.Item>
 
-      </Nav>
-    </div>
-  );
-};
 class Routing extends Component {
   constructor() {
     super();
@@ -44,7 +34,21 @@ class Routing extends Component {
     this.setState({ active: activeKey });
     // this.props.history.push(activeKey);
 
-  }
+  };
+  linkStyling = {
+    color: "#4D4D4D",
+    fontFamily: "sans-serif-light",
+    fontSize: 20,
+    textDecoration: "none",
+    paddingLeft: 5
+  };
+
+  iconStyling = {
+    height: 20,
+    width: 20,
+    color: "#4D4D4D",
+    marginBottom: -2,
+  };
   render() {
     return (
       <div style={{ width: "100vw", alignItems: "center", backgroundColor: "#F3F3F3" }}>
@@ -56,11 +60,11 @@ class Routing extends Component {
               <div>
                 {/* <CustomNav appearance="subtle" active={this.state.active} onSelect={this.handleSelect} /> */}
                 <Nav appearance="subtle" activeKey={this.state.active} onSelect={this.handleSelect}>
-                  <Nav.Item eventKey="HOME" >
-                    <Link to="/home" style={{ color: "#4D4D4D", fontFamily: "sans-serif-light", fontSize: 20, textDecoration: "none" }}>Home</Link>
+                  <Nav.Item eventKey="HOME" icon={<AiOutlineHome style={this.iconStyling} />}>
+                    <Link to="/home" style={this.linkStyling}>Home</Link>
                   </Nav.Item>
-                  <Nav.Item eventKey="MODERATEPAIRING">
-                    <Link to="/moderatePairings" style={{ color: "#4D4D4D", fontFamily: "sans-serif-light", fontSize: 20, textDecoration: "none" }}>Moderate Pairings</Link>
+                  <Nav.Item eventKey="MODERATEPAIRING" icon={<AiOutlineSecurityScan style={this.iconStyling} />}>
+                    <Link to="/moderatePairings" style={this.linkStyling}>Moderate Pairings</Link>
                   </Nav.Item>
 
                 </Nav>
