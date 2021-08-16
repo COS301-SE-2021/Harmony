@@ -60,7 +60,7 @@ class Routing extends Component {
             <nav>
               <ul>
                 <li>
-                  <Link to="/ReturnHomepage">Home</Link>
+                  <Link to="/home">Home</Link>
                 </li>
                 <li>
                   <Link to="/moderatePairings">Moderate Pairings</Link>
@@ -72,9 +72,9 @@ class Routing extends Component {
 renders the first one that matches the current URL. */}
             <Switch>
               <Route exact path="/">
-                <Redirect to="/ReturnHomepage" />
+                <Redirect to="/home" />
               </Route>
-              <Route path="/ReturnHomepage" >
+              <Route path="/home" >
                 <ReturnHomepage />
               </Route>
               <Route path="/moderatePairings">
