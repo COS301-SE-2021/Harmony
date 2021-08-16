@@ -1,11 +1,7 @@
 import React from 'react';
 import '../src/App.css';
-import { Chart } from 'react-charts'
-import CanvasJSReact from './canvasjs.react';
 import { LineChart, XAxis, Legend, YAxis, CartesianGrid, Line, BarChart, Bar, Cell, Tooltip, RadialBarChart, RadialBar } from 'recharts';
 //var CanvasJSReact = require('./canvasjs.react');
-var CanvasJS = CanvasJSReact.CanvasJS;
-var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 //user ages, demographics
 function Dashboard() {
