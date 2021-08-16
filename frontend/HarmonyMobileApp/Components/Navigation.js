@@ -105,25 +105,29 @@ const UserPairingsTopTabs = () => (
 
   <Tab.Navigator
     initialRouteName="Favourites"
-    screenOptions={{
-      tabBarActiveTintColor: "#3366FF",//When this is the active tab, this will be the color of the text and icons
-      tabBarInactiveTintColor: "rgba(0,0,0,0.4)",
-      tabBarShowIcon: true,
-      tabBarLabelStyle: {
+
+    tabBarOptions={{
+      labelStyle: {
         textAlign: "center",
-        textTransform: "none",//Needed else the table titles will be all caps
-        fontSize: 20
+        textTransform: "none", //Needed else the table titles will be all caps
+        fontSize: 21,
       },
-      tabBarItemStyle: {
+      showIcon: true, //Required for icon to show
+      // showLabel: false,// to hide tab text
+      activeTintColor: "#3366FF", //When this is the active tab, this will be the color of the text and icons
+      inactiveTintColor: "rgba(0,0,0,0.4)",
+      // backgroundColor: "rgba(0,0,0,0.1)",
+
+      tabStyle: {
         flexDirection: "row",
         height: 110,
         paddingTop: StatusBar.currentHeight,
-
       },
-      tabBarIndicatorStyle: {
+      indicatorStyle: {
+        //Style of the scroll bar at the bottom of the tabs
         borderBottomColor: "#3366FF",
-        borderBottomWidth: 4
-      }
+        borderBottomWidth: 4,
+      },
     }}
   >
     <Tab.Screen
