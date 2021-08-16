@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+
 import { Nav } from 'rsuite';
 import 'rsuite/dist/styles/rsuite-default.css';
 import Header from '../components/Header';
 import Dashboard from "../components/Dashboard";
 import Homepage from '../src/Homepage';
 import ModeratePairing from '../src/ModeratePairing';
+import "../Styling/MainStyling.css"
 import {
   BrowserRouter as Router,
   Switch,
@@ -49,21 +51,26 @@ class Routing extends Component {
     color: "#4D4D4D",
     marginBottom: -2,
   };
+  textHeader = {
+    fontSize: 40,
+    fontFamily: "sans-serif-light"
+  }
   render() {
     return (
       <div style={{ width: "100vw", alignItems: "center", backgroundColor: "#F3F3F3" }}>
         <div style={{ backgroundColor: "white" }}>
           <Router>
 
-            <div id="adminWord"> <p style={{ fontFamily: "sans-serif-light" }}>Admin</p></div>
+            <div style={{ textAlign: "center" }}> <p style={this.textHeader}>Harmony Admin</p></div>
             <nav>
-              <div>
-                {/* <CustomNav appearance="subtle" active={this.state.active} onSelect={this.handleSelect} /> */}
+              <div style={{ width: "50%", justifyContent: "center", flex: 1, backgroundColor: "pink" }}>
                 <Nav appearance="subtle" activeKey={this.state.active} onSelect={this.handleSelect}>
-                  <Nav.Item eventKey="HOME" icon={<AiOutlineHome style={this.iconStyling} />}>
+                  <Nav.Item eventKey="HOME"
+                    icon={<AiOutlineHome style={this.iconStyling} />}>
                     <Link to="/home" style={this.linkStyling}>Home</Link>
                   </Nav.Item>
-                  <Nav.Item eventKey="MODERATEPAIRING" icon={<AiOutlineSecurityScan style={this.iconStyling} />}>
+                  <Nav.Item eventKey="MODERATEPAIRING"
+                    icon={<AiOutlineSecurityScan style={this.iconStyling} />}>
                     <Link to="/moderatePairings" style={this.linkStyling}>Moderate Pairings</Link>
                   </Nav.Item>
 
