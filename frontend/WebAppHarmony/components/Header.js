@@ -4,7 +4,6 @@ import { Nav } from 'rsuite';
 import 'rsuite/dist/styles/rsuite-default.css';
 
 import PropTypes from "prop-types";
-import { MODERATEPAIRING } from "../Routes/Router"
 
 //icon={<Icon icon="home" />} add to nav elements when decided
 const CustomNav = ({ active, onSelect, ...props }) => {
