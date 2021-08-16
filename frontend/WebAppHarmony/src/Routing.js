@@ -8,6 +8,8 @@ import Header from '../components/Header';
 import Dashboard from "../components/Dashboard";
 import Homepage from '../src/Homepage';
 import ModeratePairing from '../src/ModeratePairing';
+import UserFeedback from './UserFeedback';
+import TrainAI from "./TrainAI";
 import "../Styling/MainStyling.css"
 import {
   BrowserRouter as Router,
@@ -16,7 +18,8 @@ import {
   Link,
   Redirect
 } from "react-router-dom";
-import { AiOutlineHome, AiOutlineSecurityScan } from "react-icons/ai";
+import { AiOutlineHome, AiOutlineSecurityScan, AiOutlineRadarChart } from "react-icons/ai";
+import { RiFeedbackLine } from "react-icons/ri";
 import PropTypes from "prop-types";
 //icon={<Icon icon="home" />} add to nav elements when decided
 
@@ -42,7 +45,8 @@ class Routing extends Component {
     fontFamily: "sans-serif-light",
     fontSize: 20,
     textDecoration: "none",
-    paddingLeft: 5
+    paddingLeft: 5,
+    paddingRight: 10
   };
 
   iconStyling = {
@@ -63,7 +67,7 @@ class Routing extends Component {
 
             <div style={{ textAlign: "center" }}> <p style={this.textHeader}>Harmony Admin</p></div>
             <nav>
-              <div style={{ width: "50%", justifyContent: "center", flex: 1, backgroundColor: "pink" }}>
+              <div style={{ width: "100%", justifyContent: "center", display: "flex" }}>
                 <Nav appearance="subtle" activeKey={this.state.active} onSelect={this.handleSelect}>
                   <Nav.Item eventKey="HOME"
                     icon={<AiOutlineHome style={this.iconStyling} />}>
@@ -73,7 +77,14 @@ class Routing extends Component {
                     icon={<AiOutlineSecurityScan style={this.iconStyling} />}>
                     <Link to="/moderatePairings" style={this.linkStyling}>Moderate Pairings</Link>
                   </Nav.Item>
-
+                  <Nav.Item eventKey="USERFEEDBACK"
+                    icon={<RiFeedbackLine style={this.iconStyling} />}>
+                    <Link to="/userFeedback" style={this.linkStyling}>User Feedback</Link>
+                  </Nav.Item>
+                  <Nav.Item eventKey="TRAINAI"
+                    icon={<AiOutlineRadarChart style={this.iconStyling} />}>
+                    <Link to="/trainModel" style={this.linkStyling}>Train AI</Link>
+                  </Nav.Item>
                 </Nav>
               </div>
             </nav>
@@ -81,43 +92,23 @@ class Routing extends Component {
               <Route exact path="/">
                 <Redirect to="/home" />
               </Route>
-              <Route path="/home" >
+              <Route exact path="/home" >
                 <ReturnHomepage />
               </Route>
-              <Route path="/moderatePairings">
+              <Route exact path="/moderatePairings">
                 <Moderate />
+              </Route>
+              <Route exact path="/userFeedback">
+                <Feedback />
+              </Route>
+              <Route exact path="/trainModel">
+                <Train />
               </Route>
 
             </Switch>
           </Router>
 
         </div>
-        {/* <Router>
-          <div>
-            <nav>
-              <ul>
-                <li>
-                  <Link to="/home">Home</Link>
-                </li>
-                <li>
-                  <Link to="/moderatePairings">Moderate Pairings</Link>
-                </li>
-              </ul>
-            </nav>
-            <Switch>
-              <Route exact path="/">
-                <Redirect to="/home" />
-              </Route>
-              <Route path="/home" >
-                <ReturnHomepage />
-              </Route>
-              <Route path="/moderatePairings">
-                <Moderate />
-              </Route>
-
-            </Switch>
-          </div>
-        </Router> */}
       </div>
     );
   }
@@ -128,5 +119,11 @@ function ReturnHomepage() {
 };
 function Moderate() {
   return (<ModeratePairing />);
+};
+function Feedback() {
+  return (<UserFeedback />);
+};
+function Train() {
+  return (<TrainAI />);
 };
 export default Routing;
