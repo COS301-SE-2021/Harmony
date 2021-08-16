@@ -19,13 +19,10 @@ function App() {
         <nav>
           <ul>
             <li>
-              <Link to="../src/Homepage.js">Home</Link>
+              <Link to="/ReturnHomepage">Home</Link>
             </li>
             <li>
-              <Link to="../src/ModeratePairing.js">Moderate Pairings</Link>
-            </li>
-            <li>
-              <Link to="/test">Test</Link>
+              <Link to="/moderatePairings">Moderate Pairings</Link>
             </li>
           </ul>
         </nav>
@@ -33,13 +30,13 @@ function App() {
         {/* A <Switch> looks through its children <Route>s and
 renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="../src/Homepage.js" component={Homepage} />
-          <Route path="../src/ModeratePairing.js">
-            <ModeratePairing />
+          <Route path="/ReturnHomepage" >
+            <ReturnHomepage />
           </Route>
-          <Route path="/test">
-            <Test />
+          <Route path="/moderatePairings">
+            <Moderate />
           </Route>
+
         </Switch>
       </div>
     </Router>
@@ -47,7 +44,10 @@ renders the first one that matches the current URL. */}
   );
 }
 
-function Test() {
-  return <h2>Home</h2>;
-}
+function ReturnHomepage() {
+  return <Homepage />;
+};
+function Moderate() {
+  return (<ModeratePairing />);
+};
 export default App;
