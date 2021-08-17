@@ -1,34 +1,39 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
-  untitled
-
-  Sample SAM Template for untitled
-
+  Sort and Filter Lambda with api
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
     Timeout: 20
 
 Resources:
-  NewPairingsFunction:
+  SortAndFilterFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: NewPairing/
-      Handler: NewPairing.newpairing
+      CodeUri: main/
+      Handler: SortAndFilter.sort_and_filter
       Runtime: python3.8
-
-
-
+      Policies:
+        # Give DynamoDB Full Access to your Lambda Function
+        - AmazonDynamoDBFullAccess
+      Events:
+        SortAndFilter:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /
+            Method: post
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
   # Find out more about other implicit resources you can reference within SAM
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
-  viewFavouritesFunction:
-    Description: "Hello World Lambda Function ARN"
-    Value: !GetAtt viewFavouritesFunction.Arn
-  viewFavouritesFunctionIamRole:
-    Description: "Implicit IAM Role created for Hello World function"
-    Value: !GetAtt viewFavouritesFunctionRole.Arn
-
+  SortAndFilterApi:
+    Description: "API Gateway endpoint URL for Prod stage for SortAndFilter function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/SortAndFilter/"
+  SortAndFilterFunction:
+    Description: "SortAndFilter Lambda Function ARN"
+    Value: !GetAtt SortAndFilterFunction.Arn
+  SortAndFilterIamRole:
+    Description: "Implicit IAM Role created for SortAndFilter function"
+    Value: !GetAtt SortAndFilterFunctionRole.Arn
