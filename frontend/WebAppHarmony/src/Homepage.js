@@ -1,8 +1,10 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Dashboard from "../components/Dashboard";
 
+/**@name Homepage
+ * @summary returns the homepage 
+ */
 function Homepage() {
     return (
         <div style={{ width: "100vw", alignItems: "center", backgroundColor: "#F3F3F3" }}>

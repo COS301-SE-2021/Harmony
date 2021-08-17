@@ -55,6 +55,9 @@ function ModeratePairing() {
             <div style={requestContainer}>
                 <p>Users have requested the following items to be added to the database:</p>
                 <br />
+                {/**
+                 * maps the requested item names to be repeatedly displayed
+                 */}
                 {requestedItems.map((item, index) => (<div key={index} style={{ textAlign: "center", paddingBottom: 15, borderWidth: 5, borderColor: "black" }}><p style={{ fontSize: 18 }}>{item}</p></div>))}
             </div>
             <div style={addItemContainer}>

@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 import { Nav } from 'rsuite';
 import 'rsuite/dist/styles/rsuite-default.css';
-import Header from '../components/Header';
-import Dashboard from "../components/Dashboard";
 import Homepage from '../src/Homepage';
 import ModeratePairing from '../src/ModeratePairing';
 import UserFeedback from './UserFeedback';
@@ -21,8 +18,10 @@ import {
 import { AiOutlineHome, AiOutlineSecurityScan, AiOutlineRadarChart } from "react-icons/ai";
 import { RiFeedbackLine } from "react-icons/ri";
 import PropTypes from "prop-types";
-//icon={<Icon icon="home" />} add to nav elements when decided
 
+/**
+ * The main routing of the entire web app
+ */
 class Routing extends Component {
   constructor() {
     super();
@@ -114,6 +113,10 @@ class Routing extends Component {
   }
 }
 
+/**
+ * 
+ * @returns the specific pages for the navigation
+ */
 function ReturnHomepage() {
   return <Homepage />;
 };
