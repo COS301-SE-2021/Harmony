@@ -30,11 +30,24 @@ function ModeratePairing() {
         boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
     };
 
-    const formElemennts = {
+    const formElements = {
         marginTop: 30,
         marginBottom: 30,
-        borderRadius: 15
+        borderRadius: 15,
+        justifyContent: "space-between",
+        display: "flex"
     };
+
+    const textField = {
+        borderRadius: 15,
+        width: "65%",
+        height: 45,
+        padding: 15,
+    };
+    const formLabel = {
+        marginTop: 10,
+        fontSize: 20
+    }
 
     const requestedItems = ["Malva Pudding", "Cape Malay Curry", "Biltong", "Boerewors", "Amarula Don Pedro", "Melktert"];
     return (
@@ -49,30 +62,29 @@ function ModeratePairing() {
                 <div>
                     <Formik
                         initialValues={{
-                            firstName: '',
-                            lastName: '',
-                            email: '',
+                            ItemName: requestedItems[0],
+                            ItemDescription: '',
                         }}
                         onSubmit={() => (console.log("submitted"))}
                     >
+                        {/** The moderate pairings form to submit */}
                         <Form>
-                            <div style={formElemennts}>
-                                <label htmlFor="firstName">First Name</label>
-                                <Field id="firstName" name="firstName" placeholder="John" />
+                            <div style={formElements}>
+                                <input type="file" id="file-input" name="ImageStyle" />
                             </div>
-                            <div style={formElemennts}>
-                                <label htmlFor="lastName">Last Name</label>
-                                <Field id="lastName" name="lastName" placeholder="Doe" />
+                            <div style={formElements}>
+                                <label htmlFor="ItemName" style={formLabel}>Item Name</label>
+                                <Field id="ItemName" name="ItemName" style={textField} />
                             </div>
-                            <div style={formElemennts}>
-                                <label htmlFor="email">Email</label>
-                                <Field
-                                    id="email"
-                                    name="email"
-                                    placeholder="john@acme.com"
-                                    type="email"
-                                />
+                            <div style={formElements}>
+                                <label htmlFor="ItemDescription" style={formLabel}>Item Description</label>
+                                <Field id="ItemDescription" name="ItemDescription" style={textField} placeholder="Orange flavoured carbonated soft drink" />
                             </div>
+                            <div style={formElements}>
+                                <label htmlFor="Tags" style={formLabel}>Item Tags</label>
+                                <Field id="Tags" name="Tags" style={textField} placeholder="Sweet, Fizzy" />
+                            </div>
+
                             <div>
                                 <button type="submit">Submit</button>
                             </div>
