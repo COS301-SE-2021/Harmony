@@ -75,7 +75,7 @@ class Routing extends Component {
                   </Nav.Item>
                   <Nav.Item eventKey="MODERATEPAIRING"
                     icon={<AiOutlineSecurityScan style={this.iconStyling} />}>
-                    <Link to="/moderatePairings" style={this.linkStyling}>Moderate Pairings</Link>
+                    <Link to="/moderateItems" style={this.linkStyling}>Moderate Items</Link>
                   </Nav.Item>
                   <Nav.Item eventKey="USERFEEDBACK"
                     icon={<RiFeedbackLine style={this.iconStyling} />}>
@@ -95,7 +95,7 @@ class Routing extends Component {
               <Route exact path="/home" >
                 <ReturnHomepage />
               </Route>
-              <Route exact path="/moderatePairings">
+              <Route exact path="/moderateItems">
                 <Moderate />
               </Route>
               <Route exact path="/userFeedback">
