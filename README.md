@@ -5,9 +5,13 @@
 
 # Harmony
 
-Visiting South Africa a tourist would not know what a Bunny Chow is, let alone what it pairs well with. Harmony solves this by allowing you to pull out your phone, take a picture of the food and its drink pairings will be presented to you, but it doesn't stop there, using continuous AI Harmony will provide the best possible pairings as it learns and develops over time. 
-
-
+The Harmony Application will allow the user to take a
+picture of a food item which will then be recognized by the application, and they
+will be given a list of suggestions on what to pair the item with. This will allow
+tourists to try different types of food, in a typically South African way. We can
+provide this by using cloud-based architecture hosted on AWS. We intend to
+create a serverless system while using modern-day machine learning mechanisms
+such as AWS Rekognition.
 ---
 
 ## Harmony Team Members
@@ -25,14 +29,9 @@ Visiting South Africa a tourist would not know what a Bunny Chow is, let alone w
 ## Recorded demo
 
 * :tv: [DreamTeam-Demo1](https://drive.google.com/file/d/1nDxiOpgDTvwF3yLKnQhtvAptHO-trJP8/view?usp=sharing)
-* :tv: [DreamTeam-Demo2](https://drive.google.com/file/d/1HNs5SVvK4D86Od7OrxOauSXbe83Wpj7N/view?usp=sharing)
 
 ## SRS document
-* :open_book: [SRS Document - V1](https://drive.google.com/file/d/1b0Vfq70Yxiso4dJOJbDcvd1jPnjZuZAg/view?usp=sharing)
-* :open_book: [SRS Document - V2](https://drive.google.com/file/d/150R5apTlmF-B4VxIypSXPAuZT2Uugimc/view?usp=sharing)
-
-## Architectural Requirements
-* :open_book: [Architectural Requirements Document - V1](https://drive.google.com/file/d/1ZbkhRHpGrlxcGwlZVdmui2pXZEL8-FYE/view?usp=sharing)
+* :open_book: [SRS Document](https://drive.google.com/file/d/1b0Vfq70Yxiso4dJOJbDcvd1jPnjZuZAg/view?usp=sharing)
 
 ## Project Management Tools
 
