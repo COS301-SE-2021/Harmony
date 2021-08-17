@@ -17,5 +17,6 @@ def fixture_event():
 
 def test_add_to_favourites(fixture_event):
     ret = ViewPairings.View_Pairings(fixture_event, "")
+    print(ret)
     assert ret["StatusCode"] == 200
     assert "Data" in ret

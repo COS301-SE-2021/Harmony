@@ -28,6 +28,11 @@ def test_remove_if_already_removed(fixture_event):
     assert data["StatusCode"] == 400
     assert "PID" in data
 
+def test_if_pass_invalid_string():
+    ret = RemoveFromFavourites.validate_request("","")
+    print(ret)
+    assert ret == "false"
+
 def test_validate_request():
     ret = RemoveFromFavourites.validate_request("p1", "u1")
     assert ret == "true"
