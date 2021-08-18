@@ -74,13 +74,13 @@ export default function SettingsScreen({ navigation, updateAuthState }) {
       </TouchableOpacity>
       <TouchableOpacity onPress={signOut}>
         <View style={[styles.list, styles.listContainer]}>
-          <Text style={styles.listText}>SignOut</Text>
+          <Text style={styles.listText}>Sign Out</Text>
           <AntDesign
             style={styles.rightIcon}
             name="logout"
             size={24}
             color="black"
-            // color="#118AB2"
+          // color="#118AB2"
           />
         </View>
       </TouchableOpacity>
