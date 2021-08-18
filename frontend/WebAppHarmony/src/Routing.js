@@ -17,7 +17,6 @@ import {
 } from "react-router-dom";
 import { AiOutlineHome, AiOutlineSecurityScan, AiOutlineRadarChart } from "react-icons/ai";
 import { RiFeedbackLine } from "react-icons/ri";
-import PropTypes from "prop-types";
 
 /**
  * The main routing of the entire web app
@@ -30,10 +29,6 @@ class Routing extends Component {
     };
     this.handleSelect = this.handleSelect.bind(this);
   }
-  static propTypes = {
-    history: PropTypes.object.isRequired
-  };
-
   handleSelect = (activeKey) => {
     this.setState({ active: activeKey });
     // this.props.history.push(activeKey);
