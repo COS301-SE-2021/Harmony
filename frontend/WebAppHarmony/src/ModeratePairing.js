@@ -77,11 +77,21 @@ function ModeratePairing() {
         paddingLeft: 12,
         paddingRight: 12
     };
+
+    /** @function sets the forms default values to the button values
+     * @param item = the api response item
+     */
     const handleClick = (item) => {
         console.log("click " + item.ItemName);
         setName(item.ItemName);
         setDescription(item.ItemDescription);
         setTags(item.ItemTags);
+    }
+
+    const handleClear = () => {
+        setName(" ");
+        setDescription(" ");
+        setTags(" ");
     }
     return (
         <div style={{ justifyContent: "center", display: "flex", flexDirection: "row", paddingTop: 25, backgroundColor: "#F3F3F3" }}>
@@ -121,10 +131,11 @@ function ModeratePairing() {
                             </div>
 
                             <div>
-                                <button type="submit" onClick={() => console.log("clicked submit")}>Submit</button>
+                                <button type="submit" onClick={() => console.log("clicked submit")} style={button}><p style={{ fontSize: 20, fontFamily: "sans-serif-light" }}>Add to Database</p></button>
                             </div>
                         </Form>
                     </Formik>
+                    <button onClick={() => handleClear()} style={button}><p style={{ fontSize: 20, fontFamily: "sans-serif-light" }}>Clear</p></button>
                 </div>
             </div>
         </div>
