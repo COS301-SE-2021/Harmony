@@ -3,7 +3,7 @@
 
 # Harmony
 
-Visiting South Africa a tourist would not know what a Bunny Chow is, let alone what it pairs well with. Harmony solves this by allowing you to pull out your phone, take a picture of the food and its drink pairings will be presented to you, but it doesn't stop there, Harmony will allow you to view Meal Pairings that other users created with a rating system that will show you exactly what foods are popular and what are not. 
+Visiting South Africa a tourist would not know what a Bunny Chow is, let alone what it pairs well with. Harmony solves this by allowing you to pull out your phone, take a picture of the food and its drink pairings will be presented to you, but it doesn't stop there, using continuous AI Harmony will provide the best possible pairings as it learns and develops over time. 
 
 
 ---
