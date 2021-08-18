@@ -109,8 +109,11 @@ function ModeratePairing() {
                  */}
                 {requestedItems.Data.map((item, index) => (
                     <button style={button} onClick={() => handleClick(item)}>
-                        <div key={index} style={{ textAlign: "center", paddingBottom: 15 }}>
-                            <p style={{ fontSize: 20, fontFamily: "sans-serif-light" }}>{item.ItemName}<AiOutlineMinusCircle style={{ marginLeft: 5, }} onClick={() => handleRemoveItem(item)} /></p></div></button>))}
+                        <div key={index} style={{ textAlign: "center", paddingBottom: 15, float: "left" }}>
+                            <p style={{ fontSize: 20, float: "left" }}>{item.ItemName}</p>
+                            <AiOutlineMinusCircle style={{ marginLeft: 5, float: "left", height: 20, width: 20, marginTop: 3, marginRight: -3 }} onClick={() => handleRemoveItem(item)} />
+                        </div>
+                    </button>))}
             </div>
             <div style={addItemContainer}>
                 <p>Add an item to the database:</p>
