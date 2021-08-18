@@ -16,6 +16,7 @@ import { useIsFocused } from "@react-navigation/native";
 import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
 import * as FileSystem from "expo-file-system";
 import AppLoadingIcon from "../Components/AppLoadingIcon";
+import AppAlert from "../Components/AppAlert";
 import { Auth } from "aws-amplify";
 
 export default function CameraScreen({ navigation }) {
@@ -48,6 +49,9 @@ export default function CameraScreen({ navigation }) {
   const windowHeight = Dimensions.get("window").height;
 
   const [isLoading, setLoading] = useState(false);
+
+  const [isErrorAlertVisible, setErrorAlertVisible] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
   const uploadImageURL =
     "https://jkwhidy1cf.execute-api.eu-west-1.amazonaws.com/dev";
@@ -133,16 +137,33 @@ export default function CameraScreen({ navigation }) {
     })
       .then((response) => response.json())
       .then((json) => {
-        // console.log(json);
-        setLoading(false);
-        cancelPreview();
-        navigation.navigate("Results", {
-          screen: "PairingResultsScreen",
-          params: { response: json },
-        });
+        if (json.statusCode === 200) {
+          setLoading(false);
+          cancelPreview();
+          console.log("StatusCode Returned: " + json.StatusCode)
+          setErrorAlertVisible(false);
+
+          navigation.navigate("Results", {
+            screen: "PairingResultsScreen",
+            params: { response: json },
+          });
+
+        }
+        else if (json.statusCode === 204) {
+          console.log(json)
+          console.log("ERRROR ENCOUNTERED");
+          setLoading(false);
+          cancelPreview();
+          //setModalMessage must come before setErrorAlertVisible
+          setModalMessage(json.data);
+          setErrorAlertVisible(true);
+
+        }
       })
       .catch((error) => {
         console.log(error);
+        setModalMessage("Something went wrong.");
+        setErrorAlertVisible(true);
         cancelPreview();
         setLoading(false);
       });
@@ -367,6 +388,9 @@ export default function CameraScreen({ navigation }) {
         )}
       </View>
       {isLoading === true && <AppLoadingIcon />}
+      {isErrorAlertVisible === true && (
+        <AppAlert visible={true} message={modalMessage} type={"Error"} />
+      )}
     </View>
   );
 }
