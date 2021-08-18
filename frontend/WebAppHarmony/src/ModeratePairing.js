@@ -3,7 +3,7 @@ import './App.css';
 import {
     Formik, Form, Field,
 } from 'formik';
-import Button from '@material-ui/core/Button';
+import { AiOutlineMinusCircle } from "react-icons/ai";
 //user ages, demographics
 function ModeratePairing() {
 
@@ -93,6 +93,12 @@ function ModeratePairing() {
         setDescription(" ");
         setTags(" ");
     }
+    /**
+     * @function removes the item from the list to be added
+     */
+    const handleRemoveItem = (item) => {
+        console.log("clicked remove " + item.ItemName);
+    }
     return (
         <div style={{ justifyContent: "center", display: "flex", flexDirection: "row", paddingTop: 25, backgroundColor: "#F3F3F3" }}>
             <div style={requestContainer}>
@@ -103,8 +109,8 @@ function ModeratePairing() {
                  */}
                 {requestedItems.Data.map((item, index) => (
                     <button style={button} onClick={() => handleClick(item)}>
-                        <div key={index} style={{ textAlign: "center", paddingBottom: 15, borderWidth: 5, borderColor: "black" }}>
-                            <p style={{ fontSize: 20, fontFamily: "sans-serif-light" }}>{item.ItemName}</p></div></button>))}
+                        <div key={index} style={{ textAlign: "center", paddingBottom: 15 }}>
+                            <p style={{ fontSize: 20, fontFamily: "sans-serif-light" }}>{item.ItemName}<AiOutlineMinusCircle style={{ marginLeft: 5, }} onClick={() => handleRemoveItem(item)} /></p></div></button>))}
             </div>
             <div style={addItemContainer}>
                 <p>Add an item to the database:</p>
