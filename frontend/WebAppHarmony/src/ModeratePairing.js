@@ -7,9 +7,10 @@ import Button from '@material-ui/core/Button';
 //user ages, demographics
 function ModeratePairing() {
 
-    /**The name and description for the form */
+    /**The name, description and tags for the form */
     const [name, setName] = useState(" ");
     const [description, setDescription] = useState(" ");
+    const [tags, setTags] = useState(" ");
 
     const requestContainer = {
         width: "20%",
@@ -56,13 +57,14 @@ function ModeratePairing() {
     const requestedItems = {
         Data: [{
             ItemName: "Malva Pudding",
-            ItemDescription: "Malva pudding is a sweet pudding that contains apricot jam and has a spongy caramelized texture."
+            ItemDescription: "Malva pudding is a sweet pudding that contains apricot jam and has a spongy caramelized texture.",
+            ItemTags: "Sweet , Hot, Warm"
         },
-        { ItemName: "Cape Malay Curry", ItemDescription: "Description of cape malay curry" },
-        { ItemName: "Biltong", ItemDescription: "Description of biltong" },
-        { ItemName: "Boerewors", ItemDescription: "description of boerewors" },
-        { ItemName: "Amarula Don Pedro", ItemDescription: "description of amarula dom pedro" },
-        { ItemName: "Melktert", ItemDescription: "description of melktert" }]
+        { ItemName: "Cape Malay Curry", ItemDescription: "Influenced by Malay cuisine, Cape/Malay curry powder/masala is a blend of sweet and pungent spices. A curry powder/masala of a mild heat yet full of the flavours you expect in Indian curry.", ItemTags: "Spicy, Hot, Savoury" },
+        { ItemName: "Biltong", ItemDescription: "Biltong is a form of dried, cured meat that originated in Southern African countries Various types of meat are used to produce it, ranging from beef to game", ItemTags: "Spicy, Cold, Salty" },
+        { ItemName: "Boerewors", ItemDescription: "Boerewors, a type of sausage which originated in South Africa. It is an important part of South African, Zimbabwean and Namibian cuisine and is popular across Southern Africa", ItemTags: "Spicy, Hot, Savoury" },
+        { ItemName: "Amarula Don Pedro", ItemDescription: "Amarula is a cream liqueur from South Africa. It is made with sugar, cream and the fruit of the African marula tree", ItemTags: "Alcoholic, Cold, Sweet" },
+        { ItemName: "Melktert", ItemDescription: "Melktert is an Afrikaner dessert consisting of a sweet pastry crust containing a custard filling made from milk, flour, sugar and eggs.", ItemTags: "Sweet, Warm" }]
     };
 
     // const requestedItems = ["Malva Pudding", "Cape Malay Curry", "Biltong", "Boerewors", "Amarula Don Pedro", "Melktert"];
@@ -79,6 +81,7 @@ function ModeratePairing() {
         console.log("click " + item.ItemName);
         setName(item.ItemName);
         setDescription(item.ItemDescription);
+        setTags(item.ItemTags);
     }
     return (
         <div style={{ justifyContent: "center", display: "flex", flexDirection: "row", paddingTop: 25, backgroundColor: "#F3F3F3" }}>
@@ -114,7 +117,7 @@ function ModeratePairing() {
                             </div>
                             <div style={formElements}>
                                 <label htmlFor="Tags" style={formLabel}>Item Tags</label>
-                                <Field id="Tags" name="Tags" style={textField} />
+                                <Field id="Tags" name="Tags" style={textField} value={tags} />
                             </div>
 
                             <div>
