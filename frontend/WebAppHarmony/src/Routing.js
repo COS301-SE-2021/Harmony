@@ -17,7 +17,7 @@ import {
 } from "react-router-dom";
 import { AiOutlineHome, AiOutlineSecurityScan, AiOutlineRadarChart } from "react-icons/ai";
 import { RiFeedbackLine } from "react-icons/ri";
-
+import ReduxStore from "../src/ReduxStore";
 /**
  * The main routing of the entire web app
  */
@@ -25,14 +25,17 @@ class Routing extends Component {
   constructor() {
     super();
     this.state = {
-      active: 'HOME'
+      active: ReduxStore.getState().activeBar
     };
     this.handleSelect = this.handleSelect.bind(this);
   }
   handleSelect = (activeKey) => {
     this.setState({ active: activeKey });
     // this.props.history.push(activeKey);
-
+    ReduxStore.dispatch({
+      type: "CHANGEACTIVE",
+      payload: activeKey
+    })
   };
   linkStyling = {
     color: "#4D4D4D",
