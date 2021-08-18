@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import {
     Formik, Form, Field,
@@ -6,6 +6,10 @@ import {
 import Button from '@material-ui/core/Button';
 //user ages, demographics
 function ModeratePairing() {
+
+    /**The name and description for the form */
+    const [name, setName] = useState(" ");
+    const [description, setDescription] = useState(" ");
 
     const requestContainer = {
         width: "20%",
@@ -60,10 +64,7 @@ function ModeratePairing() {
         { ItemName: "Amarula Don Pedro", ItemDescription: "description of amarula dom pedro" },
         { ItemName: "Melktert", ItemDescription: "description of melktert" }]
     };
-    var formInitialValues = {
-        ItemName: ' ',
-        ItemDescription: '',
-    }
+
     // const requestedItems = ["Malva Pudding", "Cape Malay Curry", "Biltong", "Boerewors", "Amarula Don Pedro", "Melktert"];
     const button = {
         backgroundColor: "#CECECE",
@@ -74,6 +75,11 @@ function ModeratePairing() {
         paddingLeft: 12,
         paddingRight: 12
     };
+    const handleClick = (item) => {
+        console.log("click " + item.ItemName);
+        setName(item.ItemName);
+        setDescription(item.ItemDescription);
+    }
     return (
         <div style={{ justifyContent: "center", display: "flex", flexDirection: "row", paddingTop: 25, backgroundColor: "#F3F3F3" }}>
             <div style={requestContainer}>
@@ -83,7 +89,7 @@ function ModeratePairing() {
                  * maps the requested item names to be repeatedly displayed
                  */}
                 {requestedItems.Data.map((item, index) => (
-                    <button style={button} onClick={() => { console.log("click " + item.ItemName); formInitialValues.ItemName = item.ItemName; formInitialValues.ItemDescription = item.ItemDescription }}>
+                    <button style={button} onClick={() => handleClick(item)}>
                         <div key={index} style={{ textAlign: "center", paddingBottom: 15, borderWidth: 5, borderColor: "black" }}>
                             <p style={{ fontSize: 20, fontFamily: "sans-serif-light" }}>{item.ItemName}</p></div></button>))}
             </div>
@@ -91,7 +97,6 @@ function ModeratePairing() {
                 <p>Add an item to the database:</p>
                 <div>
                     <Formik
-                        initialValues={formInitialValues}
                         onSubmit={() => (console.log("submitted"))}
                     >
                         {/** The moderate pairings form to submit */}
@@ -101,19 +106,19 @@ function ModeratePairing() {
                             </div>
                             <div style={formElements}>
                                 <label htmlFor="ItemName" style={formLabel}>Item Name</label>
-                                <Field id="ItemName" name="ItemName" style={textField} />
+                                <Field id="ItemName" name="ItemName" style={textField} value={name} />
                             </div>
                             <div style={formElements}>
                                 <label htmlFor="ItemDescription" style={formLabel}>Item Description</label>
-                                <Field id="ItemDescription" name="ItemDescription" style={textField} />
+                                <Field id="ItemDescription" name="ItemDescription" style={textField} value={description} />
                             </div>
                             <div style={formElements}>
                                 <label htmlFor="Tags" style={formLabel}>Item Tags</label>
-                                <Field id="Tags" name="Tags" style={textField} placeholder="Sweet, Fizzy" />
+                                <Field id="Tags" name="Tags" style={textField} />
                             </div>
 
                             <div>
-                                <button type="submit">Submit</button>
+                                <button type="submit" onClick={() => console.log("clicked submit")}>Submit</button>
                             </div>
                         </Form>
                     </Formik>
