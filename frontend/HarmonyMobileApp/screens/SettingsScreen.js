@@ -103,6 +103,7 @@ const styles = StyleSheet.create({
     marginTop: 1,
     borderBottomWidth: 1,
     width: "100%",
+    height: 65,// this will keep the buttons from visibly resizing when the user clicks on Settings initially
     borderBottomColor: "#cccccc",
   },
   listText: {
