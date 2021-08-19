@@ -26,12 +26,12 @@ import ReduxStore from "../Components/ReduxStore"
 
 import FilterModal from "../Components/FilterModal";
 import Card from "../Components/Card"
+import AppLoadingIcon from "../Components/AppLoadingIcon";
 import AppAlert from "../Components/AppAlert";
 
 const CardScreen = ({ URL, headerVisible }) => {
   const API_URL = URL;
   //The loading of the flatlist
-  const [isLoading, setLoading] = useState(useIsFocused());
 
   //the api data
   const [data, setData] = useState([]);
@@ -40,7 +40,7 @@ const CardScreen = ({ URL, headerVisible }) => {
   const [isModalVisible, setModalVisible] = useState(false);                               //for the filter popup
   const [sortPairings, setSortPairings] = useState("Trending");                            // the type of pairings shown filter
 
-  const [refreshing, setRefreshing] = React.useState(false);
+  const [refreshing, setRefreshing] = useState(useIsFocused());
   const [isErrorAlertVisible, setErrorAlertVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
 
@@ -48,7 +48,9 @@ const CardScreen = ({ URL, headerVisible }) => {
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
     GetLocation();
-    wait(2000).then(() => setRefreshing(false));
+    wait(2000).then(() => {
+      setRefreshing(false);
+    });
   }, []);
 
   const wait = (timeout) => {
@@ -106,6 +108,8 @@ const CardScreen = ({ URL, headerVisible }) => {
           setData(json.Data)
           console.log("StatusCode Returned: " + json.StatusCode)
           setErrorAlertVisible(false);
+          setRefreshing(false);
+
         }
         else if (json.StatusCode === 204) {
           console.log(json)
@@ -114,10 +118,11 @@ const CardScreen = ({ URL, headerVisible }) => {
           //setModalMessage must come before setErrorAlertVisible
           setModalMessage(json.Data);
           setErrorAlertVisible(true);
+          setRefreshing(false);
+
         }
       })
       .catch((error) => alert(error))
-      .then(setLoading(false));
   }, [refreshing]);
 
   const ShowTitle = () => (
@@ -144,8 +149,6 @@ const CardScreen = ({ URL, headerVisible }) => {
       payload: { "latitude": location.coords.latitude, "longitude": location.coords.longitude }
     });
     console.log("location loaded");
-    setRefreshing(true);
-    wait(2000).then(() => setRefreshing(false));
   }
 
   const filterButton = () => (
@@ -194,8 +197,8 @@ const CardScreen = ({ URL, headerVisible }) => {
           {isModalVisible && <FilterModal sortPairingsName={ReduxStore.getState().sortPairings} />}
         </View>
 
-        {isLoading ? (
-          <ActivityIndicator />
+        {refreshing ? (
+          <AppLoadingIcon />
         ) : (
           <FlatList
             data={data}
