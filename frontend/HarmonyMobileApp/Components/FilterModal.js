@@ -107,7 +107,9 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
       backdropTransitionOutTiming={0}
 
     >
-      <StatusBar hidden={true} />
+
+      {/* DO NOT UNCOMMENT:This line will cause a terrible glitchy effect that is horrible to watch */}
+      {/* <StatusBar hidden={true} /> */}
 
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
