@@ -345,7 +345,13 @@ const styles = StyleSheet.create({
     // shadowOpacity: 0.25,
     // shadowRadius: 4,
     // elevation: 3,
+    // backgroundColor: "red",
+    // flexDirection: "row",
     resizeMode: "cover",
+
+    // resizeMode: "contain",
+    // borderWidth: 1,//Contain and border width=1 will give the blured effect
+    //But will also create an image flicker after the big to small animation
   },
   smallDrinkCard: {
     width: 150,
