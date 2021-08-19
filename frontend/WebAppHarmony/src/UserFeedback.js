@@ -6,7 +6,7 @@ function UserFeedback() {
 
     return (
         <div style={{ flexDirection: "row", justifyContent: "space-around" }}>
-            <p>in user feedback</p>
+            <p>in user feedback - Under construction</p>
         </div>
 
     );

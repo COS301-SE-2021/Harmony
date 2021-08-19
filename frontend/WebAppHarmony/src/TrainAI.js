@@ -6,7 +6,7 @@ function TrainAI() {
 
     return (
         <div style={{ flexDirection: "row", justifyContent: "space-around" }}>
-            <p>in train ai</p>
+            <p>in train ai - Under construction</p>
         </div>
 
     );
