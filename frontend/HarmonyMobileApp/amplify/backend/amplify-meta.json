@@ -22,7 +22,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-harmonymobileapp-harmonydev-214351-deployment/amplify-cfn-templates/auth/harmonymobileappdd7fa753-cloudformation-template.yml",
         "logicalId": "authharmonymobileappdd7fa753"
       },
-      "lastPushTimeStamp": "2021-08-12T20:01:30.500Z",
+      "lastPushTimeStamp": "2021-08-19T15:21:22.000Z",
       "output": {
         "UserPoolId": "eu-west-1_tWd98APor",
         "AppClientIDWeb": "2cst820sedan6a5167l9tmg5hj",
