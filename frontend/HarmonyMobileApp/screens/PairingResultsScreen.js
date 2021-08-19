@@ -43,6 +43,8 @@ const PairingResultsScreen = ({ navigation, route }) => {
       animationOut={"slideOutRight"}
       swipeDirection={["up", "left", "right", "down"]}
       onSwipeComplete={toggleModal}
+      backdropTransitionInTiming={0}
+      backdropTransitionOutTiming={0}
     >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
@@ -50,11 +52,8 @@ const PairingResultsScreen = ({ navigation, route }) => {
             style={[styles.closeButton]}
             onPress={() => setModalVisible(!isModalVisible)}
           >
-            <MaterialCommunityIcons
-              name="close-circle-outline"
-              size={30}
-              color="black"
-            />
+            <MaterialIcons name="close" size={30} color="black" />
+
           </TouchableOpacity>
           <View style={[styles.modalHeaderSection]}>
             <Text style={styles.title}>Help us improve </Text>
