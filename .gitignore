@@ -112,3 +112,7 @@ amplifytools.xcconfig
 
 #node modules
 node_modules/
+/backend/src/.aws-sam/
+
+/backend/src/.aws-sam/
+/backend/src/ImageRecognition/.aws-sam/
