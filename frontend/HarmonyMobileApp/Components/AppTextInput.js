@@ -66,7 +66,7 @@ export default function AppTextInput({
     }
   };
 
-  const borderStyle = () => {
+  const borderStyle = (touched, error) => {
     if (!touched) {
       return {
         borderColor: "#ffffff00",
