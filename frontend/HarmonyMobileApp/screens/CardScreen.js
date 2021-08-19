@@ -114,12 +114,11 @@ const CardScreen = ({ URL, headerVisible }) => {
         else if (json.StatusCode === 204) {
           console.log(json)
           console.log("ERRROR ENCOUNTERED");
+          setRefreshing(false);
           ClearAllFilters();
           //setModalMessage must come before setErrorAlertVisible
           setModalMessage(json.Data);
           setErrorAlertVisible(true);
-          setRefreshing(false);
-
         }
       })
       .catch((error) => alert(error))

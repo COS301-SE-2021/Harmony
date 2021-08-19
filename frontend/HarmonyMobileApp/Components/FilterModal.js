@@ -103,6 +103,9 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
       // swipeDirection={["up", "left", "right", "down"]}
       // swipeDirection={["left", "right"]}
       onSwipeComplete={toggleModal}
+      backdropTransitionInTiming={0}
+      backdropTransitionOutTiming={0}
+
     >
       <StatusBar hidden={true} />
 
