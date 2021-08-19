@@ -66,12 +66,13 @@ export default function FilterTag({ color, title, style, cleared, filterType, ..
     return (
         <Pressable
             style={[personalStyles.filterTag, { backgroundColor: filterColor }]}
-            onPress={() => (//if i put this in a seperate function it only calls snack instead of the one pressed,
+            onPress={() => {
+                //if i put this in a seperate function it only calls snack instead of the one pressed,
                 //console.log("was pressed"),
                 //  setClicked(true),
-                tagColor(),
-                textColor()
-            )
+                tagColor();
+                textColor();
+            }
             }
         >
             <Text style={[personalStyles.TextSmaller, { color: filterTextColor }]}>{title}</Text>
