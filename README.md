@@ -86,7 +86,7 @@ Visiting South Africa a tourist would not know what a Bunny Chow is, let alone w
 ---
 
 ## Installation Manual
-* :open_book: [Installation Manual Document](https://drive.google.com/file/d/1AJF0NjBWNKCy_r3GF27-CE3Fwq0jpY2a/view?usp=sharing)
+* :open_book: [Installation Manual Document](https://drive.google.com/file/d/1ud6VexBGAUOquRtWCZ5oOaEfyiujfPzs/view?usp=sharing)
 
 ---
 
