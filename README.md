@@ -69,24 +69,24 @@ Visiting South Africa a tourist would not know what a Bunny Chow is, let alone w
 ## SRS document
 * :open_book: [SRS Document - V1](https://drive.google.com/file/d/1b0Vfq70Yxiso4dJOJbDcvd1jPnjZuZAg/view?usp=sharing)
 * :open_book: [SRS Document - V2](https://drive.google.com/file/d/1buKDAWI0slSd97IS07naV2RItgKjxfKx/view?usp=sharing)
-* :open_book: [SRS Document - V3](https://drive.google.com/file/d/1rVo7oEzNy5z0dTjtG3aESqWhB-1ekS-a/view?usp=sharing)
+* :open_book: [SRS Document - V3](https://drive.google.com/file/d/1ehPw7U7XxIeY5yOfyy1jUVU5lHNwqwam/view?usp=sharing)
 
 ---
 
 ## Architectural Requirements
-* :open_book: [Architectural Requirements Document](https://drive.google.com/file/d/1l2Q0rORmKcJ8o29OcJtPo72WnrYBXIGJ/view?usp=sharing)
+* :open_book: [Architectural Requirements Document](https://drive.google.com/file/d/1XlpOfeRdMl-AjMlRRmYxrkRisT2gbjsn/view?usp=sharing)
 ---
 
 ## Coding Standards
-* :open_book: [Coding Standards Document](https://drive.google.com/file/d/1JsnkU5Nnb4V-bqkUVahUd10hn11Acxeo/view?usp=sharing)
+* :open_book: [Coding Standards Document](https://drive.google.com/file/d/1sM5CUZBJYf5UDnfA2pEHVJP-JxLorAKA/view?usp=sharing)
 ---
 
 ## User Manual
-* :open_book: [User Manual Document](https://drive.google.com/file/d/1Uz4vtJ-DOYosIVUrFvFSVfGfRMNrsZJG/view?usp=sharing)
+* :open_book: [User Manual Document](https://drive.google.com/file/d/1ycadMttV_DPkP4R2xhLMDrRcBZ_lzUwA/view?usp=sharing)
 ---
 
 ## Installation Manual
-* :open_book: [Installation Manual Document](https://drive.google.com/file/d/19NDTOMyL4rMu7RIW-dYJULdILNsP6qdy/view?usp=sharing)
+* :open_book: [Installation Manual Document](https://drive.google.com/file/d/1AJF0NjBWNKCy_r3GF27-CE3Fwq0jpY2a/view?usp=sharing)
 
 ---
 
@@ -99,5 +99,14 @@ Visiting South Africa a tourist would not know what a Bunny Chow is, let alone w
 
 - master (build)
     - develop (build)
-        - Module−develop (build)
-            - feature −module−name
+        - Module_develop (build)
+            - feature_modulename
+        
+    - mobile_develop (build)
+        - mobile_feature_modulename
+      
+    - webapp_develop (build)
+        - webapp_feature_modulename
+
+
+    
