@@ -190,7 +190,7 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
                 <Slider
                   value={locationValueSlider}
                   step={20}
-                  maximumValue={100}
+                  maximumValue={1000}
                   onValueChange={(value) => (
                     // console.log(value), 
                     setLocationValueSlider(value)
@@ -202,7 +202,7 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
                     backgroundColor: "grey",
                   }}
                 />
-                <Text style={[styles.TextSmall, { marginLeft: 4 }]}>100</Text>
+                <Text style={[styles.TextSmall, { marginLeft: 4 }]}>1000</Text>
               </View>
               <View style={styles.flexRowJustCenter}>
                 <TextInput

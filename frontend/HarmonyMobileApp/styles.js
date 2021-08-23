@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
     padding: 2,
     backgroundColor: "#F3F2F2",
     height: 30,
-    width: 40,
+    width: 100,
     textAlign: "center",
     justifyContent: "center",
     alignItems: "center"
