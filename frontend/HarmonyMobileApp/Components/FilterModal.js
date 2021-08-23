@@ -353,11 +353,6 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
 
 const personalStyles = StyleSheet.create({
 
-  dataText: {
-    paddingLeft: "2%",
-    paddingVertical: "1%",
-    fontFamily: "sans-serif-light"
-  },
   modalHeading: {
     fontWeight: "bold",
     flex: 1,
