@@ -74,7 +74,8 @@ Visiting South Africa a tourist would not know what a Bunny Chow is, let alone w
 ---
 
 ## Architectural Requirements
-* :open_book: [Architectural Requirements Document](https://drive.google.com/file/d/1XlpOfeRdMl-AjMlRRmYxrkRisT2gbjsn/view?usp=sharing)
+* :open_book: [Architectural Requirements Document - V1](https://drive.google.com/file/d/1FF_dTcBGfnz4OI9baWZcdSioqcNxoswr/view?usp=sharing)
+* :open_book: [Architectural Requirements Document - V2](https://drive.google.com/file/d/1XlpOfeRdMl-AjMlRRmYxrkRisT2gbjsn/view?usp=sharing)
 ---
 
 ## Coding Standards
