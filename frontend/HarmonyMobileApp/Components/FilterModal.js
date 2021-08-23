@@ -175,7 +175,7 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
                   <Picker.Item label="New" value="New" />
                   <Picker.Item label="Best" value="Best" />
                   <Picker.Item label="Controversial" value="Controversial" />
-                  <Picker.Item label="Closest" value="Closest" />
+                  <Picker.Item label="Nearby" value="Closest" />
                 </Picker>
               </View>
             </View>
