@@ -9,7 +9,6 @@ from botocore.exceptions import ClientError
 
 # create a DynamoDB object using the AWS SDK
 
-# dynamodb = boto3.resource('dynamodb', endpoint_url="http://localhost:8000")
 dynamodb = boto3.resource('dynamodb')
 
 # use the DynamoDB object to select our table
@@ -38,7 +37,7 @@ def delete_pairing(event, context):
 
     try:
         # delete based on id from request
-        response = table.delete_item(
+        table.delete_item(
             Key={
                 'PID': pid
             }
