@@ -60,6 +60,9 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
     })
   }
 
+  const onChanged = (text) => {
+    setLocationValueTextInput(parseInt(text.replace(/[^0-9]/g, '')))
+  }
   useEffect(() => {
     console.log("location value updated " + locationValueSlider)
     setLocationValueTextInput(locationValueSlider);
@@ -207,9 +210,11 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
                   // value={locationValueTextInput}
                   //    value={locationValueTextInput.toString()}
                   // when you use to string it causes errors with the slider
-                  onChangeText={(value) => setLocationValueTextInput(parseInt(value))}
+                  // onChangeText={(value) => setLocationValueTextInput(parseInt(value))}
+                  // onChangeText={(value) => onChanged(parseInt(value))}
+                  onChangeText={(value) => onChanged(value)}
                   keyboardType="numeric"
-                  placeholder={locationValueTextInput.toString()}
+                  placeholder="0"
                   multiline={false}
                 />
                 <Text style={[styles.TextSmaller]}>KM</Text>
