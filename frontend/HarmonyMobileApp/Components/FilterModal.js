@@ -60,8 +60,12 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
     })
   }
 
-  const onChanged = (text) => {
-    setLocationValueTextInput(parseInt(text.replace(/[^0-9]/g, '')))
+  const onChanged = (number) => {
+    if (number.length === 0) {
+      setLocationValueTextInput(0)
+    } else {
+      setLocationValueTextInput(parseInt(number.replace(/[^0-9]/g, '')))
+    }
   }
   useEffect(() => {
     console.log("location value updated " + locationValueSlider)
