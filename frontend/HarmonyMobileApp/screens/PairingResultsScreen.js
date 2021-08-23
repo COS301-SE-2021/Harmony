@@ -105,7 +105,7 @@ const PairingResultsScreen = ({ navigation, route }) => {
       ]}
     >
       <Text style={styles.title}>
-        {pairingResults.response.data[0].FoodItem}
+        {pairingResults.response.Data[0].FoodItem}
       </Text>
       <TouchableOpacity
         style={{
@@ -124,7 +124,7 @@ const PairingResultsScreen = ({ navigation, route }) => {
   const FoodDescription = () => (
     <View style={[styles.section]}>
       <Text style={styles.sectionText}>
-        {pairingResults.response.data[0].FoodDesc}
+        {pairingResults.response.Data[0].FoodDesc}
       </Text>
     </View>
   );
@@ -140,7 +140,7 @@ const PairingResultsScreen = ({ navigation, route }) => {
         horizontal={true}
       >
         <View style={styles.rowContainer}>
-          {pairingResults.response.data[0].FoodTags.map((tag, index) => (
+          {pairingResults.response.Data[0].FoodTags.map((tag, index) => (
             <View style={styles.tagContainer} key={index}>
               <FontAwesome name="tag" size={16} color="#fff" />
               {/* Keeping outlined icons just incase we want to change to them for consistency overall */}
@@ -163,13 +163,13 @@ const PairingResultsScreen = ({ navigation, route }) => {
         onPress={() => {
           navigation.navigate("Results", {
             screen: "DrinkDetailsScreen",
-            params: { item: pairingResults.response.data[0] },
+            params: { item: pairingResults.response.Data[0] },
           });
         }}
       >
-        <SharedElement id={pairingResults.response.data[0].DrinkID}>
+        <SharedElement id={pairingResults.response.Data[0].DrinkID}>
           <Image
-            source={{ uri: pairingResults.response.data[0].DrinkImage }}
+            source={{ uri: pairingResults.response.Data[0].DrinkImage }}
             style={[styles.drinkCard, styles.bigDrinkCard]}
           />
         </SharedElement>
@@ -178,9 +178,9 @@ const PairingResultsScreen = ({ navigation, route }) => {
           delay={200}
           style={[styles.cardBackgroundOverlay, { width: 300 }]}
         >
-          {/* <SharedElement id={response.data.recommendedDrink.drinkName}> */}
+          {/* <SharedElement id={response.Data.recommendedDrink.drinkName}> */}
           <Text style={[styles.cardTextOverlay]}>
-            {pairingResults.response.data[0].DrinkItem}
+            {pairingResults.response.Data[0].DrinkItem}
           </Text>
           {/* </SharedElement> */}
         </Animatable.View>
@@ -200,8 +200,8 @@ const PairingResultsScreen = ({ navigation, route }) => {
         }}
         horizontal={false}
       >
-        {pairingResults.response.data.slice(1).map((pairing, index) => (
-          //.slice(1) is used to skip the first element of the data
+        {pairingResults.response.Data.slice(1).map((pairing, index) => (
+          //.slice(1) is used to skip the first element of the Data
           <View key={index}>
             <TouchableOpacity
               activeOpacity={0.8}
@@ -219,7 +219,7 @@ const PairingResultsScreen = ({ navigation, route }) => {
                 />
               </SharedElement>
               <View style={[styles.cardBackgroundOverlay, { width: 150 }]}>
-                {/* <SharedElement id={response.data.recommendedDrink.drinkName}> */}
+                {/* <SharedElement id={response.Data.recommendedDrink.drinkName}> */}
                 <Text style={[styles.cardTextOverlay]}>
                   {pairing.DrinkItem}
                 </Text>
@@ -249,7 +249,7 @@ const PairingResultsScreen = ({ navigation, route }) => {
         renderHeader={() => (
           <Image
             style={styles.foodCard}
-            source={{ uri: pairingResults.response.data[0].FoodImage }}
+            source={{ uri: pairingResults.response.Data[0].FoodImage }}
           />
         )}
       >
