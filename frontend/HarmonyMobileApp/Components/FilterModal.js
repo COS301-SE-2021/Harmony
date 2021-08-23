@@ -207,12 +207,8 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
               <View style={styles.flexRowJustCenter}>
                 <TextInput
                   style={[styles.TextSmall, styles.TextInputStyling]}
-                  // value={locationValueTextInput}
-                  //    value={locationValueTextInput.toString()}
-                  // when you use to string it causes errors with the slider
-                  // onChangeText={(value) => setLocationValueTextInput(parseInt(value))}
-                  // onChangeText={(value) => onChanged(parseInt(value))}
                   onChangeText={(value) => onChanged(value)}
+                  value={locationValueTextInput.toString()}
                   keyboardType="numeric"
                   placeholder="0"
                   multiline={false}
