@@ -25,15 +25,16 @@ now = strftime("%a, %d %b %Y %H:%M:%S +0000", gmtime())
     "PID" : "pairingid"
  }"""
 
+
 # define the handler function that the Lambda service will use as an entry point
 def delete_pairing(event, context):
     # extract values from the event object we got from the Lambda service and store in a variable
     pid = event['PID']
     if validate_request(pid) == "false":
         return {
-                'StatusCode': 400,
-                'Body': json.dumps({'isSuccessful': 'false', 'PID': pid})
-            }
+            'StatusCode': 400,
+            'Body': json.dumps({'isSuccessful': 'false', 'PID': pid})
+        }
 
     try:
         # delete based on id from request
@@ -93,6 +94,7 @@ def remove_favourite(pid):
 
     return json.dumps({'isSuccessful': 'true', 'PID': pid})
 
+
 def remove_user_upvoted(pid):
     # this function deletes the pairing from user upvotes in user table
     # here we scan the whole table and store it's json in allresponse var
@@ -122,6 +124,7 @@ def remove_user_upvoted(pid):
             index = index + 1
 
     return json.dumps({'isSuccessful': 'true', 'PID': pid})
+
 
 def remove_user_downvoted(pid):
     # this function deletes the pairing from user downvotes in user table
@@ -159,6 +162,8 @@ def validate_request(pid):
     if pid == "":
         testrequest = "false"
         return testrequest
-    else:
+    elif isinstance(pid, str):
         testrequest = "true"
         return testrequest
+    else:
+        return "false"
