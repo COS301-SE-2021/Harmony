@@ -18,6 +18,12 @@ table2 = dynamodb.Table('Users')
 # store the current time in a human readable format in a variable
 now = strftime("%a, %d %b %Y %H:%M:%S +0000", gmtime())
 
+""" This function takes a pairing that the user has created and deletes it from the database, as well as removes
+ it from other users favourites 
+ event {
+    "UID" : "userid",
+    "PID" : "pairingid"
+ }"""
 
 # define the handler function that the Lambda service will use as an entry point
 def delete_pairing(event, context):
@@ -25,8 +31,8 @@ def delete_pairing(event, context):
     pid = event['PID']
     if validate_request(pid) == "false":
         return {
-                'statusCode': 400,
-                'body': json.dumps({'isSuccessful': 'false', 'PID': pid})
+                'StatusCode': 400,
+                'Body': json.dumps({'isSuccessful': 'false', 'PID': pid})
             }
 
     try:
@@ -45,15 +51,15 @@ def delete_pairing(event, context):
         if e.response['Error']['Code'] == "ConditionalCheckFailedException":
             # return a properly formatted JSON object
             return {
-                'statusCode': 400,
-                'body': json.dumps({'isSuccessful': 'false', 'PID': pid})
+                'StatusCode': 400,
+                'Body': json.dumps({'isSuccessful': 'false', 'PID': pid})
             }
         else:
             raise
     else:
         return {
-            'statusCode': 200,
-            'body': json.dumps({'isSuccessful': 'true', 'PID': pid})
+            'StatusCode': 200,
+            'Body': json.dumps({'isSuccessful': 'true', 'PID': pid})
         }
 
 
