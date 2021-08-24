@@ -65,7 +65,7 @@ const CardScreen = ({ URL, headerVisible }) => {
     const state = ReduxStore.getState();
     setSortPairings(state.sortPairings);
     if (state.ApplyFilter) {
-      console.log("Applying filter");
+      //console.log("Applying filter");
       setRefreshing(true);
       ReduxStore.dispatch({
         type: "APPLYFILTER",
@@ -78,13 +78,13 @@ const CardScreen = ({ URL, headerVisible }) => {
 
   //the api call for trending
   useEffect(() => {
-    console.log("Calling API...")
+    //console.log("Calling API...")
     var state = ReduxStore.getState();
-    console.log(state);
+    //console.log(state);
     if (state.userLocationLong == null || state.userLocationLat == null) {
       GetLocation();
       state = ReduxStore.getState();
-      console.log("location updated " + state.userLocationLong);
+      //console.log("location updated " + state.userLocationLong);
     }
     fetch(API_URL, {
       method: "POST",
@@ -107,14 +107,14 @@ const CardScreen = ({ URL, headerVisible }) => {
       .then((json) => {
         if (json.StatusCode === 200) {
           setData(json.Data)
-          console.log("StatusCode Returned: " + json.StatusCode)
+          //console.log("StatusCode Returned: " + json.StatusCode)
           setErrorAlertVisible(false);
           setRefreshing(false);
 
         }
         else if (json.StatusCode === 204) {
-          console.log(json)
-          console.log("ERRROR ENCOUNTERED");
+          //console.log(json)
+          //console.log("ERRROR ENCOUNTERED");
           setRefreshing(false);
           // ClearAllFilters();
           //setModalMessage must come before setErrorAlertVisible
@@ -148,7 +148,7 @@ const CardScreen = ({ URL, headerVisible }) => {
       //payload is the standard adopted name for the state value
       payload: { "latitude": location.coords.latitude, "longitude": location.coords.longitude }
     });
-    console.log("location loaded");
+    //console.log("location loaded");
   }
 
   const filterButton = () => (
