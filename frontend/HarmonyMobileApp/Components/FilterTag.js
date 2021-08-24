@@ -19,16 +19,17 @@ export default function FilterTag({ color, title, style, cleared, filterType, ..
 
     //use effect is a hook that detects when a variable is changed and will act when its changed
     useEffect(() => {
-        const state = ReduxStore.getState();
-        //cant be on its own so this leverages the fact that it reset to reset it again
-        if ((state.MealTags.includes(title) && filterType == "mealTypes")
-            || (state.DrinkTags.includes(title) && filterType == "drinks")
-            || (state.FoodTags.includes(title) && filterType == "food")) {
+        //Checks the state of the tags
+        //If a tag has been selected then we will colour it in and set the text to white
+        //Else we will leave it as the default colour (grey) and black text
+        if ((myFilterContext.mealTagArray.includes(title) && filterType == "mealTypes")
+            || (myFilterContext.foodTagArray.includes(title) && filterType == "food")
+            || (myFilterContext.drinkTagArray.includes(title) && filterType == "drinks")
+        ) {
             setFilterColor(color);
             setTextColor("white");
         }
-
-    }, [load]);
+    }, []);
 
     function checkTag() {
         console.log("checkTag")
