@@ -11,34 +11,41 @@ meal tags from the dynamodb"""
 
 
 def get_all_items(event, context):
-    # foodresponse = {"Foods" : get_all_foods()}
-    # drinkresponse = {"Drinks" : get_all_drinks()}
-    # mealtagresponse = {"MealTags" : get_all_mealtags()}
+    # package the response
     response = {
-        "StatusCode" : 200,
-        "Foods" : get_all_foods(),
-        "Drinks" : get_all_drinks(),
-        "MealTags" : get_all_mealtags()
+        "StatusCode": 200,
+        "Foods": get_all_foods(),
+        "Drinks": get_all_drinks(),
+        "MealTags": get_all_mealtags()
     }
     return response
 
 
 def get_all_foods():
+    """This function gets all data from the Food database and sorts it alphabetically before returning"""
     response = foodtable.scan()
+    # Filter out the items
     response = response["Items"]
+    # Sort in alphabetical order according to key
     response = sorted(response, key=lambda k: k['FoodName'])
     return response
 
 
 def get_all_drinks():
+    """This function gets all data from the Drinks database and sorts it alphabetically before returning"""
     response = drinktable.scan()
+    # Filter out the items
     response = response["Items"]
+    # Sort in alphabetical order according to key
     response = sorted(response, key=lambda k: k['DrinkName'])
     return response
 
 
 def get_all_mealtags():
+    """This function gets all data from the Mealtag database and sorts it alphabetically before returning"""
     response = mealtagtable.scan()
+    # Filter out the items
     response = response["Items"]
+    # Sort in alphabetical order according to key
     response = sorted(response, key=lambda k: k['TagName'])
     return response
