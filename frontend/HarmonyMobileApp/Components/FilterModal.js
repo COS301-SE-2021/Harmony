@@ -20,7 +20,6 @@ import { Text } from "@ui-kitten/components";
 import { Slider } from "react-native-elements";
 import FilterTag from "./FilterTag";
 import { Picker } from "@react-native-picker/picker";
-import ReduxStore from "../Components/ReduxStore"
 import FilterContext from './FilterContext';
 
 

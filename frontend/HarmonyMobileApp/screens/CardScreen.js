@@ -21,9 +21,6 @@ import { useIsFocused } from "@react-navigation/native";
 import { Header } from "react-native-elements";
 import * as Location from 'expo-location';
 
-// import { createStore } from "redux";
-import ReduxStore from "../Components/ReduxStore"
-
 import FilterModal from "../Components/FilterModal";
 import Card from "../Components/Card"
 import AppLoadingIcon from "../Components/AppLoadingIcon";
@@ -80,20 +77,6 @@ const CardScreen = ({ URL, headerVisible }) => {
     setModalVisible(!isModalVisible);
   };
 
-  const unsubscribe = ReduxStore.subscribe(() => {
-    const state = ReduxStore.getState();
-    if (state.ApplyFilter) {
-      //console.log("Applying filter");
-      setRefreshing(true);
-      ReduxStore.dispatch({
-        type: "APPLYFILTER",
-        payload: { "ApplyFilter": false }
-      });
-      wait(2000).then(() => setRefreshing(false));
-    }
-  });
-  unsubscribe()
-
   useEffect(() => {
     setRefreshing(true);
     wait(2000).then(() => setRefreshing(false));
@@ -102,11 +85,6 @@ const CardScreen = ({ URL, headerVisible }) => {
 
   //the api call for trending
   useEffect(() => {
-    //console.log("Calling API...")
-    var state = ReduxStore.getState();
-    //console.log(state);
-
-
     fetch(API_URL, {
       method: "POST",
       headers: {
