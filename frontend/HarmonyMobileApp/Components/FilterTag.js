@@ -6,7 +6,7 @@ import {
 import { Text } from '@ui-kitten/components';
 import ReduxStore from "../Components/ReduxStore"
 import { useContext } from 'react';
-import AppContext from './AppContext';
+import FilterContext from './FilterContext';
 export default function FilterTag({ color, title, style, cleared, filterType, ...otherProps }) {
 
     const [filterColor, setFilterColor] = useState("#F3F2F2");
@@ -14,7 +14,7 @@ export default function FilterTag({ color, title, style, cleared, filterType, ..
     //variable gets set on load so its used to set the colours on load also
     const [load, setLoad] = useState(true);
 
-    const myContext = useContext(AppContext);
+    const FilterContext = useContext(FilterContext);
 
 
     //use effect is a hook that detects when a variable is changed and will act when its changed
@@ -32,28 +32,15 @@ export default function FilterTag({ color, title, style, cleared, filterType, ..
 
     // const checkTag = () => {
     function checkTag() {
-
         console.log("checkTag")
-        // ReduxStore.dispatch({
-        //     type: "APPEND",
-        //     //payload is the standard adopted name for the state value
-        //     payload: { "tagName": title, "tagType": filterType }
-        // })
-        myContext.setSetting1value("Checked")
-        console.log("My context 1:" + myContext.setting1name);
+        FilterContext.setSetting1value("Checked")
+        console.log("My context 1:" + FilterContext.setting1name);
     };
 
     const uncheckTag = () => {
         console.log("uncheckTag")
-        myContext.setSetting1value("Unchecked")
-        console.log("My context 2:" + myContext.setting1name);
-
-        ReduxStore.dispatch({
-            type: "REMOVE",
-            //payload is the standard adopted name for the state value
-            payload: { "tagName": title, "tagType": filterType }
-        })
-
+        FilterContext.setSetting1value("Unchecked")
+        console.log("My context 2:" + FilterContext.setting1name);
     };
 
     const tagColor = () => {

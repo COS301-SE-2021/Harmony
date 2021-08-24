@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import CardScreen from "./CardScreen";
-import AppContext from '../Components/AppContext';
+import FilterContext from '../Components/FilterContext';
 
 const HomeScreen = () => {
   const DASHBOARD_PAIRINGS_URL = "https://9vk5hcie79.execute-api.eu-west-1.amazonaws.com/dev";
@@ -14,9 +14,9 @@ const HomeScreen = () => {
   };
 
   return (
-    <AppContext.Provider value={userSettings}>
+    <FilterContext.Provider value={userSettings}>
       <CardScreen URL={DASHBOARD_PAIRINGS_URL} headerVisible={true} />
-    </AppContext.Provider>
+    </FilterContext.Provider>
 
   )
 };
