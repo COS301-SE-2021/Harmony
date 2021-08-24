@@ -132,17 +132,15 @@ const CardScreen = ({ URL, headerVisible }) => {
       .catch((error) => alert(error))
   }, [refreshing]);
 
+  const ClearAllFilters = () => {
+    myFilterContext.clearFilter()
+    myFilterContext.toggleFilter()
+  };
+
+
   const ShowTitle = () => (
     <Text style={styles.TextLarge}> {myFilterContext.sortPairingType} </Text>
   );
-
-  const ClearAllFilters = () => {
-    ReduxStore.dispatch({
-      type: "CLEAR",
-      //payload is the standard adopted name for the state value
-      payload: { "ApplyFilter": true }
-    });
-  };
 
   const GetLocation = async () => {
     //status is response from permission

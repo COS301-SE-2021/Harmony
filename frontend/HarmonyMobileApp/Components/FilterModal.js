@@ -40,12 +40,8 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
   };
   const ClearAll = () => {
     toggleModal();
-
-    ReduxStore.dispatch({
-      type: "CLEAR",
-      //payload is the standard adopted name for the state value
-      payload: { "ApplyFilter": true }
-    });
+    myFilterContext.clearFilter()
+    myFilterContext.toggleFilter()
 
   };
 

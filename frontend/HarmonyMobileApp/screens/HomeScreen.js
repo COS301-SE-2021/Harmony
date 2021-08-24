@@ -64,6 +64,16 @@ const HomeScreen = () => {
     setApplyFilter(!applyFilter);
   };
 
+  //Used as an indicator of whether or not the filter has been applied
+  //If true then the page must be refreshed and the API with the new Context values
+
+  const clearFilter = () => {
+    setMealTagArray([]);
+    setFoodTagArray([]);
+    setDrinkTagArray([]);
+    setRange(null);
+  };
+
 
   const filterState = {
     mealTagArray: mealTagArray,
@@ -77,6 +87,7 @@ const HomeScreen = () => {
     setRange,
     applyFilter: applyFilter,
     toggleFilter,
+    clearFilter,
   };
 
 
