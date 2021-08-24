@@ -6,15 +6,26 @@ const HomeScreen = () => {
   const DASHBOARD_PAIRINGS_URL = "https://9vk5hcie79.execute-api.eu-west-1.amazonaws.com/dev";
 
   const [setting1value, setSetting1value] = useState('initialValue1');
+  const [tagArray, setTagArray] = useState([]);
 
+  //Adds a tag to the start of the array
+  const appendTagToArray = (newTag) => {
+    setTagArray(tagArray => [newTag, ...tagArray]);
+  };
 
-  const userSettings = {
-    setting1name: setting1value,
-    setSetting1value,
+  //Removes the first tag from the array
+  const removeTagFromArray = () => {
+    setTagArray(tagArray => [...tagArray.slice(1)]);
+  };
+
+  const filterState = {
+    tagArray: tagArray,
+    appendTagToArray,
+    removeTagFromArray,
   };
 
   return (
-    <FilterContext.Provider value={userSettings}>
+    <FilterContext.Provider value={filterState}>
       <CardScreen URL={DASHBOARD_PAIRINGS_URL} headerVisible={true} />
     </FilterContext.Provider>
 

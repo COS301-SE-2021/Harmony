@@ -14,7 +14,7 @@ export default function FilterTag({ color, title, style, cleared, filterType, ..
     //variable gets set on load so its used to set the colours on load also
     const [load, setLoad] = useState(true);
 
-    const FilterContext = useContext(FilterContext);
+    const myFilterContext = useContext(FilterContext);
 
 
     //use effect is a hook that detects when a variable is changed and will act when its changed
@@ -30,17 +30,17 @@ export default function FilterTag({ color, title, style, cleared, filterType, ..
 
     }, [load]);
 
-    // const checkTag = () => {
     function checkTag() {
         console.log("checkTag")
-        FilterContext.setSetting1value("Checked")
-        console.log("My context 1:" + FilterContext.setting1name);
+        myFilterContext.appendTagToArray(title)
+        console.log("My context 3:" + myFilterContext.tagArray);
     };
 
     const uncheckTag = () => {
         console.log("uncheckTag")
-        FilterContext.setSetting1value("Unchecked")
-        console.log("My context 2:" + FilterContext.setting1name);
+        console.log("My context 4:" + myFilterContext.tagArray);
+        myFilterContext.removeTagFromArray()
+
     };
 
     const tagColor = () => {
