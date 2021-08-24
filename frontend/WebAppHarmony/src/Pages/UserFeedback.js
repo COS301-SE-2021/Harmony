@@ -1,15 +1,15 @@
 import React from 'react';
-import './App.css';
+// import './App.css';
 
 //user ages, demographics
-function TrainAI() {
+function UserFeedback() {
 
     return (
         <div style={{ flexDirection: "row", justifyContent: "space-around" }}>
-            <p>in train ai - Under construction</p>
+            <p>in user feedback - Under construction</p>
         </div>
 
     );
 }
 
-export default TrainAI;
+export default UserFeedback;

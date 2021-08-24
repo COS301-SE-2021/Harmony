@@ -3,10 +3,10 @@ import './App.css';
 
 import { Nav } from 'rsuite';
 import 'rsuite/dist/styles/rsuite-default.css';
-import Homepage from '../src/Homepage';
-import ModeratePairing from '../src/ModeratePairing';
-import UserFeedback from './UserFeedback';
-import TrainAI from "./TrainAI";
+import Homepage from './Pages/Homepage';
+import ModeratePairing from './Pages/ModeratePairing';
+import UserFeedback from './Pages/UserFeedback';
+import TrainAI from "./Pages/TrainAI";
 // import "../Styling/MainStyling.css"
 import {
   BrowserRouter as Router,

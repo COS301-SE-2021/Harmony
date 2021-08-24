@@ -1,6 +1,6 @@
 import React from 'react';
-import './App.css';
-import Dashboard from "./components/Dashboard";
+// import './App.css';
+import Dashboard from "../components/Dashboard";
 
 /**@name Homepage
  * @summary returns the homepage 
