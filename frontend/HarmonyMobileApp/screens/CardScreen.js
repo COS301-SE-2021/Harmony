@@ -106,8 +106,8 @@ const CardScreen = ({ URL, headerVisible }) => {
         "FoodTags": myFilterContext.foodTagArray,
         "DrinkTags": myFilterContext.drinkTagArray,
         "Distance": myFilterContext.range,
-        "Longitude": state.userLocationLong,
-        "Latitude": state.userLocationLat
+        "Latitude": myFilterContext.userLatitude,
+        "Longitude": myFilterContext.userLongitude,
       })
     })
       .then((response) => response.json())
@@ -148,11 +148,9 @@ const CardScreen = ({ URL, headerVisible }) => {
     const location = await Location.getCurrentPositionAsync({});
     // const location = await Location.watchPositionAsync({timeInterval:2000},{});
     // setUserLocation({ lat: location.coords.latitude, lng: location.coords.longitude });
-    ReduxStore.dispatch({
-      type: "ADDLOCATION",
-      //payload is the standard adopted name for the state value
-      payload: { "latitude": location.coords.latitude, "longitude": location.coords.longitude }
-    });
+
+    myFilterContext.setUserLatitude(location.coords.latitude)
+    myFilterContext.setUserLongitude(location.coords.longitude)
     //console.log("location loaded");
   }
 

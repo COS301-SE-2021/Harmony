@@ -14,6 +14,7 @@ const HomeScreen = () => {
   //Options: Trending, New, Best, Controversial, Nearby
   const [sortPairingType, setSortPairingType] = useState("Trending");
 
+
   //The range(distance) in which pairings should be within
   const [range, setRange] = useState(null);
 
@@ -75,19 +76,30 @@ const HomeScreen = () => {
   };
 
 
+  const [userLatitude, setUserLatitude] = useState(null);
+  const [userLongitude, setUserLongitude] = useState(null);
+
   const filterState = {
     mealTagArray: mealTagArray,
     foodTagArray: foodTagArray,
     drinkTagArray: drinkTagArray,
     appendTagToArray,
     removeTagFromArray,
+
     sortPairingType: sortPairingType,
     setSortPairingType,
+
     range: range,
     setRange,
+
     applyFilter: applyFilter,
     toggleFilter,
     clearFilter,
+
+    userLatitude: userLatitude,
+    setUserLatitude,
+    userLongitude: userLongitude,
+    setUserLongitude,
   };
 
 
