@@ -1,16 +1,29 @@
-import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Header from '../components/Header';
-import Dashboard from "../components/Dashboard";
-import Homepage from '../src/Homepage';
-import ModeratePairing from '../src/ModeratePairing';
-import Routing from './Routing';
+import 'rsuite/lib/styles/index.less';
 
+import { Header } from "./components/Header";
+import Routing from './Routing';
 
 function App() {
   return (
-    <Routing />
+    <div className="App">
+      {/* <Header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </Header> */}
+      <Routing />
+    </div>
   );
 }
 

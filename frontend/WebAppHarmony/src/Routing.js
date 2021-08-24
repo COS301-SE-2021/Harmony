@@ -7,7 +7,7 @@ import Homepage from '../src/Homepage';
 import ModeratePairing from '../src/ModeratePairing';
 import UserFeedback from './UserFeedback';
 import TrainAI from "./TrainAI";
-import "../Styling/MainStyling.css"
+// import "../Styling/MainStyling.css"
 import {
   BrowserRouter as Router,
   Switch,

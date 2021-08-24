@@ -73,14 +73,10 @@ function ModeratePairing() {
 
     // const requestedItems = ["Malva Pudding", "Cape Malay Curry", "Biltong", "Boerewors", "Amarula Don Pedro", "Melktert"];
     const button = {
-        backgroundColor: "#CECECE",
-        margin: 10,
-        height: 35,
-        borderRadius: 10,
-        paddingTop: 5,
-        paddingLeft: 12,
-        paddingRight: 12
+        backgroundColor: "#CECECE", margin: 10, height: 35, borderRadius: 10, paddingTop: 5, paddingLeft: 12, paddingRight: 12
     };
+
+    const container = { justifyContent: "center", display: "flex", flexDirection: "row", paddingTop: 25, backgroundColor: "#F3F3F3" }
 
     /** @function sets the forms default values to the button values
      * @param item = the api response item
@@ -104,7 +100,7 @@ function ModeratePairing() {
         console.log("clicked remove " + item.ItemName);
     }
     return (
-        <div style={{ justifyContent: "center", display: "flex", flexDirection: "row", paddingTop: 25, backgroundColor: "#F3F3F3" }}>
+        <div style={container}>
             <div style={requestContainer}>
                 <p>Users have requested the following items to be added to the database:</p>
                 <br />

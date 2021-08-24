@@ -1,41 +1,10 @@
 .App {
   text-align: center;
-  width: 100%;
-  align-items: "center",
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
-}
-
-#Header{
-  width:100%;
-  background-color: #61dafb;
-  text-align: right;
-}
-
-.dashboard{
-  width:90%;
-  height:400px;
-  background-color: grey;
-  border-radius: 15;
-  border-width: 2;
-  align-self: center;
-}
-p{
-  font-size: x-large;
-  font-family: "sans-serif-light";
-}
-
-chartContainer{
-  width: 400;
-  height: 250;
-  padding: 15;
-  border-radius: 15;
-  background-color: "white";
-  margin: "auto";
-  float: "left"
 }
 
 @media (prefers-reduced-motion: no-preference) {
