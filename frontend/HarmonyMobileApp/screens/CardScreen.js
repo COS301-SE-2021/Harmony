@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   View,
   ActivityIndicator,
@@ -28,6 +28,7 @@ import FilterModal from "../Components/FilterModal";
 import Card from "../Components/Card"
 import AppLoadingIcon from "../Components/AppLoadingIcon";
 import AppAlert from "../Components/AppAlert";
+import FilterContext from '../Components/FilterContext';
 
 const CardScreen = ({ URL, headerVisible }) => {
   const API_URL = URL;
@@ -43,6 +44,7 @@ const CardScreen = ({ URL, headerVisible }) => {
   const [refreshing, setRefreshing] = useState(useIsFocused());
   const [isErrorAlertVisible, setErrorAlertVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
+  const myFilterContext = useContext(FilterContext);
 
   //the refreshing of the flatlist
   const onRefresh = React.useCallback(() => {
@@ -86,6 +88,7 @@ const CardScreen = ({ URL, headerVisible }) => {
       state = ReduxStore.getState();
       //console.log("location updated " + state.userLocationLong);
     }
+
     fetch(API_URL, {
       method: "POST",
       headers: {
@@ -95,9 +98,9 @@ const CardScreen = ({ URL, headerVisible }) => {
       body: JSON.stringify({
         "UID": "u1",
         "Sort": state.sortPairings,
-        "MealTags": state.MealTags,
-        "FoodTags": state.FoodTags,
-        "DrinkTags": state.DrinkTags,
+        "MealTags": myFilterContext.mealTagArray,
+        "FoodTags": myFilterContext.foodTagArray,
+        "DrinkTags": myFilterContext.drinkTagArray,
         "Distance": state.Range,
         "Longitude": state.userLocationLong,
         "Latitude": state.userLocationLat

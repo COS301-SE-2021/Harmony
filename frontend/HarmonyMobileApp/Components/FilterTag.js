@@ -26,6 +26,10 @@ export default function FilterTag({ color, title, filterType }) {
         }
     }, []);
 
+    //adds the tag to an array
+    //There are three arrays: 
+    //mealTagArray,foodTagArray,drinkTagArray,
+    //the filterType is used to determine into which array the tag goes into
     function checkTag() {
         console.log("checkTag")
         console.log("title: " + title + " filterType: " + filterType)
