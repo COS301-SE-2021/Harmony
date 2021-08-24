@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import CardScreen from "./CardScreen";
 import FilterContext from '../Components/FilterContext';
+import AppAlert from "../Components/AppAlert";
 
 const HomeScreen = () => {
   const DASHBOARD_PAIRINGS_URL = "https://9vk5hcie79.execute-api.eu-west-1.amazonaws.com/dev";
+
+  const [isErrorAlertVisible, setErrorAlertVisible] = useState(false);
+  const [modalMessage, setModalMessage] = useState("Oops, something went wrong.");
 
   //the filter by which the home feed page can be sorted by
   //Options: Trending, New, Best, Controversial, Nearby
@@ -34,7 +38,9 @@ const HomeScreen = () => {
         break;
 
       default:
-      //console.long("Incorrect tagType");
+        //setModalMessage must come before setErrorAlertVisible
+        setModalMessage("Oops, something went wrong.");
+        setErrorAlertVisible(true);
     }
 
   };
@@ -52,7 +58,9 @@ const HomeScreen = () => {
         setDrinkTagArray(drinkTagArray.filter(item => item !== tagTitle));
         break;
       default:
-      //console.long("Incorrect tagType");
+        //setModalMessage must come before setErrorAlertVisible
+        setModalMessage("Oops, something went wrong.");
+        setErrorAlertVisible(true);
     }
   };
 
@@ -103,6 +111,9 @@ const HomeScreen = () => {
   return (
     <FilterContext.Provider value={globalStates}>
       <CardScreen URL={DASHBOARD_PAIRINGS_URL} headerVisible={true} />
+      {isErrorAlertVisible === true && (
+        <AppAlert visible={true} message={modalMessage} type={"Error"} />
+      )}
     </FilterContext.Provider>
 
   )
