@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   View,
   Pressable,
@@ -21,10 +21,10 @@ import { Slider } from "react-native-elements";
 import FilterTag from "./FilterTag";
 import { Picker } from "@react-native-picker/picker";
 import ReduxStore from "../Components/ReduxStore"
+import FilterContext from './FilterContext';
 
 
 export default function FilterModal({ sortPairingsName, ...otherProps }) {
-  const [sortPairings, setSortPairings] = useState(sortPairingsName); // the type of pairings shown filter
   const [locationValueSlider, setLocationValueSlider] = useState(0); //distance filter
   const [locationValueTextInput, setLocationValueTextInput] = useState(0); //distance filter
   const [isModalVisible, setModalVisible] = useState(true); //for the filter popup
@@ -34,9 +34,10 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
     drinks: ["Alcoholic", "Non-Alcoholic", "Fizzy", "Sweet", "Sour", "Bitter", "Hot", "Warm", "Cold",],
   };
 
+  const myFilterContext = useContext(FilterContext);
+
   //toggles the modals visibility
   const toggleModal = () => {
-    //    setSortPairings(ReduxStore.getState().sortPairings)
     setModalVisible(!isModalVisible);
   };
   const ClearAll = () => {
@@ -89,16 +90,6 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
       })
     }
   }, [locationValueTextInput]);
-
-  useEffect(() => {
-    //console.log("sort pairings updated " + sortPairings)
-
-    ReduxStore.dispatch({
-      type: "CHANGESORT",
-      payload: { "sort": sortPairings }
-    })
-
-  }, [sortPairings]);
 
   return (
     <Modal
@@ -159,17 +150,16 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
                       },
                     ]}
                   >
-                    {sortPairings}
+                    {myFilterContext.sortPairingType}
                   </Text>
                 </View>
               </View>
               <View style={styles.pickerView}>
                 <Picker
-                  selectedValue={sortPairings}
+                  selectedValue={myFilterContext.sortPairingType}
                   style={[styles.TextSmall, { height: 40, width: 300 }]}
-                  onValueChange={(itemValue, itemIndex) => {
-                    setSortPairings(itemValue);
-                    // console.log(itemValue);
+                  onValueChange={(itemValue) => {
+                    myFilterContext.setSortPairingType(itemValue);
                   }}
                 >
                   <Picker.Item label="Trending" value="Trending" />

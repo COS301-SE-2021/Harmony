@@ -39,7 +39,6 @@ const CardScreen = ({ URL, headerVisible }) => {
 
   //controls all the filters
   const [isModalVisible, setModalVisible] = useState(false);                               //for the filter popup
-  const [sortPairings, setSortPairings] = useState("Trending");                            // the type of pairings shown filter
 
   const [refreshing, setRefreshing] = useState(useIsFocused());
   const [isErrorAlertVisible, setErrorAlertVisible] = useState(false);
@@ -65,7 +64,6 @@ const CardScreen = ({ URL, headerVisible }) => {
 
   const unsubscribe = ReduxStore.subscribe(() => {
     const state = ReduxStore.getState();
-    setSortPairings(state.sortPairings);
     if (state.ApplyFilter) {
       //console.log("Applying filter");
       setRefreshing(true);
@@ -97,7 +95,7 @@ const CardScreen = ({ URL, headerVisible }) => {
       },
       body: JSON.stringify({
         "UID": "u1",
-        "Sort": state.sortPairings,
+        "Sort": myFilterContext.sortPairingType,
         "MealTags": myFilterContext.mealTagArray,
         "FoodTags": myFilterContext.foodTagArray,
         "DrinkTags": myFilterContext.drinkTagArray,
@@ -129,7 +127,7 @@ const CardScreen = ({ URL, headerVisible }) => {
   }, [refreshing]);
 
   const ShowTitle = () => (
-    <Text style={styles.TextLarge}> {sortPairings} </Text>
+    <Text style={styles.TextLarge}> {myFilterContext.sortPairingType} </Text>
   );
 
   const ClearAllFilters = () => {
@@ -197,7 +195,7 @@ const CardScreen = ({ URL, headerVisible }) => {
       }
       <View style={{ flex: 1 }}>
         <View style={styles.centeredView}>
-          {isModalVisible && <FilterModal sortPairingsName={ReduxStore.getState().sortPairings} />}
+          {isModalVisible && <FilterModal sortPairingsName={myFilterContext.sortPairingType} />}
         </View>
 
         {refreshing ? (

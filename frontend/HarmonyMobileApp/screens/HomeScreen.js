@@ -9,6 +9,10 @@ const HomeScreen = () => {
   const [foodTagArray, setFoodTagArray] = useState([]);
   const [drinkTagArray, setDrinkTagArray] = useState([]);
 
+  //the filter by which the home feed page can be sorted by
+  //Options: Trending, New, Best, Controversial, Nearby
+  const [sortPairingType, setSortPairingType] = useState("Trending");
+
 
   //Adds a tag to the start of the array
   const appendTagToArray = (newTag, tagType) => {
@@ -55,6 +59,9 @@ const HomeScreen = () => {
     drinkTagArray: drinkTagArray,
     appendTagToArray,
     removeTagFromArray,
+    sortPairingType: sortPairingType,
+    setSortPairingType,
+
   };
 
 
