@@ -50,11 +50,8 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
   };
 
   const applyFilters = () => {
-    ReduxStore.dispatch({
-      type: "APPLYFILTER",
-      payload: { "ApplyFilter": true }
-    })
     toggleModal();
+    myFilterContext.toggleFilter()
   }
 
   const onChanged = (number) => {

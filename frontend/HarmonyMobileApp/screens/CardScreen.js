@@ -76,6 +76,12 @@ const CardScreen = ({ URL, headerVisible }) => {
   });
   unsubscribe()
 
+  useEffect(() => {
+    setRefreshing(true);
+    wait(2000).then(() => setRefreshing(false));
+
+  }, [myFilterContext.applyFilter]);
+
   //the api call for trending
   useEffect(() => {
     //console.log("Calling API...")

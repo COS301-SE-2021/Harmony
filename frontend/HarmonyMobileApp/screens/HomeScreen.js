@@ -5,6 +5,7 @@ import FilterContext from '../Components/FilterContext';
 const HomeScreen = () => {
   const DASHBOARD_PAIRINGS_URL = "https://9vk5hcie79.execute-api.eu-west-1.amazonaws.com/dev";
 
+  //The respective arrays holding the applied tags to filter by
   const [mealTagArray, setMealTagArray] = useState([]);
   const [foodTagArray, setFoodTagArray] = useState([]);
   const [drinkTagArray, setDrinkTagArray] = useState([]);
@@ -15,7 +16,6 @@ const HomeScreen = () => {
 
   //The range(distance) in which pairings should be within
   const [range, setRange] = useState(null);
-
 
   //Adds a tag to the start of the array
   const appendTagToArray = (newTag, tagType) => {
@@ -56,6 +56,15 @@ const HomeScreen = () => {
     }
   };
 
+  //Used as an indicator of whether or not the filter has been applied
+  //If true then the page must be refreshed and the API with the new Context values
+  const [applyFilter, setApplyFilter] = useState(false);
+
+  const toggleFilter = () => {
+    setApplyFilter(!applyFilter);
+  };
+
+
   const filterState = {
     mealTagArray: mealTagArray,
     foodTagArray: foodTagArray,
@@ -66,6 +75,8 @@ const HomeScreen = () => {
     setSortPairingType,
     range: range,
     setRange,
+    applyFilter: applyFilter,
+    toggleFilter,
   };
 
 
