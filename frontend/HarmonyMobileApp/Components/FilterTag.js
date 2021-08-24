@@ -32,14 +32,19 @@ export default function FilterTag({ color, title, style, cleared, filterType, ..
 
     function checkTag() {
         console.log("checkTag")
-        myFilterContext.appendTagToArray(title)
-        console.log("My context 3:" + myFilterContext.tagArray);
+        console.log("title: " + title + " filterType: " + filterType)
+        myFilterContext.appendTagToArray(title, filterType)
+        console.log("My context mealTagArray:" + myFilterContext.mealTagArray);
+        console.log("My context foodTagArray:" + myFilterContext.foodTagArray);
+        console.log("My context drinkTagArray:" + myFilterContext.drinkTagArray);
     };
 
     const uncheckTag = () => {
         console.log("uncheckTag")
-        console.log("My context 4:" + myFilterContext.tagArray);
-        myFilterContext.removeTagFromArray()
+        console.log("My context mealTagArray:" + myFilterContext.mealTagArray);
+        console.log("My context foodTagArray:" + myFilterContext.foodTagArray);
+        console.log("My context drinkTagArray:" + myFilterContext.drinkTagArray);
+        myFilterContext.removeTagFromArray(filterType)
 
     };
 

@@ -5,24 +5,58 @@ import FilterContext from '../Components/FilterContext';
 const HomeScreen = () => {
   const DASHBOARD_PAIRINGS_URL = "https://9vk5hcie79.execute-api.eu-west-1.amazonaws.com/dev";
 
-  const [setting1value, setSetting1value] = useState('initialValue1');
-  const [tagArray, setTagArray] = useState([]);
+  const [mealTagArray, setMealTagArray] = useState([]);
+  const [foodTagArray, setFoodTagArray] = useState([]);
+  const [drinkTagArray, setDrinkTagArray] = useState([]);
+
 
   //Adds a tag to the start of the array
-  const appendTagToArray = (newTag) => {
-    setTagArray(tagArray => [newTag, ...tagArray]);
+  const appendTagToArray = (newTag, tagType) => {
+    console.log("appending...")
+    console.log(tagType)
+
+    switch (tagType) {
+      case "mealTypes":
+        setMealTagArray(mealTagArray => [newTag, ...mealTagArray]);
+        break;
+      case "food":
+        setFoodTagArray(foodTagArray => [newTag, ...foodTagArray]);
+        break;
+      case "drinks":
+        setDrinkTagArray(drinkTagArray => [newTag, ...drinkTagArray]);
+        break;
+
+      default:
+        console.log("Incorrect tagType");
+    }
+
   };
 
   //Removes the first tag from the array
-  const removeTagFromArray = () => {
-    setTagArray(tagArray => [...tagArray.slice(1)]);
+  const removeTagFromArray = (tagType) => {
+    switch (tagType) {
+      case 'mealTypes':
+        setMealTagArray(mealTagArray => [...mealTagArray.slice(1)]);
+        break;
+      case 'food':
+        setFoodTagArray(foodTagArray => [...foodTagArray.slice(1)]);
+        break;
+      case 'drinks':
+        setDrinkTagArray(drinkTagArray => [...drinkTagArray.slice(1)]);
+        break;
+      default:
+        console.log("Incorrect tagType");
+    }
   };
 
   const filterState = {
-    tagArray: tagArray,
+    mealTagArray: mealTagArray,
+    foodTagArray: foodTagArray,
+    drinkTagArray: drinkTagArray,
     appendTagToArray,
     removeTagFromArray,
   };
+
 
   return (
     <FilterContext.Provider value={filterState}>
