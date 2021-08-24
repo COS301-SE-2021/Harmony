@@ -1,0 +1,21 @@
+.App {
+    text-align: center;
+  }
+  
+  .App-logo {
+    height: 40vmin;
+    pointer-events: none;
+  }
+  
+  .testDiv{
+      background-color: aqua;
+  }
+  .dashboardContainerTest{
+    width: 400;
+    height: 250;
+    padding: 15;
+    border-radius: 15;
+    background-color: "white";
+    margin: "auto";
+    box-shadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)";
+}

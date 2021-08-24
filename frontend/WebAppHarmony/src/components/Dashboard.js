@@ -1,4 +1,6 @@
 import React from 'react';
+import styles from "../Styling/DashboardStyling.css"
+import DashStyles from '../Styling/DashboardStyle';
 import { LineChart, XAxis, Legend, YAxis, CartesianGrid, Line, BarChart, Bar, Cell, Tooltip, RadialBarChart, RadialBar } from 'recharts';
 //var CanvasJSReact = require('./canvasjs.react');
 
@@ -50,15 +52,7 @@ function Dashboard() {
         lineHeight: '24px',
     };
 
-    const dashboardContainer = {
-        width: 400,
-        height: 250,
-        padding: 15,
-        borderRadius: 15,
-        backgroundColor: "white",
-        margin: "auto",
-        boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
-    };
+
 
     const values = [
         {
@@ -115,7 +109,7 @@ function Dashboard() {
     return (
         <div style={{ flexDirection: "row", justifyContent: "space-around", paddingTop: 15, backgroundColor: "#F3F3F3" }}>
             <div style={{ display: "flex" }}>
-                <div style={dashboardContainer}>
+                <div style={DashStyles.dashboardContainer}>
                     <LineChart
                         width={350}
                         height={200}
@@ -139,7 +133,7 @@ function Dashboard() {
                         <YAxis />
                     </BarChart>
                 </div>
-                <div style={dashboardContainer}>
+                <div style={DashStyles.dashboardContainer}>
                     <LineChart
                         width={350}
                         height={200}
@@ -175,7 +169,7 @@ function Dashboard() {
                         <p>Active users</p>
                     </div>
                 </div>
-                <div style={dashboardContainer}>
+                <div style={DashStyles.dashboardContainer}>
                     <p>Locations Most Used</p>
 
                     <BarChart
@@ -198,7 +192,7 @@ function Dashboard() {
                         <Bar dataKey="uv" fill="#82ca9d" />
                     </BarChart>
                 </div>
-                <div style={dashboardContainer}>
+                <div style={DashStyles.dashboardContainer}>
                     <p>Free Tier Usage</p>
 
                     <RadialBarChart cx="50%" cy="50%" innerRadius="10%" width={350}
@@ -214,7 +208,7 @@ function Dashboard() {
                     </RadialBarChart>
                 </div>
             </div>
-            <div>TEST 21</div>
+            {/* <div class="testDiv">TEST</div> */}
         </div>
 
     );
