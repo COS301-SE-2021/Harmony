@@ -5,13 +5,17 @@ import {
 } from "react-native";
 import { Text } from '@ui-kitten/components';
 import ReduxStore from "../Components/ReduxStore"
-
+import { useContext } from 'react';
+import AppContext from './AppContext';
 export default function FilterTag({ color, title, style, cleared, filterType, ...otherProps }) {
 
     const [filterColor, setFilterColor] = useState("#F3F2F2");
     const [filterTextColor, setTextColor] = useState("black");
     //variable gets set on load so its used to set the colours on load also
     const [load, setLoad] = useState(true);
+
+    const myContext = useContext(AppContext);
+
 
     //use effect is a hook that detects when a variable is changed and will act when its changed
     useEffect(() => {
@@ -26,16 +30,24 @@ export default function FilterTag({ color, title, style, cleared, filterType, ..
 
     }, [load]);
 
-    const checkTag = () => {
-        ReduxStore.dispatch({
-            type: "APPEND",
-            //payload is the standard adopted name for the state value
-            payload: { "tagName": title, "tagType": filterType }
-        })
+    // const checkTag = () => {
+    function checkTag() {
 
+        console.log("checkTag")
+        // ReduxStore.dispatch({
+        //     type: "APPEND",
+        //     //payload is the standard adopted name for the state value
+        //     payload: { "tagName": title, "tagType": filterType }
+        // })
+        myContext.setSetting1value("Checked")
+        console.log("My context 1:" + myContext.setting1name);
     };
 
     const uncheckTag = () => {
+        console.log("uncheckTag")
+        myContext.setSetting1value("Unchecked")
+        console.log("My context 2:" + myContext.setting1name);
+
         ReduxStore.dispatch({
             type: "REMOVE",
             //payload is the standard adopted name for the state value
