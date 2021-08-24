@@ -17,7 +17,6 @@ import {
   ApplicationProvider,
   Text,
 } from "@ui-kitten/components";
-import { useIsFocused } from "@react-navigation/native";
 import { Header } from "react-native-elements";
 import * as Location from 'expo-location';
 
@@ -37,53 +36,11 @@ const CardScreen = ({ URL, headerVisible }) => {
   //controls all the filters
   const [isModalVisible, setModalVisible] = useState(false);                               //for the filter popup
 
-  const [refreshing, setRefreshing] = useState(useIsFocused());
+  const [refreshing, setRefreshing] = useState(false);
   const [isErrorAlertVisible, setErrorAlertVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const myFilterContext = useContext(FilterContext);
 
-  //the refreshing of the flatlist
-  const onRefresh = React.useCallback(() => {
-    setRefreshing(true);
-    wait(2000).then(() => {
-      setRefreshing(false);
-    });
-  }, []);
-
-  React.useEffect(() => {
-    (async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== 'granted') {
-        //setModalMessage must come before setErrorAlertVisible
-        setModalMessage("Permission to access location was denied");
-        setErrorAlertVisible(true);
-        return;
-      }
-
-      let location = await Location.getCurrentPositionAsync({});
-      myFilterContext.setUserLatitude(location.coords.latitude)
-      myFilterContext.setUserLongitude(location.coords.longitude)
-
-      let backPerm = await Location.requestBackgroundPermissionsAsync();
-      // console.log(backPerm);//Handle
-    })();
-  }, []);
-
-  const wait = (timeout) => {
-    return new Promise((resolve) => setTimeout(resolve, timeout));
-  };
-  //toggles the modals visibility
-  const toggleModal = () => {
-    setModalVisible(!isModalVisible);
-  };
-
-  useEffect(() => {
-    setRefreshing(true);
-    wait(2000).then(() => setRefreshing(false));
-
-  }, [myFilterContext.applyFilter]);
-
-  //the api call for trending
   useEffect(() => {
     fetch(API_URL, {
       method: "POST",
@@ -103,38 +60,63 @@ const CardScreen = ({ URL, headerVisible }) => {
       })
     })
       .then((response) => response.json())
-      .then((json) => {
-        if (json.StatusCode === 200) {
-          setData(json.Data)
-          //console.log("StatusCode Returned: " + json.StatusCode)
-          setErrorAlertVisible(false);
-          setRefreshing(false);
-
-        }
-        else if (json.StatusCode === 204) {
-          //console.log(json)
-          //console.log("ERRROR ENCOUNTERED");
-          setRefreshing(false);
-          // ClearAllFilters();
-          //setModalMessage must come before setErrorAlertVisible
-          setModalMessage(json.Data);
-          setErrorAlertVisible(true);
-        }
-      })
+      .then((json) => handleResponse(json))
       .catch((error) => alert(error))
   }, [refreshing]);
 
-  const ClearAllFilters = () => {
-    myFilterContext.clearFilter()
-    myFilterContext.toggleFilter()
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        //setModalMessage must come before setErrorAlertVisible
+        setModalMessage("Permission to access location was denied");
+        setErrorAlertVisible(true);
+        return;
+      }
+      let location = await Location.getCurrentPositionAsync({});
+      myFilterContext.setUserLatitude(location.coords.latitude)
+      myFilterContext.setUserLongitude(location.coords.longitude)
+      let backPerm = await Location.requestBackgroundPermissionsAsync();
+      // console.log(backPerm);//Handle
+    })();
+  }, []);
+
+  useEffect(() => {
+    toggleRefresh()
+  }, [myFilterContext.applyFilter, myFilterContext.userLatitude]);
+
+  //the api call for trending
+
+
+  const handleResponse = (json) => {
+    if (json.StatusCode === 200) {
+      setData(json.Data)
+      setErrorAlertVisible(false);
+      setRefreshing(false);
+
+    }
+    else if (json.StatusCode === 204) {
+      setRefreshing(false);
+
+      //setModalMessage must come before setErrorAlertVisible
+      setModalMessage(json.Data);
+      setErrorAlertVisible(true);
+    }
+  }
+
+  //toggles refresh
+  const toggleRefresh = () => {
+    setRefreshing(!refreshing);
   };
 
+  //toggles the modals visibility
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
 
   const ShowTitle = () => (
     <Text style={styles.TextLarge}> {myFilterContext.sortPairingType} </Text>
   );
-
-
 
   const filterButton = () => (
     <View style={[styles.flexRow, { paddingTop: "8%" }]}>
@@ -188,7 +170,7 @@ const CardScreen = ({ URL, headerVisible }) => {
           <FlatList
             data={data}
             refreshControl={
-              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+              <RefreshControl refreshing={refreshing} onRefresh={toggleRefresh} />
             }
             keyExtractor={({ PID }, index) => PID}
             renderItem={({ item }) => (
