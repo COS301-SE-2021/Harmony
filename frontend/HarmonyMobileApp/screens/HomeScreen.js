@@ -5,18 +5,17 @@ import FilterContext from '../Components/FilterContext';
 const HomeScreen = () => {
   const DASHBOARD_PAIRINGS_URL = "https://9vk5hcie79.execute-api.eu-west-1.amazonaws.com/dev";
 
-  //The respective arrays holding the applied tags to filter by
-  const [mealTagArray, setMealTagArray] = useState([]);
-  const [foodTagArray, setFoodTagArray] = useState([]);
-  const [drinkTagArray, setDrinkTagArray] = useState([]);
-
   //the filter by which the home feed page can be sorted by
   //Options: Trending, New, Best, Controversial, Nearby
   const [sortPairingType, setSortPairingType] = useState("Trending");
 
-
   //The range(distance) in which pairings should be within
   const [range, setRange] = useState(null);
+
+  //The respective arrays holding the applied tags to filter by
+  const [mealTagArray, setMealTagArray] = useState([]);
+  const [foodTagArray, setFoodTagArray] = useState([]);
+  const [drinkTagArray, setDrinkTagArray] = useState([]);
 
   //Adds a tag to the start of the array
   const appendTagToArray = (newTag, tagType) => {
@@ -65,9 +64,7 @@ const HomeScreen = () => {
     setApplyFilter(!applyFilter);
   };
 
-  //Used as an indicator of whether or not the filter has been applied
-  //If true then the page must be refreshed and the API with the new Context values
-
+  //Clears all filter values
   const clearFilter = () => {
     setMealTagArray([]);
     setFoodTagArray([]);
@@ -79,18 +76,18 @@ const HomeScreen = () => {
   const [userLatitude, setUserLatitude] = useState(null);
   const [userLongitude, setUserLongitude] = useState(null);
 
-  const filterState = {
-    mealTagArray: mealTagArray,
-    foodTagArray: foodTagArray,
-    drinkTagArray: drinkTagArray,
-    appendTagToArray,
-    removeTagFromArray,
-
+  const globalStates = {
     sortPairingType: sortPairingType,
     setSortPairingType,
 
     range: range,
     setRange,
+
+    mealTagArray: mealTagArray,
+    foodTagArray: foodTagArray,
+    drinkTagArray: drinkTagArray,
+    appendTagToArray,
+    removeTagFromArray,
 
     applyFilter: applyFilter,
     toggleFilter,
@@ -104,7 +101,7 @@ const HomeScreen = () => {
 
 
   return (
-    <FilterContext.Provider value={filterState}>
+    <FilterContext.Provider value={globalStates}>
       <CardScreen URL={DASHBOARD_PAIRINGS_URL} headerVisible={true} />
     </FilterContext.Provider>
 
