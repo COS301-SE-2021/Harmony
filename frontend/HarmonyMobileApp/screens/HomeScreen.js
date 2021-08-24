@@ -33,16 +33,16 @@ const HomeScreen = () => {
   };
 
   //Removes the first tag from the array
-  const removeTagFromArray = (tagType) => {
+  const removeTagFromArray = (tagTitle, tagType) => {
     switch (tagType) {
       case 'mealTypes':
-        setMealTagArray(mealTagArray => [...mealTagArray.slice(1)]);
+        setMealTagArray(mealTagArray.filter(item => item !== tagTitle));
         break;
       case 'food':
-        setFoodTagArray(foodTagArray => [...foodTagArray.slice(1)]);
+        setFoodTagArray(foodTagArray.filter(item => item !== tagTitle));
         break;
       case 'drinks':
-        setDrinkTagArray(drinkTagArray => [...drinkTagArray.slice(1)]);
+        setDrinkTagArray(drinkTagArray.filter(item => item !== tagTitle));
         break;
       default:
         console.log("Incorrect tagType");

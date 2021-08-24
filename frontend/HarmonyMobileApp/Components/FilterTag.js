@@ -44,7 +44,7 @@ export default function FilterTag({ color, title, filterType }) {
         console.log("My context mealTagArray:" + myFilterContext.mealTagArray);
         console.log("My context foodTagArray:" + myFilterContext.foodTagArray);
         console.log("My context drinkTagArray:" + myFilterContext.drinkTagArray);
-        myFilterContext.removeTagFromArray(filterType)
+        myFilterContext.removeTagFromArray(title, filterType)
 
     };
 
