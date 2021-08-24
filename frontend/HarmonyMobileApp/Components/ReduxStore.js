@@ -57,7 +57,7 @@ const reducer = (state = initialState, action) => {
             state.userLocationLong = action.payload.longitude;
             break;
         case "CLEAR":
-            state.Checked = [];
+            // state.Checked = [];
             state.MealTags = [];
             state.FoodTags = [];
             state.DrinkTags = [];

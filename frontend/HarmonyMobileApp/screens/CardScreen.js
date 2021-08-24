@@ -61,7 +61,7 @@ const CardScreen = ({ URL, headerVisible }) => {
     setModalVisible(!isModalVisible);
   };
 
-  ReduxStore.subscribe(() => {
+  const unsubscribe = ReduxStore.subscribe(() => {
     const state = ReduxStore.getState();
     setSortPairings(state.sortPairings);
     if (state.ApplyFilter) {
@@ -74,6 +74,7 @@ const CardScreen = ({ URL, headerVisible }) => {
       wait(2000).then(() => setRefreshing(false));
     }
   });
+  unsubscribe()
 
   //the api call for trending
   useEffect(() => {
@@ -115,7 +116,7 @@ const CardScreen = ({ URL, headerVisible }) => {
           console.log(json)
           console.log("ERRROR ENCOUNTERED");
           setRefreshing(false);
-          ClearAllFilters();
+          // ClearAllFilters();
           //setModalMessage must come before setErrorAlertVisible
           setModalMessage(json.Data);
           setErrorAlertVisible(true);

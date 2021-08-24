@@ -40,12 +40,13 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
     setModalVisible(!isModalVisible);
   };
   const ClearAll = () => {
+    toggleModal();
+
     ReduxStore.dispatch({
       type: "CLEAR",
       //payload is the standard adopted name for the state value
       payload: { "ApplyFilter": true }
     });
-    setModalVisible(!isModalVisible);
 
   };
   const wait = (timeout) => {
@@ -53,11 +54,11 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
   };
 
   const applyFilters = () => {
-    setModalVisible(!isModalVisible);
     ReduxStore.dispatch({
       type: "APPLYFILTER",
       payload: { "ApplyFilter": true }
     })
+    toggleModal();
   }
 
   const onChanged = (number) => {
@@ -68,7 +69,7 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
     }
   }
   useEffect(() => {
-    console.log("location value updated " + locationValueSlider)
+    // console.log("location value updated " + locationValueSlider)
     setLocationValueTextInput(locationValueSlider);
     if (locationValueSlider != 0) {
       ReduxStore.dispatch({
@@ -79,7 +80,7 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
   }, [locationValueSlider]);
 
   useEffect(() => {
-    console.log("location value updated " + locationValueTextInput)
+    //console.log("location value updated " + locationValueTextInput)
     setLocationValueSlider(locationValueTextInput);
     if (locationValueTextInput != 0) {
       ReduxStore.dispatch({
@@ -90,7 +91,7 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
   }, [locationValueTextInput]);
 
   useEffect(() => {
-    console.log("sort pairings updated " + sortPairings)
+    //console.log("sort pairings updated " + sortPairings)
 
     ReduxStore.dispatch({
       type: "CHANGESORT",
