@@ -25,8 +25,6 @@ import FilterContext from './FilterContext';
 
 
 export default function FilterModal({ sortPairingsName, ...otherProps }) {
-  const [locationValueSlider, setLocationValueSlider] = useState(0); //distance filter
-  const [locationValueTextInput, setLocationValueTextInput] = useState(0); //distance filter
   const [isModalVisible, setModalVisible] = useState(true); //for the filter popup
   const filters = {
     mealTypes: ["Breakfast", "Lunch", "Supper", "Snack", "Vegetarian", "Dairy-Free", "Nut-Free"],
@@ -50,9 +48,6 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
     });
 
   };
-  const wait = (timeout) => {
-    return new Promise((resolve) => setTimeout(resolve, timeout));
-  };
 
   const applyFilters = () => {
     ReduxStore.dispatch({
@@ -64,32 +59,14 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
 
   const onChanged = (number) => {
     if (number.length === 0) {
-      setLocationValueTextInput(0)
+      //No value provided so we return null
+      myFilterContext.setRange(null)
     } else {
-      setLocationValueTextInput(parseInt(number.replace(/[^0-9]/g, '')))
+      //We apply regex to ensure only a number value is provided
+      //We already use a numeric keyboard however the '.' must still be accounted for
+      myFilterContext.setRange(parseInt(number.replace(/[^0-9]/g, '')))
     }
   }
-  useEffect(() => {
-    // console.log("location value updated " + locationValueSlider)
-    setLocationValueTextInput(locationValueSlider);
-    if (locationValueSlider != 0) {
-      ReduxStore.dispatch({
-        type: "UPDATERANGE",
-        payload: { "Range": locationValueSlider }
-      })
-    }
-  }, [locationValueSlider]);
-
-  useEffect(() => {
-    //console.log("location value updated " + locationValueTextInput)
-    setLocationValueSlider(locationValueTextInput);
-    if (locationValueTextInput != 0) {
-      ReduxStore.dispatch({
-        type: "UPDATERANGE",
-        payload: { "Range": locationValueTextInput }
-      })
-    }
-  }, [locationValueTextInput]);
 
   return (
     <Modal
@@ -106,10 +83,6 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
       backdropTransitionOutTiming={0}
 
     >
-
-      {/* DO NOT UNCOMMENT:This line will cause a terrible glitchy effect that is horrible to watch */}
-      {/* <StatusBar hidden={true} /> */}
-
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
           <View
@@ -183,12 +156,11 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
               >
                 <Text style={[styles.TextSmall, { marginRight: 4 }]}>0</Text>
                 <Slider
-                  value={locationValueSlider}
+                  value={myFilterContext.range}
                   step={20}
                   maximumValue={1000}
                   onValueChange={(value) => (
-                    // console.log(value), 
-                    setLocationValueSlider(value)
+                    myFilterContext.setRange(value)
                   )}
                   style={{ width: "70%" }}
                   thumbStyle={{
@@ -203,7 +175,7 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
                 <TextInput
                   style={[styles.TextSmall, styles.TextInputStyling]}
                   onChangeText={(value) => onChanged(value)}
-                  value={locationValueTextInput.toString()}
+                  value={myFilterContext.range ? myFilterContext.range.toString() : "0"}
                   keyboardType="numeric"
                   placeholder="0"
                   multiline={false}

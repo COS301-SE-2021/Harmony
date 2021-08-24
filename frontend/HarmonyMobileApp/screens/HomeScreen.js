@@ -13,6 +13,9 @@ const HomeScreen = () => {
   //Options: Trending, New, Best, Controversial, Nearby
   const [sortPairingType, setSortPairingType] = useState("Trending");
 
+  //The range(distance) in which pairings should be within
+  const [range, setRange] = useState(null);
+
 
   //Adds a tag to the start of the array
   const appendTagToArray = (newTag, tagType) => {
@@ -61,7 +64,8 @@ const HomeScreen = () => {
     removeTagFromArray,
     sortPairingType: sortPairingType,
     setSortPairingType,
-
+    range: range,
+    setRange,
   };
 
 

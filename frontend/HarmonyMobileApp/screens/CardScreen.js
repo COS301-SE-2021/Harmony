@@ -99,7 +99,7 @@ const CardScreen = ({ URL, headerVisible }) => {
         "MealTags": myFilterContext.mealTagArray,
         "FoodTags": myFilterContext.foodTagArray,
         "DrinkTags": myFilterContext.drinkTagArray,
-        "Distance": state.Range,
+        "Distance": myFilterContext.range,
         "Longitude": state.userLocationLong,
         "Latitude": state.userLocationLat
       })
