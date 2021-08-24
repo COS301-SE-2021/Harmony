@@ -1,5 +1,5 @@
 import React from 'react';
-// import styles from "../Styling/DashboardStyling.css"
+import "../Styling/DashboardStyling.css";
 import DashStyles from '../Styling/DashboardStyle';
 import UniversalStyle from '../Styling/UniversalStyle';
 import { LineChart, XAxis, Legend, YAxis, CartesianGrid, Line, BarChart, Bar, Cell, Tooltip, RadialBarChart, RadialBar } from 'recharts';
@@ -87,7 +87,7 @@ function Dashboard() {
                         <Line type="monotone" dataKey="uv" stroke="#ff7300" yAxisId={0} />
                         <Line type="monotone" dataKey="pv" stroke="#387908" yAxisId={1} />
                     </LineChart>                </div>
-                <div style={{ width: 400, height: 250, padding: 15, borderRadius: 15, backgroundColor: "white", margin: "auto", boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)", textAlign: "center" }}>
+                <div style={DashStyles.dashboardContainer}>
                     <p>User flavour preferences</p>
 
                     <BarChart width={350} height={200} data={values}>
@@ -116,7 +116,7 @@ function Dashboard() {
             <br />
             <div style={UniversalStyle.displayFlexJustifyAround}>
                 <div style={{ textAlign: "center", alignItems: "center", marginLeft: 25 }}>
-                    <div style={{ padding: 15, borderRadius: 15, backgroundColor: "white", display: "block", /* margin: "auto", marginLeft: "auto", marginRight: "auto", */height: 120, width: 300, boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)", textAlign: "center" }}>
+                    <div style={DashStyles.dashboardContainerThin}>
                         <div style={UniversalStyle.displayFlexJustifyCenter}>
                             <h1 style={DashStyles.textMediumGreen}>75</h1>
                             <h1 style={DashStyles.textMediumBlack}>:</h1>
@@ -125,7 +125,7 @@ function Dashboard() {
                         <p>ratio of hits to misses</p>
                     </div>
                     <br />
-                    <div style={{ padding: 15, borderRadius: 15, backgroundColor: "white", display: "block",/* margin: "auto", marginLeft: "auto", marginRight: "auto", */height: 120, width: 300, boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)", textAlign: "center" }}>
+                    <div style={DashStyles.dashboardContainerThin}>
                         <div style={UniversalStyle.displayFlexJustifyCenter}>
                             <h1 style={DashStyles.textMediumBlue}>35128</h1>
                         </div>
