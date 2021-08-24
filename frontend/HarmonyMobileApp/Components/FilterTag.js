@@ -1,23 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
     StyleSheet,
     Pressable,
 } from "react-native";
 import { Text } from '@ui-kitten/components';
-import ReduxStore from "../Components/ReduxStore"
-import { useContext } from 'react';
 import FilterContext from './FilterContext';
-export default function FilterTag({ color, title, style, cleared, filterType, ...otherProps }) {
-
+export default function FilterTag({ color, title, filterType }) {
     const [filterColor, setFilterColor] = useState("#F3F2F2");
     const [filterTextColor, setTextColor] = useState("black");
     //variable gets set on load so its used to set the colours on load also
-    const [load, setLoad] = useState(true);
 
     const myFilterContext = useContext(FilterContext);
 
-
-    //use effect is a hook that detects when a variable is changed and will act when its changed
+    //useEffect only called ONCE onLoad
     useEffect(() => {
         //Checks the state of the tags
         //If a tag has been selected then we will colour it in and set the text to white
