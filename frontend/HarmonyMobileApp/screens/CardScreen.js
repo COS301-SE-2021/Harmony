@@ -48,10 +48,28 @@ const CardScreen = ({ URL, headerVisible }) => {
   //the refreshing of the flatlist
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
-    GetLocation();
     wait(2000).then(() => {
       setRefreshing(false);
     });
+  }, []);
+
+  React.useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        //setModalMessage must come before setErrorAlertVisible
+        setModalMessage("Permission to access location was denied");
+        setErrorAlertVisible(true);
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      myFilterContext.setUserLatitude(location.coords.latitude)
+      myFilterContext.setUserLongitude(location.coords.longitude)
+
+      let backPerm = await Location.requestBackgroundPermissionsAsync();
+      // console.log(backPerm);//Handle
+    })();
   }, []);
 
   const wait = (timeout) => {
@@ -87,11 +105,7 @@ const CardScreen = ({ URL, headerVisible }) => {
     //console.log("Calling API...")
     var state = ReduxStore.getState();
     //console.log(state);
-    if (state.userLocationLong == null || state.userLocationLat == null) {
-      GetLocation();
-      state = ReduxStore.getState();
-      //console.log("location updated " + state.userLocationLong);
-    }
+
 
     fetch(API_URL, {
       method: "POST",
@@ -142,17 +156,7 @@ const CardScreen = ({ URL, headerVisible }) => {
     <Text style={styles.TextLarge}> {myFilterContext.sortPairingType} </Text>
   );
 
-  const GetLocation = async () => {
-    //status is response from permission
-    const { status } = await Location.requestForegroundPermissionsAsync();
-    const location = await Location.getCurrentPositionAsync({});
-    // const location = await Location.watchPositionAsync({timeInterval:2000},{});
-    // setUserLocation({ lat: location.coords.latitude, lng: location.coords.longitude });
 
-    myFilterContext.setUserLatitude(location.coords.latitude)
-    myFilterContext.setUserLongitude(location.coords.longitude)
-    //console.log("location loaded");
-  }
 
   const filterButton = () => (
     <View style={[styles.flexRow, { paddingTop: "8%" }]}>
