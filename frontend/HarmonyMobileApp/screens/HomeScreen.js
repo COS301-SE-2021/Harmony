@@ -19,8 +19,8 @@ const HomeScreen = () => {
 
   //Adds a tag to the start of the array
   const appendTagToArray = (newTag, tagType) => {
-    console.log("appending...")
-    console.log(tagType)
+    //console.long("appending...")
+    //console.long(tagType)
 
     switch (tagType) {
       case "mealTypes":
@@ -34,7 +34,7 @@ const HomeScreen = () => {
         break;
 
       default:
-        console.log("Incorrect tagType");
+      //console.long("Incorrect tagType");
     }
 
   };
@@ -52,7 +52,7 @@ const HomeScreen = () => {
         setDrinkTagArray(drinkTagArray.filter(item => item !== tagTitle));
         break;
       default:
-        console.log("Incorrect tagType");
+      //console.long("Incorrect tagType");
     }
   };
 
