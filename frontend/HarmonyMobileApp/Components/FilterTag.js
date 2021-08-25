@@ -12,6 +12,9 @@ export default function FilterTag({ color, title, filterType }) {
 
     const myFilterContext = useContext(FilterContext);
 
+    const [addTag, setAddTag] = useState(false);
+    const [removeTag, setRemoveTag] = useState(false);
+
     //useEffect only called ONCE onLoad
     useEffect(() => {
         //Checks the state of the tags
@@ -26,26 +29,23 @@ export default function FilterTag({ color, title, filterType }) {
         }
     }, []);
 
+    useEffect(() => {
+        myFilterContext.appendTagToArray(title, filterType)
+    }, [addTag]);
+    useEffect(() => {
+        myFilterContext.removeTagFromArray(title, filterType)
+    }, [removeTag]);
+
     //adds the tag to an array
     //There are three arrays: 
     //mealTagArray,foodTagArray,drinkTagArray,
     //the filterType is used to determine into which array the tag goes into
-    function checkTag() {
-        console.log("checkTag")
-        console.log("title: " + title + " filterType: " + filterType)
-        myFilterContext.appendTagToArray(title, filterType)
-        console.log("My context mealTagArray:" + myFilterContext.mealTagArray);
-        console.log("My context foodTagArray:" + myFilterContext.foodTagArray);
-        console.log("My context drinkTagArray:" + myFilterContext.drinkTagArray);
+    const checkTag = () => {
+        setAddTag(!addTag);
     };
 
     const uncheckTag = () => {
-        console.log("uncheckTag")
-        console.log("My context mealTagArray:" + myFilterContext.mealTagArray);
-        console.log("My context foodTagArray:" + myFilterContext.foodTagArray);
-        console.log("My context drinkTagArray:" + myFilterContext.drinkTagArray);
-        myFilterContext.removeTagFromArray(title, filterType)
-
+        setRemoveTag(!removeTag);
     };
 
     const tagColor = () => {
