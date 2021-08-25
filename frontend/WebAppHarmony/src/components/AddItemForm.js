@@ -88,7 +88,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                                     onChange={HandleToggle}
                                     style={ModerateItemStyling.Toggle}
                                 >
-                                    <ToggleButton value="Food" color={{ backgroundColor: 'blue' }}>
+                                    <ToggleButton value="Food" >
                                         Food
                                     </ToggleButton>
                                     <ToggleButton value="Drink" >
@@ -111,14 +111,14 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                             </div>
 
                             <div>
-                                <button type="submit" onClick={() => console.log("clicked submit")} style={ModerateItemStyling.button}><p style={{ fontSize: 20, fontFamily: "sans-serif-light" }}>Add to Database</p></button>
+                                <button type="submit" onClick={() => console.log("clicked submit")} style={ModerateItemStyling.button}><p style={UniversalStyle.fontSizeMedium}>Add to Database</p></button>
                             </div>
                         </Form>
                     )}
                 </Formik>
-                <button onClick={() => handleClear()} style={ModerateItemStyling.button}><p style={{ fontSize: 20, fontFamily: "sans-serif-light" }}>Clear</p></button>
+                <button onClick={() => handleClear()} style={ModerateItemStyling.button}><p style={UniversalStyle.fontSizeMedium}>Clear</p></button>
             </div>
-        </div>
+        </div >
     );
 }
 
