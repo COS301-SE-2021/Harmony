@@ -25,7 +25,7 @@ now = strftime("%a, %d %b %Y %H:%M:%S +0000", gmtime())
     A Pid is generated for the user.
     If any input is not passed in, the system does not add the new pairing.
     :returns JSON object saying whether it was successful, as well as the generated Pid
-    
+
     event{
         "UID" : "",
         "Foodid" : "",
@@ -41,20 +41,30 @@ now = strftime("%a, %d %b %Y %H:%M:%S +0000", gmtime())
 def create_pairing(event, context):
     if not check_if_key_exists(event):
         return {
-            "StatusCode": 400
+            "StatusCode": 400,
+            "Data": "Failed to create pairing"
         }
 
     if not check_if_input_is_valid(event):
         return {
-            "StatusCode": 400
+            "StatusCode": 400,
+            "Data": "Failed to create pairing"
         }
 
-    add_to_database(event)
-
-
+    response = add_to_database(event)
 
     # return a properly formatted JSON object
-    return json.dumps({'isSuccessful': 'true', 'PID': "" })
+    if response == False:
+        return {
+            "StatusCode": 400,
+            "Data": "Failed to create pairing"
+        }
+    else:
+        return {
+            'StatusCode': 200,
+            'Data': "Pairing created",
+            'Pairing' : response
+        }
 
 
 def validatestring(inputstring: str) -> bool:
@@ -99,7 +109,6 @@ def check_if_key_exists(event):
         return True
 
 
-
 def check_if_input_is_valid(event):
     # extract values from the event object we got from the Lambda service and store in a variable
     # exits if the string is not correct.
@@ -121,6 +130,7 @@ def check_if_input_is_valid(event):
 
     return True
 
+
 def add_to_database(event):
     # generate unique id for pairing
     pid = uuid.uuid4().hex
@@ -131,29 +141,35 @@ def add_to_database(event):
     datedata = get_date_data()
     locationdata = get_location_data(event)
 
+    inputdata = {
+        "Coordinates": locationdata["coordinates"],
+        "DateAdded": datedata,
+        "Downvotes": 0,
+        "DrinkDesc": drinkdata["DrinkDescription"],
+        "DrinkID": drinkdata["DrinkID"],
+        "DrinkImage": drinkdata["DrinkImage"],
+        "DrinkItem": drinkdata["DrinkName"],
+        "DrinkTags": drinkdata["DrinkTags"],
+        "FoodDesc": fooddata["FoodDescription"],
+        "FoodID": fooddata["FoodID"],
+        "FoodImage": fooddata["FoodImage"],
+        "FoodItem": fooddata["FoodName"],
+        "FoodTags": fooddata["FoodTags"],
+        "Location": locationdata["address"],
+        "MealTag": mealtagdata["TagName"],
+        "PID": pid,
+        "UID": event["UID"],
+        "Upvotes": 0
+    }
     # write data for new pairing to the DynamoDB table using the object we instantiated and save response in a variable
     response = table.put_item(
-        Item={
-      "Coordinates": locationdata["coordinates"],
-      "DateAdded": datedata,
-      "Downvotes": 0,
-      "DrinkDesc": drinkdata["DrinkDescription"],
-      "DrinkID": drinkdata["DrinkID"],
-      "DrinkImage": drinkdata["DrinkImage"],
-      "DrinkItem": drinkdata["DrinkName"],
-      "DrinkTags": drinkdata["DrinkTags"],
-      "FoodDesc": fooddata["FoodDescription"],
-      "FoodID": fooddata["FoodID"],
-      "FoodImage": fooddata["FoodImage"],
-      "FoodItem": fooddata["FoodName"],
-      "FoodTags": fooddata["FoodTags"],
-      "Location": locationdata["address"],
-      "MealTag": mealtagdata["TagName"],
-      "PID": pid,
-      "UID": event["UID"],
-      "Upvotes": 0
-    })
-    return
+        Item=inputdata)
+
+    if response["ResponseMetadata"]["HTTPStatusCode"] == 200:
+        return inputdata
+    else:
+        return False
+
 
 def get_food_data(foodid):
     foodtable = dynamodb.Table("Foods")
@@ -162,12 +178,14 @@ def get_food_data(foodid):
     )
     return response["Item"]
 
+
 def get_drink_data(drinkid):
     drinktable = dynamodb.Table("Drinks")
     response = drinktable.get_item(
         Key={'DrinkID': drinkid}
     )
     return response["Item"]
+
 
 def get_meal_tag_data(mealtagid):
     mealtagtable = dynamodb.Table("Mealtags")
@@ -176,10 +194,12 @@ def get_meal_tag_data(mealtagid):
     )
     return response["Item"]
 
+
 def get_date_data():
     date = datetime.date.today()
     date = f"{date.year}" + "-" + f"{date.month}" + "-" + f"{date.day}"
     return date
+
 
 def get_location_data(event):
     latitude = event["Latitude"]
