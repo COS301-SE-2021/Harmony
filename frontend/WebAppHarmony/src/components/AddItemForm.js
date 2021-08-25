@@ -1,8 +1,8 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import UniversalStyle from '../Styling/UniversalStyle';
 import ModerateItemStyling from '../Styling/ModerateItemStyling';
 import {
-    Formik, Form, Field, useFormik
+    Formik, Form, useFormik
 } from 'formik';
 
 function AddItemForm(itemName, itemDescription, itemTags, ...props) {
@@ -10,15 +10,23 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
     const [formName, setName] = useState(itemName.itemName);
     const [formDescription, setDescription] = useState(itemName.itemDescription);
     const [formTags, setTags] = useState(itemName.itemTags);
-    const formReference = useRef(null);
+
+    useEffect(() => {
+        // Update the document title using the browser API
+        console.log("in useEffect " + itemName.itemName + " updated")
+        setName(itemName.itemName);
+        setDescription(itemName.itemDescription);
+        setTags(itemName.itemTags);
+    }, [itemName]);
 
     /**The initial values for the form */
     const formik = useFormik(
         {
+            enableReinitialize: true,
             initialValues: {
-                ItemName: itemName.itemName,
-                ItemDescription: itemName.itemDescription,
-                ItemTags: itemName.itemTags
+                ItemName: formName,
+                ItemDescription: formDescription,
+                ItemTags: formTags
             }
         }
     )
@@ -37,12 +45,12 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
             <div>
                 <Formik
                     onSubmit={() => (console.log("submitted"))}
-                    innerRef={formReference}
-                    initialValues={{ ItemName: "test" }}
+                    initialValues={formik.values}
                 >
                     {/** The moderate pairings form to submit */}
                     {({ values }) => (
                         <Form>
+                            {console.log("form rerendered itemName " + itemName.itemName + " formName: " + formName)}
                             <div style={ModerateItemStyling.formElements}>
                                 <input type="file" id="file-input" name="ImageStyle" />
                             </div>

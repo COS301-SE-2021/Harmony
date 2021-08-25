@@ -7,9 +7,9 @@ import { AiOutlineMinusCircle } from "react-icons/ai";
 function ModeratePairing() {
 
     /**The name, description and tags for the form */
-    const [name, setName] = useState("test name");
-    const [description, setDescription] = useState("test decr");
-    const [tags, setTags] = useState("test tags");
+    const [name, setName] = useState(" ");
+    const [description, setDescription] = useState(" ");
+    const [tags, setTags] = useState(" ");
     const formReference = useRef(null);
     const requestedItems = {
         Data: [{
@@ -45,9 +45,6 @@ function ModeratePairing() {
         console.log("clicked remove " + item.ItemName);
     }
 
-    const handleValueUpdate = (values) => {
-        console.log("name updated " + values.ItemName)
-    }
     return (
         <div style={UniversalStyle.greyContainer}>
             <div style={ModerateItemStyling.requestContainer}>
@@ -64,6 +61,8 @@ function ModeratePairing() {
                         </div>
                     </button>))}
             </div>
+            {console.log(name + " updated")
+            }
             <AddItemForm itemName={name} itemDescription={description} itemTags={tags} />
         </div>
 
