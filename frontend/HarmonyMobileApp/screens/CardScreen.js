@@ -3,7 +3,7 @@ import {
   View,
   ActivityIndicator,
   FlatList,
-  Pressable,
+  TouchableOpacity,
   StyleSheet,
   RefreshControl,
 } from "react-native";
@@ -118,9 +118,9 @@ const CardScreen = ({ URL, headerVisible }) => {
     <Text style={styles.TextLarge}> {myFilterContext.sortPairingType} </Text>
   );
 
-  const filterButton = () => (
+  const FilterButton = () => (
     <View style={[styles.flexRow, { paddingTop: "8%" }]}>
-      <Pressable
+      <TouchableOpacity
         style={[styles.button, styles.buttonOpen]}
         onPress={() => {
           toggleModal();
@@ -129,16 +129,16 @@ const CardScreen = ({ URL, headerVisible }) => {
         <Text>
           <Feather name="filter" size={22} color="white" />
         </Text>
-      </Pressable>
+      </TouchableOpacity>
       <Text style={{ width: "8%" }}></Text>
-      <Pressable
+      <TouchableOpacity
         style={[styles.button, styles.buttonOpen]}
         onPress={() => toggleModal()}
       >
         <Text>
           <Feather name="search" size={22} color="white" />
         </Text>
-      </Pressable>
+      </TouchableOpacity>
     </View>
   );
 
@@ -156,14 +156,13 @@ const CardScreen = ({ URL, headerVisible }) => {
           containerStyle={{
             backgroundColor: "white",
           }}
-          rightComponent={filterButton}
+          rightComponent={FilterButton}
         />
       }
       <View style={{ flex: 1 }}>
         <View style={styles.centeredView}>
           {isModalVisible && <FilterModal sortPairingsName={myFilterContext.sortPairingType} />}
         </View>
-
         {refreshing ? (
           <AppLoadingIcon />
         ) : (
