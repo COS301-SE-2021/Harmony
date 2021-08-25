@@ -8,9 +8,7 @@ import {
   RefreshControl,
 } from "react-native";
 import styles from "../styles";
-import {
-  Feather,
-} from "@expo/vector-icons";
+import { Ionicons } from '@expo/vector-icons';
 import * as eva from "@eva-design/eva";
 import { default as theme } from "../theme.json";
 import {
@@ -118,25 +116,14 @@ const CardScreen = ({ URL, headerVisible }) => {
   );
 
   const FilterButton = () => (
-    <View style={[styles.flexRow, { paddingTop: "8%" }]}>
+    <View style={[styles.flexRow]}>
       <TouchableOpacity
-        style={[styles.button, styles.buttonOpen]}
+        style={[styles.filterButton]}
         onPress={() => {
           toggleModal();
         }}
       >
-        <Text>
-          <Feather name="filter" size={22} color="white" />
-        </Text>
-      </TouchableOpacity>
-      <Text style={{ width: "8%" }}></Text>
-      <TouchableOpacity
-        style={[styles.button, styles.buttonOpen]}
-        onPress={() => toggleModal()}
-      >
-        <Text>
-          <Feather name="search" size={22} color="white" />
-        </Text>
+        <Ionicons name="filter-sharp" size={35} color="black" />
       </TouchableOpacity>
     </View>
   );
