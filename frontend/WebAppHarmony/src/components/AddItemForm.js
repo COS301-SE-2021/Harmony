@@ -5,6 +5,7 @@ import {
 } from 'formik';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+import UniversalStyle from '../Styling/UniversalStyle';
 
 function AddItemForm(itemName, itemDescription, itemTags, ...props) {
     /**The name, description and tags for the form */
@@ -48,6 +49,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
         setTags(" ");
     }
 
+    /**Handles the image preview */
     const imageHandler = (e) => {
         const reader = new FileReader();
         reader.onload = () => {
@@ -59,7 +61,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
     }
     return (
         <div style={ModerateItemStyling.addItemContainer}>
-            <p>Add an item to the database:</p>
+            <p style={UniversalStyle.fontSizeMedium}>Add an item to the database:</p>
             <div>
                 <Formik
                     onSubmit={() => (console.log("submitted"))}
@@ -69,16 +71,16 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                     {({ values }) => (
                         <Form>
                             <div style={ModerateItemStyling.formElements}>
-                                <div>
-                                    <img src={img} />
+                                <div style={ModerateItemStyling.PreviewContainer}>
+                                    <div style={ModerateItemStyling.PreviewPiece}><label htmlFor="file-input">Upload an image</label></div>
+                                    <div style={ModerateItemStyling.PreviewPiece}><img src={img} style={ModerateItemStyling.ImageContainer} /></div>
+                                    <div style={ModerateItemStyling.FileInput}><input type="file" id="file-input" name="ImageStyle" accept="image/*" onChange={imageHandler} /></div>
                                 </div>
-                                <input type="file" id="file-input" name="ImageStyle" accept="image/*" onChange={imageHandler} />
-                                <label htmlFor="file-input">upload an image</label>
                                 <ToggleButtonGroup
                                     value={FoodOrDrink}
                                     exclusive
                                     onChange={HandleToggle}
-                                    style={{ marginRight: 15, borderRadius: 15, }}
+                                    style={ModerateItemStyling.Toggle}
                                 >
                                     <ToggleButton value="Food" color={{ backgroundColor: 'blue' }}>
                                         Food

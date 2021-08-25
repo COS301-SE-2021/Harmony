@@ -48,7 +48,7 @@ function ModeratePairing() {
     return (
         <div style={UniversalStyle.greyContainer}>
             <div style={ModerateItemStyling.requestContainer}>
-                <p>Users have requested the following items to be added to the database:</p>
+                <p style={UniversalStyle.fontSizeMedium}>Users have requested the following items to be added to the database:</p>
                 <br />
                 {/**
                  * maps the requested item names to be repeatedly displayed

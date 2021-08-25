@@ -15,6 +15,9 @@ const UniversalStyle = {
         display: "flex"
     },
     icon: { marginLeft: 5, float: "left", height: 20, width: 20, marginTop: 3, marginRight: -3 },
+    fontSizeMedium: {
+        fontSize: 20
+    }
 }
 
 export default UniversalStyle;

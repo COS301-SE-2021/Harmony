@@ -17,7 +17,7 @@ const ModerateItemStyling = {
     },
     addItemContainer: {
         width: "65%",
-        height: 600,
+        height: 620,
         marginLeft: 100,
         padding: 15,
         borderRadius: 15,
@@ -29,7 +29,7 @@ const ModerateItemStyling = {
     },
     requestContainer: {
         width: "20%",
-        height: 600,
+        height: 620,
         padding: 15,
         borderRadius: 15,
         backgroundColor: "white",
@@ -46,6 +46,26 @@ const ModerateItemStyling = {
     },
     requestedItemName: {
         fontSize: 20, float: "left"
+    },
+    ImageContainer: {
+        height: 125,
+        width: 150
+    },
+    PreviewContainer: {
+        display: "block",
+        marginTop: -30
+    },
+    PreviewPiece: {
+        marginBottom: 10
+    },
+    FileInput: {
+        marginRight: "-25%",
+    },
+    Toggle: {
+        borderRadius: 15,
+        height: 50,
+        marginRight: "1%",
+        marginTop: "10%"
     }
 }
 
