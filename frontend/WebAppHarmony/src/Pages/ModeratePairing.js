@@ -1,18 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import UniversalStyle from '../Styling/UniversalStyle';
 import ModerateItemStyling from '../Styling/ModerateItemStyling';
-import {
-    Formik, Form, Field,
-} from 'formik';
+import AddItemForm from '../components/AddItemForm';
 import { AiOutlineMinusCircle } from "react-icons/ai";
 //user ages, demographics
 function ModeratePairing() {
 
     /**The name, description and tags for the form */
-    const [name, setName] = useState(" ");
-    const [description, setDescription] = useState(" ");
-    const [tags, setTags] = useState(" ");
-
+    const [name, setName] = useState("test name");
+    const [description, setDescription] = useState("test decr");
+    const [tags, setTags] = useState("test tags");
+    const formReference = useRef(null);
     const requestedItems = {
         Data: [{
             ItemName: "Malva Pudding",
@@ -30,6 +28,7 @@ function ModeratePairing() {
         { ItemName: "Melktert", ItemDescription: "Melktert is an Afrikaner dessert consisting of a sweet pastry crust containing a custard filling made from milk, flour, sugar and eggs.", ItemTags: "Sweet, Warm" }]
     };
 
+
     /** @function sets the forms default values to the button values
      * @param item = the api response item
      */
@@ -39,17 +38,15 @@ function ModeratePairing() {
         setDescription(item.ItemDescription);
         setTags(item.ItemTags);
     }
-
-    const handleClear = () => {
-        setName(" ");
-        setDescription(" ");
-        setTags(" ");
-    }
     /**
      * @function removes the item from the list to be added
      */
     const handleRemoveItem = (item) => {
         console.log("clicked remove " + item.ItemName);
+    }
+
+    const handleValueUpdate = (values) => {
+        console.log("name updated " + values.ItemName)
     }
     return (
         <div style={UniversalStyle.greyContainer}>
@@ -67,38 +64,7 @@ function ModeratePairing() {
                         </div>
                     </button>))}
             </div>
-            <div style={ModerateItemStyling.addItemContainer}>
-                <p>Add an item to the database:</p>
-                <div>
-                    <Formik
-                        onSubmit={() => (console.log("submitted"))}
-                    >
-                        {/** The moderate pairings form to submit */}
-                        <Form>
-                            <div style={ModerateItemStyling.formElements}>
-                                <input type="file" id="file-input" name="ImageStyle" />
-                            </div>
-                            <div style={ModerateItemStyling.formElements}>
-                                <label htmlFor="ItemName" style={ModerateItemStyling.formLabel}>Item Name</label>
-                                <Field id="ItemName" name="ItemName" style={ModerateItemStyling.textField} value={name} />
-                            </div>
-                            <div style={ModerateItemStyling.formElements}>
-                                <label htmlFor="ItemDescription" style={ModerateItemStyling.formLabel}>Item Description</label>
-                                <Field id="ItemDescription" name="ItemDescription" style={ModerateItemStyling.textField} value={description} />
-                            </div>
-                            <div style={ModerateItemStyling.formElements}>
-                                <label htmlFor="Tags" style={ModerateItemStyling.formLabel}>Item Tags</label>
-                                <Field id="Tags" name="Tags" style={ModerateItemStyling.textField} value={tags} />
-                            </div>
-
-                            <div>
-                                <button type="submit" onClick={() => console.log("clicked submit")} style={ModerateItemStyling.button}><p style={{ fontSize: 20, fontFamily: "sans-serif-light" }}>Add to Database</p></button>
-                            </div>
-                        </Form>
-                    </Formik>
-                    <button onClick={() => handleClear()} style={ModerateItemStyling.button}><p style={{ fontSize: 20, fontFamily: "sans-serif-light" }}>Clear</p></button>
-                </div>
-            </div>
+            <AddItemForm itemName={name} itemDescription={description} itemTags={tags} />
         </div>
 
     );

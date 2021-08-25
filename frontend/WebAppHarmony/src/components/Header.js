@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import { Nav } from 'rsuite';
 import Routing from '../Routing';
 
 import PropTypes from "prop-types";
@@ -12,9 +11,6 @@ const CustomNav = ({ active, onSelect, ...props }) => {
             <Routing />
         </div>
     );
-};
-const styles = {
-    marginBottom: 50
 };
 class Header extends Component {
     constructor() {

@@ -2,7 +2,7 @@ import React from 'react';
 import "../Styling/DashboardStyling.css";
 import DashStyles from '../Styling/DashboardStyle';
 import UniversalStyle from '../Styling/UniversalStyle';
-import { LineChart, XAxis, Legend, YAxis, CartesianGrid, Line, BarChart, Bar, Cell, Tooltip, RadialBarChart, RadialBar } from 'recharts';
+import { LineChart, XAxis, Legend, YAxis, CartesianGrid, Line, BarChart, Bar, Tooltip, RadialBarChart, RadialBar } from 'recharts';
 //var CanvasJSReact = require('./canvasjs.react');
 
 //user ages, demographics
