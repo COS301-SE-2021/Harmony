@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import UniversalStyle from '../Styling/UniversalStyle';
 import ModerateItemStyling from '../Styling/ModerateItemStyling';
 import {
     Formik, Form, useFormik
 } from 'formik';
+import ToggleButton from '@material-ui/lab/ToggleButton';
+import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 
 function AddItemForm(itemName, itemDescription, itemTags, ...props) {
     /**The name, description and tags for the form */
     const [formName, setName] = useState(itemName.itemName);
     const [formDescription, setDescription] = useState(itemName.itemDescription);
     const [formTags, setTags] = useState(itemName.itemTags);
+    const [FoodOrDrink, setFoodOrDrink] = React.useState('none');
 
+    /**Sets the toggle value to whether the added item is a food or drink */
+    const HandleToggle = (event, newValue) => {
+        setFoodOrDrink(newValue);
+    };
     /**@function useEffect trigger
      * @summary this trigger is fired when the item is updated by clicking a new item and updating the initial values
      */
@@ -54,7 +60,21 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                         <Form>
                             <div style={ModerateItemStyling.formElements}>
                                 <input type="file" id="file-input" name="ImageStyle" />
+                                <ToggleButtonGroup
+                                    value={FoodOrDrink}
+                                    exclusive
+                                    onChange={HandleToggle}
+                                    style={{ marginRight: 15, borderRadius: 15, }}
+                                >
+                                    <ToggleButton value="Food" color={{ backgroundColor: 'blue' }}>
+                                        Food
+                                    </ToggleButton>
+                                    <ToggleButton value="Drink" >
+                                        Drink
+                                    </ToggleButton>
+                                </ToggleButtonGroup>
                             </div>
+
                             <div style={ModerateItemStyling.formElements}>
                                 <label htmlFor="ItemName" style={ModerateItemStyling.formLabel}>Item Name</label>
                                 <input id="ItemName" name="ItemName" style={ModerateItemStyling.textField} onChange={formik.handleChange} value={formik.values.ItemName} />

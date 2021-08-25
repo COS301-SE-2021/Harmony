@@ -1,25 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import UniversalStyle from '../Styling/UniversalStyle';
 import ModerateItemStyling from '../Styling/ModerateItemStyling';
 import { AiOutlineMinusCircle } from "react-icons/ai";
 
 
 function ItemsButton(item, ...props) {
-    const [name, setName] = useState(item.itemName);
+    const [color, setColor] = useState("#CECECE");
 
     /**
        * @function removes the item from the list to be added
        */
-    const handleRemoveItem = (name) => {
+    const handleRemoveItem = () => {
         console.log(item);
     }
-    const handleClick = (item) => {
-        console.log("click " + item.ItemName);
+    const changeColour = () => {
+        console.log("clicked ");
+        setColor("#FF6347");
     }
 
     return (
-        <div style={ModerateItemStyling.requestedItemBox}>
-            {console.log("item is " + item.ItemName)}
+        <div style={ModerateItemStyling.requestedItemBox} onClick={() => changeColour()}>
             <p style={ModerateItemStyling.requestedItemName}>{item.item}</p>
             <AiOutlineMinusCircle style={UniversalStyle.icon} onClick={() => handleRemoveItem(item)} />
         </div>

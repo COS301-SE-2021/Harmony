@@ -2,7 +2,6 @@ import React, { useState, useRef } from 'react';
 import UniversalStyle from '../Styling/UniversalStyle';
 import ModerateItemStyling from '../Styling/ModerateItemStyling';
 import AddItemForm from '../components/AddItemForm';
-import { AiOutlineMinusCircle } from "react-icons/ai";
 import ItemsButton from '../components/ItemsButton';
 //user ages, demographics
 function ModeratePairing() {
@@ -11,7 +10,7 @@ function ModeratePairing() {
     const [name, setName] = useState(" ");
     const [description, setDescription] = useState(" ");
     const [tags, setTags] = useState(" ");
-    const formReference = useRef(null);
+
     const requestedItems = {
         Data: [{
             ItemName: "Malva Pudding",
@@ -56,10 +55,6 @@ function ModeratePairing() {
                  */}
                 {requestedItems.Data.map((item, index) => (
                     <button style={ModerateItemStyling.button} onClick={() => handleClick(item)}>
-                        {/* //     <div key={index} style={ModerateItemStyling.requestedItemBox}>
-                    //         <p style={ModerateItemStyling.requestedItemName}>{item.ItemName}</p>
-                    //         <AiOutlineMinusCircle style={UniversalStyle.icon} onClick={() => handleRemoveItem(item)} />
-                    //     </div>*/}
                         <ItemsButton item={item.ItemName} />
                     </button>
                 ))}
