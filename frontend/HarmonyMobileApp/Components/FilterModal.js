@@ -22,7 +22,6 @@ import FilterTag from "./FilterTag";
 import { Picker } from "@react-native-picker/picker";
 import FilterContext from './FilterContext';
 
-
 export default function FilterModal({ sortPairingsName, ...otherProps }) {
   const [isModalVisible, setModalVisible] = useState(true); //for the filter popup
   const filters = {
@@ -85,7 +84,7 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
             </Text>
             <TouchableOpacity
               style={[styles.closeButton]}
-              onPress={() => setModalVisible(!isModalVisible)}
+              onPress={() => toggleModal()}
             >
               <MaterialIcons name="close" size={30} color="black" />
             </TouchableOpacity>
