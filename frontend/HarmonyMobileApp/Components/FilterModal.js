@@ -31,6 +31,12 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
   };
 
   const myFilterContext = useContext(FilterContext);
+  //Using temp values to save the value selected
+  //Only once the apply button has been pressed will the
+  //Context be updated
+  //Directly updating the Context with no temp values
+  //Makes it look much slower/blockier
+  const [tempRange, setTempRange] = useState(null);
 
   //toggles the modals visibility
   const toggleModal = () => {
@@ -45,17 +51,24 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
 
   const applyFilters = () => {
     toggleModal();
+    myFilterContext.setRange(tempRange)
     myFilterContext.toggleFilter()
   }
 
   const onChanged = (number) => {
     if (number.length === 0) {
       //No value provided so we return null
-      myFilterContext.setRange(null)
+      setTempRange(null)
     } else {
       //We apply regex to ensure only a number value is provided
       //We already use a numeric keyboard however the '.' must still be accounted for
-      myFilterContext.setRange(parseInt(number.replace(/[^0-9]/g, '')))
+      let validNumber = parseInt(number.replace(/[^0-9]/g, ''))
+      if (validNumber) {
+        setTempRange(validNumber)
+      }
+      else {
+        console.log("Invalid character '.' or '-' provided!")
+      }
     }
   }
 
@@ -147,11 +160,11 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
               >
                 <Text style={[styles.TextSmall, { marginRight: 4 }]}>0</Text>
                 <Slider
-                  value={myFilterContext.range}
+                  value={tempRange}
                   step={20}
                   maximumValue={1000}
                   onValueChange={(value) => (
-                    myFilterContext.setRange(value)
+                    setTempRange(value)
                   )}
                   style={{ width: "70%" }}
                   thumbStyle={{
@@ -166,7 +179,7 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
                 <TextInput
                   style={[styles.TextSmall, styles.TextInputStyling]}
                   onChangeText={(value) => onChanged(value)}
-                  value={myFilterContext.range ? myFilterContext.range.toString() : "0"}
+                  value={tempRange ? tempRange.toString() : ""}
                   keyboardType="numeric"
                   placeholder="0"
                   multiline={false}
