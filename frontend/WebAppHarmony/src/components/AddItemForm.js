@@ -11,9 +11,11 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
     const [formDescription, setDescription] = useState(itemName.itemDescription);
     const [formTags, setTags] = useState(itemName.itemTags);
 
+    /**@function useEffect trigger
+     * @summary this trigger is fired when the item is updated by clicking a new item and updating the initial values
+     */
     useEffect(() => {
         // Update the document title using the browser API
-        console.log("in useEffect " + itemName.itemName + " updated")
         setName(itemName.itemName);
         setDescription(itemName.itemDescription);
         setTags(itemName.itemTags);
@@ -31,7 +33,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
         }
     )
     /*Access form values with formik.values */
-    console.log(formik.values);
+    // console.log(formik.values);
 
     const handleClear = () => {
         setName(" ");
@@ -50,7 +52,6 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                     {/** The moderate pairings form to submit */}
                     {({ values }) => (
                         <Form>
-                            {console.log("form rerendered itemName " + itemName.itemName + " formName: " + formName)}
                             <div style={ModerateItemStyling.formElements}>
                                 <input type="file" id="file-input" name="ImageStyle" />
                             </div>
