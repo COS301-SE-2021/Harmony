@@ -37,6 +37,7 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
   //Directly updating the Context with no temp values
   //Makes it look much slower/blockier
   const [tempRange, setTempRange] = useState(null);
+  const [tempSortPairingType, setTempSortPairingType] = useState(myFilterContext.sortPairingType);
 
   //toggles the modals visibility
   const toggleModal = () => {
@@ -52,6 +53,7 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
   const applyFilters = () => {
     toggleModal();
     myFilterContext.setRange(tempRange)
+    myFilterContext.setSortPairingType(tempSortPairingType)
     myFilterContext.toggleFilter()
   }
 
@@ -127,16 +129,16 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
                       },
                     ]}
                   >
-                    {myFilterContext.sortPairingType}
+                    {tempSortPairingType}
                   </Text>
                 </View>
               </View>
               <View style={styles.pickerView}>
                 <Picker
-                  selectedValue={myFilterContext.sortPairingType}
+                  selectedValue={tempSortPairingType}
                   style={[styles.TextSmall, { height: 40, width: 300 }]}
                   onValueChange={(itemValue) => {
-                    myFilterContext.setSortPairingType(itemValue);
+                    setTempSortPairingType(itemValue);
                   }}
                 >
                   <Picker.Item label="Trending" value="Trending" />
