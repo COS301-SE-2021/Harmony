@@ -47,6 +47,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
         setName(" ");
         setDescription(" ");
         setTags(" ");
+        setImg("http://beepeers.com/assets/images/commerces/default-image.jpg")
     }
 
     /**Handles the image preview */
