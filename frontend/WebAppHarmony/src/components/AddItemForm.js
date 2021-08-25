@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ModerateItemStyling from '../Styling/ModerateItemStyling';
 import {
     Formik, Form, useFormik
@@ -13,8 +13,11 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
     const [formDescription, setDescription] = useState(itemName.itemDescription);
     const [formTags, setTags] = useState(itemName.itemTags);
     const [FoodOrDrink, setFoodOrDrink] = React.useState('none');
-
     const [img, setImg] = useState("http://beepeers.com/assets/images/commerces/default-image.jpg");
+
+    /**@var used to create a reference to the file input to be able to clear it */
+    const fileRef = useRef();
+
     /**Sets the toggle value to whether the added item is a food or drink */
     const HandleToggle = (event, newValue) => {
         setFoodOrDrink(newValue);
@@ -47,7 +50,9 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
         setName(" ");
         setDescription(" ");
         setTags(" ");
-        setImg("http://beepeers.com/assets/images/commerces/default-image.jpg")
+        setImg("http://beepeers.com/assets/images/commerces/default-image.jpg");
+        fileRef.current.value = "";
+        setFoodOrDrink('none');
     }
 
     /**Handles the image preview */
@@ -75,7 +80,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                                 <div style={ModerateItemStyling.PreviewContainer}>
                                     <div style={ModerateItemStyling.PreviewPiece}><label htmlFor="file-input">Upload an image</label></div>
                                     <div style={ModerateItemStyling.PreviewPiece}><img src={img} style={ModerateItemStyling.ImageContainer} /></div>
-                                    <div style={ModerateItemStyling.FileInput}><input type="file" id="file-input" name="ImageStyle" accept="image/*" onChange={imageHandler} /></div>
+                                    <div style={ModerateItemStyling.FileInput}><input type="file" id="file-input" name="ImageStyle" accept="image/*" ref={fileRef} onChange={imageHandler} /></div>
                                 </div>
                                 <ToggleButtonGroup
                                     value={FoodOrDrink}
