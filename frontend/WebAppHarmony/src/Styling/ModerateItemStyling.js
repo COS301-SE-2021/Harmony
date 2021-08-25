@@ -1,6 +1,5 @@
 const ModerateItemStyling = {
     textField: {
-        borderRadius: 15,
         width: "65%",
         height: 45,
         padding: 15,

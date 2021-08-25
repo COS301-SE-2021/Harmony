@@ -13,6 +13,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
     const [formTags, setTags] = useState(itemName.itemTags);
     const [FoodOrDrink, setFoodOrDrink] = React.useState('none');
 
+    const [img, setImg] = useState("http://beepeers.com/assets/images/commerces/default-image.jpg");
     /**Sets the toggle value to whether the added item is a food or drink */
     const HandleToggle = (event, newValue) => {
         setFoodOrDrink(newValue);
@@ -47,6 +48,15 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
         setTags(" ");
     }
 
+    const imageHandler = (e) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+            if (reader.readyState === 2) {
+                setImg(reader.result)
+            }
+        }
+        reader.readAsDataURL(e.target.files[0])
+    }
     return (
         <div style={ModerateItemStyling.addItemContainer}>
             <p>Add an item to the database:</p>
@@ -59,7 +69,11 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                     {({ values }) => (
                         <Form>
                             <div style={ModerateItemStyling.formElements}>
-                                <input type="file" id="file-input" name="ImageStyle" />
+                                <div>
+                                    <img src={img} />
+                                </div>
+                                <input type="file" id="file-input" name="ImageStyle" accept="image/*" onChange={imageHandler} />
+                                <label htmlFor="file-input">upload an image</label>
                                 <ToggleButtonGroup
                                     value={FoodOrDrink}
                                     exclusive
