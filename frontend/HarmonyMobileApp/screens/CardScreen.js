@@ -93,11 +93,10 @@ const CardScreen = ({ URL, headerVisible }) => {
       setData(json.Data)
       setErrorAlertVisible(false);
       setRefreshing(false);
-
     }
     else if (json.StatusCode === 204) {
       setRefreshing(false);
-
+      setData([]);
       //setModalMessage must come before setErrorAlertVisible
       setModalMessage(json.Data);
       setErrorAlertVisible(true);
