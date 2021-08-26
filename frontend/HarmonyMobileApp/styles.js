@@ -93,6 +93,13 @@ const styles = StyleSheet.create({
     padding: 10,
     elevation: 2
   },
+  filterButton: {
+    //styling for filter button
+    paddingHorizontal: 10,
+    backgroundColor: "white",
+    marginRight: "8%",
+    marginTop: "8%"
+  },
   applyButton: {
     //styling for modal buttons
     borderRadius: 15,
@@ -219,7 +226,7 @@ const styles = StyleSheet.create({
     padding: 2,
     backgroundColor: "#F3F2F2",
     height: 30,
-    width: 40,
+    width: 100,
     textAlign: "center",
     justifyContent: "center",
     alignItems: "center"

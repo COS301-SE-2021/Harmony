@@ -65,18 +65,18 @@ const DeletePairingScreen = (props) => {
       "Delete",
       "Are you sure you want to delete this pairing?",
       [
-       
+
         // The "No" button
         // Does nothing but dismiss the dialog when tapped
         {
           text: "No",
         },
-         // The "Yes" button
-         {
+        // The "Yes" button
+        {
           text: "Yes",
           onPress: () => {
             //setShowBox(false);
-            console.log(obj.item);
+            //console.long(obj.item);
             setToDelete(true);
             setPID(obj.item);
           },

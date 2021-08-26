@@ -87,7 +87,7 @@ export default function CameraScreen({ navigation }) {
       quality: 1,
     });
 
-    console.log(result);
+    //console.long(result);
     if (!result.cancelled) {
       setImage(result.uri);
       const base64 = await FileSystem.readAsStringAsync(result.uri, {
@@ -120,15 +120,15 @@ export default function CameraScreen({ navigation }) {
     setLoading(true);
     let JWTToken = "";
     await Auth.currentAuthenticatedUser({}) //Get user information
-      .then((data) => {
-        JWTToken = data.signInUserSession.idToken.jwtToken;
+      .then((Data) => {
+        JWTToken = Data.signInUserSession.idToken.jwtToken;
       })
       .catch((err) => console.log(err));
 
     await fetch(uploadImageURL, {
       method: "POST",
       body: JSON.stringify({
-        data: img,
+        Data: img,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -137,10 +137,10 @@ export default function CameraScreen({ navigation }) {
     })
       .then((response) => response.json())
       .then((json) => {
-        if (json.statusCode === 200) {
+        if (json.StatusCode === 200) {
           setLoading(false);
           cancelPreview();
-          console.log("StatusCode Returned: " + json.StatusCode)
+          //console.long("StatusCode Returned: " + json.StatusCode)
           setErrorAlertVisible(false);
 
           navigation.navigate("Results", {
@@ -149,19 +149,19 @@ export default function CameraScreen({ navigation }) {
           });
 
         }
-        else if (json.statusCode === 204) {
-          console.log(json)
-          console.log("ERRROR ENCOUNTERED");
+        else if (json.StatusCode === 204) {
+          //console.long(json)
+          //console.long("ERRROR ENCOUNTERED");
           setLoading(false);
           cancelPreview();
           //setModalMessage must come before setErrorAlertVisible
-          setModalMessage(json.data);
+          setModalMessage(json.Data);
           setErrorAlertVisible(true);
 
         }
       })
       .catch((error) => {
-        console.log(error);
+        //console.long(error);
         setModalMessage("Something went wrong.");
         setErrorAlertVisible(true);
         cancelPreview();

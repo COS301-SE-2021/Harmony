@@ -10,7 +10,7 @@ import {
   StyleSheet,
 } from "react-native";
 import * as eva from '@eva-design/eva';
-import { ApplicationProvider, Layout,Button, Divider, Card,Text } from '@ui-kitten/components';
+import { ApplicationProvider, Layout, Button, Divider, Card, Text } from '@ui-kitten/components';
 import { default as theme } from '../theme.json';
 import styles from "../styles";
 
@@ -36,7 +36,7 @@ function NewPairingScreen({ navigation }) {
         {
           text: "Yes",
           onPress: () => {
-            console.log("Saving to db...");
+            //console.long("Saving to db...");
 
             if (
               DrinkDesc === "" ||
@@ -45,10 +45,10 @@ function NewPairingScreen({ navigation }) {
               FoodItem === "" ||
               Location === ""
             ) {
-              console.log("Empty");
+              //console.long("Empty");
               setToSave(false);
             } else {
-              console.log("NOT EMPTY");
+              //console.long("NOT EMPTY");
               fetch(addPairingURL, {
                 method: "POST",
                 headers: {
@@ -76,74 +76,74 @@ function NewPairingScreen({ navigation }) {
     );
   };
   return (
-   /* <ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }}>
-    <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Card>
-    <Text>Medium Rare Steak</Text>
-    <Text>Coke</Text>
-    </Card>
-    </Layout>
-  </ApplicationProvider>*/
+    /* <ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }}>
+     <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+     <Card>
+     <Text>Medium Rare Steak</Text>
+     <Text>Coke</Text>
+     </Card>
+     </Layout>
+   </ApplicationProvider>*/
     <SafeAreaView style={personalStyles.container}>
       <View style={styles.LoginContainer}>
         <StatusBar style="auto" />
-    <Divider>
-        <View style={styles.inputView}>
-          <TextInput
-            style={styles.TextInput}
-            placeholder="Food:"
-            placeholderTextColor="#003f5c"
-            onChangeText={(FoodItem) => setFoodItem(FoodItem)}
-          />
-        </View>
+        <Divider>
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.TextInput}
+              placeholder="Food:"
+              placeholderTextColor="#003f5c"
+              onChangeText={(FoodItem) => setFoodItem(FoodItem)}
+            />
+          </View>
 
-        <View style={styles.inputView}>
-          <TextInput
-            style={styles.TextInput}
-            placeholder="Description:"
-            placeholderTextColor="#003f5c"
-            onChangeText={(FoodDesc) => setFoodDesc(FoodDesc)}
-          />
-        </View>
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.TextInput}
+              placeholder="Description:"
+              placeholderTextColor="#003f5c"
+              onChangeText={(FoodDesc) => setFoodDesc(FoodDesc)}
+            />
+          </View>
 
-        <View style={styles.inputView}>
-          <TextInput
-            style={styles.TextInput}
-            placeholder="Drink:"
-            placeholderTextColor="#003f5c"
-            onChangeText={(DrinkItem) => setDrinkItem(DrinkItem)}
-          />
-        </View>
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.TextInput}
+              placeholder="Drink:"
+              placeholderTextColor="#003f5c"
+              onChangeText={(DrinkItem) => setDrinkItem(DrinkItem)}
+            />
+          </View>
 
-        <View style={styles.inputView}>
-          <TextInput
-            style={styles.TextInput}
-            placeholder="Description:"
-            placeholderTextColor="#003f5c"
-            onChangeText={(DrinkDesc) => setDrinkDesc(DrinkDesc)}
-          />
-        </View>
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.TextInput}
+              placeholder="Description:"
+              placeholderTextColor="#003f5c"
+              onChangeText={(DrinkDesc) => setDrinkDesc(DrinkDesc)}
+            />
+          </View>
 
-        <View style={styles.inputView}>
-          <TextInput
-            style={styles.TextInput}
-            placeholder="Location:"
-            placeholderTextColor="#003f5c"
-            onChangeText={(Location) => setLocation(Location)}
-          />
-        </View>
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.TextInput}
+              placeholder="Location:"
+              placeholderTextColor="#003f5c"
+              onChangeText={(Location) => setLocation(Location)}
+            />
+          </View>
 
-        <TouchableOpacity>
-          <Text style={styles.forgot_button}>Use current location</Text>
-        </TouchableOpacity>
+          <TouchableOpacity>
+            <Text style={styles.forgot_button}>Use current location</Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity
-          onPress={() => savePairing()}
-          // onPress={() => getMoviesFromApiAsync()}
-          style={styles.loginBtn}
-        >
-          <Text style={styles.loginText}>Add</Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => savePairing()}
+            // onPress={() => getMoviesFromApiAsync()}
+            style={styles.loginBtn}
+          >
+            <Text style={styles.loginText}>Add</Text>
+          </TouchableOpacity>
         </Divider>
       </View>
     </SafeAreaView>
