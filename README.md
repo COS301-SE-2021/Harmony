@@ -25,7 +25,6 @@ Visiting South Africa a tourist would not know what a Bunny Chow is, let alone w
 [![react](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://github.com/COS301-SE-2021/Harmony/graphs/contributors)
 [![react native](https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://github.com/COS301-SE-2021/Harmony/graphs/contributors)
 [![sam cli](https://img.shields.io/badge/aws%20sam%20cli-orange?style=for-the-badge&logo=amazonaws&logoColor=white)](https://github.com/COS301-SE-2021/Harmony/graphs/contributors)
-[![redux](https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white)](https://github.com/COS301-SE-2021/Harmony/graphs/contributors)
 ### Hosting
 [![aws](https://img.shields.io/badge/AWS-orange?style=for-the-badge&logo=amazonaws&logoColor=white)](https://github.com/COS301-SE-2021/Harmony/graphs/contributors)
 
