@@ -23,6 +23,7 @@ import Card from "../Components/Card"
 import AppLoadingIcon from "../Components/AppLoadingIcon";
 import AppAlert from "../Components/AppAlert";
 import FilterContext from '../Components/FilterContext';
+import FAB from "../Components/FAB";
 
 const CardScreen = ({ URL, headerVisible }) => {
   const API_URL = URL;
@@ -165,6 +166,7 @@ const CardScreen = ({ URL, headerVisible }) => {
             )}
           />
         )}
+        <FAB />
       </View>
       {isErrorAlertVisible === true && (
         <AppAlert visible={true} message={modalMessage} type={"Error"} />
