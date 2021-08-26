@@ -1,5 +1,7 @@
 import json
 import boto3
+import uuid
+from botocore.exceptions import ClientError
 
 table_name = 'Foods'
 
@@ -19,15 +21,22 @@ def add_item(event, context):
     description = event['ItemDescription']
     tags = event['ItemTags']
     image = event['ItemImage']
-    id = event['ID']
+    generate_id = uuid.uuid4().hex
 
     # write data for new item to the DynamoDB table
-    table.put_item(
-        Item={
-            'FoodID': id,
-            'FoodTags': tags,
-            'FoodDescription': description,
-            'FoodItem': name,
-            'FoodImage': image
-        })
-    return json.dumps({'StatusCode': 200})
+    try:
+        table.put_item(
+            Item={
+                'FoodID': generate_id,
+                'FoodTags': tags,
+                'FoodDescription': description,
+                'FoodItem': name,
+                'FoodImage': image
+            })
+        return json.dumps({'StatusCode': 200})
+
+    except ClientError as e:
+        if e.response['Error']['Code'] == "ConditionalCheckFailedException":
+            print(e.response['Error']['Message'])
+
+            return json.dumps({'StatusCode': 400})
