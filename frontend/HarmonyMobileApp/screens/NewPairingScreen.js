@@ -93,16 +93,18 @@ function NewPairingScreen() {
         }}
         itemStyle={{
           padding: 15,
-          marginTop: 5,
           backgroundColor: '#f9f9f9',
           borderColor: '#bbb',
-          borderWidth: 1,
-          borderRadius: 25,
-          textAlign: "center",
-          justifyContent: "center",
+          borderBottomWidth: 0.2,
+          borderBottomColor: "#cccccc",
+          borderRadius: 20,
         }}
         itemTextStyle={{ color: "#6e6869" }}
-        itemsContainerStyle={{ maxHeight: "50%" }}
+        itemsContainerStyle={{
+          maxHeight: "80%",
+          borderRadius: 20,
+          overflow: 'hidden'
+        }}
         items={items}
         resetValue={false}
         textInputProps={
@@ -110,10 +112,10 @@ function NewPairingScreen() {
             placeholder: "Select your food...",
             underlineColorAndroid: "transparent",
             style: {
-              borderRadius: 25,
+              borderRadius: 20,
+              marginBottom: 1,
               flexDirection: "row",
               padding: 15,
-              marginVertical: 10,
               borderWidth: 0.5,
               backgroundColor: "#f9f9f9",
               width: "100%",
