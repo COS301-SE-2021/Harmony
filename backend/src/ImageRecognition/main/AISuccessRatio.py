@@ -1,6 +1,6 @@
 import json
 import boto3
-from datetime import datetime
+from datetime import date
 import uuid
 from botocore.exceptions import ClientError
 
@@ -23,7 +23,9 @@ def ai_success_ratio(event, context):
     # is_correct is a boolean, either true or false
     is_correct = event['isCorrect']
     food_item = event['FoodItem']
-    date = datetime.today()
+    today = date.today()
+
+    get_date = today.strftime("%d/%m/%Y")
 
     sid = uuid.uuid4().hex
     try:
@@ -31,7 +33,7 @@ def ai_success_ratio(event, context):
             Item={
                 'SID': sid,
                 'FoodName': food_item,
-                'DateScanned': date,
+                'DateScanned': get_date,
                 'CorrectlyIdentified': is_correct
             })
         return json.dumps({'StatusCode': 200})

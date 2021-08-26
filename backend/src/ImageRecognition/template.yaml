@@ -24,6 +24,21 @@ Resources:
           Properties:
             Path: /
             Method: post
+  AISuccessRatioFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: main/
+      Handler: AISuccessRatio.ai_success_ratio
+      Runtime: python3.8
+      Policies:
+        # Give DynamoDB Full Access to your Lambda Function
+        - AmazonDynamoDBFullAccess
+      Events:
+        AISuccessRatio:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /
+            Method: post
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
@@ -38,3 +53,13 @@ Outputs:
   IdentifyFoodItemIamRole:
     Description: "Implicit IAM Role created for IdentifyFoodItem function"
     Value: !GetAtt IdentifyFoodItemFunctionRole.Arn
+
+  AISuccessRatioApi:
+    Description: "API Gateway endpoint URL for Prod stage for AISuccessRatio function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/AISuccessRatio/"
+  AISuccessRatioFunction:
+    Description: "AISuccessRatio Lambda Function ARN"
+    Value: !GetAtt AISuccessRatioFunction.Arn
+  AISuccessRatioIamRole:
+    Description: "Implicit IAM Role created for AISuccessRatio function"
+    Value: !GetAtt AISuccessRatioFunctionRole.Arn
