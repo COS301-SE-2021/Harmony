@@ -7,9 +7,16 @@ import SearchableDropdown from 'react-native-searchable-dropdown';
 
 function NewPairingScreen() {
 
-  const [selectedItem, setSelectedItem] = useState({
+  const [selectedFood, setSelectedFood] = useState({
     name: "Select your food...",
   });
+  const [selectedDrink, setSelectedDrink] = useState({
+    name: "Select your drink...",
+  });
+  const [selectedMealType, setSelectedMealType] = useState({
+    name: "Select your meal type...",
+  });
+
   const [data, setData] = useState([]);
   const API_URL = "https://jsonplaceholder.typicode.com/users";
   useEffect(() => {
@@ -19,6 +26,32 @@ function NewPairingScreen() {
       .catch((error) => alert(error))
   }, []);
 
+  const DropDown = ({ responseData, selectedItem, setSelected }) => (
+    <SearchableDropdown
+      onItemSelect={(item) => {
+        setSelected(item);
+      }}
+
+      containerStyle={{ padding: 5 }}
+      itemStyle={localStyles.itemStyle}
+      itemTextStyle={{ color: "#6e6869" }}
+      itemsContainerStyle={localStyles.itemsContainerStyle}
+      items={responseData}
+      resetValue={false}
+      textInputProps={
+        {
+          placeholder: selectedItem.name,
+          underlineColorAndroid: "transparent",
+          style: localStyles.textInputProps,
+          onTextChange: text => console.log(text)
+        }
+      }
+      listProps={
+        {
+          nestedScrollEnabled: true,
+        }
+      }
+    />);
 
   return (
     <View
@@ -41,32 +74,13 @@ function NewPairingScreen() {
           backgroundColor: "white",
         }}
       />
-      {/* Single */}
-      <SearchableDropdown
-        onItemSelect={(item) => {
-          setSelectedItem(item);
-        }}
-        containerStyle={{ padding: 5 }}
-        itemStyle={localStyles.itemStyle}
-        itemTextStyle={{ color: "#6e6869" }}
-        itemsContainerStyle={localStyles.itemsContainerStyle}
-        items={data}
-        resetValue={false}
-        textInputProps={
-          {
-            placeholder: selectedItem.name,
-            underlineColorAndroid: "transparent",
-            style: localStyles.textInputProps,
-            onTextChange: text => console.log(text)
-          }
-        }
-        listProps={
-          {
-            nestedScrollEnabled: true,
-          }
-        }
-      />
-      <Text>Selected item: {selectedItem.name}</Text>
+      <DropDown responseData={data} type="food" selectedItem={selectedFood} setSelected={setSelectedFood} />
+      <DropDown responseData={data} type="drink" selectedItem={selectedDrink} setSelected={setSelectedDrink} />
+      <DropDown responseData={data} type="mealType" selectedItem={selectedMealType} setSelected={setSelectedMealType} />
+
+      <Text>Selected item: {selectedFood.name}</Text>
+      <Text>Selected item: {selectedDrink.name}</Text>
+      <Text>Selected item: {selectedMealType.name}</Text>
     </View>
   );
 }
