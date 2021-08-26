@@ -45,7 +45,7 @@ export default function EditAccountScreen({ navigation, route }) {
 
       const user = await Auth.currentAuthenticatedUser();
       // let result = await Auth.deleteUser(user);//Does not exist?
-      //console.long(result); // SUCCESS
+      (result); // SUCCESS
 
       setLoading(false);
 
@@ -55,7 +55,7 @@ export default function EditAccountScreen({ navigation, route }) {
       // navigation.navigate("Confirm Edit Email");
     } catch (error) {
       //setModalMessage must come before setErrorAlertVisible
-      //console.long(error);
+      (error);
       setModalMessage(error.message);
       setErrorAlertVisible(true);
       setLoading(false);

@@ -22,8 +22,8 @@ const CardFilterScreen = ({ givenURL, isHeaderVisible }) => {
 
   //Adds a tag to the start of the array
   const appendTagToArray = (newTag, tagType) => {
-    //console.long("appending...")
-    //console.long(tagType)
+    ("appending...")
+      (tagType)
 
     switch (tagType) {
       case "mealTypes":

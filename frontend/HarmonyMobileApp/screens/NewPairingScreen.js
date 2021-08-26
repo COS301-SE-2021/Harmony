@@ -36,7 +36,7 @@ function NewPairingScreen({ navigation }) {
         {
           text: "Yes",
           onPress: () => {
-            //console.long("Saving to db...");
+            ("Saving to db...");
 
             if (
               DrinkDesc === "" ||
@@ -45,10 +45,10 @@ function NewPairingScreen({ navigation }) {
               FoodItem === "" ||
               Location === ""
             ) {
-              //console.long("Empty");
+              ("Empty");
               setToSave(false);
             } else {
-              //console.long("NOT EMPTY");
+              ("NOT EMPTY");
               fetch(addPairingURL, {
                 method: "POST",
                 headers: {

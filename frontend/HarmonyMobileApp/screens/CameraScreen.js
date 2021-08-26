@@ -87,7 +87,7 @@ export default function CameraScreen({ navigation }) {
       quality: 1,
     });
 
-    //console.long(result);
+    (result);
     if (!result.cancelled) {
       setImage(result.uri);
       const base64 = await FileSystem.readAsStringAsync(result.uri, {
@@ -140,7 +140,7 @@ export default function CameraScreen({ navigation }) {
         if (json.StatusCode === 200) {
           setLoading(false);
           cancelPreview();
-          //console.long("StatusCode Returned: " + json.StatusCode)
+          ("StatusCode Returned: " + json.StatusCode)
           setErrorAlertVisible(false);
 
           navigation.navigate("Results", {
@@ -150,8 +150,8 @@ export default function CameraScreen({ navigation }) {
 
         }
         else if (json.StatusCode === 204) {
-          //console.long(json)
-          //console.long("ERRROR ENCOUNTERED");
+          (json)
+            ("ERRROR ENCOUNTERED");
           setLoading(false);
           cancelPreview();
           //setModalMessage must come before setErrorAlertVisible
@@ -161,7 +161,7 @@ export default function CameraScreen({ navigation }) {
         }
       })
       .catch((error) => {
-        //console.long(error);
+        (error);
         setModalMessage("Something went wrong.");
         setErrorAlertVisible(true);
         cancelPreview();

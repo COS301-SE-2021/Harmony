@@ -30,7 +30,7 @@ export default function ConfirmEditEmailScreen({ navigation }) {
         "email",
         values.Code
       );
-      //console.long(result);
+      (result);
 
       setLoading(false);
 

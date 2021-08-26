@@ -76,7 +76,7 @@ const DeletePairingScreen = (props) => {
           text: "Yes",
           onPress: () => {
             //setShowBox(false);
-            //console.long(obj.item);
+            (obj.item);
             setToDelete(true);
             setPID(obj.item);
           },
