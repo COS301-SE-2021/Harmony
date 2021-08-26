@@ -67,7 +67,7 @@ const TabNavigator = (props) => {
     <Navigator tabBar={(props) => <BottomTabBar {...props} />}>
       <Screen name="Home" component={HomeFeed} />
       <Screen name="Camera" component={CameraScreen} />
-      <Screen name="Favourite" component={UserPairingsTopTabs} />
+      <Screen name="Favourite" component={PairingFeed} />
       <Screen name="SettingsScreen">
         {(screenProps) => (
           <SettingsNavigator
@@ -102,8 +102,25 @@ function HomeFeed() {
   );
 }
 
-const Stack = createSharedElementStackNavigator();
+const PairingStack = createStackNavigator();
+function PairingFeed() {
+  return (
 
+    <PairingStack.Navigator initialRouteName="UserPairings"
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <PairingStack.Screen name="UserPairings" component={UserPairingsTopTabs} />
+      <PairingStack.Screen
+        name="NewPairing"
+        component={NewPairingScreen}
+      />
+    </PairingStack.Navigator>
+  );
+}
+
+const Stack = createSharedElementStackNavigator();
 const Results = () => (
   <Stack.Navigator initialRouteName="PairingResultsScreen"
     screenOptions={{
@@ -118,8 +135,8 @@ const Results = () => (
     />
   </Stack.Navigator>
 );
-const Tab = createMaterialTopTabNavigator();
 
+const Tab = createMaterialTopTabNavigator();
 const UserPairingsTopTabs = () => (
 
   <Tab.Navigator
