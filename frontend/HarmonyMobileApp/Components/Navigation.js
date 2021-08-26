@@ -26,6 +26,7 @@ import SettingsScreen from "../screens/SettingsScreen.js";
 import CameraScreen from "../screens/CameraScreen.js";
 import PairingResultsScreen from "../screens/PairingResultsScreen.js";
 import DrinkDetailsScreen from "../screens/DrinkDetailsScreen.js";
+import NewPairingScreen from "../screens/NewPairingScreen";
 
 import config from "../aws-exports";
 import SignIn from "../screens/SignInScreen";
@@ -64,7 +65,7 @@ const BottomTabBar = ({ navigation, state }) => (
 const TabNavigator = (props) => {
   return (
     <Navigator tabBar={(props) => <BottomTabBar {...props} />}>
-      <Screen name="Home" component={HomeScreen} />
+      <Screen name="Home" component={HomeFeed} />
       <Screen name="Camera" component={CameraScreen} />
       <Screen name="Favourite" component={UserPairingsTopTabs} />
       <Screen name="SettingsScreen">
@@ -82,6 +83,24 @@ const TabNavigator = (props) => {
     </Navigator>
   );
 };
+
+const HomeStack = createStackNavigator();
+function HomeFeed() {
+  return (
+
+    <HomeStack.Navigator initialRouteName="Home"
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <HomeStack.Screen name="Home" component={HomeScreen} />
+      <HomeStack.Screen
+        name="NewPairing"
+        component={NewPairingScreen}
+      />
+    </HomeStack.Navigator>
+  );
+}
 
 const Stack = createSharedElementStackNavigator();
 

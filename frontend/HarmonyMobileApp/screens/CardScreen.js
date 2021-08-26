@@ -25,7 +25,7 @@ import AppAlert from "../Components/AppAlert";
 import FilterContext from '../Components/FilterContext';
 import FAB from "../Components/FAB";
 
-const CardScreen = ({ URL, headerVisible }) => {
+const CardScreen = ({ navigation, URL, headerVisible }) => {
   const API_URL = URL;
   //The loading of the flatlist
 
