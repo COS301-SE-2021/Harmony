@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { Header } from "react-native-elements";
 import styles from "../styles";
 // import DropDownPicker from 'react-native-dropdown-picker';
@@ -54,9 +54,9 @@ function NewPairingScreen() {
     },
   ];
 
-
-  const [selectedItems, setSelectedItems] = useState([]);
-
+  const [selectedItem, setSelectedItem] = useState({
+    name: "Select your food...",
+  });
 
   return (
     <View
@@ -82,45 +82,19 @@ function NewPairingScreen() {
       {/* Single */}
       <SearchableDropdown
         onItemSelect={(item) => {
-          const items = selectedItems;
-          items.push(item)
-          setSelectedItems({ selectedItems: items });
+          setSelectedItem(item);
         }}
         containerStyle={{ padding: 5 }}
-        onRemoveItem={(item, index) => {
-          const items = state.selectedItems.filter((sitem) => sitem.id !== item.id);
-          setSelectedItems({ selectedItems: items });
-        }}
-        itemStyle={{
-          padding: 15,
-          backgroundColor: '#f9f9f9',
-          borderColor: '#bbb',
-          borderBottomWidth: 0.2,
-          borderBottomColor: "#cccccc",
-          borderRadius: 20,
-        }}
+        itemStyle={localStyles.itemStyle}
         itemTextStyle={{ color: "#6e6869" }}
-        itemsContainerStyle={{
-          maxHeight: "80%",
-          borderRadius: 20,
-          overflow: 'hidden'
-        }}
+        itemsContainerStyle={localStyles.itemsContainerStyle}
         items={items}
         resetValue={false}
         textInputProps={
           {
-            placeholder: "Select your food...",
+            placeholder: selectedItem.name,
             underlineColorAndroid: "transparent",
-            style: {
-              borderRadius: 20,
-              marginBottom: 1,
-              flexDirection: "row",
-              padding: 15,
-              borderWidth: 0.5,
-              backgroundColor: "#f9f9f9",
-              width: "100%",
-              borderColor: "#ffffff00",
-            },
+            style: localStyles.textInputProps,
             onTextChange: text => console.log(text)
           }
         }
@@ -130,7 +104,34 @@ function NewPairingScreen() {
           }
         }
       />
+      <Text>Selected item: {selectedItem.name}</Text>
     </View>
   );
 }
 export default NewPairingScreen;
+
+const localStyles = StyleSheet.create({
+  itemStyle: {
+    padding: 15,
+    backgroundColor: '#f9f9f9',
+    borderColor: '#bbb',
+    borderBottomWidth: 0.2,
+    borderBottomColor: "#cccccc",
+    borderRadius: 20,
+  },
+  itemsContainerStyle: {
+    maxHeight: "80%",
+    borderRadius: 20,
+    overflow: 'hidden'
+  },
+  textInputProps: {
+    borderRadius: 20,
+    marginBottom: 1,
+    flexDirection: "row",
+    padding: 15,
+    borderWidth: 0.5,
+    backgroundColor: "#f9f9f9",
+    width: "100%",
+    borderColor: "#ffffff00",
+  }
+})
