@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TextInput } from 'react-native';
 import { Header } from "react-native-elements";
 import styles from "../styles";
 // import DropDownPicker from 'react-native-dropdown-picker';
@@ -33,16 +33,17 @@ function NewPairingScreen() {
       }}
 
       containerStyle={{ padding: 5 }}
-      itemStyle={localStyles.itemStyle}
+      itemStyle={localStyles.dropdownItemStyle}
       itemTextStyle={{ color: "#6e6869" }}
-      itemsContainerStyle={localStyles.itemsContainerStyle}
+      itemsContainerStyle={localStyles.dropdownContainerStyle}
       items={responseData}
       resetValue={false}
       textInputProps={
         {
           placeholder: selectedItem.name,
+          placeholderTextColor: '#555',
           underlineColorAndroid: "transparent",
-          style: localStyles.textInputProps,
+          style: localStyles.dropdownTextInput,
           onTextChange: text => console.log(text)
         }
       }
@@ -78,29 +79,37 @@ function NewPairingScreen() {
       <DropDown responseData={data} type="drink" selectedItem={selectedDrink} setSelected={setSelectedDrink} />
       <DropDown responseData={data} type="mealType" selectedItem={selectedMealType} setSelected={setSelectedMealType} />
 
-      <Text>Selected item: {selectedFood.name}</Text>
+      <View style={[]}>
+        <TextInput
+          style={localStyles.input}
+          autoCapitalize="none"
+          placeholderTextColor="#555"
+          placeholder="Enter your location..."
+          secureTextEntry={false}
+        />
+      </View>
+      {/* <Text>Selected item: {selectedFood.name}</Text>
       <Text>Selected item: {selectedDrink.name}</Text>
-      <Text>Selected item: {selectedMealType.name}</Text>
+      <Text>Selected item: {selectedMealType.name}</Text> */}
     </View>
   );
 }
 export default NewPairingScreen;
 
 const localStyles = StyleSheet.create({
-  itemStyle: {
+  dropdownItemStyle: {
     padding: 15,
     backgroundColor: '#f9f9f9',
-    borderColor: '#bbb',
     borderBottomWidth: 0.2,
     borderBottomColor: "#cccccc",
     borderRadius: 20,
   },
-  itemsContainerStyle: {
+  dropdownContainerStyle: {
     maxHeight: "80%",
     borderRadius: 20,
     overflow: 'hidden'
   },
-  textInputProps: {
+  dropdownTextInput: {
     borderRadius: 20,
     marginBottom: 1,
     flexDirection: "row",
@@ -109,5 +118,17 @@ const localStyles = StyleSheet.create({
     backgroundColor: "#f9f9f9",
     width: "100%",
     borderColor: "#ffffff00",
-  }
+    fontSize: 18,
+  },
+  input: {
+    padding: 15,
+    margin: 5,
+    width: "97%",
+    fontSize: 18,
+    color: '#555',
+    backgroundColor: '#f9f9f9',
+    borderBottomWidth: 0.2,
+    borderBottomColor: "#cccccc",
+    borderRadius: 20,
+  },
 })
