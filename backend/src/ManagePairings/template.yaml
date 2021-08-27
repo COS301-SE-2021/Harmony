@@ -55,6 +55,22 @@ Resources:
             Path: /
             Method: post
 
+  ViewMostFavouritePairingsFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: main/
+      Handler: ViewMostFavouritePairings.view_most_favourite_pairings
+      Runtime: python3.8
+      Policies:
+        # Give DynamoDB Full Access to your Lambda Function
+        - AmazonDynamoDBFullAccess
+      Events:
+        ViewMostFavouritePairings:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /
+            Method: post
+
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
   # Find out more about other implicit resources you can reference within SAM
@@ -88,3 +104,13 @@ Outputs:
   ViewRatioDataIamRole:
     Description: "Implicit IAM Role created for ViewRatioData function"
     Value: !GetAtt ViewRatioDataFunctionRole.Arn
+
+  ViewMostFavouritePairingsApi:
+    Description: "API Gateway endpoint URL for Prod stage for ViewMostFavouritePairings function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/ViewMostFavouritePairings/"
+  ViewMostFavouritePairingsFunction:
+    Description: "ViewMostFavouritePairings Lambda Function ARN"
+    Value: !GetAtt ViewMostFavouritePairings.Arn
+  ViewMostFavouritePairingsIamRole:
+    Description: "Implicit IAM Role created for ViewMostFavouritePairings function"
+    Value: !GetAtt ViewMostFavouritePairings.Arn
