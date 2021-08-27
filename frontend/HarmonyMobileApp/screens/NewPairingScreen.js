@@ -76,19 +76,11 @@ function NewPairingScreen() {
           backgroundColor: "white",
         }}
       />
-      <View style={{ paddingTop: 40 }}>
+      <View style={{ paddingTop: 50 }}>
 
         <DropDown responseData={data} type="food" selectedItem={selectedFood} setSelected={setSelectedFood} />
         <DropDown responseData={data} type="drink" selectedItem={selectedDrink} setSelected={setSelectedDrink} />
         <DropDown responseData={data} type="mealType" selectedItem={selectedMealType} setSelected={setSelectedMealType} />
-
-        <TextInput
-          style={localStyles.input}
-          autoCapitalize="none"
-          placeholderTextColor="#555"
-          placeholder="Enter your location..."
-          secureTextEntry={false}
-        />
         <View style={{ alignItems: "center", flexDirection: "column" }}>
           <AppButton
             title="Create"
@@ -135,16 +127,5 @@ const localStyles = StyleSheet.create({
     width: "100%",
     borderColor: "#ffffff00",
     fontSize: 18,
-  },
-  input: {
-    padding: 15,
-    margin: 5,
-    width: "97%",
-    fontSize: 18,
-    color: '#555',
-    backgroundColor: '#f9f9f9',
-    borderBottomWidth: 0.2,
-    borderBottomColor: "#cccccc",
-    borderRadius: 20,
   },
 })
