@@ -4,6 +4,7 @@ import { Header } from "react-native-elements";
 import styles from "../styles";
 // import DropDownPicker from 'react-native-dropdown-picker';
 import SearchableDropdown from 'react-native-searchable-dropdown';
+import AppButton from "../Components/AppButton";
 
 function NewPairingScreen() {
 
@@ -75,11 +76,12 @@ function NewPairingScreen() {
           backgroundColor: "white",
         }}
       />
-      <DropDown responseData={data} type="food" selectedItem={selectedFood} setSelected={setSelectedFood} />
-      <DropDown responseData={data} type="drink" selectedItem={selectedDrink} setSelected={setSelectedDrink} />
-      <DropDown responseData={data} type="mealType" selectedItem={selectedMealType} setSelected={setSelectedMealType} />
+      <View style={{ paddingTop: 40 }}>
 
-      <View style={[]}>
+        <DropDown responseData={data} type="food" selectedItem={selectedFood} setSelected={setSelectedFood} />
+        <DropDown responseData={data} type="drink" selectedItem={selectedDrink} setSelected={setSelectedDrink} />
+        <DropDown responseData={data} type="mealType" selectedItem={selectedMealType} setSelected={setSelectedMealType} />
+
         <TextInput
           style={localStyles.input}
           autoCapitalize="none"
@@ -87,7 +89,21 @@ function NewPairingScreen() {
           placeholder="Enter your location..."
           secureTextEntry={false}
         />
+        <View style={{ alignItems: "center", flexDirection: "column" }}>
+          <AppButton
+            title="Create"
+            disabled={false}
+            onPress={() => console.log("aaaa")}
+          />
+
+          <AppButton
+            title="Cancel"
+            disabled={false}
+            onPress={() => console.log("bbbb")}
+          />
+        </View>
       </View>
+
       {/* <Text>Selected item: {selectedFood.name}</Text>
       <Text>Selected item: {selectedDrink.name}</Text>
       <Text>Selected item: {selectedMealType.name}</Text> */}
