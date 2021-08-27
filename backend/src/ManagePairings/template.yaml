@@ -39,6 +39,21 @@ Resources:
           Properties:
             Path: /
             Method: post
+  ViewRatioDataFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: main/
+      Handler: ViewRatioData.view_ratio_data
+      Runtime: python3.8
+      Policies:
+        # Give DynamoDB Full Access to your Lambda Function
+        - AmazonDynamoDBFullAccess
+      Events:
+        ViewRatioData:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /
+            Method: post
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
@@ -63,3 +78,13 @@ Outputs:
   AddItemIamRole:
     Description: "Implicit IAM Role created for AddItem function"
     Value: !GetAtt AddItemFunctionRole.Arn
+
+  ViewRatioDataApi:
+    Description: "API Gateway endpoint URL for Prod stage for ViewRatioData function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/ViewRatioData/"
+  ViewRatioDataFunction:
+    Description: "ViewRatioData Lambda Function ARN"
+    Value: !GetAtt ViewRatioData.Arn
+  ViewRatioDataIamRole:
+    Description: "Implicit IAM Role created for ViewRatioData function"
+    Value: !GetAtt ViewRatioDataFunctionRole.Arn
