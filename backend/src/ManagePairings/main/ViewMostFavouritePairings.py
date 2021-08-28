@@ -21,41 +21,48 @@ def view_most_favourite_pairings(event, context):
     users = users_response['Items']
 
     # array containing current pairing id's that were favourite
-    lst = []
+    id_array = []
 
     # Count of the number of times the corresponding favourite paring was found in favourites
-    lstcount = []
+    count_array = []
 
     for pairing_count in pairings:
         pid = pairing_count['PID']
-        lst.append(pid)
-        lstcount.append(1)
+        id_array.append(pid)
+        count_array.append(0)
 
     # step through the users and if the favourite is in the users row, add 1 to that corresponding item count.
     for specific_user in users:
         for user_fav_pairings in specific_user['FavouritePairings']:
-            for k in lst:
-                if user_fav_pairings == lst[k]:
-                    lstcount[k] = lstcount[k] + 1
+            for k in range(len(id_array)):
+                if user_fav_pairings == id_array[k]:
+                    count_array[k] = count_array[k] + 1
+                    break
 
-    # Now do a bubble sort to sort data from largest to smallest
-    # We do the sort manually instead of calling the built in sort function because
-    # we need both the parallel arrays to be in the correct order as they relate to each other.
+    bubble_sort(id_array, count_array)
 
+    for i in range(len(id_array)):
+        print(id_array[i])
+        print(count_array[i])
     return 0
 
 
-"""
-    itemfound = False
+# Now do a bubble sort to sort data from largest to smallest
+# We do the sort manually instead of calling the built in sort function because
+# we need both the parallel arrays to be in the correct order as they relate to each other.
+def bubble_sort(id_array, count_array):
 
-    for table_item_index in itemresponse:
-        for user_fav_pairings in table_item_index['FavouritePairings']:
-            for pairings_found in lst:
-                if user_fav_pairings == pairings_found:
-                    lstcount[pairings_found] = lstcount[pairings_found] + 1
-                itemfound = True
-                break
+    len_array = len(id_array)
 
-            if itemfound == False:
-                lst.append(user_fav_pairings)
-                lst.append(1)"""
+    # Traverse through all array elements
+    for i in range(len_array - 1):
+
+        # Last i elements are already in place
+        for j in range(0, len_array - i - 1):
+
+            # traverse the array from 0 to n-i-1
+            # Swap if the element found is greater
+            # than the next element
+            if count_array[j] < count_array[j + 1]:
+                id_array[j], id_array[j + 1] = id_array[j + 1], id_array[j]
+                count_array[j], count_array[j + 1] = count_array[j + 1], count_array[j]
