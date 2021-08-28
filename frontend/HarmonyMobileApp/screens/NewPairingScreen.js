@@ -37,6 +37,8 @@ function NewPairingScreen() {
 
         console.log(mealTypeArray)
 
+
+        console.log(data)
       })
       .catch((error) => alert(error))
   }, []);
@@ -45,8 +47,8 @@ function NewPairingScreen() {
   const DropDown = ({ responseData, selectedItem, setSelected }) => (
     <SearchableDropdown
       onItemSelect={(item) => {
-        setSelected(item.TagName);
-        console.log(item.TagName)
+        setSelected({ name: item.name });
+        console.log({ name: item.name })
       }}
 
       containerStyle={{ padding: 5 }}
@@ -71,6 +73,39 @@ function NewPairingScreen() {
       }
     />);
 
+  //Function to remap the API response JSON
+  //This is necessary inorder for the dropdown to 
+  //render the items.
+  // the specific format is needed:
+  // id: 1,
+  // name: myName
+  const MapJSON = (array, type) => {
+    var data = array.map(function (item) {
+
+      if (type === "food") {
+        return {
+          id: item.FoodID,
+          name: item.FoodName
+        };
+      }
+      else if (type === "drink") {
+        return {
+          id: item.DrinkID,
+          name: item.DrinkName
+        };
+      }
+      else if (type === "mealType") {
+        return {
+          id: item.Mealid,
+          name: item.TagName
+        };
+      }
+
+    });
+    return data;
+  };
+
+
   return (
     <View
       style={{
@@ -94,9 +129,9 @@ function NewPairingScreen() {
       />
       <View style={{ paddingTop: 50 }}>
 
-        <DropDown responseData={foodArray} type="food" selectedItem={selectedFood} setSelected={setSelectedFood} />
-        <DropDown responseData={drinkArray} type="drink" selectedItem={selectedDrink} setSelected={setSelectedDrink} />
-        <DropDown responseData={mealTypeArray} type="mealType" selectedItem={selectedMealType} setSelected={setSelectedMealType} />
+        <DropDown responseData={MapJSON(foodArray, "food")} selectedItem={selectedFood} setSelected={setSelectedFood} />
+        <DropDown responseData={MapJSON(drinkArray, "drink")} selectedItem={selectedDrink} setSelected={setSelectedDrink} />
+        <DropDown responseData={MapJSON(mealTypeArray, "mealType")} selectedItem={selectedMealType} setSelected={setSelectedMealType} />
         <View style={{ alignItems: "center", flexDirection: "column" }}>
           <AppButton
             title="Create"
