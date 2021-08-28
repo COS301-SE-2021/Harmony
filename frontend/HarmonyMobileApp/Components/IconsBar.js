@@ -33,9 +33,9 @@ export default function IconsBar({
     // const [isDown, setIsDown] = useState(isDV);
     // const [isFave, setIsFave] = useState(isF);
 
-    const voteURL = "https://w6gduongvk.execute-api.eu-west-1.amazonaws.com/dev/voting";
-    const addToFavURL = "https://w6gduongvk.execute-api.eu-west-1.amazonaws.com/dev/addtofav";
-    const removeFromFavURL = "https://w6gduongvk.execute-api.eu-west-1.amazonaws.com/dev/removefromfav";
+    const voteURL = "https://2928u23tv1.execute-api.eu-west-1.amazonaws.com/dev/voting";
+    const addToFavURL = "https://2928u23tv1.execute-api.eu-west-1.amazonaws.com/dev/addtofav";
+    const removeFromFavURL = "https://2928u23tv1.execute-api.eu-west-1.amazonaws.com/dev/removefromfav";
 
     const [load, setLoad] = useState(true);
 

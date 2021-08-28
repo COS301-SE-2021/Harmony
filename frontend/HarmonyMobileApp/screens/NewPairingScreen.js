@@ -10,8 +10,8 @@ import AppLoadingIcon from "../Components/AppLoadingIcon";
 
 function NewPairingScreen({ navigation }) {
 
-  const GET_ALL_PAIRNGS_URL = "https://w6gduongvk.execute-api.eu-west-1.amazonaws.com/dev/getallpairingitems";
-  const CREATE_PAIRNG_URL = "https://w6gduongvk.execute-api.eu-west-1.amazonaws.com/dev/createpairing";
+  const GET_ALL_PAIRNGS_URL = "https://2928u23tv1.execute-api.eu-west-1.amazonaws.com/dev/getallpairingitems";
+  const CREATE_PAIRNG_URL = "https://2928u23tv1.execute-api.eu-west-1.amazonaws.com/dev/createpairings";
 
   const [selectedFood, setSelectedFood] = useState({
     name: "Select your food...",
