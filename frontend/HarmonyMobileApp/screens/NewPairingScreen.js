@@ -4,6 +4,7 @@ import { Header } from "react-native-elements";
 import SearchableDropdown from 'react-native-searchable-dropdown';
 import AppButton from "../Components/AppButton";
 import * as Location from 'expo-location';
+import { AppToast } from "../Components/AppToast";
 
 function NewPairingScreen() {
 
@@ -32,6 +33,7 @@ function NewPairingScreen() {
   const [userLatitude, setUserLatitude] = useState(null);
   const [userLongitude, setUserLongitude] = useState(null);
 
+  const [isErrorAlertVisible, setErrorAlertVisible] = useState(false);
 
   useEffect(() => {
     fetch(GET_ALL_PAIRNGS_URL)
@@ -152,9 +154,8 @@ function NewPairingScreen() {
 
   const handleResponse = (json) => {
     if (json.StatusCode === 200) {
-      console.log("Success")
+      AppToast.ToastDisplay(json.Data);
       setErrorAlertVisible(false);
-      setRefreshing(false);
     }
     else if (json.StatusCode === 400) {
       //setModalMessage must come before setErrorAlertVisible
@@ -202,10 +203,9 @@ function NewPairingScreen() {
           />
         </View>
       </View>
-
-      {/* <Text>Selected item: {selectedFood.name}</Text>
-      <Text>Selected item: {selectedDrink.name}</Text>
-      <Text>Selected item: {selectedMealType.name}</Text> */}
+      {isErrorAlertVisible === true && (
+        <AppAlert visible={true} message={modalMessage} type={"Error"} />
+      )}
     </View>
   );
 }
