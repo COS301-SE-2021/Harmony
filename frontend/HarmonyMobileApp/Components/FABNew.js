@@ -23,7 +23,7 @@ export default function FABNew() {
                         {
                             icon: props => <FontAwesome5 name="hamburger" size={24} color="white" />,
                             label: 'Request a new item',
-                            onPress: () => navigation.navigate("NewPairing"),
+                            onPress: () => navigation.navigate("RequestNewItem"),
                             small: false,
                             style: {
                                 backgroundColor: '#03A9F4',

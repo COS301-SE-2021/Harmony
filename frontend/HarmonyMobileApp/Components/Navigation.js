@@ -27,6 +27,7 @@ import CameraScreen from "../screens/CameraScreen.js";
 import PairingResultsScreen from "../screens/PairingResultsScreen.js";
 import DrinkDetailsScreen from "../screens/DrinkDetailsScreen.js";
 import NewPairingScreen from "../screens/NewPairingScreen";
+import RequestNewItemScreen from "../screens/RequestNewItemScreen";
 
 import config from "../aws-exports";
 import SignIn from "../screens/SignInScreen";
@@ -98,6 +99,10 @@ function HomeFeed() {
         name="NewPairing"
         component={NewPairingScreen}
       />
+      <HomeStack.Screen
+        name="RequestNewItem"
+        component={RequestNewItemScreen}
+      />
     </HomeStack.Navigator>
   );
 }
@@ -115,6 +120,10 @@ function PairingFeed() {
       <PairingStack.Screen
         name="NewPairing"
         component={NewPairingScreen}
+      />
+      <PairingStack.Screen
+        name="RequestNewItem"
+        component={RequestNewItemScreen}
       />
     </PairingStack.Navigator>
   );
