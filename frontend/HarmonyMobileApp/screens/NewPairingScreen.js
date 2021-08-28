@@ -3,26 +3,38 @@ import { View, Text, StyleSheet } from 'react-native';
 import { Header } from "react-native-elements";
 import SearchableDropdown from 'react-native-searchable-dropdown';
 import AppButton from "../Components/AppButton";
+import * as Location from 'expo-location';
 
 function NewPairingScreen() {
 
+  const GET_ALL_PAIRNGS_URL = "https://w6gduongvk.execute-api.eu-west-1.amazonaws.com/dev/getallpairingitems";
+  const CREATE_PAIRNG_URL = "https://w6gduongvk.execute-api.eu-west-1.amazonaws.com/dev/createpairing";
+
   const [selectedFood, setSelectedFood] = useState({
     name: "Select your food...",
+    id: 0,
   });
+
   const [selectedDrink, setSelectedDrink] = useState({
     name: "Select your drink...",
+    id: 0,
   });
+
   const [selectedMealType, setSelectedMealType] = useState({
     name: "Select your meal type...",
+    id: 0,
   });
 
   const [foodArray, setFoodArray] = useState([]);
   const [drinkArray, setDrinkArray] = useState([]);
   const [mealTypeArray, setMealTypeArray] = useState([]);
 
-  const API_URL = "https://w6gduongvk.execute-api.eu-west-1.amazonaws.com/dev/getallpairingitems";
+  const [userLatitude, setUserLatitude] = useState(null);
+  const [userLongitude, setUserLongitude] = useState(null);
+
+
   useEffect(() => {
-    fetch(API_URL)
+    fetch(GET_ALL_PAIRNGS_URL)
       .then((response) => response.json())
       .then((json) => {
         setFoodArray(json.Foods)
@@ -32,11 +44,30 @@ function NewPairingScreen() {
       .catch((error) => alert(error))
   }, []);
 
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        //setModalMessage must come before setErrorAlertVisible
+        setModalMessage("Permission to access location was denied");
+        setErrorAlertVisible(true);
+        return;
+      }
+      let location = await Location.getCurrentPositionAsync({});
+      setUserLatitude(location.coords.latitude)
+      setUserLongitude(location.coords.longitude)
+      let backPerm = await Location.requestBackgroundPermissionsAsync();
+      // console.log(backPerm);//Handle
+    })();
+  }, []);
 
   const DropDown = ({ responseData, selectedItem, setSelected }) => (
     <SearchableDropdown
       onItemSelect={(item) => {
-        setSelected({ name: item.name });
+        setSelected({
+          name: item.name,
+          id: item.id
+        });
       }}
 
       containerStyle={{ padding: 5 }}
@@ -92,7 +123,45 @@ function NewPairingScreen() {
     return data;
   };
 
+  async function createNewPairing() {
 
+    console.log("Creating...")
+
+    await fetch(CREATE_PAIRNG_URL, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        "UID": "u1",
+        "Foodid": selectedFood.id,
+        "Drinkid": selectedDrink.id,
+        "Mealtagid": selectedMealType.id,
+        "Latitude": userLatitude,
+        "Longitude": userLongitude,
+      })
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json)
+        handleResponse(json)
+      })
+      .catch((error) => alert(error))
+  };
+
+  const handleResponse = (json) => {
+    if (json.StatusCode === 200) {
+      console.log("Success")
+      setErrorAlertVisible(false);
+      setRefreshing(false);
+    }
+    else if (json.StatusCode === 400) {
+      //setModalMessage must come before setErrorAlertVisible
+      setModalMessage(json.Data);
+      setErrorAlertVisible(true);
+    }
+  }
   return (
     <View
       style={{
@@ -123,7 +192,7 @@ function NewPairingScreen() {
           <AppButton
             title="Create"
             disabled={false}
-            onPress={() => console.log(selectedMealType)}
+            onPress={() => createNewPairing()}
           />
 
           <AppButton
