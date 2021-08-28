@@ -46,22 +46,23 @@ function ModeratePairing() {
     }
 
     return (
-        <div style={UniversalStyle.greyContainer}>
-            <div style={ModerateItemStyling.requestContainer}>
-                <p style={UniversalStyle.fontSizeMedium}>Users have requested the following items to be added to the database:</p>
-                <br />
-                {/**
+        <div style={UniversalStyle.pageContainer}>
+            <div style={UniversalStyle.greyContainer}>
+                <div style={ModerateItemStyling.requestContainer}>
+                    <p style={UniversalStyle.fontSizeMedium}>Users have requested the following items to be added to the database:</p>
+                    <br />
+                    {/**
                  * maps the requested item names to be repeatedly displayed
                  */}
-                {requestedItems.Data.map((item, index) => (
-                    <button style={ModerateItemStyling.button} onClick={() => handleClick(item)}>
-                        <ItemsButton item={item.ItemName} />
-                    </button>
-                ))}
+                    {requestedItems.Data.map((item, index) => (
+                        <button style={ModerateItemStyling.button} onClick={() => handleClick(item)}>
+                            <ItemsButton item={item.ItemName} />
+                        </button>
+                    ))}
+                </div>
+                <AddItemForm itemName={name} itemDescription={description} itemTags={tags} />
             </div>
-            <AddItemForm itemName={name} itemDescription={description} itemTags={tags} />
         </div>
-
     );
 }
 

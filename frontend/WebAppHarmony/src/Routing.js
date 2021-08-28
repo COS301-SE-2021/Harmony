@@ -54,58 +54,60 @@ class Routing extends Component {
   };
   textHeader = {
     fontSize: 40,
-    fontFamily: "sans-serif-light"
+    fontFamily: "sans-serif-light",
+    color: "white"
   }
   render() {
     return (
       <div style={{ width: "100vw", alignItems: "center", backgroundColor: "#F3F3F3" }}>
-        <div style={{ backgroundColor: "white" }}>
-          <Router>
+        <div style={{ backgroundColor: " #FF6347" }}>
 
-            <div style={{ textAlign: "center" }}> <p style={this.textHeader}>Harmony Admin</p></div>
-            <nav>
-              <div style={{ width: "100%", justifyContent: "center", display: "flex" }}>
-                <Nav appearance="subtle" activeKey={this.state.active} onSelect={this.handleSelect}>
-                  <Nav.Item eventKey="HOME"
-                    icon={<AiOutlineHome style={this.iconStyling} />}>
-                    <Link to="/home" style={this.linkStyling}>Home</Link>
-                  </Nav.Item>
-                  <Nav.Item eventKey="MODERATEPAIRING"
-                    icon={<AiOutlineSecurityScan style={this.iconStyling} />}>
-                    <Link to="/moderateItems" style={this.linkStyling}>Moderate Items</Link>
-                  </Nav.Item>
-                  <Nav.Item eventKey="USERFEEDBACK"
-                    icon={<RiFeedbackLine style={this.iconStyling} />}>
-                    <Link to="/userFeedback" style={this.linkStyling}>User Feedback</Link>
-                  </Nav.Item>
-                  <Nav.Item eventKey="TRAINAI"
-                    icon={<AiOutlineRadarChart style={this.iconStyling} />}>
-                    <Link to="/trainModel" style={this.linkStyling}>Train AI</Link>
-                  </Nav.Item>
-                </Nav>
-              </div>
-            </nav>
-            <Switch>
-              <Route exact path="/">
-                <Redirect to="/home" />
-              </Route>
-              <Route exact path="/home" >
-                <ReturnHomepage />
-              </Route>
-              <Route exact path="/moderateItems">
-                <Moderate />
-              </Route>
-              <Route exact path="/userFeedback">
-                <Feedback />
-              </Route>
-              <Route exact path="/trainModel">
-                <Train />
-              </Route>
-
-            </Switch>
-          </Router>
-
+          <div style={{ textAlign: "center" }}> <p style={this.textHeader}>Harmony Admin</p></div>
         </div>
+        <Router>
+          <nav>
+            {/* <div style={{ width: "100%", justifyContent: "center", display: "flex" }}> */}
+            <div style={{ display: "flex", width: "10%", float: "left" }}>
+              <Nav vertical appearance="subtle" activeKey={this.state.active} onSelect={this.handleSelect}>
+                <Nav.Item eventKey="HOME"
+                  icon={<AiOutlineHome style={this.iconStyling} />}>
+                  <Link to="/home" style={this.linkStyling}>Home</Link>
+                </Nav.Item>
+                <Nav.Item eventKey="MODERATEPAIRING"
+                  icon={<AiOutlineSecurityScan style={this.iconStyling} />}>
+                  <Link to="/moderateItems" style={this.linkStyling}>Moderate Items</Link>
+                </Nav.Item>
+                <Nav.Item eventKey="USERFEEDBACK"
+                  icon={<RiFeedbackLine style={this.iconStyling} />}>
+                  <Link to="/userFeedback" style={this.linkStyling}>User Feedback</Link>
+                </Nav.Item>
+                <Nav.Item eventKey="TRAINAI"
+                  icon={<AiOutlineRadarChart style={this.iconStyling} />}>
+                  <Link to="/trainModel" style={this.linkStyling}>Train AI</Link>
+                </Nav.Item>
+              </Nav>
+            </div>
+          </nav>
+          <Switch>
+            <Route exact path="/">
+              <Redirect to="/home" />
+            </Route>
+            <Route exact path="/home" >
+              <ReturnHomepage />
+            </Route>
+            <Route exact path="/moderateItems">
+              <Moderate />
+            </Route>
+            <Route exact path="/userFeedback">
+              <Feedback />
+            </Route>
+            <Route exact path="/trainModel">
+              <Train />
+            </Route>
+
+          </Switch>
+        </Router>
+
       </div>
     );
   }
