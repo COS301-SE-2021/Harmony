@@ -30,7 +30,7 @@ def add_item(event, context):
                 'FoodID': generate_id,
                 'FoodTags': tags,
                 'FoodDescription': description,
-                'FoodItem': name,
+                'FoodName': name,
                 'FoodImage': image
             })
         return json.dumps({'StatusCode': 200})
