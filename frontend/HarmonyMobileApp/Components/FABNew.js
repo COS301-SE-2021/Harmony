@@ -9,7 +9,6 @@ export default function FABNew() {
     const [state, setState] = React.useState({ open: false });
     const onStateChange = ({ open }) => setState({ open });
     const { open } = state;
-    // onPress={() => navigation.navigate("NewPairing")}
 
     return (
         <Provider>
@@ -24,7 +23,7 @@ export default function FABNew() {
                         {
                             icon: props => <FontAwesome5 name="hamburger" size={24} color="white" />,
                             label: 'Request a new item',
-                            onPress: () => console.log('Pressed notifications'),
+                            onPress: () => navigation.navigate("NewPairing"),
                             small: false,
                             style: {
                                 backgroundColor: '#03A9F4',
@@ -34,7 +33,7 @@ export default function FABNew() {
                         {
                             icon: props => <MaterialIcons name="fastfood" size={24} color="white" />,
                             label: 'Create a new pairing',
-                            onPress: () => console.log('Pressed notifications'),
+                            onPress: () => navigation.navigate("NewPairing"),
                             small: false,
                             style: {
                                 backgroundColor: '#03A9F4',
