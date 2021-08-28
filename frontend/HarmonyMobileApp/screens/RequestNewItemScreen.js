@@ -10,12 +10,57 @@ import AppLoadingIcon from "../Components/AppLoadingIcon";
 import AppAlert from "../Components/AppAlert";
 
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { SocialIcon } from "react-native-elements";
 
 export default function RequestNewItemScreen({ navigation }) {
     const [isLoading, setLoading] = useState(false);
     const [isErrorAlertVisible, setErrorAlertVisible] = useState(false);
     const [modalMessage, setModalMessage] = useState("");
+    const REQUEST_ITEM_URL =
+        "https://2928u23tv1.execute-api.eu-west-1.amazonaws.com/dev/requestnewitem";
+
+    async function submitRequest(values) {
+        setLoading(true);
+        setErrorAlertVisible(false);
+
+        await fetch(REQUEST_ITEM_URL, {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                "Name": values.Name,
+                "Description": values.Description
+            })
+        })
+            .then((response) => response.json())
+            .then((json) => handleResponse(json))
+            .catch((error) => {
+                //setModalMessage must come before setErrorAlertVisible
+                setModalMessage(error.message);
+                setErrorAlertVisible(true);
+                setLoading(false);
+            })
+
+        // Add a Toast on screen.
+        AppToast.ToastDisplay("Item request submitted");
+
+    }
+
+    const handleResponse = (json) => {
+        if (json.StatusCode === 200) {
+            setErrorAlertVisible(false);
+            setLoading(false);
+            navigation.goBack()
+
+        }
+        else if (json.StatusCode === 400) {
+            setLoading(false);
+            //setModalMessage must come before setErrorAlertVisible
+            setModalMessage(json.Data);
+            setErrorAlertVisible(true);
+        }
+    }
     return (
 
         <Formik
@@ -24,12 +69,12 @@ export default function RequestNewItemScreen({ navigation }) {
                 Description: "",
             }}
             onSubmit={async (values, { resetForm }) => {
-                //Form must be reset before signIn is called
-                //This is because signIn will lead to navigating the user to the homeScreen
+                //Form must be reset before submitRequest is called
+                //This is because submitRequest will lead to navigating the user to the homeScreen
                 //Then try to update the form
-                //but because the signIn screen will be unmounted react native wont know what to do
+                //but because the submitRequest screen will be unmounted react native wont know what to do
                 resetForm();
-                await signIn(values);
+                await submitRequest(values);
             }}
             validationSchema={yup.object().shape({
                 Name: yup
@@ -59,6 +104,7 @@ export default function RequestNewItemScreen({ navigation }) {
 
                         <View style={styles.body}>
                             <AppTextInput
+                                leftIcon="account"
                                 value={values.Name}
                                 onChangeText={handleChange("Name")}
                                 onBlur={() => setFieldTouched("Name")}
@@ -75,12 +121,16 @@ export default function RequestNewItemScreen({ navigation }) {
                                 </Text>
                             )}
                             <AppTextInput
+                                leftIcon="account"
+
                                 value={values.Description}
                                 onChangeText={handleChange("Description")}
                                 placeholder="Enter Item Description"
                                 autoCorrect={false}
+                                keyboardType="email-address"
+                                textContentType="emailAddress"
+
                                 onBlur={() => setFieldTouched("Description")}
-                                // secureTextEntry={true}
                                 error={errors.Description}
                                 touched={touched.Description}
                                 type="Description"
@@ -92,11 +142,16 @@ export default function RequestNewItemScreen({ navigation }) {
                             )}
 
                             <AppButton
-                                title="Sign in"
+                                title="Submit"
                                 disabled={!isValid}
                                 onPress={handleSubmit}
                             />
 
+                            <AppButton
+                                title="Cancel"
+                                disabled={false}
+                                onPress={navigation.goBack}
+                            />
                         </View>
 
                     </View>
