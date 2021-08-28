@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, TextInput } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { Header } from "react-native-elements";
-import styles from "../styles";
-// import DropDownPicker from 'react-native-dropdown-picker';
 import SearchableDropdown from 'react-native-searchable-dropdown';
 import AppButton from "../Components/AppButton";
 
@@ -18,7 +16,6 @@ function NewPairingScreen() {
     name: "Select your meal type...",
   });
 
-  const [data, setData] = useState([]);
   const [foodArray, setFoodArray] = useState([]);
   const [drinkArray, setDrinkArray] = useState([]);
   const [mealTypeArray, setMealTypeArray] = useState([]);
@@ -28,17 +25,9 @@ function NewPairingScreen() {
     fetch(API_URL)
       .then((response) => response.json())
       .then((json) => {
-        // console.log(json)
-        // setData(json)
         setFoodArray(json.Foods)
         setDrinkArray(json.Drinks)
         setMealTypeArray(json.MealTags)
-        console.log(json.MealTags)
-
-        console.log(mealTypeArray)
-
-
-        console.log(data)
       })
       .catch((error) => alert(error))
   }, []);
@@ -48,7 +37,6 @@ function NewPairingScreen() {
     <SearchableDropdown
       onItemSelect={(item) => {
         setSelected({ name: item.name });
-        console.log({ name: item.name })
       }}
 
       containerStyle={{ padding: 5 }}
@@ -81,7 +69,6 @@ function NewPairingScreen() {
   // name: myName
   const MapJSON = (array, type) => {
     var data = array.map(function (item) {
-
       if (type === "food") {
         return {
           id: item.FoodID,
