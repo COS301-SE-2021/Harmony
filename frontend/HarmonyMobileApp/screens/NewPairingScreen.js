@@ -19,18 +19,34 @@ function NewPairingScreen() {
   });
 
   const [data, setData] = useState([]);
-  const API_URL = "https://jsonplaceholder.typicode.com/users";
+  const [foodArray, setFoodArray] = useState([]);
+  const [drinkArray, setDrinkArray] = useState([]);
+  const [mealTypeArray, setMealTypeArray] = useState([]);
+
+  const API_URL = "https://w6gduongvk.execute-api.eu-west-1.amazonaws.com/dev/getallpairingitems";
   useEffect(() => {
     fetch(API_URL)
       .then((response) => response.json())
-      .then((json) => setData(json))
+      .then((json) => {
+        // console.log(json)
+        // setData(json)
+        setFoodArray(json.Foods)
+        setDrinkArray(json.Drinks)
+        setMealTypeArray(json.MealTags)
+        console.log(json.MealTags)
+
+        console.log(mealTypeArray)
+
+      })
       .catch((error) => alert(error))
   }, []);
+
 
   const DropDown = ({ responseData, selectedItem, setSelected }) => (
     <SearchableDropdown
       onItemSelect={(item) => {
-        setSelected(item);
+        setSelected(item.TagName);
+        console.log(item.TagName)
       }}
 
       containerStyle={{ padding: 5 }}
@@ -78,14 +94,14 @@ function NewPairingScreen() {
       />
       <View style={{ paddingTop: 50 }}>
 
-        <DropDown responseData={data} type="food" selectedItem={selectedFood} setSelected={setSelectedFood} />
-        <DropDown responseData={data} type="drink" selectedItem={selectedDrink} setSelected={setSelectedDrink} />
-        <DropDown responseData={data} type="mealType" selectedItem={selectedMealType} setSelected={setSelectedMealType} />
+        <DropDown responseData={foodArray} type="food" selectedItem={selectedFood} setSelected={setSelectedFood} />
+        <DropDown responseData={drinkArray} type="drink" selectedItem={selectedDrink} setSelected={setSelectedDrink} />
+        <DropDown responseData={mealTypeArray} type="mealType" selectedItem={selectedMealType} setSelected={setSelectedMealType} />
         <View style={{ alignItems: "center", flexDirection: "column" }}>
           <AppButton
             title="Create"
             disabled={false}
-            onPress={() => console.log("aaaa")}
+            onPress={() => console.log(selectedMealType)}
           />
 
           <AppButton
