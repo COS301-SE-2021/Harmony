@@ -4,6 +4,8 @@ import {
   IconButton,
   List,
   withStyles } from "@material-ui/core";
+
+import FeedbackIcon from '@material-ui/icons/Feedback
 import {
   Home as HomeIcon,
   NotificationsNone as NotificationsIcon,

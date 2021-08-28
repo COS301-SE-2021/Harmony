@@ -41,11 +41,11 @@ export default function Tables() {
   const classes = useStyles();
   return (
     <>
-      <PageTitle title="Tables" />
+      <PageTitle title="Train AI" />
       <Grid container spacing={4}>
         <Grid item xs={12}>
           <MUIDataTable
-            title="Employee List"
+            title="Tags"
             data={datatableData}
             columns={["Name", "Company", "City", "State"]}
             options={{
@@ -53,10 +53,17 @@ export default function Tables() {
             }}
           />
         </Grid>
+      </Grid>
+      <Grid container spacing={4}>
         <Grid item xs={12}>
-          <Widget title="Material-UI Table" upperTitle noBodyPadding bodyClass={classes.tableOverflow}>
-            <Table data={mock.table} />
-          </Widget>
+          <MUIDataTable
+              title="Iterations"
+              data={datatableData}
+              columns={["Name", "Company", "City", "State"]}
+              options={{
+                filterType: "checkbox",
+              }}
+          />
         </Grid>
       </Grid>
     </>

@@ -11,6 +11,8 @@ import {
   HelpOutline as FAQIcon,
   ArrowBack as ArrowBackIcon,
 } from "@material-ui/icons";
+import FeedbackIcon from "@material-ui/icons/Feedback";
+import QueueIcon from '@material-ui/icons/Queue';
 import { useTheme } from "@material-ui/styles";
 import { withRouter } from "react-router-dom";
 import classNames from "classnames";
@@ -31,19 +33,19 @@ import {
 
 const structure = [
   { id: 0, label: "Dashboard", link: "/app/dashboard", icon: <HomeIcon /> },
+  { id: 1, type: "divider" },
   {
-    id: 1,
-    label: "Typography",
+    id: 2,
+    label: "Moderate Pairing",
     link: "/app/typography",
-    icon: <TypographyIcon />,
+    icon: <QueueIcon />,
   },
-  { id: 2, label: "Tables", link: "/app/tables", icon: <TableIcon /> },
+  { id: 3, type: "divider" },
+  { id: 4, label: "Train AI", link: "/app/tables", icon: <TableIcon /> },
 
   { id: 5, type: "divider" },
-  { id: 6, type: "title", label: "HELP" },
-  { id: 7, label: "Library", link: "https://flatlogic.com/templates", icon: <LibraryIcon /> },
-  { id: 8, label: "Support", link: "https://flatlogic.com/forum", icon: <SupportIcon /> },
-  { id: 9, label: "FAQ", link: "https://flatlogic.com/forum", icon: <FAQIcon /> },
+  { id: 6, label: "User Feedback", link: "/app/maps", icon: <FeedbackIcon /> },
+  { id: 7, type: "divider" },
 
 ];
 
