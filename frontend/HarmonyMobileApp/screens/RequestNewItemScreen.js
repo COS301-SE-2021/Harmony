@@ -104,7 +104,7 @@ export default function RequestNewItemScreen({ navigation }) {
 
                         <View style={styles.body}>
                             <AppTextInput
-                                leftIcon="account"
+                                leftIcon="food-apple"
                                 value={values.Name}
                                 onChangeText={handleChange("Name")}
                                 onBlur={() => setFieldTouched("Name")}
@@ -121,8 +121,7 @@ export default function RequestNewItemScreen({ navigation }) {
                                 </Text>
                             )}
                             <AppTextInput
-                                leftIcon="account"
-
+                                leftIcon="card-text"
                                 value={values.Description}
                                 onChangeText={handleChange("Description")}
                                 placeholder="Enter Item Description"
