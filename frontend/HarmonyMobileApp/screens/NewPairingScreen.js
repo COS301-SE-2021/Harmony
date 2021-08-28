@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet } from 'react-native';
-import { Header } from "react-native-elements";
 import SearchableDropdown from 'react-native-searchable-dropdown';
 import AppButton from "../Components/AppButton";
 import * as Location from 'expo-location';
@@ -188,54 +187,34 @@ function NewPairingScreen({ navigation }) {
     }
   }
   return (
-    <View
-      style={{
-        flex: 1,
-      }}
-    >
-      <Header
-        statusBarProps={{ elevated: "true", backgroundColor: "black" }}
-        placement="left"
-        centerComponent={
-          <Text style={{
-            fontFamily: "sans-serif-light",
-            fontSize: 35,
-            fontWeight: "bold",
-            textAlignVertical: "center",
-          }}> Create New Pairing</Text>
-        }
-        containerStyle={{
-          backgroundColor: "white",
-        }}
-      />
-      {isLoading ? (
-        <AppLoadingIcon />
-      ) : (
-        <View style={{ paddingTop: 50 }}>
+    <View style={localStyles.container}>
+      <View style={localStyles.header}>
+        <Text style={localStyles.headerText}>Create New Pairing</Text>
+        <Text style={localStyles.subtitle}>Fill in the fields below</Text>
+      </View>
+      <View style={localStyles.body}>
+        <DropDown responseData={MapJSON(foodArray, "food")} selectedItem={selectedFood} setSelected={setSelectedFood} />
+        <DropDown responseData={MapJSON(drinkArray, "drink")} selectedItem={selectedDrink} setSelected={setSelectedDrink} />
+        <DropDown responseData={MapJSON(mealTypeArray, "mealType")} selectedItem={selectedMealType} setSelected={setSelectedMealType} />
+        <View style={{ alignItems: "center", flexDirection: "column" }}>
+          <AppButton
+            title="Create"
+            disabled={isLoading}
+            onPress={() => createNewPairing()}
+          />
 
-
-          <DropDown responseData={MapJSON(foodArray, "food")} selectedItem={selectedFood} setSelected={setSelectedFood} />
-          <DropDown responseData={MapJSON(drinkArray, "drink")} selectedItem={selectedDrink} setSelected={setSelectedDrink} />
-          <DropDown responseData={MapJSON(mealTypeArray, "mealType")} selectedItem={selectedMealType} setSelected={setSelectedMealType} />
-          <View style={{ alignItems: "center", flexDirection: "column" }}>
-            <AppButton
-              title="Create"
-              disabled={isLoading}
-              onPress={() => createNewPairing()}
-            />
-
-            <AppButton
-              title="Cancel"
-              disabled={isLoading}
-              onPress={navigation.goBack}
-            />
-          </View>
+          <AppButton
+            title="Cancel"
+            disabled={isLoading}
+            onPress={navigation.goBack}
+          />
         </View>
-      )}
+      </View>
 
       {isErrorAlertVisible === true && (
         <AppAlert visible={true} message={modalMessage} type={"Error"} />
       )}
+      {isLoading === true && <AppLoadingIcon />}
 
     </View>
   );
@@ -243,6 +222,39 @@ function NewPairingScreen({ navigation }) {
 export default NewPairingScreen;
 
 const localStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    // alignItems: "center",
+    // justifyContent: "center",
+    // backgroundColor: "#118AB2",
+    backgroundColor: "#118AB2",
+  },
+  headerText: {
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 30,
+  },
+  header: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+  },
+  subtitle: {
+    fontSize: 16,
+    color: "#fff",
+    textAlign: "center",
+    paddingVertical: 10,
+  },
+  body: {
+    backgroundColor: "#fff",
+    borderTopRightRadius: 30,
+    borderTopLeftRadius: 30,
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+
+  },
   dropdownItemStyle: {
     padding: 15,
     backgroundColor: '#f9f9f9',
