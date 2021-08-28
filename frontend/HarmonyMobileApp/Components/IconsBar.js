@@ -11,9 +11,6 @@ export default function IconsBar({
     dataSet,
     upVoteVal,
     downVoteVal,
-    isDV,
-    isUV,
-    isF,
     isDeleteVisible,
 }) {
     const [favouriteIconChecked, setFavouriteIconChecked] = useState("");
@@ -31,10 +28,6 @@ export default function IconsBar({
     const [upvote, setUpvote] = useState(upVoteVal);
     const [downvote, setDownvote] = useState(downVoteVal);
 
-    // const [isUp, setIsUp] = useState(isUV);
-    // const [isDown, setIsDown] = useState(isDV);
-    // const [isFave, setIsFave] = useState(isF);
-
     const voteURL = "https://2928u23tv1.execute-api.eu-west-1.amazonaws.com/dev/voting";
     const addToFavURL = "https://2928u23tv1.execute-api.eu-west-1.amazonaws.com/dev/addtofav";
     const removeFromFavURL = "https://2928u23tv1.execute-api.eu-west-1.amazonaws.com/dev/removefromfav";
@@ -44,10 +37,6 @@ export default function IconsBar({
     const [isErrorAlertVisible, setErrorAlertVisible] = useState(false);
     const [modalMessage, setModalMessage] = useState("Oops, something went wrong.");
     useEffect(() => {
-        //      console.log(load + " load var")
-        // console.log("prev votes " + dataSet.isUpvoted + " " + dataSet.isDownvoted + " " + dataSet.isFavourited);
-        // console.log(dataSet);
-        //  test();
         if (load) {
             setLoad(false);
 
@@ -69,9 +58,6 @@ export default function IconsBar({
         }
     }, []);
 
-    // const test = () => {
-    //     console.log("in test " + isUp + " " + isDown + " " + isFave);
-    // }
     useEffect(() => {
         if (upIconChecked != "") {//If the value has been set
             vote("Upvotes", upIconChecked);
@@ -82,7 +68,6 @@ export default function IconsBar({
         if (downIconChecked != "") {//If the value has been set
             vote("Downvotes", downIconChecked);
         };
-        //  console.log(dataSet);
     }, [downIconChecked]);
 
     //Upvotes or Downvotes depending on the button clicked
