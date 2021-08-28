@@ -27,7 +27,7 @@ import FABNew from "../Components/FABNew";
 // import { FAB } from 'react-native-paper';
 
 
-const CardScreen = ({ navigation, URL, headerVisible }) => {
+const CardScreen = ({ navigation, URL, headerVisible, isDeleteVisible }) => {
 
 
   const API_URL = URL;
@@ -166,6 +166,7 @@ const CardScreen = ({ navigation, URL, headerVisible }) => {
             renderItem={({ item }) => (
               <Card
                 dataSet={item}
+                isDeleteVisible={isDeleteVisible}
               />
             )}
           />
