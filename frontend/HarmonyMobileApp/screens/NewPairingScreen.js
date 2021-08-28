@@ -5,6 +5,7 @@ import SearchableDropdown from 'react-native-searchable-dropdown';
 import AppButton from "../Components/AppButton";
 import * as Location from 'expo-location';
 import { AppToast } from "../Components/AppToast";
+import AppAlert from "../Components/AppAlert";
 
 function NewPairingScreen({ navigation }) {
 
@@ -34,6 +35,7 @@ function NewPairingScreen({ navigation }) {
   const [userLongitude, setUserLongitude] = useState(null);
 
   const [isErrorAlertVisible, setErrorAlertVisible] = useState(false);
+  const [modalMessage, setModalMessage] = useState("Oops, something went wrong.");
 
   useEffect(() => {
     fetch(GET_ALL_PAIRNGS_URL)
