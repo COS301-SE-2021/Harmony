@@ -12,7 +12,7 @@ export default function IconsBar({
     isDV,
     isUV,
     isF,
-    ...otherProps
+    isDeleteVisible,
 }) {
     const [favouriteIconChecked, setFavouriteIconChecked] = useState("");
     const [favouriteIconColor, setFavouriteIconColor] = useState("black"); // controls the favourite heart color (pink/black)
@@ -195,6 +195,9 @@ export default function IconsBar({
             uncheckFavourite();
         }
     };
+    handleDeleteIconPress = () => {
+        console.log("deleted")
+    };
 
     return (
         <View style={styles.iconsBar}>
@@ -217,13 +220,26 @@ export default function IconsBar({
                 </Pressable>
 
             </View>
-            <Pressable onPress={handleFavouriteIconPress}>
-                <AntDesign
-                    name={favouriteIconOutline}
-                    size={24}
-                    color={favouriteIconColor}
-                />
-            </Pressable>
+            <View style={styles.flexRow}>
+
+                <Pressable onPress={handleFavouriteIconPress}
+                    style={[styles.flexRowJustCenter, { paddingRight: 20 }]}
+                >
+                    <AntDesign
+                        name={favouriteIconOutline}
+                        size={24}
+                        color={favouriteIconColor}
+                    />
+                </Pressable>
+                {isDeleteVisible &&
+                    <Pressable onPress={handleDeleteIconPress}>
+                        <AntDesign
+                            name="delete"
+                            size={24}
+                            color="black"
+                        />
+                    </Pressable>}
+            </View>
         </View>
     );
 }
