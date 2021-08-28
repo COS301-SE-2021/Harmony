@@ -32,7 +32,7 @@ def delete_pairing(event, context):
     if validate_request(pid) == "false":
         return {
             'StatusCode': 400,
-            'Body': json.dumps({'isSuccessful': 'false', 'PID': pid})
+            'Data': "Failed to delete pairing"
         }
 
     try:
@@ -52,14 +52,14 @@ def delete_pairing(event, context):
             # return a properly formatted JSON object
             return {
                 'StatusCode': 400,
-                'Body': json.dumps({'isSuccessful': 'false', 'PID': pid})
+                'Data': "Failed to delete pairing"
             }
         else:
             raise
     else:
         return {
             'StatusCode': 200,
-            'Body': json.dumps({'isSuccessful': 'true', 'PID': pid})
+            'Data': "Pairing deleted"
         }
 
 
