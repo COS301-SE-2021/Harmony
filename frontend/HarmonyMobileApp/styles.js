@@ -359,8 +359,17 @@ const styles = StyleSheet.create({
   flexRowJustCenter: {
     flexDirection: "row",
     justifyContent: "center"
+  },
+  fab: {
+    position: 'absolute',
+    width: 56,
+    height: 56,
+    alignItems: 'center',
+    justifyContent: 'center',
+    right: 20,
+    bottom: 20,
+    backgroundColor: '#03A9F4',
   }
-
 
 });
 
