@@ -137,7 +137,7 @@ export default function Header(props) {
           )}
         </IconButton>
         <Typography variant="h3" weight="medium" className={classes.logotype}>
-          Harmony Admin Page
+          Harmony Admin
         </Typography>
         <div className={classes.grow} />
         <div

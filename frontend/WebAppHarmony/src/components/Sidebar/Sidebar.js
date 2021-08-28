@@ -36,7 +36,7 @@ const structure = [
   { id: 1, type: "divider" },
   {
     id: 2,
-    label: "Moderate Pairing",
+    label: "Moderate Items",
     link: "/app/typography",
     icon: <QueueIcon />,
   },
@@ -60,7 +60,7 @@ function Sidebar({ location }) {
   // local
   var [isPermanent, setPermanent] = useState(true);
 
-  useEffect(function() {
+  useEffect(function () {
     window.addEventListener("resize", handleWindowWidthChange);
     handleWindowWidthChange();
     return function cleanup() {
