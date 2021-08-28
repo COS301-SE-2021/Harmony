@@ -6,7 +6,7 @@ import AppButton from "../Components/AppButton";
 import * as Location from 'expo-location';
 import { AppToast } from "../Components/AppToast";
 
-function NewPairingScreen() {
+function NewPairingScreen({ navigation }) {
 
   const GET_ALL_PAIRNGS_URL = "https://w6gduongvk.execute-api.eu-west-1.amazonaws.com/dev/getallpairingitems";
   const CREATE_PAIRNG_URL = "https://w6gduongvk.execute-api.eu-west-1.amazonaws.com/dev/createpairing";
@@ -156,6 +156,7 @@ function NewPairingScreen() {
     if (json.StatusCode === 200) {
       AppToast.ToastDisplay(json.Data);
       setErrorAlertVisible(false);
+      navigation.goBack()
     }
     else if (json.StatusCode === 400) {
       //setModalMessage must come before setErrorAlertVisible
@@ -199,7 +200,7 @@ function NewPairingScreen() {
           <AppButton
             title="Cancel"
             disabled={false}
-            onPress={() => console.log("bbbb")}
+            onPress={navigation.goBack}
           />
         </View>
       </View>
