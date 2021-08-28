@@ -98,15 +98,15 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                             </div>
 
                             <div style={ModerateItemStyling.formElements}>
-                                <label htmlFor="ItemName" style={ModerateItemStyling.formLabel}>Item Name</label>
+                                <label htmlFor="ItemName" style={ModerateItemStyling.formLabel}> Name</label>
                                 <input id="ItemName" name="ItemName" style={ModerateItemStyling.textField} onChange={formik.handleChange} value={formik.values.ItemName} />
                             </div>
                             <div style={ModerateItemStyling.formElements}>
-                                <label htmlFor="ItemDescription" style={ModerateItemStyling.formLabel}>Item Description</label>
+                                <label htmlFor="ItemDescription" style={ModerateItemStyling.formLabel}> Description</label>
                                 <input id="ItemDescription" name="ItemDescription" style={ModerateItemStyling.textField} onChange={formik.handleChange} value={formik.values.ItemDescription} />
                             </div>
                             <div style={ModerateItemStyling.formElements}>
-                                <label htmlFor="Tags" style={ModerateItemStyling.formLabel}>Item Tags</label>
+                                <label htmlFor="Tags" style={ModerateItemStyling.formLabel}> Tags</label>
                                 <input id="Tags" name="ItemTags" style={ModerateItemStyling.textField} onChange={formik.handleChange} value={formik.values.ItemTags} />
                             </div>
 

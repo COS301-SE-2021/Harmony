@@ -65,7 +65,7 @@ const ModerateItemStyling = {
         marginBottom: 10
     },
     FileInput: {
-        marginRight: "-25%",
+        marginRight: "-30%",
     },
     Toggle: {
         borderRadius: 15,
