@@ -55,6 +55,9 @@ function NewPairingScreen({ navigation }) {
       .catch((error) => {
         alert(error)
         setLoading(false)
+        setModalMessage(json.Data);
+        setErrorAlertVisible(true);
+
       })
   }, []);
 
@@ -205,29 +208,34 @@ function NewPairingScreen({ navigation }) {
           backgroundColor: "white",
         }}
       />
-      <View style={{ paddingTop: 50 }}>
+      {isLoading ? (
+        <AppLoadingIcon />
+      ) : (
+        <View style={{ paddingTop: 50 }}>
 
-        <DropDown responseData={MapJSON(foodArray, "food")} selectedItem={selectedFood} setSelected={setSelectedFood} />
-        <DropDown responseData={MapJSON(drinkArray, "drink")} selectedItem={selectedDrink} setSelected={setSelectedDrink} />
-        <DropDown responseData={MapJSON(mealTypeArray, "mealType")} selectedItem={selectedMealType} setSelected={setSelectedMealType} />
-        <View style={{ alignItems: "center", flexDirection: "column" }}>
-          <AppButton
-            title="Create"
-            disabled={isLoading}
-            onPress={() => createNewPairing()}
-          />
 
-          <AppButton
-            title="Cancel"
-            disabled={isLoading}
-            onPress={navigation.goBack}
-          />
+          <DropDown responseData={MapJSON(foodArray, "food")} selectedItem={selectedFood} setSelected={setSelectedFood} />
+          <DropDown responseData={MapJSON(drinkArray, "drink")} selectedItem={selectedDrink} setSelected={setSelectedDrink} />
+          <DropDown responseData={MapJSON(mealTypeArray, "mealType")} selectedItem={selectedMealType} setSelected={setSelectedMealType} />
+          <View style={{ alignItems: "center", flexDirection: "column" }}>
+            <AppButton
+              title="Create"
+              disabled={isLoading}
+              onPress={() => createNewPairing()}
+            />
+
+            <AppButton
+              title="Cancel"
+              disabled={isLoading}
+              onPress={navigation.goBack}
+            />
+          </View>
         </View>
-      </View>
+      )}
+
       {isErrorAlertVisible === true && (
         <AppAlert visible={true} message={modalMessage} type={"Error"} />
       )}
-      {isLoading && <AppLoadingIcon />}
 
     </View>
   );
