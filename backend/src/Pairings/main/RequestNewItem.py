@@ -41,8 +41,16 @@ def request_item(event, context):
 
     # generate unique id for pairing
     a = uuid.uuid4().hex
-    response = client.upload_file('requirements.txt', 'harmonyitemrequests', 'requirements.txt')
-    # write data for new pairing to the DynamoDB table using the object we instantiated and save response in a variable
+    # response = client.upload_file('requirements.txt', 'harmonyitemrequests', 'requirements.txt')
+
+    if not validatestring(event["Description"]) or not validatestring(event["Name"]):
+        return {
+            "StatusCode": 400,
+            "Data": "Request has failed"
+        }
+
+
+
     response = table.put_item(
         Item={
             'RID': a,
