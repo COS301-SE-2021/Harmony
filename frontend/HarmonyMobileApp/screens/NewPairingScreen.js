@@ -6,6 +6,7 @@ import AppButton from "../Components/AppButton";
 import * as Location from 'expo-location';
 import { AppToast } from "../Components/AppToast";
 import AppAlert from "../Components/AppAlert";
+import AppLoadingIcon from "../Components/AppLoadingIcon";
 
 function NewPairingScreen({ navigation }) {
 
@@ -34,18 +35,27 @@ function NewPairingScreen({ navigation }) {
   const [userLatitude, setUserLatitude] = useState(null);
   const [userLongitude, setUserLongitude] = useState(null);
 
+  const [isLoading, setLoading] = useState(false);
   const [isErrorAlertVisible, setErrorAlertVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState("Oops, something went wrong.");
 
   useEffect(() => {
+    setLoading(true);
+    setErrorAlertVisible(false);
+
     fetch(GET_ALL_PAIRNGS_URL)
       .then((response) => response.json())
       .then((json) => {
         setFoodArray(json.Foods)
         setDrinkArray(json.Drinks)
         setMealTypeArray(json.MealTags)
+        setLoading(false);
+
       })
-      .catch((error) => alert(error))
+      .catch((error) => {
+        alert(error)
+        setLoading(false)
+      })
   }, []);
 
   useEffect(() => {
@@ -58,10 +68,11 @@ function NewPairingScreen({ navigation }) {
         return;
       }
       let location = await Location.getCurrentPositionAsync({});
-      setUserLatitude(location.coords.latitude)
-      setUserLongitude(location.coords.longitude)
       let backPerm = await Location.requestBackgroundPermissionsAsync();
       // console.log(backPerm);//Handle
+      setUserLatitude(location.coords.latitude)
+      setUserLongitude(location.coords.longitude)
+
     })();
   }, []);
 
@@ -130,6 +141,7 @@ function NewPairingScreen({ navigation }) {
   async function createNewPairing() {
 
     console.log("Creating...")
+    setLoading(true);
 
     await fetch(CREATE_PAIRNG_URL, {
       method: "POST",
@@ -158,12 +170,18 @@ function NewPairingScreen({ navigation }) {
     if (json.StatusCode === 200) {
       AppToast.ToastDisplay(json.Data);
       setErrorAlertVisible(false);
+      setLoading(false);
+
       navigation.goBack()
     }
     else if (json.StatusCode === 400) {
+      setLoading(false);
+
       //setModalMessage must come before setErrorAlertVisible
       setModalMessage(json.Data);
       setErrorAlertVisible(true);
+
+
     }
   }
   return (
@@ -195,13 +213,13 @@ function NewPairingScreen({ navigation }) {
         <View style={{ alignItems: "center", flexDirection: "column" }}>
           <AppButton
             title="Create"
-            disabled={false}
+            disabled={isLoading}
             onPress={() => createNewPairing()}
           />
 
           <AppButton
             title="Cancel"
-            disabled={false}
+            disabled={isLoading}
             onPress={navigation.goBack}
           />
         </View>
@@ -209,6 +227,8 @@ function NewPairingScreen({ navigation }) {
       {isErrorAlertVisible === true && (
         <AppAlert visible={true} message={modalMessage} type={"Error"} />
       )}
+      {isLoading && <AppLoadingIcon />}
+
     </View>
   );
 }
