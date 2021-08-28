@@ -65,7 +65,7 @@ class Routing extends Component {
           <div style={{ textAlign: "center" }}> <p style={this.textHeader}>Harmony Admin</p></div>
         </div>
         <Router>
-          <nav>
+          <nav style={{ width: "20%" }}>
             {/* <div style={{ width: "100%", justifyContent: "center", display: "flex" }}> */}
             <div style={{ display: "flex", width: "10%", float: "left" }}>
               <Nav vertical appearance="subtle" activeKey={this.state.active} onSelect={this.handleSelect}>

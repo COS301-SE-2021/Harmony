@@ -41,6 +41,12 @@ const ModerateItemStyling = {
     button: {
         backgroundColor: "#CECECE", margin: 10, height: 35, borderRadius: 10, paddingTop: 5, paddingLeft: 12, paddingRight: 12
     },
+    clearButton: {
+        backgroundColor: "#CECECE", margin: 10, height: 35, borderRadius: 10, paddingTop: 5, paddingLeft: 12, paddingRight: 12, width: "20%"
+    },
+    addButton: {
+        backgroundColor: "#FF6347", color: "white", margin: 10, height: 35, borderRadius: 10, paddingTop: 5, paddingLeft: 12, paddingRight: 12, width: "20%"
+    },
     requestedItemBox: {
         textAlign: "center", paddingBottom: 15, float: "left"
     },
