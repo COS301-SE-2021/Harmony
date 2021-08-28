@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Pressable, View } from "react-native";
+import {
+    StyleSheet, Pressable, View, Alert,
+} from "react-native";
 import { Text } from "@ui-kitten/components";
 import { AntDesign } from "@expo/vector-icons";
 import styles from "../styles";
-
+import { AppToast } from "../Components/AppToast";
 // make api call with dataSet.PID
 export default function IconsBar({
     dataSet,
@@ -36,9 +38,11 @@ export default function IconsBar({
     const voteURL = "https://2928u23tv1.execute-api.eu-west-1.amazonaws.com/dev/voting";
     const addToFavURL = "https://2928u23tv1.execute-api.eu-west-1.amazonaws.com/dev/addtofav";
     const removeFromFavURL = "https://2928u23tv1.execute-api.eu-west-1.amazonaws.com/dev/removefromfav";
+    const deltePairingURL = "https://2928u23tv1.execute-api.eu-west-1.amazonaws.com/dev/deletepairing";
 
     const [load, setLoad] = useState(true);
-
+    const [isErrorAlertVisible, setErrorAlertVisible] = useState(false);
+    const [modalMessage, setModalMessage] = useState("Oops, something went wrong.");
     useEffect(() => {
         //      console.log(load + " load var")
         // console.log("prev votes " + dataSet.isUpvoted + " " + dataSet.isDownvoted + " " + dataSet.isFavourited);
@@ -195,10 +199,57 @@ export default function IconsBar({
             uncheckFavourite();
         }
     };
-    handleDeleteIconPress = () => {
-        console.log("deleted")
+
+    const handleDeleteIconPress = async () => {
+
+        console.log("Deleting...")
+
+        await fetch(deltePairingURL, {
+            method: "POST",
+            body: JSON.stringify({
+                UID: "u1",
+                PID: dataSet.PID,
+            }),
+        })
+            .then((response) => response.json())
+            .then((json) => {
+                handleResponse(json)
+            })
+            .catch((error) => alert(error));
     };
 
+    const confirmPairingDelete = () => {
+        return Alert.alert(
+            "Delete Pairing",
+            "Are you sure you want to Delete this pairing?",
+            [
+                // The "No" button
+                // Does nothing but dismiss the dialog when tapped
+                {
+                    text: "Cancel",
+                },
+                // The "Yes" button
+                {
+                    text: "Delete",
+                    onPress: () => {
+                        handleDeleteIconPress()
+                    }
+                },
+            ]
+        );
+    };
+
+    const handleResponse = (json) => {
+        if (json.StatusCode === 200) {
+            AppToast.ToastDisplay(json.Data);
+            setErrorAlertVisible(false);
+        }
+        else if (json.StatusCode === 400) {
+            //setModalMessage must come before setErrorAlertVisible
+            setModalMessage(json.Data);
+            setErrorAlertVisible(true);
+        }
+    }
     return (
         <View style={styles.iconsBar}>
             <View style={styles.flexRow}>
@@ -232,7 +283,7 @@ export default function IconsBar({
                     />
                 </Pressable>
                 {isDeleteVisible &&
-                    <Pressable onPress={handleDeleteIconPress}>
+                    <Pressable onPress={confirmPairingDelete}>
                         <AntDesign
                             name="delete"
                             size={24}
@@ -240,6 +291,9 @@ export default function IconsBar({
                         />
                     </Pressable>}
             </View>
+            {isErrorAlertVisible === true && (
+                <AppAlert visible={true} message={modalMessage} type={"Error"} />
+            )}
         </View>
     );
 }
