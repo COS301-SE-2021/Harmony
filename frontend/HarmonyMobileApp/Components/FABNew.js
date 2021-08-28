@@ -22,16 +22,23 @@ export default function FABNew() {
                     icon={open ? 'close' : 'plus'}
                     actions={[
                         {
-                            icon: props => <FontAwesome5 name="hamburger" size={24} color="gray" />,
-                            label: 'Request new item',
+                            icon: props => <FontAwesome5 name="hamburger" size={24} color="white" />,
+                            label: 'Request a new item',
                             onPress: () => console.log('Pressed notifications'),
                             small: false,
+                            style: {
+                                backgroundColor: '#03A9F4',
+                            },
+
                         },
                         {
-                            icon: props => <MaterialIcons name="fastfood" size={24} color="gray" />,
-                            label: 'Create new pairing',
+                            icon: props => <MaterialIcons name="fastfood" size={24} color="white" />,
+                            label: 'Create a new pairing',
                             onPress: () => console.log('Pressed notifications'),
                             small: false,
+                            style: {
+                                backgroundColor: '#03A9F4',
+                            },
                         },
                     ]}
                     onStateChange={onStateChange}
