@@ -13,5 +13,10 @@ Returns all the items that have been requested to be added to the database.
 
 
 def view_requested_items(event, context):
-    response = table.scan()
-    return response
+    allresponse = table.scan()
+    response = allresponse['Items']
+
+    return {
+        "StatusCode": 200,
+        "Data": response
+    }
