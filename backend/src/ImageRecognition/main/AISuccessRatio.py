@@ -7,7 +7,7 @@ from botocore.exceptions import ClientError
 dynamodb = boto3.resource('dynamodb')
 
 # use the DynamoDB object to select our table
-table_name = 'ScannedItems'
+table_name = 'User_Feedback'
 table = dynamodb.Table(table_name)
 
 """
@@ -25,15 +25,15 @@ def ai_success_ratio(event, context):
     food_item = event['FoodItem']
     today = date.today()
 
-    get_date = today.strftime("%d/%m/%Y")
+    #get_date = today.strftime("%d/%m/%Y")
 
-    sid = uuid.uuid4().hex
+    ufid = uuid.uuid4().hex
     try:
         table.put_item(
             Item={
-                'SID': sid,
+                'UFID': ufid,
                 'FoodName': food_item,
-                'DateScanned': get_date,
+                'DateScanned': str(today),
                 'CorrectlyIdentified': is_correct
             })
         return json.dumps({'StatusCode': 200})

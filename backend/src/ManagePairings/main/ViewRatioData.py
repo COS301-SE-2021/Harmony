@@ -4,7 +4,7 @@ import boto3
 dynamodb = boto3.resource('dynamodb')
 
 # use the DynamoDB object to select our table
-table_name = 'ScannedItems'
+table_name = 'User_Feedback'
 table = dynamodb.Table(table_name)
 
 """
