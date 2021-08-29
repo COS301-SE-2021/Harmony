@@ -8,6 +8,8 @@
 .idea/**/dictionaries
 .idea/**/shelf
 
+frontend/WebAppHarmony/
+frontend/HarmonyMobileApp/
 # AWS User-specific
 .idea/**/aws.xml
 
