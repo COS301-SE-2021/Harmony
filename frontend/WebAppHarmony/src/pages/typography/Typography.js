@@ -8,8 +8,8 @@ import useStyles from "./styles";
 import PageTitle from "../../components/PageTitle";
 import Widget from "../../components/Widget";
 import { Typography } from "../../components/Wrappers";
-import AddItemForm from "../../components/Layout/AddItemForm";
-import ItemsButton from "../../components/Layout/ItemsButton";
+import AddItemForm from "./AddItemForm";
+import ItemsButton from "./ItemsButton";
 
 export default function TypographyPage() {
   var classes = useStyles();

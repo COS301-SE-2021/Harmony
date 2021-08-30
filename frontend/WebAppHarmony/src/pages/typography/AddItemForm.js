@@ -2,16 +2,15 @@ import React, { useState, useEffect, useRef } from 'react';
 import {
     Formik, Form, useFormik
 } from 'formik';
-// styles
+// classNames
 import useStyles from "./styles";
 
 // components
-import PageTitle from "../../components/PageTitle";
-import Widget from "../../components/Widget";
+import PageTitle from "../../components/PageTitle/PageTitle";
+import Widget from "../../components/Widget/Widget";
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
-import UniversalStyle from '../../themes/UniversalStyle';
-import ModerateItemStyling from '../../themes/ModerateItemStyling';
+
 function AddItemForm(itemName, itemDescription, itemTags, ...props) {
     /**The name, description and tags for the form */
     const [formName, setName] = useState(itemName.itemName);
@@ -19,6 +18,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
     const [formTags, setTags] = useState(itemName.itemTags);
     const [FoodOrDrink, setFoodOrDrink] = React.useState('none');
     const [img, setImg] = useState("http://beepeers.com/assets/images/commerces/default-image.jpg");
+    var classes = useStyles();
 
     /**@var used to create a reference to the file input to be able to clear it */
     const fileRef = useRef();
@@ -71,8 +71,8 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
         reader.readAsDataURL(e.target.files[0])
     }
     return (
-        <div style={ModerateItemStyling.addItemContainer}>
-            <p style={UniversalStyle.fontSizeMedium}>Add an item to the database:</p>
+        <div className={classes.addItemContainer}>
+            <p className={classes.fontSizeMedium}>Add an item to the database:</p>
             <div>
                 <Formik
                     onSubmit={() => (console.log("submitted"))}
@@ -81,17 +81,17 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                     {/** The moderate pairings form to submit */}
                     {({ values }) => (
                         <Form>
-                            <div style={ModerateItemStyling.formElements}>
-                                <div style={ModerateItemStyling.PreviewContainer}>
-                                    <div style={ModerateItemStyling.PreviewPiece}><label htmlFor="file-input">Upload an image</label></div>
-                                    <div style={ModerateItemStyling.PreviewPiece}><img src={img} style={ModerateItemStyling.ImageContainer} /></div>
-                                    <div style={ModerateItemStyling.FileInput}><input type="file" id="file-input" name="ImageStyle" accept="image/*" ref={fileRef} onChange={imageHandler} /></div>
+                            <div className={classes.formElements}>
+                                <div className={classes.PreviewContainer}>
+                                    <div className={classes.PreviewPiece}><label htmlFor="file-input">Upload an image</label></div>
+                                    <div className={classes.PreviewPiece}><img src={img} className={classes.ImageContainer} /></div>
+                                    <div className={classes.FileInput}><input type="file" id="file-input" name="ImageclassName" accept="image/*" ref={fileRef} onChange={imageHandler} /></div>
                                 </div>
                                 <ToggleButtonGroup
                                     value={FoodOrDrink}
                                     exclusive
                                     onChange={HandleToggle}
-                                    style={ModerateItemStyling.Toggle}
+                                    className={classes.Toggle}
                                 >
                                     <ToggleButton value="Food" >
                                         Food
@@ -102,27 +102,27 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                                 </ToggleButtonGroup>
                             </div>
 
-                            <div style={ModerateItemStyling.formElements}>
-                                <label htmlFor="ItemName" style={ModerateItemStyling.formLabel}> Name</label>
-                                <input id="ItemName" name="ItemName" style={ModerateItemStyling.textField} onChange={formik.handleChange} value={formik.values.ItemName} />
+                            <div className={classes.formElements}>
+                                <label htmlFor="ItemName" className={classes.formLabel}> Name</label>
+                                <input id="ItemName" name="ItemName" className={classes.textField} onChange={formik.handleChange} value={formik.values.ItemName} />
                             </div>
-                            <div style={ModerateItemStyling.formElements}>
-                                <label htmlFor="ItemDescription" style={ModerateItemStyling.formLabel}> Description</label>
-                                <input id="ItemDescription" name="ItemDescription" style={ModerateItemStyling.textField} onChange={formik.handleChange} value={formik.values.ItemDescription} />
+                            <div className={classes.formElements}>
+                                <label htmlFor="ItemDescription" className={classes.formLabel}> Description</label>
+                                <input id="ItemDescription" name="ItemDescription" className={classes.textField} onChange={formik.handleChange} value={formik.values.ItemDescription} />
                             </div>
-                            <div style={ModerateItemStyling.formElements}>
-                                <label htmlFor="Tags" style={ModerateItemStyling.formLabel}> Tags</label>
-                                <input id="Tags" name="ItemTags" style={ModerateItemStyling.textField} onChange={formik.handleChange} value={formik.values.ItemTags} />
+                            <div className={classes.formElements}>
+                                <label htmlFor="Tags" className={classes.formLabel}> Tags</label>
+                                <input id="Tags" name="ItemTags" className={classes.textField} onChange={formik.handleChange} value={formik.values.ItemTags} />
                             </div>
 
                             <div>
-                                <button onClick={() => handleClear()} style={ModerateItemStyling.clearButton}><p style={UniversalStyle.fontSizeMedium}>Clear</p></button>
-                                <button type="submit" onClick={() => console.log("clicked submit")} style={ModerateItemStyling.addButton}><p style={UniversalStyle.fontSizeMedium}>Add to Database</p></button>
+                                <button onClick={() => handleClear()} className={classes.clearButton}><p className={classes.fontSizeMedium}>Clear</p></button>
+                                <button type="submit" onClick={() => console.log("clicked submit")} className={classes.addButton}><p className={classes.fontSizeMedium}>Add to Database</p></button>
                             </div>
                         </Form>
                     )}
                 </Formik>
-                {/* <button onClick={() => handleClear()} style={ModerateItemStyling.button}><p style={UniversalStyle.fontSizeMedium}>Clear</p></button> */}
+                {/* <button onClick={() => handleClear()} className={classes.button}><p className={classes.fontSizeMedium}>Clear</p></button> */}
             </div>
         </div >
     );

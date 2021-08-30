@@ -7,10 +7,11 @@ import { AiOutlineMinusCircle } from "react-icons/ai";
 import useStyles from "./styles";
 
 // components
-import PageTitle from "../../components/PageTitle";
-import Widget from "../../components/Widget";
+import PageTitle from "../../components/PageTitle/PageTitle";
+import Widget from "../../components/Widget/Widget";
 function ItemsButton(item, ...props) {
     const [color, setColor] = useState("#CECECE");
+    var classes = useStyles();
 
     /**
        * @function removes the item from the list to be added
@@ -24,9 +25,9 @@ function ItemsButton(item, ...props) {
     }
 
     return (
-        <div style={ModerateItemStyling.requestedItemBox} onClick={() => changeColour()}>
-            <p style={ModerateItemStyling.requestedItemName}>{item.item}</p>
-            <AiOutlineMinusCircle style={UniversalStyle.icon} onClick={() => handleRemoveItem(item)} />
+        <div className={classes.requestedItemBox} onClick={() => changeColour()}>
+            <p className={classes.requestedItemName}>{item.item}</p>
+            <AiOutlineMinusCircle className={classes.icon} onClick={() => handleRemoveItem(item)} />
         </div>
     );
 }
