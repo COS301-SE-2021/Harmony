@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Table,
   TableRow,
@@ -17,20 +17,23 @@ const states = {
 
 export default function TableComponent({ data }) {
   const classes = useStyles();
-  var keys = Object.keys(data[0]).map(i => i.toUpperCase());
-  keys.shift(); // delete "id" key
+  // var keys = Object.keys(data[0]).map(i => i.toUpperCase());
+  // keys.shift(); // delete "id" key
+  var [tableData, setTableData] = useState(data);
 
   return (
     <Table className="mb-0">
       <TableHead>
         <TableRow>
-          {keys.map(key => (
-            <TableCell key={key}>{key}</TableCell>
-          ))}
+          {/* {data.map(PID => ( */}
+          <TableCell>ID</TableCell>
+          <TableCell >Food</TableCell>
+          <TableCell >Drink</TableCell>
+          {/* ))} */}
         </TableRow>
       </TableHead>
       <TableBody>
-        {data.map(({ id, name, email, product, price, date, city, status }) => (
+        {/* {data.map(({ id, name, email, product, price, date, city, status }) => (
           <TableRow key={id}>
             <TableCell className="pl-3 fw-normal">{name}</TableCell>
             <TableCell>{email}</TableCell>
@@ -38,11 +41,17 @@ export default function TableComponent({ data }) {
             <TableCell>{price}</TableCell>
             <TableCell>{date}</TableCell>
             <TableCell>{city}</TableCell>
-            <TableCell>
+             <TableCell>
               <Chip label={status} classes={{root: classes[states[status.toLowerCase()]]}}/>
-            </TableCell>
+            </TableCell> 
           </TableRow>
-        ))}
+        ))} */}
+        <TableRow>
+          {console.log("in table " + JSON.stringify(data.Data))}
+          <TableCell className="pl-3 fw-normal">{data.Data[0].PID}</TableCell>
+          <TableCell>{data.Data[0].FoodItem}</TableCell>
+          <TableCell>{data.Data[0].DrinkItem}</TableCell>
+        </TableRow>
       </TableBody>
     </Table>
   );
