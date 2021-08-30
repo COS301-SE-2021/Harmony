@@ -29,43 +29,44 @@ export default function TableComponent({ data, ...props }) {
     /**  empty dependency array means this effect will only run once (like componentDidMount in classes)*/
   }, []);
   return (
-    <Table className="mb-0">
-      <TableHead>
-        <TableRow>
-          {/* {data.map(PID => ( */}
-          <TableCell>ID</TableCell>
-          <TableCell >Food</TableCell>
-          <TableCell >Drink</TableCell>
-          <TableCell >Up Votes</TableCell>
-          <TableCell >Down Votes</TableCell>
-          <TableCell >Favourited</TableCell>
-          {/* ))} */}
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {tableData.map((pairing) => (
+    <div style={{ height: 300, overflowY: "scroll" }}>
+      <Table className="mb-0">
+        <TableHead>
           <TableRow>
-            <TableCell className="pl-3 fw-normal">{pairing.PID}</TableCell>
-            <TableCell>{pairing.FoodItem}</TableCell>
-            <TableCell>{pairing.DrinkItem}</TableCell>
-            <TableCell>
-              <Chip label={pairing.Upvotes} classes={{ root: classes[states["success"]] }} />
-            </TableCell>
-            <TableCell>
-              <Chip label={pairing.Downvotes} classes={{ root: classes[states["warning"]] }} />
-            </TableCell>
-            <TableCell>
-              <Chip label={pairing.Count} classes={{ root: classes[states["success"]] }} />
-            </TableCell>
+            {/* {data.map(PID => ( */}
+            <TableCell>ID</TableCell>
+            <TableCell >Food</TableCell>
+            <TableCell >Drink</TableCell>
+            <TableCell >Up Votes</TableCell>
+            <TableCell >Down Votes</TableCell>
+            <TableCell >Favourited</TableCell>
+            {/* ))} */}
           </TableRow>
-        ))}
-        {/* <TableRow>
+        </TableHead>
+        <TableBody>
+          {tableData.map((pairing) => (
+            <TableRow>
+              <TableCell className="pl-3 fw-normal">{pairing.PID}</TableCell>
+              <TableCell>{pairing.FoodItem}</TableCell>
+              <TableCell>{pairing.DrinkItem}</TableCell>
+              <TableCell>
+                <Chip label={pairing.Upvotes} classes={{ root: classes[states["success"]] }} />
+              </TableCell>
+              <TableCell>
+                <Chip label={pairing.Downvotes} classes={{ root: classes[states["warning"]] }} />
+              </TableCell>
+              <TableCell>
+                <Chip label={pairing.Count} classes={{ root: classes[states["success"]] }} />
+              </TableCell>
+            </TableRow>
+          ))}
+          {/* <TableRow>
           {console.log("in table " + JSON.stringify(data))}
           <TableCell className="pl-3 fw-normal">test</TableCell>
           <TableCell>rge</TableCell>
           <TableCell>th</TableCell>
         </TableRow> */}
-        {/* <TableRow>
+          {/* <TableRow>
           <TableCell className="pl-3 fw-normal">{data.Data[1].PID}</TableCell>
           <TableCell>{data.Data[1].FoodItem}</TableCell>
           <TableCell>{data.Data[1].DrinkItem}</TableCell>
@@ -85,7 +86,8 @@ export default function TableComponent({ data, ...props }) {
           <TableCell>{data.Data[4].FoodItem}</TableCell>
           <TableCell>{data.Data[4].DrinkItem}</TableCell>
         </TableRow> */}
-      </TableBody>
-    </Table>
+        </TableBody>
+      </Table>
+    </div>
   );
 }
