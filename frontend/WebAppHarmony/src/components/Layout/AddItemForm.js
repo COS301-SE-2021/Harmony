@@ -2,6 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import {
     Formik, Form, useFormik
 } from 'formik';
+// styles
+import useStyles from "./styles";
+
+// components
+import PageTitle from "../../components/PageTitle";
+import Widget from "../../components/Widget";
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import UniversalStyle from '../../themes/UniversalStyle';

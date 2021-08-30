@@ -3,7 +3,12 @@ import UniversalStyle from '../../themes/UniversalStyle';
 import ModerateItemStyling from '../../themes/ModerateItemStyling';
 import { AiOutlineMinusCircle } from "react-icons/ai";
 
+// styles
+import useStyles from "./styles";
 
+// components
+import PageTitle from "../../components/PageTitle";
+import Widget from "../../components/Widget";
 function ItemsButton(item, ...props) {
     const [color, setColor] = useState("#CECECE");
 
