@@ -43,9 +43,8 @@ const structure = [
   { id: 3, type: "divider" },
   { id: 4, label: "Train AI", link: "/app/tables", icon: <TableIcon /> },
 
-  { id: 5, type: "divider" },
-  { id: 6, label: "User Feedback", link: "/app/maps", icon: <FeedbackIcon /> },
-  { id: 7, type: "divider" },
+  { id: 5, label: "User Feedback", link: "/app/tablecopy", icon: <FeedbackIcon /> },
+  { id: 6, type: "divider" },
 
 ];
 

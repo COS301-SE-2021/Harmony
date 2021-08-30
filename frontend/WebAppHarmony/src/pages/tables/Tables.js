@@ -30,6 +30,25 @@ const datatableData = [
   ["8d198cb5-4008-49c9-8a6d-040809376919", "Fish and Chips", "Regular", "50"],
 ];
 
+const datatableData2 = [
+  ["8d198cb5-4008-49c9-8a6d-040809376919", "Churros", "Regular", "50"],
+  ["8d198cb5-4008-49c9-8a6d-040809376919", "Chocolate Cake", "Regular", "50"],
+  ["8d198cb5-4008-49c9-8a6d-040809376919", "Samoosa", "Regular", "50"],
+  ["8d198cb5-4008-49c9-8a6d-040809376919", "Fish and Chips", "Regular", "50"],
+  ["8d198cb5-4008-49c9-8a6d-040809376919", "Churros", "Regular", "50"],
+  ["8d198cb5-4008-49c9-8a6d-040809376919", "Chocolate Cake", "Regular", "50"],
+  ["8d198cb5-4008-49c9-8a6d-040809376919", "Samoosa", "Regular", "50"],
+  ["8d198cb5-4008-49c9-8a6d-040809376919", "Fish and Chips", "Regular", "50"],
+  ["8d198cb5-4008-49c9-8a6d-040809376919", "Churros", "Regular", "50"],
+  ["8d198cb5-4008-49c9-8a6d-040809376919", "Chocolate Cake", "Regular", "50"],
+  ["8d198cb5-4008-49c9-8a6d-040809376919", "Samoosa", "Regular", "50"],
+  ["8d198cb5-4008-49c9-8a6d-040809376919", "Fish and Chips", "Regular", "50"],
+  ["8d198cb5-4008-49c9-8a6d-040809376919", "Churros", "Regular", "50"],
+  ["8d198cb5-4008-49c9-8a6d-040809376919", "Chocolate Cake", "Regular", "50"],
+  ["8d198cb5-4008-49c9-8a6d-040809376919", "Samoosa", "Regular", "50"],
+  ["8d198cb5-4008-49c9-8a6d-040809376919", "Fish and Chips", "Regular", "50"],
+];
+
 const useStyles = makeStyles(theme => ({
   tableOverflow: {
     overflow: 'auto'
@@ -57,7 +76,7 @@ export default function Tables() {
         <Grid item xs={12}>
           <MUIDataTable
               title="Iterations"
-              data={datatableData}
+              data={datatableData2}
               columns={["Id Iteration", "Name", "Status", "PublishName", "TrainingType"]}
           />
         </Grid>
