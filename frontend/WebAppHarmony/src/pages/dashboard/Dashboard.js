@@ -50,7 +50,7 @@ export default function Dashboard(props) {
   var [mainChartState, setMainChartState] = useState("monthly");
   var [data, setData] = useState(" ");
   var [totalUsers, setTotalUsers] = useState("");
-  var [mostFavouritedPairings, setMostFavouritedPairings] = useState("");
+  var [mostFavouritedPairings, setMostFavouritedPairings] = useState([]);
 
   /**
    * @function runs once to load all the data for the dashboard
@@ -64,7 +64,7 @@ export default function Dashboard(props) {
 
     fetch('https://w3lfp6r6f7.execute-api.eu-west-1.amazonaws.com/dev/viewmostfavouritepairings')
       .then(response => response.json())
-      .then(data => setMostFavouritedPairings(data))
+      .then(data => setMostFavouritedPairings(data.Data))
       .then(console.log(mostFavouritedPairings));
     /**  empty dependency array means this effect will only run once (like componentDidMount in classes)*/
   }, []);
