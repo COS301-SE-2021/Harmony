@@ -27,7 +27,7 @@ def view_recently_scanned_items(event, context):
 
     # populate date array with 7 days prior to current date
     for i in range(7):
-        g = date.today() - timedelta(days=7-i)
+        g = date.today() - timedelta(days=7 - i)
         dates.append(g)
 
     # If we want to extend/change the days we can change the range in the for-loop as well as the relevent subtraction
@@ -45,17 +45,22 @@ def view_recently_scanned_items(event, context):
 
     response = ""
 
+    listvar = []
     for w in range(7):
-        dictionary = {"DateScanned": str(dates[w]), "Count": date_count_array[w]}
-        if w == 6:
-            response = response + str(dictionary)
-        else:
-            response = response + str(dictionary) + ","
+        listvar.append({"DateScanned": f"{dates[w]}", "Count": f"{date_count_array[w]}"})
+
+    # for w in range(7):
+    #     dictionary = {"DateScanned": str(dates[w]), "Count": date_count_array[w]}
+    #     if w == 6:
+    #         response = response + str(dictionary)
+    #     else:
+    #         response = response + str(dictionary) + ","
 
     print(response)
-    #jsonstring = json.dumps(response)
-    #print(jsonstring)
+    # jsonstring = json.dumps(response)
+    # print(jsonstring)
     return {
         "StatusCode": 200,
-        "Data": [response]
+        "Data": listvar,
+        "TotalCount" : total_scans
     }
