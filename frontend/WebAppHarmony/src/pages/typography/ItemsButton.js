@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
-import UniversalStyle from '../../themes/UniversalStyle';
-import ModerateItemStyling from '../../themes/ModerateItemStyling';
 import { AiOutlineMinusCircle } from "react-icons/ai";
-
 // styles
 import useStyles from "./styles";
-
 // components
 import PageTitle from "../../components/PageTitle/PageTitle";
 import Widget from "../../components/Widget/Widget";
