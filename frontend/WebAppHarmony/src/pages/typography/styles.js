@@ -22,8 +22,8 @@ export default makeStyles(theme => ({
     fontSize: 20
   },
   formElements: {
-    marginTop: 30,
-    marginBottom: 30,
+    marginTop: 20,
+    marginBottom: 20,
     borderRadius: 15,
     justifyContent: "space-between",
     display: "flex"
@@ -33,22 +33,22 @@ export default makeStyles(theme => ({
     height: 620,
     marginLeft: 70,
     padding: 15,
-    borderRadius: 15,
+    borderRadius: 5,
     float: "left",
     backgroundColor: "white",
     textAlign: "center",
-    boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
+    boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)"
   },
   requestContainer: {
     width: "25%",
     height: 620,
     padding: 15,
-    borderRadius: 15,
+    borderRadius: 5,
     backgroundColor: "white",
     float: "left",
     textAlign: "center",
     // margin: "auto",
-    boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
+    boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)"
   },
   button: {
     backgroundColor: "#CECECE", height: 35, borderRadius: 10, paddingLeft: 12, paddingRight: 12
@@ -110,6 +110,7 @@ export default makeStyles(theme => ({
     fontFamily: "sans-serif-light"
   },
   pageContainer: {
-    float: "right"
+    float: "right",
+    width: "95%"
   }
 }));

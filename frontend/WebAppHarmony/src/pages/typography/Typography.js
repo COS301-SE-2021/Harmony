@@ -18,24 +18,22 @@ export default function TypographyPage() {
   /**The name, description and tags for the form */
   const [name, setName] = useState(" ");
   const [description, setDescription] = useState(" ");
-  const [tags, setTags] = useState(" ");
-  const [requestedItemsAPI, setRequested] = useState([]);
   const requestedItems = {
     Data: [{
-      ItemName: "Malva Pudding",
-      ItemDescription: "Malva pudding is a sweet pudding that contains apricot jam and has a spongy caramelized texture.",
-      ItemTags: "Sweet , Hot, Warm"
+      FoodName: "Malva Pudding",
+      FoodDescription: "Malva pudding is a sweet pudding that contains apricot jam and has a spongy caramelized texture.",
     },
     {
-      ItemName: "Cape Malay Curry",
-      ItemDescription: "Influenced by Malay cuisine, Cape/Malay curry powder/masala is a blend of sweet and pungent spices. A curry powder/masala of a mild heat yet full of the flavours you expect in Indian curry.",
-      ItemTags: "Spicy, Hot, Savoury"
+      FoodName: "Cape Malay Curry",
+      FoodDescription: "Influenced by Malay cuisine, Cape/Malay curry powder/masala is a blend of sweet and pungent spices. A curry powder/masala of a mild heat yet full of the flavours you expect in Indian curry.",
     },
-    { ItemName: "Biltong", ItemDescription: "Biltong is a form of dried, cured meat that originated in Southern African countries Various types of meat are used to produce it, ranging from beef to game", ItemTags: "Spicy, Cold, Salty" },
-    { ItemName: "Boerewors", ItemDescription: "Boerewors, a type of sausage which originated in South Africa. It is an important part of South African, Zimbabwean and Namibian cuisine and is popular across Southern Africa", ItemTags: "Spicy, Hot, Savoury" },
-    { ItemName: "Amarula Don Pedro", ItemDescription: "Amarula is a cream liqueur from South Africa. It is made with sugar, cream and the fruit of the African marula tree", ItemTags: "Alcoholic, Cold, Sweet" },
-    { ItemName: "Melktert", ItemDescription: "Melktert is an Afrikaner dessert consisting of a sweet pastry crust containing a custard filling made from milk, flour, sugar and eggs.", ItemTags: "Sweet, Warm" }]
+    { FoodName: "Biltong", FoodDescription: "Biltong is a form of dried, cured meat that originated in Southern African countries Various types of meat are used to produce it, ranging from beef to game" },
+    { FoodName: "Boerewors", FoodDescription: "Boerewors, a type of sausage which originated in South Africa. It is an important part of South African, Zimbabwean and Namibian cuisine and is popular across Southern Africa" },
+    { FoodName: "Amarula Don Pedro", FoodDescription: "Amarula is a cream liqueur from South Africa. It is made with sugar, cream and the fruit of the African marula tree" },
+    { FoodName: "Melktert", FoodDescription: "Melktert is an Afrikaner dessert consisting of a sweet pastry crust containing a custard filling made from milk, flour, sugar and eggs." }]
   };
+  const [requestedItemsAPI, setRequested] = useState(requestedItems);
+
   useEffect(() => {
 
     fetch('https://w3lfp6r6f7.execute-api.eu-west-1.amazonaws.com/dev/viewrequesteditems')
@@ -49,16 +47,15 @@ export default function TypographyPage() {
    * @param item = the api response item
    */
   const handleClick = (item) => {
-    console.log("click " + item.ItemName);
-    setName(item.ItemName);
-    setDescription(item.ItemDescription);
-    setTags(item.ItemTags);
+    console.log("click " + item.FoodName);
+    setName(item.FoodName);
+    setDescription(item.FoodDescription);
   }
   /**
    * @function removes the item from the list to be added
    */
   const handleRemoveItem = (item) => {
-    console.log("clicked remove " + item.ItemName);
+    console.log("clicked remove " + item.FoodName);
   }
 
   return (
@@ -66,34 +63,39 @@ export default function TypographyPage() {
       <PageTitle title="Moderate Items" />
       <Grid container spacing={1}>
         <Grid item xs={12} md={12}>
-          <Widget disableWidgetMenu>
-            <div className={classes.root}>
-              <div className={classes.pageContainer}>
-                <div className={classes.requestContainer}>
-                  <p className={classes.fontSizeMedium}>Users have requested the following items to be added to the database:</p>
-                  <br />
-                  <ToggleButtonGroup
-                    value={name}
-                    exclusive
-                    orientation="vertical"
-                  // onChange={HandleToggle}
-                  // className={classes.Toggle}
-                  >
-                    {/**
+          <div className={classes.root}>
+            <div className={classes.pageContainer}>
+              <div className={classes.requestContainer}>
+                <Typography
+                  color="text"
+                  colorBrightness="secondary"
+                  className={classes.legendElementText}
+                >
+                  <p style={{ fontSize: 18 }}> Users have requested the following items be added to the database:</p>
+                </Typography>
+                {/* <p className={classes.fontSizeMedium}></p> */}
+                <br />
+                <ToggleButtonGroup
+                  value={name}
+                  exclusive
+                  orientation="vertical"
+                // onChange={HandleToggle}
+                // className={classes.Toggle}
+                >
+                  {/**
                        * maps the requested item names to be repeatedly displayed
                         */}
-                    {requestedItemsAPI.Data.map((item, index) => (
-                      <ToggleButton className={classes.toggleButton} value={item.FoodName} onClick={() => handleClick(item)}>
-                        <ItemsButton item={item.FoodName} />
-                      </ToggleButton>
-                    ))}
-                  </ToggleButtonGroup>
+                  {requestedItemsAPI.Data.map((item, index) => (
+                    <ToggleButton className={classes.toggleButton} value={item.FoodName} key={index} onClick={() => handleClick(item)}>
+                      <ItemsButton item={item.FoodName} />
+                    </ToggleButton>
+                  ))}
+                </ToggleButtonGroup>
 
-                </div>
-                <AddItemForm itemName={name} itemDescription={description} itemTags={tags} />
               </div>
+              <AddItemForm FoodName={name} FoodDescription={description} />
             </div>
-          </Widget>
+          </div>
         </Grid>
       </Grid>
     </>

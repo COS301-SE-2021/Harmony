@@ -8,14 +8,15 @@ import useStyles from "./styles";
 // components
 import PageTitle from "../../components/PageTitle/PageTitle";
 import Widget from "../../components/Widget/Widget";
+import { Typography } from "../../components/Wrappers";
+
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 
 function AddItemForm(itemName, itemDescription, itemTags, ...props) {
     /**The name, description and tags for the form */
-    const [formName, setName] = useState(itemName.itemName);
-    const [formDescription, setDescription] = useState(itemName.itemDescription);
-    const [formTags, setTags] = useState(itemName.itemTags);
+    const [formName, setName] = useState(itemName.FoodName);
+    const [formDescription, setDescription] = useState(itemName.FoodDescription);
     const [FoodOrDrink, setFoodOrDrink] = React.useState('none');
     const [img, setImg] = useState("http://beepeers.com/assets/images/commerces/default-image.jpg");
     var classes = useStyles();
@@ -32,9 +33,8 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
      */
     useEffect(() => {
         // Update the document title using the browser API
-        setName(itemName.itemName);
-        setDescription(itemName.itemDescription);
-        setTags(itemName.itemTags);
+        setName(itemName.FoodName);
+        setDescription(itemName.FoodDescription);
     }, [itemName]);
 
     /**The initial values for the form */
@@ -44,7 +44,6 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
             initialValues: {
                 ItemName: formName,
                 ItemDescription: formDescription,
-                ItemTags: formTags
             }
         }
     )
@@ -54,7 +53,6 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
     const handleClear = () => {
         setName(" ");
         setDescription(" ");
-        setTags(" ");
         setImg("http://beepeers.com/assets/images/commerces/default-image.jpg");
         fileRef.current.value = "";
         setFoodOrDrink('none');
@@ -72,7 +70,14 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
     }
     return (
         <div className={classes.addItemContainer}>
-            <p className={classes.fontSizeMedium}>Add an item to the database:</p>
+            <Typography
+                color="text"
+                colorBrightness="secondary"
+                className={classes.legendElementText}
+            >
+                <p style={{ fontSize: 18 }}>   Add an item to the database:</p>
+            </Typography>
+            {/* <p className={classes.fontSizeMedium}></p> */}
             <div>
                 <Formik
                     onSubmit={() => (console.log("submitted"))}
@@ -83,7 +88,12 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                         <Form>
                             <div className={classes.formElements}>
                                 <div className={classes.PreviewContainer}>
-                                    <div className={classes.PreviewPiece}><label htmlFor="file-input">Upload an image</label></div>
+                                    <div className={classes.PreviewPiece}><label htmlFor="file-input"><Typography
+                                        color="text"
+                                        colorBrightness="secondary"
+                                        className={classes.legendElementText}
+                                    >
+                                        <p style={{ fontSize: 15 }}>Upload an image</p></Typography></label></div>
                                     <div className={classes.PreviewPiece}><img src={img} className={classes.ImageContainer} /></div>
                                     <div className={classes.FileInput}><input type="file" id="file-input" name="ImageclassName" accept="image/*" ref={fileRef} onChange={imageHandler} /></div>
                                 </div>
@@ -103,16 +113,35 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                             </div>
 
                             <div className={classes.formElements}>
-                                <label htmlFor="ItemName" className={classes.formLabel}> Name</label>
+                                <label htmlFor="ItemName" className={classes.formLabel}><Typography
+                                    color="text"
+                                    colorBrightness="secondary"
+                                    className={classes.legendElementText}
+                                >
+                                    <p style={{ fontSize: 18, marginTop: 0 }}>Name</p>
+                                </Typography>
+                                </label>
                                 <input id="ItemName" name="ItemName" className={classes.textField} onChange={formik.handleChange} value={formik.values.ItemName} />
                             </div>
                             <div className={classes.formElements}>
-                                <label htmlFor="ItemDescription" className={classes.formLabel}> Description</label>
+                                <label htmlFor="ItemDescription" className={classes.formLabel}> <Typography
+                                    color="text"
+                                    colorBrightness="secondary"
+                                    className={classes.legendElementText}
+                                >
+                                    <p style={{ fontSize: 18, marginTop: 0 }}>Description</p>
+                                </Typography></label>
                                 <input id="ItemDescription" name="ItemDescription" className={classes.textField} onChange={formik.handleChange} value={formik.values.ItemDescription} />
                             </div>
                             <div className={classes.formElements}>
-                                <label htmlFor="Tags" className={classes.formLabel}> Tags</label>
-                                <input id="Tags" name="ItemTags" className={classes.textField} onChange={formik.handleChange} value={formik.values.ItemTags} />
+                                <label htmlFor="Tags" className={classes.formLabel}><Typography
+                                    color="text"
+                                    colorBrightness="secondary"
+                                    className={classes.legendElementText}
+                                >
+                                    <p style={{ fontSize: 18, marginTop: 0 }}>Tags</p>
+                                </Typography></label>
+                                <input id="Tags" name="ItemTags" className={classes.textField} onChange={formik.handleChange} />
                             </div>
 
                             <div>
