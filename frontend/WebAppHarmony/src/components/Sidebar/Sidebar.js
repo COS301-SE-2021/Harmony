@@ -33,18 +33,15 @@ import {
 
 const structure = [
   { id: 0, label: "Dashboard", link: "/app/dashboard", icon: <HomeIcon /> },
-  { id: 1, type: "divider" },
   {
-    id: 2,
+    id: 1,
     label: "Moderate Pairing",
-    link: "/app/typography",
+    link: "/app/moderateitems",
     icon: <QueueIcon />,
   },
-  { id: 3, type: "divider" },
-  { id: 4, label: "Train AI", link: "/app/tables", icon: <TableIcon /> },
-
-  { id: 5, label: "User Feedback", link: "/app/tablecopy", icon: <FeedbackIcon /> },
-  { id: 6, type: "divider" },
+  { id: 2, label: "Train AI", link: "/app/tables", icon: <TableIcon /> },
+  { id: 3, label: "User Feedback", link: "/app/tablecopy", icon: <FeedbackIcon /> },
+  { id: 4, type: "divider" },
 
 ];
 
