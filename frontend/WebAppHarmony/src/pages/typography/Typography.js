@@ -74,24 +74,24 @@ export default function TypographyPage() {
                   <p style={{ fontSize: 18 }}> Users have requested the following items be added to the database:</p>
                 </Typography>
                 {/* <p className={classes.fontSizeMedium}></p> */}
-                <br />
-                <ToggleButtonGroup
-                  value={name}
-                  exclusive
-                  orientation="vertical"
-                // onChange={HandleToggle}
-                // className={classes.Toggle}
-                >
-                  {/**
+                <div style={{ height: 450, overflowY: "scroll" }}>
+                  <ToggleButtonGroup
+                    value={name}
+                    exclusive
+                    orientation="vertical"
+                  // onChange={HandleToggle}
+                  // className={classes.Toggle}
+                  >
+                    {/**
                        * maps the requested item names to be repeatedly displayed
                         */}
-                  {requestedItemsAPI.Data.map((item, index) => (
-                    <ToggleButton className={classes.toggleButton} value={item.FoodName} key={index} onClick={() => handleClick(item)}>
-                      <ItemsButton item={item.FoodName} />
-                    </ToggleButton>
-                  ))}
-                </ToggleButtonGroup>
-
+                    {requestedItemsAPI.Data.map((item, index) => (
+                      <ToggleButton className={classes.toggleButton} value={item.FoodName} key={index} onClick={() => handleClick(item)}>
+                        <ItemsButton item={item.FoodName} />
+                      </ToggleButton>
+                    ))}
+                  </ToggleButtonGroup>
+                </div>
               </div>
               <AddItemForm FoodName={name} FoodDescription={description} />
             </div>

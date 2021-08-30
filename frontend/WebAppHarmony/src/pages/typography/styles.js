@@ -57,10 +57,14 @@ export default makeStyles(theme => ({
     borderRadius: 10, height: 70
   },
   clearButton: {
-    backgroundColor: "#CECECE", margin: 10, height: 35, borderRadius: 10, paddingLeft: 12, paddingRight: 12, width: "20%"
+    backgroundColor: "#CECECE", margin: 10, height: 35, borderRadius: 10, paddingLeft: 12, paddingRight: 12, width: "20%",
+    boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)"
+
   },
   addButton: {
-    backgroundColor: "#FF6347", color: "white", margin: 10, height: 35, borderRadius: 10, paddingLeft: 12, paddingRight: 12, width: "20%"
+    backgroundColor: "#3f51b5", color: "white", margin: 15, height: 35, borderRadius: 10, paddingLeft: 12, paddingRight: 12, width: "30%",
+    boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)"
+
   },
   requestedItemBox: {
     textAlign: "left",
@@ -107,7 +111,8 @@ export default makeStyles(theme => ({
   icon: { float: "right", height: 20, width: 20, marginTop: 15, marginBottom: 0 },
   fontSizeMedium: {
     fontSize: 20,
-    fontFamily: "sans-serif-light"
+    fontFamily: "sans-serif-light",
+    marginTop: 0
   },
   pageContainer: {
     float: "right",

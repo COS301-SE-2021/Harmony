@@ -12,6 +12,7 @@ import { Typography } from "../../components/Wrappers";
 
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+import Button from '@material-ui/core/Button';
 
 function AddItemForm(itemName, itemDescription, itemTags, ...props) {
     /**The name, description and tags for the form */
@@ -145,8 +146,12 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                             </div>
 
                             <div>
-                                <button onClick={() => handleClear()} className={classes.clearButton}><p className={classes.fontSizeMedium}>Clear</p></button>
-                                <button type="submit" onClick={() => console.log("clicked submit")} className={classes.addButton}><p className={classes.fontSizeMedium}>Add to Database</p></button>
+                                {/* <button onClick={() => handleClear()} className={classes.clearButton}><p className={classes.fontSizeMedium}>Clear</p></button> */}
+                                <Button onClick={() => handleClear()} variant="contained">Clear</Button>
+                                {/* <button type="submit" onClick={() => console.log("clicked submit")} className={classes.addButton}><p className={classes.fontSizeMedium}>Add to Database</p></button> */}
+                                <Button variant="contained" color="primary" type="submit" onClick={() => console.log("clicked submit")}>
+                                    Add to database
+                                </Button>
                             </div>
                         </Form>
                     )}

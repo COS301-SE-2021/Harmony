@@ -217,7 +217,7 @@ export default function Dashboard(props) {
 
                 <Grid item xs={6}>
                   <Typography size="xxl" weight="large" noWrap>
-                    {totalUsers}:{totalUsers}
+                    {hitRatio.TrueScans}:{hitRatio.FalseScans}
                   </Typography>
 
                 </Grid>
