@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Grid,
   LinearProgress,
@@ -48,20 +48,33 @@ export default function Dashboard(props) {
 
   // local
   var [mainChartState, setMainChartState] = useState("monthly");
+  var [data, setData] = useState(" ");
+  var [totalUsers, setTotalUsers] = useState("");
 
+  /**
+   * @function runs once to load all the data for the dashboard
+   */
+  useEffect(() => {
+    // GET request using fetch inside useEffect React hook
+    fetch('https://w3lfp6r6f7.execute-api.eu-west-1.amazonaws.com/dev/gettotalusers')
+      .then(response => response.json())
+      .then(data => setTotalUsers(data.TotalUsers))
+      .then(console.log(totalUsers));
+    /**  empty dependency array means this effect will only run once (like componentDidMount in classes)*/
+  }, []);
   return (
     <>
       <PageTitle title="Dashboard" button={<Button
-      variant="contained"
-      size="medium"
-      color="secondary"
-    >
+        variant="contained"
+        size="medium"
+        color="secondary"
+      >
         Latest Reports
-    </Button>} />
+      </Button>} />
       <Grid container spacing={4}>
         <Grid item lg={3} md={4} sm={6} xs={12}>
           <Widget
-            title="Visits Today"
+            title="Total Users"
             upperTitle
             bodyClass={classes.fullHeightBody}
             className={classes.card}
@@ -69,39 +82,39 @@ export default function Dashboard(props) {
             <div className={classes.visitsNumberContainer}>
               <Grid container item alignItems={"center"}>
                 <Grid item xs={6}>
-              <Typography size="xl" weight="medium" noWrap>
-                12, 678
-              </Typography>
+                  <Typography size="xl" weight="large" noWrap>
+                    {totalUsers}
+                  </Typography>
                 </Grid>
-                <Grid item xs={6}>
-              <LineChart
-                width={100}
-                height={30}
-                data={[
-                  { value: 10 },
-                  { value: 15 },
-                  { value: 10 },
-                  { value: 17 },
-                  { value: 18 },
-                ]}
-              >
-                <Line
-                  type="natural"
-                  dataKey="value"
-                  stroke={theme.palette.success.main}
-                  strokeWidth={2}
-                  dot={false}
-                />
-              </LineChart>
-                </Grid>
+                {/* <Grid item xs={6}>
+                  <LineChart
+                    width={100}
+                    height={30}
+                    data={[
+                      { value: 10 },
+                      { value: 15 },
+                      { value: 10 },
+                      { value: 17 },
+                      { value: 18 },
+                    ]}
+                  >
+                    <Line
+                      type="natural"
+                      dataKey="value"
+                      stroke={theme.palette.success.main}
+                      strokeWidth={2}
+                      dot={false}
+                    />
+                  </LineChart>
+                </Grid> */}
               </Grid>
             </div>
-            <Grid
+            {/* <Grid
               container
               direction="row"
               justify="space-between"
               alignItems="center"
-            >
+              >
               <Grid item xs={4}>
                 <Typography color="text" colorBrightness="secondary" noWrap>
                   Registrations
@@ -120,7 +133,7 @@ export default function Dashboard(props) {
                 </Typography>
                 <Typography size="md">3.25%</Typography>
               </Grid>
-            </Grid>
+            </Grid> */}
           </Widget>
         </Grid>
         <Grid item lg={3} md={8} sm={6} xs={12}>
@@ -412,16 +425,6 @@ export default function Dashboard(props) {
             <BigStat {...stat} />
           </Grid>
         ))}
-        <Grid item xs={12}>
-          <Widget
-            title="Support Requests"
-            upperTitle
-            noBodyPadding
-            bodyClass={classes.tableWidget}
-          >
-            <Table data={mock.table} />
-          </Widget>
-        </Grid>
       </Grid>
     </>
   );
