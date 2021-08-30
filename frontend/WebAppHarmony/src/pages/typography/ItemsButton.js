@@ -6,7 +6,6 @@ import useStyles from "./styles";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import Widget from "../../components/Widget/Widget";
 function ItemsButton(item, ...props) {
-    const [color, setColor] = useState("#CECECE");
     var classes = useStyles();
 
     /**
@@ -15,15 +14,13 @@ function ItemsButton(item, ...props) {
     const handleRemoveItem = () => {
         console.log(item);
     }
-    const changeColour = () => {
-        console.log("clicked ");
-        setColor("#FF6347");
-    }
 
     return (
-        <div className={classes.requestedItemBox} onClick={() => changeColour()}>
+        <div className={classes.requestedItemBox}>
             <p className={classes.requestedItemName}>{item.item}</p>
-            <AiOutlineMinusCircle className={classes.icon} onClick={() => handleRemoveItem(item)} />
+            <div className={classes.icon}>
+                <AiOutlineMinusCircle size="20" onClick={() => handleRemoveItem(item)} />
+            </div>
         </div>
     );
 }

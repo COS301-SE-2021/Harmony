@@ -11,6 +11,8 @@ import { Typography } from "../../components/Wrappers";
 import AddItemForm from "./AddItemForm";
 import ItemsButton from "./ItemsButton";
 
+import ToggleButton from '@material-ui/lab/ToggleButton';
+import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 export default function TypographyPage() {
   var classes = useStyles();
   /**The name, description and tags for the form */
@@ -63,14 +65,23 @@ export default function TypographyPage() {
                 <div className={classes.requestContainer}>
                   <p className={classes.fontSizeMedium}>Users have requested the following items to be added to the database:</p>
                   <br />
-                  {/**
+                  <ToggleButtonGroup
+                    value={name}
+                    exclusive
+                    orientation="vertical"
+                  // onChange={HandleToggle}
+                  // className={classes.Toggle}
+                  >
+                    {/**
                        * maps the requested item names to be repeatedly displayed
                         */}
-                  {requestedItems.Data.map((item, index) => (
-                    <button className={classes.button} onClick={() => handleClick(item)}>
-                      <ItemsButton item={item.ItemName} />
-                    </button>
-                  ))}
+                    {requestedItems.Data.map((item, index) => (
+                      <ToggleButton className={classes.toggleButton} value={item.ItemName} onClick={() => handleClick(item)}>
+                        <ItemsButton item={item.ItemName} />
+                      </ToggleButton>
+                    ))}
+                  </ToggleButtonGroup>
+
                 </div>
                 <AddItemForm itemName={name} itemDescription={description} itemTags={tags} />
               </div>

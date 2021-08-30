@@ -53,6 +53,9 @@ export default makeStyles(theme => ({
   button: {
     backgroundColor: "#CECECE", height: 35, borderRadius: 10, paddingLeft: 12, paddingRight: 12
   },
+  toggleButton: {
+    borderRadius: 10, height: 70
+  },
   clearButton: {
     backgroundColor: "#CECECE", margin: 10, height: 35, borderRadius: 10, paddingLeft: 12, paddingRight: 12, width: "20%"
   },
@@ -60,10 +63,11 @@ export default makeStyles(theme => ({
     backgroundColor: "#FF6347", color: "white", margin: 10, height: 35, borderRadius: 10, paddingLeft: 12, paddingRight: 12, width: "20%"
   },
   requestedItemBox: {
-    textAlign: "center", float: "left"
+    textAlign: "left",
+    width: "100%"
   },
   requestedItemName: {
-    fontSize: 20, float: "left"
+    fontSize: 15, float: "left", textAlign: "left"
   },
   ImageContainer: {
     height: 125,
@@ -100,7 +104,7 @@ export default makeStyles(theme => ({
   displayFlexOnly: {
     display: "flex"
   },
-  icon: { marginLeft: 5, float: "left", height: 20, width: 20, marginTop: 3, marginRight: -3 },
+  icon: { float: "right", height: 20, width: 20, marginTop: 15, marginBottom: 0 },
   fontSizeMedium: {
     fontSize: 20,
     fontFamily: "sans-serif-light"
