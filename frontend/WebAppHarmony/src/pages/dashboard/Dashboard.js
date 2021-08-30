@@ -52,7 +52,6 @@ export default function Dashboard(props) {
   var [totalUsers, setTotalUsers] = useState("");
   var [mostFavouritedPairings, setMostFavouritedPairings] = useState([]);
   var [hitRatio, setHitRatio] = useState("");
-
   /**
    * @function runs once to load all the data for the dashboard
    */
@@ -491,11 +490,17 @@ export default function Dashboard(props) {
             </ResponsiveContainer>
           </Widget>
         </Grid>
-        {mock.bigStat.map(stat => (
+        <Grid item sm={6} xs={12}>
+          <BigStat title="Food Flavour Statistics" color="#C41ED4" />
+        </Grid>
+        <Grid item sm={6} xs={12}>
+          <BigStat title="Food Flavour Statistics" color="#C41ED4" />
+        </Grid>
+        {/* {mock.bigStat.map(stat => (
           <Grid item md={4} sm={6} xs={12} key={stat.product}>
-            <BigStat {...stat} />
+            <BigStat {...stat} title="Statistics" color="#FF6347" />
           </Grid>
-        ))}
+        ))} */}
       </Grid>
       <br />
       <br />
