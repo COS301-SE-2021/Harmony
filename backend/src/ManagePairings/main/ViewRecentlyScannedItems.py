@@ -43,8 +43,6 @@ def view_recently_scanned_items(event, context):
     # Gets the total scans for all 7 days.
     total_scans = sum(date_count_array)
 
-    response = ""
-
     listvar = []
     for w in range(7):
         listvar.append({"DateScanned": f"{dates[w]}", "Count": f"{date_count_array[w]}"})
@@ -56,7 +54,6 @@ def view_recently_scanned_items(event, context):
     #     else:
     #         response = response + str(dictionary) + ","
 
-    print(response)
     # jsonstring = json.dumps(response)
     # print(jsonstring)
     return {
