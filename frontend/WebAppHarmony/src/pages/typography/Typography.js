@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Grid } from "@material-ui/core";
 
 // styles
@@ -19,7 +19,7 @@ export default function TypographyPage() {
   const [name, setName] = useState(" ");
   const [description, setDescription] = useState(" ");
   const [tags, setTags] = useState(" ");
-
+  const [requestedItemsAPI, setRequested] = useState([]);
   const requestedItems = {
     Data: [{
       ItemName: "Malva Pudding",
@@ -36,7 +36,14 @@ export default function TypographyPage() {
     { ItemName: "Amarula Don Pedro", ItemDescription: "Amarula is a cream liqueur from South Africa. It is made with sugar, cream and the fruit of the African marula tree", ItemTags: "Alcoholic, Cold, Sweet" },
     { ItemName: "Melktert", ItemDescription: "Melktert is an Afrikaner dessert consisting of a sweet pastry crust containing a custard filling made from milk, flour, sugar and eggs.", ItemTags: "Sweet, Warm" }]
   };
+  useEffect(() => {
 
+    fetch('https://w3lfp6r6f7.execute-api.eu-west-1.amazonaws.com/dev/viewrequesteditems')
+      .then(response => response.json())
+      .then(data => setRequested(data))
+      .then(console.log("items " + JSON.stringify(requestedItemsAPI)));
+    /**  empty dependency array means this effect will only run once (like componentDidMount in classes)*/
+  }, []);
 
   /** @function sets the forms default values to the button values
    * @param item = the api response item
@@ -58,7 +65,7 @@ export default function TypographyPage() {
     <>
       <PageTitle title="Moderate Items" />
       <Grid container spacing={1}>
-        <Grid item xs={12} md={16}>
+        <Grid item xs={12} md={12}>
           <Widget disableWidgetMenu>
             <div className={classes.root}>
               <div className={classes.pageContainer}>
@@ -75,9 +82,9 @@ export default function TypographyPage() {
                     {/**
                        * maps the requested item names to be repeatedly displayed
                         */}
-                    {requestedItems.Data.map((item, index) => (
-                      <ToggleButton className={classes.toggleButton} value={item.ItemName} onClick={() => handleClick(item)}>
-                        <ItemsButton item={item.ItemName} />
+                    {requestedItemsAPI.Data.map((item, index) => (
+                      <ToggleButton className={classes.toggleButton} value={item.FoodName} onClick={() => handleClick(item)}>
+                        <ItemsButton item={item.FoodName} />
                       </ToggleButton>
                     ))}
                   </ToggleButtonGroup>
