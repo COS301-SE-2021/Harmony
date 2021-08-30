@@ -33,12 +33,6 @@ Resources:
       Policies:
         # Give DynamoDB Full Access to your Lambda Function
         - AmazonDynamoDBFullAccess
-      Events:
-        AISuccessRatio:
-          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
-          Properties:
-            Path: /
-            Method: post
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
