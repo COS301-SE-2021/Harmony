@@ -10,8 +10,6 @@ import Widget from "../../components/Widget";
 import { Typography } from "../../components/Wrappers";
 import AddItemForm from "../../components/Layout/AddItemForm";
 import ItemsButton from "../../components/Layout/ItemsButton";
-import UniversalStyle from "../../themes/UniversalStyle";
-import ModerateItemStyling from "../../themes/ModerateItemStyling";
 
 export default function TypographyPage() {
   var classes = useStyles();
@@ -61,16 +59,15 @@ export default function TypographyPage() {
         <Grid item xs={12} md={16}>
           <Widget disableWidgetMenu>
             <div className={classes.root}>
-
-              <div style={UniversalStyle.pageContainer}>
-                <div style={ModerateItemStyling.requestContainer}>
-                  <p style={UniversalStyle.fontSizeMedium}>Users have requested the following items to be added to the database:</p>
+              <div className={classes.pageContainer}>
+                <div className={classes.requestContainer}>
+                  <p className={classes.fontSizeMedium}>Users have requested the following items to be added to the database:</p>
                   <br />
                   {/**
                        * maps the requested item names to be repeatedly displayed
                         */}
                   {requestedItems.Data.map((item, index) => (
-                    <button style={ModerateItemStyling.button} onClick={() => handleClick(item)}>
+                    <button className={classes.button} onClick={() => handleClick(item)}>
                       <ItemsButton item={item.ItemName} />
                     </button>
                   ))}
