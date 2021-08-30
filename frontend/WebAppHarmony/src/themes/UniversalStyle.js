@@ -20,7 +20,6 @@ const UniversalStyle = {
         fontFamily: "sans-serif-light"
     },
     pageContainer: {
-        width: "90%",
         float: "right"
     }
 }

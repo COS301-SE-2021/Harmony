@@ -18,7 +18,7 @@ const ModerateItemStyling = {
     addItemContainer: {
         width: "65%",
         height: 620,
-        marginLeft: 100,
+        marginLeft: 70,
         padding: 15,
         borderRadius: 15,
         float: "left",
@@ -28,7 +28,7 @@ const ModerateItemStyling = {
         boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
     },
     requestContainer: {
-        width: "20%",
+        width: "25%",
         height: 620,
         padding: 15,
         borderRadius: 15,
@@ -39,16 +39,16 @@ const ModerateItemStyling = {
         boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
     },
     button: {
-        backgroundColor: "#CECECE", margin: 10, height: 35, borderRadius: 10, paddingTop: 5, paddingLeft: 12, paddingRight: 12
+        backgroundColor: "#CECECE", height: 35, borderRadius: 10, paddingLeft: 12, paddingRight: 12
     },
     clearButton: {
-        backgroundColor: "#CECECE", margin: 10, height: 35, borderRadius: 10, paddingTop: 5, paddingLeft: 12, paddingRight: 12, width: "20%"
+        backgroundColor: "#CECECE", margin: 10, height: 35, borderRadius: 10, paddingLeft: 12, paddingRight: 12, width: "20%"
     },
     addButton: {
-        backgroundColor: "#FF6347", color: "white", margin: 10, height: 35, borderRadius: 10, paddingTop: 5, paddingLeft: 12, paddingRight: 12, width: "20%"
+        backgroundColor: "#FF6347", color: "white", margin: 10, height: 35, borderRadius: 10, paddingLeft: 12, paddingRight: 12, width: "20%"
     },
     requestedItemBox: {
-        textAlign: "center", paddingBottom: 15, float: "left"
+        textAlign: "center", float: "left"
     },
     requestedItemName: {
         fontSize: 20, float: "left"
