@@ -64,10 +64,10 @@ export default makeStyles(theme => ({
   },
   requestedItemBox: {
     textAlign: "left",
-    width: "100%"
+    width: 200
   },
   requestedItemName: {
-    fontSize: 15, float: "left", textAlign: "left"
+    fontSize: 15, float: "left", textAlign: "left", width: 170, height: 30, overflow: "hidden"
   },
   ImageContainer: {
     height: 125,
