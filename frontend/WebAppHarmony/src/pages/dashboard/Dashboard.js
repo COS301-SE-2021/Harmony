@@ -51,21 +51,22 @@ export default function Dashboard(props) {
   var [data, setData] = useState(" ");
   var [totalUsers, setTotalUsers] = useState("");
   var [mostFavouritedPairings, setMostFavouritedPairings] = useState([]);
+  var [hitRatio, setHitRatio] = useState("");
 
   /**
    * @function runs once to load all the data for the dashboard
    */
   useEffect(() => {
-    // GET request using fetch inside useEffect React hook
+    /**Get total users api  */
     fetch('https://w3lfp6r6f7.execute-api.eu-west-1.amazonaws.com/dev/gettotalusers')
       .then(response => response.json())
-      .then(data => setTotalUsers(data.TotalUsers))
-      .then(console.log(totalUsers));
+      .then(data => setTotalUsers(data.TotalUsers));
 
-    fetch('https://w3lfp6r6f7.execute-api.eu-west-1.amazonaws.com/dev/viewmostfavouritepairings')
+    /**Get hit ration call */
+    fetch('https://w3lfp6r6f7.execute-api.eu-west-1.amazonaws.com/dev/viewratiodata')
       .then(response => response.json())
-      .then(data => setMostFavouritedPairings(data.Data))
-      .then(console.log(mostFavouritedPairings));
+      .then(data => setHitRatio(data))
+      .then(console.log("hit ratio " + JSON.stringify(hitRatio)));
     /**  empty dependency array means this effect will only run once (like componentDidMount in classes)*/
   }, []);
   return (
@@ -87,11 +88,13 @@ export default function Dashboard(props) {
           >
             <div className={classes.visitsNumberContainer}>
               <Grid container item alignItems={"center"}>
-                <Grid item xs={6}>
-                  <Typography size="xl" weight="large" noWrap>
-                    {totalUsers}
-                  </Typography>
-                </Grid>
+                <div style={{ width: "100%", textAlign: "right" }}>
+                  <Grid item xs={6}>
+                    <Typography size="xxl" weight="large" noWrap>
+                      {totalUsers}
+                    </Typography>
+                  </Grid>
+                </div>
                 {/* <Grid item xs={6}>
                   <LineChart
                     width={100}
@@ -143,8 +146,8 @@ export default function Dashboard(props) {
           </Widget>
         </Grid>
         <Grid item lg={3} md={8} sm={6} xs={12}>
-          <Widget
-            title="App Performance"
+          {/* <Widget
+            title="AI Performance"
             upperTitle
             className={classes.card}
             bodyClass={classes.fullHeightBody}
@@ -203,7 +206,69 @@ export default function Dashboard(props) {
                 className={classes.progress}
               />
             </div>
+          </Widget> */}
+          <Widget
+            title="AI Performance"
+            upperTitle
+            bodyClass={classes.fullHeightBody}
+            className={classes.card}
+          >
+            <div className={classes.visitsNumberContainer}>
+              <Grid container item alignItems={"center"}>
+
+                <Grid item xs={6}>
+                  <Typography size="xxl" weight="large" noWrap>
+                    {totalUsers}:{totalUsers}
+                  </Typography>
+
+                </Grid>
+                <div className={classes.performanceLegendWrapper}>
+                  <div className={classes.legendElement}>
+                    <Dot color="success" />
+                    <Typography
+                      color="text"
+                      colorBrightness="secondary"
+                      className={classes.legendElementText}
+                    >
+                      Hits
+                    </Typography>
+                  </div>
+                  <div className={classes.legendElement}>
+                    <Dot color="secondary" />
+                    <Typography
+                      color="text"
+                      colorBrightness="secondary"
+                      className={classes.legendElementText}
+                    >
+                      Misses
+                    </Typography>
+                  </div>
+                </div>
+              </Grid>
+            </div>
+
+            <div className={classes.visitsNumberContainer}>
+              <div style={{ width: "100%", textAlign: "center" }}>
+                <Grid container item alignItems={"center"}>
+                  <Grid item xs={6}>
+                    <Typography color="text" colorBrightness="primary" >
+                      Total Scanned :
+                    </Typography>
+
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography color="text" colorBrightness="secondary">
+                      {hitRatio.TotalScans}
+                    </Typography>
+
+                  </Grid>
+
+                </Grid>
+              </div>
+            </div>
+
           </Widget>
+
         </Grid>
         <Grid item lg={3} md={8} sm={6} xs={12}>
           <Widget
