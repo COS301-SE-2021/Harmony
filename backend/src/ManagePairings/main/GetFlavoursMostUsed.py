@@ -35,7 +35,14 @@ def get_flavours_most_used(event, context):
 
     bubble_sort(flavours_count, flavours)
 
-    return 0
+    listvar = []
+    for w in range(len(flavours)):
+        listvar.append({"Flavour": f"{flavours[w]}", "Count": f"{flavours_count[w]}"})
+
+    return {
+        "StatusCode": 200,
+        "Data": listvar,
+    }
 
 
 def bubble_sort(flavours_count, flavours):
