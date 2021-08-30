@@ -32,6 +32,10 @@ def view_ratio_data(event, context):
 
     calc_ratio = true_count / false_count
 
-    print(calc_ratio)
-    print(totalScanned)
-    return 0
+    return {
+        "StatusCode": 200,
+        "TotalScans": totalScanned,
+        "GlobalRatio": calc_ratio,
+        "FalseScans": false_count,
+        "TrueScans": true_count
+    }
