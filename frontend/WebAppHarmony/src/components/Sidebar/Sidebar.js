@@ -40,7 +40,7 @@ const structure = [
     icon: <QueueIcon />,
   },
   { id: 2, label: "Train AI", link: "/app/tables", icon: <TableIcon /> },
-  { id: 3, label: "User Feedback", link: "/app/tablecopy", icon: <FeedbackIcon /> },
+  { id: 3, label: "User Feedback", link: "/app/feedback", icon: <FeedbackIcon /> },
   { id: 4, type: "divider" },
 
 ];

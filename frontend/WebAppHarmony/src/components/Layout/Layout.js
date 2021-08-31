@@ -21,6 +21,7 @@ import Sidebar from "../Sidebar";
 import Dashboard from "../../pages/dashboard";
 import ModerateItems from "../../pages/moderateitems/ModerateItems";
 import Tables from "../../pages/tables";
+import Feedback from "../../pages/feedback";
 
 
 
@@ -48,7 +49,7 @@ function Layout(props) {
               <Route path="/app/dashboard" component={Dashboard} />
               <Route path="/app/moderateitems" component={ModerateItems} />
               <Route path="/app/tables" component={Tables} />
-              <Route path="/app/table" component={Tables} />
+              <Route path="/app/feedback" component={Feedback} />
 
             </Switch>
             <Box
