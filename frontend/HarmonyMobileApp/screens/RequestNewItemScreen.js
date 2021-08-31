@@ -132,6 +132,7 @@ export default function RequestNewItemScreen({ navigation }) {
                                 autoCorrect={false}
                                 keyboardType="email-address"
                                 textContentType="emailAddress"
+                                multiline={true}
 
                                 onBlur={() => setFieldTouched("Description")}
                                 error={errors.Description}
