@@ -35,8 +35,8 @@ def identify_food_item(event, context):
         b = data['predictions'][0]['probability']
         if b < 0.6:
             return {
-                "statusCode": 204,
-                "data": "Image cannot be Identified"
+                "StatusCode": 204,
+                "Data": "Image cannot be Identified"
             }
 
     else:
@@ -46,8 +46,8 @@ def identify_food_item(event, context):
         b = data
         # print(a,b)
         return {
-            "statusCode": 204,
-            "data": "Image cannot be Identified"
+            "StatusCode": 204,
+            "Data": "Image cannot be Identified"
         }
 
     dynamodb = boto3.resource('dynamodb')
@@ -76,13 +76,13 @@ def identify_food_item(event, context):
     # Format response to have only one food item and multiple drink items.
     if len(response['Items']) == 0:
         return {
-            "statusCode": 204,
-            "data": "Image cannot be Identified"
+            "StatusCode": 204,
+            "Data": "Image cannot be Identified"
         }
     else:
         return {
-            "statusCode": 200,
-            "data": response['Items']
+            "StatusCode": 200,
+            "Data": response['Items']
         }
 
 """
