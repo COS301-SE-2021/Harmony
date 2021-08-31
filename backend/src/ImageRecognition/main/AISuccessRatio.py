@@ -36,7 +36,7 @@ def ai_success_ratio(event, context):
     is_correct = event['IsCorrect']
     food_item = event['FoodItem']
     today = date.today()
-    #get_date = today.strftime("%d/%m/%Y")
+    # get_date = today.strftime("%d/%m/%Y")
 
     ufid = uuid.uuid4().hex
     imagelink = add_image_to_s3(event["Image"], ufid)
@@ -51,22 +51,22 @@ def ai_success_ratio(event, context):
                 'FoodImage': imagelink
             })
         return {'StatusCode': 200,
-                "Data" : "Feedback has been sent"}
+                "Data": "Feedback has been sent"}
 
     except ClientError as e:
         if e.response['Error']['Code'] == "ConditionalCheckFailedException":
             print(e.response['Error']['Message'])
 
             return {'StatusCode': 400,
-                    "Data" : "Failed to send feedback"}
+                    "Data": "Failed to send feedback"}
+
 
 def add_image_to_s3(base64image, imageid):
     imgdata = base64.b64decode(base64image)
 
-
     file_name_with_extention = f'recognitionfeedback/{imageid}.jpg'
     obj = s3.Object(bucket_name, file_name_with_extention)
-    response = obj.put(Body=imgdata,ContentType='image/jpeg')
+    response = obj.put(Body=imgdata, ContentType='image/jpeg')
     location = boto3.client('s3').get_bucket_location(Bucket=bucket_name)['LocationConstraint']
     # get object url
     object_url = "https://%s.s3-%s.amazonaws.com/%s" % (bucket_name, location, file_name_with_extention)

@@ -18,12 +18,7 @@ Resources:
       Policies:
         # Give DynamoDB Full Access to your Lambda Function
         - AmazonDynamoDBFullAccess
-      Events:
-        IdentifyFoodItem:
-          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
-          Properties:
-            Path: /
-            Method: post
+
   AISuccessRatioFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
@@ -33,27 +28,3 @@ Resources:
       Policies:
         # Give DynamoDB Full Access to your Lambda Function
         - AmazonDynamoDBFullAccess
-
-Outputs:
-  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
-  # Find out more about other implicit resources you can reference within SAM
-  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
-  IdentifyFoodItemApi:
-    Description: "API Gateway endpoint URL for Prod stage for IdentifyFoodItem function"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/IdentifyFoodItem/"
-  IdentifyFoodItemFunction:
-    Description: "IdentifyFoodItem Lambda Function ARN"
-    Value: !GetAtt IdentifyFoodItemFunction.Arn
-  IdentifyFoodItemIamRole:
-    Description: "Implicit IAM Role created for IdentifyFoodItem function"
-    Value: !GetAtt IdentifyFoodItemFunctionRole.Arn
-
-  AISuccessRatioApi:
-    Description: "API Gateway endpoint URL for Prod stage for AISuccessRatio function"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/AISuccessRatio/"
-  AISuccessRatioFunction:
-    Description: "AISuccessRatio Lambda Function ARN"
-    Value: !GetAtt AISuccessRatioFunction.Arn
-  AISuccessRatioIamRole:
-    Description: "Implicit IAM Role created for AISuccessRatio function"
-    Value: !GetAtt AISuccessRatioFunctionRole.Arn
