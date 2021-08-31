@@ -83,7 +83,7 @@ export default function RequestNewItemScreen({ navigation }) {
                     .required("Please, provide the item name!"),
                 Description: yup
                     .string()
-                    .matches(/^[A-Za-z\s]+$/, "Item name description may only contain alphabetic characters") //Includes spaces
+                    .matches(/^[A-Za-z.,;'"\s]+$/, "Item name description may only contain valid characters such as A-Za-z.,;'\"") //Includes spaces
                     .required("Please, provide your item description!"),
             })}
         >
