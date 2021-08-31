@@ -24,7 +24,7 @@ def identify_food_item(event, context):
         'Prediction-key': '',
         'Content-Type': 'application/octet-stream',
     }
-    t = event['data'].encode("ascii")
+    t = event['Data'].encode("ascii")
     body = base64.decodebytes(t)
     response = requests.post(url, headers=headers, data=body)
     data = response.json()
