@@ -79,8 +79,12 @@ export default function RequestNewItemScreen({ navigation }) {
             validationSchema={yup.object().shape({
                 Name: yup
                     .string()
+                    .matches(/^[A-Za-z\s]+$/, "Item name may only contain alphabetic characters") //Includes spaces
                     .required("Please, provide the item name!"),
-                Description: yup.string().required("Please, provide your item description!"),
+                Description: yup
+                    .string()
+                    .matches(/^[A-Za-z\s]+$/, "Item name description may only contain alphabetic characters") //Includes spaces
+                    .required("Please, provide your item description!"),
             })}
         >
             {({
