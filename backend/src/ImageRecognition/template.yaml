@@ -28,3 +28,4 @@ Resources:
       Policies:
         # Give DynamoDB Full Access to your Lambda Function
         - AmazonDynamoDBFullAccess
+        - AmazonS3FullAccess
