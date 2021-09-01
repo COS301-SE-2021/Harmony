@@ -23,8 +23,8 @@ def add_item(event, context):
     name = event['ItemName']
     description = event['ItemDescription']
     tags = event['ItemTags']
-    image = event['ItemImage']
     generate_id = uuid.uuid4().hex
+    imagelink = add_image_to_s3(event["Image"], generate_id)
 
     # write data for new item to the DynamoDB table
     try:
@@ -34,7 +34,7 @@ def add_item(event, context):
                 'FoodTags': tags,
                 'FoodDescription': description,
                 'FoodName': name,
-                'FoodImage': image
+                'FoodImage': imagelink
             })
         return json.dumps({'StatusCode': 200})
 
