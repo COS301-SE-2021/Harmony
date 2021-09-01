@@ -12,22 +12,8 @@ import Table from "../dashboard/components/Table/Table";
 import mock from "../dashboard/mock";
 
 const datatableData = [
-  ["8d198cb5-4008-49c9-8a6d-040809376919", "Churros", "Regular", "50"],
-  ["8d198cb5-4008-49c9-8a6d-040809376919", "Chocolate Cake", "Regular", "50"],
-  ["8d198cb5-4008-49c9-8a6d-040809376919", "Samoosa", "Regular", "50"],
-  ["8d198cb5-4008-49c9-8a6d-040809376919", "Fish and Chips", "Regular", "50"],
-  ["8d198cb5-4008-49c9-8a6d-040809376919", "Churros", "Regular", "50"],
-  ["8d198cb5-4008-49c9-8a6d-040809376919", "Chocolate Cake", "Regular", "50"],
-  ["8d198cb5-4008-49c9-8a6d-040809376919", "Samoosa", "Regular", "50"],
-  ["8d198cb5-4008-49c9-8a6d-040809376919", "Fish and Chips", "Regular", "50"],
-  ["8d198cb5-4008-49c9-8a6d-040809376919", "Churros", "Regular", "50"],
-  ["8d198cb5-4008-49c9-8a6d-040809376919", "Chocolate Cake", "Regular", "50"],
-  ["8d198cb5-4008-49c9-8a6d-040809376919", "Samoosa", "Regular", "50"],
-  ["8d198cb5-4008-49c9-8a6d-040809376919", "Fish and Chips", "Regular", "50"],
-  ["8d198cb5-4008-49c9-8a6d-040809376919", "Churros", "Regular", "50"],
-  ["8d198cb5-4008-49c9-8a6d-040809376919", "Chocolate Cake", "Regular", "50"],
-  ["8d198cb5-4008-49c9-8a6d-040809376919", "Samoosa", "Regular", "50"],
-  ["8d198cb5-4008-49c9-8a6d-040809376919", "Fish and Chips", "Regular", "50"],
+  {Id: "8d198cb5-4008-49c9-8a6d-040809376919", name1: "Churros", type1: "Regular", count1: "50"},
+  {Id: "8d198cb5-4008-49c9-8a6d-040809376919", name1: "Churros", type1: "Regular", count1: "50"},
 ];
 
 const datatableData2 = [
@@ -55,32 +41,50 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default function Tables() {
-  const classes = useStyles();
-  return (
-    <>
-      <PageTitle title="Train AI" />
-      <Grid container spacing={4}>
-        <Grid item xs={12}>
-          <MUIDataTable
-            title="Tags"
-            data={datatableData}
-            columns={["Tag ID ", "Name", "Type", "ImageCount"]}
-            options={{
-              filterType: "checkbox",
-            }}
-          />
-        </Grid>
-      </Grid>
-      <Grid container spacing={4}>
-        <Grid item xs={12}>
-          <MUIDataTable
-              title="Iterations"
-              data={datatableData2}
-              columns={["Id Iteration", "Name", "Status", "PublishName", "TrainingType"]}
-          />
-        </Grid>
-      </Grid>
-    </>
-  );
-}
+
+  export default function Tables() {
+    const classes = useStyles();
+
+    const [data, setData] = React.useState([])
+    const columns = [
+      { title: "ID", field: "id" },
+      { title: "Username", field: "username" },
+      { title: "Name", field: "name" },
+      { title: "Email", field: "email" },
+      { title: "Phone", field: "phone" },
+      { title: "Web Link", field: 'website' }
+    ]
+    React.useEffect(() => {
+      fetch("https://jsonplaceholder.typicode.com/users")
+          .then(resp => resp.json())
+          .then(resp => {
+            setData(resp)
+          })
+    }, [])
+    return (
+        <>
+          <PageTitle title="Train AI"/>
+          <Grid container spacing={4}>
+            <Grid item xs={12}>
+              <MUIDataTable
+                  title="Tags"
+                  data={data}
+                  columns={columns}
+                  options={{
+                    filterType: "checkbox",
+                  }}
+              />
+            </Grid>
+          </Grid>
+          <Grid container spacing={4}>
+            <Grid item xs={12}>
+              <MUIDataTable
+                  title="Iterations"
+                  data={datatableData2}
+                  columns={["Id Iteration", "Name", "Status", "PublishName", "TrainingType"]}
+              />
+            </Grid>
+          </Grid>
+        </>
+    );
+  }

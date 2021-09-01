@@ -47,7 +47,7 @@ export default function Tables() {
           <MUIDataTable
             title="Tags"
             data={datatableData}
-            columns={["Item Name", "Type", "Image"]}
+            columns={["Item Name", "Type", "Image", "Image Tag", "Upload Image"]}
             options={{
               filterType: "checkbox",
             }}
