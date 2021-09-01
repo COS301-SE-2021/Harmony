@@ -62,13 +62,13 @@ def add_item(event, context):
                 'FoodName': name,
                 'FoodImage': imagelink
             })
-        return json.dumps({'StatusCode': 200})
+        return {"StatusCode": 200}
 
     except ClientError as e:
         if e.response['Error']['Code'] == "ConditionalCheckFailedException":
             print(e.response['Error']['Message'])
 
-            return json.dumps({'StatusCode': 400})
+            return {"StatusCode": 400}
 
 
 def add_image_to_s3(base64image, imageid):
