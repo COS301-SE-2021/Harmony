@@ -29,20 +29,29 @@ def add_item(event, context):
     generate_id = uuid.uuid4().hex
     imagelink = add_image_to_s3(event["Image"], generate_id)
 
-
     input_response = request_table.scan()
     requested_items = input_response['Items']
 
-    # initialising string
-    query_id = 'null'
+    food_response = table.scan()
+    food_items = food_response['Items']
+
+    # Checking if the item already exists in the Food table
+    # No Check needed if the item exists in the Requested table because
+    # at times the admin may want to add an item that they want.
+    for w in food_items:
+        if w['FoodName'] == name:
+            return {"StatusCode": 400,
+                    "ErrorMessage": "Item already exists in table."}
+
+    # Checks if the item is in the Request table.
+    # If it is then delete the item.
+    # If not do not delete.
+
     for i in requested_items:
         if i['FoodName'] == name:
-            query_id = i['RID']
+            request_table.delete_item(Key={'RID': i['RID']})
+            break
 
-    request_table.delete_item(
-        Key={
-            'RID': query_id}
-    )
     # write data for new item to the DynamoDB table
     try:
         table.put_item(
