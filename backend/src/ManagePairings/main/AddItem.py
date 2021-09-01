@@ -5,9 +5,12 @@ import base64
 from botocore.exceptions import ClientError
 
 table_name = 'Foods'
+requestTable_name = 'RequestItems'
 
 dynamodb = boto3.resource('dynamodb')
 table = dynamodb.Table(table_name)
+
+request_table = dynamodb.Table(requestTable_name)
 
 client = boto3.client('s3')
 s3 = boto3.resource('s3')
@@ -26,6 +29,20 @@ def add_item(event, context):
     generate_id = uuid.uuid4().hex
     imagelink = add_image_to_s3(event["Image"], generate_id)
 
+
+    input_response = request_table.scan()
+    requested_items = input_response['Items']
+
+    # initialising string
+    query_id = 'null'
+    for i in requested_items:
+        if i['FoodName'] == name:
+            query_id = i['RID']
+
+    request_table.delete_item(
+        Key={
+            'RID': query_id}
+    )
     # write data for new item to the DynamoDB table
     try:
         table.put_item(
