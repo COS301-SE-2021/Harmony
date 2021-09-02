@@ -18,6 +18,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
     /**The name, description and tags for the form */
     const [formName, setName] = useState(itemName.FoodName);
     const [formDescription, setDescription] = useState(itemName.FoodDescription);
+    const [formTags, setTags] = useState("");
     const [FoodOrDrink, setFoodOrDrink] = React.useState('none');
     const [img, setImg] = useState("http://beepeers.com/assets/images/commerces/default-image.jpg");
     var classes = useStyles();
@@ -45,6 +46,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
             initialValues: {
                 ItemName: formName,
                 ItemDescription: formDescription,
+                ItemTags: formTags
             }
         }
     )
@@ -57,6 +59,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
         setImg("http://beepeers.com/assets/images/commerces/default-image.jpg");
         fileRef.current.value = "";
         setFoodOrDrink('none');
+        setTags("");
     }
 
     /**Handles the image preview */
@@ -69,6 +72,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
         }
         reader.readAsDataURL(e.target.files[0])
     }
+
     return (
         <div className={classes.addItemContainer}>
             <Typography
@@ -81,7 +85,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
             {/* <p className={classes.fontSizeMedium}></p> */}
             <div>
                 <Formik
-                    onSubmit={() => (console.log("submitted"))}
+                    onSubmit={() => (console.log("submitted " + formik.values.ItemName + " " + formik.values.ItemTags))}
                     initialValues={formik.values}
                 >
                     {/** The moderate pairings form to submit */}
@@ -142,13 +146,11 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                                 >
                                     <p style={{ fontSize: 18, marginTop: 0 }}>Tags</p>
                                 </Typography></label>
-                                <input id="Tags" name="ItemTags" className={classes.textField} onChange={formik.handleChange} />
+                                <input id="ItemTags" name="ItemTags" className={classes.textField} onChange={formik.handleChange} value={formik.values.ItemTags} />
                             </div>
 
                             <div>
-                                {/* <button onClick={() => handleClear()} className={classes.clearButton}><p className={classes.fontSizeMedium}>Clear</p></button> */}
                                 <Button onClick={() => handleClear()} className={classes.clearButton} variant="contained">Clear</Button>
-                                {/* <button type="submit" onClick={() => console.log("clicked submit")} className={classes.addButton}><p className={classes.fontSizeMedium}>Add to Database</p></button> */}
                                 <Button variant="contained" color="primary" type="submit" className={classes.addButton} onClick={() => console.log("clicked submit")}>
                                     Add to database
                                 </Button>
@@ -156,7 +158,6 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                         </Form>
                     )}
                 </Formik>
-                {/* <button onClick={() => handleClear()} className={classes.button}><p className={classes.fontSizeMedium}>Clear</p></button> */}
             </div>
         </div >
     );

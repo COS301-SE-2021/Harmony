@@ -217,7 +217,13 @@ export default function Dashboard(props) {
 
                 <Grid item xs={6}>
                   <Typography size="xxl" weight="large" noWrap>
-                    {hitRatio.TrueScans}:{hitRatio.FalseScans}
+                    <p style={{
+                      color: "#33eb91", float: "left"
+                    }}>{hitRatio.TrueScans}</p><p style={{
+                      float: "left"
+                    }}>:</p><p style={{
+                      color: "#ff4569", float: "left"
+                    }}>{hitRatio.FalseScans}</p>
                   </Typography>
 
                 </Grid>
