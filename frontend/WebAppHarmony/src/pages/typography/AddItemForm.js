@@ -16,8 +16,8 @@ import Button from '@material-ui/core/Button';
 
 function AddItemForm(itemName, itemDescription, itemTags, ...props) {
     /**The name, description and tags for the form */
-    const [formName, setName] = useState(itemName.FoodName);
-    const [formDescription, setDescription] = useState(itemName.FoodDescription);
+    const [formName, setName] = useState("");
+    const [formDescription, setDescription] = useState("");
     const [formTags, setTags] = useState("");
     const [FoodOrDrink, setFoodOrDrink] = React.useState('none');
     const [img, setImg] = useState("http://beepeers.com/assets/images/commerces/default-image.jpg");
@@ -54,8 +54,8 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
     // console.log(formik.values);
 
     const handleClear = () => {
-        setName(" ");
-        setDescription(" ");
+        setName("");
+        setDescription("");
         setImg("http://beepeers.com/assets/images/commerces/default-image.jpg");
         fileRef.current.value = "";
         setFoodOrDrink('none');
@@ -74,9 +74,15 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
     }
 
     const validateForm = Yup.object().shape({
-        ItemName: Yup.string().min(1, '*').required('*Required'),
-        ItemDescription: Yup.string().required('Required'),
-        ItemTags: Yup.string().email('Invalid email').required('Required'),
+        ItemName: Yup.string()
+            .min(2, '*')
+            .required('*'),
+        ItemDescription: Yup.string()
+            .min(2, '*')
+            .required('*'),
+        ItemTags: Yup.string()
+            .min(2, '*')
+            .required('*'),
     });
 
     return (
@@ -91,7 +97,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
             {/* <p className={classes.fontSizeMedium}></p> */}
             <div>
                 <Formik
-                    onSubmit={() => (console.log("submitted " + formik.values.ItemName + " " + formik.values.ItemTags))}
+                    onSubmit={values => { console.log("submitted " + JSON.stringify(values)) }}
                     initialValues={formik.values}
                     validationSchema={validateForm}
                 >
@@ -130,9 +136,10 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                                     colorBrightness="secondary"
                                     className={classes.legendElementText}
                                 >
-                                    <p style={{ fontSize: 18, marginTop: -15 }}><div style={{ float: "left" }}>Name</div><div style={{ float: "left" }}> {errors.ItemName || !touched.ItemName ? (
-                                        <div style={{ color: "red" }}>*</div>
-                                    ) : null}</div></p>
+                                    <div className={classes.floatLeft}><p className={classes.errorDiv}>Name</p></div><div className={classes.floatLeft}>
+                                        {(errors.ItemName && touched.ItemName) ? (
+                                            <div className={classes.errorStar}>{errors.ItemName}</div>
+                                        ) : null}</div>
 
                                 </Typography>
                                 </label>
@@ -145,18 +152,22 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                                     colorBrightness="secondary"
                                     className={classes.legendElementText}
                                 >
-                                    <p style={{ fontSize: 18, marginTop: 0 }}>Description</p>
-                                </Typography></label>
+                                    <div className={classes.floatLeft}><p className={classes.errorDiv}>Description</p> </div><div className={classes.floatLeft}>
+                                        {errors.ItemDescription && touched.ItemDescription ? (
+                                            <div className={classes.errorStar}>{errors.ItemDescription}</div>
+                                        ) : null}</div>                               </Typography></label>
                                 <input id="ItemDescription" name="ItemDescription" className={classes.textField} onChange={formik.handleChange} value={formik.values.ItemDescription} />
                             </div>
                             <div className={classes.formElements}>
-                                <label htmlFor="Tags" className={classes.formLabel}><Typography
+                                <label htmlFor="ItemTags" className={classes.formLabel}><Typography
                                     color="text"
                                     colorBrightness="secondary"
                                     className={classes.legendElementText}
                                 >
-                                    <p style={{ fontSize: 18, marginTop: 0 }}>Tags</p>
-                                </Typography></label>
+                                    <div className={classes.floatLeft}><p className={classes.errorDiv}>Tags</p> </div><div className={classes.floatLeft}>
+                                        {errors.ItemTags && touched.ItemTags ? (
+                                            <div className={classes.errorStar}>{errors.ItemTags}</div>
+                                        ) : null}</div>                               </Typography></label>
                                 <input id="ItemTags" name="ItemTags" className={classes.textField} onChange={formik.handleChange} value={formik.values.ItemTags} />
                             </div>
 

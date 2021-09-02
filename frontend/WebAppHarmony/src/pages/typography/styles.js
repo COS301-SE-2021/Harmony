@@ -117,5 +117,15 @@ export default makeStyles(theme => ({
   pageContainer: {
     float: "right",
     width: "95%"
+  },
+  floatLeft: {
+    float: "left"
+  },
+  errorDiv: {
+    fontSize: 18,
+    marginTop: -10
+  },
+  errorStar: {
+    color: "red", fontSize: 25, marginLeft: 5, marginTop: -15
   }
 }));
