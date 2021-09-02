@@ -123,7 +123,8 @@ export default makeStyles(theme => ({
   },
   errorDiv: {
     fontSize: 18,
-    marginTop: -10
+    marginTop: -10,
+    color: "#717171"
   },
   errorStar: {
     color: "red", fontSize: 25, marginLeft: 5, marginTop: -15

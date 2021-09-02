@@ -131,43 +131,35 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                             </div>
 
                             <div className={classes.formElements}>
-                                <label htmlFor="ItemName" className={classes.formLabel}><Typography
-                                    color="text"
-                                    colorBrightness="secondary"
-                                    className={classes.legendElementText}
-                                >
-                                    <div className={classes.floatLeft}><p className={classes.errorDiv}>Name</p></div><div className={classes.floatLeft}>
+                                <label htmlFor="ItemName" className={classes.formLabel}>
+                                    <div className={classes.floatLeft}>
+                                        <p className={classes.errorDiv}>Name</p>
+                                    </div>
+                                    <div className={classes.floatLeft}>
                                         {(errors.ItemName && touched.ItemName) ? (
-                                            <div className={classes.errorStar}>{errors.ItemName}</div>
-                                        ) : null}</div>
-
-                                </Typography>
+                                            <div className={classes.errorStar}>*</div>
+                                        ) : null}
+                                    </div>
                                 </label>
                                 <input id="ItemName" name="ItemName" className={classes.textField} onChange={formik.handleChange} value={formik.values.ItemName} />
 
                             </div>
                             <div className={classes.formElements}>
-                                <label htmlFor="ItemDescription" className={classes.formLabel}> <Typography
-                                    color="text"
-                                    colorBrightness="secondary"
-                                    className={classes.legendElementText}
-                                >
+                                <label htmlFor="ItemDescription" className={classes.formLabel}>
                                     <div className={classes.floatLeft}><p className={classes.errorDiv}>Description</p> </div><div className={classes.floatLeft}>
                                         {errors.ItemDescription && touched.ItemDescription ? (
-                                            <div className={classes.errorStar}>{errors.ItemDescription}</div>
-                                        ) : null}</div>                               </Typography></label>
+                                            <div className={classes.errorStar}>*</div>
+                                        ) : null}</div>
+                                </label>
                                 <input id="ItemDescription" name="ItemDescription" className={classes.textField} onChange={formik.handleChange} value={formik.values.ItemDescription} />
                             </div>
                             <div className={classes.formElements}>
-                                <label htmlFor="ItemTags" className={classes.formLabel}><Typography
-                                    color="text"
-                                    colorBrightness="secondary"
-                                    className={classes.legendElementText}
-                                >
+                                <label htmlFor="ItemTags" className={classes.formLabel}>
                                     <div className={classes.floatLeft}><p className={classes.errorDiv}>Tags</p> </div><div className={classes.floatLeft}>
                                         {errors.ItemTags && touched.ItemTags ? (
-                                            <div className={classes.errorStar}>{errors.ItemTags}</div>
-                                        ) : null}</div>                               </Typography></label>
+                                            <div className={classes.errorStar}>*</div>
+                                        ) : null}</div>
+                                </label>
                                 <input id="ItemTags" name="ItemTags" className={classes.textField} onChange={formik.handleChange} value={formik.values.ItemTags} />
                             </div>
 
