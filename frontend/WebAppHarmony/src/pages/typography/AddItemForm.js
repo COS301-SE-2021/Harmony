@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
-    Formik, Form, useFormik
+    Formik, Form, useFormik, Field
 } from 'formik';
 // classNames
 import useStyles from "./styles";
-
+import * as Yup from 'yup';
 // components
 import PageTitle from "../../components/PageTitle/PageTitle";
 import Widget from "../../components/Widget/Widget";
@@ -73,6 +73,12 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
         reader.readAsDataURL(e.target.files[0])
     }
 
+    const validateForm = Yup.object().shape({
+        ItemName: Yup.string().min(1, '*').required('*Required'),
+        ItemDescription: Yup.string().required('Required'),
+        ItemTags: Yup.string().email('Invalid email').required('Required'),
+    });
+
     return (
         <div className={classes.addItemContainer}>
             <Typography
@@ -87,9 +93,10 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                 <Formik
                     onSubmit={() => (console.log("submitted " + formik.values.ItemName + " " + formik.values.ItemTags))}
                     initialValues={formik.values}
+                    validationSchema={validateForm}
                 >
                     {/** The moderate pairings form to submit */}
-                    {({ values }) => (
+                    {({ errors, touched, values }) => (
                         <Form>
                             <div className={classes.formElements}>
                                 <div className={classes.PreviewContainer}>
@@ -123,10 +130,14 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                                     colorBrightness="secondary"
                                     className={classes.legendElementText}
                                 >
-                                    <p style={{ fontSize: 18, marginTop: 0 }}>Name</p>
+                                    <p style={{ fontSize: 18, marginTop: -15 }}><div style={{ float: "left" }}>Name</div><div style={{ float: "left" }}> {errors.ItemName || !touched.ItemName ? (
+                                        <div style={{ color: "red" }}>*</div>
+                                    ) : null}</div></p>
+
                                 </Typography>
                                 </label>
                                 <input id="ItemName" name="ItemName" className={classes.textField} onChange={formik.handleChange} value={formik.values.ItemName} />
+
                             </div>
                             <div className={classes.formElements}>
                                 <label htmlFor="ItemDescription" className={classes.formLabel}> <Typography
