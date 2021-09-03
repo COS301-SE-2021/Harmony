@@ -67,7 +67,8 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
         const reader = new FileReader();
         reader.onload = () => {
             if (reader.readyState === 2) {
-                setImg(reader.result)
+                setImg(reader.result);
+                // console.log(btoa(img))
             }
         }
         reader.readAsDataURL(e.target.files[0])
@@ -76,7 +77,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
     const validateForm = Yup.object().shape({
         ItemName: Yup.string()
             .min(2, '*')
-            .required('*'),
+            .required('req'),
         ItemDescription: Yup.string()
             .min(2, '*')
             .required('*'),
@@ -84,6 +85,22 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
             .min(2, '*')
             .required('*'),
     });
+
+    /** Submits the form to the database */
+    const handleSubmit = (vals) => {
+        console.log("submitted handle " + JSON.stringify(formik.values))
+        var request = {
+            "ItemName": vals.ItemName,
+            "ItemDescription": vals.ItemDescription,
+            "ItemTags": vals.ItemTags,
+            "FoodOrDrink": FoodOrDrink,
+            "Image": btoa(img)
+        }
+        // console.log("request to submit " + JSON.stringify(request))
+        fetch('https://w3lfp6r6f7.execute-api.eu-west-1.amazonaws.com/dev/additem', request)
+            .then(response => response.json())
+            .then(data => console.log(data))
+    }
 
     return (
         <div className={classes.addItemContainer}>
@@ -97,7 +114,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
             {/* <p className={classes.fontSizeMedium}></p> */}
             <div>
                 <Formik
-                    onSubmit={values => { console.log("submitted " + JSON.stringify(values)) }}
+                    onSubmit={() => handleSubmit(formik.values)}
                     initialValues={formik.values}
                     validationSchema={validateForm}
                 >
