@@ -89,8 +89,8 @@ export default function Dashboard(props) {
               <Grid container item alignItems={"center"}>
                 <div style={{ width: "100%", textAlign: "right" }}>
                   <Grid item xs={6}>
-                    <Typography size="xxl" weight="large" noWrap>
-                      {totalUsers}
+                    <Typography size="xxl" weight="large" noWrap >
+                      <p style={{ color: theme.palette.primary.main }}>{totalUsers}</p>
                     </Typography>
                   </Grid>
                 </div>
@@ -212,22 +212,22 @@ export default function Dashboard(props) {
             bodyClass={classes.fullHeightBody}
             className={classes.card}
           >
-            <div className={classes.visitsNumberContainer}>
+            <div className={[classes.visitsNumberContainer, { justifyContent: "space-between" }]}>
               <Grid container item alignItems={"center"}>
 
                 <Grid item xs={6}>
                   <Typography size="xxl" weight="large" noWrap>
                     <p style={{
-                      color: "#33eb91", float: "left"
+                      color: theme.palette.success, float: "left"
                     }}>{hitRatio.TrueScans}</p><p style={{
                       float: "left"
                     }}>:</p><p style={{
-                      color: "#ff4569", float: "left"
+                      color: theme.palette.warning, float: "left"
                     }}>{hitRatio.FalseScans}</p>
                   </Typography>
 
                 </Grid>
-                <div className={classes.performanceLegendWrapper}>
+                <div className={[classes.performanceLegendWrapper, { justifyContent: "space-between" }]}>
                   <div className={classes.legendElement}>
                     <Dot color="success" />
                     <Typography
@@ -275,7 +275,7 @@ export default function Dashboard(props) {
           </Widget>
 
         </Grid>
-        <Grid item lg={3} md={8} sm={6} xs={12}>
+        {/* <Grid item lg={3} md={8} sm={6} xs={12}>
           <Widget
             title="Server Overview"
             upperTitle
@@ -355,7 +355,7 @@ export default function Dashboard(props) {
               </div>
             </div>
           </Widget>
-        </Grid>
+        </Grid> */}
         <Grid item lg={3} md={4} sm={6} xs={12}>
           <Widget title="Revenue Breakdown" upperTitle className={classes.card}>
             <Grid container spacing={2}>
