@@ -76,7 +76,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
 
     /** Submits the form to the database */
     const handleSubmit = (vals) => {
-        console.log("submitted handle " + JSON.stringify(vals.values))
+        console.log("submitted handle " + JSON.stringify(vals))
         var request = {
             "ItemName": vals.ItemName,
             "ItemDescription": vals.ItemDescription,
@@ -116,7 +116,15 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                         ItemDescription: Yup.string().required('*'),
                         ItemTags: Yup.string().required('*'),
                     })}
-                    onSubmit={(values) => handleSubmit(values)}
+                    // onSubmit={(values) => handleSubmit(values)}
+                    onSubmit={(values, { resetForm }) => {
+                        //Form must be reset before signUp is called
+                        //This is because signUp will lead to navigating the user to the homeScreen
+                        //Then try to update the form
+                        //but because the signUp screen will be unmounted react native wont know what to do
+                        resetForm();
+                        handleSubmit(values);
+                    }}
                     enableReinitialize={true}
                 >
                     {/** The moderate pairings form to submit */}
