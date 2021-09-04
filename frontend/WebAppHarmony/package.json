@@ -15,6 +15,7 @@
     "@mdi/js": "^5.9.55",
     "@mdi/react": "^1.4.0",
     "apexcharts": "^3.24.0",
+    "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "font-awesome": "^4.7.0",
     "mui-datatables": "^3.7.4",

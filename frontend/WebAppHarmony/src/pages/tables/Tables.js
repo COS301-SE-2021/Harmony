@@ -1,90 +1,72 @@
-import React from "react";
-import { Grid } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
-import MUIDataTable from "mui-datatables";
-
-// components
 import PageTitle from "../../components/PageTitle";
-import Widget from "../../components/Widget";
-import Table from "../dashboard/components/Table/Table";
+import React, {useEffect, useState} from "react";
+import MUIDataTable from "mui-datatables";
+import axios from 'axios';
+import { Grid } from "@material-ui/core";
 
-// data
-import mock from "../dashboard/mock";
+export default function DataTable() {
+  const [posts, setPost] = useState([]);
+  let signal = axios.CancelToken.source();
 
-const datatableData = [
-  {Id: "8d198cb5-4008-49c9-8a6d-040809376919", name1: "Churros", type1: "Regular", count1: "50"},
-  {Id: "8d198cb5-4008-49c9-8a6d-040809376919", name1: "Churros", type1: "Regular", count1: "50"},
-];
+  useEffect(() => {
+    let isSubscribed = true;
+    axios.get(`https://jsonplaceholder.typicode.com/posts`, {
+      cancelToken: signal.token,
+    })
+        .then(res => {
+          const posts = res.data;
+          setPost(posts);
+        }).catch(err => {
+      console.log(err);
+    });
+    return function cleanup() {
+      isSubscribed = false;
+      signal.cancel('Api is being canceled');
+    }
+  }, []);
 
-const datatableData2 = [
-  ["8d198cb5-4008-49c9-8a6d-040809376919", "Churros", "Regular", "50"],
-  ["8d198cb5-4008-49c9-8a6d-040809376919", "Chocolate Cake", "Regular", "50"],
-  ["8d198cb5-4008-49c9-8a6d-040809376919", "Samoosa", "Regular", "50"],
-  ["8d198cb5-4008-49c9-8a6d-040809376919", "Fish and Chips", "Regular", "50"],
-  ["8d198cb5-4008-49c9-8a6d-040809376919", "Churros", "Regular", "50"],
-  ["8d198cb5-4008-49c9-8a6d-040809376919", "Chocolate Cake", "Regular", "50"],
-  ["8d198cb5-4008-49c9-8a6d-040809376919", "Samoosa", "Regular", "50"],
-  ["8d198cb5-4008-49c9-8a6d-040809376919", "Fish and Chips", "Regular", "50"],
-  ["8d198cb5-4008-49c9-8a6d-040809376919", "Churros", "Regular", "50"],
-  ["8d198cb5-4008-49c9-8a6d-040809376919", "Chocolate Cake", "Regular", "50"],
-  ["8d198cb5-4008-49c9-8a6d-040809376919", "Samoosa", "Regular", "50"],
-  ["8d198cb5-4008-49c9-8a6d-040809376919", "Fish and Chips", "Regular", "50"],
-  ["8d198cb5-4008-49c9-8a6d-040809376919", "Churros", "Regular", "50"],
-  ["8d198cb5-4008-49c9-8a6d-040809376919", "Chocolate Cake", "Regular", "50"],
-  ["8d198cb5-4008-49c9-8a6d-040809376919", "Samoosa", "Regular", "50"],
-  ["8d198cb5-4008-49c9-8a6d-040809376919", "Fish and Chips", "Regular", "50"],
-];
+  const columns = ["userId", "id", "title", "body"];
 
-const useStyles = makeStyles(theme => ({
-  tableOverflow: {
-    overflow: 'auto'
-  }
-}))
+  const options = {
+    filter: true,
+    filterType: "dropdown",
+    print: true,
+    viewColumns: true,
+    selectableRows: 'none',
+    onRowClick: (rowData) => {
+      console.log("RowClicked->", rowData);
+    },
+    responsive: "stacked",
+    fixedHeaderOptions: {
+      xAxis: false,
+      yAxis: true,
+    },
+  };
 
 
-  export default function Tables() {
-    const classes = useStyles();
-
-    const [data, setData] = React.useState([])
-    const columns = [
-      { title: "ID", field: "id" },
-      { title: "Username", field: "username" },
-      { title: "Name", field: "name" },
-      { title: "Email", field: "email" },
-      { title: "Phone", field: "phone" },
-      { title: "Web Link", field: 'website' }
-    ]
-    React.useEffect(() => {
-      fetch("https://jsonplaceholder.typicode.com/users")
-          .then(resp => resp.json())
-          .then(resp => {
-            setData(resp)
-          })
-    }, [])
-    return (
-        <>
-          <PageTitle title="Train AI"/>
-          <Grid container spacing={4}>
-            <Grid item xs={12}>
-              <MUIDataTable
-                  title="Tags"
-                  data={data}
-                  columns={columns}
-                  options={{
-                    filterType: "checkbox",
-                  }}
-              />
-            </Grid>
+  return (
+      <>
+        <PageTitle title="Train AI"/>
+        <Grid container spacing={4}>
+          <Grid item xs={12}>
+            <MUIDataTable
+                title={"Posts"}
+                data={posts}
+                columns={columns}
+                options={options}
+            />
           </Grid>
-          <Grid container spacing={4}>
-            <Grid item xs={12}>
-              <MUIDataTable
-                  title="Iterations"
-                  data={datatableData2}
-                  columns={["Id Iteration", "Name", "Status", "PublishName", "TrainingType"]}
-              />
-            </Grid>
+        </Grid>
+        <Grid container spacing={4}>
+          <Grid item xs={12}>
+            <MUIDataTable
+                title={"Posts"}
+                data={posts}
+                columns={columns}
+                options={options}
+            />
           </Grid>
-        </>
-    );
-  }
+        </Grid>
+      </>
+  );
+}
