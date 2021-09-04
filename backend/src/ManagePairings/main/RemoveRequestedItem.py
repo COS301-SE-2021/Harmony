@@ -10,11 +10,16 @@ request_table = dynamodb.Table(requestTable_name)
 
 """
 Removes an item from the database via the admin webpage.
+This is done if the admin rejects the item for whatver reason after viewing it.
 """
 
 
 def remove_requested_item(event, context):
+    # Use name from input for the item rather than the RID to be deleted because it will be what be easier for and admin
+    # to type.
+    # Could still use RID.
     name = event['ItemName']
+    #RID = event['RID']
 
     input_response = request_table.scan()
     requested_items = input_response['Items']
@@ -34,4 +39,4 @@ def remove_requested_item(event, context):
                     return {"StatusCode": 400}
             break
 
-
+    return {"StatusCode": 200}
