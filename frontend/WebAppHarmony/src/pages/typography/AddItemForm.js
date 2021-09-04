@@ -40,16 +40,16 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
     }, [itemName]);
 
     /**The initial values for the form */
-    const formik = useFormik(
-        {
-            enableReinitialize: true,
-            initialValues: {
-                ItemName: formName,
-                ItemDescription: formDescription,
-                ItemTags: formTags
-            }
-        }
-    )
+    // const formik = useFormik(
+    //     {
+    //         enableReinitialize: true,
+    //         initialValues: {
+    //             ItemName: formName,
+    //             ItemDescription: formDescription,
+    //             ItemTags: formTags
+    //         }
+    //     }
+    // )
     /*Access form values with formik.values */
     // console.log(formik.values);
 
@@ -76,7 +76,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
 
     /** Submits the form to the database */
     const handleSubmit = (vals) => {
-        console.log("submitted handle " + JSON.stringify(formik.values))
+        console.log("submitted handle " + JSON.stringify(vals.values))
         var request = {
             "ItemName": vals.ItemName,
             "ItemDescription": vals.ItemDescription,
@@ -96,22 +96,31 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                 color="text"
                 colorBrightness="secondary"
                 className={classes.legendElementText}
+                size={18}
             >
-                <p style={{ fontSize: 18 }}>   Add an item to the database:</p>
+                {/* <p style={{ fontSize: 18 }}> */}
+                Add an item to the database:
+                {/* </p> */}
             </Typography>
             {/* <p className={classes.fontSizeMedium}></p> */}
             <div>
                 <Formik
-                    onSubmit={() => handleSubmit(formik.values)}
-                    initialValues={formik.values}
+                    // initialValues={formik.values}
+                    initialValues={{
+                        ItemName: formName,
+                        ItemDescription: formDescription,
+                        ItemTags: formTags
+                    }}
                     validationSchema={Yup.object().shape({
-                        ItemName: Yup.string().min(2, 'short').required('req'),
-                        ItemDescription: Yup.string().min(2, '*').required('*'),
-                        ItemTags: Yup.string().min(2, '*').required('*'),
+                        ItemName: Yup.string().required('*'),
+                        ItemDescription: Yup.string().required('*'),
+                        ItemTags: Yup.string().required('*'),
                     })}
+                    onSubmit={(values) => handleSubmit(values)}
+                    enableReinitialize={true}
                 >
                     {/** The moderate pairings form to submit */}
-                    {({ errors, touched, values }) => (
+                    {({ errors, touched, values, handleChange }) => (
                         <Form>
                             <div className={classes.formElements}>
                                 <div className={classes.PreviewContainer}>
@@ -150,8 +159,11 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                                         ) : null}
                                     </div>
                                 </label>
-                                <Field id="ItemName" name="ItemName" className={classes.textField} onChange={formik.handleChange} value={formik.values.ItemName} />
-
+                                {/* <Field id="ItemName" name="ItemName" className={classes.textField} onChange={formik.handleChange} value={formik.values.ItemName} /> */}
+                                <Field id="ItemName" name="ItemName" className={classes.textField} onChange={handleChange} value={values.ItemName} />
+                                {/* {
+                                    console.log("158 " + JSON.stringify(formik.values))
+                                } */}
                             </div>
                             <div className={classes.formElements}>
                                 <label htmlFor="ItemDescription" className={classes.formLabel}>
@@ -160,7 +172,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                                             <div className={classes.errorStar}>*</div>
                                         ) : null}</div>
                                 </label>
-                                <Field id="ItemDescription" name="ItemDescription" className={classes.textField} onChange={formik.handleChange} value={formik.values.ItemDescription} />
+                                <Field id="ItemDescription" name="ItemDescription" className={classes.textField} onChange={handleChange} value={values.ItemDescription} />
                             </div>
                             <div className={classes.formElements}>
                                 <label htmlFor="ItemTags" className={classes.formLabel}>
@@ -169,7 +181,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                                             <div className={classes.errorStar}>*</div>
                                         ) : null}</div>
                                 </label>
-                                <Field id="ItemTags" name="ItemTags" className={classes.textField} onChange={formik.handleChange} value={formik.values.ItemTags} />
+                                <Field id="ItemTags" name="ItemTags" className={classes.textField} onChange={handleChange} value={values.ItemTags} />
                             </div>
 
                             <div>
