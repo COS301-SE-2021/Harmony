@@ -36,7 +36,7 @@ const structure = [
   {
     id: 1,
     label: "Moderate Pairing",
-    link: "/app/moderateitems",
+    link: "/app/createads",
     icon: <QueueIcon />,
   },
   { id: 2, label: "Train AI", link: "/app/settings", icon: <TableIcon /> },
