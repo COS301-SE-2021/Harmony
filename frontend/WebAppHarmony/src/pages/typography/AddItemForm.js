@@ -74,18 +74,6 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
         reader.readAsDataURL(e.target.files[0])
     }
 
-    const validateForm = Yup.object().shape({
-        ItemName: Yup.string()
-            .min(2, '*')
-            .required('req'),
-        ItemDescription: Yup.string()
-            .min(2, '*')
-            .required('*'),
-        ItemTags: Yup.string()
-            .min(2, '*')
-            .required('*'),
-    });
-
     /** Submits the form to the database */
     const handleSubmit = (vals) => {
         console.log("submitted handle " + JSON.stringify(formik.values))
@@ -116,7 +104,11 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                 <Formik
                     onSubmit={() => handleSubmit(formik.values)}
                     initialValues={formik.values}
-                    validationSchema={validateForm}
+                    validationSchema={Yup.object().shape({
+                        ItemName: Yup.string().min(2, 'short').required('req'),
+                        ItemDescription: Yup.string().min(2, '*').required('*'),
+                        ItemTags: Yup.string().min(2, '*').required('*'),
+                    })}
                 >
                     {/** The moderate pairings form to submit */}
                     {({ errors, touched, values }) => (
@@ -154,11 +146,11 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                                     </div>
                                     <div className={classes.floatLeft}>
                                         {(errors.ItemName && touched.ItemName) ? (
-                                            <div className={classes.errorStar}>*</div>
+                                            <div className={classes.errorStar}>{errors.ItemName}</div>
                                         ) : null}
                                     </div>
                                 </label>
-                                <input id="ItemName" name="ItemName" className={classes.textField} onChange={formik.handleChange} value={formik.values.ItemName} />
+                                <Field id="ItemName" name="ItemName" className={classes.textField} onChange={formik.handleChange} value={formik.values.ItemName} />
 
                             </div>
                             <div className={classes.formElements}>
@@ -168,7 +160,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                                             <div className={classes.errorStar}>*</div>
                                         ) : null}</div>
                                 </label>
-                                <input id="ItemDescription" name="ItemDescription" className={classes.textField} onChange={formik.handleChange} value={formik.values.ItemDescription} />
+                                <Field id="ItemDescription" name="ItemDescription" className={classes.textField} onChange={formik.handleChange} value={formik.values.ItemDescription} />
                             </div>
                             <div className={classes.formElements}>
                                 <label htmlFor="ItemTags" className={classes.formLabel}>
@@ -177,7 +169,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                                             <div className={classes.errorStar}>*</div>
                                         ) : null}</div>
                                 </label>
-                                <input id="ItemTags" name="ItemTags" className={classes.textField} onChange={formik.handleChange} value={formik.values.ItemTags} />
+                                <Field id="ItemTags" name="ItemTags" className={classes.textField} onChange={formik.handleChange} value={formik.values.ItemTags} />
                             </div>
 
                             <div>
