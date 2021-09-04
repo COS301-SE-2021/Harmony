@@ -20,8 +20,8 @@ import Sidebar from "../Sidebar";
 // pages
 import Dashboard from "../../pages/dashboard";
 import ModerateItems from "../../pages/moderateitems/ModerateItems";
-import Tables from "../../pages/tables";
-import Feedback from "../../pages/feedback";
+import Tables from "../../pages/settings";
+import Feedback from "../../pages/usertrends";
 
 
 

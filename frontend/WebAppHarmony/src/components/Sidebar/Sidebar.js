@@ -39,8 +39,8 @@ const structure = [
     link: "/app/moderateitems",
     icon: <QueueIcon />,
   },
-  { id: 2, label: "Train AI", link: "/app/tables", icon: <TableIcon /> },
-  { id: 3, label: "User Feedback", link: "/app/feedback", icon: <FeedbackIcon /> },
+  { id: 2, label: "Train AI", link: "/app/settings", icon: <TableIcon /> },
+  { id: 3, label: "User Feedback", link: "/app/usertrends", icon: <FeedbackIcon /> },
   { id: 4, type: "divider" },
 
 ];
