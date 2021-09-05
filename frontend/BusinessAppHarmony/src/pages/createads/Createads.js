@@ -8,17 +8,17 @@ import useStyles from "./styles";
 import PageTitle from "../../components/PageTitle";
 import Widget from "../../components/Widget";
 import { Typography } from "../../components/Wrappers";
-
+import CreateAdForm from "./CreateAdForm";
 export default function TypographyPage() {
   var classes = useStyles();
 
   return (
     <>
-      <PageTitle title="Moderate Items" />
+      <PageTitle title="Create Pairing Advert" />
       <Grid container spacing={1}>
         <Grid item xs={12} md={16}>
-          <Widget title="Headings" disableWidgetMenu>
-
+          <Widget title="" disableWidgetMenu>
+            <CreateAdForm />
           </Widget>
 
         </Grid>
