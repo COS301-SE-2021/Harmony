@@ -14,9 +14,6 @@ import Button from '@material-ui/core/Button';
 
 function CreateAdForm(...props) {
     /**The name, description and tags for the form */
-    const [formName, setName] = useState("");
-    const [formDescription, setDescription] = useState("");
-    const [formTags, setTags] = useState("");
     const [foodImage, setFoodImage] = useState("http://beepeers.com/assets/images/commerces/default-image.jpg");
     const [drinkImage, setDrinkImage] = useState("http://beepeers.com/assets/images/commerces/default-image.jpg");
     var classes = useStyles();
@@ -27,14 +24,19 @@ function CreateAdForm(...props) {
 
 
 
-    const handleClear = () => {
-        setName("");
-        setDescription("");
+    const handleClear = (values) => {
+        values.ItemName = "";
+        values.ItemDescription = "";
+        values.ItemTags = "";
+        values.FoodName = "";
+        values.FoodTags = "";
+        values.DrinkName = "";
+        values.DrinkTags = "";
+        values.PairingDescription = "";
         setFoodImage("http://beepeers.com/assets/images/commerces/default-image.jpg");
         setDrinkImage("http://beepeers.com/assets/images/commerces/default-image.jpg");
         foodFileRef.current.value = "";
         drinkFileRef.current.value = "";
-        setTags("");
     }
 
     /**Handles the image preview */
@@ -78,14 +80,21 @@ function CreateAdForm(...props) {
         <div className={classes.addItemContainer}>
             <Formik
                 initialValues={{
-                    ItemName: formName,
-                    ItemDescription: formDescription,
-                    ItemTags: formTags
+                    ItemName: "",
+                    ItemDescription: "",
+                    ItemTags: "",
+                    FoodName: "",
+                    FoodTags: "",
+                    DrinkName: "",
+                    DrinkTags: "",
+                    PairingDescription: ""
                 }}
                 validationSchema={Yup.object().shape({
                     ItemName: Yup.string().required('*'),
                     ItemDescription: Yup.string().required('*'),
                     ItemTags: Yup.string().required('*'),
+
+                    FoodName: Yup.string().required('*'),
                 })}
                 // onSubmit={(values) => handleSubmit(values)}
                 onSubmit={(values, { resetForm }) => {
@@ -104,6 +113,23 @@ function CreateAdForm(...props) {
                                 <div className={classes.PreviewPiece}><label htmlFor="file-input-Food"></label></div>
                                 <div className={classes.PreviewPiece}><img src={foodImage} className={classes.ImageContainer} /></div>
                                 <div className={classes.FileInput}><input type="file" id="file-input-Food" name="ImageclassNameFood" accept="image/*" ref={foodFileRef} onChange={FoodImageHandler} /></div>
+                                <div className={classes.formElements}>
+                                    <label htmlFor="FoodName" className={classes.formLabel}>
+                                        <div className={classes.floatLeft}>
+                                            <p className={classes.errorDiv}>Name</p>
+                                        </div>
+                                        <div className={classes.floatLeft}>
+                                            {(errors.FoodName && touched.FoodName) ? (
+                                                <div className={classes.errorStar}>*</div>
+                                            ) : null}
+                                        </div>
+                                    </label>
+                                    {/* <Field id="ItemName" name="ItemName" className={classes.textField} onChange={formik.handleChange} value={formik.values.ItemName} /> */}
+                                    <Field id="FoodName" name="FoodName" className={classes.individualTextField} onChange={handleChange} value={values.FoodName} />
+                                    {/* {
+                                    console.log("158 " + JSON.stringify(formik.values))
+                                } */}
+                                </div>
                             </div>
                             <div className={classes.PreviewContainer}>
                                 <div className={classes.DrinkLabelButton}>Drink</div>
@@ -111,6 +137,7 @@ function CreateAdForm(...props) {
                                 <div className={classes.PreviewPiece}><img src={drinkImage} className={classes.ImageContainer} /></div>
                                 <div className={classes.FileInput}><input type="file" id="file-input-Drink" name="ImageclassNameDrink" accept="image/*" ref={drinkFileRef} onChange={DrinkImageHandler} /></div>
                             </div>
+
                         </div>
                         <div className={classes.MealLabelButton}>Meal</div>
 
@@ -151,7 +178,7 @@ function CreateAdForm(...props) {
                         </div>
 
                         <div>
-                            <Button onClick={() => handleClear()} className={classes.clearButton} variant="contained">Clear</Button>
+                            <Button onClick={(values) => handleClear(values)} className={classes.clearButton} variant="contained">Clear</Button>
                             <Button variant="contained" color="primary" type="submit" className={classes.addButton} onClick={() => console.log("clicked submit")}>
                                 Create Advert
                             </Button>

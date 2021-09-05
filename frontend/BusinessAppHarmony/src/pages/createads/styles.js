@@ -14,7 +14,12 @@ export default makeStyles(theme => ({
   },
   textField: {
     width: "65%",
-    height: 45,
+    height: 15,
+    padding: 15,
+  },
+  individualTextField: {
+    width: "85%",
+    height: 15,
     padding: 15,
   },
   formLabel: {
@@ -151,9 +156,10 @@ export default makeStyles(theme => ({
     float: "left"
   },
   errorDiv: {
-    fontSize: 18,
-    marginTop: -10,
-    color: "#717171"
+    fontSize: 15,
+    marginTop: 0,
+    color: "#717171",
+    marginRight: 10
   },
   errorStar: {
     color: "red", fontSize: 25, marginLeft: 5, marginTop: -15
