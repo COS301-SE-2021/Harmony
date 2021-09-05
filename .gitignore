@@ -76,5 +76,5 @@ fabric.properties
 frontend/HarmonyMobileApp/.expo/packager-info.json
 frontend/HarmonyMobileApp/.expo/settings.json
 
-frontend/WebAppHarmony/node_modules/
-frontend/WebAppHarmony/.expo/
+frontend/BusinessAppHarmony/node_modules/
+frontend/BusinessAppHarmony/.expo/

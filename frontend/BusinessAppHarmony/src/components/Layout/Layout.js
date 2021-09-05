@@ -47,9 +47,9 @@ function Layout(props) {
             <div className={classes.fakeToolbar} />
             <Switch>
               <Route path="/app/dashboard" component={Dashboard} />
-              <Route path="/app/moderateitems" component={ModerateItems} />
-              <Route path="/app/tables" component={Tables} />
-              <Route path="/app/feedback" component={Feedback} />
+              <Route path="/app/createads" component={ModerateItems} />
+              <Route path="/app/settings" component={Tables} />
+              <Route path="/app/usertrends" component={Feedback} />
 
             </Switch>
             <Box

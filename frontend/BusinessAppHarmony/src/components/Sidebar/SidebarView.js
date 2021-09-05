@@ -23,23 +23,18 @@ import SidebarLink from './components/SidebarLink/SidebarLinkContainer';
 import Dot from './components/Dot';
 
 const structure = [
-  { id: 0, label: 'Homepage', link: '/app/dashboard', icon: <HomeIcon /> },
-  { id: 1, label: 'Typography', link: '/app/createads', icon: <TypographyIcon /> },
-  { id: 2, label: 'Tables', link: '/app/settings', icon: <TableIcon /> },
-  { id: 3, label: 'Notifications', link: '/app/notifications', icon: <NotificationsIcon />},
+const structure = [
+  { id: 0, label: "Dashboard", link: "/app/dashboard", icon: <HomeIcon /> },
   {
-    id: 4,
-    label: 'UI Elements',
-    link: '/app/ui',
-    icon: <UIElementsIcon />,
-    children: [
-      { label: 'Icons', link: '/app/ui/icons' },
-      { label: 'Charts', link: '/app/ui/charts' },
-      { label: 'Maps', link: '/app/ui/maps' },
-    ],
+    id: 1,
+    label: "Moderate Pairing",
+    link: "/app/createads",
+    icon: <QueueIcon />,
   },
-  { id: 5, type: 'divider' },
-  { id: 6, type: 'title', label: 'HELP' },
+  { id: 2, label: "Train AI", link: "/app/settings", icon: <TableIcon /> },
+  { id: 3, label: "User Feedback", link: "/app/usertrends", icon: <FeedbackIcon /> },
+  { id: 4, type: "divider" },
+
 ];
 
 const SidebarView = ({ classes, theme, toggleSidebar, isSidebarOpened, isPermanent, location }) => {
