@@ -75,3 +75,6 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 frontend/HarmonyMobileApp/.expo/packager-info.json
 frontend/HarmonyMobileApp/.expo/settings.json
+
+frontend/WebAppHarmony/node_modules/
+frontend/WebAppHarmony/.expo/
