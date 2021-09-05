@@ -70,9 +70,9 @@ export default function TypographyPage() {
                   color="text"
                   colorBrightness="secondary"
                   className={classes.legendElementText}
-                >
-                  <p style={{ fontSize: 18 }}> Users have requested the following items be added to the database:</p>
+                > Users have requested the following items be added to the database:
                 </Typography>
+                <br />
                 {/* <p className={classes.fontSizeMedium}></p> */}
                 <div style={{ height: 450, overflowY: "scroll" }}>
                   <ToggleButtonGroup

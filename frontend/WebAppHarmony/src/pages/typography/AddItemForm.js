@@ -39,20 +39,6 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
         setDescription(itemName.FoodDescription);
     }, [itemName]);
 
-    /**The initial values for the form */
-    // const formik = useFormik(
-    //     {
-    //         enableReinitialize: true,
-    //         initialValues: {
-    //             ItemName: formName,
-    //             ItemDescription: formDescription,
-    //             ItemTags: formTags
-    //         }
-    //     }
-    // )
-    /*Access form values with formik.values */
-    // console.log(formik.values);
-
     const handleClear = () => {
         setName("");
         setDescription("");
@@ -98,10 +84,9 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                 className={classes.legendElementText}
                 size={18}
             >
-                {/* <p style={{ fontSize: 18 }}> */}
                 Add an item to the database:
-                {/* </p> */}
             </Typography>
+            <br />
             {/* <p className={classes.fontSizeMedium}></p> */}
             <div>
                 <Formik
@@ -118,10 +103,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                     })}
                     // onSubmit={(values) => handleSubmit(values)}
                     onSubmit={(values, { resetForm }) => {
-                        //Form must be reset before signUp is called
-                        //This is because signUp will lead to navigating the user to the homeScreen
-                        //Then try to update the form
-                        //but because the signUp screen will be unmounted react native wont know what to do
+                        /**reset then handle submit */
                         resetForm();
                         handleSubmit(values);
                     }}
@@ -136,8 +118,8 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                                         color="text"
                                         colorBrightness="secondary"
                                         className={classes.legendElementText}
-                                    >
-                                        <p style={{ fontSize: 15 }}>Upload an image</p></Typography></label></div>
+                                        size={15}
+                                    >Upload an image</Typography></label></div>
                                     <div className={classes.PreviewPiece}><img src={img} className={classes.ImageContainer} /></div>
                                     <div className={classes.FileInput}><input type="file" id="file-input" name="ImageclassName" accept="image/*" ref={fileRef} onChange={imageHandler} /></div>
                                 </div>
