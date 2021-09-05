@@ -10,8 +10,6 @@ import PageTitle from "../../components/PageTitle/PageTitle";
 import Widget from "../../components/Widget/Widget";
 import { Typography } from "../../components/Wrappers";
 
-import ToggleButton from '@material-ui/lab/ToggleButton';
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import Button from '@material-ui/core/Button';
 
 function CreateAdForm(...props) {
@@ -19,7 +17,6 @@ function CreateAdForm(...props) {
     const [formName, setName] = useState("");
     const [formDescription, setDescription] = useState("");
     const [formTags, setTags] = useState("");
-    const [FoodOrDrink, setFoodOrDrink] = React.useState('none');
     const [foodImage, setFoodImage] = useState("http://beepeers.com/assets/images/commerces/default-image.jpg");
     const [drinkImage, setDrinkImage] = useState("http://beepeers.com/assets/images/commerces/default-image.jpg");
     var classes = useStyles();
@@ -28,10 +25,7 @@ function CreateAdForm(...props) {
     const foodFileRef = useRef();
     const drinkFileRef = useRef();
 
-    /**Sets the toggle value to whether the added item is a food or drink */
-    const HandleToggle = (event, newValue) => {
-        setFoodOrDrink(newValue);
-    };
+
 
     const handleClear = () => {
         setName("");
@@ -40,7 +34,6 @@ function CreateAdForm(...props) {
         setDrinkImage("http://beepeers.com/assets/images/commerces/default-image.jpg");
         foodFileRef.current.value = "";
         drinkFileRef.current.value = "";
-        setFoodOrDrink('none');
         setTags("");
     }
 
@@ -105,41 +98,21 @@ function CreateAdForm(...props) {
                 {/** The moderate pairings form to submit */}
                 {({ errors, touched, values, handleChange }) => (
                     <Form>
-                        <div className={classes.formElements}>
+                        <div className={classes.formElementsImageContainer}>
                             <div className={classes.PreviewContainer}>
-                                <div className={classes.PreviewPiece}><label htmlFor="file-input-Food"><Typography
-                                    color="text"
-                                    colorBrightness="secondary"
-                                    className={classes.legendElementText}
-                                    size={15}
-                                >Upload an image</Typography></label></div>
+                                <div className={classes.FoodLabelButton}>Food</div>
+                                <div className={classes.PreviewPiece}><label htmlFor="file-input-Food"></label></div>
                                 <div className={classes.PreviewPiece}><img src={foodImage} className={classes.ImageContainer} /></div>
                                 <div className={classes.FileInput}><input type="file" id="file-input-Food" name="ImageclassNameFood" accept="image/*" ref={foodFileRef} onChange={FoodImageHandler} /></div>
                             </div>
                             <div className={classes.PreviewContainer}>
-                                <div className={classes.PreviewPiece}><label htmlFor="file-input-Drink"><Typography
-                                    color="text"
-                                    colorBrightness="secondary"
-                                    className={classes.legendElementText}
-                                    size={15}
-                                >Upload an image</Typography></label></div>
+                                <div className={classes.DrinkLabelButton}>Drink</div>
+                                <div className={classes.PreviewPiece}><label htmlFor="file-input-Drink"></label></div>
                                 <div className={classes.PreviewPiece}><img src={drinkImage} className={classes.ImageContainer} /></div>
                                 <div className={classes.FileInput}><input type="file" id="file-input-Drink" name="ImageclassNameDrink" accept="image/*" ref={drinkFileRef} onChange={DrinkImageHandler} /></div>
                             </div>
-                            <ToggleButtonGroup
-                                value={FoodOrDrink}
-                                exclusive
-                                onChange={HandleToggle}
-                                className={classes.Toggle}
-                            >
-                                <ToggleButton value="Food" >
-                                    Food
-                                </ToggleButton>
-                                <ToggleButton value="Drink" >
-                                    Drink
-                                </ToggleButton>
-                            </ToggleButtonGroup>
                         </div>
+                        <div className={classes.MealLabelButton}>Meal</div>
 
                         <div className={classes.formElements}>
                             <label htmlFor="ItemName" className={classes.formLabel}>
@@ -180,7 +153,7 @@ function CreateAdForm(...props) {
                         <div>
                             <Button onClick={() => handleClear()} className={classes.clearButton} variant="contained">Clear</Button>
                             <Button variant="contained" color="primary" type="submit" className={classes.addButton} onClick={() => console.log("clicked submit")}>
-                                Add to database
+                                Create Advert
                             </Button>
                         </div>
                     </Form>

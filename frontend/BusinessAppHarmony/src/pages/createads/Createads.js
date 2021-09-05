@@ -16,11 +16,11 @@ export default function TypographyPage() {
     <>
       <PageTitle title="Create Pairing Advert" />
       <Grid container spacing={1}>
-        <Grid item xs={12} md={16}>
-          <Widget title="" disableWidgetMenu>
-            <CreateAdForm />
-          </Widget>
-
+        <Grid item xs={12} md={12}>
+          {/* <Widget title="" disableWidgetMenu>
+           
+          </Widget> */}
+          <CreateAdForm />
         </Grid>
       </Grid>
     </>
