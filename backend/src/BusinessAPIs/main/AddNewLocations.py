@@ -9,4 +9,4 @@ table = dynamodb.Table(table_name)
 
 
 def add_new_locations(event, context):
-    return {"Statuscode": 200}
+    return {"StatusCode": 200}
