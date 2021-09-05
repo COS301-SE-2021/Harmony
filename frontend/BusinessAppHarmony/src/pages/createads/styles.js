@@ -18,7 +18,7 @@ export default makeStyles(theme => ({
     padding: 15,
   },
   individualTextField: {
-    width: "85%",
+    width: "75%",
     height: 15,
     padding: 15,
   },
@@ -41,9 +41,8 @@ export default makeStyles(theme => ({
     display: "flex"
   },
   addItemContainer: {
-    width: "90%",
-    height: 620,
-    marginLeft: 70,
+    width: "95%",
+    marginLeft: 40,
     padding: 15,
     borderRadius: 5,
     float: "left",
@@ -87,12 +86,13 @@ export default makeStyles(theme => ({
   },
   ImageContainer: {
     height: 165,
-    width: "100%",
+    width: "60%",
     borderRadius: 5
   },
   PreviewContainer: {
     display: "block",
-    marginTop: -30
+    marginTop: -30,
+    width: "40%"
   },
   PreviewPiece: {
     marginBottom: 10
@@ -106,7 +106,8 @@ export default makeStyles(theme => ({
     borderRadius: 5,
     color: "white",
     width: 200,
-    marginLeft: 30,
+    margin: "auto"
+    // marginLeft: 30,
   },
   DrinkLabelButton: {
     backgroundColor: "#1FBFBA",
@@ -115,7 +116,7 @@ export default makeStyles(theme => ({
     borderRadius: 5,
     color: "white",
     width: 200,
-    marginLeft: 30,
+    margin: "auto"
 
   },
   MealLabelButton: {

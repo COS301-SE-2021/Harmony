@@ -113,10 +113,10 @@ function CreateAdForm(...props) {
                                 <div className={classes.PreviewPiece}><label htmlFor="file-input-Food"></label></div>
                                 <div className={classes.PreviewPiece}><img src={foodImage} className={classes.ImageContainer} /></div>
                                 <div className={classes.FileInput}><input type="file" id="file-input-Food" name="ImageclassNameFood" accept="image/*" ref={foodFileRef} onChange={FoodImageHandler} /></div>
-                                <div className={classes.formElements}>
+                                <div className={classes.formElementsImageContainer}>
                                     <label htmlFor="FoodName" className={classes.formLabel}>
                                         <div className={classes.floatLeft}>
-                                            <p className={classes.errorDiv}>Name</p>
+                                            <p className={classes.errorDiv}>Food Name</p>
                                         </div>
                                         <div className={classes.floatLeft}>
                                             {(errors.FoodName && touched.FoodName) ? (
@@ -124,11 +124,20 @@ function CreateAdForm(...props) {
                                             ) : null}
                                         </div>
                                     </label>
-                                    {/* <Field id="ItemName" name="ItemName" className={classes.textField} onChange={formik.handleChange} value={formik.values.ItemName} /> */}
                                     <Field id="FoodName" name="FoodName" className={classes.individualTextField} onChange={handleChange} value={values.FoodName} />
-                                    {/* {
-                                    console.log("158 " + JSON.stringify(formik.values))
-                                } */}
+                                </div>
+                                <div className={classes.formElementsImageContainer}>
+                                    <label htmlFor="FoodTags" className={classes.formLabel}>
+                                        <div className={classes.floatLeft}>
+                                            <p className={classes.errorDiv}>Food Tags</p>
+                                        </div>
+                                        <div className={classes.floatLeft}>
+                                            {(errors.FoodTags && touched.FoodTags) ? (
+                                                <div className={classes.errorStar}>*</div>
+                                            ) : null}
+                                        </div>
+                                    </label>
+                                    <Field id="FoodTags" name="FoodTags" className={classes.individualTextField} onChange={handleChange} value={values.FoodTags} />
                                 </div>
                             </div>
                             <div className={classes.PreviewContainer}>
@@ -136,6 +145,32 @@ function CreateAdForm(...props) {
                                 <div className={classes.PreviewPiece}><label htmlFor="file-input-Drink"></label></div>
                                 <div className={classes.PreviewPiece}><img src={drinkImage} className={classes.ImageContainer} /></div>
                                 <div className={classes.FileInput}><input type="file" id="file-input-Drink" name="ImageclassNameDrink" accept="image/*" ref={drinkFileRef} onChange={DrinkImageHandler} /></div>
+                                <div className={classes.formElementsImageContainer}>
+                                    <label htmlFor="Drink Name" className={classes.formLabel}>
+                                        <div className={classes.floatLeft}>
+                                            <p className={classes.errorDiv}>Drink Name</p>
+                                        </div>
+                                        <div className={classes.floatLeft}>
+                                            {(errors.DrinkName && touched.DrinkName) ? (
+                                                <div className={classes.errorStar}>*</div>
+                                            ) : null}
+                                        </div>
+                                    </label>
+                                    <Field id="DrinkName" name="DrinkName" className={classes.individualTextField} onChange={handleChange} value={values.DrinkName} />
+                                </div>
+                                <div className={classes.formElementsImageContainer}>
+                                    <label htmlFor="DrinkTags" className={classes.formLabel}>
+                                        <div className={classes.floatLeft}>
+                                            <p className={classes.errorDiv}>Drink Tags</p>
+                                        </div>
+                                        <div className={classes.floatLeft}>
+                                            {(errors.DrinkTags && touched.DrinkTags) ? (
+                                                <div className={classes.errorStar}>*</div>
+                                            ) : null}
+                                        </div>
+                                    </label>
+                                    <Field id="DrinkTags" name="DrinkTags" className={classes.individualTextField} onChange={handleChange} value={values.DrinkTags} />
+                                </div>
                             </div>
 
                         </div>
