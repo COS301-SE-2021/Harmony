@@ -118,7 +118,9 @@ function CreateAdForm(...props) {
                                 <div className={classes.FoodLabelButton}>Food</div>
                                 <div className={classes.PreviewPiece}><label htmlFor="file-input-Food"></label></div>
                                 <div className={classes.PreviewPiece}><img src={foodImage} className={classes.ImageContainer} /></div>
-                                <div className={classes.FileInput}><input type="file" id="file-input-Food" name="ImageclassNameFood" accept="image/*" ref={foodFileRef} onChange={FoodImageHandler} /></div>
+                                <div className={classes.FileInput}><input type="file" id="file-input-Food" name="ImageclassNameFood" accept="image/*" ref={foodFileRef} onChange={FoodImageHandler} style={{ display: 'none' }} />
+                                    <Button onClick={() => (foodFileRef.current.click())} className={classes.uploadFoodButton} variant="contained">Upload Image</Button>
+                                </div>
                                 <div className={classes.formElementsImageContainer}>
                                     <label htmlFor="FoodName" className={classes.formLabel}>
                                         <div className={classes.floatLeft}>
@@ -153,11 +155,17 @@ function CreateAdForm(...props) {
                                             ref={foodTagSelector}
                                             placeholder=""
                                             style={{
-                                                searchBox: {
-                                                    'width': '100%'
+                                                multiselectContainer: {
+                                                    'width': '100%',
+                                                    'height': 20
+                                                },
+                                                inputField: {
+                                                    'width': '100%',
+                                                    'height': 20
                                                 },
                                                 chips: {
-                                                    'background-color': '#FF6347'
+                                                    'background-color': '#FF6347',
+                                                    'font-weight': 'bold',
                                                 },
                                             }}
                                             onRemove={(selectedList) => (values.FoodTags = selectedList)}
@@ -173,7 +181,10 @@ function CreateAdForm(...props) {
                                 <div className={classes.DrinkLabelButton}>Drink</div>
                                 <div className={classes.PreviewPiece}><label htmlFor="file-input-Drink"></label></div>
                                 <div className={classes.PreviewPiece}><img src={drinkImage} className={classes.ImageContainer} /></div>
-                                <div className={classes.FileInput}><input type="file" id="file-input-Drink" name="ImageclassNameDrink" accept="image/*" ref={drinkFileRef} onChange={DrinkImageHandler} /></div>
+                                <div className={classes.FileInput}><input type="file" id="file-input-Drink" name="ImageclassNameDrink" accept="image/*" ref={drinkFileRef} onChange={DrinkImageHandler} style={{ display: 'none' }} />
+                                    <Button onClick={() => (drinkFileRef.current.click())} className={classes.uploadDrinkButton} variant="contained">Upload Image</Button>
+                                </div>
+
                                 <div className={classes.formElementsImageContainer}>
                                     <label htmlFor="Drink Name" className={classes.formLabel}>
                                         <div className={classes.floatLeft}>
@@ -212,7 +223,8 @@ function CreateAdForm(...props) {
                                                     'width': '100%'
                                                 },
                                                 chips: {
-                                                    'background-color': '#1FBFBA'
+                                                    'background-color': '#1FBFBA',
+                                                    'font-weight': 'bold'
                                                 },
                                             }}
                                             onRemove={(selectedList) => (values.DrinkTags = selectedList)}
@@ -262,7 +274,8 @@ function CreateAdForm(...props) {
                                                     'width': '80%'
                                                 },
                                                 chips: {
-                                                    'background-color': '#C41ED4'
+                                                    'background-color': '#C41ED4',
+                                                    'font-weight': 'bold'
                                                 },
                                             }}
                                             onRemove={(selectedList) => (values.PairingTags = selectedList)}
@@ -291,10 +304,11 @@ function CreateAdForm(...props) {
                                             placeholder=""
                                             style={{
                                                 searchBox: {
-                                                    'width': '80%'
+                                                    'width': '80%',
                                                 },
                                                 chips: {
-                                                    'background-color': '#39E717'
+                                                    'background-color': '#45CC00',
+                                                    'font-weight': 'bold'
                                                 },
                                             }}
                                             onRemove={(selectedList) => (values.PairingTags = selectedList)}

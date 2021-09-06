@@ -33,7 +33,7 @@ export default makeStyles(theme => ({
   },
   formLabel: {
     marginTop: 10,
-    fontSize: 20
+    fontSize: 20,
   },
   formElements: {
     marginTop: 20,
@@ -99,11 +99,21 @@ export default makeStyles(theme => ({
     float: "none",
     boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)"
   },
+  uploadFoodButton: {
+    backgroundColor: "#FF6347", height: 35, borderRadius: 5, paddingLeft: 12, paddingRight: 12, width: "40%",
+    float: "none", color: 'white',
+    boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)"
+  },
+  uploadDrinkButton: {
+    backgroundColor: "#1FBFBA", height: 35, borderRadius: 5, paddingLeft: 12, paddingRight: 12, width: "40%",
+    float: "none", color: 'white',
+    boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)"
+  },
   buttonContainer: {
     float: "auto",
   },
   addButton: {
-    backgroundColor: "#3f51b5", color: "white", marginLeft: 45, height: 35, borderRadius: 10, paddingLeft: 12, paddingRight: 12, width: "30%",
+    backgroundColor: "#81b5c2", color: "white", marginLeft: 45, height: 35, borderRadius: 10, paddingLeft: 12, paddingRight: 12, width: "30%",
     boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)"
 
   },
@@ -129,9 +139,9 @@ export default makeStyles(theme => ({
     border: "1px solid #EDEDED",
     boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)",
     borderRadius: 5,
-
+    marginTop: 40,
     marginBottom: 20,
-    width: "85%",
+    width: "90%",
     margin: "auto"
   },
   PreviewPiece: {
@@ -141,13 +151,15 @@ export default makeStyles(theme => ({
   },
   FoodLabelButton: {
     backgroundColor: "#FF6347",
-    padding: 10,
+    padding: 8,
     color: "white",
     width: "100%",
     margin: "auto",
     height: 40,
     borderTopRightRadius: 5,
-    borderTopLeftRadius: 5
+    borderTopLeftRadius: 5,
+    fontWeight: 'bold',
+    fontSize: 18
     // marginLeft: 30,
   },
   DrinkLabelButton: {
@@ -158,7 +170,9 @@ export default makeStyles(theme => ({
     margin: "auto",
     height: 40,
     borderTopRightRadius: 5,
-    borderTopLeftRadius: 5
+    borderTopLeftRadius: 5,
+    fontWeight: 'bold',
+    fontSize: 18
 
   },
   MealLabelButton: {
@@ -169,7 +183,9 @@ export default makeStyles(theme => ({
     margin: "auto",
     height: 40,
     borderTopRightRadius: 5,
-    borderTopLeftRadius: 5
+    borderTopLeftRadius: 5,
+    fontWeight: 'bold',
+    fontSize: 18
 
   },
   displayFlexJustifyCenter: {
