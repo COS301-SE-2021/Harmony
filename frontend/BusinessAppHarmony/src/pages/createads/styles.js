@@ -12,15 +12,19 @@ export default makeStyles(theme => ({
   text: {
     marginBottom: theme.spacing(2),
   },
-  textField: {
-    width: "65%",
-    height: 15,
+  textAreaField: {
+    width: "85%",
+    height: 100,
     padding: 15,
+    fontFamily: "sans-serif-light",
+    color: "#717171",
   },
   individualTextField: {
     width: "75%",
     height: 15,
     padding: 15,
+    color: "#717171",
+
     // borderColor: 'grey'
   },
   multiselector: {

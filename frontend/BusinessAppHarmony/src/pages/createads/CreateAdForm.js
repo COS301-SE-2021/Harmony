@@ -237,7 +237,7 @@ function CreateAdForm(...props) {
                                                 <div className={classes.errorStar}>*</div>
                                             ) : null}</div>
                                     </label>
-                                    <Field id="PairingDescription" name="PairingDescription" className={classes.textField} onChange={handleChange} value={values.PairingDescription} />
+                                    <Field id="PairingDescription" component="textarea" name="PairingDescription" className={classes.textAreaField} onChange={handleChange} value={values.PairingDescription} />
                                 </div>
                                 <div className={classes.formElementsAudience}>
                                     <label htmlFor="ItemTags" className={classes.tagName}>
