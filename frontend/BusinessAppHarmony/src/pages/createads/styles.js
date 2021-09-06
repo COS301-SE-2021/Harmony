@@ -34,8 +34,13 @@ export default makeStyles(theme => ({
     marginTop: 20,
     marginBottom: 20,
     borderRadius: 15,
-
     display: "flex"
+  },
+  MealContainer: {
+    marginTop: 20,
+    marginBottom: 20,
+    width: "65%",
+    margin: "auto"
   },
   formElementsImageContainer: {
     marginTop: 20,
@@ -164,9 +169,8 @@ export default makeStyles(theme => ({
     fontSize: 15,
     marginTop: 0,
     color: "#717171",
-    marginRight: 10,
   },
   errorStar: {
-    color: "red", fontSize: 25, marginLeft: 5, marginTop: -15
+    color: "red", fontSize: 25, marginRight: 5, marginTop: -10
   }
 }));

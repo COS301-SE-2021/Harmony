@@ -13,9 +13,12 @@ import Multiselect from 'multiselect-react-dropdown';
 import Button from '@material-ui/core/Button';
 
 function CreateAdForm(...props) {
-    /**The name, description and tags for the form */
+    /**The form variables */
     const [foodImage, setFoodImage] = useState("http://beepeers.com/assets/images/commerces/default-image.jpg");
     const [drinkImage, setDrinkImage] = useState("http://beepeers.com/assets/images/commerces/default-image.jpg");
+    const [formFoodName, setFoodName] = useState("");
+    const [formDrinkName, setDrinkName] = useState("");
+    const [formPairingDescr, setPairingDescr] = useState("");
     var classes = useStyles();
 
     /**@var used to create a reference to the file input to be able to clear it */
@@ -26,14 +29,9 @@ function CreateAdForm(...props) {
 
 
     const handleClear = (values) => {
-        values.ItemName = "";
-        values.ItemDescription = "";
-        values.ItemTags = "";
-        values.FoodName = "";
-        values.FoodTags = "";
-        values.DrinkName = "";
-        values.DrinkTags = "";
-        values.PairingDescription = "";
+        setFoodName("");
+        setDrinkName("");
+        setPairingDescr("");
         setFoodImage("http://beepeers.com/assets/images/commerces/default-image.jpg");
         setDrinkImage("http://beepeers.com/assets/images/commerces/default-image.jpg");
         foodFileRef.current.value = "";
@@ -82,15 +80,17 @@ function CreateAdForm(...props) {
     return (
         <div className={classes.addItemContainer}>
             <Formik
+                enableReinitialize={true}
                 initialValues={{
                     ItemName: "",
                     ItemDescription: "",
                     ItemTags: "",
-                    FoodName: "",
+                    FoodName: formFoodName,
                     FoodTags: "",
-                    DrinkName: "",
+                    DrinkName: formDrinkName,
                     DrinkTags: "",
-                    PairingDescription: ""
+                    PairingDescription: formPairingDescr,
+                    PairingTags: "",
                 }}
                 validationSchema={Yup.object().shape({
                     ItemName: Yup.string().required('*'),
@@ -98,6 +98,8 @@ function CreateAdForm(...props) {
                     ItemTags: Yup.string().required('*'),
 
                     FoodName: Yup.string().required('*'),
+                    DrinkName: Yup.string().required('*'),
+                    PairingDescription: Yup.string().required('*'),
                 })}
                 // onSubmit={(values) => handleSubmit(values)}
                 onSubmit={(values, { resetForm }) => {
@@ -105,7 +107,6 @@ function CreateAdForm(...props) {
                     resetForm();
                     handleSubmit(values);
                 }}
-                enableReinitialize={true}
             >
                 {/** The moderate pairings form to submit */}
                 {({ errors, touched, values, handleChange }) => (
@@ -174,7 +175,8 @@ function CreateAdForm(...props) {
                                                 'Cold',
                                             ]}
                                         />
-                                    </div>                                </div>
+                                    </div>
+                                </div>
                             </div>
                             <div className={classes.PreviewContainer}>
                                 <div className={classes.DrinkLabelButton}>Drink</div>
@@ -205,7 +207,6 @@ function CreateAdForm(...props) {
                                             ) : null}
                                         </div>
                                     </label>
-                                    {/* <Field id="DrinkTags" name="DrinkTags" className={classes.individualTextField} onChange={handleChange} value={values.DrinkTags} /> */}
                                     <div className={classes.multiselector}>
                                         <Multiselect
                                             isObject={false}
@@ -245,42 +246,59 @@ function CreateAdForm(...props) {
                             </div>
 
                         </div>
-                        <div className={classes.MealLabelButton}>Meal</div>
+                        <div className={classes.MealLabelButton}>Pairing</div>
 
-                        <div className={classes.formElements}>
-                            <label htmlFor="ItemName" className={classes.formLabel}>
-                                <div className={classes.floatLeft}>
-                                    <p className={classes.errorDiv}>Name</p>
+                        <div className={classes.MealContainer}>
+                            <div className={classes.formElementsPairing}>
+                                <label htmlFor="PairingDescription" className={classes.formLabel}>
+                                    <div className={classes.floatLeft}><p className={classes.errorDiv}>Description</p> </div><div className={classes.floatLeft}>
+                                        {errors.PairingDescription && touched.PairingDescription ? (
+                                            <div className={classes.errorStar}>*</div>
+                                        ) : null}</div>
+                                </label>
+                                <Field id="PairingDescription" name="PairingDescription" className={classes.textField} onChange={handleChange} value={values.PairingDescription} />
+                            </div>
+                            <div className={[classes.formElements]}>
+                                <label htmlFor="ItemTags" className={classes.formLabel}>
+                                    <div className={classes.floatLeft}><p className={classes.errorDiv}>Tag</p> </div><div className={classes.floatLeft}>
+                                        {errors.ItemTags && touched.ItemTags ? (
+                                            <div className={classes.errorStar}>*</div>
+                                        ) : null}</div>
+                                </label>
+                                <div className={classes.multiselector}>
+                                    <Multiselect
+                                        isObject={false}
+                                        disablePreSelectedValues
+                                        avoidHighlightFirstOption
+                                        selectionLimit={1}
+                                        showArrow
+                                        placeholder=""
+                                        style={{
+                                            searchBox: {
+                                                'border': '1px solid grey',
+                                                'border-radius': '0px',
+                                                'width': '40%'
+                                            },
+                                            chips: {
+                                                'background-color': '#C41ED4'
+                                            },
+                                        }}
+                                        onRemove={(selectedList) => (values.PairingTags = selectedList)}
+                                        onSearch={function noRefCheck() { }}
+                                        onSelect={(selectedList) => (values.PairingTags = selectedList)}
+                                        id="PairingTags" name="PairingTags" onChange={handleChange} value={values.PairingTags}
+                                        options={[
+                                            'Breakfast',
+                                            'Lunch',
+                                            'Supper',
+                                            'Snack',
+                                            'Vegetarian',
+                                            'Dairy-Free',
+                                            'Nut-Free',
+                                        ]}
+                                    />
                                 </div>
-                                <div className={classes.floatLeft}>
-                                    {(errors.ItemName && touched.ItemName) ? (
-                                        <div className={classes.errorStar}>{errors.ItemName}</div>
-                                    ) : null}
-                                </div>
-                            </label>
-                            {/* <Field id="ItemName" name="ItemName" className={classes.textField} onChange={formik.handleChange} value={formik.values.ItemName} /> */}
-                            <Field id="ItemName" name="ItemName" className={classes.textField} onChange={handleChange} value={values.ItemName} />
-                            {/* {
-                                    console.log("158 " + JSON.stringify(formik.values))
-                                } */}
-                        </div>
-                        <div className={classes.formElements}>
-                            <label htmlFor="ItemDescription" className={classes.formLabel}>
-                                <div className={classes.floatLeft}><p className={classes.errorDiv}>Description</p> </div><div className={classes.floatLeft}>
-                                    {errors.ItemDescription && touched.ItemDescription ? (
-                                        <div className={classes.errorStar}>*</div>
-                                    ) : null}</div>
-                            </label>
-                            <Field id="ItemDescription" name="ItemDescription" className={classes.textField} onChange={handleChange} value={values.ItemDescription} />
-                        </div>
-                        <div className={classes.formElements}>
-                            <label htmlFor="ItemTags" className={classes.formLabel}>
-                                <div className={classes.floatLeft}><p className={classes.errorDiv}>Tags</p> </div><div className={classes.floatLeft}>
-                                    {errors.ItemTags && touched.ItemTags ? (
-                                        <div className={classes.errorStar}>*</div>
-                                    ) : null}</div>
-                            </label>
-                            <Field id="ItemTags" name="ItemTags" className={classes.textField} onChange={handleChange} value={values.ItemTags} />
+                            </div>
                         </div>
 
                         <div>
