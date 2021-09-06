@@ -21,6 +21,7 @@ export default makeStyles(theme => ({
     width: "75%",
     height: 15,
     padding: 15,
+    // borderColor: 'grey'
   },
   multiselector: {
     width: "75%",
@@ -107,13 +108,6 @@ export default makeStyles(theme => ({
     margin: 'auto',
     width: '100%'
   },
-  requestedItemBox: {
-    textAlign: "left",
-    width: 200
-  },
-  requestedItemName: {
-    fontSize: 15, float: "left", textAlign: "left", width: 170, height: 30, overflow: "hidden"
-  },
   ImageContainer: {
     height: 165,
     width: "60%",
@@ -121,8 +115,20 @@ export default makeStyles(theme => ({
   },
   PreviewContainer: {
     display: "block",
-    marginTop: -30,
-    width: "40%"
+    width: "40%",
+    border: "1px solid #EDEDED",
+    boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)",
+    borderRadius: 5,
+  },
+  PreviewContainerPairing: {
+    display: "block",
+    border: "1px solid #EDEDED",
+    boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)",
+    borderRadius: 5,
+
+    marginBottom: 20,
+    width: "85%",
+    margin: "auto"
   },
   PreviewPiece: {
     marginBottom: 10
@@ -131,31 +137,35 @@ export default makeStyles(theme => ({
   },
   FoodLabelButton: {
     backgroundColor: "#FF6347",
-    marginTop: 15,
-    padding: 5,
-    borderRadius: 5,
+    padding: 10,
     color: "white",
-    width: 200,
-    margin: "auto"
+    width: "100%",
+    margin: "auto",
+    height: 40,
+    borderTopRightRadius: 5,
+    borderTopLeftRadius: 5
     // marginLeft: 30,
   },
   DrinkLabelButton: {
     backgroundColor: "#1FBFBA",
-    marginTop: 15,
-    padding: 5,
-    borderRadius: 5,
+    padding: 10,
     color: "white",
-    width: 200,
-    margin: "auto"
+    width: "100%",
+    margin: "auto",
+    height: 40,
+    borderTopRightRadius: 5,
+    borderTopLeftRadius: 5
 
   },
   MealLabelButton: {
     backgroundColor: "#C41ED4",
-    marginTop: 15,
-    padding: 5,
-    borderRadius: 5,
+    padding: 10,
     color: "white",
-    width: 200,
+    width: "100%",
+    margin: "auto",
+    height: 40,
+    borderTopRightRadius: 5,
+    borderTopLeftRadius: 5
 
   },
   displayFlexJustifyCenter: {
