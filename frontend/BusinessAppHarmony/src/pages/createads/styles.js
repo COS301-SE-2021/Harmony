@@ -21,6 +21,7 @@ export default makeStyles(theme => ({
     width: "75%",
     height: 15,
     padding: 15,
+    overflow: "scroll"
   },
   formLabel: {
     marginTop: 10,

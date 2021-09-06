@@ -9,7 +9,7 @@ import * as Yup from 'yup';
 import PageTitle from "../../components/PageTitle/PageTitle";
 import Widget from "../../components/Widget/Widget";
 import { Typography } from "../../components/Wrappers";
-
+import Multiselect from 'multiselect-react-dropdown';
 import Button from '@material-ui/core/Button';
 
 function CreateAdForm(...props) {
@@ -169,7 +169,28 @@ function CreateAdForm(...props) {
                                             ) : null}
                                         </div>
                                     </label>
-                                    <Field id="DrinkTags" name="DrinkTags" className={classes.individualTextField} onChange={handleChange} value={values.DrinkTags} />
+                                    {/* <Field id="DrinkTags" name="DrinkTags" className={classes.individualTextField} onChange={handleChange} value={values.DrinkTags} /> */}
+                                    <Multiselect
+                                        isObject={false}
+                                        disablePreSelectedValues
+                                        avoidHighlightFirstOption
+                                        selectionLimit={3}
+                                        onRemove={function noRefCheck() { }}
+                                        onSearch={function noRefCheck() { }}
+                                        onSelect={(selectedList) => (values.DrinkTags = selectedList, console.log(selectedList + " vslues list " + JSON.stringify(values)))}
+                                        id="DrinkTags" name="DrinkTags" className={classes.individualTextField} onChange={handleChange} value={values.DrinkTags}
+                                        options={[
+                                            'Alcoholic',
+                                            'Non-Alcoholic',
+                                            'Fizzy',
+                                            'Sweet',
+                                            'Sour',
+                                            'Bitter',
+                                            'Warm',
+                                            'Hot',
+                                            'Cold',
+                                        ]}
+                                    />
                                 </div>
                             </div>
 
