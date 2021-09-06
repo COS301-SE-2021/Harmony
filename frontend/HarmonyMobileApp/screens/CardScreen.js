@@ -23,9 +23,13 @@ import Card from "../Components/Card"
 import AppLoadingIcon from "../Components/AppLoadingIcon";
 import AppAlert from "../Components/AppAlert";
 import FilterContext from '../Components/FilterContext';
-import FAB from "../Components/FAB";
+import FABNew from "../Components/FABNew";
+// import { FAB } from 'react-native-paper';
 
-const CardScreen = ({ URL, headerVisible }) => {
+
+const CardScreen = ({ navigation, URL, headerVisible, isDeleteVisible }) => {
+
+
   const API_URL = URL;
   //The loading of the flatlist
 
@@ -162,11 +166,13 @@ const CardScreen = ({ URL, headerVisible }) => {
             renderItem={({ item }) => (
               <Card
                 dataSet={item}
+                isDeleteVisible={isDeleteVisible}
               />
             )}
           />
         )}
-        <FAB />
+        <FABNew />
+
       </View>
       {isErrorAlertVisible === true && (
         <AppAlert visible={true} message={modalMessage} type={"Error"} />

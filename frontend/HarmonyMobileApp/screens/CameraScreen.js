@@ -54,7 +54,7 @@ export default function CameraScreen({ navigation }) {
   const [modalMessage, setModalMessage] = useState("");
 
   const uploadImageURL =
-    "https://jkwhidy1cf.execute-api.eu-west-1.amazonaws.com/dev";
+    "https://jkwhidy1cf.execute-api.eu-west-1.amazonaws.com/dev/imagerecognition";
   useEffect(() => {
     onHandlePermission();
   }, []);

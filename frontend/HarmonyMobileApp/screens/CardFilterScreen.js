@@ -3,7 +3,7 @@ import CardScreen from "./CardScreen";
 import FilterContext from '../Components/FilterContext';
 import AppAlert from "../Components/AppAlert";
 
-const CardFilterScreen = ({ givenURL, isHeaderVisible }) => {
+const CardFilterScreen = ({ givenURL, isHeaderVisible, isDeleteVisible }) => {
 
   const [isErrorAlertVisible, setErrorAlertVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState("Oops, something went wrong.");
@@ -22,8 +22,6 @@ const CardFilterScreen = ({ givenURL, isHeaderVisible }) => {
 
   //Adds a tag to the start of the array
   const appendTagToArray = (newTag, tagType) => {
-    ("appending...")
-      (tagType)
 
     switch (tagType) {
       case "mealTypes":
@@ -109,7 +107,7 @@ const CardFilterScreen = ({ givenURL, isHeaderVisible }) => {
 
   return (
     <FilterContext.Provider value={globalStates}>
-      <CardScreen URL={givenURL} headerVisible={isHeaderVisible} />
+      <CardScreen URL={givenURL} headerVisible={isHeaderVisible} isDeleteVisible={isDeleteVisible} />
       {isErrorAlertVisible === true && (
         <AppAlert visible={true} message={modalMessage} type={"Error"} />
       )}

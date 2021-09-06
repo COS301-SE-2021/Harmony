@@ -9,6 +9,7 @@ import awsExports from "./aws-exports";
 import { RootSiblingParent } from "react-native-root-siblings";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import * as SplashScreen from "expo-splash-screen";
+import { Provider as PaperProvider } from 'react-native-paper';
 
 Amplify.configure({
   ...awsExports,
@@ -62,7 +63,9 @@ export default function App() {
           <IconRegistry icons={EvaIconsPack} />
           <ApplicationProvider {...eva} theme={eva.light}>
             <View onLayout={onLayoutRootView} />
-            <AppNavigator />
+            <PaperProvider>
+              <AppNavigator />
+            </PaperProvider>
           </ApplicationProvider>
         </RootSiblingParent>
       </SafeAreaProvider>

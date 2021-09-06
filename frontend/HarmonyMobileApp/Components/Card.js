@@ -18,7 +18,7 @@ import {
 } from "@ui-kitten/components";
 import IconsBar from "../Components/IconsBar";
 
-export default function Card({ dataSet, ...otherProps }) {
+export default function Card({ dataSet, isDeleteVisible, ...otherProps }) {
 
     return (
         <View style={{ paddingBottom: 15 }}>
@@ -123,6 +123,7 @@ export default function Card({ dataSet, ...otherProps }) {
                     isDV={dataSet.isDownvoted}
                     isUV={dataSet.isUpvoted}
                     isF={dataSet.isFavourited}
+                    isDeleteVisible={isDeleteVisible}
                 />
             </View>
         </View>
