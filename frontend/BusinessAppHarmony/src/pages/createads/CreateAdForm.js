@@ -18,10 +18,15 @@ function CreateAdForm(...props) {
     const [drinkImage, setDrinkImage] = useState("http://beepeers.com/assets/images/commerces/default-image.jpg");
     var classes = useStyles();
 
-    /**@var used to create a reference to the file input to be able to clear it */
+    /**@var fileRef to create a reference to the file input to be able to clear it */
     const foodFileRef = useRef();
     const drinkFileRef = useRef();
+
+    /**@var tagSelector used to clear the multiple selectors on clear  */
     const foodTagSelector = useRef();
+    const drinkTagSelector = useRef();
+    const mealTagSelector = useRef();
+    const audienceTagSelector = useRef();
 
 
 
@@ -30,7 +35,10 @@ function CreateAdForm(...props) {
         setDrinkImage("http://beepeers.com/assets/images/commerces/default-image.jpg");
         foodFileRef.current.value = "";
         drinkFileRef.current.value = "";
-
+        foodTagSelector.current.resetSelectedValues();
+        drinkTagSelector.current.resetSelectedValues();
+        mealTagSelector.current.resetSelectedValues();
+        audienceTagSelector.current.resetSelectedValues();
         foodTagSelector.current.selectedList = "";
     }
 
@@ -208,6 +216,7 @@ function CreateAdForm(...props) {
                                             avoidHighlightFirstOption
                                             selectionLimit={3}
                                             showArrow
+                                            ref={drinkTagSelector}
                                             placeholder=""
                                             style={{
                                                 searchBox: {
@@ -269,6 +278,7 @@ function CreateAdForm(...props) {
                                             selectionLimit={1}
                                             showArrow
                                             placeholder=""
+                                            ref={mealTagSelector}
                                             style={{
                                                 searchBox: {
                                                     'border': '1px solid grey',
@@ -308,6 +318,7 @@ function CreateAdForm(...props) {
                                             avoidHighlightFirstOption
                                             selectionLimit={2}
                                             showArrow
+                                            ref={audienceTagSelector}
                                             placeholder=""
                                             style={{
                                                 searchBox: {
