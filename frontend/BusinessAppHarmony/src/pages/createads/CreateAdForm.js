@@ -170,27 +170,38 @@ function CreateAdForm(...props) {
                                         </div>
                                     </label>
                                     {/* <Field id="DrinkTags" name="DrinkTags" className={classes.individualTextField} onChange={handleChange} value={values.DrinkTags} /> */}
-                                    <Multiselect
-                                        isObject={false}
-                                        disablePreSelectedValues
-                                        avoidHighlightFirstOption
-                                        selectionLimit={3}
-                                        onRemove={function noRefCheck() { }}
-                                        onSearch={function noRefCheck() { }}
-                                        onSelect={(selectedList) => (values.DrinkTags = selectedList, console.log(selectedList + " vslues list " + JSON.stringify(values)))}
-                                        id="DrinkTags" name="DrinkTags" className={classes.individualTextField} onChange={handleChange} value={values.DrinkTags}
-                                        options={[
-                                            'Alcoholic',
-                                            'Non-Alcoholic',
-                                            'Fizzy',
-                                            'Sweet',
-                                            'Sour',
-                                            'Bitter',
-                                            'Warm',
-                                            'Hot',
-                                            'Cold',
-                                        ]}
-                                    />
+                                    <div className={classes.multiselector}>
+                                        <Multiselect
+                                            isObject={false}
+                                            disablePreSelectedValues
+                                            avoidHighlightFirstOption
+                                            selectionLimit={3}
+                                            showArrow
+                                            placeholder=""
+                                            style={{
+                                                searchBox: {
+                                                    'border': '1px solid grey',
+                                                    'border-radius': '0px',
+                                                    'width': '100%'
+                                                }
+                                            }}
+                                            onRemove={(selectedList) => (values.DrinkTags = selectedList)}
+                                            onSearch={function noRefCheck() { }}
+                                            onSelect={(selectedList) => (values.DrinkTags = selectedList)}
+                                            id="DrinkTags" name="DrinkTags" onChange={handleChange} value={values.DrinkTags}
+                                            options={[
+                                                'Alcoholic',
+                                                'Non-Alcoholic',
+                                                'Fizzy',
+                                                'Sweet',
+                                                'Sour',
+                                                'Bitter',
+                                                'Warm',
+                                                'Hot',
+                                                'Cold',
+                                            ]}
+                                        />
+                                    </div>
                                 </div>
                             </div>
 

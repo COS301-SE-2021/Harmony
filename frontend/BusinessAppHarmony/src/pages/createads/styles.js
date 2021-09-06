@@ -21,7 +21,10 @@ export default makeStyles(theme => ({
     width: "75%",
     height: 15,
     padding: 15,
-    overflow: "scroll"
+  },
+  multiselector: {
+    width: "75%",
+    height: 15,
   },
   formLabel: {
     marginTop: 10,
@@ -161,7 +164,7 @@ export default makeStyles(theme => ({
     fontSize: 15,
     marginTop: 0,
     color: "#717171",
-    marginRight: 10
+    marginRight: 10,
   },
   errorStar: {
     color: "red", fontSize: 25, marginLeft: 5, marginTop: -15
