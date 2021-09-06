@@ -21,6 +21,7 @@ function CreateAdForm(...props) {
     /**@var used to create a reference to the file input to be able to clear it */
     const foodFileRef = useRef();
     const drinkFileRef = useRef();
+    const foodTagSelector = useRef();
 
 
 
@@ -37,6 +38,8 @@ function CreateAdForm(...props) {
         setDrinkImage("http://beepeers.com/assets/images/commerces/default-image.jpg");
         foodFileRef.current.value = "";
         drinkFileRef.current.value = "";
+
+        foodTagSelector.current.selectedList = "";
     }
 
     /**Handles the image preview */
@@ -144,6 +147,7 @@ function CreateAdForm(...props) {
                                             avoidHighlightFirstOption
                                             selectionLimit={3}
                                             showArrow
+                                            ref={foodTagSelector}
                                             placeholder=""
                                             style={{
                                                 searchBox: {
