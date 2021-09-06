@@ -137,8 +137,37 @@ function CreateAdForm(...props) {
                                             ) : null}
                                         </div>
                                     </label>
-                                    <Field id="FoodTags" name="FoodTags" className={classes.individualTextField} onChange={handleChange} value={values.FoodTags} />
-                                </div>
+                                    <div className={classes.multiselector}>
+                                        <Multiselect
+                                            isObject={false}
+                                            disablePreSelectedValues
+                                            avoidHighlightFirstOption
+                                            selectionLimit={3}
+                                            showArrow
+                                            placeholder=""
+                                            style={{
+                                                searchBox: {
+                                                    'border': '1px solid grey',
+                                                    'border-radius': '0px',
+                                                    'width': '100%'
+                                                }
+                                            }}
+                                            onRemove={(selectedList) => (values.FoodTags = selectedList)}
+                                            onSearch={function noRefCheck() { }}
+                                            onSelect={(selectedList) => (values.FoodTags = selectedList)}
+                                            id="FoodTags" name="FoodTags" onChange={handleChange} value={values.FoodTags}
+                                            options={[
+                                                'Spicy',
+                                                'Savoury',
+                                                'Salty',
+                                                'Sweet',
+                                                'Sour',
+                                                'Warm',
+                                                'Hot',
+                                                'Cold',
+                                            ]}
+                                        />
+                                    </div>                                </div>
                             </div>
                             <div className={classes.PreviewContainer}>
                                 <div className={classes.DrinkLabelButton}>Drink</div>
