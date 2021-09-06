@@ -16,9 +16,6 @@ function CreateAdForm(...props) {
     /**The form variables */
     const [foodImage, setFoodImage] = useState("http://beepeers.com/assets/images/commerces/default-image.jpg");
     const [drinkImage, setDrinkImage] = useState("http://beepeers.com/assets/images/commerces/default-image.jpg");
-    const [formFoodName, setFoodName] = useState("");
-    const [formDrinkName, setDrinkName] = useState("");
-    const [formPairingDescr, setPairingDescr] = useState("");
     var classes = useStyles();
 
     /**@var used to create a reference to the file input to be able to clear it */
@@ -29,9 +26,6 @@ function CreateAdForm(...props) {
 
 
     const handleClear = (values) => {
-        setFoodName("");
-        setDrinkName("");
-        setPairingDescr("");
         setFoodImage("http://beepeers.com/assets/images/commerces/default-image.jpg");
         setDrinkImage("http://beepeers.com/assets/images/commerces/default-image.jpg");
         foodFileRef.current.value = "";
@@ -85,11 +79,11 @@ function CreateAdForm(...props) {
                     ItemName: "",
                     ItemDescription: "",
                     ItemTags: "",
-                    FoodName: formFoodName,
+                    FoodName: "",
                     FoodTags: "",
-                    DrinkName: formDrinkName,
+                    DrinkName: "",
                     DrinkTags: "",
-                    PairingDescription: formPairingDescr,
+                    PairingDescription: "",
                     PairingTags: "",
                 }}
                 validationSchema={Yup.object().shape({
@@ -109,7 +103,7 @@ function CreateAdForm(...props) {
                 }}
             >
                 {/** The moderate pairings form to submit */}
-                {({ errors, touched, values, handleChange }) => (
+                {({ errors, touched, values, handleChange, resetForm }) => (
                     <Form>
                         <div className={classes.formElementsImageContainer}>
                             <div className={classes.PreviewContainer}>
@@ -344,7 +338,7 @@ function CreateAdForm(...props) {
                         </div>
                         <br />
                         <div className={classes.ButtonContainer}>
-                            <Button onClick={(values) => handleClear(values)} className={classes.clearButton} variant="contained">Clear</Button>
+                            <Button onClick={(values) => (resetForm(), handleClear())} className={classes.clearButton} variant="contained">Clear</Button>
                             <Button variant="contained" color="primary" type="submit" className={classes.addButton} onClick={() => console.log("clicked submit")}>
                                 Create Advert
                             </Button>
