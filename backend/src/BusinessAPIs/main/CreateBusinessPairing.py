@@ -44,13 +44,15 @@ def create_business_pairing(event, context):
         return {"StatusCode": 400,
                 "ErrorMessage": "Business User has no remaining pairing credit left."}
 
+    pairings_used, pairings_available = adjust_user_credit(business_user_data)
+
     # generate unique id for business pairing
     bpID = uuid.uuid4().hex
 
     # need to have an array of locations of stores.
     # Need to keep track of it because the business is limited to a specific number of locations otherwise they pay
     # more.
-    #location_array = event['Location']
+    # location_array = event['Location']
 
     # TODO: A check if the business user is not surpassing their current account limit (Checks the user table)
 
@@ -67,3 +69,21 @@ def create_business_pairing(event, context):
         })
 
     return {"StatusCode": 200}
+
+
+"""
+This function adjusts the user credit.
+It takes in a business user that we get from the main lambda function.
+It returns the updated pairings used and pairings available.
+"""
+
+
+def adjust_user_credit(business_user):
+    pairings_used = business_user["Item"]["PairingsUsed"]
+    pairings_available = business_user["Item"]["PairingsAvailable"]
+
+    pairings_used = pairings_used + 1
+    pairings_available = pairings_available - 1
+
+    # to use in return : pairings_used, pairings_available = adjust_user_credits(x,y)
+    return pairings_used, pairings_available
