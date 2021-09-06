@@ -326,7 +326,7 @@ function CreateAdForm(...props) {
                                                     'border-radius': '0px',
                                                 },
                                                 chips: {
-                                                    'background-color': '#C41ED4'
+                                                    'background-color': '#43F221'
                                                 },
                                             }}
                                             onRemove={(selectedList) => (values.PairingTags = selectedList)}
