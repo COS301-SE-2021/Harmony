@@ -166,16 +166,7 @@ function CreateAdForm(...props) {
                                             onSearch={function noRefCheck() { }}
                                             onSelect={(selectedList) => (values.FoodTags = selectedList)}
                                             id="FoodTags" name="FoodTags" onChange={handleChange} value={values.FoodTags}
-                                            options={[
-                                                'Spicy',
-                                                'Savoury',
-                                                'Salty',
-                                                'Sweet',
-                                                'Sour',
-                                                'Warm',
-                                                'Hot',
-                                                'Cold',
-                                            ]}
+                                            options={['Spicy', 'Savoury', 'Salty', 'Sweet', 'Sour', 'Warm', 'Hot', 'Cold']}
                                         />
                                     </div>
                                 </div>
@@ -232,17 +223,7 @@ function CreateAdForm(...props) {
                                             onSearch={function noRefCheck() { }}
                                             onSelect={(selectedList) => (values.DrinkTags = selectedList)}
                                             id="DrinkTags" name="DrinkTags" onChange={handleChange} value={values.DrinkTags}
-                                            options={[
-                                                'Alcoholic',
-                                                'Non-Alcoholic',
-                                                'Fizzy',
-                                                'Sweet',
-                                                'Sour',
-                                                'Bitter',
-                                                'Warm',
-                                                'Hot',
-                                                'Cold',
-                                            ]}
+                                            options={['Alcoholic', 'Non-Alcoholic', 'Fizzy', 'Sweet', 'Sour', 'Bitter', 'Warm', 'Hot', 'Cold']}
                                         />
                                     </div>
                                 </div>
@@ -261,91 +242,75 @@ function CreateAdForm(...props) {
                                 </label>
                                 <Field id="PairingDescription" name="PairingDescription" className={classes.textField} onChange={handleChange} value={values.PairingDescription} />
                             </div>
-                            <div className={classes.justifySpaceBet}>
-                                <div className={classes.formElementsAudience}>
-                                    <label htmlFor="ItemTags" className={classes.formLabel}>
-                                        <div className={classes.floatLeft}><p className={classes.errorDiv}>Tag</p> </div>
-                                        <div className={classes.floatLeft}>
-                                            {errors.ItemTags && touched.ItemTags ? (
-                                                <div className={classes.errorStar}>*</div>
-                                            ) : null}</div>
-                                    </label>
-                                    <div className={classes.multiselector}>
-                                        <Multiselect
-                                            isObject={false}
-                                            disablePreSelectedValues
-                                            avoidHighlightFirstOption
-                                            selectionLimit={1}
-                                            showArrow
-                                            placeholder=""
-                                            ref={mealTagSelector}
-                                            style={{
-                                                searchBox: {
-                                                    'border': '1px solid grey',
-                                                    'border-radius': '0px',
-                                                },
-                                                chips: {
-                                                    'background-color': '#C41ED4'
-                                                },
-                                            }}
-                                            onRemove={(selectedList) => (values.PairingTags = selectedList)}
-                                            onSearch={function noRefCheck() { }}
-                                            onSelect={(selectedList) => (values.PairingTags = selectedList)}
-                                            id="PairingTags" name="PairingTags" onChange={handleChange} value={values.PairingTags}
-                                            options={[
-                                                'Breakfast',
-                                                'Lunch',
-                                                'Supper',
-                                                'Snack',
-                                                'Vegetarian',
-                                                'Dairy-Free',
-                                                'Nut-Free',
-                                            ]}
-                                        />
-                                    </div>
-                                </div>
-                                <div className={classes.formElementsAudience}>
-                                    <label htmlFor="ItemTags" className={classes.formLabel}>
-                                        <div className={classes.floatLeft}><p className={classes.errorDiv}>Audience</p> </div><div className={classes.floatLeft}>
-                                            {errors.ItemTags && touched.ItemTags ? (
-                                                <div className={classes.errorStar}>*</div>
-                                            ) : null}</div>
-                                    </label>
-                                    <div className={classes.multiselector}>
-                                        <Multiselect
-                                            isObject={false}
-                                            disablePreSelectedValues
-                                            avoidHighlightFirstOption
-                                            selectionLimit={2}
-                                            showArrow
-                                            ref={audienceTagSelector}
-                                            placeholder=""
-                                            style={{
-                                                searchBox: {
-                                                    'border': '1px solid grey',
-                                                    'border-radius': '0px',
-                                                },
-                                                chips: {
-                                                    'background-color': '#43F221'
-                                                },
-                                            }}
-                                            onRemove={(selectedList) => (values.PairingTags = selectedList)}
-                                            onSearch={function noRefCheck() { }}
-                                            onSelect={(selectedList) => (values.PairingTags = selectedList)}
-                                            id="PairingTags" name="PairingTags" onChange={handleChange} value={values.PairingTags}
-                                            options={[
-                                                'Sweet Tooth',
-                                                'Meat Lovers',
-                                                'Alcohol',
-                                                'Children',
-                                                'Vegetarian',
-                                                'Seafood',
-                                            ]}
-                                        />
-                                    </div>
+                            <div className={classes.formElementsAudience}>
+                                <label htmlFor="ItemTags" className={classes.tagName}>
+                                    <div className={classes.tagn}><p className={classes.errorDiv}>Tag</p> </div>
+                                    <div className={classes.floatLeft}>
+                                        {errors.ItemTags && touched.ItemTags ? (
+                                            <div className={classes.errorStar}>*</div>
+                                        ) : null}</div>
+                                </label>
+                                <div className={classes.multiselector}>
+                                    <Multiselect
+                                        isObject={false}
+                                        disablePreSelectedValues
+                                        avoidHighlightFirstOption
+                                        selectionLimit={1}
+                                        showArrow
+                                        placeholder=""
+                                        ref={mealTagSelector}
+                                        style={{
+                                            searchBox: {
+                                                'border': '1px solid grey',
+                                                'border-radius': '0px',
+                                                'width': '80%'
+                                            },
+                                            chips: {
+                                                'background-color': '#C41ED4'
+                                            },
+                                        }}
+                                        onRemove={(selectedList) => (values.PairingTags = selectedList)}
+                                        onSearch={function noRefCheck() { }}
+                                        onSelect={(selectedList) => (values.PairingTags = selectedList)}
+                                        id="PairingTags" name="PairingTags" onChange={handleChange} value={values.PairingTags}
+                                        options={['Breakfast', 'Lunch', 'Supper', 'Snack', 'Vegetarian', 'Dairy-Free', 'Nut-Free']}
+                                    />
                                 </div>
                             </div>
-
+                            <div className={classes.formElementsAudience}>
+                                <label htmlFor="ItemTags" className={classes.tagName}>
+                                    <div className={classes.floatLeft}><p className={classes.errorDiv}>Audience</p> </div><div className={classes.floatLeft}>
+                                        {errors.ItemTags && touched.ItemTags ? (
+                                            <div className={classes.errorStar}>*</div>
+                                        ) : null}</div>
+                                </label>
+                                <div className={classes.multiselector}>
+                                    <Multiselect
+                                        isObject={false}
+                                        disablePreSelectedValues
+                                        avoidHighlightFirstOption
+                                        selectionLimit={2}
+                                        showArrow
+                                        ref={audienceTagSelector}
+                                        placeholder=""
+                                        style={{
+                                            searchBox: {
+                                                'border': '1px solid grey',
+                                                'border-radius': '0px',
+                                                'width': '80%'
+                                            },
+                                            chips: {
+                                                'background-color': '#39E717'
+                                            },
+                                        }}
+                                        onRemove={(selectedList) => (values.PairingTags = selectedList)}
+                                        onSearch={function noRefCheck() { }}
+                                        onSelect={(selectedList) => (values.PairingTags = selectedList)}
+                                        id="PairingTags" name="PairingTags" onChange={handleChange} value={values.PairingTags}
+                                        options={['Sweet Tooth', 'Meat Lovers', 'Alcohol', 'Children', 'Vegetarian', 'Seafood']}
+                                    />
+                                </div>
+                            </div>
                         </div>
                         <br />
                         <div className={classes.ButtonContainer}>

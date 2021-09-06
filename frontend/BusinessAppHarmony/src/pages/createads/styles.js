@@ -38,14 +38,21 @@ export default makeStyles(theme => ({
   },
   formElementsAudience: {
     marginTop: 20,
-    marginBottom: 20,
+    marginBottom: 30,
     display: "flex",
     float: "left",
+    width: '40%',
+  },
+  tagName: {
+    float: 'left',
+    marginRight: 15,
+    marginTop: 8,
+    fontSize: 20
   },
   MealContainer: {
     marginTop: 20,
     marginBottom: 20,
-    width: "65%",
+    width: "85%",
     margin: "auto",
   },
   formElementsImageContainer: {
@@ -189,7 +196,6 @@ export default makeStyles(theme => ({
   },
   justifySpaceBet: {
     justifyContent: "space-between",
-    backgroundColor: 'pink',
     width: "100%"
   }
 }));
