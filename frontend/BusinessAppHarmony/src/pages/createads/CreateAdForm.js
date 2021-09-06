@@ -150,7 +150,10 @@ function CreateAdForm(...props) {
                                                     'border': '1px solid grey',
                                                     'border-radius': '0px',
                                                     'width': '100%'
-                                                }
+                                                },
+                                                chips: {
+                                                    'background-color': '#FF6347'
+                                                },
                                             }}
                                             onRemove={(selectedList) => (values.FoodTags = selectedList)}
                                             onSearch={function noRefCheck() { }}
@@ -212,7 +215,10 @@ function CreateAdForm(...props) {
                                                     'border': '1px solid grey',
                                                     'border-radius': '0px',
                                                     'width': '100%'
-                                                }
+                                                },
+                                                chips: {
+                                                    'background-color': '#1FBFBA'
+                                                },
                                             }}
                                             onRemove={(selectedList) => (values.DrinkTags = selectedList)}
                                             onSearch={function noRefCheck() { }}
