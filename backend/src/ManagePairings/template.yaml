@@ -28,6 +28,7 @@ Resources:
       Policies:
         # Give DynamoDB Full Access to your Lambda Function
         - AmazonDynamoDBFullAccess
+        - AmazonS3FullAccess
 
   ViewRatioDataFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
@@ -77,6 +78,16 @@ Resources:
     Properties:
       CodeUri: main/
       Handler: GetFlavoursMostUsed.get_flavours_most_used
+      Runtime: python3.8
+      Policies:
+        # Give DynamoDB Full Access to your Lambda Function
+        - AmazonDynamoDBFullAccess
+
+  RemoveRequestedItem:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: main/
+      Handler: RemoveRequestedItem.remove_requested_item
       Runtime: python3.8
       Policies:
         # Give DynamoDB Full Access to your Lambda Function
