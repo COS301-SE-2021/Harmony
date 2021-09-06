@@ -27,12 +27,22 @@ def create_business_pairing(event, context):
     price = event['Price']
     businessID = event['BID']
 
+    response = business_user_table.scan()
+    business_user_data = response["Items"]
+
     """Gets the business user data that we will need to process before they can add their pairing."""
     try:
-        busines_user_data = table.get_item(Key={'BID': businessID})
+        business_user_data = business_user_table.get_item(Key={'BID': businessID})
     except ClientError as e:
         print(e.response['Error']['Message'])
         return {"StatusCode": 400}
+
+    """
+    Checks if the business user has credit available.   
+    """
+    if business_user_data["Item"]["PairingsAvailable"] == 0:
+        return {"StatusCode": 400,
+                "ErrorMessage": "Business User has no remaining pairing credit left."}
 
     # generate unique id for business pairing
     bpID = uuid.uuid4().hex
@@ -52,7 +62,8 @@ def create_business_pairing(event, context):
             'DrinkItem': drink_item,
             'FoodDesc': food_desc,
             'FoodItem': food_item,
-            'Price': price
+            'Price': price,
+            'BID': businessID
         })
 
     return {"StatusCode": 200}
