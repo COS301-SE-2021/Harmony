@@ -1,6 +1,7 @@
 import json
 import boto3
 import uuid
+import base64
 from botocore.exceptions import ClientError
 
 dynamodb = boto3.resource('dynamodb')
@@ -11,6 +12,10 @@ table = dynamodb.Table(table_name)
 
 business_user_table_name = 'BusinessUsers'
 business_user_table = dynamodb.Table(business_user_table_name)
+
+client = boto3.client('s3')
+s3 = boto3.resource('s3')
+bucket_name = 'harmonynewitem'
 
 """
 This function adds the business users pairing to the corresponding table.
@@ -26,9 +31,6 @@ def create_business_pairing(event, context):
     food_item = event['FoodItem']
     price = event['Price']
     businessID = event['BID']
-
-    response = business_user_table.scan()
-    business_user_data = response["Items"]
 
     """Gets the business user data that we will need to process before they can add their pairing."""
     try:
@@ -55,6 +57,10 @@ def create_business_pairing(event, context):
     # location_array = event['Location']
 
     # TODO: A check if the business user is not surpassing their current account limit (Checks the user table)
+
+    # place the image in the s3 bucket and get the link
+    # food_image_link = add_image_to_s3(event["FoodImage"], generate_id)
+    # drink_image_link = add_image_to_s3(event["DrinkImage"], generate_id)
 
     # write data for new pairing to the DynamoDB table using the object we instantiated and save response in a variable
     table.put_item(
@@ -87,3 +93,20 @@ def adjust_user_credit(business_user):
 
     # to use in return : pairings_used, pairings_available = adjust_user_credits(x,y)
     return pairings_used, pairings_available
+
+
+"""
+This function adds an image to the s3 bucket and creates a link to be stored in the database.
+"""
+
+
+def add_image_to_s3(base64image, imageid):
+    imgdata = base64.b64decode(base64image)
+
+    file_name_with_extension = f'businessimages/{imageid}.jpg'
+    obj = s3.Object(bucket_name, file_name_with_extension)
+    obj.put(Body=imgdata, ContentType='image/jpeg')
+    location = boto3.client('s3').get_bucket_location(Bucket=bucket_name)['LocationConstraint']
+    # get object url
+    object_url = "https://%s.s3-%s.amazonaws.com/%s" % (bucket_name, location, file_name_with_extension)
+    return object_url
