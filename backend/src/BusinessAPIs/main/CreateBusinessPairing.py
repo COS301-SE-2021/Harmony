@@ -74,6 +74,8 @@ def create_business_pairing(event, context):
             'BID': businessID
         })
 
+    update_business_user_database(businessID, pairings_used, pairings_available)
+
     return {"StatusCode": 200}
 
 
@@ -110,3 +112,34 @@ def add_image_to_s3(base64image, imageid):
     # get object url
     object_url = "https://%s.s3-%s.amazonaws.com/%s" % (bucket_name, location, file_name_with_extension)
     return object_url
+
+
+"""
+Updates the business user's database with the updated pairings_used/pairings_available.
+"""
+
+
+def update_business_user_database(bid, pairings_used, pairings_available):
+    business_user_table.update_item(
+        TableName=business_user_table_name,
+        Key={
+            'BID': bid
+        },
+        ExpressionAttributeNames={'#V': 'PairingsUsed'},
+        ExpressionAttributeValues={':v': pairings_used},
+        UpdateExpression='SET #V = :v',
+        ReturnValues="UPDATED_NEW"
+
+    )
+
+    business_user_table.update_item(
+        TableName=business_user_table_name,
+        Key={
+            'BID': bid
+        },
+        ExpressionAttributeNames={'#T': 'PairingsUsed'},
+        ExpressionAttributeValues={':t': pairings_available},
+        UpdateExpression='SET #T = :t',
+        ReturnValues="UPDATED_NEW"
+
+    )
