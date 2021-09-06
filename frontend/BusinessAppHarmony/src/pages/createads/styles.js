@@ -36,11 +36,17 @@ export default makeStyles(theme => ({
     borderRadius: 15,
     display: "flex"
   },
+  formElementsAudience: {
+    marginTop: 20,
+    marginBottom: 20,
+    display: "flex",
+    float: "left",
+  },
   MealContainer: {
     marginTop: 20,
     marginBottom: 20,
     width: "65%",
-    margin: "auto"
+    margin: "auto",
   },
   formElementsImageContainer: {
     marginTop: 20,
@@ -78,13 +84,21 @@ export default makeStyles(theme => ({
   },
   clearButton: {
     backgroundColor: "#CECECE", margin: 10, height: 35, borderRadius: 10, paddingLeft: 12, paddingRight: 12, width: "20%",
+    float: "none",
     boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)"
-
+  },
+  buttonContainer: {
+    float: "auto",
   },
   addButton: {
     backgroundColor: "#3f51b5", color: "white", marginLeft: 45, height: 35, borderRadius: 10, paddingLeft: 12, paddingRight: 12, width: "30%",
     boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)"
 
+  },
+  ButtonContainer: {
+    float: 'left',
+    margin: 'auto',
+    width: '100%'
   },
   requestedItemBox: {
     textAlign: "left",
@@ -172,5 +186,10 @@ export default makeStyles(theme => ({
   },
   errorStar: {
     color: "red", fontSize: 25, marginRight: 5, marginTop: -10
+  },
+  justifySpaceBet: {
+    justifyContent: "space-between",
+    backgroundColor: 'pink',
+    width: "100%"
   }
 }));
