@@ -4,7 +4,8 @@ import MUIDataTable from "mui-datatables";
 import axios from 'axios';
 import {Container, Button, Grid, TextField} from "@material-ui/core";
 import  { makeStyles } from "@material-ui/core";
-import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
+import {MaterialUIFormSubmit} from "../../components/MaterialUIFormSubmit";
+
 
 const useStyles = makeStyles({
   field: {
@@ -17,20 +18,15 @@ const useStyles = makeStyles({
 
 export default function DataTable() {
   const classes = useStyles()
-  const [tag, setTag]  = useState('');
   const [posts, setPost] = useState([]);
-
-  const handleSubmit  = (e) => {
-    e.preventDefault();
-  }
-
+  const [posts1, setPost1] = useState([]);
 
 
   let signal = axios.CancelToken.source();
 
   useEffect(() => {
     let isSubscribed = true;
-    axios.get(`https://jsonplaceholder.typicode.com/posts`, {
+    axios.get(`https://mocki.io/v1/64dfb5a2-0cd9-4483-8dce-a2ef4db47f36`, {
       cancelToken: signal.token,
     })
         .then(res => {
@@ -45,7 +41,37 @@ export default function DataTable() {
     }
   }, []);
 
-  const columns = ["userId", "id", "title", "body"];
+  const columns = [
+    {label: "Tag ID", name: "id" },
+    {label: "Tag Name", name:"name" },
+    {label:"Type of Tag", name:"type" },
+    {label:"Image count", name:"imageCount" }
+  ];
+
+
+  useEffect(() => {
+    let isSubscribed = true;
+    axios.get(`https://mocki.io/v1/37248929-ce35-49cc-a7d1-b2ae7e4cecb3`, {
+      cancelToken: signal.token,
+    })
+        .then(res => {
+          const posts1 = res.data;
+          setPost1(posts1);
+        }).catch(err => {
+      console.log(err);
+    });
+    return function cleanup() {
+      isSubscribed = false;
+      signal.cancel('Api is being canceled');
+    }
+  }, []);
+
+  const columns1 = [
+    {label: "Iteration ID", name: "id" },
+    {label: "Published Name", name:"publishName" },
+    {label:"Status of Iteration", name:"status" },
+    {label:"Date of Training", name:"trainedAt" }
+  ];
 
   const options = {
     filter: true,
@@ -75,45 +101,43 @@ export default function DataTable() {
                 options={options}
             />
           </Grid>
+
+        <Grid item xs={6}>
+          <div className="App">
+            <MaterialUIFormSubmit
+                formName="Create New Tag"
+                formDescription="Using TagID and Image URL from the Feedback, You can add images to AI DataSet."
+            />
+          </div>
         </Grid>
 
-        <form onSubmit={handleSubmit}>
-          <Grid container>
-            <Grid item xs={3}>
-              <TextField
-                  onChange={(e) => setTag(e.target.value)}
-                  className={classes.field}
-                  label="New Tag"
-                  variant="outlined"
-                  color = "secondary"
-                  fullWidth
-                  required
-              />
-            </Grid>
-
-          <Grid item xs={1}>
-            <Button
-              onClick={() => console.log('uouclocked')}
-              type="submit"
-              color="primary"
-              variant="contained"
-              endIcon={<KeyboardArrowRightIcon/>}
-            >
-              Submit
-          </Button>
-          </Grid>
-          </Grid>
-        </form>
-
+        <Grid item xs={6}>
+          <div className="App">
+            <MaterialUIFormSubmit
+                formName="Add new Image to Training Set"
+                formDescription="Using TagID and Image URL from the Feedback, You can add images to AI DataSet."
+            />
+          </div>
+        </Grid>
+        </Grid>
 
         <Grid container spacing={4}>
-          <Grid item xs={12}>
+          <Grid item xs={6}>
             <MUIDataTable
-                title={"Posts"}
-                data={posts}
-                columns={columns}
+                title={"Iterations"}
+                data={posts1}
+                columns={columns1}
                 options={options}
             />
+          </Grid>
+
+          <Grid item xs={6}>
+            <div className="App">
+              <MaterialUIFormSubmit
+                  formName="Iteration Publish or Unpublish"
+                  formDescription="Using TagID and Image URL from the Feedback, You can add images to AI DataSet."
+              />
+            </div>
           </Grid>
         </Grid>
       </>
