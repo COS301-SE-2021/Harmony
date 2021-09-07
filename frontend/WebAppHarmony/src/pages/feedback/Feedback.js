@@ -3,23 +3,15 @@ import React, {useEffect, useState} from "react";
 import MUIDataTable from "mui-datatables";
 import axios from 'axios';
 import {Container, Button, Grid, TextField} from "@material-ui/core";
-import  { makeStyles } from "@material-ui/core";
-
-
-const useStyles = makeStyles({
-  field: {
-    marginTop: 20,
-    marginBottom: 20,
-    display: 'block'
-  }
-})
+import { MaterialUIFormSubmit } from "../../components/MaterialUIFormSubmit";
 
 
 export default function DataTable() {
-  const classes = useStyles()
-  const [posts1, setPost1] = useState([]);
-  const [posts3, setPost3] = useState([]);
   const [posts, setPost] = useState([]);
+  const [posts1, setPost1] = useState([]);
+  const [posts2, setPost2] = useState([]);
+  const [posts3, setPost3] = useState([]);
+
 
 
 
@@ -41,6 +33,69 @@ export default function DataTable() {
       signal.cancel('Api is being canceled');
     }
   }, []);
+  const columns = [
+    {label: "userId", name: "userId" },
+    {label: "ID", name:"id" },
+    {label:"title", name:"title" },
+    {label:"body", name:"body" }
+  ]
+
+
+
+  useEffect(() => {
+    let isSubscribed = true;
+    axios.get(`https://mocki.io/v1/9f39d9f9-2ed7-46cf-848d-2f6e9089767e`, {
+      cancelToken: signal.token,
+    })
+        .then(res => {
+          const posts1 = res.data;
+          setPost1(posts1);
+        }).catch(err => {
+      console.log(err);
+    });
+    return function cleanup() {
+      isSubscribed = false;
+      signal.cancel('Api is being canceled');
+    }
+  }, []);
+  const columns1 = [
+    {label: "UFID", name: "UFID" },
+    {label: "FoodName", name:"FoodName" },
+    {label:"Date Scanned", name:"DateScanned" },
+    {label:"Correctly Identified", name:"CorrectlyIdentified"},
+    {label:"FoodImage", name:"FoodImage"}
+  ]
+
+
+
+
+  useEffect(() => {
+    let isSubscribed = true;
+    axios.get(`https://mocki.io/v1/64dfb5a2-0cd9-4483-8dce-a2ef4db47f36`, {
+      cancelToken: signal.token,
+    })
+        .then(res => {
+          const posts2 = res.data;
+          setPost2(posts2);
+        }).catch(err => {
+      console.log(err);
+    });
+    return function cleanup() {
+      isSubscribed = false;
+      signal.cancel('Api is being canceled');
+    }
+  }, []);
+  const columns2 = [
+    {label: "Tag ID", name: "id" },
+    {label: "Tag Name", name:"name" },
+    {label:"Type of Tag", name:"type" }
+  ];
+
+
+
+
+
+
 
   useEffect(() => {
     let isSubscribed = true;
@@ -59,43 +114,17 @@ export default function DataTable() {
     }
   }, []);
 
-  useEffect(() => {
-    let isSubscribed = true;
-    axios.get(`https://mocki.io/v1/9f39d9f9-2ed7-46cf-848d-2f6e9089767e`, {
-      cancelToken: signal.token,
-    })
-        .then(res => {
-          const posts1 = res.data;
-          setPost1(posts1);
-        }).catch(err => {
-      console.log(err);
-    });
-    return function cleanup() {
-      isSubscribed = false;
-      signal.cancel('Api is being canceled');
-    }
-  }, []);
-
-  const columns1 = [
-    {label: "UFID", name: "UFID" },
-    {label: "FoodName", name:"FoodName" },
-    {label:"Date Scanned", name:"DateScanned" },
-    {label:"Correctly Identified", name:"CorrectlyIdentified"},
-    {label:"FoodImage", name:"FoodImage"}
-  ]
-  const columns = [
-    {label: "userId", name: "userId" },
-    {label: "ID", name:"id" },
-    {label:"title", name:"title" },
-    {label:"body", name:"body" }
-    ]
-
   const columns3 = [
     {label: "userId", name: "albumId" },
     {label: "ID", name:"id" },
     {label:"title", name:"title" },
     {label:"body", name:"url" }
   ]
+
+
+
+
+
   const options = {
     filter: true,
     filterType: "dropdown",
@@ -124,6 +153,24 @@ export default function DataTable() {
                 options={options}
             />
           </Grid>
+        </Grid>
+        <Grid container spacing={4}>
+        <Grid item xs={6}>
+          <MUIDataTable
+              title={"Food Tags"}
+              data={posts2}
+              columns={columns2}
+              options={options}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <div className="App">
+            <MaterialUIFormSubmit
+                formName="Add new Image to Training Set"
+                formDescription="Using TagID and Image URL from the Feedback, You can add images to AI DataSet."
+            />
+          </div>
+        </Grid>
         </Grid>
       </>
   );
