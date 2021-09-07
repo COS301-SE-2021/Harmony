@@ -25,12 +25,15 @@ If the user paid for 5 adverts they should only be able to create 5 pairings.
 
 
 def create_business_pairing(event, context):
-    drink_desc = event['DrinkDesc']
     drink_item = event['DrinkItem']
-    food_desc = event['FoodDesc']
     food_item = event['FoodItem']
     price = event['Price']
     businessID = event['BID']
+    target_audience = event['Audience']
+    food_tags = event["FoodTags"]
+    drink_tags = event["DrinkTags"]
+    pairing_tags = event["PairingTags"]
+    pairing_description = event["Description"]
 
     """Gets the business user data that we will need to process before they can add their pairing."""
     try:
@@ -59,6 +62,8 @@ def create_business_pairing(event, context):
     # TODO: A check if the business user is not surpassing their current account limit (Checks the user table)
 
     # place the image in the s3 bucket and get the link
+    food_image_link = ''
+    drink_image_link = ''
     # food_image_link = add_image_to_s3(event["FoodImage"], generate_id)
     # drink_image_link = add_image_to_s3(event["DrinkImage"], generate_id)
 
@@ -66,12 +71,17 @@ def create_business_pairing(event, context):
     table.put_item(
         Item={
             'BPID': bpID,
-            'DrinkDesc': drink_desc,
             'DrinkItem': drink_item,
-            'FoodDesc': food_desc,
+            'PairingDescription': pairing_description,
+            'PairingTags': pairing_tags,
             'FoodItem': food_item,
             'Price': price,
-            'BID': businessID
+            'BID': businessID,
+            'FoodTags': food_tags,
+            'DrinkTags': drink_tags,
+            'TargetAudience': target_audience,
+            'DrinkImage': food_image_link,
+            'FoodImage': drink_image_link
         })
 
     update_business_user_database(businessID, pairings_used, pairings_available)
