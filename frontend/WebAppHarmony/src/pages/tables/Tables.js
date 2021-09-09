@@ -2,9 +2,11 @@ import PageTitle from "../../components/PageTitle";
 import React, {useEffect, useState} from "react";
 import MUIDataTable from "mui-datatables";
 import axios from 'axios';
-import {Container, Button, Grid, TextField} from "@material-ui/core";
+import {Grid} from "@material-ui/core";
 import  { makeStyles } from "@material-ui/core";
-import {MaterialUIFormSubmit} from "../../components/MaterialUIFormSubmit";
+import {FormSubmit_ImageUrl} from "../../components/Forms/FormSubmit_ImageUrl";
+import {FormSubmit_NewTag} from "../../components/Forms/FormSubmit_NewTag";
+import {FormSubmit_Iterations} from "../../components/Forms/FormSubmit_Iterations";
 
 
 const useStyles = makeStyles({
@@ -104,7 +106,7 @@ export default function DataTable() {
 
         <Grid item xs={6}>
           <div className="App">
-            <MaterialUIFormSubmit
+            <FormSubmit_NewTag
                 formName="Create New Tag"
                 formDescription="Using TagID and Image URL from the Feedback, You can add images to AI DataSet."
             />
@@ -113,7 +115,7 @@ export default function DataTable() {
 
         <Grid item xs={6}>
           <div className="App">
-            <MaterialUIFormSubmit
+            <FormSubmit_ImageUrl
                 formName="Add new Image to Training Set"
                 formDescription="Using TagID and Image URL from the Feedback, You can add images to AI DataSet."
             />
@@ -133,7 +135,7 @@ export default function DataTable() {
 
           <Grid item xs={6}>
             <div className="App">
-              <MaterialUIFormSubmit
+              <FormSubmit_Iterations
                   formName="Iteration Publish or Unpublish"
                   formDescription="Using TagID and Image URL from the Feedback, You can add images to AI DataSet."
               />
