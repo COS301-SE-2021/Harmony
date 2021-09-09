@@ -58,13 +58,6 @@ def create_business_pairing(event, context):
     generate_id1 = uuid.uuid4().hex
     generate_id2 = uuid.uuid4().hex
 
-    # need to have an array of locations of stores.
-    # Need to keep track of it because the business is limited to a specific number of locations otherwise they pay
-    # more.
-    # location_array = event['Location']
-
-    # TODO: A check if the business user is not surpassing their current account limit (Checks the user table)
-
     # place the image in the s3 bucket and get the link
 
     food_image_link = add_image_to_s3(event["FoodImage"], generate_id1)
