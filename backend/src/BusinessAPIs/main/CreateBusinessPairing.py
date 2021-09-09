@@ -50,6 +50,10 @@ def create_business_pairing(event, context):
                 "ErrorMessage": "Business User has no remaining pairing credit left."}
 
     pairings_used, pairings_available = adjust_user_credit(business_user_data)
+    
+    if not pairings_used:
+        return {"StatusCode": 400,
+                "ErrorMessage": "Business user has no credit remaining."}
 
     # generate unique id for business pairing
     bpID = uuid.uuid4().hex
@@ -99,6 +103,9 @@ It returns the updated pairings used and pairings available.
 def adjust_user_credit(business_user):
     pairings_used = business_user["Item"]["PairingsUsed"]
     pairings_available = business_user["Item"]["PairingsAvailable"]
+
+    if pairings_available == 0:
+        return False, False
 
     pairings_used = pairings_used + 1
     pairings_available = pairings_available - 1
