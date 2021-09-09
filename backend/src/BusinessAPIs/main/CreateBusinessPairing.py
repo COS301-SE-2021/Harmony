@@ -50,13 +50,13 @@ def create_business_pairing(event, context):
                 "ErrorMessage": "Business User has no remaining pairing credit left."}
 
     pairings_used, pairings_available = adjust_user_credit(business_user_data)
-    
-    if not pairings_used:
-        return {"StatusCode": 400,
-                "ErrorMessage": "Business user has no credit remaining."}
 
     # generate unique id for business pairing
     bpID = uuid.uuid4().hex
+
+    # generate id for images.
+    generate_id1 = uuid.uuid4().hex
+    generate_id2 = uuid.uuid4().hex
 
     # need to have an array of locations of stores.
     # Need to keep track of it because the business is limited to a specific number of locations otherwise they pay
@@ -66,10 +66,9 @@ def create_business_pairing(event, context):
     # TODO: A check if the business user is not surpassing their current account limit (Checks the user table)
 
     # place the image in the s3 bucket and get the link
-    food_image_link = ''
-    drink_image_link = ''
-    # food_image_link = add_image_to_s3(event["FoodImage"], generate_id)
-    # drink_image_link = add_image_to_s3(event["DrinkImage"], generate_id)
+
+    food_image_link = add_image_to_s3(event["FoodImage"], generate_id1)
+    drink_image_link = add_image_to_s3(event["DrinkImage"], generate_id2)
 
     # write data for new pairing to the DynamoDB table using the object we instantiated and save response in a variable
     table.put_item(
@@ -103,9 +102,6 @@ It returns the updated pairings used and pairings available.
 def adjust_user_credit(business_user):
     pairings_used = business_user["Item"]["PairingsUsed"]
     pairings_available = business_user["Item"]["PairingsAvailable"]
-
-    if pairings_available == 0:
-        return False, False
 
     pairings_used = pairings_used + 1
     pairings_available = pairings_available - 1
