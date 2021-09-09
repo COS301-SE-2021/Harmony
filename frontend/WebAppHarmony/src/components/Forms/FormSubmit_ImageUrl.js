@@ -2,7 +2,7 @@ import React, { useReducer } from "react";
 import { Button, Icon, TextField, Paper, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
-export function MaterialUIFormSubmit(props) {
+export function FormSubmit_ImageUrl(props) {
     const useStyles = makeStyles(theme => ({
         button: {
             margin: theme.spacing(1)
@@ -33,8 +33,8 @@ export function MaterialUIFormSubmit(props) {
     const [formInput, setFormInput] = useReducer(
         (state, newState) => ({ ...state, ...newState }),
         {
-            name: "",
-            email: ""
+            tagID: "",
+            URL: ""
         }
     );
 
@@ -75,10 +75,10 @@ export function MaterialUIFormSubmit(props) {
 
                 <form onSubmit={handleSubmit}>
                     <TextField
-                        label="TagID"
+                        label="Tag ID"
                         id="margin-normal"
-                        name="name"
-                        defaultValue={formInput.email}
+                        name="tagID"
+                        defaultValue={formInput.tagID}
                         className={classes.textField}
                         helperText="Enter TagID "
                         onChange={handleInput}
@@ -86,8 +86,8 @@ export function MaterialUIFormSubmit(props) {
                     <TextField
                         label="Image URL"
                         id="margin-normal"
-                        name="email"
-                        defaultValue={formInput.name}
+                        name="URL"
+                        defaultValue={formInput.URL}
                         className={classes.textField}
                         helperText="e.g. .png"
                         onChange={handleInput}
