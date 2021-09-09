@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import MUIDataTable from "mui-datatables";
 import axios from 'axios';
 import {Container, Button, Grid, TextField} from "@material-ui/core";
-import { MaterialUIFormSubmit } from "../../components/MaterialUIFormSubmit";
+import { FormSubmit_ImageUrl } from "../../components/Forms/FormSubmit_ImageUrl";
 
 
 export default function DataTable() {
@@ -23,7 +23,7 @@ export default function DataTable() {
       cancelToken: signal.token,
     })
         .then(res => {
-          const posts = res.data;
+          const posts = res.data.UFID;
           setPost(posts);
         }).catch(err => {
       console.log(err);
@@ -34,10 +34,11 @@ export default function DataTable() {
     }
   }, []);
   const columns = [
-    {label: "userId", name: "userId" },
-    {label: "ID", name:"id" },
-    {label:"title", name:"title" },
-    {label:"body", name:"body" }
+    {label: "UFID", name: "UFID" },
+    {label: "FoodName", name:"FoodName" },
+    {label:"Date Scanned", name:"DateScanned" },
+    {label:"Correctly Identified", name:"CorrectlyIdentified"},
+    {label:"FoodImage", name:"FoodImage"}
   ]
 
 
@@ -148,8 +149,8 @@ export default function DataTable() {
           <Grid item xs={12}>
             <MUIDataTable
                 title={"User Feedback Table"}
-                data={posts1}
-                columns={columns1}
+                data={posts}
+                columns={columns}
                 options={options}
             />
           </Grid>
@@ -165,7 +166,7 @@ export default function DataTable() {
         </Grid>
         <Grid item xs={6}>
           <div className="App">
-            <MaterialUIFormSubmit
+            <FormSubmit_ImageUrl
                 formName="Add new Image to Training Set"
                 formDescription="Using TagID and Image URL from the Feedback, You can add images to AI DataSet."
             />
