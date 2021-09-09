@@ -3,7 +3,7 @@ import json
 import boto3
 
 
-def get_iterations(event, context):
+def get_iteration(event, context):
     url = "https://eastus.api.cognitive.microsoft.com/customvision/v3.0/training/projects/b2c99ecb-e43e-4a59-ac87-a189c109e267/iterations"
 
     body = {}
@@ -19,4 +19,5 @@ def get_iterations(event, context):
 
     # load the json data
     data = response.json()
-    return data
+    return {"StatusCode": 200,
+            "data": data}

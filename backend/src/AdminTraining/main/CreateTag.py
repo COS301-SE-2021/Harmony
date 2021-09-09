@@ -20,4 +20,5 @@ def create_tag(event, context):
 
     # load the json data
     data = response.json()
-    return data
+    return {"StatusCode": 200,
+            "data": data}

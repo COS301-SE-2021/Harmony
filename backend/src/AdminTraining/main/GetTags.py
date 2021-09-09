@@ -19,4 +19,5 @@ def get_tags(event, context):
 
     # load the json data
     data = response.json()
-    return data
+    return {"StatusCode": 200,
+            "data": data}

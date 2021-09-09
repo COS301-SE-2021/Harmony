@@ -28,4 +28,5 @@ def new_image_url(event, context):
 
     # load the json data
     data = response.json()
-    print(data)
+    return {"StatusCode": 200,
+            "data": data}
