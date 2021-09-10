@@ -235,9 +235,9 @@ function CreateAdForm(...props) {
                                         <div className={classes.floatLeft}><p className={classes.errorDiv}>Description</p> </div>
                                     </label>
                                     <TextField id="outlined-basic" multiline={true} error={errors.PairingDescription} variant="outlined" name="PairingDescription" className={classes.individualTextField} onChange={handleChange} value={values.PairingDescription} />
-
                                 </div>
-                                <div className={classes.formElementsAudience}>
+                                <br />
+                                <div className={classes.formElementsPairingTag}>
                                     <label htmlFor="ItemTags" className={classes.tagName}>
                                         <div className={classes.floatLeft}><p className={classes.errorDiv}>Tag</p> </div>
                                         <div className={classes.floatLeft}>
@@ -245,7 +245,7 @@ function CreateAdForm(...props) {
                                                 <div className={classes.errorStar}>*</div>
                                             ) : null}</div>
                                     </label>
-                                    <div className={classes.multiselector}>
+                                    <div className={classes.multiselectorTag}>
                                         <Multiselect
                                             isObject={false}
                                             disablePreSelectedValues
@@ -261,7 +261,7 @@ function CreateAdForm(...props) {
                                                 },
                                                 chips: {
                                                     'background-color': '#C41ED4',
-                                                    'font-weight': 'bold'
+                                                    'font-weight': 'bold',
                                                 },
                                             }}
                                             onRemove={(selectedList) => (values.PairingTags = selectedList)}
@@ -272,6 +272,7 @@ function CreateAdForm(...props) {
                                         />
                                     </div>
                                 </div>
+                                <div className={classes.clear}></div>
                                 {/* <div className={classes.formElements}>
                                     <label htmlFor="ItemTags" className={classes.tagName}>
                                         <div className={classes.floatLeft}><p className={classes.errorDiv}>Audience</p> </div><div className={classes.floatLeft}>

@@ -21,15 +21,17 @@ export default makeStyles(theme => ({
   },
   individualTextField: {
     width: "75%",
-    height: 15,
-    padding: 15,
-    color: "#717171",
-    borderWidth: 2,
-    borderColor: 'grey'
+    height: 10,
   },
   multiselector: {
     width: "75%",
+    height: 35,
+    marginLeft: 8
+  },
+  multiselectorTag: {
+    width: "75%",
     height: 15,
+    marginLeft: 100
   },
   formLabel: {
     marginTop: 10,
@@ -41,7 +43,7 @@ export default makeStyles(theme => ({
     borderRadius: 15,
     display: "flex"
   },
-  formElementsAudience: {
+  formElementsPairingTag: {
     marginTop: 20,
     marginBottom: 30,
     display: "flex",
@@ -140,11 +142,13 @@ export default makeStyles(theme => ({
     display: "block",
     border: "1px solid #EDEDED",
     boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.02)",
-    borderRadius: 5,
-    marginTop: 40,
-    marginBottom: 20,
+    height: "auto",
     width: "90%",
-    margin: "auto"
+    margin: "auto",
+    borderRadius: 5,
+  },
+  clear: {
+    clear: "both"
   },
   PreviewPiece: {
     marginBottom: 10
