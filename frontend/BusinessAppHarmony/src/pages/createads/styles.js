@@ -100,13 +100,15 @@ export default makeStyles(theme => ({
     boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)"
   },
   uploadFoodButton: {
-    backgroundColor: "#FF6347", height: 35, borderRadius: 5, paddingLeft: 12, paddingRight: 12, width: "40%",
-    float: "none", color: 'white',
+    backgroundColor: "#FF6347",
+    height: 35, borderRadius: 5, paddingLeft: 12, paddingRight: 12, width: "40%",
+    float: "none", color: 'white', fontWeight: "bold",
     boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)"
   },
   uploadDrinkButton: {
-    backgroundColor: "#1FBFBA", height: 35, borderRadius: 5, paddingLeft: 12, paddingRight: 12, width: "40%",
-    float: "none", color: 'white',
+    backgroundColor: "#1FBFBA",
+    height: 35, borderRadius: 5, paddingLeft: 12, paddingRight: 12, width: "40%",
+    float: "none", color: 'white', fontWeight: "bold",
     boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)"
   },
   buttonContainer: {
@@ -131,13 +133,13 @@ export default makeStyles(theme => ({
     display: "block",
     width: "40%",
     border: "1px solid #EDEDED",
-    boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)",
+    boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.02)",
     borderRadius: 5,
   },
   PreviewContainerPairing: {
     display: "block",
     border: "1px solid #EDEDED",
-    boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)",
+    boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.02)",
     borderRadius: 5,
     marginTop: 40,
     marginBottom: 20,
