@@ -11,7 +11,8 @@ import Widget from "../../components/Widget/Widget";
 import { Typography } from "../../components/Wrappers";
 import Multiselect from 'multiselect-react-dropdown';
 import Button from '@material-ui/core/Button';
-
+import { Input } from '@material-ui/core';
+import TextField from '@material-ui/core/TextField'
 function CreateAdForm(...props) {
     /**The form variables */
     const [foodImage, setFoodImage] = useState("http://beepeers.com/assets/images/commerces/default-image.jpg");
@@ -99,9 +100,9 @@ function CreateAdForm(...props) {
                     ItemDescription: Yup.string().required('*'),
                     ItemTags: Yup.string().required('*'),
 
-                    FoodName: Yup.string().required('*'),
-                    DrinkName: Yup.string().required('*'),
-                    PairingDescription: Yup.string().required('*'),
+                    FoodName: Yup.string().required(true),
+                    DrinkName: Yup.string().required(true),
+                    PairingDescription: Yup.string().required(true),
                 })}
                 // onSubmit={(values) => handleSubmit(values)}
                 onSubmit={(values, { resetForm }) => {
@@ -126,13 +127,8 @@ function CreateAdForm(...props) {
                                         <div className={classes.floatLeft}>
                                             <p className={classes.errorDiv}>Food Name</p>
                                         </div>
-                                        <div className={classes.floatLeft}>
-                                            {(errors.FoodName && touched.FoodName) ? (
-                                                <div className={classes.errorStar}>*</div>
-                                            ) : null}
-                                        </div>
                                     </label>
-                                    <Field id="FoodName" name="FoodName" className={classes.individualTextField} onChange={handleChange} value={values.FoodName} />
+                                    <TextField id="outlined-basic" error={errors.FoodName} variant="outlined" name="FoodName" className={classes.individualTextField} onChange={handleChange} value={values.FoodName} />
                                 </div>
                                 <div className={classes.formElementsImageContainer}>
                                     <label htmlFor="FoodTags" className={classes.formLabel}>
@@ -190,23 +186,15 @@ function CreateAdForm(...props) {
                                         <div className={classes.floatLeft}>
                                             <p className={classes.errorDiv}>Drink Name</p>
                                         </div>
-                                        <div className={classes.floatLeft}>
-                                            {(errors.DrinkName && touched.DrinkName) ? (
-                                                <div className={classes.errorStar}>*</div>
-                                            ) : null}
-                                        </div>
+
                                     </label>
-                                    <Field id="DrinkName" name="DrinkName" className={classes.individualTextField} onChange={handleChange} value={values.DrinkName} />
+                                    <TextField id="outlined-basic" error={errors.DrinkName} variant="outlined" name="DrinkName" className={classes.individualTextField} onChange={handleChange} value={values.DrinkName} />
+
                                 </div>
                                 <div className={classes.formElementsImageContainer}>
                                     <label htmlFor="DrinkTags" className={classes.formLabel}>
                                         <div className={classes.floatLeft}>
                                             <p className={classes.errorDiv}>Drink Tags</p>
-                                        </div>
-                                        <div className={classes.floatLeft}>
-                                            {(errors.DrinkTags && touched.DrinkTags) ? (
-                                                <div className={classes.errorStar}>*</div>
-                                            ) : null}
                                         </div>
                                     </label>
                                     <div className={classes.multiselector}>
@@ -244,12 +232,10 @@ function CreateAdForm(...props) {
                             <div className={classes.MealContainer}>
                                 <div className={classes.formElementsPairing}>
                                     <label htmlFor="PairingDescription" className={classes.formLabel}>
-                                        <div className={classes.floatLeft}><p className={classes.errorDiv}>Description</p> </div><div className={classes.floatLeft}>
-                                            {errors.PairingDescription && touched.PairingDescription ? (
-                                                <div className={classes.errorStar}>*</div>
-                                            ) : null}</div>
+                                        <div className={classes.floatLeft}><p className={classes.errorDiv}>Description</p> </div>
                                     </label>
-                                    <Field id="PairingDescription" component="textarea" name="PairingDescription" className={classes.textAreaField} onChange={handleChange} value={values.PairingDescription} />
+                                    <TextField id="outlined-basic" multiline={true} error={errors.PairingDescription} variant="outlined" name="PairingDescription" className={classes.individualTextField} onChange={handleChange} value={values.PairingDescription} />
+
                                 </div>
                                 <div className={classes.formElementsAudience}>
                                     <label htmlFor="ItemTags" className={classes.tagName}>
@@ -286,7 +272,7 @@ function CreateAdForm(...props) {
                                         />
                                     </div>
                                 </div>
-                                <div className={classes.formElements}>
+                                {/* <div className={classes.formElements}>
                                     <label htmlFor="ItemTags" className={classes.tagName}>
                                         <div className={classes.floatLeft}><p className={classes.errorDiv}>Audience</p> </div><div className={classes.floatLeft}>
                                             {errors.ItemTags && touched.ItemTags ? (
@@ -318,7 +304,7 @@ function CreateAdForm(...props) {
                                             options={['Sweet Tooth', 'Meat Lovers', 'Alcohol', 'Children', 'Vegetarian', 'Seafood']}
                                         />
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                         <br />

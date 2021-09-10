@@ -24,8 +24,8 @@ export default makeStyles(theme => ({
     height: 15,
     padding: 15,
     color: "#717171",
-
-    // borderColor: 'grey'
+    borderWidth: 2,
+    borderColor: 'grey'
   },
   multiselector: {
     width: "75%",
