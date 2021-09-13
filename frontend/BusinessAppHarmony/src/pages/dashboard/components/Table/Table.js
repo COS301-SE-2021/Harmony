@@ -17,6 +17,7 @@ import Widget from "../../../../components/Widget";
 import useStyles from "../../styles";
 import { Typography } from "../../../../components/Wrappers";
 import { IoMdCloudDownload } from "react-icons/io";
+import { GrPaypal } from "react-icons/gr";
 const states = {
   approved: "success",
   pending: "warning",
@@ -25,8 +26,9 @@ const states = {
 
 export default function TableComponent({ data }) {
   const classes = useStyles();
-  var keys = Object.keys(data[0]).map(i => i.toUpperCase());
+  var keys = Object.keys(data.statements[0]).map(i => i.toUpperCase());
   keys.shift(); // delete "id" key
+  /**to filter the data */
   var [mainChartState, setMainChartState] = useState("Month");
   const handleChange = (event) => {
     setMainChartState(event.target.value);
@@ -47,7 +49,7 @@ export default function TableComponent({ data }) {
   ];
   /**The variables need to export the csv for payments */
   const csvReport = {
-    data: data,
+    data: data.statements,
     headers: headers,
     filename: 'StatementOfAccount.csv'
   };
@@ -86,7 +88,7 @@ export default function TableComponent({ data }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map(({ id, name, date, expiring, location, audience, status, cost }) => (
+            {data.statements.map(({ id, name, date, expiring, location, audience, status, cost }) => (
               <TableRow key={id}>
                 <TableCell className="pl-3 fw-normal">{name}</TableCell>
                 <TableCell>{date}</TableCell>
@@ -102,6 +104,15 @@ export default function TableComponent({ data }) {
             ))}
           </TableBody>
         </Table>
+        <div className={classes.totalBox}>
+          <Button className={classes.payNowButton} variant="contained"><GrPaypal style={{ marginRight: 10 }} size={20} />Pay now</Button>
+
+          <div className={classes.floatLeft}>
+            <Typography size="xl" weight="bold">
+              R{data.total}
+            </Typography>
+          </div>
+        </div>
       </Widget>
     </Grid>
 

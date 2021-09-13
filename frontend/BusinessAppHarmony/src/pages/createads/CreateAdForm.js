@@ -8,7 +8,6 @@ import * as Yup from 'yup';
 // components
 import PageTitle from "../../components/PageTitle/PageTitle";
 import Widget from "../../components/Widget/Widget";
-import { Typography } from "../../components/Wrappers";
 import Multiselect from 'multiselect-react-dropdown';
 import Button from '@material-ui/core/Button';
 import { Input } from '@material-ui/core';
