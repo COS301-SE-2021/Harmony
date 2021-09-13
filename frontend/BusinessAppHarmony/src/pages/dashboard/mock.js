@@ -134,8 +134,8 @@ const mock = {
       email: "ottoto@wxample.com",
       product: "ON the Road",
       price: "$25 224.2",
-      date: "11 May 2017",
-      city: "Otsego",
+      date: "11 May 2021",
+      location: "Otsego",
       status: "Pending"
     },
     {
@@ -144,8 +144,8 @@ const mock = {
       email: "thornton@wxample.com",
       product: "HP Core i7",
       price: "$1 254.2",
-      date: "4 Jun 2017",
-      city: "Fivepointville",
+      date: "4 Jun 2021",
+      location: "Fivepointville",
       status: "Declined"
     },
     {
@@ -154,8 +154,8 @@ const mock = {
       email: "bird@wxample.com",
       product: "Air Pro",
       price: "$1 570.0",
-      date: "27 Aug 2017",
-      city: "Leadville North",
+      date: "27 Aug 2021",
+      location: "Leadville North",
       status: "Pending"
     },
     {
@@ -164,8 +164,8 @@ const mock = {
       email: "josephmay@wxample.com",
       product: "Version Control",
       price: "$5 224.5",
-      date: "19 Feb 2018",
-      city: "Seaforth",
+      date: "19 Feb 2021",
+      location: "Seaforth",
       status: "Declined"
     },
     {
@@ -174,8 +174,8 @@ const mock = {
       email: "horadnia@wxample.com",
       product: "Let's Dance",
       price: "$43 594.7",
-      date: "1 Mar 2018",
-      city: "Hanoverton",
+      date: "1 Mar 2021",
+      location: "Hanoverton",
       status: "Approved"
     }
   ]

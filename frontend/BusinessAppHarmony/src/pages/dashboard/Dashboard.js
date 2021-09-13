@@ -24,7 +24,6 @@ import {
 import MUIDataTable from "mui-datatables";
 // styles
 import useStyles from "./styles";
-
 // components
 import mock from "./mock";
 import Widget from "../../components/Widget";
@@ -33,7 +32,7 @@ import { Typography } from "../../components/Wrappers";
 import Dot from "../../components/Sidebar/components/Dot";
 import Table from "./components/Table/Table";
 import BigStat from "./components/BigStat/BigStat";
-
+import Statement from "./Statement";
 const mainChartData = getMainChartData();
 
 export default function Dashboard(props) {
@@ -50,6 +49,20 @@ export default function Dashboard(props) {
     ["Chicken Curry and Coke", "Advert", "38"],
     ["Mutton Bunny Chow and Coke", "Advert", "63"],
   ];
+
+
+  function createData(name, calories, fat, carbs, protein) {
+    return { name, calories, fat, carbs, protein };
+  }
+
+  const rows = [
+    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
+    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
+    createData('Eclair', 262, 16.0, 24, 6.0),
+    createData('Cupcake', 305, 3.7, 67, 4.3),
+    createData('Gingerbread', 356, 16.0, 49, 3.9),
+  ];
+
   return (
     <>
       <PageTitle title="Balance" />
@@ -78,6 +91,19 @@ export default function Dashboard(props) {
             <BigStat {...stat} />
           </Grid>
         ))} */}
+        <Grid item xs={12}>
+          <Widget
+            title={<Typography size="xl" weight="medium" colorBrightness="secondary" noWrap>
+              Remaining balance on account
+            </Typography>
+            }
+            upperTitle
+            noBodyPadding
+            bodyClass={classes.tableWidget}
+          >
+            <Statement />
+          </Widget>
+        </Grid>
         <Grid item xs={12}>
           <Widget
             title="Pending Adverts"

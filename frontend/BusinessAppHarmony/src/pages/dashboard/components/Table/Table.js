@@ -30,14 +30,14 @@ export default function TableComponent({ data }) {
         </TableRow>
       </TableHead>
       <TableBody>
-        {data.map(({ id, name, email, product, price, date, city, status }) => (
+        {data.map(({ id, name, email, product, price, date, location, status }) => (
           <TableRow key={id}>
             <TableCell className="pl-3 fw-normal">{name}</TableCell>
             <TableCell>{email}</TableCell>
             <TableCell>{product}</TableCell>
             <TableCell>{price}</TableCell>
             <TableCell>{date}</TableCell>
-            <TableCell>{city}</TableCell>
+            <TableCell>{location}</TableCell>
             <TableCell>
               <Chip label={status} classes={{ root: classes[states[status.toLowerCase()]] }} />
             </TableCell>
