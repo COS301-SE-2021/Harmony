@@ -10,7 +10,7 @@ import {
 import useStyles from "../../styles";
 
 const states = {
-  sent: "success",
+  approved: "success",
   pending: "warning",
   declined: "secondary",
 };
@@ -39,7 +39,7 @@ export default function TableComponent({ data }) {
             <TableCell>{date}</TableCell>
             <TableCell>{city}</TableCell>
             <TableCell>
-              <Chip label={status} classes={{root: classes[states[status.toLowerCase()]]}}/>
+              <Chip label={status} classes={{ root: classes[states[status.toLowerCase()]] }} />
             </TableCell>
           </TableRow>
         ))}

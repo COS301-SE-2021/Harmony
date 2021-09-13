@@ -136,7 +136,7 @@ const mock = {
       price: "$25 224.2",
       date: "11 May 2017",
       city: "Otsego",
-      status: "Sent"
+      status: "Pending"
     },
     {
       id: 1,
@@ -146,7 +146,7 @@ const mock = {
       price: "$1 254.2",
       date: "4 Jun 2017",
       city: "Fivepointville",
-      status: "Sent"
+      status: "Declined"
     },
     {
       id: 2,
@@ -176,7 +176,7 @@ const mock = {
       price: "$43 594.7",
       date: "1 Mar 2018",
       city: "Hanoverton",
-      status: "Sent"
+      status: "Approved"
     }
   ]
 };

@@ -47,7 +47,6 @@ export default makeStyles(theme => ({
     marginTop: 20,
     marginBottom: 30,
     display: "flex",
-    float: "left",
     width: '40%',
   },
   tagName: {
@@ -61,6 +60,7 @@ export default makeStyles(theme => ({
     marginBottom: 20,
     width: "85%",
     margin: "auto",
+    display: "table"
   },
   formElementsImageContainer: {
     marginTop: 20,

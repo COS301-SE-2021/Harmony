@@ -21,7 +21,7 @@ import {
   YAxis,
   XAxis,
 } from "recharts";
-
+import MUIDataTable from "mui-datatables";
 // styles
 import useStyles from "./styles";
 
@@ -35,12 +35,6 @@ import Table from "./components/Table/Table";
 import BigStat from "./components/BigStat/BigStat";
 
 const mainChartData = getMainChartData();
-const PieChartData = [
-  { name: "Group A", value: 400, color: "primary" },
-  { name: "Group B", value: 300, color: "secondary" },
-  { name: "Group C", value: 300, color: "warning" },
-  { name: "Group D", value: 200, color: "success" },
-];
 
 export default function Dashboard(props) {
   var classes = useStyles();
@@ -48,18 +42,53 @@ export default function Dashboard(props) {
 
   // local
   var [mainChartState, setMainChartState] = useState("monthly");
-
+  const datatableData = [
+    ["Churros and Tea", "Advert", "45"],
+    ["Chocolate Cake and Coffee", "Advert", "32"],
+    ["Samoosa and Chai", "Advert", "28"],
+    ["Chicken Wings and Beer", "Advert", "47"],
+    ["Chicken Curry and Coke", "Advert", "38"],
+    ["Mutton Bunny Chow and Coke", "Advert", "63"],
+  ];
   return (
     <>
-      <PageTitle title="Dashboard" button={<Button
-      variant="contained"
-      size="medium"
-      color="secondary"
-    >
-        Latest Reports
-    </Button>} />
+      <PageTitle title="Balance" />
       <Grid container spacing={4}>
-        <Grid item lg={3} md={4} sm={6} xs={12}>
+
+        <Grid item xs={12}>
+          <ResponsiveContainer width="100%" minWidth={500} >
+            <MUIDataTable
+              title={<Typography size="xl" weight="medium" colorBrightness="secondary" noWrap>
+                Remaining balance on account
+              </Typography>
+              }
+              data={datatableData}
+              columns={["Name", "Type", "Cost (R)"]}
+              options={{
+                download: true,
+                fixedSelectColumn: false,
+                rowsPerPage: 5,
+                rowsPerPageOptions: [5, 10, 15, 25]
+              }}
+            />
+          </ResponsiveContainer>
+        </Grid>
+        {/* {mock.bigStat.map(stat => (
+          <Grid item md={4} sm={6} xs={12} key={stat.product}>
+            <BigStat {...stat} />
+          </Grid>
+        ))} */}
+        <Grid item xs={12}>
+          <Widget
+            title="Pending Adverts"
+            upperTitle
+            noBodyPadding
+            bodyClass={classes.tableWidget}
+          >
+            <Table data={mock.table} />
+          </Widget>
+        </Grid>
+        {/* <Grid item lg={3} md={4} sm={6} xs={12}>
           <Widget
             title="Visits Today"
             upperTitle
@@ -69,30 +98,30 @@ export default function Dashboard(props) {
             <div className={classes.visitsNumberContainer}>
               <Grid container item alignItems={"center"}>
                 <Grid item xs={6}>
-              <Typography size="xl" weight="medium" noWrap>
-                12, 678
-              </Typography>
+                  <Typography size="xl" weight="medium" noWrap>
+                    12, 678
+                  </Typography>
                 </Grid>
                 <Grid item xs={6}>
-              <LineChart
-                width={100}
-                height={30}
-                data={[
-                  { value: 10 },
-                  { value: 15 },
-                  { value: 10 },
-                  { value: 17 },
-                  { value: 18 },
-                ]}
-              >
-                <Line
-                  type="natural"
-                  dataKey="value"
-                  stroke={theme.palette.success.main}
-                  strokeWidth={2}
-                  dot={false}
-                />
-              </LineChart>
+                  <LineChart
+                    width={100}
+                    height={30}
+                    data={[
+                      { value: 10 },
+                      { value: 15 },
+                      { value: 10 },
+                      { value: 17 },
+                      { value: 18 },
+                    ]}
+                  >
+                    <Line
+                      type="natural"
+                      dataKey="value"
+                      stroke={theme.palette.success.main}
+                      strokeWidth={2}
+                      dot={false}
+                    />
+                  </LineChart>
                 </Grid>
               </Grid>
             </div>
@@ -266,8 +295,8 @@ export default function Dashboard(props) {
               </div>
             </div>
           </Widget>
-        </Grid>
-        <Grid item lg={3} md={4} sm={6} xs={12}>
+        </Grid> 
+         <Grid item lg={3} md={4} sm={6} xs={12}>
           <Widget title="Revenue Breakdown" upperTitle className={classes.card}>
             <Grid container spacing={2}>
               <Grid item xs={6}>
@@ -306,122 +335,7 @@ export default function Dashboard(props) {
               </Grid>
             </Grid>
           </Widget>
-        </Grid>
-        <Grid item xs={12}>
-          <Widget
-            bodyClass={classes.mainChartBody}
-            header={
-              <div className={classes.mainChartHeader}>
-                <Typography
-                  variant="h5"
-                  color="text"
-                  colorBrightness="secondary"
-                >
-                  Daily Line Chart
-                </Typography>
-                <div className={classes.mainChartHeaderLabels}>
-                  <div className={classes.mainChartHeaderLabel}>
-                    <Dot color="warning" />
-                    <Typography className={classes.mainChartLegentElement}>
-                      Tablet
-                    </Typography>
-                  </div>
-                  <div className={classes.mainChartHeaderLabel}>
-                    <Dot color="primary" />
-                    <Typography className={classes.mainChartLegentElement}>
-                      Mobile
-                    </Typography>
-                  </div>
-                  <div className={classes.mainChartHeaderLabel}>
-                    <Dot color="secondary" />
-                    <Typography className={classes.mainChartLegentElement}>
-                      Desktop
-                    </Typography>
-                  </div>
-                </div>
-                <Select
-                  value={mainChartState}
-                  onChange={e => setMainChartState(e.target.value)}
-                  input={
-                    <OutlinedInput
-                      labelWidth={0}
-                      classes={{
-                        notchedOutline: classes.mainChartSelectRoot,
-                        input: classes.mainChartSelect,
-                      }}
-                    />
-                  }
-                  autoWidth
-                >
-                  <MenuItem value="daily">Daily</MenuItem>
-                  <MenuItem value="weekly">Weekly</MenuItem>
-                  <MenuItem value="monthly">Monthly</MenuItem>
-                </Select>
-              </div>
-            }
-          >
-            <ResponsiveContainer width="100%" minWidth={500} height={350}>
-              <ComposedChart
-                margin={{ top: 0, right: -15, left: -15, bottom: 0 }}
-                data={mainChartData}
-              >
-                <YAxis
-                  ticks={[0, 2500, 5000, 7500]}
-                  tick={{ fill: theme.palette.text.hint + "80", fontSize: 14 }}
-                  stroke={theme.palette.text.hint + "80"}
-                  tickLine={false}
-                />
-                <XAxis
-                  tickFormatter={i => i + 1}
-                  tick={{ fill: theme.palette.text.hint + "80", fontSize: 14 }}
-                  stroke={theme.palette.text.hint + "80"}
-                  tickLine={false}
-                />
-                <Area
-                  type="natural"
-                  dataKey="desktop"
-                  fill={theme.palette.background.light}
-                  strokeWidth={0}
-                  activeDot={false}
-                />
-                <Line
-                  type="natural"
-                  dataKey="mobile"
-                  stroke={theme.palette.primary.main}
-                  strokeWidth={2}
-                  dot={false}
-                  activeDot={false}
-                />
-                <Line
-                  type="linear"
-                  dataKey="tablet"
-                  stroke={theme.palette.warning.main}
-                  strokeWidth={2}
-                  dot={{
-                    stroke: theme.palette.warning.dark,
-                    strokeWidth: 2,
-                    fill: theme.palette.warning.main,
-                  }}
-                />
-              </ComposedChart>
-            </ResponsiveContainer>
-          </Widget>
-        </Grid>
-        {mock.bigStat.map(stat => (
-          <Grid item md={4} sm={6} xs={12} key={stat.product}>
-            <BigStat {...stat} />
-          </Grid>
-        ))}
-        <Grid item xs={12}>
-          <Widget
-            title="Support Requests"
-            upperTitle
-            noBodyPadding
-            bodyClass={classes.tableWidget}
-          >
-            <Table data={mock.table} />
-          </Widget>
-        </Grid>
+        </Grid> */}
       </Grid>
     </>
   );
