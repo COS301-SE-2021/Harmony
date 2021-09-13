@@ -126,5 +126,14 @@ export default makeStyles(theme => ({
   secondary: {
     backgroundColor: theme.palette.secondary.main,
     color: '#fff',
+  },
+  tableHeader: {
+    width: "100%",
+    justifyContent: "space-between",
+    backgroundColor: "pink"
+  },
+  floatLeft: {
+    float: "left"
   }
+
 }));

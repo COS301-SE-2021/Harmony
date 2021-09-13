@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Grid,
   Table,
@@ -6,7 +6,11 @@ import {
   TableHead,
   TableBody,
   TableCell,
-  Chip
+  Chip,
+  Select,
+  OutlinedInput,
+  MenuItem,
+  Button
 } from "@material-ui/core";
 import Widget from "../../../../components/Widget";
 import useStyles from "../../styles";
@@ -21,18 +25,37 @@ export default function TableComponent({ data }) {
   const classes = useStyles();
   var keys = Object.keys(data[0]).map(i => i.toUpperCase());
   keys.shift(); // delete "id" key
-
+  var [mainChartState, setMainChartState] = useState("Month");
+  const handleChange = (event) => {
+    setMainChartState(event.target.value);
+  };
   return (
     <Grid item xs={12}>
       <Widget
-        title={<Typography size="xl" weight="medium" colorBrightness="secondary" noWrap>
-          Remaining balance on account
-        </Typography>
-        }
-        upperTitle
+        disableWidgetMenu
         noBodyPadding
         bodyClass={classes.tableWidget}
       >
+        <div className={classes.tableHeader}>
+          <div style={{ float: "left" }}>
+            <Typography size="xl" weight="medium" colorBrightness="secondary" noWrap>
+              Remaining balance on account
+            </Typography>
+          </div>
+          <Select
+            labelId="demo-simple-select-outlined-label"
+            id="demo-simple-select-outlined"
+            value={mainChartState}
+            onChange={handleChange}
+            label="chartState"
+            style={{ float: "left", marginRight: 50 }}
+          >
+            <MenuItem value="Day">Past Day</MenuItem>
+            <MenuItem value="Week">Past Week</MenuItem>
+            <MenuItem value="Month">Past Month</MenuItem>
+            <MenuItem value="Year">Past Year</MenuItem>
+          </Select>
+        </div>
         <Table className="mb-0">
           <TableHead>
             <TableRow>
