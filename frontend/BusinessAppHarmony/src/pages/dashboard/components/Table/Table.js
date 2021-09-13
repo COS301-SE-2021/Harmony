@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Grid,
   Table,
   TableRow,
   TableHead,
@@ -7,8 +8,9 @@ import {
   TableCell,
   Chip
 } from "@material-ui/core";
+import Widget from "../../../../components/Widget";
 import useStyles from "../../styles";
-
+import { Typography } from "../../../../components/Wrappers";
 const states = {
   approved: "success",
   pending: "warning",
@@ -21,29 +23,43 @@ export default function TableComponent({ data }) {
   keys.shift(); // delete "id" key
 
   return (
-    <Table className="mb-0">
-      <TableHead>
-        <TableRow>
-          {keys.map(key => (
-            <TableCell key={key}>{key}</TableCell>
-          ))}
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {data.map(({ id, name, email, product, price, date, location, status }) => (
-          <TableRow key={id}>
-            <TableCell className="pl-3 fw-normal">{name}</TableCell>
-            <TableCell>{email}</TableCell>
-            <TableCell>{product}</TableCell>
-            <TableCell>{price}</TableCell>
-            <TableCell>{date}</TableCell>
-            <TableCell>{location}</TableCell>
-            <TableCell>
-              <Chip label={status} classes={{ root: classes[states[status.toLowerCase()]] }} />
-            </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+    <Grid item xs={12}>
+      <Widget
+        title={<Typography size="xl" weight="medium" colorBrightness="secondary" noWrap>
+          Remaining balance on account
+        </Typography>
+        }
+        upperTitle
+        noBodyPadding
+        bodyClass={classes.tableWidget}
+      >
+        <Table className="mb-0">
+          <TableHead>
+            <TableRow>
+              {keys.map(key => (
+                <TableCell key={key}>{key}</TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {data.map(({ id, name, date, expiring, location, audience, status, cost }) => (
+              <TableRow key={id}>
+                <TableCell className="pl-3 fw-normal">{name}</TableCell>
+                <TableCell>{date}</TableCell>
+                <TableCell>{expiring}</TableCell>
+                <TableCell>{location}</TableCell>
+                <TableCell>{audience}</TableCell>
+                <TableCell>
+                  <Chip label={status} classes={{ root: classes[states[status.toLowerCase()]] }} />
+                </TableCell>
+                <TableCell>{cost}</TableCell>
+
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </Widget>
+    </Grid>
+
   );
 }
