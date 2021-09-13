@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   Grid,
   Table,
@@ -12,9 +12,11 @@ import {
   MenuItem,
   Button
 } from "@material-ui/core";
+import { CSVLink } from "react-csv";
 import Widget from "../../../../components/Widget";
 import useStyles from "../../styles";
 import { Typography } from "../../../../components/Wrappers";
+import { IoMdCloudDownload } from "react-icons/io";
 const states = {
   approved: "success",
   pending: "warning",
@@ -29,6 +31,26 @@ export default function TableComponent({ data }) {
   const handleChange = (event) => {
     setMainChartState(event.target.value);
   };
+
+  /** reference to allow an icon to click the csv button */
+  const csvRef = useRef();
+
+  /** the header for the csv to be exported */
+  const headers = [
+    { label: "Name", key: "name" },
+    { label: "Date", key: "date" },
+    { label: "Expiring", key: "expiring" },
+    { label: "Location", key: "location" },
+    { label: "Audience", key: "audience" },
+    { label: "Status", key: "status" },
+    { label: "Cost", key: "cost" },
+  ];
+  /**The variables need to export the csv for payments */
+  const csvReport = {
+    data: data,
+    headers: headers,
+    filename: 'StatementOfAccount.csv'
+  };
   return (
     <Grid item xs={12}>
       <Widget
@@ -36,25 +58,24 @@ export default function TableComponent({ data }) {
         noBodyPadding
         bodyClass={classes.tableWidget}
       >
-        <div className={classes.tableHeader}>
-          <div style={{ float: "left" }}>
-            <Typography size="xl" weight="medium" colorBrightness="secondary" noWrap>
-              Remaining balance on account
-            </Typography>
-          </div>
+        <div style={{ float: "right" }}>
           <Select
             labelId="demo-simple-select-outlined-label"
             id="demo-simple-select-outlined"
             value={mainChartState}
             onChange={handleChange}
             label="chartState"
-            style={{ float: "left", marginRight: 50 }}
+            style={{ float: "left", width: 150, marginRight: 25 }}
           >
             <MenuItem value="Day">Past Day</MenuItem>
             <MenuItem value="Week">Past Week</MenuItem>
             <MenuItem value="Month">Past Month</MenuItem>
             <MenuItem value="Year">Past Year</MenuItem>
+            <MenuItem value="All">All</MenuItem>
           </Select>
+          <CSVLink {...csvReport} style={{ display: 'none' }} ref={csvRef}>Export to CSV</CSVLink>
+          <IoMdCloudDownload style={{ float: "left", marginRight: 25 }} size={32} onClick={() => { csvRef.current.link.click() }} />
+
         </div>
         <Table className="mb-0">
           <TableHead>
