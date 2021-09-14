@@ -1,18 +1,19 @@
 import React, { useState, useRef, useEffect } from "react";
 
-export default function PayPal() {
+export default function PayPal(amount) {
 
     const paypal = useRef();
     useEffect(() => {
+        console.log(amount);
         window.paypal.Buttons({
             createOrder: (data, actions, err) => {
                 return actions.order.create({
                     intent: "CAPTURE",
                     purchase_units: [
                         {
-                            description: "cool table",
                             amount: {
-                                value: 650.00
+                                value: amount.amount,
+                                currency: "MXN"
                             }
                         }
                     ]

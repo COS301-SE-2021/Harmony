@@ -126,7 +126,7 @@ export default function TableComponent({ data }) {
             </Typography>
           </div>
           <div style={{ clear: "both" }}></div>
-          {checkout ? (<PayPal />) : (
+          {checkout ? (<PayPal amount={data.total} />) : (
             <Button className={classes.payNowButton} variant="contained" onClick={() => { setCheckout(true) }}><GrPaypal style={{ marginRight: 10 }} size={20} color="white" />Pay now</Button>
           )}
         </div>
