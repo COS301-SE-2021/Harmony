@@ -39,8 +39,9 @@ export default function Tables() {
             <div className={classes.PreviewPiece}><label htmlFor="file-input-Logo"></label></div>
             <div className={classes.PreviewPiece}><img src={logo} className={classes.ImageContainer} /></div>
             <div className={classes.FileInput}><input type="file" id="file-input-Logo" name="ImageclassNameFood" accept="image/*" ref={logoFileRef} onChange={logoImageHandler} style={{ display: 'none' }} />
-              <Button onClick={() => (logoFileRef.current.click())} className={classes.uploadLogoButton} variant="contained">Upload Image</Button>
+              <Button onClick={() => (logoFileRef.current.click())} className={classes.uploadLogoButton} variant="contained">Upload New Logo</Button>
             </div>
+            <br />
           </Widget>
         </Grid>
       </Grid>

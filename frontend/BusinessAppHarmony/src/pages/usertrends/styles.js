@@ -103,9 +103,8 @@ export default makeStyles(theme => ({
   },
   uploadLogoButton: {
     backgroundColor: theme.palette.primary.main,
-    width: 120,
-    height: 35, borderRadius: 5, paddingLeft: 12, paddingRight: 12,
-    float: "none", color: 'white', fontWeight: "bold",
+    height: 25, borderRadius: 50, paddingLeft: 10, paddingRight: 10, fontSize: 10, marginLeft: 10, marginTop: -5,
+    float: "none", color: 'white',
     boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)"
   },
 
