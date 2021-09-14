@@ -98,20 +98,27 @@ export default function TableComponent({ data }) {
                 <TableCell>
                   <Chip label={status} classes={{ root: classes[states[status.toLowerCase()]] }} />
                 </TableCell>
-                <TableCell>{cost}</TableCell>
+                <TableCell style={{ textAlign: "right" }}>{cost}</TableCell>
 
               </TableRow>
             ))}
           </TableBody>
         </Table>
-        <div className={classes.totalBox}>
-          <Button className={classes.payNowButton} variant="contained"><GrPaypal style={{ marginRight: 10 }} size={20} />Pay now</Button>
 
+        <div className={classes.totalBox}>
+          <div className={classes.floatLeftLeft}>
+            <Typography size="xl" weight="bold">
+              Balance Due
+            </Typography>
+          </div>
           <div className={classes.floatLeft}>
             <Typography size="xl" weight="bold">
               R{data.total}
             </Typography>
           </div>
+          <div style={{ clear: "both" }}></div>
+          <Button className={classes.payNowButton} variant="contained"><GrPaypal style={{ marginRight: 10 }} size={20} color="white" />Pay now</Button>
+
         </div>
       </Widget>
     </Grid>

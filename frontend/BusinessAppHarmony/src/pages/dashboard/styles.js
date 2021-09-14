@@ -135,14 +135,19 @@ export default makeStyles(theme => ({
   floatLeft: {
     float: "left"
   },
+  floatLeftLeft: {
+    float: "left",
+    marginRight: 40
+  },
   totalBox: {
-    float: "right",
-    margin: 20
+    margin: 15,
+    float: "right"
   },
   payNowButton: {
-    marginRight: 20,
-    float: "left",
+    width: 320,
+    margin: "auto",
     backgroundColor: theme.palette.primary.main,
-    fontSize: 17
+    fontSize: 17,
+    color: "white"
   }
 }));
