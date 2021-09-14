@@ -1,57 +1,47 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from 'react';
 import { Grid } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
-import MUIDataTable from "mui-datatables";
+import useStyles from "./styles";
 
 // components
 import PageTitle from "../../components/PageTitle";
 import Widget from "../../components/Widget";
 import Table from "../dashboard/components/Table/Table";
-
-// data
-import mock from "../dashboard/mock";
-
-const datatableData = [
-  ["Churros", "Correct"],
-  ["Chocolate Cake", "Incorrect"],
-  ["Samoosa", "Incorrect"],
-  ["Fish and Chips", "Correct"],
-  ["Churros", "Correct"],
-  ["Chocolate Cake", "Incorrect"],
-  ["Samoosa", "Incorrect"],
-  ["Fish and Chips", "Correct"],
-  ["Churros", "Correct"],
-  ["Chocolate Cake", "Incorrect"],
-  ["Samoosa", "Incorrect"],
-  ["Fish and Chips", "Correct"],
-  ["Churros", "Correct"],
-  ["Chocolate Cake", "Incorrect"],
-  ["Samoosa", "Incorrect"],
-  ["Fish and Chips", "Correct"],
-];
-
-
-const useStyles = makeStyles(theme => ({
-  tableOverflow: {
-    overflow: 'auto'
-  }
-}))
+import Button from '@material-ui/core/Button';
 
 export default function Tables() {
   const classes = useStyles();
+  const [logo, setLogo] = useState("http://beepeers.com/assets/images/commerces/default-image.jpg");
+
+  /**@var fileRef to create a reference to the file input to be able to clear it */
+  const logoFileRef = useRef();
+
+  /**Handles the image preview */
+  const logoImageHandler = (e) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setLogo(reader.result);
+        // console.log(btoa(img))
+      }
+    }
+    reader.readAsDataURL(e.target.files[0])
+  }
   return (
     <>
-      <PageTitle title="User Feedback" />
+      <PageTitle title="Profile" />
       <Grid container spacing={4}>
         <Grid item xs={12}>
-          <MUIDataTable
-            title="Tags"
-            data={datatableData}
-            columns={["Item Name", "Type", "Image", "Image Tag", "Upload Image"]}
-            options={{
-              filterType: "checkbox",
-            }}
-          />
+          <Widget
+            disableWidgetMenu
+            noBodyPadding
+            bodyClass={classes.tableWidget}
+          >
+            <div className={classes.PreviewPiece}><label htmlFor="file-input-Logo"></label></div>
+            <div className={classes.PreviewPiece}><img src={logo} className={classes.ImageContainer} /></div>
+            <div className={classes.FileInput}><input type="file" id="file-input-Logo" name="ImageclassNameFood" accept="image/*" ref={logoFileRef} onChange={logoImageHandler} style={{ display: 'none' }} />
+              <Button onClick={() => (logoFileRef.current.click())} className={classes.uploadLogoButton} variant="contained">Upload Image</Button>
+            </div>
+          </Widget>
         </Grid>
       </Grid>
     </>
