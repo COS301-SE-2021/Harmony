@@ -35,13 +35,6 @@ export default function TableComponent({ data }) {
   const handleChange = (event) => {
     setMainChartState(event.target.value);
   };
-  /** the options for the paypal library */
-  const initialOptions = {
-    "client-id": "test",
-    currency: "ZAR",
-    intent: "capture",
-    "data-client-token": "abc123xyz==",
-  };
 
   /** reference to allow an icon to click the csv button */
   const csvRef = useRef();
