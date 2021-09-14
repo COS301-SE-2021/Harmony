@@ -7,7 +7,14 @@ dynamodb = boto3.resource('dynamodb')
 request_adverts_table_name = 'RequestAdverts'
 request_adverts_table = dynamodb.Table(request_adverts_table_name)
 
-
+"""
+This function takes in the configuration settings of the new advert which will be set by the business user.
+The configurations consist of : 1) Locations targeted.
+                                2) Audience targeted.
+                                3) Time limit for the add (in days)
+It then assigns the pending status to the pairing advert in the RequestAdverts database.
+This database contains the pairings that the admin user still has to approve before they can go live within the system.
+"""
 def finalise_advert(event, context):
     # locations the ad will be used for.(Stores of the business)
     locations = event['Locations']
