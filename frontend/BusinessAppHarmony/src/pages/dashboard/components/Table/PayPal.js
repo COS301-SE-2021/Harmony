@@ -12,7 +12,6 @@ export default function PayPal() {
                         {
                             description: "cool table",
                             amount: {
-                                currency_code: "ZAR",
                                 value: 650.00
                             }
                         }
