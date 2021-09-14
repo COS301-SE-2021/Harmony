@@ -12,6 +12,7 @@ import {
   MenuItem,
   Button
 } from "@material-ui/core";
+import PayPal from "./PayPal";
 import { CSVLink } from "react-csv";
 import Widget from "../../../../components/Widget";
 import useStyles from "../../styles";
@@ -26,12 +27,20 @@ const states = {
 
 export default function TableComponent({ data }) {
   const classes = useStyles();
+  const [checkout, setCheckout] = useState(false);
   var keys = Object.keys(data.statements[0]).map(i => i.toUpperCase());
   keys.shift(); // delete "id" key
   /**to filter the data */
   var [mainChartState, setMainChartState] = useState("Month");
   const handleChange = (event) => {
     setMainChartState(event.target.value);
+  };
+  /** the options for the paypal library */
+  const initialOptions = {
+    "client-id": "test",
+    currency: "ZAR",
+    intent: "capture",
+    "data-client-token": "abc123xyz==",
   };
 
   /** reference to allow an icon to click the csv button */
@@ -117,8 +126,9 @@ export default function TableComponent({ data }) {
             </Typography>
           </div>
           <div style={{ clear: "both" }}></div>
-          <Button className={classes.payNowButton} variant="contained"><GrPaypal style={{ marginRight: 10 }} size={20} color="white" />Pay now</Button>
-
+          {checkout ? (<PayPal />) : (
+            <Button className={classes.payNowButton} variant="contained" onClick={() => { setCheckout(true) }}><GrPaypal style={{ marginRight: 10 }} size={20} color="white" />Pay now</Button>
+          )}
         </div>
       </Widget>
     </Grid>

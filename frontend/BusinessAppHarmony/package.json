@@ -14,6 +14,7 @@
     "@material-ui/styles": "^4.11.3",
     "@mdi/js": "^5.9.55",
     "@mdi/react": "^1.4.0",
+    "@paypal/react-paypal-js": "^7.3.3",
     "apexcharts": "^3.24.0",
     "axios": "^0.21.1",
     "classnames": "^2.2.6",
