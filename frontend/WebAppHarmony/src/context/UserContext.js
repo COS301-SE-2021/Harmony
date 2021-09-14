@@ -11,14 +11,15 @@ function userReducer(state, action) {
     case "SIGN_OUT_SUCCESS":
       return { ...state, isAuthenticated: false };
     default: {
-      throw new Error(`Unhandled action type: ${action.type}`);
+      return { ...state, isAuthenticated: false };
     }
   }
 }
 
-function UserProvider({ children }) {
-  var [state, dispatch] = React.useReducer(userReducer, {
-    isAuthenticated: !!localStorage.getItem("id_token"),
+ function  UserProvider({ children }) {
+
+  let [state, dispatch] = React.useReducer(userReducer, {
+    isAuthenticated: false,
   });
 
   return (
@@ -56,7 +57,7 @@ function loginUser(dispatch, login, password, history, setIsLoading, setError) {
 
   if (!!login && !!password) {
     setTimeout(() => {
-      localStorage.setItem('id_token', 1)
+      //localStorage.setItem('id_token', 1)
       setError(null)
       Auth.signIn(login,password).then(user => {
         setIsLoading(false)

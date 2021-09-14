@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   AppBar,
   Toolbar,
@@ -26,7 +26,7 @@ import useStyles from "./styles";
 import { Badge, Typography} from "../Wrappers";
 import Notification from "../Notification/Notification";
 import UserAvatar from "../UserAvatar/UserAvatar";
-
+import { Auth } from 'aws-amplify';
 // context
 import {
   useLayoutState,
@@ -103,6 +103,16 @@ export default function Header(props) {
   var [isNotificationsUnread, setIsNotificationsUnread] = useState(true);
   var [profileMenu, setProfileMenu] = useState(null);
   var [isSearchOpen, setSearchOpen] = useState(false);
+  let [userState, setUserState] = useState({username : "Loading"});
+  useEffect( ()=>{
+     Auth.currentUserInfo().then(value => {
+      console.log(value)
+      setUserState(value)
+    }).catch(value=>{
+        console.log(value)
+    })
+  })
+
 
   return (
     <AppBar position="fixed" className={classes.appBar}>
@@ -287,16 +297,9 @@ export default function Header(props) {
         >
           <div className={classes.profileMenuUser}>
             <Typography variant="h4" weight="medium">
-              John Smith
+              {userState?.username}
             </Typography>
-            <Typography
-              className={classes.profileMenuLink}
-              component="a"
-              color="primary"
-              href="https://flatlogic.com"
-            >
-              Flalogic.com
-            </Typography>
+
           </div>
           <MenuItem
             className={classNames(
