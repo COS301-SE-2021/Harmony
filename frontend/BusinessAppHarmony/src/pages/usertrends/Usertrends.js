@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Grid } from "@material-ui/core";
+import { Grid, Table, TableRow, TableHead, TableBody, TableCell, } from "@material-ui/core";
 import useStyles from "./styles";
 import TextField from '@material-ui/core/TextField'
 // components
@@ -105,6 +105,23 @@ export default function Tables() {
               <TextField id="outlined-basic" variant="outlined" name="Locations" className={classes.individualTextField} onChange={handleLocationUpdate} value="" />
 
             </div>
+            <Table className="mb-0">
+              <TableHead>
+                <TableRow className={classes.tableRowHeader}>
+                  <TableCell className={classes.tableCell}>NAME</TableCell>
+                  <TableCell className={classes.tableCell}>ADDRESS</TableCell>
+
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {mockResponse.locations.map(({ name, address }) => (
+                  <TableRow >
+                    <TableCell className="pl-3 fw-normal">{name}</TableCell>
+                    <TableCell>{address}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
           </Widget>
 
         </Grid>

@@ -1,16 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import {
-    Formik, Form, useFormik, Field
+    Formik, Form
 } from 'formik';
 // classNames
 import useStyles from "./styles";
 import * as Yup from 'yup';
 // components
-import PageTitle from "../../components/PageTitle/PageTitle";
-import Widget from "../../components/Widget/Widget";
 import Multiselect from 'multiselect-react-dropdown';
 import Button from '@material-ui/core/Button';
-import { Input } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField'
 function CreateAdForm(...props) {
     /**The form variables */

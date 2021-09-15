@@ -249,8 +249,14 @@ export default makeStyles(theme => ({
     color: "white",
     height: 50
   },
-  PayPalContainer: {
-    height: 60,
-    overflow: "hidden"
+  tableRowHeader: {
+    backgroundColor: theme.palette.primary.main,
+    color: "white"
+    // height: 60,
+    // overflow: "hidden"
+  },
+  tableCell: {
+    color: "white"
+
   }
 }));
