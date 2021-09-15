@@ -10,7 +10,7 @@ import PageTitle from "../../components/PageTitle/PageTitle";
 import Widget from "../../components/Widget/Widget";
 import { Typography } from "../../components/Wrappers";
 import Multiselect from 'multiselect-react-dropdown';
-
+import TextField from '@material-ui/core/TextField'
 
 // import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
@@ -120,7 +120,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                     enableReinitialize={true}
                 >
                     {/** The moderate pairings form to submit */}
-                    {({ errors, touched, values, handleChange }) => (
+                    {({ errors, touched, values, handleChange, resetForm }) => (
                         <Form>
                             <div className={classes.formElements}>
                                 <div className={classes.PreviewContainer}>
@@ -148,33 +148,21 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                                     <div className={classes.floatLeft}>
                                         <p className={classes.errorDiv}>Name</p>
                                     </div>
-                                    <div className={classes.floatLeft}>
-                                        {(errors.ItemName && touched.ItemName) ? (
-                                            <div className={classes.errorStar}>{errors.ItemName}</div>
-                                        ) : null}
-                                    </div>
+
                                 </label>
-                                {/* <Field id="ItemName" name="ItemName" className={classes.textField} onChange={formik.handleChange} value={formik.values.ItemName} /> */}
-                                <Field id="ItemName" name="ItemName" className={classes.textField} onChange={handleChange} value={values.ItemName} />
-                                {/* {
-                                    console.log("158 " + JSON.stringify(formik.values))
-                                } */}
+                                <TextField id="outlined-basic" error={errors.ItemName} variant="outlined" name="ItemName" className={classes.individualTextField} onChange={handleChange} value={values.ItemName} />
+
+
                             </div>
                             <div className={classes.formElements}>
                                 <label htmlFor="ItemDescription" className={classes.formLabel}>
-                                    <div className={classes.floatLeft}><p className={classes.errorDiv}>Description</p> </div><div className={classes.floatLeft}>
-                                        {errors.ItemDescription && touched.ItemDescription ? (
-                                            <div className={classes.errorStar}>*</div>
-                                        ) : null}</div>
+                                    <div className={classes.floatLeft}><p className={classes.errorDiv}>Description</p> </div>
                                 </label>
-                                <Field id="ItemDescription" name="ItemDescription" className={classes.textField} onChange={handleChange} value={values.ItemDescription} />
+                                <TextField id="outlined-basic" error={errors.ItemDescription} variant="outlined" name="ItemDescription" className={classes.individualTextField} onChange={handleChange} value={values.ItemDescription} />
                             </div>
                             <div className={classes.formElements}>
                                 <label htmlFor="ItemTags" className={classes.formLabel}>
-                                    <div className={classes.floatLeft}><p className={classes.errorDiv}>Tags</p> </div><div className={classes.floatLeft}>
-                                        {errors.ItemTags && touched.ItemTags ? (
-                                            <div className={classes.errorStar}>*</div>
-                                        ) : null}</div>
+                                    <div className={classes.floatLeft}><p className={classes.errorDiv}>Tags</p> </div>
                                 </label>
                                 <Multiselect
                                     isObject={false}
@@ -207,7 +195,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                             </div>
 
                             <div>
-                                <Button onClick={() => handleClear()} className={classes.clearButton} variant="contained">Clear</Button>
+                                <Button onClick={(values) => (resetForm(), handleClear())} className={classes.clearButton} variant="contained">Clear</Button>
                                 <Button variant="contained" color="primary" type="submit" className={classes.addButton} onClick={() => console.log("clicked submit")}>
                                     Add to database
                                 </Button>

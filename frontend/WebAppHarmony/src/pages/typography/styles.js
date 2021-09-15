@@ -12,6 +12,10 @@ export default makeStyles(theme => ({
   text: {
     marginBottom: theme.spacing(2),
   },
+  individualTextField: {
+    width: "65%",
+    height: 10,
+  },
   textField: {
     width: "65%",
     height: 45,
