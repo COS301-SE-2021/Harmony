@@ -47,6 +47,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
         setFoodOrDrink('none');
         setTags("");
     }
+    const supportedFormats = ['image/jpg', 'image/jpeg', 'image/png'];
 
     /**Handles the image preview */
     const imageHandler = (e) => {
@@ -57,7 +58,11 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                 // console.log(btoa(img))
             }
         }
-        reader.readAsDataURL(e.target.files[0])
+        if (supportedFormats.includes(e.target.files[0].type)) { reader.readAsDataURL(e.target.files[0]) }
+        else {
+            alert(e.target.files[0].type + " is not a supported file format.");
+            setImg("http://beepeers.com/assets/images/commerces/default-image.jpg");
+        }
     }
 
     /** Submits the form to the database */
@@ -114,14 +119,9 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                         <Form>
                             <div className={classes.formElements}>
                                 <div className={classes.PreviewContainer}>
-                                    <div className={classes.PreviewPiece}><label htmlFor="file-input"><Typography
-                                        color="text"
-                                        colorBrightness="secondary"
-                                        className={classes.legendElementText}
-                                        size={15}
-                                    >Upload an image</Typography></label></div>
                                     <div className={classes.PreviewPiece}><img src={img} className={classes.ImageContainer} /></div>
-                                    <div className={classes.FileInput}><input type="file" id="file-input" name="ImageclassName" accept="image/*" ref={fileRef} onChange={imageHandler} /></div>
+                                    <div className={classes.FileInput}><input type="file" id="file-input" name="ImageclassName" accept="image/*" ref={fileRef} onChange={imageHandler} style={{ display: 'none' }} /></div>
+                                    <Button onClick={() => (fileRef.current.click())} className={classes.uploadImageButton} variant="contained">Upload Image</Button>
                                 </div>
                                 {/* <ToggleButtonGroup
                                     value={FoodOrDrink}

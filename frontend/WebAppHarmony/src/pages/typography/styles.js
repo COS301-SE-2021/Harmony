@@ -75,14 +75,21 @@ export default makeStyles(theme => ({
   },
   ImageContainer: {
     height: 125,
-    width: 150
+    width: 150,
+    borderRadius: 5
   },
   PreviewContainer: {
     display: "block",
     marginTop: -30
   },
+  uploadImageButton: {
+    backgroundColor: theme.palette.primary.main,
+    height: 35, borderRadius: 5, paddingLeft: 10, paddingRight: 10, fontSize: 13, marginTop: -5,
+    float: "none", color: 'white', fontWeight: "bold",
+    boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)"
+  },
   PreviewPiece: {
-    marginBottom: 10
+    marginBottom: 10,
   },
   FileInput: {
     marginRight: "-30%",
