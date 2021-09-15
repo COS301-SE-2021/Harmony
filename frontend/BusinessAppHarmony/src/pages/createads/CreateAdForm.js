@@ -14,8 +14,9 @@ import { Input } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField'
 function CreateAdForm(...props) {
     /**The form variables */
-    const [foodImage, setFoodImage] = useState("http://beepeers.com/assets/images/commerces/default-image.jpg");
-    const [drinkImage, setDrinkImage] = useState("http://beepeers.com/assets/images/commerces/default-image.jpg");
+    const defaultImage = "http://beepeers.com/assets/images/commerces/default-image.jpg";
+    const [foodImage, setFoodImage] = useState(defaultImage);
+    const [drinkImage, setDrinkImage] = useState(defaultImage);
     var classes = useStyles();
 
     /**@var fileRef to create a reference to the file input to be able to clear it */
@@ -28,11 +29,12 @@ function CreateAdForm(...props) {
     const mealTagSelector = useRef();
     const audienceTagSelector = useRef();
 
+    const supportedFormats = ['image/jpg', 'image/jpeg', 'image/png'];
 
 
     const handleClear = (values) => {
-        setFoodImage("http://beepeers.com/assets/images/commerces/default-image.jpg");
-        setDrinkImage("http://beepeers.com/assets/images/commerces/default-image.jpg");
+        setFoodImage(defaultImage);
+        setDrinkImage(defaultImage);
         foodFileRef.current.value = "";
         drinkFileRef.current.value = "";
         foodTagSelector.current.resetSelectedValues();
@@ -51,7 +53,11 @@ function CreateAdForm(...props) {
                 // console.log(btoa(img))
             }
         }
-        reader.readAsDataURL(e.target.files[0])
+        if (supportedFormats.includes(e.target.files[0].type)) { reader.readAsDataURL(e.target.files[0]) }
+        else {
+            alert(e.target.files[0].type + " is not a supported file format.");
+            setFoodImage(defaultImage);
+        }
     }
     const DrinkImageHandler = (e) => {
         const reader = new FileReader();
@@ -61,7 +67,11 @@ function CreateAdForm(...props) {
                 // console.log(btoa(img))
             }
         }
-        reader.readAsDataURL(e.target.files[0])
+        if (supportedFormats.includes(e.target.files[0].type)) { reader.readAsDataURL(e.target.files[0]) }
+        else {
+            alert(e.target.files[0].type + " is not a supported file format.");
+            setDrinkImage(defaultImage);
+        }
     }
     /** Submits the form to the database */
     const handleSubmit = (vals) => {
