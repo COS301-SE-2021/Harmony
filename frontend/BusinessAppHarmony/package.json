@@ -28,6 +28,7 @@
     "react-dom": "^16.14.0",
     "react-geocode": "^0.2.3",
     "react-google-maps": "^9.4.5",
+    "react-hook-form": "^7.15.3",
     "react-icons": "^4.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",

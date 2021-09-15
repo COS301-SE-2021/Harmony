@@ -10,6 +10,11 @@ import { Typography } from "../../components/Wrappers";
 import Geocode from "react-geocode";
 import PayPal from '../dashboard/components/Table/PayPal';
 import { GrPaypal } from "react-icons/gr";
+import * as yup from 'yup';
+
+import {
+  Formik, Form, useFormik, Field, validateYupSchema
+} from 'formik';
 
 export default function Tables() {
   const classes = useStyles();
@@ -35,17 +40,34 @@ export default function Tables() {
   // );
   /**@var fileRef to create a reference to the file input to be able to clear it */
   const logoFileRef = useRef();
+  const submitButtonRef = useRef();
+
+  const supportedFormats = ['image/jpg', 'image/jpeg', 'image/png'];
+  /**image validation schema */
+  let schema = yup.object().shape({
+    logo: yup.mixed().test('fileType', "Unsupported File Type", (value) => {
+      // supportedFormats.includes(value.type)
+      console.log(value)
+    })
+  });
 
   /**Handles the image preview */
   const logoImageHandler = (e) => {
     const reader = new FileReader();
     reader.onload = () => {
       if (reader.readyState === 2) {
-        setLogo(reader.result);
+        // schema.isValid({ logo: reader.result }).then(alert("image is valid"), setLogo(reader.result));
+        setLogo(reader.result)
+        // submitButtonRef.current.click()
+        // alert(JSON.stringify(logo))
         // console.log(btoa(img))
       }
     }
-    reader.readAsDataURL(e.target.files[0])
+    if (supportedFormats.includes(e.target.files[0].type)) { reader.readAsDataURL(e.target.files[0]) }
+    else {
+      alert(e.target.files[0].type + " is not a supported file format.");
+      setLogo("http://beepeers.com/assets/images/commerces/default-image.jpg");
+    }
   }
 
   const handleLocationUpdate = () => {
@@ -60,6 +82,8 @@ export default function Tables() {
     ],
     outstandingBalance: 187.25
   }
+
+
   return (
     <>
       <PageTitle title="Profile" />
@@ -73,11 +97,18 @@ export default function Tables() {
               Profile Settings
             </Typography>
             <br />
-            <div className={classes.PreviewPiece}><label htmlFor="file-input-Logo"></label></div>
-            <div className={classes.PreviewPiece}><img src={logo} className={classes.ImageContainer} /></div>
-            <div className={classes.FileInput}><input type="file" id="file-input-Logo" name="ImageclassNameFood" accept="image/*" ref={logoFileRef} onChange={logoImageHandler} style={{ display: 'none' }} />
-              <Button onClick={() => (logoFileRef.current.click())} className={classes.uploadLogoButton} variant="contained">Upload New Logo</Button>
-            </div>
+            <Formik onSubmit={() => console.log("clicked submit")} validationSchema={schema}>
+              {({ errors, touched, values, handleChange, resetForm }) => (
+                <Form >
+                  <div className={classes.PreviewPiece}><label htmlFor="file-input-Logo"></label></div>
+                  <div className={classes.PreviewPiece}><img src={logo} className={classes.ImageContainer} /></div>
+                  <div className={classes.FileInput}><input type="file" id="file-input-Logo" name="ImageclassNameFood" accept="image/*" ref={logoFileRef} onChange={logoImageHandler} style={{ display: 'none' }} />
+                    <Button onClick={() => (logoFileRef.current.click())} className={classes.uploadLogoButton} variant="contained">Upload New Logo</Button>
+                    {/* <Button type="submit" className={classes.uploadLogoButton} ref={submitButtonRef} variant="contained">Upload click</Button> */}
+
+                  </div>
+                </Form>)}
+            </Formik>
           </Widget>
         </Grid>
 
@@ -127,4 +158,4 @@ export default function Tables() {
       </Grid>
     </>
   );
-}
+}
