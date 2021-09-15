@@ -9,6 +9,8 @@ import * as Yup from 'yup';
 import PageTitle from "../../components/PageTitle/PageTitle";
 import Widget from "../../components/Widget/Widget";
 import { Typography } from "../../components/Wrappers";
+import Multiselect from 'multiselect-react-dropdown';
+
 
 // import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
@@ -22,6 +24,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
     const [FoodOrDrink, setFoodOrDrink] = React.useState('none');
     const [img, setImg] = useState("http://beepeers.com/assets/images/commerces/default-image.jpg");
     var classes = useStyles();
+    const tagSelector = useRef();
 
     /**@var used to create a reference to the file input to be able to clear it */
     const fileRef = useRef();
@@ -46,6 +49,8 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
         fileRef.current.value = "";
         setFoodOrDrink('none');
         setTags("");
+        tagSelector.current.resetSelectedValues();
+
     }
     const supportedFormats = ['image/jpg', 'image/jpeg', 'image/png'];
 
@@ -171,7 +176,34 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                                             <div className={classes.errorStar}>*</div>
                                         ) : null}</div>
                                 </label>
-                                <Field id="ItemTags" name="ItemTags" className={classes.textField} onChange={handleChange} value={values.ItemTags} />
+                                <Multiselect
+                                    isObject={false}
+                                    disablePreSelectedValues
+                                    avoidHighlightFirstOption
+                                    selectionLimit={3}
+                                    showArrow
+                                    ref={tagSelector}
+                                    placeholder=""
+                                    style={{
+                                        multiselectContainer: {
+                                            'width': '65%',
+                                            'height': 20
+                                        },
+                                        inputField: {
+                                            'width': '100%',
+                                            'height': 20
+                                        },
+                                        chips: {
+                                            'background-color': '#536DFE',
+                                            'font-weight': 'bold',
+                                        },
+                                    }}
+                                    onRemove={(selectedList) => (values.ItemTags = selectedList)}
+                                    onSearch={function noRefCheck() { }}
+                                    onSelect={(selectedList) => (values.ItemTags = selectedList)}
+                                    id="ItemTags" name="ItemTags" onChange={handleChange} value={values.ItemTags}
+                                    options={['Spicy', 'Savoury', 'Salty', 'Sweet', 'Sour', 'Warm', 'Hot', 'Cold', 'Alcoholic', 'Non-Alcoholic', 'Fizzy', 'Sweet', 'Sour', 'Bitter', 'Warm', 'Hot', 'Cold']}
+                                />
                             </div>
 
                             <div>

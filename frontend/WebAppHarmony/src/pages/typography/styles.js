@@ -135,5 +135,9 @@ export default makeStyles(theme => ({
   },
   errorStar: {
     color: "red", fontSize: 25, marginLeft: 5, marginTop: -15
+  },
+  color: {
+    backgroundColor: theme.palette.primary.main,
+
   }
 }));
