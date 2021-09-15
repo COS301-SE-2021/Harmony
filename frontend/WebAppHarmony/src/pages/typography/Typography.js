@@ -11,7 +11,7 @@ import { Typography } from "../../components/Wrappers";
 import AddItemForm from "./AddItemForm";
 import ItemsButton from "./ItemsButton";
 
-import ToggleButton from '@material-ui/lab/ToggleButton';
+// import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 export default function TypographyPage() {
   var classes = useStyles();
@@ -75,22 +75,22 @@ export default function TypographyPage() {
                 <br />
                 {/* <p className={classes.fontSizeMedium}></p> */}
                 <div style={{ height: 450, overflowY: "scroll" }}>
-                  <ToggleButtonGroup
+                  {/* <ToggleButtonGroup
                     value={name}
                     exclusive
                     orientation="vertical"
                   // onChange={HandleToggle}
                   // className={classes.Toggle}
-                  >
-                    {/**
+                  > */}
+                  {/**
                        * maps the requested item names to be repeatedly displayed
                         */}
-                    {requestedItemsAPI.Data.map((item, index) => (
+                  {/* {requestedItemsAPI.Data.map((item, index) => (
                       <ToggleButton className={classes.toggleButton} value={item.FoodName} key={index} onClick={() => handleClick(item)}>
                         <ItemsButton item={item.FoodName} />
                       </ToggleButton>
                     ))}
-                  </ToggleButtonGroup>
+                  </ToggleButtonGroup> */}
                 </div>
               </div>
               <AddItemForm FoodName={name} FoodDescription={description} />

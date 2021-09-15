@@ -10,7 +10,7 @@ import PageTitle from "../../components/PageTitle/PageTitle";
 import Widget from "../../components/Widget/Widget";
 import { Typography } from "../../components/Wrappers";
 
-import ToggleButton from '@material-ui/lab/ToggleButton';
+// import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import Button from '@material-ui/core/Button';
 
@@ -123,7 +123,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                                     <div className={classes.PreviewPiece}><img src={img} className={classes.ImageContainer} /></div>
                                     <div className={classes.FileInput}><input type="file" id="file-input" name="ImageclassName" accept="image/*" ref={fileRef} onChange={imageHandler} /></div>
                                 </div>
-                                <ToggleButtonGroup
+                                {/* <ToggleButtonGroup
                                     value={FoodOrDrink}
                                     exclusive
                                     onChange={HandleToggle}
@@ -135,7 +135,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                                     <ToggleButton value="Drink" >
                                         Drink
                                     </ToggleButton>
-                                </ToggleButtonGroup>
+                                </ToggleButtonGroup> */}
                             </div>
 
                             <div className={classes.formElements}>
