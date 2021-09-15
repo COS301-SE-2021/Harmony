@@ -14,6 +14,7 @@ dynamodb = boto3.resource('dynamodb')
 
 # use the DynamoDB object to select our table
 table = dynamodb.Table('Test_Movies')
+table = dynamodb.Table('Test_Movies')
 
 # define the handler function that the Lambda service will use as an entry point
 def example_function(event, context):
@@ -260,20 +261,15 @@ def example_function(event, context):
     """test"""
     response = table.scan()
     response = response["Items"]
-    data = [{u'TEMP': 30, u'LIGHT': 315, u'HUMIDITY': 30.9, u'SOURCE': u'arduino_1', u'PLACE': u'kitchen',
-             u'time': u'2016-12-31T11:18:38.822822913Z'},
-            {u'TEMP': 31, u'LIGHT': 325.5, u'HUMIDITY': 31.93, u'SOURCE': u'arduino_1', u'PLACE': u'garage',
-             u'time': u'2016-12-31T11:18:39.919019993Z'},
-            {u'TEMP': 32, u'LIGHT': 336, u'HUMIDITY': 32.96, u'SOURCE': u'arduino_1', u'PLACE': u'living_room',
-             u'time': u'2016-12-31T11:18:41.014792508Z'},
-            {u'TEMP': 33, u'LIGHT': 346.5, u'HUMIDITY': 33.99, u'SOURCE': u'arduino_1', u'PLACE': u'basement',
-             u'time': u'2016-12-31T11:18:42.11100167Z'}]
 
     with open("output.csv", "w", newline="") as f:  # python 2: open("output.csv","wb")
-        title = "time,SOURCE,PLACE,TEMP,LIGHT,HUMIDITY".split(",")  # quick hack
+        title = "movieId,Title".split(",")  # quick hack
         cw = csv.DictWriter(f, title, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
         cw.writeheader()
-        cw.writerows(data)
+        cw.writerows(response)
+
+    movies2 = pd.read_csv('output.csv', usecols=['movieId', 'Title'])
+    """test ends"""
 
     df = ratings2.pivot_table(index='title', columns='userId', values='rating').fillna(0)
     df1 = df.copy()
