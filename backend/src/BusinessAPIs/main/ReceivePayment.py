@@ -25,6 +25,27 @@ def receive_payment(event, context):
         print(e.response['Error']['Message'])
         return {"StatusCode": 400}
 
+    """
+    Takes the current outstanding amount and subtracts the amount paid from it.
+    """
+    outstanding_amount = business_user_data["Item"]["OutstandingAmount"]
+    new_amount = outstanding_amount - amount
+
+    """
+    Writes the new outstanding amount to the business users table.
+    """
+    business_user_table.update_item(
+        TableName=business_user_table_name,
+        Key={
+            'BID': bid
+        },
+        ExpressionAttributeNames={'#V': 'OutstandingAmount'},
+        ExpressionAttributeValues={':v': new_amount},
+        UpdateExpression='SET #V = :v',
+        ReturnValues="UPDATED_NEW"
+
+    )
+
     return {
-        "StatusCode": 200,
+        "StatusCode": 200
     }
