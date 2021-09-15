@@ -230,5 +230,27 @@ export default makeStyles(theme => ({
   justifySpaceBet: {
     justifyContent: "space-between",
     width: "100%"
+  },
+  outstandingBalance: {
+    color: theme.palette.primary.main,
+    textAlign: "center"
+  },
+  outstandingBalanceWord: {
+    fontSize: 15,
+    marginTop: 20,
+    color: "#717171",
+    float: "left"
+  },
+  payNowButton: {
+    width: "100%",
+    margin: "auto",
+    backgroundColor: theme.palette.primary.main,
+    fontSize: 17,
+    color: "white",
+    height: 50
+  },
+  PayPalContainer: {
+    height: 60,
+    overflow: "hidden"
   }
 }));

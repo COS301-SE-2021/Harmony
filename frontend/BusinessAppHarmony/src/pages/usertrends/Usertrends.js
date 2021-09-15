@@ -5,13 +5,34 @@ import TextField from '@material-ui/core/TextField'
 // components
 import PageTitle from "../../components/PageTitle";
 import Widget from "../../components/Widget";
-import Table from "../dashboard/components/Table/Table";
 import Button from '@material-ui/core/Button';
 import { Typography } from "../../components/Wrappers";
+import Geocode from "react-geocode";
+import PayPal from '../dashboard/components/Table/PayPal';
+import { GrPaypal } from "react-icons/gr";
+
 export default function Tables() {
   const classes = useStyles();
   const [logo, setLogo] = useState("http://beepeers.com/assets/images/commerces/default-image.jpg");
+  // useEffect(() => {
+  const [checkout, setCheckout] = useState(false);
 
+  // }, [logo])
+  /**set the api key to use geocode */
+  // Geocode.setApiKey("AIzaSyBX7qzFSYnqo28_uZDI3GBRCK7JGkK07L8");
+  // Geocode.setLanguage("en");
+  // Geocode.setRegion("za");
+  // Geocode.setLocationType("ROOFTOP");
+  // Get latitude & longitude from address.
+  // Geocode.fromAddress("Eiffel Tower").then(
+  //   (response) => {
+  //     const { lat, lng } = response.results[0].geometry.location;
+  //     console.log(lat, lng);
+  //   },
+  //   (error) => {
+  //     console.error(error);
+  //   }
+  // );
   /**@var fileRef to create a reference to the file input to be able to clear it */
   const logoFileRef = useRef();
 
@@ -87,8 +108,19 @@ export default function Tables() {
             bodyClass={classes.tableWidget}
           >
             <Typography size="md" weight="bold">
-              View Account
+              View Account Balance
             </Typography>
+            <div className={classes.outstandingBalance}>
+              <p className={classes.outstandingBalanceWord}>Outstanding Balance</p>
+              <Typography size="xxl" weight="bold">
+                {mockResponse.outstandingBalance}
+              </Typography>
+            </div>
+            <div className={classes.PayPalContainer}>
+              {checkout ? (<PayPal amount={mockResponse.outstandingBalance} />) : (
+                <Button className={classes.payNowButton} variant="contained" onClick={() => { setCheckout(true) }}><GrPaypal style={{ marginRight: 10 }} size={20} color="white" />Pay now</Button>
+              )}
+            </div>
           </Widget>
 
         </Grid>
