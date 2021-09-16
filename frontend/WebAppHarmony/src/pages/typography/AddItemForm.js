@@ -11,7 +11,8 @@ import Widget from "../../components/Widget/Widget";
 import { Typography } from "../../components/Wrappers";
 import Multiselect from 'multiselect-react-dropdown';
 import TextField from '@material-ui/core/TextField'
-
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 // import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import Button from '@material-ui/core/Button';
@@ -31,7 +32,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
 
     /**Sets the toggle value to whether the added item is a food or drink */
     const HandleToggle = (event, newValue) => {
-        setFoodOrDrink(newValue);
+        setFoodOrDrink(newValue.props.value);
     };
     /**@function useEffect trigger
      * @summary this trigger is fired when the item is updated by clicking a new item and updating the initial values
@@ -128,19 +129,23 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                                     <div className={classes.FileInput}><input type="file" id="file-input" name="ImageclassName" accept="image/*" ref={fileRef} onChange={imageHandler} style={{ display: 'none' }} /></div>
                                     <Button onClick={() => (fileRef.current.click())} className={classes.uploadImageButton} variant="contained">Upload Image</Button>
                                 </div>
-                                {/* <ToggleButtonGroup
+                                <label htmlFor="Type" className={classes.formLabel}>
+                                    <div className={classes.floatLeft}>
+                                        <p className={classes.errorDivType}>Type</p>
+                                    </div>
+
+                                </label>
+                                <Select
+                                    labelId="demo-simple-select-outlined-label"
+                                    id="demo-simple-select-outlined"
                                     value={FoodOrDrink}
-                                    exclusive
                                     onChange={HandleToggle}
                                     className={classes.Toggle}
+                                    label="Type"
                                 >
-                                    <ToggleButton value="Food" >
-                                        Food
-                                    </ToggleButton>
-                                    <ToggleButton value="Drink" >
-                                        Drink
-                                    </ToggleButton>
-                                </ToggleButtonGroup> */}
+                                    <MenuItem value="Food">Food</MenuItem>
+                                    <MenuItem value="Drink">Drink</MenuItem>
+                                </Select>
                             </div>
 
                             <div className={classes.formElements}>

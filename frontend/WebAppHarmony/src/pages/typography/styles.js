@@ -110,6 +110,7 @@ export default makeStyles(theme => ({
   Toggle: {
     borderRadius: 15,
     height: 50,
+    width: 150,
     marginRight: "1%",
     marginTop: "10%"
   },
@@ -149,6 +150,12 @@ export default makeStyles(theme => ({
     fontSize: 18,
     color: "#717171",
     marginTop: -8
+  },
+  errorDivType: {
+    fontSize: 18,
+    color: "#717171",
+    marginTop: 80,
+
   },
   color: {
     backgroundColor: theme.palette.primary.main,
