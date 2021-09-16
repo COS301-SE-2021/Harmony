@@ -48,9 +48,20 @@ const CardScreen = ({ navigation, URL, headerVisible, isDeleteVisible }) => {
 
     async function fetchData() {
       let user = await Auth.currentAuthenticatedUser();
-
       const { username } = user;
-      console.log("User data: " + username);
+
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        //setModalMessage must come before setErrorAlertVisible
+        setModalMessage("Permission to access location was denied");
+        setErrorAlertVisible(true);
+        return;
+      }
+      let location = await Location.getCurrentPositionAsync({});
+      myFilterContext.setUserLatitude(location.coords.latitude)
+      myFilterContext.setUserLongitude(location.coords.longitude)
+      let backPerm = await Location.requestBackgroundPermissionsAsync();
+      // console.log(backPerm);//Handle
 
       fetch(API_URL, {
         method: "POST",
@@ -65,8 +76,8 @@ const CardScreen = ({ navigation, URL, headerVisible, isDeleteVisible }) => {
           "FoodTags": myFilterContext.foodTagArray,
           "DrinkTags": myFilterContext.drinkTagArray,
           "Distance": myFilterContext.range,
-          "Latitude": myFilterContext.userLatitude,
-          "Longitude": myFilterContext.userLongitude,
+          "Latitude": location.coords.latitude,//Directly reference variable instead of context because its faster
+          "Longitude": location.coords.longitude,
         })
       })
         .then((response) => response.json())
@@ -83,18 +94,7 @@ const CardScreen = ({ navigation, URL, headerVisible, isDeleteVisible }) => {
 
   useEffect(() => {
     (async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== 'granted') {
-        //setModalMessage must come before setErrorAlertVisible
-        setModalMessage("Permission to access location was denied");
-        setErrorAlertVisible(true);
-        return;
-      }
-      let location = await Location.getCurrentPositionAsync({});
-      myFilterContext.setUserLatitude(location.coords.latitude)
-      myFilterContext.setUserLongitude(location.coords.longitude)
-      let backPerm = await Location.requestBackgroundPermissionsAsync();
-      // console.log(backPerm);//Handle
+
     })();
   }, []);
 
