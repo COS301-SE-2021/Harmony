@@ -91,6 +91,10 @@ const CardScreen = ({ navigation, URL, headerVisible, isDeleteVisible }) => {
 
   }, [refreshing]);
 
+  useEffect(() => {
+    toggleRefresh();
+  }, [myFilterContext.applyFilter]);
+
   const handleResponse = (json) => {
     if (json.StatusCode === 200) {
       setData(json.Data)
