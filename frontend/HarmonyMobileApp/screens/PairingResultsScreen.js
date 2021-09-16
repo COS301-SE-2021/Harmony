@@ -21,17 +21,75 @@ import {
   Ionicons,
 } from "@expo/vector-icons";
 import * as Animatable from "react-native-animatable";
+import AppLoadingIcon from "../Components/AppLoadingIcon";
+import AppAlert from "../Components/AppAlert";
+import { Auth } from "aws-amplify";
 
 const MIN_HEIGHT = Platform.OS === "ios" ? 90 : 55;
 const MAX_HEIGHT = 300;
+const USER_FEEDBACK_API =
+  "https://jkwhidy1cf.execute-api.eu-west-1.amazonaws.com/dev/userfeedback";
 
 const PairingResultsScreen = ({ navigation, route }) => {
   const [isModalVisible, setModalVisible] = useState(false);
   const pairingResults = route.params;
-  // console.log(pairingResults);
+  // console.log("your image is: " + pairingResults.b64img);
+  // console.log("your data is: " + pairingResults.response);
+
+  const [isLoading, setLoading] = useState(false);
+
+  const [isErrorAlertVisible, setErrorAlertVisible] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
+  };
+
+  const submitFeedback = async (isCorrect, foodItem, img) => {
+
+    setLoading(true);
+    let JWTToken = "";
+    await Auth.currentAuthenticatedUser({}) //Get user information
+      .then((Data) => {
+        JWTToken = Data.signInUserSession.idToken.jwtToken;
+      })
+      .catch((err) => console.log(err));
+
+    await fetch(USER_FEEDBACK_API, {
+      method: "POST",
+      body: JSON.stringify({
+        "IsCorrect": isCorrect,
+        "FoodItem": foodItem,
+        "Image": img
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: JWTToken,
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        if (json.StatusCode === 200) {
+          setLoading(false);
+          console.log("StatusCode Returned: " + json.StatusCode)
+          setErrorAlertVisible(false);
+        }
+        else if (json.StatusCode === 400) {
+          setLoading(false);
+          //setModalMessage must come before setErrorAlertVisible
+          setModalMessage(json.Data);
+          setErrorAlertVisible(true);
+
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        setModalMessage("Something went wrong.");
+        setErrorAlertVisible(true);
+        cancelPreview();
+        setLoading(false);
+      });
   };
 
   const FeedbackModal = () => (
@@ -64,14 +122,19 @@ const PairingResultsScreen = ({ navigation, route }) => {
           <View style={styles.rowContainer}>
             <TouchableOpacity
               style={[styles.button, styles.buttonIncorrect]}
-              onPress={() => setModalVisible(!isModalVisible)}
+              onPress={() => {
+                submitFeedback(false, pairingResults.response.Data[0].FoodItem, pairingResults.b64img)
+                setModalVisible(!isModalVisible);
+              }}
             >
               <MaterialIcons name="thumb-down" size={40} color="white" />
             </TouchableOpacity>
             <TouchableOpacity
               style={[styles.button, styles.buttonCorrect]}
-              onPress={() => setModalVisible(!isModalVisible)}
-            >
+              onPress={() => {
+                submitFeedback(true, pairingResults.response.Data[0].FoodItem, pairingResults.response.Data[0].FoodImage)
+                setModalVisible(!isModalVisible);
+              }}            >
               <MaterialIcons name="thumb-up" size={40} color="white" />
             </TouchableOpacity>
           </View>
@@ -244,6 +307,11 @@ const PairingResultsScreen = ({ navigation, route }) => {
         <TagBar />
         <RecommendedDrink />
         <OtherDrinks />
+        {isLoading === true && <AppLoadingIcon />}
+        {isErrorAlertVisible === true && (
+          <AppAlert visible={true} message={modalMessage} type={"Error"} />
+        )}
+
       </ImageHeaderScrollView>
     </View>
   );

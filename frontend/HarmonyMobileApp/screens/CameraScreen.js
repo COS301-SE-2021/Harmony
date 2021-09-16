@@ -145,7 +145,10 @@ export default function CameraScreen({ navigation }) {
 
           navigation.navigate("Results", {
             screen: "PairingResultsScreen",
-            params: { response: json },
+            params: {
+              response: json,
+              b64img: b64Image
+            },
           });
 
         }
