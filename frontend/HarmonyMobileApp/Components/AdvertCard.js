@@ -23,16 +23,22 @@ export default function AdvertCard({ dataSet, isDeleteVisible, ...otherProps }) 
     return (
         <View style={{ paddingBottom: 15 }}>
             <View style={styles.cardContainer}>
-                <View style={{
-                    height: 50, width: "100%",
-                    backgroundColor: "#06D6A0",
-                    borderTopLeftRadius: 15,
-                    borderTopRightRadius: 15,
-                    overflow: "hidden"
-                }}>
-                    <Text style={styles.adTitleText}>
-                        Sponsored
-                    </Text>
+                <View style={styles.adTitleContainer}>
+
+                    <Image
+                        style={styles.tinyLogo}
+                        source={{
+                            uri: 'https://nandos-site.objects.frb.io/assets/n_logo.png',
+                        }}
+                    />
+                    <View style={{
+                        left: "150%",
+                    }}>
+
+                        <Text style={styles.adTitleText}>
+                            Sponsored
+                        </Text>
+                    </View>
                 </View>
 
                 <View style={styles.adimageContainer}>
