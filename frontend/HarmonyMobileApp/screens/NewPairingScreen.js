@@ -145,6 +145,9 @@ function NewPairingScreen({ navigation }) {
     console.log("Creating...")
     setLoading(true);
 
+    let user = await Auth.currentAuthenticatedUser();
+    const { username } = user;
+
     await fetch(CREATE_PAIRNG_URL, {
       method: "POST",
       headers: {
@@ -152,7 +155,7 @@ function NewPairingScreen({ navigation }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        "UID": "u1",
+        "UID": username,
         "Foodid": selectedFood.id,
         "Drinkid": selectedDrink.id,
         "Mealtagid": selectedMealType.id,
