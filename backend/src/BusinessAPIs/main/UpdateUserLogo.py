@@ -1,11 +1,17 @@
 import json
 import boto3
+import base64
+from botocore.exceptions import ClientError
 
 dynamodb = boto3.resource('dynamodb')
 
 # use the DynamoDB object to select our table
 request_adverts_table_name = 'BusinessUsers'
 request_adverts_table = dynamodb.Table(request_adverts_table_name)
+
+client = boto3.client('s3')
+s3 = boto3.resource('s3')
+bucket_name = 'harmonynewitem'
 
 """
 This function takes in the user id and an image in base64.
@@ -14,6 +20,21 @@ It then updates the users logo.
 
 
 def update_user_logo(event, context):
-
-
     return {"StatusCode": 200}
+
+
+"""
+This function adds an image to the s3 bucket and creates a link to be stored in the database.
+"""
+
+
+def add_image_to_s3(base64image, imageid):
+    imgdata = base64.b64decode(base64image)
+
+    file_name_with_extension = f'businessimages/{imageid}.jpg'
+    obj = s3.Object(bucket_name, file_name_with_extension)
+    obj.put(Body=imgdata, ContentType='image/jpeg')
+    location = boto3.client('s3').get_bucket_location(Bucket=bucket_name)['LocationConstraint']
+    # get object url
+    object_url = "https://%s.s3-%s.amazonaws.com/%s" % (bucket_name, location, file_name_with_extension)
+    return object_url
