@@ -17,7 +17,7 @@ export default makeStyles(theme => ({
     height: 10,
   },
   individualTextFieldDescription: {
-    width: "68%",
+    width: "67.5%",
     height: 100,
     padding: 15,
   },

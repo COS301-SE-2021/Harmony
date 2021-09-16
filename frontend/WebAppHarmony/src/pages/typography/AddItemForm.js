@@ -105,12 +105,14 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                     initialValues={{
                         ItemName: formName,
                         ItemDescription: formDescription,
-                        ItemTags: formTags
+                        ItemTags: formTags,
+                        FoodOrDrink: FoodOrDrink
                     }}
                     validationSchema={Yup.object().shape({
                         ItemName: Yup.string().required('*'),
                         ItemDescription: Yup.string().required('*'),
                         ItemTags: Yup.string().required('*'),
+                        FoodOrDrink: Yup.string().required('*'),
                     })}
                     // onSubmit={(values) => handleSubmit(values)}
                     onSubmit={(values, { resetForm }) => {
