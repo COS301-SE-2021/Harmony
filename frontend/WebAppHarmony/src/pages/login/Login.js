@@ -10,15 +10,11 @@ import {
   Fade,
 } from "@material-ui/core";
 import { withRouter } from "react-router-dom";
-import classnames from "classnames";
-import { Auth } from 'aws-amplify';
+import {useHistory} from "react-router-dom"
 
 // styles
 import useStyles from "./styles";
-import {useHistory} from "react-router-dom"
-// logo
 import logo from "./logo.svg";
-import google from "../../images/google.svg";
 
 // context
 import { useUserDispatch, loginUser } from "../../context/UserContext";
@@ -26,6 +22,14 @@ import { useUserDispatch, loginUser } from "../../context/UserContext";
 function Login(props) {
   var classes = useStyles();
 
+
+  const history = useHistory();
+  const handleRoute = () =>{
+    history.push('/resetpass');
+  }
+  const handleRouteSign = () =>{
+    history.push('/signup');
+  }
   // global
   var userDispatch = useUserDispatch();
 
@@ -33,9 +37,9 @@ function Login(props) {
   var [isLoading, setIsLoading] = useState(false);
   var [error, setError] = useState(null);
   var [activeTabId, setActiveTabId] = useState(0);
-  var [loginValue, setLoginValue] = useState("arshadsacoor@me.com");
-  var [passwordValue, setPasswordValue] = useState("12345678");
-  const history = useHistory();
+  var [loginValue, setLoginValue] = useState("arshad");
+  var [passwordValue, setPasswordValue] = useState("Cos301@2022");
+
 
   return (
     <Grid container className={classes.container}>
@@ -114,16 +118,6 @@ function Login(props) {
                           setError
                           )
                         }
-                     //   {
-                     //    setIsLoading(true)
-                     //
-                     //  Auth.signIn(loginValue,passwordValue).then(e=>{
-                     //  console.log(e)
-                     //    setIsLoading(false)
-                     //  props.history.push('/')}).catch(e=> console.log(e))
-                     // }
-
-                    //}
                     variant="contained"
                     color="primary"
                     size="large"
@@ -136,8 +130,19 @@ function Login(props) {
                   color="primary"
                   size="large"
                   className={classes.forgetButton}
+                  onClick={handleRouteSign}
                 >
-                  Forget Password
+
+                  Sign Up
+                </Button>
+                <Button
+                    color="primary"
+                    size="large"
+                    className={classes.forgetButton}
+                    onClick={handleRoute}
+                >
+
+                  Forgot Password
                 </Button>
               </div>
             </React.Fragment>
