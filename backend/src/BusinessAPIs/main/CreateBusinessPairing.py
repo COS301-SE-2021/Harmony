@@ -7,7 +7,7 @@ from botocore.exceptions import ClientError
 dynamodb = boto3.resource('dynamodb')
 
 # use the DynamoDB object to select our table
-table_name = 'BusinessPairings'
+table_name = 'RequestAdverts'
 table = dynamodb.Table(table_name)
 
 business_user_table_name = 'BusinessUsers'
@@ -25,11 +25,9 @@ If the user paid for 5 adverts they should only be able to create 5 pairings.
 
 
 def create_business_pairing(event, context):
-    drink_item = event['DrinkItem']
-    food_item = event['FoodItem']
-    price = event['Price']
+    drink_item = event['DrinkName']
+    food_item = event['FoodName']
     businessID = event['BID']
-    target_audience = event['Audience']
     food_tags = event["FoodTags"]
     drink_tags = event["DrinkTags"]
     pairing_tags = event["PairingTags"]
@@ -42,17 +40,8 @@ def create_business_pairing(event, context):
         print(e.response['Error']['Message'])
         return {"StatusCode": 400}
 
-    """
-    Checks if the business user has credit available.   
-    """
-    if business_user_data["Item"]["PairingsAvailable"] == 0:
-        return {"StatusCode": 400,
-                "ErrorMessage": "Business User has no remaining pairing credit left."}
-
-    pairings_used, pairings_available = adjust_user_credit(business_user_data)
-
-    # generate unique id for business pairing
-    bpID = uuid.uuid4().hex
+    # generate unique id for business request pairing
+    raid = uuid.uuid4().hex
 
     # generate id for images.
     generate_id1 = uuid.uuid4().hex
@@ -66,41 +55,19 @@ def create_business_pairing(event, context):
     # write data for new pairing to the DynamoDB table using the object we instantiated and save response in a variable
     table.put_item(
         Item={
-            'BPID': bpID,
-            'DrinkItem': drink_item,
+            'RAID': raid,
+            'DrinkName': drink_item,
             'PairingDescription': pairing_description,
             'PairingTags': pairing_tags,
-            'FoodItem': food_item,
-            'Price': price,
+            'FoodName': food_item,
             'BID': businessID,
             'FoodTags': food_tags,
             'DrinkTags': drink_tags,
-            'TargetAudience': target_audience,
             'DrinkImage': food_image_link,
             'FoodImage': drink_image_link
         })
 
-    update_business_user_database(businessID, pairings_used, pairings_available)
-
     return {"StatusCode": 200}
-
-
-"""
-This function adjusts the user credit.
-It takes in a business user that we get from the main lambda function.
-It returns the updated pairings used and pairings available.
-"""
-
-
-def adjust_user_credit(business_user):
-    pairings_used = business_user["Item"]["PairingsUsed"]
-    pairings_available = business_user["Item"]["PairingsAvailable"]
-
-    pairings_used = pairings_used + 1
-    pairings_available = pairings_available - 1
-
-    # to use in return : pairings_used, pairings_available = adjust_user_credits(x,y)
-    return pairings_used, pairings_available
 
 
 """
@@ -118,34 +85,3 @@ def add_image_to_s3(base64image, imageid):
     # get object url
     object_url = "https://%s.s3-%s.amazonaws.com/%s" % (bucket_name, location, file_name_with_extension)
     return object_url
-
-
-"""
-Updates the business user's database with the updated pairings_used/pairings_available.
-"""
-
-
-def update_business_user_database(bid, pairings_used, pairings_available):
-    business_user_table.update_item(
-        TableName=business_user_table_name,
-        Key={
-            'BID': bid
-        },
-        ExpressionAttributeNames={'#V': 'PairingsUsed'},
-        ExpressionAttributeValues={':v': pairings_used},
-        UpdateExpression='SET #V = :v',
-        ReturnValues="UPDATED_NEW"
-
-    )
-
-    business_user_table.update_item(
-        TableName=business_user_table_name,
-        Key={
-            'BID': bid
-        },
-        ExpressionAttributeNames={'#T': 'PairingsUsed'},
-        ExpressionAttributeValues={':t': pairings_available},
-        UpdateExpression='SET #T = :t',
-        ReturnValues="UPDATED_NEW"
-
-    )
