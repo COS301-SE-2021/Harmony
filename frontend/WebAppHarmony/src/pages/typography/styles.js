@@ -17,8 +17,8 @@ export default makeStyles(theme => ({
     height: 10,
   },
   individualTextFieldDescription: {
-    width: "65%",
-    height: 45,
+    width: "68%",
+    height: 100,
     padding: 15,
   },
   formLabel: {
@@ -26,11 +26,20 @@ export default makeStyles(theme => ({
     fontSize: 20
   },
   formElements: {
-    marginTop: 20,
-    marginBottom: 20,
+    marginTop: 15,
     borderRadius: 15,
     justifyContent: "space-between",
     display: "flex"
+  },
+  formElementsDescription: {
+    marginBottom: 40,
+    borderRadius: 15,
+    justifyContent: "space-between",
+    display: "flex",
+    height: 100,
+    marginRight: -15,
+    marginTop: 10
+
   },
   addItemContainer: {
     width: "65%",
@@ -134,11 +143,12 @@ export default makeStyles(theme => ({
   },
   errorDiv: {
     fontSize: 18,
-    marginTop: -10,
     color: "#717171"
   },
-  errorStar: {
-    color: "red", fontSize: 25, marginLeft: 5, marginTop: -15
+  errorDivTags: {
+    fontSize: 18,
+    color: "#717171",
+    marginTop: -8
   },
   color: {
     backgroundColor: theme.palette.primary.main,

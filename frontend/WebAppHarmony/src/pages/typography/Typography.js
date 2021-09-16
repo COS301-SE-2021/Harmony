@@ -74,22 +74,6 @@ export default function TypographyPage() {
                 <br />
                 {/* <p className={classes.fontSizeMedium}></p> */}
                 <div style={{ height: 450, overflowY: "scroll", overflowX: "hidden" }}>
-                  {/* <ToggleButtonGroup
-                    value={name}
-                    exclusive
-                    orientation="vertical"
-                  // onChange={HandleToggle}
-                  // className={classes.Toggle}
-                  > */}
-                  {/**
-                       * maps the requested item names to be repeatedly displayed
-                        */}
-                  {/* {requestedItemsAPI.Data.map((item, index) => (
-                      <ToggleButton className={classes.toggleButton} value={item.FoodName} key={index} onClick={() => handleClick(item)}>
-                        <ItemsButton item={item.FoodName} />
-                      </ToggleButton>
-                    ))}
-                  </ToggleButtonGroup> */}
                   <Table className="mb-0">
                     <TableHead>
                       <TableRow className={classes.tableRowHeader}>

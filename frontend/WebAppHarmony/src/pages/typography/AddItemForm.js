@@ -146,21 +146,22 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                             <div className={classes.formElements}>
                                 <label htmlFor="ItemName" className={classes.formLabel}>
                                     <div className={classes.floatLeft}>
-                                        <p className={classes.errorDiv}>Name</p>
+                                        <p className={classes.errorDivTags}>Name</p>
                                     </div>
 
                                 </label>
                                 <TextField id="outlined-basic" error={errors.ItemName} variant="outlined" name="ItemName" className={classes.individualTextField} onChange={handleChange} value={values.ItemName} />
                             </div>
-                            <div className={classes.formElements}>
+                            <div className={classes.formElementsDescription}>
                                 <label htmlFor="ItemDescription" className={classes.formLabel}>
                                     <div className={classes.floatLeft}><p className={classes.errorDiv}>Description</p> </div>
                                 </label>
-                                <TextField id="outlined-basic" multiline={true} error={errors.ItemDescription} variant="outlined" name="ItemDescription" className={classes.individualTextField} onChange={handleChange} value={values.ItemDescription} />
+                                <TextField id="outlined-basic" multiline={true} error={errors.ItemDescription} rows={4} variant="outlined" name="ItemDescription" className={classes.individualTextFieldDescription} onChange={handleChange} value={values.ItemDescription} />
                             </div>
+
                             <div className={classes.formElements}>
                                 <label htmlFor="ItemTags" className={classes.formLabel}>
-                                    <div className={classes.floatLeft}><p className={classes.errorDiv}>Tags</p> </div>
+                                    <div className={classes.floatLeft}><p className={classes.errorDivTags}>Tags</p> </div>
                                 </label>
                                 <Multiselect
                                     isObject={false}
