@@ -6,6 +6,7 @@ import * as Location from 'expo-location';
 import { AppToast } from "../Components/AppToast";
 import AppAlert from "../Components/AppAlert";
 import AppLoadingIcon from "../Components/AppLoadingIcon";
+import { Auth } from "aws-amplify";
 
 function NewPairingScreen({ navigation }) {
 
@@ -165,7 +166,7 @@ function NewPairingScreen({ navigation }) {
     })
       .then((response) => response.json())
       .then((json) => {
-        console.log(json)
+        // console.log(json)
         handleResponse(json)
       })
       .catch((error) => alert(error))
