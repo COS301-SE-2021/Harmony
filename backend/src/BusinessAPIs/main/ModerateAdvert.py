@@ -16,6 +16,7 @@ the RequestAdverts table.
 If the advert is declined, set the cost to 0 and set the status to declined.
 """
 
+
 def moderate_advert(event, context):
     # The id of the advert
     advertID = event['AdvertID']
@@ -29,11 +30,26 @@ def moderate_advert(event, context):
             Key={
                 'RAID': advertID
             },
-            ExpressionAttributeNames={'#V': 'AdvertStatus'},
+            ExpressionAttributeNames={'#V': 'Status'},
             ExpressionAttributeValues={':v': status},
             UpdateExpression='SET #V = :v',
             ReturnValues="UPDATED_NEW"
 
         )
-    #else write rejected status and the set the cost back to 0
+    else:
+        # else write rejected status and the set the cost back to 0
+        cost = 0
+        request_adverts_table.update_item(
+            TableName=request_adverts_table_name,
+            Key={
+                'RAID': advertID
+            },
+            ExpressionAttributeNames={'#V': 'Status',
+                                      '#G': 'Price'},
+            ExpressionAttributeValues={':v': status,
+                                       ':g': cost},
+            UpdateExpression='SET #V = :v, #G = :g',
+            ReturnValues="UPDATED_NEW"
+        )
+
     return {"StatusCode": 200}
