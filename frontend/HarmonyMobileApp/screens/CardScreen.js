@@ -92,19 +92,6 @@ const CardScreen = ({ navigation, URL, headerVisible, isDeleteVisible }) => {
 
   }, [refreshing]);
 
-  useEffect(() => {
-    (async () => {
-
-    })();
-  }, []);
-
-  useEffect(() => {
-    toggleRefresh()
-  }, [myFilterContext.applyFilter, myFilterContext.userLatitude]);
-
-  //the api call for trending
-
-
   const handleResponse = (json) => {
     if (json.StatusCode === 200) {
       setData(json.Data)
