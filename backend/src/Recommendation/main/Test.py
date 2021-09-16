@@ -255,9 +255,9 @@ def example_function(event, context):
     #
     # movie_recommender('user_4', 4, 5)
 
-    ratings = pd.read_csv('ml-latest-small/ratings.csv', usecols=['userId', 'movieId', 'rating'])
-    movies = pd.read_csv('ml-latest-small/movies.csv', usecols=['movieId', 'title'])
-    ratings2 = pd.merge(ratings, movies, how='inner', on='movieId')
+    # ratings = pd.read_csv('ml-latest-small/ratings.csv', usecols=['userId', 'movieId', 'rating'])
+    # movies = pd.read_csv('ml-latest-small/movies.csv', usecols=['movieId', 'title'])
+    # ratings2 = pd.merge(ratings, movies, how='inner', on='movieId')
     """test"""
     pairingresponse = pairingtable.scan()
     pairingresponse = pairingresponse["Items"]
