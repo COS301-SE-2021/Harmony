@@ -26,6 +26,8 @@ def get_statement(event, context):
     allresponse = business_pairings_table.scan()
     response = allresponse['Items']
 
+    statement_duration = event['Days']
+
     """Gets the business user data that we will need to process for their statement."""
     try:
         business_user_data = business_user_table.get_item(Key={'BID': bid})
@@ -38,9 +40,11 @@ def get_statement(event, context):
         if i['BID'] == bid:
             adverts.append(i)
 
+    sort_response = sortbynew(adverts)
+
     return {
         "StatusCode": 200,
-        "Data": adverts
+        "Data": sort_response
 
     }
 
@@ -52,3 +56,14 @@ def calculate_total_cost_ads(bid, response, time_period):
             total_cost = total_cost + i['Cost']
 
     return total_cost
+
+
+"""
+Sorts the response by date from newest to oldest.
+"""
+
+
+def sortbynew(response):
+    # this function sorts the dateadded from new to old
+    sortedresponse = sorted(response, key=lambda x: datetime.strptime(x['DateCreated'], '%Y-%m-%d'), reverse=True)
+    return sortedresponse
