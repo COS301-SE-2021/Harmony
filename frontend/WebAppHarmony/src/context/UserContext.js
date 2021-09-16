@@ -1,26 +1,36 @@
 import React from "react";
+import { Auth } from 'aws-amplify'
+import Amplify from 'aws-amplify';
+import aws_exports from '../aws-exports';
 
+Amplify.configure(aws_exports);
 var UserStateContext = React.createContext();
 var UserDispatchContext = React.createContext();
 
 function userReducer(state, action) {
   switch (action.type) {
-    case "LOGIN_SUCCESS":
-      return { ...state, isAuthenticated: true };
+    case "LOGIN_SUCCESS": {
+      Auth.currentAuthenticatedUser().then(succ=>{
+        console.log(succ)
+      }).catch(e=> console.log(e))
+      return {...state, isAuthenticated: true};
+    }
     case "SIGN_OUT_SUCCESS":
       return { ...state, isAuthenticated: false };
     default: {
-      throw new Error(`Unhandled action type: ${action.type}`);
+      return { ...state, isAuthenticated: false };
     }
   }
 }
 
-function UserProvider({ children }) {
-  var [state, dispatch] = React.useReducer(userReducer, {
-    isAuthenticated: !!localStorage.getItem("id_token"),
+ function  UserProvider({ children }) {
+
+  let [state, dispatch] = React.useReducer(userReducer, {
+    isAuthenticated: false,
   });
 
   return (
+
     <UserStateContext.Provider value={state}>
       <UserDispatchContext.Provider value={dispatch}>
         {children}
@@ -55,12 +65,21 @@ function loginUser(dispatch, login, password, history, setIsLoading, setError) {
 
   if (!!login && !!password) {
     setTimeout(() => {
-      localStorage.setItem('id_token', 1)
+      //localStorage.setItem('id_token', 1)
       setError(null)
-      setIsLoading(false)
-      dispatch({ type: 'LOGIN_SUCCESS' })
+      Auth.signIn(login,password).then(user => {
+        //console.log(user)
+        setIsLoading(false)
+        dispatch({ type: 'LOGIN_SUCCESS' })
+        history.push('/app/dashboard')
+      }).catch(error=> {
+        dispatch({ type: "LOGIN_FAILURE" });
+        setError(true);
+        setIsLoading(false);
+      })
 
-      history.push('/app/dashboard')
+
+
     }, 2000);
   } else {
     dispatch({ type: "LOGIN_FAILURE" });
@@ -70,7 +89,15 @@ function loginUser(dispatch, login, password, history, setIsLoading, setError) {
 }
 
 function signOut(dispatch, history) {
-  localStorage.removeItem("id_token");
-  dispatch({ type: "SIGN_OUT_SUCCESS" });
-  history.push("/login");
+
+  Auth.signOut().then(() => {
+    dispatch({ type: "SIGN_OUT_SUCCESS" });
+    history.push("/login");
+  }).catch(()=>{
+
+  })
+
 }
+
+
+

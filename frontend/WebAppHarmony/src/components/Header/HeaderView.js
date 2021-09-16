@@ -20,7 +20,7 @@ import {
 } from "@material-ui/icons";
 import { fade } from "@material-ui/core/styles/colorManipulator";
 import classNames from "classnames";
-
+import { Auth } from 'aws-amplify';
 import { Badge, Typography } from "../Wrappers";
 import Notification from "../Notification";
 import UserAvatar from "../UserAvatar";
@@ -247,7 +247,7 @@ const Header = ({ classes, isSidebarOpened, toggleSidebar, ...props }) => (
       >
         <div className={classes.profileMenuUser}>
           <Typography variant="h4" weight="medium">
-            John Smith
+            Auth.name
           </Typography>
           <Typography
             className={classes.profileMenuLink}

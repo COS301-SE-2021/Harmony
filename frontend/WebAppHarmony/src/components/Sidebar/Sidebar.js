@@ -2,13 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Drawer, IconButton, List } from "@material-ui/core";
 import {
   Home as HomeIcon,
-  NotificationsNone as NotificationsIcon,
-  FormatSize as TypographyIcon,
-  FilterNone as UIElementsIcon,
   BorderAll as TableIcon,
-  QuestionAnswer as SupportIcon,
-  LibraryBooks as LibraryIcon,
-  HelpOutline as FAQIcon,
   ArrowBack as ArrowBackIcon,
 } from "@material-ui/icons";
 import FeedbackIcon from "@material-ui/icons/Feedback";
@@ -22,7 +16,6 @@ import useStyles from "./styles";
 
 // components
 import SidebarLink from "./components/SidebarLink/SidebarLink";
-import Dot from "./components/Dot";
 
 // context
 import {
@@ -33,19 +26,15 @@ import {
 
 const structure = [
   { id: 0, label: "Dashboard", link: "/app/dashboard", icon: <HomeIcon /> },
-  { id: 1, type: "divider" },
   {
-    id: 2,
-    label: "Moderate Items",
-    link: "/app/typography",
+    id: 1,
+    label: "Moderate Pairing",
+    link: "/app/moderateitems",
     icon: <QueueIcon />,
   },
-  { id: 3, type: "divider" },
-  { id: 4, label: "Train AI", link: "/app/tables", icon: <TableIcon /> },
-
-  { id: 5, type: "divider" },
-  { id: 6, label: "User Feedback", link: "/app/maps", icon: <FeedbackIcon /> },
-  { id: 7, type: "divider" },
+  { id: 2, label: "Train AI", link: "/app/tables", icon: <TableIcon /> },
+  { id: 3, label: "User Feedback", link: "/app/feedback", icon: <FeedbackIcon /> },
+  { id: 4, type: "divider" },
 
 ];
 
@@ -60,7 +49,7 @@ function Sidebar({ location }) {
   // local
   var [isPermanent, setPermanent] = useState(true);
 
-  useEffect(function () {
+  useEffect(function() {
     window.addEventListener("resize", handleWindowWidthChange);
     handleWindowWidthChange();
     return function cleanup() {
