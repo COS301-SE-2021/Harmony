@@ -49,21 +49,25 @@ def moderate_advert(event, context):
             print(e.response['Error']['Message'])
             return {"StatusCode": 400}
 
-        print(request_advert_data['DrinkName'])
+
         bpid = uuid.uuid4().hex
         # write data for new advert to the DynamoDB table.
         business_pairings_table.put_item(
             Item={
                 'BPID': bpid,
-                'DrinkName': request_advert_data["DrinkName"],
-                'PairingDescription': request_advert_data["PairingDescription"],
-                'PairingTags': request_advert_data["PairingTag"],
-                'FoodName': request_advert_data["FoodName"],
-                'BID': request_advert_data["BID"],
-                'FoodTags': request_advert_data["FoodTags"],
-                'DrinkTags': request_advert_data["DrinkTags"],
-                'DrinkImage': request_advert_data["DrinkImage"],
-                'FoodImage': request_advert_data["FoodImage"],
+                'DrinkName': request_advert_data["Item"]["DrinkName"],
+                'PairingDescription': request_advert_data["Item"]["PairingDescription"],
+                'PairingTags': request_advert_data["Item"]["PairingTags"],
+                'FoodName': request_advert_data["Item"]["FoodName"],
+                'BID': request_advert_data["Item"]["BID"],
+                'FoodTags': request_advert_data["Item"]["FoodTags"],
+                'DrinkTags': request_advert_data["Item"]["DrinkTags"],
+                'DrinkImage': request_advert_data["Item"]["DrinkImage"],
+                'FoodImage': request_advert_data["Item"]["FoodImage"],
+                'Price': request_advert_data["Item"]["Price"],
+                'Status': request_advert_data["Item"]["Status"],
+                'TargetAudience': request_advert_data["Item"]["TargetAudience"],
+                'TimeLimit': request_advert_data["Item"]["TimeLimit"]
             })
     else:
         # else write rejected status and the set the cost back to 0
