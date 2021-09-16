@@ -25,6 +25,7 @@ import AppAlert from "../Components/AppAlert";
 import FilterContext from '../Components/FilterContext';
 import FABNew from "../Components/FABNew";
 // import { FAB } from 'react-native-paper';
+import { Auth } from "aws-amplify";
 
 
 const CardScreen = ({ navigation, URL, headerVisible, isDeleteVisible }) => {
@@ -43,28 +44,41 @@ const CardScreen = ({ navigation, URL, headerVisible, isDeleteVisible }) => {
   const [isErrorAlertVisible, setErrorAlertVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const myFilterContext = useContext(FilterContext);
-
   useEffect(() => {
-    fetch(API_URL, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        "UID": "u1",
-        "Sort": myFilterContext.sortPairingType,
-        "MealTags": myFilterContext.mealTagArray,
-        "FoodTags": myFilterContext.foodTagArray,
-        "DrinkTags": myFilterContext.drinkTagArray,
-        "Distance": myFilterContext.range,
-        "Latitude": myFilterContext.userLatitude,
-        "Longitude": myFilterContext.userLongitude,
+
+    async function fetchData() {
+      let user = await Auth.currentAuthenticatedUser();
+
+      const { username } = user;
+      console.log("User data: " + username);
+
+      fetch(API_URL, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          "UID": username,
+          "Sort": myFilterContext.sortPairingType,
+          "MealTags": myFilterContext.mealTagArray,
+          "FoodTags": myFilterContext.foodTagArray,
+          "DrinkTags": myFilterContext.drinkTagArray,
+          "Distance": myFilterContext.range,
+          "Latitude": myFilterContext.userLatitude,
+          "Longitude": myFilterContext.userLongitude,
+        })
       })
-    })
-      .then((response) => response.json())
-      .then((json) => handleResponse(json))
-      .catch((error) => alert(error))
+        .then((response) => response.json())
+        .then((json) => {
+          handleResponse(json)
+        })
+        .catch((error) => alert(error))
+    };
+
+    fetchData();
+
+
   }, [refreshing]);
 
   useEffect(() => {
@@ -103,6 +117,9 @@ const CardScreen = ({ navigation, URL, headerVisible, isDeleteVisible }) => {
       //setModalMessage must come before setErrorAlertVisible
       setModalMessage(json.Data);
       setErrorAlertVisible(true);
+    }
+    else {
+      console.log(json);
     }
   }
 
