@@ -24,9 +24,7 @@ import AppLoadingIcon from "../Components/AppLoadingIcon";
 import AppAlert from "../Components/AppAlert";
 import FilterContext from '../Components/FilterContext';
 import FABNew from "../Components/FABNew";
-// import { FAB } from 'react-native-paper';
 import { Auth } from "aws-amplify";
-import AdvertCard from "../Components/AdvertCard";
 
 
 const CardScreen = ({ navigation, URL, headerVisible, isDeleteVisible }) => {
@@ -168,15 +166,13 @@ const CardScreen = ({ navigation, URL, headerVisible, isDeleteVisible }) => {
               <RefreshControl refreshing={refreshing} onRefresh={toggleRefresh} />
             }
             keyExtractor={({ PID }, index) => PID}
+
             renderItem={({ item }) => (
-              <AdvertCard
+              <Card
                 dataSet={item}
                 isDeleteVisible={isDeleteVisible}
+                isAd={true}
               />
-              // <Card
-              //   dataSet={item}
-              //   isDeleteVisible={isDeleteVisible}
-              // />
             )}
           />
         )}
