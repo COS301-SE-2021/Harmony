@@ -67,7 +67,10 @@ def create_business_pairing(event, context):
             'FoodImage': drink_image_link
         })
 
-    return {"StatusCode": 200}
+    locations = business_user_data["Item"]["Locations"]
+    return {"StatusCode": 200,
+            "Locations": locations,
+            "SuggestedAudience": "Mock data"}
 
 
 """
