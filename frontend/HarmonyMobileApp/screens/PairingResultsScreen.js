@@ -66,26 +66,12 @@ const PairingResultsScreen = ({ navigation, route }) => {
               style={[styles.button, styles.buttonIncorrect]}
               onPress={() => setModalVisible(!isModalVisible)}
             >
-              {/* Keeping outlined icons just incase we want to change to them for consistency overall */}
-              {/* The filled icons look better in this case though */}
-              {/* <MaterialIcons
-                    name="thumb-down-off-alt"
-                    size={40}
-                    color="white"
-                  /> */}
               <MaterialIcons name="thumb-down" size={40} color="white" />
             </TouchableOpacity>
             <TouchableOpacity
               style={[styles.button, styles.buttonCorrect]}
               onPress={() => setModalVisible(!isModalVisible)}
             >
-              {/* Keeping outlined icons just incase we want to change to them for consistency overall */}
-              {/* The filled icons look better in this case though */}
-              {/* <MaterialIcons
-                    name="thumb-up-off-alt"
-                    size={40}
-                    color="white"
-                  /> */}
               <MaterialIcons name="thumb-up" size={40} color="white" />
             </TouchableOpacity>
           </View>
