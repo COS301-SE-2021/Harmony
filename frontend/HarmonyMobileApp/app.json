@@ -1,32 +1,33 @@
 {
-    "expo": {
-      "name": "HarmonyMobileApp",
-      "slug": "HarmonyMobileApp",
-      "version": "1.0.0",
-      "orientation": "portrait",
-      "icon": "./assets/icon1.png",
-      "splash": {
-        "image": "./assets/splash1.png",
-        "resizeMode": "contain",
+  "expo": {
+    "name": "HarmonyMobileApp",
+    "slug": "HarmonyMobileApp",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon1.png",
+    "splash": {
+      "image": "./assets/splash1.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#118AB2"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon1.png",
         "backgroundColor": "#118AB2"
-      },
-      "updates": {
-        "fallbackToCacheTimeout": 0
-      },
-      "assetBundlePatterns": [
-        "**/*"
-      ],
-      "ios": {
-        "supportsTablet": true
-      },
-      "android": {
-        "adaptiveIcon": {
-          "foregroundImage": "./assets/adaptive-icon1.png",
-          "backgroundColor": "#118AB2"
-        }
-      },
-      "web": {
-        "favicon": "./assets/favicon.png"
       }
-    }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "description": "Initial publish"
   }
+}
