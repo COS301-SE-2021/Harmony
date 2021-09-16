@@ -21,6 +21,7 @@ import {
   Ionicons,
 } from "@expo/vector-icons";
 import * as Animatable from "react-native-animatable";
+import { AppToast } from "../Components/AppToast";
 import AppLoadingIcon from "../Components/AppLoadingIcon";
 import AppAlert from "../Components/AppAlert";
 import { Auth } from "aws-amplify";
@@ -74,6 +75,8 @@ const PairingResultsScreen = ({ navigation, route }) => {
           setLoading(false);
           console.log("StatusCode Returned: " + json.StatusCode)
           setErrorAlertVisible(false);
+          // Add a Toast on screen.
+          AppToast.ToastDisplay(json.Data);
         }
         else if (json.StatusCode === 400) {
           setLoading(false);
