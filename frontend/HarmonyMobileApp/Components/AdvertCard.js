@@ -23,7 +23,19 @@ export default function AdvertCard({ dataSet, isDeleteVisible, ...otherProps }) 
     return (
         <View style={{ paddingBottom: 15 }}>
             <View style={styles.cardContainer}>
-                <View style={styles.imageContainer}>
+                <View style={{
+                    height: 50, width: "100%",
+                    backgroundColor: "#06D6A0",
+                    borderTopLeftRadius: 15,
+                    borderTopRightRadius: 15,
+                    overflow: "hidden"
+                }}>
+                    <Text style={styles.adTitleText}>
+                        Sponsored
+                    </Text>
+                </View>
+
+                <View style={styles.adimageContainer}>
                     <View
                         style={personalStyles.image}
                     >

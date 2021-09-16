@@ -144,6 +144,18 @@ const styles = StyleSheet.create({
     marginTop: 22
   },
 
+  adTitleText: {
+    //Heading text for ad cards
+    color: "white",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    textAlign: "center",
+    alignContent: "center",
+    fontWeight: "bold",
+    fontFamily: "sans-serif-light",
+    paddingVertical: "5%",
+    fontSize: 18,
+  },
   cardText: {
     //text for the food and drink name
     flexDirection: "row",
@@ -321,6 +333,14 @@ const styles = StyleSheet.create({
     flex: 1,
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
+    overflow: "hidden"
+  },
+  adimageContainer: {
+    // hold the food+drink images+text
+    flexDirection: "row",
+    width: "100%",
+    height: 180,
+    flex: 1,
     overflow: "hidden"
   },
 
