@@ -151,14 +151,12 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
 
                                 </label>
                                 <TextField id="outlined-basic" error={errors.ItemName} variant="outlined" name="ItemName" className={classes.individualTextField} onChange={handleChange} value={values.ItemName} />
-
-
                             </div>
                             <div className={classes.formElements}>
                                 <label htmlFor="ItemDescription" className={classes.formLabel}>
                                     <div className={classes.floatLeft}><p className={classes.errorDiv}>Description</p> </div>
                                 </label>
-                                <TextField id="outlined-basic" error={errors.ItemDescription} variant="outlined" name="ItemDescription" className={classes.individualTextField} onChange={handleChange} value={values.ItemDescription} />
+                                <TextField id="outlined-basic" multiline={true} error={errors.ItemDescription} variant="outlined" name="ItemDescription" className={classes.individualTextField} onChange={handleChange} value={values.ItemDescription} />
                             </div>
                             <div className={classes.formElements}>
                                 <label htmlFor="ItemTags" className={classes.formLabel}>

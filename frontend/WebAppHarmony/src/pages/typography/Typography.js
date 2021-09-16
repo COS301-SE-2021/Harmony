@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Grid } from "@material-ui/core";
+import { Grid, Table, TableRow, TableHead, TableBody, TableCell, } from "@material-ui/core";
 
 // styles
 import useStyles from "./styles";
@@ -10,7 +10,6 @@ import Widget from "../../components/Widget";
 import { Typography } from "../../components/Wrappers";
 import AddItemForm from "./AddItemForm";
 import ItemsButton from "./ItemsButton";
-
 // import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 export default function TypographyPage() {
@@ -74,7 +73,7 @@ export default function TypographyPage() {
                 </Typography>
                 <br />
                 {/* <p className={classes.fontSizeMedium}></p> */}
-                <div style={{ height: 450, overflowY: "scroll" }}>
+                <div style={{ height: 450, overflowY: "scroll", overflowX: "hidden" }}>
                   {/* <ToggleButtonGroup
                     value={name}
                     exclusive
@@ -91,6 +90,20 @@ export default function TypographyPage() {
                       </ToggleButton>
                     ))}
                   </ToggleButtonGroup> */}
+                  <Table className="mb-0">
+                    <TableHead>
+                      <TableRow className={classes.tableRowHeader}>
+                        <TableCell className={classes.tableCell}>NAME</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {requestedItemsAPI.Data.map((item) => (
+                        <TableRow >
+                          <TableCell className="pl-3 fw-normal" onClick={() => handleClick(item)}><ItemsButton item={item.FoodName} /></TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
                 </div>
               </div>
               <AddItemForm FoodName={name} FoodDescription={description} />

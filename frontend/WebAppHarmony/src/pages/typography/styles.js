@@ -16,7 +16,7 @@ export default makeStyles(theme => ({
     width: "65%",
     height: 10,
   },
-  textField: {
+  individualTextFieldDescription: {
     width: "65%",
     height: 45,
     padding: 15,
@@ -72,10 +72,10 @@ export default makeStyles(theme => ({
   },
   requestedItemBox: {
     textAlign: "left",
-    width: 200
+    width: 200,
   },
   requestedItemName: {
-    fontSize: 15, float: "left", textAlign: "left", width: 170, height: 30, overflow: "hidden"
+    fontSize: 15, float: "left", textAlign: "left", width: 170, height: 30, overflow: "hidden",
   },
   ImageContainer: {
     height: 125,
@@ -119,7 +119,7 @@ export default makeStyles(theme => ({
   displayFlexOnly: {
     display: "flex"
   },
-  icon: { float: "right", height: 20, width: 20, marginTop: 15, marginBottom: 0 },
+  icon: { float: "right", marginTop: 15, marginRight: 10, marginBottom: 0 },
   fontSizeMedium: {
     fontSize: 20,
     fontFamily: "sans-serif-light",
@@ -142,6 +142,12 @@ export default makeStyles(theme => ({
   },
   color: {
     backgroundColor: theme.palette.primary.main,
-
+  },
+  tableRowHeader: {
+    backgroundColor: theme.palette.primary.main,
+  },
+  tableCell: {
+    color: "white"
   }
+
 }));

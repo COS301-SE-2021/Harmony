@@ -3,8 +3,6 @@ import { AiOutlineMinusCircle } from "react-icons/ai";
 // styles
 import useStyles from "./styles";
 // components
-import PageTitle from "../../components/PageTitle/PageTitle";
-import Widget from "../../components/Widget/Widget";
 function ItemsButton(item, ...props) {
     var classes = useStyles();
 
