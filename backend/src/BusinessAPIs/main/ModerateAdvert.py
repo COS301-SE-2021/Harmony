@@ -1,11 +1,16 @@
 import json
 import boto3
+from botocore.exceptions import ClientError
+import uuid
 
 dynamodb = boto3.resource('dynamodb')
 
 # use the DynamoDB object to select our table
 request_adverts_table_name = 'RequestAdverts'
 request_adverts_table = dynamodb.Table(request_adverts_table_name)
+
+business_pairings_table_name = 'BusinessPairings'
+business_pairings_table = dynamodb.Table(business_pairings_table_name)
 
 """
 This function takes in whether the admin user has Accepted/Rejected the advert pairing.
@@ -36,6 +41,30 @@ def moderate_advert(event, context):
             ReturnValues="UPDATED_NEW"
 
         )
+
+        """Gets the request advert data to put into the actual advert table."""
+        try:
+            request_advert_data = request_adverts_table.get_item(Key={'RAID': advertID})
+        except ClientError as e:
+            print(e.response['Error']['Message'])
+            return {"StatusCode": 400}
+
+        print(request_advert_data['DrinkName'])
+        bpid = uuid.uuid4().hex
+        # write data for new advert to the DynamoDB table.
+        business_pairings_table.put_item(
+            Item={
+                'BPID': bpid,
+                'DrinkName': request_advert_data["DrinkName"],
+                'PairingDescription': request_advert_data["PairingDescription"],
+                'PairingTags': request_advert_data["PairingTag"],
+                'FoodName': request_advert_data["FoodName"],
+                'BID': request_advert_data["BID"],
+                'FoodTags': request_advert_data["FoodTags"],
+                'DrinkTags': request_advert_data["DrinkTags"],
+                'DrinkImage': request_advert_data["DrinkImage"],
+                'FoodImage': request_advert_data["FoodImage"],
+            })
     else:
         # else write rejected status and the set the cost back to 0
         cost = 0
@@ -51,5 +80,7 @@ def moderate_advert(event, context):
             UpdateExpression='SET #V = :v, #G = :g',
             ReturnValues="UPDATED_NEW"
         )
+
+
 
     return {"StatusCode": 200}
