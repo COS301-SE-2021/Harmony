@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Grid, Select, MenuItem, Input } from "@material-ui/core";
 import { ArrowForward as ArrowForwardIcon } from "@material-ui/icons";
 import { useTheme } from "@material-ui/styles";
-import { BarChart, Bar } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, Tooltip } from "recharts";
 import classnames from "classnames";
 
 // styles
@@ -13,10 +13,19 @@ import Widget from "../../../../components/Widget";
 import { Typography } from "../../../../components/Wrappers";
 
 export default function BigStat(props) {
-  var { product, total, color, registrations, bounce } = props;
+  var { product, total, color, registrations, bounce, title } = props;
+
   var classes = useStyles();
   var theme = useTheme();
+  var [tableData, setTableData] = useState([]);
+  useEffect(() => {
 
+    fetch('https://w3lfp6r6f7.execute-api.eu-west-1.amazonaws.com/dev/getflavoursmostused')
+      .then(response => response.json())
+      .then(data => setTableData(data.Data))
+      .then(console.log(tableData));
+    /**  empty dependency array means this effect will only run once (like componentDidMount in classes)*/
+  }, []);
   // local
   var [value, setValue] = useState("daily");
 
@@ -24,7 +33,7 @@ export default function BigStat(props) {
     <Widget
       header={
         <div className={classes.title}>
-          <Typography variant="h5">{product}</Typography>
+          <Typography variant="h5">Flavour Statistics</Typography>
 
           <Select
             value={value}
@@ -37,9 +46,9 @@ export default function BigStat(props) {
             }
             className={classes.select}
           >
-            <MenuItem value="daily">Daily</MenuItem>
-            <MenuItem value="weekly">Weekly</MenuItem>
-            <MenuItem value="monthly">Monthly</MenuItem>
+            <MenuItem value="meal">Meal</MenuItem>
+            <MenuItem value="food">Food</MenuItem>
+            <MenuItem value="drink">Drink</MenuItem>
           </Select>
         </div>
       }
@@ -47,7 +56,7 @@ export default function BigStat(props) {
       bodyClass={classes.bodyWidgetOverflow}
     >
       <div className={classes.totalValueContainer}>
-        <div className={classes.totalValue}>
+        {/* <div className={classes.totalValue}>
           <Typography size="xxl" color="text" colorBrightness="secondary">
             {total[value]}
           </Typography>
@@ -55,17 +64,22 @@ export default function BigStat(props) {
             &nbsp;{total.percent.profit ? "+" : "-"}
             {total.percent.value}%
           </Typography>
-        </div>
-        <BarChart width={150} height={70} data={getRandomData()}>
+        </div> */}
+        <BarChart width={450} height={200} data={tableData}>
           <Bar
-            dataKey="value"
-            fill={theme.palette[color].main}
-            radius={10}
-            barSize={10}
+            dataKey="Count"
+            // fill={theme.palette[color].main}
+            fill={color}
+            radius={8}
+            barSize={20}
+
           />
+          <YAxis domain={[0, 10]} />
+          {/* <Tooltip /> */}
+          <XAxis dataKey="Flavour" />
         </BarChart>
       </div>
-      <div className={classes.bottomStatsContainer}>
+      {/* <div className={classes.bottomStatsContainer}>
         <div className={classnames(classes.statCell, classes.borderRight)}>
           <Grid container alignItems="center">
             <Typography variant="h6">{registrations[value].value}</Typography>
@@ -107,7 +121,7 @@ export default function BigStat(props) {
             Views
           </Typography>
         </div>
-      </div>
+      </div> */}
     </Widget>
   );
 }

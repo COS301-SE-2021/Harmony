@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Grid,
   LinearProgress,
@@ -48,60 +48,81 @@ export default function Dashboard(props) {
 
   // local
   var [mainChartState, setMainChartState] = useState("monthly");
+  var [data, setData] = useState(" ");
+  var [totalUsers, setTotalUsers] = useState("");
+  var [mostFavouritedPairings, setMostFavouritedPairings] = useState([]);
+  var [hitRatio, setHitRatio] = useState("");
+  /**
+   * @function runs once to load all the data for the dashboard
+   */
+  useEffect(() => {
+    /**Get total users api  */
+    fetch('https://w3lfp6r6f7.execute-api.eu-west-1.amazonaws.com/dev/gettotalusers')
+      .then(response => response.json())
+      .then(data => setTotalUsers(data.TotalUsers));
 
+    /**Get hit ration call */
+    fetch('https://w3lfp6r6f7.execute-api.eu-west-1.amazonaws.com/dev/viewratiodata')
+      .then(response => response.json())
+      .then(data => setHitRatio(data))
+      .then(console.log("hit ratio " + JSON.stringify(hitRatio)));
+    /**  empty dependency array means this effect will only run once (like componentDidMount in classes)*/
+  }, []);
   return (
     <>
       <PageTitle title="Dashboard" button={<Button
-      variant="contained"
-      size="medium"
-      color="secondary"
-    >
+        variant="contained"
+        size="medium"
+        color="secondary"
+      >
         Latest Reports
-    </Button>} />
+      </Button>} />
       <Grid container spacing={4}>
         <Grid item lg={3} md={4} sm={6} xs={12}>
           <Widget
-            title="Visits Today"
+            title="Total Users"
             upperTitle
             bodyClass={classes.fullHeightBody}
             className={classes.card}
           >
             <div className={classes.visitsNumberContainer}>
               <Grid container item alignItems={"center"}>
-                <Grid item xs={6}>
-              <Typography size="xl" weight="medium" noWrap>
-                12, 678
-              </Typography>
-                </Grid>
-                <Grid item xs={6}>
-              <LineChart
-                width={100}
-                height={30}
-                data={[
-                  { value: 10 },
-                  { value: 15 },
-                  { value: 10 },
-                  { value: 17 },
-                  { value: 18 },
-                ]}
-              >
-                <Line
-                  type="natural"
-                  dataKey="value"
-                  stroke={theme.palette.success.main}
-                  strokeWidth={2}
-                  dot={false}
-                />
-              </LineChart>
-                </Grid>
+                <div style={{ width: "100%", textAlign: "right" }}>
+                  <Grid item xs={6}>
+                    <Typography size="xxl" weight="large" noWrap >
+                      <p style={{ color: theme.palette.primary.main }}>{totalUsers}</p>
+                    </Typography>
+                  </Grid>
+                </div>
+                {/* <Grid item xs={6}>
+                  <LineChart
+                    width={100}
+                    height={30}
+                    data={[
+                      { value: 10 },
+                      { value: 15 },
+                      { value: 10 },
+                      { value: 17 },
+                      { value: 18 },
+                    ]}
+                  >
+                    <Line
+                      type="natural"
+                      dataKey="value"
+                      stroke={theme.palette.success.main}
+                      strokeWidth={2}
+                      dot={false}
+                    />
+                  </LineChart>
+                </Grid> */}
               </Grid>
             </div>
-            <Grid
+            {/* <Grid
               container
               direction="row"
               justify="space-between"
               alignItems="center"
-            >
+              >
               <Grid item xs={4}>
                 <Typography color="text" colorBrightness="secondary" noWrap>
                   Registrations
@@ -120,12 +141,12 @@ export default function Dashboard(props) {
                 </Typography>
                 <Typography size="md">3.25%</Typography>
               </Grid>
-            </Grid>
+            </Grid> */}
           </Widget>
         </Grid>
         <Grid item lg={3} md={8} sm={6} xs={12}>
-          <Widget
-            title="App Performance"
+          {/* <Widget
+            title="AI Performance"
             upperTitle
             className={classes.card}
             bodyClass={classes.fullHeightBody}
@@ -184,9 +205,77 @@ export default function Dashboard(props) {
                 className={classes.progress}
               />
             </div>
+          </Widget> */}
+          <Widget
+            title="AI Performance"
+            upperTitle
+            bodyClass={classes.fullHeightBody}
+            className={classes.card}
+          >
+            <div className={[classes.visitsNumberContainer, { justifyContent: "space-between" }]}>
+              <Grid container item alignItems={"center"}>
+
+                <Grid item xs={6}>
+                  <Typography size="xxl" weight="large" noWrap>
+                    <p style={{
+                      color: theme.palette.success, float: "left"
+                    }}>{hitRatio.TrueScans}</p><p style={{
+                      float: "left"
+                    }}>:</p><p style={{
+                      color: theme.palette.warning, float: "left"
+                    }}>{hitRatio.FalseScans}</p>
+                  </Typography>
+
+                </Grid>
+                <div className={[classes.performanceLegendWrapper, { justifyContent: "space-between" }]}>
+                  <div className={classes.legendElement}>
+                    <Dot color="success" />
+                    <Typography
+                      color="text"
+                      colorBrightness="secondary"
+                      className={classes.legendElementText}
+                    >
+                      Hits
+                    </Typography>
+                  </div>
+                  <div className={classes.legendElement}>
+                    <Dot color="secondary" />
+                    <Typography
+                      color="text"
+                      colorBrightness="secondary"
+                      className={classes.legendElementText}
+                    >
+                      Misses
+                    </Typography>
+                  </div>
+                </div>
+              </Grid>
+            </div>
+
+            <div className={classes.visitsNumberContainer}>
+              <div style={{ width: "100%", textAlign: "center" }}>
+                <Grid container item alignItems={"center"}>
+                  <Grid item xs={6}>
+                    <Typography color="text" colorBrightness="primary" >
+                      Total Scanned :
+                    </Typography>
+
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography color="text" colorBrightness="secondary">
+                      {hitRatio.TotalScans}
+                    </Typography>
+
+                  </Grid>
+
+                </Grid>
+              </div>
+            </div>
+
           </Widget>
+
         </Grid>
-        <Grid item lg={3} md={8} sm={6} xs={12}>
+        {/* <Grid item lg={3} md={8} sm={6} xs={12}>
           <Widget
             title="Server Overview"
             upperTitle
@@ -266,7 +355,7 @@ export default function Dashboard(props) {
               </div>
             </div>
           </Widget>
-        </Grid>
+        </Grid> */}
         <Grid item lg={3} md={4} sm={6} xs={12}>
           <Widget title="Revenue Breakdown" upperTitle className={classes.card}>
             <Grid container spacing={2}>
@@ -407,21 +496,29 @@ export default function Dashboard(props) {
             </ResponsiveContainer>
           </Widget>
         </Grid>
-        {mock.bigStat.map(stat => (
-          <Grid item md={4} sm={6} xs={12} key={stat.product}>
-            <BigStat {...stat} />
-          </Grid>
-        ))}
-        <Grid item xs={12}>
-          <Widget
-            title="Support Requests"
-            upperTitle
-            noBodyPadding
-            bodyClass={classes.tableWidget}
-          >
-            <Table data={mock.table} />
-          </Widget>
+        <Grid item sm={6} xs={12}>
+          <BigStat title="Food Flavour Statistics" color="#C41ED4" />
         </Grid>
+        <Grid item sm={6} xs={12}>
+          <BigStat title="Food Flavour Statistics" color="#C41ED4" />
+        </Grid>
+        {/* {mock.bigStat.map(stat => (
+          <Grid item md={4} sm={6} xs={12} key={stat.product}>
+            <BigStat {...stat} title="Statistics" color="#FF6347" />
+          </Grid>
+        ))} */}
+      </Grid>
+      <br />
+      <br />
+      <Grid item xs={12}>
+        <Widget
+          title="Most Favourited Pairings"
+          upperTitle
+          noBodyPadding
+          bodyClass={classes.tableWidget}
+        >
+          <Table data={mostFavouritedPairings} />
+        </Widget>
       </Grid>
     </>
   );
