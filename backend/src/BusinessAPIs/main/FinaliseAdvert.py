@@ -30,14 +30,27 @@ def finalise_advert(event, context):
     advertID = event['AdvertID']
     status = 'Pending'
 
+    num_locations = len(locations)
+    num_audience = len(audience)
+    price = calculate_cost(num_locations, num_audience, ad_time_period)
+    print(price)
+
     request_adverts_table.update_item(
         TableName=request_adverts_table_name,
         Key={
             'RAID': advertID
         },
-        ExpressionAttributeNames={'#V': 'AdvertStatus'},
-        ExpressionAttributeValues={':v': status},
-        UpdateExpression='SET #V = :v',
+        ExpressionAttributeNames={'#V': 'Status',
+                                  '#G': 'Locations',
+                                  '#H': 'TimeLimit',
+                                  '#L': 'TargetAudience',
+                                  '#P': 'Price'},
+        ExpressionAttributeValues={':v': status,
+                                   ':g': locations,
+                                   ':h': ad_time_period,
+                                   ':l': audience,
+                                   ':p': price},
+        UpdateExpression='SET #V = :v, #G = :g, #H = :h, #L = :l, #P = :p',
         ReturnValues="UPDATED_NEW"
 
     )
@@ -56,6 +69,6 @@ This data must be written to the database
 
 
 def calculate_cost(num_locations, num_audience, time_limit):
-    cost = time_limit + (1 * num_locations * time_limit) + (1 * num_audience * time_limit)
+    cost = time_limit + (1 + num_locations * time_limit) + (1 * num_audience * time_limit)
 
     return cost
