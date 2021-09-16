@@ -6,8 +6,12 @@ var UserDispatchContext = React.createContext();
 
 function userReducer(state, action) {
   switch (action.type) {
-    case "LOGIN_SUCCESS":
-      return { ...state, isAuthenticated: true };
+    case "LOGIN_SUCCESS": {
+      Auth.currentAuthenticatedUser().then(succ=>{
+        console.log(succ)
+      }).catch(e=> console.log(e))
+      return {...state, isAuthenticated: true};
+    }
     case "SIGN_OUT_SUCCESS":
       return { ...state, isAuthenticated: false };
     default: {
@@ -23,6 +27,7 @@ function userReducer(state, action) {
   });
 
   return (
+
     <UserStateContext.Provider value={state}>
       <UserDispatchContext.Provider value={dispatch}>
         {children}
@@ -60,6 +65,7 @@ function loginUser(dispatch, login, password, history, setIsLoading, setError) {
       //localStorage.setItem('id_token', 1)
       setError(null)
       Auth.signIn(login,password).then(user => {
+        //console.log(user)
         setIsLoading(false)
         dispatch({ type: 'LOGIN_SUCCESS' })
         history.push('/app/dashboard')
@@ -90,8 +96,5 @@ function signOut(dispatch, history) {
 
 }
 
-function test(){
-
-}
 
 
