@@ -9,8 +9,8 @@ from datetime import datetime
 dynamodb = boto3.resource('dynamodb')
 
 # use the DynamoDB object to select our table
-request_adverts_table_name = 'RequestAdverts'
-request_adverts_table = dynamodb.Table(request_adverts_table_name)
+business_pairings_table_name = 'BusinessPairings'
+business_pairings_table = dynamodb.Table(business_pairings_table_name)
 
 business_user_table_name = 'BusinessUsers'
 business_user_table = dynamodb.Table(business_user_table_name)
@@ -23,7 +23,7 @@ Gets the statement for the business user.
 def get_statement(event, context):
     bid = event['BID']
 
-    allresponse = request_adverts_table.scan()
+    allresponse = business_pairings_table.scan()
     response = allresponse['Items']
 
     """Gets the business user data that we will need to process for their statement."""
@@ -33,9 +33,15 @@ def get_statement(event, context):
         print(e.response['Error']['Message'])
         return {"StatusCode": 400}
 
+    adverts = []
+    for i in response:
+        if i['BID'] == bid:
+            adverts.append(i)
+
     return {
         "StatusCode": 200,
-        "Data": response
+        "Data": adverts
+
     }
 
 
