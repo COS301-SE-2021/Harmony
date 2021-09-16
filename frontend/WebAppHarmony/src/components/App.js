@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { HashRouter, Route, Switch, Redirect, Router, useHistory } from "react-router-dom";
 import { Auth, Hub, Amplify } from 'aws-amplify'
-import awsconfig from '../aws-exports'
+import '../aws-exports'
 import {AmplifySignOut, withAuthenticator} from "@aws-amplify/ui-react";
 // components
 import Layout from "./Layout";
@@ -10,7 +10,9 @@ import { useUserState } from "../context/UserContext";
 // pages
 import Error from "../pages/error";
 import Login from "../pages/login";
-Amplify.configure(awsconfig)
+import ResetPass from "../pages/resetpass";
+import SignUp from "../pages/signup";
+
 // context
 
 export default function App() {
@@ -28,6 +30,8 @@ export default function App() {
                 />
                 <PrivateRoute path="/app" component={Layout} />
                 <PublicRoute path="/login" component={Login} />
+                <PublicRoute path="/resetpass" component={ResetPass} />
+                <PublicRoute path="/signup" component={SignUp} />
                 <Route component={Error} />
             </Switch>
         </HashRouter>
