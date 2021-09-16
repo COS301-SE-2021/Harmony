@@ -1,6 +1,9 @@
 import React from "react";
 import { Auth } from 'aws-amplify'
+import Amplify from 'aws-amplify';
+import aws_exports from '../aws-exports';
 
+Amplify.configure(aws_exports);
 var UserStateContext = React.createContext();
 var UserDispatchContext = React.createContext();
 

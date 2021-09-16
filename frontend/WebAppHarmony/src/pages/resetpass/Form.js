@@ -3,8 +3,6 @@ import AccountForm from "./AccountForm";
 import CodeForm from "./CodeForm";
 import NewPassForm from "./NewPassForm";
 import withStyles from "@material-ui/core/styles/withStyles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import Stepper from "@material-ui/core/Stepper";

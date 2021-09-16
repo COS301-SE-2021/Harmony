@@ -1,17 +1,19 @@
-import React, {useState} from "react";
-import { HashRouter, Route, Switch, Redirect, Router, useHistory } from "react-router-dom";
-import { Auth, Hub, Amplify } from 'aws-amplify'
+import React from "react";
+import { HashRouter, Route, Switch, Redirect} from "react-router-dom";
+import { Amplify } from 'aws-amplify'
 import '../aws-exports'
-import {AmplifySignOut, withAuthenticator} from "@aws-amplify/ui-react";
+
 // components
 import Layout from "./Layout";
 import { useUserState } from "../context/UserContext";
-
-// pages
+import aws_exports from '../aws-exports';
 import Error from "../pages/error";
 import Login from "../pages/login";
 import ResetPass from "../pages/resetpass";
 import SignUp from "../pages/signup";
+
+Amplify.configure(aws_exports);
+// pages
 
 // context
 

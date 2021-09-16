@@ -1,22 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Grid,
-  CircularProgress,
-  Typography,
-  Button,
-  Tabs,
-  Tab,
-  TextField,
-  Fade,
+  Typography
+
 } from "@material-ui/core";
 import { withRouter } from "react-router-dom";
 import Form from './Form';
-import classnames from "classnames";
-import { Auth } from 'aws-amplify';
 
 // styles
 import useStyles from "./styles";
-import {useHistory} from "react-router-dom"
+
 // logo
 import logo from "./logo.svg";
 
