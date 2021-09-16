@@ -294,31 +294,31 @@ def example_function(event, context):
     # df = ratings2.pivot_table(index='title', columns='userId', values='rating').fillna(0)
     # df1 = df.copy()
 
-    def recommend_movies(user, num_recommended_movies):
+    def recommend_pairings(user, num_recommended_pairings):
 
-        print('The list of the Movies {} Has Watched \n'.format(user))
+        print('The list of the Pairings {} has interacted with \n'.format(user))
 
         for m in df[df[user] > 0][user].index.tolist():
             print(m)
 
         print('\n')
 
-        recommended_movies = []
+        recommended_pairings = []
 
         for m in df[df[user] == 0].index.tolist():
             index_df = df.index.tolist().index(m)
             predicted_rating = df1.iloc[index_df, df1.columns.tolist().index(user)]
-            recommended_movies.append((m, predicted_rating))
+            recommended_pairings.append((m, predicted_rating))
 
-        sorted_rm = sorted(recommended_movies, key=lambda x: x[1], reverse=True)
+        sorted_rm = sorted(recommended_pairings, key=lambda x: x[1], reverse=True)
 
-        print('The list of the Recommended Movies \n')
+        print('The list of the interacted Pairings \n')
         rank = 1
-        for recommended_movie in sorted_rm[:num_recommended_movies]:
-            print('{}: {} - predicted rating:{}'.format(rank, recommended_movie[0], recommended_movie[1]))
+        for recommended_pairing in sorted_rm[:num_recommended_pairings]:
+            print('{}: {} - predicted rating:{}'.format(rank, recommended_pairing[0], recommended_pairing[1]))
             rank = rank + 1
 
-    def movie_recommender(user, num_neighbors, num_recommendation):
+    def pairing_recommender(user, num_neighbors, num_recommendation):
 
         number_neighbors = num_neighbors
 
@@ -330,36 +330,36 @@ def example_function(event, context):
 
         for m, t in list(enumerate(df.index)):
             if df.iloc[m, user_index] == 0:
-                sim_movies = indices[m].tolist()
-                movie_distances = distances[m].tolist()
+                sim_pairings = indices[m].tolist()
+                pairing_distances = distances[m].tolist()
 
-                if m in sim_movies:
-                    id_movie = sim_movies.index(m)
-                    sim_movies.remove(m)
-                    movie_distances.pop(id_movie)
+                if m in sim_pairings:
+                    id_pairing = sim_pairings.index(m)
+                    sim_pairings.remove(m)
+                    pairing_distances.pop(id_pairing)
 
                 else:
-                    sim_movies = sim_movies[:num_neighbors - 1]
-                    movie_distances = movie_distances[:num_neighbors - 1]
+                    sim_pairings = sim_pairings[:num_neighbors - 1]
+                    pairing_distances = pairing_distances[:num_neighbors - 1]
 
-                movie_similarity = [1 - x for x in movie_distances]
-                movie_similarity_copy = movie_similarity.copy()
+                pairing_similarity = [1 - x for x in pairing_distances]
+                pairing_similarity_copy = pairing_similarity.copy()
                 nominator = 0
 
-                for s in range(0, len(movie_similarity)):
-                    if df.iloc[sim_movies[s], user_index] == 0:
-                        if len(movie_similarity_copy) == (number_neighbors - 1):
-                            movie_similarity_copy.pop(s)
+                for s in range(0, len(pairing_similarity)):
+                    if df.iloc[sim_pairings[s], user_index] == 0:
+                        if len(pairing_similarity_copy) == (number_neighbors - 1):
+                            pairing_similarity_copy.pop(s)
 
                         else:
-                            movie_similarity_copy.pop(s - (len(movie_similarity) - len(movie_similarity_copy)))
+                            pairing_similarity_copy.pop(s - (len(pairing_similarity) - len(pairing_similarity_copy)))
 
                     else:
-                        nominator = nominator + movie_similarity[s] * df.iloc[sim_movies[s], user_index]
+                        nominator = nominator + pairing_similarity[s] * df.iloc[sim_pairings[s], user_index]
 
-                if len(movie_similarity_copy) > 0:
-                    if sum(movie_similarity_copy) > 0:
-                        predicted_r = nominator / sum(movie_similarity_copy)
+                if len(pairing_similarity_copy) > 0:
+                    if sum(pairing_similarity_copy) > 0:
+                        predicted_r = nominator / sum(pairing_similarity_copy)
 
                     else:
                         predicted_r = 0
@@ -368,9 +368,10 @@ def example_function(event, context):
                     predicted_r = 0
 
                 df1.iloc[m, user_index] = predicted_r
-        recommend_movies(user, num_recommendation)
+        recommend_pairings(user, num_recommendation)
 
-    movie_recommender("jd1", 2, 3)
+
+    pairing_recommender("jd1", 2, 3)
 
 
     return
