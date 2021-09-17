@@ -1,7 +1,6 @@
 import json
 import boto3
 from botocore.exceptions import ClientError
-from boto3.dynamodb.conditions import Key
 from datetime import date, timedelta, datetime
 from datetime import time
 from datetime import datetime
@@ -28,32 +27,38 @@ def get_statement(event, context):
 
     statement_duration = event['Days']
 
-    """Gets the business user data that we will need to process for their statement."""
-    try:
-        business_user_data = business_user_table.get_item(Key={'BID': bid})
-    except ClientError as e:
-        print(e.response['Error']['Message'])
-        return {"StatusCode": 400}
+    # this takes the current time and subtracts the input statement number of days to get a range
+    d = datetime.today() - timedelta(days=statement_duration)
+
+    # format the date to be compared
+    d = d.replace(hour=0, minute=0, second=0, microsecond=0)
 
     adverts = []
     for i in response:
-        if i['BID'] == bid:
+        # datetime.strptime(response[counter]['DateAdded'], '%Y-%m-%d')
+        date_created = datetime.strptime(i['DateCreated'], '%Y-%m-%d')
+        if i['BID'] == bid and d <= date_created:
+            today = datetime.strptime(str(date.today()), '%Y-%m-%d')
+            difference = (today - date_created).days
+            days_remaining = i['TimeLimit'] - difference
+            i['DaysRemaining'] = days_remaining
             adverts.append(i)
 
     sort_response = sortbynew(adverts)
+    total_cost = calculate_total_cost_ads(adverts)
 
     return {
         "StatusCode": 200,
-        "Data": sort_response
+        "AdvertData": sort_response,
+        "TotalCost": total_cost
 
     }
 
 
-def calculate_total_cost_ads(bid, response, time_period):
+def calculate_total_cost_ads(response):
     total_cost = 0
     for i in response:
-        if i['BID'] == bid:
-            total_cost = total_cost + i['Cost']
+        total_cost = total_cost + i['Price']
 
     return total_cost
 
