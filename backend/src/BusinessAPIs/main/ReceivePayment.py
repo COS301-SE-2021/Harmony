@@ -15,7 +15,7 @@ It then adjusts their credit in the database.
 
 
 def receive_payment(event, context):
-    amount = event['Amount']
+    amount_paid = event['Amount']
     bid = event['BID']
 
     """Gets the business user data that we will need to process the payment for."""
@@ -29,7 +29,7 @@ def receive_payment(event, context):
     Takes the current outstanding amount and subtracts the amount paid from it.
     """
     outstanding_amount = business_user_data["Item"]["OutstandingAmount"]
-    new_amount = outstanding_amount - amount
+    new_amount = outstanding_amount - amount_paid
 
     """
     Writes the new outstanding amount to the business users table.
@@ -46,6 +46,16 @@ def receive_payment(event, context):
 
     )
 
+    """Gets the business user data that we will now use for the response."""
+    try:
+        data = business_user_table.get_item(Key={'BID': bid})
+    except ClientError as e:
+        print(e.response['Error']['Message'])
+        return {"StatusCode": 400}
+
     return {
-        "StatusCode": 200
+        "StatusCode": 200,
+        "Message": "Payment was successful",
+        "Data": data["Item"]
+
     }
