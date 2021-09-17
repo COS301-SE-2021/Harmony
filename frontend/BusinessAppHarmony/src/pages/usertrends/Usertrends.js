@@ -16,7 +16,7 @@ export default function Tables() {
   const [logo, setLogo] = useState("http://beepeers.com/assets/images/commerces/default-image.jpg");
   // useEffect(() => {
   const [checkout, setCheckout] = useState(false);
-
+  const [data, setData] = useState();
   // }, [logo])
   /**set the api key to use geocode */
   // Geocode.setApiKey("AIzaSyBX7qzFSYnqo28_uZDI3GBRCK7JGkK07L8");
@@ -44,6 +44,19 @@ export default function Tables() {
     reader.onload = () => {
       if (reader.readyState === 2) {
         setLogo(reader.result)
+        fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/updateuserlogo", { BID: "b1", Logo: btoa(reader.result) })
+          .then(res => res.json())
+          .then(
+            (result) => {
+              console.log(result);
+              setData(result);
+            },
+            // Note: it's important to handle errors here
+            // instead of a catch() block so that we don't swallow
+            // exceptions from actual bugs in components.
+            (error) => {
+            }
+          )
       }
     }
     if (supportedFormats.includes(e.target.files[0].type)) { reader.readAsDataURL(e.target.files[0]) }
