@@ -34,11 +34,17 @@ function CreateAdForm(...props) {
         setDrinkImage(defaultImage);
         foodFileRef.current.value = "";
         drinkFileRef.current.value = "";
-        foodTagSelector.current.resetSelectedValues();
-        drinkTagSelector.current.resetSelectedValues();
-        mealTagSelector.current.resetSelectedValues();
-        audienceTagSelector.current.resetSelectedValues();
-        foodTagSelector.current.selectedList = "";
+        // console.log(foodTagSelector.current.selectedList);
+
+        /**in a try catch because if you try clearing a list thats already empty it should do nothing */
+        try {
+            foodTagSelector.current.resetSelectedValues();
+            drinkTagSelector.current.resetSelectedValues();
+            mealTagSelector.current.resetSelectedValues();
+            audienceTagSelector.current.resetSelectedValues();
+        } catch (error) {
+        }
+
     }
 
     /**Handles the image preview */
