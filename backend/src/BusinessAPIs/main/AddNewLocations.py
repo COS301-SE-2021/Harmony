@@ -1,5 +1,6 @@
 import json
 import boto3
+from botocore.exceptions import ClientError
 
 dynamodb = boto3.resource('dynamodb')
 
@@ -23,15 +24,26 @@ def add_new_locations(event, context):
     coordinates = event['Coordinates']
     address = event['Address']
 
+
     business_users_table.update_item(
         TableName=business_users_table_name,
         Key={
             'BID': user_id
         },
-        ExpressionAttributeNames={'#V': 'LocationsName'},
-        ExpressionAttributeValues={':v': location_name},
-        UpdateExpression='SET #V = :v',
+        UpdateExpression="SET Locations = list_append(Locations, :locations)",
+        ExpressionAttributeValues={':locations': [location_name]},
         ReturnValues="UPDATED_NEW"
 
     )
-    return {"StatusCode": 200}
+
+    """Gets the business user data for the response"""
+    try:
+        business_user_data = business_users_table.get_item(Key={'BID': user_id})
+    except ClientError as e:
+        print(e.response['Error']['Message'])
+        return {"StatusCode": 400}
+
+
+    return {"StatusCode": 200,
+            "Data": business_user_data["Item"]
+            }
