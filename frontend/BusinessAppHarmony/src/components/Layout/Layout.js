@@ -2,12 +2,11 @@ import React from "react";
 import {
   Route,
   Switch,
-  Redirect,
   withRouter,
 } from "react-router-dom";
 import classnames from "classnames";
-import {Box, IconButton, Link} from '@material-ui/core'
-import Icon from '@mdi/react'
+import {Box} from '@material-ui/core'
+
 
 
 // styles

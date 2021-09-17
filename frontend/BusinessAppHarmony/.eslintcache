@@ -1,1 +1,1012 @@
-[{"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\index.js":"1","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\serviceWorker.js":"2","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\components\\App.js":"3","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\context\\LayoutContext.js":"4","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\context\\UserContext.js":"5","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\themes\\index.js":"6","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\components\\Layout\\Layout.js":"7","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\pages\\error\\Error.js":"8","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\pages\\login\\Login.js":"9","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\themes\\default.js":"10","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\pages\\usertrends\\Usertrends.js":"11","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\pages\\dashboard\\mock.js":"12","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\pages\\dashboard\\components\\Table\\Table.js":"13","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\pages\\dashboard\\styles.js":"14","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\pages\\login\\styles.js":"15","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\pages\\error\\styles.js":"16","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\components\\Widget\\Widget.js":"17","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\components\\PageTitle\\PageTitle.js":"18","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\components\\Layout\\styles.js":"19","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\pages\\settings\\Settings.js":"20","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\pages\\createads\\Createads.js":"21","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\pages\\dashboard\\Dashboard.js":"22","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\components\\Header\\Header.js":"23","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\components\\Sidebar\\Sidebar.js":"24","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\components\\PageTitle\\styles.js":"25","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\components\\Widget\\styles.js":"26","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\pages\\createads\\styles.js":"27","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\pages\\dashboard\\components\\BigStat\\BigStat.js":"28","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\components\\Wrappers\\Wrappers.js":"29","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\components\\Sidebar\\styles.js":"30","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\components\\Sidebar\\components\\Dot.js":"31","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\components\\Sidebar\\components\\SidebarLink\\SidebarLink.js":"32","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\components\\Header\\styles.js":"33","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\components\\UserAvatar\\UserAvatar.js":"34","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\components\\Notification\\Notification.js":"35","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\pages\\dashboard\\components\\BigStat\\styles.js":"36","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\components\\Sidebar\\components\\SidebarLink\\styles.js":"37","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\components\\Notification\\styles.js":"38","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\components\\UserAvatar\\styles.js":"39","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\pages\\createads\\CreateAdForm.js":"40","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\pages\\dashboard\\Statement.js":"41","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\pages\\dashboard\\components\\Table\\PayPal.js":"42","C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\pages\\usertrends\\styles.js":"43"},{"size":896,"mtime":1631863777423,"results":"44","hashOfConfig":"45"},{"size":5083,"mtime":1631863777615,"results":"46","hashOfConfig":"45"},{"size":1787,"mtime":1631863777398,"results":"47","hashOfConfig":"45"},{"size":1444,"mtime":1631863777421,"results":"48","hashOfConfig":"45"},{"size":2053,"mtime":1631863777422,"results":"49","hashOfConfig":"45"},{"size":534,"mtime":1631863777617,"results":"50","hashOfConfig":"45"},{"size":1758,"mtime":1631863777403,"results":"51","hashOfConfig":"45"},{"size":1626,"mtime":1631863777569,"results":"52","hashOfConfig":"45"},{"size":8837,"mtime":1631863777573,"results":"53","hashOfConfig":"45"},{"size":3127,"mtime":1631863777616,"results":"54","hashOfConfig":"45"},{"size":5928,"mtime":1631863777581,"results":"55","hashOfConfig":"45"},{"size":5277,"mtime":1631863777549,"results":"56","hashOfConfig":"45"},{"size":4518,"mtime":1631863777535,"results":"57","hashOfConfig":"45"},{"size":3429,"mtime":1631863777567,"results":"58","hashOfConfig":"45"},{"size":3281,"mtime":1631863777576,"results":"59","hashOfConfig":"45"},{"size":1395,"mtime":1631863777571,"results":"60","hashOfConfig":"45"},{"size":2581,"mtime":1631863777418,"results":"61","hashOfConfig":"45"},{"size":447,"mtime":1631863777408,"results":"62","hashOfConfig":"45"},{"size":710,"mtime":1631863777404,"results":"63","hashOfConfig":"45"},{"size":1818,"mtime":1631863777578,"results":"64","hashOfConfig":"45"},{"size":736,"mtime":1631863777449,"results":"65","hashOfConfig":"45"},{"size":801,"mtime":1631863777486,"results":"66","hashOfConfig":"45"},{"size":10236,"mtime":1631863777400,"results":"67","hashOfConfig":"45"},{"size":3467,"mtime":1631863777410,"results":"68","hashOfConfig":"45"},{"size":482,"mtime":1631863777409,"results":"69","hashOfConfig":"45"},{"size":1015,"mtime":1631863777419,"results":"70","hashOfConfig":"45"},{"size":5900,"mtime":1631863777481,"results":"71","hashOfConfig":"45"},{"size":4160,"mtime":1630878778553,"results":"72","hashOfConfig":"45"},{"size":3971,"mtime":1631863777420,"results":"73","hashOfConfig":"45"},{"size":1363,"mtime":1631863777415,"results":"74","hashOfConfig":"45"},{"size":902,"mtime":1631863777412,"results":"75","hashOfConfig":"45"},{"size":4589,"mtime":1631863777413,"results":"76","hashOfConfig":"45"},{"size":4043,"mtime":1631863777402,"results":"77","hashOfConfig":"45"},{"size":620,"mtime":1631863777416,"results":"78","hashOfConfig":"45"},{"size":3413,"mtime":1631863777405,"results":"79","hashOfConfig":"45"},{"size":1075,"mtime":1630878778554,"results":"80","hashOfConfig":"45"},{"size":1474,"mtime":1631863777413,"results":"81","hashOfConfig":"45"},{"size":1040,"mtime":1631863777407,"results":"82","hashOfConfig":"45"},{"size":291,"mtime":1631863777417,"results":"83","hashOfConfig":"45"},{"size":20348,"mtime":1631864815470,"results":"84","hashOfConfig":"45"},{"size":2518,"mtime":1631546739726,"results":"85","hashOfConfig":"45"},{"size":1292,"mtime":1631863777509,"results":"86","hashOfConfig":"45"},{"size":6257,"mtime":1631863777613,"results":"87","hashOfConfig":"45"},{"filePath":"88","messages":"89","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},"1nxypf6",{"filePath":"90","messages":"91","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"92","messages":"93","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"94","messages":"95","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"96","messages":"97","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"98","messages":"99","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"100","messages":"101","errorCount":0,"fatalErrorCount":0,"warningCount":4,"fixableErrorCount":0,"fixableWarningCount":0,"source":null},{"filePath":"102","messages":"103","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"104","messages":"105","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"106","messages":"107","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"108","messages":"109","errorCount":0,"fatalErrorCount":0,"warningCount":3,"fixableErrorCount":0,"fixableWarningCount":0,"source":null},{"filePath":"110","messages":"111","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"112","messages":"113","errorCount":0,"fatalErrorCount":0,"warningCount":1,"fixableErrorCount":0,"fixableWarningCount":0,"source":null},{"filePath":"114","messages":"115","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"116","messages":"117","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"118","messages":"119","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"120","messages":"121","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"122","messages":"123","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"124","messages":"125","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"126","messages":"127","errorCount":0,"fatalErrorCount":0,"warningCount":2,"fixableErrorCount":0,"fixableWarningCount":0,"source":null},{"filePath":"128","messages":"129","errorCount":0,"fatalErrorCount":0,"warningCount":3,"fixableErrorCount":0,"fixableWarningCount":0,"source":null},{"filePath":"130","messages":"131","errorCount":0,"fatalErrorCount":0,"warningCount":5,"fixableErrorCount":0,"fixableWarningCount":0,"source":null},{"filePath":"132","messages":"133","errorCount":0,"fatalErrorCount":0,"warningCount":2,"fixableErrorCount":0,"fixableWarningCount":0,"source":null},{"filePath":"134","messages":"135","errorCount":0,"fatalErrorCount":0,"warningCount":7,"fixableErrorCount":0,"fixableWarningCount":0,"source":null},{"filePath":"136","messages":"137","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"138","messages":"139","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"140","messages":"141","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"142","messages":"143","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"144"},{"filePath":"145","messages":"146","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"147","messages":"148","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"149","messages":"150","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"151","messages":"152","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"153","messages":"154","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"155","messages":"156","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"157","messages":"158","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"159","messages":"160","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"144"},{"filePath":"161","messages":"162","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"163","messages":"164","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"165","messages":"166","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},{"filePath":"167","messages":"168","errorCount":0,"fatalErrorCount":0,"warningCount":3,"fixableErrorCount":0,"fixableWarningCount":0,"source":null},{"filePath":"169","messages":"170","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"144"},{"filePath":"171","messages":"172","errorCount":0,"fatalErrorCount":0,"warningCount":2,"fixableErrorCount":0,"fixableWarningCount":0,"source":null},{"filePath":"173","messages":"174","errorCount":0,"fatalErrorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0},"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\index.js",[],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\serviceWorker.js",[],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\components\\App.js",[],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\context\\LayoutContext.js",[],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\context\\UserContext.js",[],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\themes\\index.js",[],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\components\\Layout\\Layout.js",["175","176","177","178"],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\pages\\error\\Error.js",[],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\pages\\login\\Login.js",[],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\themes\\default.js",[],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\pages\\usertrends\\Usertrends.js",["179","180","181"],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\pages\\dashboard\\mock.js",[],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\pages\\dashboard\\components\\Table\\Table.js",["182"],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\pages\\dashboard\\styles.js",[],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\pages\\login\\styles.js",[],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\pages\\error\\styles.js",[],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\components\\Widget\\Widget.js",[],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\components\\PageTitle\\PageTitle.js",[],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\components\\Layout\\styles.js",[],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\pages\\settings\\Settings.js",["183","184"],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\pages\\createads\\Createads.js",["185","186","187"],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\pages\\dashboard\\Dashboard.js",["188","189","190","191","192"],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\components\\Header\\Header.js",["193","194"],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\components\\Sidebar\\Sidebar.js",["195","196","197","198","199","200","201"],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\components\\PageTitle\\styles.js",[],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\components\\Widget\\styles.js",[],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\pages\\createads\\styles.js",[],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\pages\\dashboard\\components\\BigStat\\BigStat.js",[],["202","203"],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\components\\Wrappers\\Wrappers.js",[],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\components\\Sidebar\\styles.js",[],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\components\\Sidebar\\components\\Dot.js",[],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\components\\Sidebar\\components\\SidebarLink\\SidebarLink.js",[],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\components\\Header\\styles.js",[],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\components\\UserAvatar\\UserAvatar.js",[],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\components\\Notification\\Notification.js",[],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\pages\\dashboard\\components\\BigStat\\styles.js",[],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\components\\Sidebar\\components\\SidebarLink\\styles.js",[],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\components\\Notification\\styles.js",[],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\components\\UserAvatar\\styles.js",[],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\pages\\createads\\CreateAdForm.js",["204","205","206"],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\pages\\dashboard\\Statement.js",[],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\pages\\dashboard\\components\\Table\\PayPal.js",["207","208"],"C:\\Users\\user\\Documents\\COS341\\Harmony\\frontend\\BusinessAppHarmony\\src\\pages\\usertrends\\styles.js",[],{"ruleId":"209","severity":1,"message":"210","line":5,"column":3,"nodeType":"211","messageId":"212","endLine":5,"endColumn":11},{"ruleId":"209","severity":1,"message":"213","line":9,"column":14,"nodeType":"211","messageId":"212","endLine":9,"endColumn":24},{"ruleId":"209","severity":1,"message":"214","line":9,"column":26,"nodeType":"211","messageId":"212","endLine":9,"endColumn":30},{"ruleId":"209","severity":1,"message":"215","line":10,"column":8,"nodeType":"211","messageId":"212","endLine":10,"endColumn":12},{"ruleId":"209","severity":1,"message":"216","line":1,"column":27,"nodeType":"211","messageId":"212","endLine":1,"endColumn":36},{"ruleId":"209","severity":1,"message":"217","line":10,"column":8,"nodeType":"211","messageId":"212","endLine":10,"endColumn":15},{"ruleId":"218","severity":1,"message":"219","line":83,"column":51,"nodeType":"220","endLine":83,"endColumn":104},{"ruleId":"209","severity":1,"message":"221","line":11,"column":3,"nodeType":"211","messageId":"212","endLine":11,"endColumn":16},{"ruleId":"209","severity":1,"message":"222","line":12,"column":9,"nodeType":"211","messageId":"212","endLine":12,"endColumn":21},{"ruleId":"223","severity":1,"message":"224","line":26,"column":6,"nodeType":"225","endLine":26,"endColumn":8,"suggestions":"226"},{"ruleId":"209","severity":1,"message":"227","line":9,"column":8,"nodeType":"211","messageId":"212","endLine":9,"endColumn":14},{"ruleId":"209","severity":1,"message":"228","line":10,"column":10,"nodeType":"211","messageId":"212","endLine":10,"endColumn":20},{"ruleId":"209","severity":1,"message":"229","line":13,"column":7,"nodeType":"211","messageId":"212","endLine":13,"endColumn":14},{"ruleId":"209","severity":1,"message":"230","line":1,"column":17,"nodeType":"211","messageId":"212","endLine":1,"endColumn":25},{"ruleId":"209","severity":1,"message":"227","line":10,"column":8,"nodeType":"211","messageId":"212","endLine":10,"endColumn":14},{"ruleId":"209","severity":1,"message":"228","line":12,"column":10,"nodeType":"211","messageId":"212","endLine":12,"endColumn":20},{"ruleId":"209","severity":1,"message":"229","line":16,"column":7,"nodeType":"211","messageId":"212","endLine":16,"endColumn":14},{"ruleId":"209","severity":1,"message":"231","line":17,"column":7,"nodeType":"211","messageId":"212","endLine":17,"endColumn":12},{"ruleId":"209","severity":1,"message":"214","line":10,"column":3,"nodeType":"211","messageId":"212","endLine":10,"endColumn":7},{"ruleId":"209","severity":1,"message":"232","line":27,"column":29,"nodeType":"211","messageId":"212","endLine":27,"endColumn":35},{"ruleId":"209","severity":1,"message":"233","line":5,"column":24,"nodeType":"211","messageId":"212","endLine":5,"endColumn":41},{"ruleId":"209","severity":1,"message":"234","line":6,"column":17,"nodeType":"211","messageId":"212","endLine":6,"endColumn":31},{"ruleId":"209","severity":1,"message":"235","line":7,"column":17,"nodeType":"211","messageId":"212","endLine":7,"endColumn":31},{"ruleId":"209","severity":1,"message":"236","line":9,"column":21,"nodeType":"211","messageId":"212","endLine":9,"endColumn":32},{"ruleId":"209","severity":1,"message":"237","line":10,"column":19,"nodeType":"211","messageId":"212","endLine":10,"endColumn":30},{"ruleId":"209","severity":1,"message":"238","line":11,"column":18,"nodeType":"211","messageId":"212","endLine":11,"endColumn":25},{"ruleId":"209","severity":1,"message":"239","line":25,"column":8,"nodeType":"211","messageId":"212","endLine":25,"endColumn":11},{"ruleId":"240","replacedBy":"241"},{"ruleId":"242","replacedBy":"243"},{"ruleId":"218","severity":1,"message":"219","line":133,"column":71,"nodeType":"220","endLine":133,"endColumn":129},{"ruleId":"218","severity":1,"message":"219","line":191,"column":71,"nodeType":"220","endLine":191,"endColumn":130},{"ruleId":"244","severity":1,"message":"245","line":325,"column":70,"nodeType":"246","messageId":"247","endLine":325,"endColumn":71},{"ruleId":"209","severity":1,"message":"230","line":1,"column":17,"nodeType":"211","messageId":"212","endLine":1,"endColumn":25},{"ruleId":"223","severity":1,"message":"248","line":33,"column":8,"nodeType":"225","endLine":33,"endColumn":10,"suggestions":"249"},"no-unused-vars","'Redirect' is defined but never used.","Identifier","unusedVar","'IconButton' is defined but never used.","'Link' is defined but never used.","'Icon' is defined but never used.","'useEffect' is defined but never used.","'Geocode' is defined but never used.","jsx-a11y/alt-text","img elements must have an alt prop, either with meaningful text, or an empty string for decorative images.","JSXOpeningElement","'OutlinedInput' is defined but never used.","'isSubscribed' is assigned a value but never used.","react-hooks/exhaustive-deps","React Hook useEffect has a missing dependency: 'signal'. Either include it or remove the dependency array.","ArrayExpression",["250"],"'Widget' is defined but never used.","'Typography' is defined but never used.","'classes' is assigned a value but never used.","'useState' is defined but never used.","'theme' is assigned a value but never used.","'Button' is defined but never used.","'NotificationsIcon' is defined but never used.","'TypographyIcon' is defined but never used.","'UIElementsIcon' is defined but never used.","'SupportIcon' is defined but never used.","'LibraryIcon' is defined but never used.","'FAQIcon' is defined but never used.","'Dot' is defined but never used.","no-native-reassign",["251"],"no-negated-in-lhs",["252"],"no-sequences","Unexpected use of comma operator.","SequenceExpression","unexpectedCommaExpression","React Hook useEffect has a missing dependency: 'amount'. Either include it or remove the dependency array.",["253"],{"desc":"254","fix":"255"},"no-global-assign","no-unsafe-negation",{"desc":"256","fix":"257"},"Update the dependencies array to be: [signal]",{"range":"258","text":"259"},"Update the dependencies array to be: [amount]",{"range":"260","text":"261"},[772,774],"[signal]",[1191,1193],"[amount]"]
+[
+    {
+        "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/index.js": "1",
+        "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/serviceWorker.js": "2",
+        "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/context/LayoutContext.js": "3",
+        "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/components/App.js": "4",
+        "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/context/UserContext.js": "5",
+        "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/themes/index.js": "6",
+        "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/components/Layout/Layout.js": "7",
+        "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/pages/error/Error.js": "8",
+        "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/pages/login/Login.js": "9",
+        "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/themes/default.js": "10",
+        "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/pages/usertrends/Usertrends.js": "11",
+        "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/pages/dashboard/mock.js": "12",
+        "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/pages/dashboard/components/Table/Table.js": "13",
+        "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/components/Widget/Widget.js": "14",
+        "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/components/PageTitle/PageTitle.js": "15",
+        "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/pages/dashboard/styles.js": "16",
+        "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/components/PageTitle/styles.js": "17",
+        "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/components/Widget/styles.js": "18",
+        "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/components/Wrappers/Wrappers.js": "19",
+        "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/pages/login/styles.js": "20",
+        "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/pages/error/styles.js": "21",
+        "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/components/Layout/styles.js": "22",
+        "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/pages/dashboard/Dashboard.js": "23",
+        "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/pages/settings/Settings.js": "24",
+        "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/pages/createads/Createads.js": "25",
+        "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/components/Header/Header.js": "26",
+        "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/components/Sidebar/Sidebar.js": "27",
+        "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/pages/dashboard/components/BigStat/BigStat.js": "28",
+        "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/components/Sidebar/components/Dot.js": "29",
+        "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/components/Sidebar/styles.js": "30",
+        "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/components/UserAvatar/UserAvatar.js": "31",
+        "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/components/Sidebar/components/SidebarLink/SidebarLink.js": "32",
+        "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/pages/createads/styles.js": "33",
+        "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/components/Header/styles.js": "34",
+        "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/components/Notification/Notification.js": "35",
+        "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/pages/dashboard/components/BigStat/styles.js": "36",
+        "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/components/Sidebar/components/SidebarLink/styles.js": "37",
+        "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/components/UserAvatar/styles.js": "38",
+        "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/components/Notification/styles.js": "39"
+    },
+    {
+        "size": 869,
+        "mtime": 1630878916940,
+        "results": "40",
+        "hashOfConfig": "41"
+    },
+    {
+        "size": 4948,
+        "mtime": 1630878916951,
+        "results": "42",
+        "hashOfConfig": "41"
+    },
+    {
+        "size": 1392,
+        "mtime": 1630878916940,
+        "results": "43",
+        "hashOfConfig": "41"
+    },
+    {
+        "size": 1711,
+        "mtime": 1630878916931,
+        "results": "44",
+        "hashOfConfig": "41"
+    },
+    {
+        "size": 1977,
+        "mtime": 1630878916940,
+        "results": "45",
+        "hashOfConfig": "41"
+    },
+    {
+        "size": 502,
+        "mtime": 1630878916952,
+        "results": "46",
+        "hashOfConfig": "41"
+    },
+    {
+        "size": 1689,
+        "mtime": 1630878916933,
+        "results": "47",
+        "hashOfConfig": "41"
+    },
+    {
+        "size": 1571,
+        "mtime": 1630878916943,
+        "results": "48",
+        "hashOfConfig": "41"
+    },
+    {
+        "size": 8585,
+        "mtime": 1630878916944,
+        "results": "49",
+        "hashOfConfig": "41"
+    },
+    {
+        "size": 2987,
+        "mtime": 1630878916952,
+        "results": "50",
+        "hashOfConfig": "41"
+    },
+    {
+        "size": 1474,
+        "mtime": 1630878916947,
+        "results": "51",
+        "hashOfConfig": "41"
+    },
+    {
+        "size": 4105,
+        "mtime": 1630878916942,
+        "results": "52",
+        "hashOfConfig": "41"
+    },
+    {
+        "size": 1274,
+        "mtime": 1630878916942,
+        "results": "53",
+        "hashOfConfig": "41"
+    },
+    {
+        "size": 2485,
+        "mtime": 1630878916938,
+        "results": "54",
+        "hashOfConfig": "41"
+    },
+    {
+        "size": 427,
+        "mtime": 1630878916934,
+        "results": "55",
+        "hashOfConfig": "41"
+    },
+    {
+        "size": 2870,
+        "mtime": 1630878916943,
+        "results": "56",
+        "hashOfConfig": "41"
+    },
+    {
+        "size": 462,
+        "mtime": 1630878916935,
+        "results": "57",
+        "hashOfConfig": "41"
+    },
+    {
+        "size": 969,
+        "mtime": 1630878916939,
+        "results": "58",
+        "hashOfConfig": "41"
+    },
+    {
+        "size": 3790,
+        "mtime": 1630878916939,
+        "results": "59",
+        "hashOfConfig": "41"
+    },
+    {
+        "size": 3133,
+        "mtime": 1630878916946,
+        "results": "60",
+        "hashOfConfig": "41"
+    },
+    {
+        "size": 1334,
+        "mtime": 1630878916944,
+        "results": "61",
+        "hashOfConfig": "41"
+    },
+    {
+        "size": 680,
+        "mtime": 1630878916933,
+        "results": "62",
+        "hashOfConfig": "41"
+    },
+    {
+        "size": 15659,
+        "mtime": 1630878916941,
+        "results": "63",
+        "hashOfConfig": "41"
+    },
+    {
+        "size": 1746,
+        "mtime": 1630878916946,
+        "results": "64",
+        "hashOfConfig": "41"
+    },
+    {
+        "size": 610,
+        "mtime": 1630878916941,
+        "results": "65",
+        "hashOfConfig": "41"
+    },
+    {
+        "size": 9897,
+        "mtime": 1630878916931,
+        "results": "66",
+        "hashOfConfig": "41"
+    },
+    {
+        "size": 3348,
+        "mtime": 1630878916935,
+        "results": "67",
+        "hashOfConfig": "41"
+    },
+    {
+        "size": 4039,
+        "mtime": 1630878916942,
+        "results": "68",
+        "hashOfConfig": "41"
+    },
+    {
+        "size": 862,
+        "mtime": 1630878916936,
+        "results": "69",
+        "hashOfConfig": "41"
+    },
+    {
+        "size": 1304,
+        "mtime": 1630878916937,
+        "results": "70",
+        "hashOfConfig": "41"
+    },
+    {
+        "size": 593,
+        "mtime": 1630878916938,
+        "results": "71",
+        "hashOfConfig": "41"
+    },
+    {
+        "size": 4411,
+        "mtime": 1630878916937,
+        "results": "72",
+        "hashOfConfig": "41"
+    },
+    {
+        "size": 374,
+        "mtime": 1630878916941,
+        "results": "73",
+        "hashOfConfig": "41"
+    },
+    {
+        "size": 3868,
+        "mtime": 1630878916932,
+        "results": "74",
+        "hashOfConfig": "41"
+    },
+    {
+        "size": 3296,
+        "mtime": 1630878916934,
+        "results": "75",
+        "hashOfConfig": "41"
+    },
+    {
+        "size": 1027,
+        "mtime": 1630878916942,
+        "results": "76",
+        "hashOfConfig": "41"
+    },
+    {
+        "size": 1412,
+        "mtime": 1630878916937,
+        "results": "77",
+        "hashOfConfig": "41"
+    },
+    {
+        "size": 276,
+        "mtime": 1630878916938,
+        "results": "78",
+        "hashOfConfig": "41"
+    },
+    {
+        "size": 993,
+        "mtime": 1630878916934,
+        "results": "79",
+        "hashOfConfig": "41"
+    },
+    {
+        "filePath": "80",
+        "messages": "81",
+        "errorCount": 0,
+        "fatalErrorCount": 0,
+        "warningCount": 0,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0
+    },
+    "143nd89",
+    {
+        "filePath": "82",
+        "messages": "83",
+        "errorCount": 0,
+        "fatalErrorCount": 0,
+        "warningCount": 0,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0
+    },
+    {
+        "filePath": "84",
+        "messages": "85",
+        "errorCount": 0,
+        "fatalErrorCount": 0,
+        "warningCount": 0,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0
+    },
+    {
+        "filePath": "86",
+        "messages": "87",
+        "errorCount": 0,
+        "fatalErrorCount": 0,
+        "warningCount": 0,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0
+    },
+    {
+        "filePath": "88",
+        "messages": "89",
+        "errorCount": 0,
+        "fatalErrorCount": 0,
+        "warningCount": 0,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0
+    },
+    {
+        "filePath": "90",
+        "messages": "91",
+        "errorCount": 0,
+        "fatalErrorCount": 0,
+        "warningCount": 0,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0
+    },
+    {
+        "filePath": "92",
+        "messages": "93",
+        "errorCount": 0,
+        "fatalErrorCount": 0,
+        "warningCount": 4,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0,
+        "source": null
+    },
+    {
+        "filePath": "94",
+        "messages": "95",
+        "errorCount": 0,
+        "fatalErrorCount": 0,
+        "warningCount": 0,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0
+    },
+    {
+        "filePath": "96",
+        "messages": "97",
+        "errorCount": 0,
+        "fatalErrorCount": 0,
+        "warningCount": 0,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0
+    },
+    {
+        "filePath": "98",
+        "messages": "99",
+        "errorCount": 0,
+        "fatalErrorCount": 0,
+        "warningCount": 0,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0
+    },
+    {
+        "filePath": "100",
+        "messages": "101",
+        "errorCount": 0,
+        "fatalErrorCount": 0,
+        "warningCount": 4,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0,
+        "source": null
+    },
+    {
+        "filePath": "102",
+        "messages": "103",
+        "errorCount": 0,
+        "fatalErrorCount": 0,
+        "warningCount": 0,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0
+    },
+    {
+        "filePath": "104",
+        "messages": "105",
+        "errorCount": 0,
+        "fatalErrorCount": 0,
+        "warningCount": 0,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0
+    },
+    {
+        "filePath": "106",
+        "messages": "107",
+        "errorCount": 0,
+        "fatalErrorCount": 0,
+        "warningCount": 0,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0
+    },
+    {
+        "filePath": "108",
+        "messages": "109",
+        "errorCount": 0,
+        "fatalErrorCount": 0,
+        "warningCount": 0,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0
+    },
+    {
+        "filePath": "110",
+        "messages": "111",
+        "errorCount": 0,
+        "fatalErrorCount": 0,
+        "warningCount": 0,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0
+    },
+    {
+        "filePath": "112",
+        "messages": "113",
+        "errorCount": 0,
+        "fatalErrorCount": 0,
+        "warningCount": 0,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0
+    },
+    {
+        "filePath": "114",
+        "messages": "115",
+        "errorCount": 0,
+        "fatalErrorCount": 0,
+        "warningCount": 0,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0
+    },
+    {
+        "filePath": "116",
+        "messages": "117",
+        "errorCount": 0,
+        "fatalErrorCount": 0,
+        "warningCount": 0,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0
+    },
+    {
+        "filePath": "118",
+        "messages": "119",
+        "errorCount": 0,
+        "fatalErrorCount": 0,
+        "warningCount": 0,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0
+    },
+    {
+        "filePath": "120",
+        "messages": "121",
+        "errorCount": 0,
+        "fatalErrorCount": 0,
+        "warningCount": 0,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0
+    },
+    {
+        "filePath": "122",
+        "messages": "123",
+        "errorCount": 0,
+        "fatalErrorCount": 0,
+        "warningCount": 0,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0
+    },
+    {
+        "filePath": "124",
+        "messages": "125",
+        "errorCount": 0,
+        "fatalErrorCount": 0,
+        "warningCount": 0,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0
+    },
+    {
+        "filePath": "126",
+        "messages": "127",
+        "errorCount": 0,
+        "fatalErrorCount": 0,
+        "warningCount": 2,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0,
+        "source": null
+    },
+    {
+        "filePath": "128",
+        "messages": "129",
+        "errorCount": 0,
+        "fatalErrorCount": 0,
+        "warningCount": 2,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0,
+        "source": null
+    },
+    {
+        "filePath": "130",
+        "messages": "131",
+        "errorCount": 0,
+        "fatalErrorCount": 0,
+        "warningCount": 2,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0,
+        "source": null
+    },
+    {
+        "filePath": "132",
+        "messages": "133",
+        "errorCount": 0,
+        "fatalErrorCount": 0,
+        "warningCount": 7,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0,
+        "source": null
+    },
+    {
+        "filePath": "134",
+        "messages": "135",
+        "errorCount": 0,
+        "fatalErrorCount": 0,
+        "warningCount": 0,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0
+    },
+    {
+        "filePath": "136",
+        "messages": "137",
+        "errorCount": 0,
+        "fatalErrorCount": 0,
+        "warningCount": 0,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0
+    },
+    {
+        "filePath": "138",
+        "messages": "139",
+        "errorCount": 0,
+        "fatalErrorCount": 0,
+        "warningCount": 0,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0
+    },
+    {
+        "filePath": "140",
+        "messages": "141",
+        "errorCount": 0,
+        "fatalErrorCount": 0,
+        "warningCount": 0,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0
+    },
+    {
+        "filePath": "142",
+        "messages": "143",
+        "errorCount": 0,
+        "fatalErrorCount": 0,
+        "warningCount": 0,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0
+    },
+    {
+        "filePath": "144",
+        "messages": "145",
+        "errorCount": 0,
+        "fatalErrorCount": 0,
+        "warningCount": 0,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0
+    },
+    {
+        "filePath": "146",
+        "messages": "147",
+        "errorCount": 0,
+        "fatalErrorCount": 0,
+        "warningCount": 0,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0
+    },
+    {
+        "filePath": "148",
+        "messages": "149",
+        "errorCount": 0,
+        "fatalErrorCount": 0,
+        "warningCount": 0,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0
+    },
+    {
+        "filePath": "150",
+        "messages": "151",
+        "errorCount": 0,
+        "fatalErrorCount": 0,
+        "warningCount": 0,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0
+    },
+    {
+        "filePath": "152",
+        "messages": "153",
+        "errorCount": 0,
+        "fatalErrorCount": 0,
+        "warningCount": 0,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0
+    },
+    {
+        "filePath": "154",
+        "messages": "155",
+        "errorCount": 0,
+        "fatalErrorCount": 0,
+        "warningCount": 0,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0
+    },
+    {
+        "filePath": "156",
+        "messages": "157",
+        "errorCount": 0,
+        "fatalErrorCount": 0,
+        "warningCount": 0,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0
+    },
+    "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/index.js",
+    [],
+    "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/serviceWorker.js",
+    [],
+    "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/context/LayoutContext.js",
+    [],
+    "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/components/App.js",
+    [],
+    "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/context/UserContext.js",
+    [],
+    "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/themes/index.js",
+    [],
+    "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/components/Layout/Layout.js",
+    [
+        "158",
+        "159",
+        "160",
+        "161"
+    ],
+    "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/pages/error/Error.js",
+    [],
+    "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/pages/login/Login.js",
+    [],
+    "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/themes/default.js",
+    [],
+    "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/pages/usertrends/Usertrends.js",
+    [
+        "162",
+        "163",
+        "164",
+        "165"
+    ],
+    "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/pages/dashboard/mock.js",
+    [],
+    "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/pages/dashboard/components/Table/Table.js",
+    [],
+    "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/components/Widget/Widget.js",
+    [],
+    "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/components/PageTitle/PageTitle.js",
+    [],
+    "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/pages/dashboard/styles.js",
+    [],
+    "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/components/PageTitle/styles.js",
+    [],
+    "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/components/Widget/styles.js",
+    [],
+    "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/components/Wrappers/Wrappers.js",
+    [],
+    "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/pages/login/styles.js",
+    [],
+    "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/pages/error/styles.js",
+    [],
+    "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/components/Layout/styles.js",
+    [],
+    "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/pages/dashboard/Dashboard.js",
+    [],
+    "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/pages/settings/Settings.js",
+    [
+        "166",
+        "167"
+    ],
+    "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/pages/createads/Createads.js",
+    [
+        "168",
+        "169"
+    ],
+    "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/components/Header/Header.js",
+    [
+        "170",
+        "171"
+    ],
+    "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/components/Sidebar/Sidebar.js",
+    [
+        "172",
+        "173",
+        "174",
+        "175",
+        "176",
+        "177",
+        "178"
+    ],
+    "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/pages/dashboard/components/BigStat/BigStat.js",
+    [],
+    "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/components/Sidebar/components/Dot.js",
+    [],
+    "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/components/Sidebar/styles.js",
+    [],
+    "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/components/UserAvatar/UserAvatar.js",
+    [],
+    "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/components/Sidebar/components/SidebarLink/SidebarLink.js",
+    [],
+    "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/pages/createads/styles.js",
+    [],
+    "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/components/Header/styles.js",
+    [],
+    "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/components/Notification/Notification.js",
+    [],
+    "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/pages/dashboard/components/BigStat/styles.js",
+    [],
+    "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/components/Sidebar/components/SidebarLink/styles.js",
+    [],
+    "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/components/UserAvatar/styles.js",
+    [],
+    "/Users/arshad/WebstormProjects/Harmony/frontend/BusinessAppHarmony/src/components/Notification/styles.js",
+    [],
+    {
+        "ruleId": "179",
+        "severity": 1,
+        "message": "180",
+        "line": 5,
+        "column": 3,
+        "nodeType": "181",
+        "messageId": "182",
+        "endLine": 5,
+        "endColumn": 11
+    },
+    {
+        "ruleId": "179",
+        "severity": 1,
+        "message": "183",
+        "line": 9,
+        "column": 14,
+        "nodeType": "181",
+        "messageId": "182",
+        "endLine": 9,
+        "endColumn": 24
+    },
+    {
+        "ruleId": "179",
+        "severity": 1,
+        "message": "184",
+        "line": 9,
+        "column": 26,
+        "nodeType": "181",
+        "messageId": "182",
+        "endLine": 9,
+        "endColumn": 30
+    },
+    {
+        "ruleId": "179",
+        "severity": 1,
+        "message": "185",
+        "line": 10,
+        "column": 8,
+        "nodeType": "181",
+        "messageId": "182",
+        "endLine": 10,
+        "endColumn": 12
+    },
+    {
+        "ruleId": "179",
+        "severity": 1,
+        "message": "186",
+        "line": 8,
+        "column": 8,
+        "nodeType": "181",
+        "messageId": "182",
+        "endLine": 8,
+        "endColumn": 14
+    },
+    {
+        "ruleId": "179",
+        "severity": 1,
+        "message": "187",
+        "line": 9,
+        "column": 8,
+        "nodeType": "181",
+        "messageId": "182",
+        "endLine": 9,
+        "endColumn": 13
+    },
+    {
+        "ruleId": "179",
+        "severity": 1,
+        "message": "188",
+        "line": 12,
+        "column": 8,
+        "nodeType": "181",
+        "messageId": "182",
+        "endLine": 12,
+        "endColumn": 12
+    },
+    {
+        "ruleId": "179",
+        "severity": 1,
+        "message": "189",
+        "line": 41,
+        "column": 9,
+        "nodeType": "181",
+        "messageId": "182",
+        "endLine": 41,
+        "endColumn": 16
+    },
+    {
+        "ruleId": "179",
+        "severity": 1,
+        "message": "190",
+        "line": 12,
+        "column": 9,
+        "nodeType": "181",
+        "messageId": "182",
+        "endLine": 12,
+        "endColumn": 21
+    },
+    {
+        "ruleId": "191",
+        "severity": 1,
+        "message": "192",
+        "line": 26,
+        "column": 6,
+        "nodeType": "193",
+        "endLine": 26,
+        "endColumn": 8,
+        "suggestions": "194"
+    },
+    {
+        "ruleId": "179",
+        "severity": 1,
+        "message": "195",
+        "line": 10,
+        "column": 10,
+        "nodeType": "181",
+        "messageId": "182",
+        "endLine": 10,
+        "endColumn": 20
+    },
+    {
+        "ruleId": "179",
+        "severity": 1,
+        "message": "189",
+        "line": 13,
+        "column": 7,
+        "nodeType": "181",
+        "messageId": "182",
+        "endLine": 13,
+        "endColumn": 14
+    },
+    {
+        "ruleId": "179",
+        "severity": 1,
+        "message": "184",
+        "line": 10,
+        "column": 3,
+        "nodeType": "181",
+        "messageId": "182",
+        "endLine": 10,
+        "endColumn": 7
+    },
+    {
+        "ruleId": "179",
+        "severity": 1,
+        "message": "196",
+        "line": 27,
+        "column": 29,
+        "nodeType": "181",
+        "messageId": "182",
+        "endLine": 27,
+        "endColumn": 35
+    },
+    {
+        "ruleId": "179",
+        "severity": 1,
+        "message": "197",
+        "line": 5,
+        "column": 24,
+        "nodeType": "181",
+        "messageId": "182",
+        "endLine": 5,
+        "endColumn": 41
+    },
+    {
+        "ruleId": "179",
+        "severity": 1,
+        "message": "198",
+        "line": 6,
+        "column": 17,
+        "nodeType": "181",
+        "messageId": "182",
+        "endLine": 6,
+        "endColumn": 31
+    },
+    {
+        "ruleId": "179",
+        "severity": 1,
+        "message": "199",
+        "line": 7,
+        "column": 17,
+        "nodeType": "181",
+        "messageId": "182",
+        "endLine": 7,
+        "endColumn": 31
+    },
+    {
+        "ruleId": "179",
+        "severity": 1,
+        "message": "200",
+        "line": 9,
+        "column": 21,
+        "nodeType": "181",
+        "messageId": "182",
+        "endLine": 9,
+        "endColumn": 32
+    },
+    {
+        "ruleId": "179",
+        "severity": 1,
+        "message": "201",
+        "line": 10,
+        "column": 19,
+        "nodeType": "181",
+        "messageId": "182",
+        "endLine": 10,
+        "endColumn": 30
+    },
+    {
+        "ruleId": "179",
+        "severity": 1,
+        "message": "202",
+        "line": 11,
+        "column": 18,
+        "nodeType": "181",
+        "messageId": "182",
+        "endLine": 11,
+        "endColumn": 25
+    },
+    {
+        "ruleId": "179",
+        "severity": 1,
+        "message": "203",
+        "line": 25,
+        "column": 8,
+        "nodeType": "181",
+        "messageId": "182",
+        "endLine": 25,
+        "endColumn": 11
+    },
+    "no-unused-vars",
+    "'Redirect' is defined but never used.",
+    "Identifier",
+    "unusedVar",
+    "'IconButton' is defined but never used.",
+    "'Link' is defined but never used.",
+    "'Icon' is defined but never used.",
+    "'Widget' is defined but never used.",
+    "'Table' is defined but never used.",
+    "'mock' is defined but never used.",
+    "'classes' is assigned a value but never used.",
+    "'isSubscribed' is assigned a value but never used.",
+    "react-hooks/exhaustive-deps",
+    "React Hook useEffect has a missing dependency: 'signal'. Either include it or remove the dependency array.",
+    "ArrayExpression",
+    [
+        "204"
+    ],
+    "'Typography' is defined but never used.",
+    "'Button' is defined but never used.",
+    "'NotificationsIcon' is defined but never used.",
+    "'TypographyIcon' is defined but never used.",
+    "'UIElementsIcon' is defined but never used.",
+    "'SupportIcon' is defined but never used.",
+    "'LibraryIcon' is defined but never used.",
+    "'FAQIcon' is defined but never used.",
+    "'Dot' is defined but never used.",
+    {
+        "desc": "205",
+        "fix": "206"
+    },
+    "Update the dependencies array to be: [signal]",
+    {
+        "range": "207",
+        "text": "208"
+    },
+    [
+        747,
+        749
+    ],
+    "[signal]"
+]
