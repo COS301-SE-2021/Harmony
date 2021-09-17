@@ -32,6 +32,8 @@ def finalise_advert(event, context):
 
     num_locations = len(locations)
     num_audience = len(audience)
+    print(num_audience)
+    print(num_locations)
     price = calculate_cost(num_locations, num_audience, ad_time_period)
     print(price)
 
@@ -69,6 +71,6 @@ This data must be written to the database
 
 
 def calculate_cost(num_locations, num_audience, time_limit):
-    cost = time_limit + (1 + num_locations * time_limit) + (1 * num_audience * time_limit)
+    cost = time_limit + (1 * num_locations * time_limit) + (1 * num_audience * time_limit)
 
     return cost
