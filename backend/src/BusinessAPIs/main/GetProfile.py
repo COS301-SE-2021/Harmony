@@ -26,5 +26,5 @@ def get_profile(event, context):
 
     return {
         "StatusCode": 200,
-        "UserData": business_user_data
+        "UserData": business_user_data["Item"]
     }
