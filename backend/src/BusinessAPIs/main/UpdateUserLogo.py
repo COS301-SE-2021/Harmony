@@ -39,7 +39,17 @@ def update_user_logo(event, context):
         ReturnValues="UPDATED_NEW"
 
     )
-    return {"StatusCode": 200}
+
+    """Gets the business user data for the response"""
+    try:
+        business_user_data = business_users_table.get_item(Key={'BID': bid})
+    except ClientError as e:
+        print(e.response['Error']['Message'])
+        return {"StatusCode": 400}
+
+    return {"StatusCode": 200,
+            "Data": business_user_data["Item"]
+            }
 
 
 """
