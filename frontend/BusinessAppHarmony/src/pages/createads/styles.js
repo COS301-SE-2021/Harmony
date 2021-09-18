@@ -44,10 +44,11 @@ export default makeStyles(theme => ({
     display: "flex"
   },
   formElementsPairingTag: {
-    marginTop: 20,
-    marginBottom: 30,
+    marginTop: 70,
+    marginBottom: 10,
     display: "flex",
     width: '60%',
+    position: "relative"
   },
   tagName: {
     float: 'left',
