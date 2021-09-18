@@ -28,6 +28,13 @@ def get_statement(event, context):
     statement_time_period = event['TimePeriod']
     statement_duration = 30
 
+    """Gets the business user data using the business id"""
+    try:
+        business_user_data = business_user_table.get_item(Key={'BID': bid})
+    except ClientError as e:
+        print(e.response['Error']['Message'])
+        return {"StatusCode": 400}
+
     """
     Adjusts duration of statement based on the input set.
     Default is 1 Month/30 days.
@@ -63,22 +70,13 @@ def get_statement(event, context):
             adverts.append(i)
 
     sort_response = sortbynew(adverts)
-    total_cost = calculate_total_cost_ads(adverts)
 
     return {
         "StatusCode": 200,
         "AdvertData": sort_response,
-        "TotalCost": total_cost
+        "OutsandingAmount": business_user_data["Item"]["OutstandingAmount"]
 
     }
-
-
-def calculate_total_cost_ads(response):
-    total_cost = 0
-    for i in response:
-        total_cost = total_cost + i['Price']
-
-    return total_cost
 
 
 """
