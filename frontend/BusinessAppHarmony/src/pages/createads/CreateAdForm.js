@@ -100,7 +100,7 @@ function CreateAdForm(...props) {
             FoodImage: foodImage.split(',')[1],
             DrinkImage: drinkImage.split(',')[1],
         }
-        console.log("request to submit " + JSON.stringify(request))
+        // console.log("request to submit " + JSON.stringify(request))
         fetch('https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/createbusinesspairing', {
             headers: {
                 'Accept': 'application/json',
@@ -111,6 +111,7 @@ function CreateAdForm(...props) {
         })
             .then(response => response.json())
             .then(data => console.log(data))
+            .then(alert("Advert for " + vals.FoodName + " and " + vals.DrinkName + " was created successfully."))
     }
 
     return (
