@@ -2,11 +2,12 @@ import PageTitle from "../../components/PageTitle";
 import React, {useEffect, useState} from "react";
 import MUIDataTable from "mui-datatables";
 import axios from 'axios';
-import {Grid} from "@material-ui/core";
+import {Button, Grid} from "@material-ui/core";
 import  { makeStyles } from "@material-ui/core";
 import {FormSubmit_ImageUrl} from "../../components/Forms/FormSubmit_ImageUrl";
 import {FormSubmit_NewTag} from "../../components/Forms/FormSubmit_NewTag";
 import {FormSubmit_Iterations} from "../../components/Forms/FormSubmit_Iterations";
+import {FormSubmit_PublishIterations} from "../../components/Forms/FormSubmit_PublishIterations";
 
 
 const useStyles = makeStyles({
@@ -17,8 +18,13 @@ const useStyles = makeStyles({
   }
 })
 
-function refreshPage() {
-  window.location.reload(false);
+// function refreshPage() {
+//   window.location.reload(true);
+// }
+function callApi() {
+  fetch('https://7q0027151j.execute-api.eu-west-1.amazonaws.com/dev/train', { method: 'GET' })
+      .then(data => data.json()) // Parsing the data into a JavaScript object
+      .then(json => alert(JSON.stringify(json))) // Displaying the stringified data in an alert popup
 }
 export default function DataTable() {
   const classes = useStyles()
@@ -32,11 +38,11 @@ export default function DataTable() {
   // Get Iterations Table
   useEffect(() => {
     let isSubscribed = true;
-    axios.get(`https://mocki.io/v1/37248929-ce35-49cc-a7d1-b2ae7e4cecb3`, {
+    axios.get(`https://7q0027151j.execute-api.eu-west-1.amazonaws.com/dev/getiterations`, {
       cancelToken: signal.token,
     })
         .then(res => {
-          const posts1 = res.data;
+          const posts1 = res.data.data;
           setPost1(posts1);
         }).catch(err => {
       console.log(err);
@@ -48,10 +54,11 @@ export default function DataTable() {
   }, []);
 
   const columns1 = [
+    {label: "Iteration Name", name: "name" },
     {label: "Iteration ID", name: "id" },
-    {label: "Published Name", name:"publishName" },
     {label:"Status of Iteration", name:"status" },
-    {label:"Date of Training", name:"trainedAt" }
+    {label:"Date of Training", name:"trainedAt" },
+    {label: "Published Name", name:"publishName" }
   ];
 
 
@@ -77,8 +84,16 @@ export default function DataTable() {
 
   return (
       <>
-        <PageTitle title="Train AI"/>
-        <button onClick={refreshPage}>Click to reload!</button>
+
+        <PageTitle title="Train AI"
+        //            button={<Button
+        //     variant="contained"
+        //     size="medium"
+        //     color="secondary"
+        //     onClick={refreshPage}>
+        //   Refresh
+        // </Button>}
+        />
         <Grid container spacing={4}>
           <Grid item xs={6}>
             <MUIDataTable
@@ -87,16 +102,35 @@ export default function DataTable() {
                 columns={columns1}
                 options={options}
             />
+
+            <Button
+                variant="contained"
+                size="large"
+                color="secondary"
+                onClick={callApi}>
+
+              Train New Iteration
+            </Button>
+          </Grid>
+          <Grid item xs={6}>
+            <div className="App">
+              <FormSubmit_PublishIterations
+                  formName="Publish Iteration"
+                  formDescription="The iteration will no longer be available to be used for prediction"
+              />
+            </div>
           </Grid>
 
           <Grid item xs={6}>
             <div className="App">
               <FormSubmit_Iterations
-                  formName="Iteration Publish or Unpublish"
-                  formDescription="Using TagID and Image URL from the Feedback, You can add images to AI DataSet."
+                  formName="Unpublish Iteration"
+                  formDescription="The iteration will no longer be available for prediction"
               />
             </div>
           </Grid>
+
+
         </Grid>
       </>
   );
