@@ -95,3 +95,19 @@ def add_image_to_s3(base64image, imageid):
     # get object url
     object_url = "https://%s.s3-%s.amazonaws.com/%s" % (bucket_name, location, file_name_with_extension)
     return object_url
+
+
+"""
+This function calculates the cost of an advert by taking in the parameters we decided to use.
+    1) Number of locations
+    2) Number of audiences targeted.
+    3)Time limit (in days)
+
+This data must be written to the database
+"""
+
+
+def calculate_cost(num_locations, time_limit):
+    cost = time_limit + (2 * num_locations * time_limit)
+
+    return cost
