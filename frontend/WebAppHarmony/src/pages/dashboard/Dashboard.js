@@ -356,9 +356,10 @@ export default function Dashboard(props) {
             </div>
           </Widget>
         </Grid> */}
-        <Grid item lg={3} md={4} sm={6} xs={12}>
-          <Widget title="Revenue Breakdown" upperTitle className={classes.card}>
+        {/*  <Grid item lg={3} md={4} sm={6} xs={12}>
+           <Widget title="Revenue Breakdown" upperTitle className={classes.card}>
             <Grid container spacing={2}>
+              }
               <Grid item xs={6}>
                 <ResponsiveContainer width="100%" height={144}>
                   <PieChart>
@@ -378,6 +379,7 @@ export default function Dashboard(props) {
                   </PieChart>
                 </ResponsiveContainer>
               </Grid>
+
               <Grid item xs={6}>
                 <div className={classes.pieChartLegendWrapper}>
                   {PieChartData.map(({ name, value, color }, index) => (
@@ -395,7 +397,8 @@ export default function Dashboard(props) {
               </Grid>
             </Grid>
           </Widget>
-        </Grid>
+        </Grid>*/}
+        {/*}
         <Grid item xs={12}>
           <Widget
             bodyClass={classes.mainChartBody}
@@ -496,9 +499,13 @@ export default function Dashboard(props) {
             </ResponsiveContainer>
           </Widget>
         </Grid>
+        */}
+        {/*
         <Grid item sm={6} xs={12}>
           <BigStat title="Food Flavour Statistics" color="#C41ED4" />
         </Grid>
+        */}
+
         <Grid item sm={6} xs={12}>
           <BigStat title="Food Flavour Statistics" color="#C41ED4" />
         </Grid>
@@ -520,6 +527,7 @@ export default function Dashboard(props) {
           <Table data={mostFavouritedPairings} />
         </Widget>
       </Grid>
+
     </>
   );
 }
