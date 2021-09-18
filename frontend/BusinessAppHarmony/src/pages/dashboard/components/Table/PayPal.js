@@ -14,7 +14,7 @@ export default function PayPal(amount) {
                             description: "Settlement of account at Harmony Business",
                             amount: {
                                 value: amount.amount,
-                                currency: "MXN"
+                                currency: "USD"
                             }
                         }
                     ]
@@ -22,7 +22,20 @@ export default function PayPal(amount) {
             },
             onApprove: async (data, actions) => {
                 const order = await actions.order.capture()
-                console.log(order)
+                console.log(order);
+                console.log(amount.amount);
+
+                // fetch('https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/receivepayment', {
+                //     headers: {
+                //         'Accept': 'application/json',
+                //         'Content-Type': 'application/json'
+                //     },
+                //     method: "POST",
+                //     body: JSON.stringify({ BID: "b4", Amount: amount.amount })
+                // })
+                //     .then(response => response.json())
+                //     .then(data => console.log(data))
+                //     .then(alert("Payment completed successfully."))
                 //do an api call that updates the statement total
             },
             onError: (err) => {

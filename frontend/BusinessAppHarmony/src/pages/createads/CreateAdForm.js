@@ -33,7 +33,6 @@ function CreateAdForm(...props) {
     const mockResponse = {
         statusCode: 200,
         locations: ["Durban North", "Pretoria East", "Westville"]
-
     }
 
     const handleClear = (values) => {
@@ -426,7 +425,7 @@ function CreateAdForm(...props) {
                                             onSearch={function noRefCheck() { }}
                                             onSelect={(selectedList) => (values.TimePeriod = selectedList)}
                                             id="TimePeriod" name="TimePeriod" onChange={handleChange} value={values.TimePeriod}
-                                            options={['One Day', 'One Month', 'Three Months', 'Six Months', 'One Year']}
+                                            options={['One Day', 'One Week', 'One Month', 'Three Months', 'Six Months', 'One Year']}
                                         />
                                     </div>
                                 </div>

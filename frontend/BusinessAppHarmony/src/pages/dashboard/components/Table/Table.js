@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   Grid,
   Table,
@@ -28,6 +28,8 @@ const states = {
 export default function TableComponent({ data }) {
   const classes = useStyles();
   const [checkout, setCheckout] = useState(false);
+  const [result, setResult] = useState({ StatusCode: 200, AdvertData: [], TotalCost: 0 });
+
   var keys = Object.keys(data.statements[0]).map(i => i.toUpperCase());
   keys.shift(); // delete "id" key
   /**to filter the data */
@@ -35,6 +37,30 @@ export default function TableComponent({ data }) {
   const handleChange = (event) => {
     setMainChartState(event.target.value);
   };
+
+  useEffect(() => {
+    // fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/getprofile", { BID: "b1" })
+    fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/getstatement", {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: JSON.stringify({ BID: "b4", TimePeriod: "Month" })
+    })
+      .then(res => res.json())
+      .then(
+        (result) => {
+          console.log(result);
+          setResult(result);
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+        }
+      )
+  }, [])
 
   /** reference to allow an icon to click the csv button */
   const csvRef = useRef();
@@ -90,7 +116,7 @@ export default function TableComponent({ data }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.statements.map(({ id, name, date, expiring, location, audience, status, cost }) => (
+            {/* {data.statements.map(({ id, name, date, expiring, location, audience, status, cost }) => (
               <TableRow key={id}>
                 <TableCell className="pl-3 fw-normal">{name}</TableCell>
                 <TableCell>{date}</TableCell>
@@ -101,6 +127,20 @@ export default function TableComponent({ data }) {
                   <Chip label={status} classes={{ root: classes[states[status.toLowerCase()]] }} />
                 </TableCell>
                 <TableCell style={{ textAlign: "right" }}>{cost}</TableCell>
+
+              </TableRow>
+            ))} */}
+            {result.AdvertData.map(({ BPID, FoodName, DateCreated, DaysRemaining, Locations, audience, Status, Price }) => (
+              <TableRow key={BPID}>
+                <TableCell className="pl-3 fw-normal">{FoodName}</TableCell>
+                <TableCell>{DateCreated}</TableCell>
+                <TableCell>{DaysRemaining}</TableCell>
+                <TableCell>{Locations.map((item) => (item))}</TableCell>
+                <TableCell>{audience}</TableCell>
+                <TableCell>
+                  <Chip label={Status} classes={{ root: classes[states[Status.toLowerCase()]] }} />
+                </TableCell>
+                <TableCell style={{ textAlign: "right" }}>{Price}</TableCell>
 
               </TableRow>
             ))}
@@ -115,7 +155,7 @@ export default function TableComponent({ data }) {
           </div>
           <div className={classes.floatLeft}>
             <Typography size="xl" weight="bold">
-              R{data.total}
+              R{result.TotalCost}
             </Typography>
           </div>
           <div style={{ clear: "both" }}></div>
