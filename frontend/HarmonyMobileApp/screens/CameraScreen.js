@@ -262,13 +262,6 @@ export default function CameraScreen({ navigation }) {
         disabled={!isCameraReady}
       />
 
-      <MaterialCommunityIcons
-        name="barcode-scan"
-        size={40}
-        // onPress={handleGridMode} //Change to handleBarcode
-        disabled={!isCameraReady}
-        style={styles.toolbarIcon}
-      />
     </TouchableOpacity>
   );
 
