@@ -57,6 +57,7 @@ def create_business_pairing(event, context):
 
     food_image_link = add_image_to_s3(event["FoodImage"], generate_id1)
     drink_image_link = add_image_to_s3(event["DrinkImage"], generate_id2)
+    cost = calculate_cost(len(locations), time_period)
 
     # write data for new pairing to the DynamoDB table using the object we instantiated and save response in a variable
     table.put_item(
@@ -74,7 +75,8 @@ def create_business_pairing(event, context):
             'Locations': locations,
             'TimeLimit': time_period,
             'Status': "Pending",
-            'DateCreated': str(today)
+            'DateCreated': str(today),
+            'Price': cost
         })
 
     return {"StatusCode": 200}
