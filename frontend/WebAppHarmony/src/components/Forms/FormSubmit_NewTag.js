@@ -33,17 +33,15 @@ export function FormSubmit_NewTag(props) {
     const [formInput, setFormInput] = useReducer(
         (state, newState) => ({ ...state, ...newState }),
         {
-            tagname: "",
-            type: ""
+            TagName: ""
         }
     );
 
     const handleSubmit = evt => {
         evt.preventDefault();
+        let data =  formInput ;
 
-        let data = { formInput };
-
-        fetch("https://pointy-gauge.glitch.me/api/form", {
+        fetch(" https://7q0027151j.execute-api.eu-west-1.amazonaws.com/dev/createtags", {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
@@ -77,19 +75,20 @@ export function FormSubmit_NewTag(props) {
                     <TextField
                         label="New Tag"
                         id="margin-normal"
-                        name="tagname"
-                        defaultValue={formInput.tagname}
+                        name="TagName"
+                        defaultValue={formInput.TagName}
                         className={classes.textField}
                         helperText="Enter new Tag "
                         onChange={handleInput}
                     />
+
                     <TextField
-                        label="Type of Tag"
+                        label="Tag Type"
                         id="margin-normal"
-                        name="type"
-                        defaultValue={formInput.type}
+                        name="Type"
+                        defaultValue={formInput.Type}
                         className={classes.textField}
-                        helperText="Normal or Negative"
+                        helperText="Enter Regular or Negative"
                         onChange={handleInput}
                     />
                     <Button
