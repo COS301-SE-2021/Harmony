@@ -7,6 +7,7 @@ import { AntDesign } from "@expo/vector-icons";
 import styles from "../styles";
 import { AppToast } from "../Components/AppToast";
 // make api call with dataSet.PID
+import { Auth } from "aws-amplify";
 export default function IconsBar({
     dataSet,
     upVoteVal,
@@ -37,25 +38,32 @@ export default function IconsBar({
     const [isErrorAlertVisible, setErrorAlertVisible] = useState(false);
     const [modalMessage, setModalMessage] = useState("Oops, something went wrong.");
     useEffect(() => {
-        if (load) {
-            setLoad(false);
+        async function fetchData() {
+            let user = await Auth.currentAuthenticatedUser();
+            const { username } = user;
 
-            if (dataSet.isUpvoted == "True") {
-                setUpIconColor("#80CB41");
-                setUpIconOutline("upcircle");
-                setUpIconChecked("Checked");
+            if (load) {
+                setLoad(false);
+
+                if (dataSet.isUpvoted == "True") {
+                    setUpIconColor("#80CB41");
+                    setUpIconOutline("upcircle");
+                    setUpIconChecked("Checked");
+                }
+                if (dataSet.isDownvoted == "True") {
+                    setDownIconColor("#FF2727");
+                    setDownIconOutline("downcircle");
+                    setDownIconChecked("Checked");
+                }
+                if (dataSet.isFavourited == "True") {
+                    setFavouriteIconColor("#FF2763");
+                    setFavouriteIconOutline("heart");
+                    setFavouriteIconChecked("Checked");
+                }
             }
-            if (dataSet.isDownvoted == "True") {
-                setDownIconColor("#FF2727");
-                setDownIconOutline("downcircle");
-                setDownIconChecked("Checked");
-            }
-            if (dataSet.isFavourited == "True") {
-                setFavouriteIconColor("#FF2763");
-                setFavouriteIconOutline("heart");
-                setFavouriteIconChecked("Checked");
-            }
-        }
+
+        };
+        fetchData();
     }, []);
 
     useEffect(() => {
@@ -72,28 +80,33 @@ export default function IconsBar({
 
     //Upvotes or Downvotes depending on the button clicked
     const vote = async (VoteType, iconChecked) => {
-        await fetch(voteURL, {
-            method: "POST",
-            body: JSON.stringify({
-                UID: "u1",
-                PID: dataSet.PID,
-                VoteType: VoteType,
-                IsChecked: iconChecked,
-            }),
-        })
-            .then((response) => response.json())
-            .then((json) => {
-                if (VoteType == "Downvotes") {
-                    if (json.Downvotes) {
-                        setDownvote(json.Downvotes);
-                    }
-                } else if (VoteType == "Upvotes") {
-                    if (json.Upvotes) {
-                        setUpvote(json.Upvotes);
-                    }
-                }
+        async function fetchData() {
+            let user = await Auth.currentAuthenticatedUser();
+            const { username } = user;
+            await fetch(voteURL, {
+                method: "POST",
+                body: JSON.stringify({
+                    UID: username,
+                    PID: dataSet.PID,
+                    VoteType: VoteType,
+                    IsChecked: iconChecked,
+                }),
             })
-            .catch((error) => alert(error));
+                .then((response) => response.json())
+                .then((json) => {
+                    if (VoteType == "Downvotes") {
+                        if (json.Downvotes) {
+                            setDownvote(json.Downvotes);
+                        }
+                    } else if (VoteType == "Upvotes") {
+                        if (json.Upvotes) {
+                            setUpvote(json.Upvotes);
+                        }
+                    }
+                })
+                .catch((error) => alert(error));
+        };
+        fetchData();
     };
 
     useEffect(() => {
@@ -106,16 +119,21 @@ export default function IconsBar({
 
     //Adds and removes pairings from user favourites
     const addRemoveFavourites = async (URL) => {
-        fetch(URL, {
-            method: "POST",
-            body: JSON.stringify({
-                UID: "u1",
-                PID: dataSet.PID,
-            }),
-        })
-            .then((response) => response.json())
-            .catch((error) => alert(error));
+        async function fetchData() {
+            let user = await Auth.currentAuthenticatedUser();
+            const { username } = user;
 
+            fetch(URL, {
+                method: "POST",
+                body: JSON.stringify({
+                    UID: username,
+                    PID: dataSet.PID,
+                }),
+            })
+                .then((response) => response.json())
+                .catch((error) => alert(error));
+        };
+        fetchData();
     };
 
     const uncheckDownvote = () => {
@@ -186,21 +204,25 @@ export default function IconsBar({
     };
 
     const handleDeleteIconPress = async () => {
+        async function fetchData() {
+            let user = await Auth.currentAuthenticatedUser();
+            const { username } = user;
+            console.log("Deleting...")
 
-        console.log("Deleting...")
-
-        await fetch(deltePairingURL, {
-            method: "POST",
-            body: JSON.stringify({
-                UID: "u1",
-                PID: dataSet.PID,
-            }),
-        })
-            .then((response) => response.json())
-            .then((json) => {
-                handleResponse(json)
+            await fetch(deltePairingURL, {
+                method: "POST",
+                body: JSON.stringify({
+                    UID: username,
+                    PID: dataSet.PID,
+                }),
             })
-            .catch((error) => alert(error));
+                .then((response) => response.json())
+                .then((json) => {
+                    handleResponse(json)
+                })
+                .catch((error) => alert(error));
+        };
+        fetchData();
     };
 
     const confirmPairingDelete = () => {
