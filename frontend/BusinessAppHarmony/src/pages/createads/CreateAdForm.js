@@ -87,17 +87,30 @@ function CreateAdForm(...props) {
     const handleSubmit = (vals) => {
 
         // console.log("submitted handle " + JSON.stringify(vals))
-        // var request = {
-        //     "ItemName": vals.ItemName,
-        //     "ItemDescription": vals.ItemDescription,
-        //     "ItemTags": vals.ItemTags,
-        //     "FoodOrDrink": FoodOrDrink,
-        //     "Image": btoa(img)
-        // }
-        // // console.log("request to submit " + JSON.stringify(request))
-        // fetch('https://w3lfp6r6f7.execute-api.eu-west-1.amazonaws.com/dev/additem', request)
-        //     .then(response => response.json())
-        //     .then(data => console.log(data))
+        var request = {
+            FoodName: vals.FoodName,
+            DrinkName: vals.DrinkName,
+            BID: "b4",
+            FoodTags: vals.FoodTags,
+            DrinkTags: vals.DrinkTags,
+            PairingTags: vals.PairingTags,
+            Description: vals.PairingDescription,
+            Locations: vals.Locations,
+            TimePeriod: vals.TimePeriod,
+            FoodImage: foodImage.split(',')[1],
+            DrinkImage: drinkImage.split(',')[1],
+        }
+        console.log("request to submit " + JSON.stringify(request))
+        fetch('https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/createbusinesspairing', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "POST",
+            body: JSON.stringify(request)
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
     }
 
     return (
@@ -129,6 +142,7 @@ function CreateAdForm(...props) {
                     }
                     else {                    /**reset then handle submit */
                         resetForm();
+                        handleClear();
                         handleSubmit(values);
                     }
                 }}
