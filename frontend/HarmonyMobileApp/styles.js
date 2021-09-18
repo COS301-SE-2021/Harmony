@@ -175,7 +175,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     textAlign: "center",
-    justifyContent: "center",
     alignContent: "center",
     alignItems: "center",
     fontWeight: "bold",
