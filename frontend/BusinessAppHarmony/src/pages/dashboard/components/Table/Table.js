@@ -33,12 +33,13 @@ export default function TableComponent({ data }) {
   var keys = Object.keys(data.statements[0]).map(i => i.toUpperCase());
   keys.shift(); // delete "id" key
   /**to filter the data */
-  var [mainChartState, setMainChartState] = useState("Month");
+  var [TimePeriod, setTimePeriod] = useState("Month");
   const handleChange = (event) => {
-    setMainChartState(event.target.value);
+    setTimePeriod(event.target.value);
   };
 
   useEffect(() => {
+    console.log(JSON.stringify({ BID: "ghjgj", TimePeriod: TimePeriod }));
     // fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/getprofile", { BID: "b1" })
     fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/getstatement", {
       headers: {
@@ -46,7 +47,7 @@ export default function TableComponent({ data }) {
         'Content-Type': 'application/json'
       },
       method: "POST",
-      body: JSON.stringify({ BID: "b4", TimePeriod: "Month" })
+      body: JSON.stringify({ BID: "ghjgj", TimePeriod: TimePeriod })
     })
       .then(res => res.json())
       .then(
@@ -60,7 +61,7 @@ export default function TableComponent({ data }) {
         (error) => {
         }
       )
-  }, [])
+  }, [TimePeriod])
 
   /** reference to allow an icon to click the csv button */
   const csvRef = useRef();
@@ -92,7 +93,7 @@ export default function TableComponent({ data }) {
           <Select
             labelId="demo-simple-select-outlined-label"
             id="demo-simple-select-outlined"
-            value={mainChartState}
+            value={TimePeriod}
             onChange={handleChange}
             label="chartState"
             style={{ float: "left", width: 150, marginRight: 25 }}
@@ -130,12 +131,12 @@ export default function TableComponent({ data }) {
 
               </TableRow>
             ))} */}
-            {result.AdvertData.map(({ BPID, FoodName, DateCreated, DaysRemaining, Locations, audience, Status, Price }) => (
+            {result.AdvertData.map(({ BPID, FoodName, DrinkName, DateCreated, DaysRemaining, Locations, audience, Status, Price }) => (
               <TableRow key={BPID}>
-                <TableCell className="pl-3 fw-normal">{FoodName}</TableCell>
+                <TableCell className="pl-3 fw-normal">{FoodName} and {DrinkName}</TableCell>
                 <TableCell>{DateCreated}</TableCell>
                 <TableCell>{DaysRemaining}</TableCell>
-                <TableCell>{Locations.map((item) => (item))}</TableCell>
+                <TableCell>{Locations.map((item) => (item + ", "))}</TableCell>
                 <TableCell>{audience}</TableCell>
                 <TableCell>
                   <Chip label={Status} classes={{ root: classes[states[Status.toLowerCase()]] }} />
