@@ -68,7 +68,8 @@ export default function Tables() {
     reader.onload = () => {
       if (reader.readyState === 2) {
         setLogo(reader.result)
-        console.log(reader.result);
+        var base64result = reader.result.split(',')[1];
+        console.log(base64result);
         // fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/updateuserlogo", { BID: "b1", Logo: btoa(reader.result) })
         fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/updateuserlogo", {
           headers: {
@@ -76,7 +77,7 @@ export default function Tables() {
             'Content-Type': 'application/json'
           },
           method: "POST",
-          body: JSON.stringify({ BID: "b4", Logo: reader.result })
+          body: JSON.stringify({ BID: "b4", Logo: base64result })
         })
           .then(res => res.json())
           .then(
