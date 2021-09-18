@@ -41,9 +41,9 @@ export function FormSubmit_ImageUrl(props) {
     const handleSubmit = evt => {
         evt.preventDefault();
 
-        let data = { formInput };
+        let data =  formInput ;
 
-        fetch("https://pointy-gauge.glitch.me/api/form", {
+        fetch("https://7q0027151j.execute-api.eu-west-1.amazonaws.com/dev/newimage", {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
@@ -53,6 +53,7 @@ export function FormSubmit_ImageUrl(props) {
             .then(response => response.json())
             .then(response => console.log("Success:", JSON.stringify(response)))
             .catch(error => console.error("Error:", error));
+
     };
 
     const handleInput = evt => {
@@ -77,8 +78,8 @@ export function FormSubmit_ImageUrl(props) {
                     <TextField
                         label="Tag ID"
                         id="margin-normal"
-                        name="tagID"
-                        defaultValue={formInput.tagID}
+                        name="TagID"
+                        defaultValue={formInput.TagID}
                         className={classes.textField}
                         helperText="Enter TagID "
                         onChange={handleInput}
@@ -86,8 +87,8 @@ export function FormSubmit_ImageUrl(props) {
                     <TextField
                         label="Image URL"
                         id="margin-normal"
-                        name="URL"
-                        defaultValue={formInput.URL}
+                        name="images"
+                        defaultValue={formInput.images}
                         className={classes.textField}
                         helperText="e.g. .png"
                         onChange={handleInput}
