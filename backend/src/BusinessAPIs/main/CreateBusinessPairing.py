@@ -3,11 +3,14 @@ import boto3
 import uuid
 import base64
 from botocore.exceptions import ClientError
+from datetime import date, timedelta, datetime
+from datetime import time
+from datetime import datetime
 
 dynamodb = boto3.resource('dynamodb')
 
 # use the DynamoDB object to select our table
-table_name = 'RequestAdverts'
+table_name = 'BusinessPairings'
 table = dynamodb.Table(table_name)
 
 business_user_table_name = 'BusinessUsers'
@@ -32,6 +35,9 @@ def create_business_pairing(event, context):
     drink_tags = event["DrinkTags"]
     pairing_tags = event["PairingTags"]
     pairing_description = event["Description"]
+    locations = event["Locations"]
+    time_period = event["TimePeriod"]
+    today = date.today()
 
     """Gets the business user data that we will need to process before they can add their pairing."""
     try:
@@ -41,7 +47,7 @@ def create_business_pairing(event, context):
         return {"StatusCode": 400}
 
     # generate unique id for business request pairing
-    raid = uuid.uuid4().hex
+    bpid = uuid.uuid4().hex
 
     # generate id for images.
     generate_id1 = uuid.uuid4().hex
@@ -55,7 +61,7 @@ def create_business_pairing(event, context):
     # write data for new pairing to the DynamoDB table using the object we instantiated and save response in a variable
     table.put_item(
         Item={
-            'RAID': raid,
+            'BPID': bpid,
             'DrinkName': drink_item,
             'PairingDescription': pairing_description,
             'PairingTags': pairing_tags,
@@ -64,10 +70,13 @@ def create_business_pairing(event, context):
             'FoodTags': food_tags,
             'DrinkTags': drink_tags,
             'DrinkImage': food_image_link,
-            'FoodImage': drink_image_link
+            'FoodImage': drink_image_link,
+            'Locations': locations,
+            'TimeLimit': time_period,
+            'Status': "Pending",
+            'DateCreated': str(today)
         })
 
-    locations = business_user_data["Item"]["Locations"]
     return {"StatusCode": 200}
 
 
