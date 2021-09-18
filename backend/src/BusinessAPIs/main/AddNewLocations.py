@@ -24,14 +24,14 @@ def add_new_locations(event, context):
     coordinates = event['Coordinates']
     address = event['Address']
 
-
+    location_to_add = {"Address": f"{address}", "Name": f"{location_name}"}
     business_users_table.update_item(
         TableName=business_users_table_name,
         Key={
             'BID': user_id
         },
         UpdateExpression="SET Locations = list_append(Locations, :locations)",
-        ExpressionAttributeValues={':locations': [location_name]},
+        ExpressionAttributeValues={':locations': [location_to_add]},
         ReturnValues="UPDATED_NEW"
 
     )
