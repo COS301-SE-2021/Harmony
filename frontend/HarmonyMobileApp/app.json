@@ -13,13 +13,12 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
     "android": {
+      "package": "com.DreamTeam.Harmony",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon1.png",
         "backgroundColor": "#118AB2"
@@ -27,7 +26,6 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    },
-    "description": "Initial publish"
+    }
   }
 }

@@ -24,7 +24,7 @@ import AppLoadingIcon from "../Components/AppLoadingIcon";
 import AppAlert from "../Components/AppAlert";
 import FilterContext from '../Components/FilterContext';
 import FABNew from "../Components/FABNew";
-// import { FAB } from 'react-native-paper';
+import { Auth } from "aws-amplify";
 
 
 const CardScreen = ({ navigation, URL, headerVisible, isDeleteVisible }) => {
@@ -43,32 +43,12 @@ const CardScreen = ({ navigation, URL, headerVisible, isDeleteVisible }) => {
   const [isErrorAlertVisible, setErrorAlertVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const myFilterContext = useContext(FilterContext);
-
   useEffect(() => {
-    fetch(API_URL, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        "UID": "u1",
-        "Sort": myFilterContext.sortPairingType,
-        "MealTags": myFilterContext.mealTagArray,
-        "FoodTags": myFilterContext.foodTagArray,
-        "DrinkTags": myFilterContext.drinkTagArray,
-        "Distance": myFilterContext.range,
-        "Latitude": myFilterContext.userLatitude,
-        "Longitude": myFilterContext.userLongitude,
-      })
-    })
-      .then((response) => response.json())
-      .then((json) => handleResponse(json))
-      .catch((error) => alert(error))
-  }, [refreshing]);
 
-  useEffect(() => {
-    (async () => {
+    async function fetchData() {
+      let user = await Auth.currentAuthenticatedUser();
+      const { username } = user;
+
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
         //setModalMessage must come before setErrorAlertVisible
@@ -81,15 +61,39 @@ const CardScreen = ({ navigation, URL, headerVisible, isDeleteVisible }) => {
       myFilterContext.setUserLongitude(location.coords.longitude)
       let backPerm = await Location.requestBackgroundPermissionsAsync();
       // console.log(backPerm);//Handle
-    })();
-  }, []);
+
+      fetch(API_URL, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          "UID": username,
+          "Sort": myFilterContext.sortPairingType,
+          "MealTags": myFilterContext.mealTagArray,
+          "FoodTags": myFilterContext.foodTagArray,
+          "DrinkTags": myFilterContext.drinkTagArray,
+          "Distance": myFilterContext.range,
+          "Latitude": location.coords.latitude,//Directly reference variable instead of context because its faster
+          "Longitude": location.coords.longitude,
+        })
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          handleResponse(json)
+        })
+        .catch((error) => alert(error))
+    };
+
+    fetchData();
+
+
+  }, [refreshing]);
 
   useEffect(() => {
-    toggleRefresh()
-  }, [myFilterContext.applyFilter, myFilterContext.userLatitude]);
-
-  //the api call for trending
-
+    toggleRefresh();
+  }, [myFilterContext.applyFilter]);
 
   const handleResponse = (json) => {
     if (json.StatusCode === 200) {
@@ -103,6 +107,9 @@ const CardScreen = ({ navigation, URL, headerVisible, isDeleteVisible }) => {
       //setModalMessage must come before setErrorAlertVisible
       setModalMessage(json.Data);
       setErrorAlertVisible(true);
+    }
+    else {
+      console.log(json);
     }
   }
 
@@ -163,10 +170,12 @@ const CardScreen = ({ navigation, URL, headerVisible, isDeleteVisible }) => {
               <RefreshControl refreshing={refreshing} onRefresh={toggleRefresh} />
             }
             keyExtractor={({ PID }, index) => PID}
+
             renderItem={({ item }) => (
               <Card
                 dataSet={item}
                 isDeleteVisible={isDeleteVisible}
+                isAd={true}
               />
             )}
           />

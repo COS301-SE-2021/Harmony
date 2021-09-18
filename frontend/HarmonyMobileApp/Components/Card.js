@@ -18,33 +18,80 @@ import {
 } from "@ui-kitten/components";
 import IconsBar from "../Components/IconsBar";
 
-export default function Card({ dataSet, isDeleteVisible, ...otherProps }) {
+export default function Card({ dataSet, isDeleteVisible, isAd, ...otherProps }) {
 
     return (
         <View style={{ paddingBottom: 15 }}>
             <View style={styles.cardContainer}>
-                <View style={styles.imageContainer}>
-                    <View
-                        style={personalStyles.image}
-                    >
-                        <Image
-                            source={{ uri: dataSet.FoodImage }}
-                            style={styles.standardImage}
-                        />
-                        <Text style={styles.cardText}>{dataSet.FoodItem}</Text>
+
+                {isAd ?
+                    <View>
+                        <View style={styles.adTitleContainer}>
+                            <Image
+                                style={styles.tinyLogo}
+                                source={{
+                                    uri: 'https://nandos-site.objects.frb.io/assets/n_logo.png',
+                                }}
+                            />
+                            <View style={{
+                                left: "150%",
+                            }}>
+
+                                <Text style={styles.adTitleText}>
+                                    Sponsored
+                                </Text>
+                            </View>
+                        </View>
+                        <View style={styles.adimageContainer}>
+                            <View
+                                style={personalStyles.image}
+                            >
+                                <Image
+                                    source={{ uri: dataSet.FoodImage }}
+                                    style={styles.standardImage}
+                                />
+                                <Text style={styles.cardText}>{dataSet.FoodItem}</Text>
+                            </View>
+
+                            <View
+                                style={personalStyles.image}
+                            >
+                                <Image
+                                    source={{ uri: dataSet.DrinkImage }}
+                                    style={styles.standardImage}
+                                />
+
+                                <Text style={styles.cardText}>{dataSet.DrinkItem}</Text>
+                            </View>
+                        </View>
                     </View>
 
-                    <View
-                        style={personalStyles.image}
-                    >
-                        <Image
-                            source={{ uri: dataSet.DrinkImage }}
-                            style={styles.standardImage}
-                        />
+                    :
+                    <View style={styles.imageContainer}>
+                        <View
+                            style={personalStyles.image}
+                        >
+                            <Image
+                                source={{ uri: dataSet.FoodImage }}
+                                style={styles.standardImage}
+                            />
+                            <Text style={styles.cardText}>{dataSet.FoodItem}</Text>
+                        </View>
 
-                        <Text style={styles.cardText}>{dataSet.DrinkItem}</Text>
+                        <View
+                            style={personalStyles.image}
+                        >
+                            <Image
+                                source={{ uri: dataSet.DrinkImage }}
+                                style={styles.standardImage}
+                            />
+
+                            <Text style={styles.cardText}>{dataSet.DrinkItem}</Text>
+                        </View>
                     </View>
-                </View>
+                }
+
+
 
                 <Divider />
                 <View style={styles.tagsSection}>

@@ -145,13 +145,14 @@ export default function CameraScreen({ navigation }) {
 
           navigation.navigate("Results", {
             screen: "PairingResultsScreen",
-            params: { response: json },
+            params: {
+              response: json,
+              b64img: b64Image
+            },
           });
 
         }
         else if (json.StatusCode === 204) {
-          (json)
-            ("ERRROR ENCOUNTERED");
           setLoading(false);
           cancelPreview();
           //setModalMessage must come before setErrorAlertVisible
@@ -161,7 +162,7 @@ export default function CameraScreen({ navigation }) {
         }
       })
       .catch((error) => {
-        (error);
+        console.log(error);
         setModalMessage("Something went wrong.");
         setErrorAlertVisible(true);
         cancelPreview();

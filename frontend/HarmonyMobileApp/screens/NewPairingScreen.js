@@ -6,6 +6,7 @@ import * as Location from 'expo-location';
 import { AppToast } from "../Components/AppToast";
 import AppAlert from "../Components/AppAlert";
 import AppLoadingIcon from "../Components/AppLoadingIcon";
+import { Auth } from "aws-amplify";
 
 function NewPairingScreen({ navigation }) {
 
@@ -145,6 +146,9 @@ function NewPairingScreen({ navigation }) {
     console.log("Creating...")
     setLoading(true);
 
+    let user = await Auth.currentAuthenticatedUser();
+    const { username } = user;
+
     await fetch(CREATE_PAIRNG_URL, {
       method: "POST",
       headers: {
@@ -152,7 +156,7 @@ function NewPairingScreen({ navigation }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        "UID": "u1",
+        "UID": username,
         "Foodid": selectedFood.id,
         "Drinkid": selectedDrink.id,
         "Mealtagid": selectedMealType.id,
@@ -162,7 +166,7 @@ function NewPairingScreen({ navigation }) {
     })
       .then((response) => response.json())
       .then((json) => {
-        console.log(json)
+        // console.log(json)
         handleResponse(json)
       })
       .catch((error) => alert(error))
