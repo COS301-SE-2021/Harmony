@@ -7,8 +7,10 @@ def create_tag(event, context):
     # create tag : the tag name will come from the user input
 
     tagname = event['TagName']
-    url_semi = "https://eastus.api.cognitive.microsoft.com/customvision/v3.0/training/projects/b2c99ecb-e43e-4a59-ac87-a189c109e267/tags?name="
-    url = url_semi + tagname
+    type = event['Type']
+    url_semi1 = "https://eastus.api.cognitive.microsoft.com/customvision/v3.0/training/projects/b2c99ecb-e43e-4a59-ac87-a189c109e267/tags?name="
+    url_semi2 = "type="
+    url = url_semi1 + tagname + url_semi2 + type
 
     headers = {
         'Training-Key': '',
