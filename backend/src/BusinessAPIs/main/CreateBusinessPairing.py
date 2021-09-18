@@ -68,9 +68,7 @@ def create_business_pairing(event, context):
         })
 
     locations = business_user_data["Item"]["Locations"]
-    return {"StatusCode": 200,
-            "Locations": locations,
-            "SuggestedAudience": "Mock data"}
+    return {"StatusCode": 200}
 
 
 """
