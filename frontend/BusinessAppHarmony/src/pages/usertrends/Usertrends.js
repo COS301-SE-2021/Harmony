@@ -161,10 +161,11 @@ export default function Tables() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {mockResponse.locations.map(({ name, address }) => (
-                  <TableRow >
-                    <TableCell className="pl-3 fw-normal">{name}</TableCell>
-                    <TableCell>{address}</TableCell>
+                {data.Locations.map(({ Name, Address }) => (
+
+                  <TableRow key={Address}>
+                    <TableCell className="pl-3 fw-normal">{Name}</TableCell>
+                    <TableCell>{Address}</TableCell>
                   </TableRow>
                 ))}
                 {/* {data.Locations.map((item, index) => (
