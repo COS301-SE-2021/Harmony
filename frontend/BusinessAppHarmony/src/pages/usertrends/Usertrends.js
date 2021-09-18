@@ -10,6 +10,9 @@ import { Typography } from "../../components/Wrappers";
 import Geocode from "react-geocode";
 import PayPal from '../dashboard/components/Table/PayPal';
 import { GrPaypal } from "react-icons/gr";
+import {
+  Formik, Form
+} from 'formik';
 
 export default function Tables() {
   const classes = useStyles();
@@ -85,14 +88,15 @@ export default function Tables() {
     }
   }
 
-  const handleLocationUpdate = () => {
+  const handleLocationUpdate = (values) => {
+    console.log(values.LocationName);
     /**set the api key to use geocode */
     Geocode.setApiKey("");
     Geocode.setLanguage("en");
     Geocode.setRegion("za");
     Geocode.setLocationType("ROOFTOP");
     // Get latitude & longitude from address.
-    Geocode.fromAddress("Eiffel Tower").then(
+    Geocode.fromAddress(values.LocationName).then(
       (response) => {
         const { lat, lng } = response.results[0].geometry.location;
         console.log(lat, lng);
@@ -142,14 +146,25 @@ export default function Tables() {
               Edit Locations
             </Typography>
             <div className={classes.formElementsImageContainer}>
-              <label htmlFor="Locations" className={classes.formLabel}>
+              <label htmlFor="LocationName" className={classes.formLabel}>
                 <div className={classes.floatLeft}>
                   <p className={classes.errorDiv}>New Location</p>
                 </div>
-
               </label>
-              <TextField id="outlined-basic" variant="outlined" name="Locations" className={classes.individualTextField} onChange={handleLocationUpdate} value="" />
-
+              <Formik
+                initialValues={{
+                  LocationName: ""
+                }}
+                onSubmit={(values, { resetForm }) => { resetForm(); handleLocationUpdate(values) }}
+              >
+                {/** The moderate pairings form to submit */}
+                {({ values, handleChange, resetForm }) => (
+                  <Form >
+                    <TextField id="outlined-basic" variant="outlined" name="LocationName" className={classes.individualTextField} onChange={handleChange} value={values.LocationName} />
+                    <Button type="Submit"> Add</Button>
+                  </Form>
+                )}
+              </Formik>
             </div>
             <Table className="mb-0">
               <TableHead>
