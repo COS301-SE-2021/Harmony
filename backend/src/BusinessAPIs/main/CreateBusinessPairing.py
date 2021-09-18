@@ -39,13 +39,6 @@ def create_business_pairing(event, context):
     time_period = event["TimePeriod"]
     today = date.today()
 
-    """Gets the business user data that we will need to process before they can add their pairing."""
-    try:
-        business_user_data = business_user_table.get_item(Key={'BID': businessID})
-    except ClientError as e:
-        print(e.response['Error']['Message'])
-        return {"StatusCode": 400}
-
     # generate unique id for business request pairing
     bpid = uuid.uuid4().hex
 
