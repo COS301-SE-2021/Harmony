@@ -15,7 +15,7 @@ export default function Tables() {
   const classes = useStyles();
   const [logo, setLogo] = useState("http://beepeers.com/assets/images/commerces/default-image.jpg");
   const [checkout, setCheckout] = useState(false);
-  const [data, setData] = useState({ OutstandingAmount: 0 });
+  const [data, setData] = useState({ OutstandingAmount: 0, Locations: [] });
 
   useEffect(() => {
     // fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/getprofile", { BID: "b1" })
@@ -167,6 +167,12 @@ export default function Tables() {
                     <TableCell>{address}</TableCell>
                   </TableRow>
                 ))}
+                {/* {data.Locations.map((item, index) => (
+                  <TableRow key={item} >
+                    <TableCell className="pl-3 fw-normal">{item[index][0]}</TableCell>
+                    <TableCell>{item[index][1]}</TableCell>
+                  </TableRow>
+                ))} */}
               </TableBody>
             </Table>
           </Widget>
