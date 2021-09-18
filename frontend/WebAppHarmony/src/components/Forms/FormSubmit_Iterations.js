@@ -41,9 +41,9 @@ export function FormSubmit_Iterations(props) {
     const handleSubmit = evt => {
         evt.preventDefault();
 
-        let data = { formInput };
+        let data =  formInput ;
 
-        fetch("https://pointy-gauge.glitch.me/api/form", {
+        fetch("https://7q0027151j.execute-api.eu-west-1.amazonaws.com/dev/unpublishiterations", {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
@@ -77,19 +77,10 @@ export function FormSubmit_Iterations(props) {
                     <TextField
                         label="Iteration ID"
                         id="margin-normal"
-                        name="ID"
-                        defaultValue={formInput.ID}
+                        name="IterId"
+                        defaultValue={formInput.IterId}
                         className={classes.textField}
                         helperText="Enter Iteration ID "
-                        onChange={handleInput}
-                    />
-                    <TextField
-                        label="Type"
-                        id="margin-normal"
-                        name="Type"
-                        defaultValue={formInput.Type}
-                        className={classes.textField}
-                        helperText="Publish or Unpublish"
                         onChange={handleInput}
                     />
                     <Button

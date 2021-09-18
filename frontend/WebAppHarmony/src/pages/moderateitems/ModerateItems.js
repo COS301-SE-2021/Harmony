@@ -6,12 +6,9 @@ import useStyles from "./styles";
 
 // components
 import PageTitle from "../../components/PageTitle";
-import Widget from "../../components/Widget";
 import { Typography } from "../../components/Wrappers";
 import AddItemForm from "./AddItemForm";
 import ItemsButton from "./ItemsButton";
-// import ToggleButton from '@material-ui/lab/ToggleButton';
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 export default function TypographyPage() {
   var classes = useStyles();
   /**The name, description and tags for the form */

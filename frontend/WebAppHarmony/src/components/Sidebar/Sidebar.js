@@ -32,7 +32,16 @@ const structure = [
     link: "/app/moderateitems",
     icon: <QueueIcon />,
   },
-  { id: 2, label: "Train AI", link: "/app/tables", icon: <TableIcon /> },
+  // { id: 2, label: "Train AI", link: "/app/tables", icon: <TableIcon /> },
+  //
+
+  {
+    id: 2, label: "Harmony AI", icon: <TableIcon/>,
+    children: [
+      {label: "Add to AI", link: "/app/tables"},
+      {label: "Train AI", link: "/app/train"},
+    ],
+  },
   { id: 3, label: "User Feedback", link: "/app/feedback", icon: <FeedbackIcon /> },
   { id: 4, type: "divider" },
 

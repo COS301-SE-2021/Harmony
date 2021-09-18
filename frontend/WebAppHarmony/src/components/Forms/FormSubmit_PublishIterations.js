@@ -2,7 +2,7 @@ import React, { useReducer } from "react";
 import { Button, Icon, TextField, Paper, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
-export function FormSubmit_NewTag(props) {
+export function FormSubmit_PublishIterations(props) {
     const useStyles = makeStyles(theme => ({
         button: {
             margin: theme.spacing(1)
@@ -33,15 +33,17 @@ export function FormSubmit_NewTag(props) {
     const [formInput, setFormInput] = useReducer(
         (state, newState) => ({ ...state, ...newState }),
         {
-            TagName: ""
+            ID: "",
+            Type: ""
         }
     );
 
     const handleSubmit = evt => {
         evt.preventDefault();
+
         let data =  formInput ;
 
-        fetch(" https://7q0027151j.execute-api.eu-west-1.amazonaws.com/dev/createtags", {
+        fetch(" https://7q0027151j.execute-api.eu-west-1.amazonaws.com/dev/publishiteration", {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
@@ -73,22 +75,22 @@ export function FormSubmit_NewTag(props) {
 
                 <form onSubmit={handleSubmit}>
                     <TextField
-                        label="New Tag"
+                        label="Iteration ID"
                         id="margin-normal"
-                        name="TagName"
-                        defaultValue={formInput.TagName}
+                        name="IterId"
+                        defaultValue={formInput.IterId}
                         className={classes.textField}
-                        helperText="Enter new Tag "
+                        helperText="Enter Iteration ID "
                         onChange={handleInput}
                     />
 
                     <TextField
-                        label="Tag Type"
+                        label="Iteration ID"
                         id="margin-normal"
-                        name="Type"
-                        defaultValue={formInput.Type}
+                        name="Name"
+                        defaultValue={formInput.Name}
                         className={classes.textField}
-                        helperText="Enter Regular or Negative"
+                        helperText="Enter Name "
                         onChange={handleInput}
                     />
                     <Button
