@@ -41,21 +41,6 @@ export default function Tables() {
         }
       )
   }, [])
-  /**set the api key to use geocode */
-  // Geocode.setApiKey("AIzaSyBX7qzFSYnqo28_uZDI3GBRCK7JGkK07L8");
-  // Geocode.setLanguage("en");
-  // Geocode.setRegion("za");
-  // Geocode.setLocationType("ROOFTOP");
-  // Get latitude & longitude from address.
-  // Geocode.fromAddress("Eiffel Tower").then(
-  //   (response) => {
-  //     const { lat, lng } = response.results[0].geometry.location;
-  //     console.log(lat, lng);
-  //   },
-  //   (error) => {
-  //     console.error(error);
-  //   }
-  // );
 
   /**@var fileRef to create a reference to the file input to be able to clear it */
   const logoFileRef = useRef();
@@ -101,7 +86,21 @@ export default function Tables() {
   }
 
   const handleLocationUpdate = () => {
-
+    /**set the api key to use geocode */
+    Geocode.setApiKey("");
+    Geocode.setLanguage("en");
+    Geocode.setRegion("za");
+    Geocode.setLocationType("ROOFTOP");
+    // Get latitude & longitude from address.
+    Geocode.fromAddress("Eiffel Tower").then(
+      (response) => {
+        const { lat, lng } = response.results[0].geometry.location;
+        console.log(lat, lng);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
   const mockResponse = {
     statusCode: 200,
