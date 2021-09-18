@@ -21,7 +21,7 @@ import Dashboard from "../../pages/dashboard";
 import ModerateItems from "../../pages/moderateitems/ModerateItems";
 import Tables from "../../pages/tables";
 import Feedback from "../../pages/feedback";
-
+import Train from "../../pages/train";
 
 
 // context
@@ -48,6 +48,7 @@ function Layout(props) {
               <Route path="/app/dashboard" component={Dashboard} />
               <Route path="/app/moderateitems" component={ModerateItems} />
               <Route path="/app/tables" component={Tables} />
+              <Route path="/app/train" component={Train} />
               <Route path="/app/feedback" component={Feedback} />
 
             </Switch>
