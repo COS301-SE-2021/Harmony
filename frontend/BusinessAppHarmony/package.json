@@ -24,6 +24,7 @@
     "multiselect-react-dropdown": "^2.0.6",
     "react": "^16.14.0",
     "react-apexcharts": "^1.3.7",
+    "react-cool-onclickoutside": "^1.6.2",
     "react-csv": "^2.0.3",
     "react-dom": "^16.14.0",
     "react-geocode": "^0.2.3",
@@ -36,6 +37,7 @@
     "react-toastify": "^7.0.3",
     "recharts": "^2.0.4",
     "tinycolor2": "^1.4.2",
+    "use-places-autocomplete": "^1.9.4",
     "yup": "^0.32.9"
   },
   "scripts": {

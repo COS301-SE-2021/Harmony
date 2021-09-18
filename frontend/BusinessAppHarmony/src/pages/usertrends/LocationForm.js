@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import useStyles from "./styles";
+
+
 import TextField from '@material-ui/core/TextField'
 // components
 import Button from '@material-ui/core/Button';
@@ -8,6 +10,7 @@ import * as Yup from 'yup';
 import {
     Formik, Form
 } from 'formik';
+
 
 export default function LocationForm() {
     const classes = useStyles();
@@ -23,9 +26,29 @@ export default function LocationForm() {
             (response) => {
                 const { lat, lng } = response.results[0].geometry.location;
                 console.log(lat, lng);
+                fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/addnewlocations", {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    method: "POST",
+                    body: JSON.stringify({ BID: "b4", lat: lat, lng: lng, "LocationName": values.LocationName, "Address": values.LocationAddress })
+                })
+                    .then(res => res.json())
+                    .then(
+                        (result) => {
+                            console.log(result);
+                        },
+                        // Note: it's important to handle errors here
+                        // instead of a catch() block so that we don't swallow
+                        // exceptions from actual bugs in components.
+                        (error) => {
+                        }
+                    )
             },
             (error) => {
                 console.error(error);
+                alert("Location " + values.LocationName + " was not found.")
             }
         );
     }
