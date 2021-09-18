@@ -48,7 +48,7 @@ const CardScreen = ({ navigation, URL, headerVisible, isDeleteVisible }) => {
     async function fetchData() {
       let user = await Auth.currentAuthenticatedUser();
       const { username } = user;
-
+      alert(username);
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
         //setModalMessage must come before setErrorAlertVisible
