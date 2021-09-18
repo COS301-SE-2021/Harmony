@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
     Formik, Form
 } from 'formik';
@@ -14,6 +14,7 @@ function CreateAdForm(...props) {
     const defaultImage = "http://beepeers.com/assets/images/commerces/default-image.jpg";
     const [foodImage, setFoodImage] = useState(defaultImage);
     const [drinkImage, setDrinkImage] = useState(defaultImage);
+    const [result, setResult] = useState([]);
     var classes = useStyles();
 
     /**@var fileRef to create a reference to the file input to be able to clear it */
@@ -34,6 +35,28 @@ function CreateAdForm(...props) {
         statusCode: 200,
         locations: ["Durban North", "Pretoria East", "Westville"]
     }
+    useEffect(() => {
+        fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/getprofile", {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "POST",
+            body: JSON.stringify({ BID: "b4" })
+        })
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    console.log(result);
+                    setResult(result.Locations);
+                },
+                // Note: it's important to handle errors here
+                // instead of a catch() block so that we don't swallow
+                // exceptions from actual bugs in components.
+                (error) => {
+                }
+            )
+    }, [])
 
     const handleClear = (values) => {
         setFoodImage(defaultImage);
@@ -385,7 +408,7 @@ function CreateAdForm(...props) {
                                             onSearch={function noRefCheck() { }}
                                             onSelect={(selectedList) => (values.Locations = selectedList)}
                                             id="Locations" name="Locations" onChange={handleChange} value={values.Locations}
-                                            options={mockResponse.locations}
+                                            options={result}
                                         />
                                     </div>
                                 </div>
