@@ -55,7 +55,7 @@ function CreateAdForm(...props) {
     }
 
     /**Handles the image preview */
-    const FoodImageHandler = (e) => {
+    const FoodImageHandler = (e, values) => {
         const reader = new FileReader();
         reader.onload = () => {
             if (reader.readyState === 2) {
@@ -85,9 +85,7 @@ function CreateAdForm(...props) {
     }
     /** Submits the form to the database */
     const handleSubmit = (vals) => {
-        if (foodImage == defaultImage) {
-            alert("You havent uploaded an image for food.");
-        }
+
         // console.log("submitted handle " + JSON.stringify(vals))
         // var request = {
         //     "ItemName": vals.ItemName,
@@ -117,20 +115,22 @@ function CreateAdForm(...props) {
                     TimePeriod: "",
                 }}
                 validationSchema={Yup.object().shape({
-                    FoodTags: Yup.string().required('*'),
                     FoodName: Yup.string().required('*'),
-                    Locations: Yup.string().required('*'),
-                    DrinkTags: Yup.string().required('*'),
                     DrinkName: Yup.string().required('*'),
                     PairingDescription: Yup.string().required('*'),
-                    PairingTags: Yup.string().required('*'),
-                    TimePeriod: Yup.string().required('*'),
                 })}
                 // onSubmit={(values) => handleSubmit(values)}
                 onSubmit={(values, { resetForm }) => {
-                    /**reset then handle submit */
-                    resetForm();
-                    handleSubmit(values);
+                    if (foodImage == defaultImage || drinkImage == defaultImage) {
+                        if (foodImage == defaultImage)
+                            alert("You havent uploaded an image for food.");
+                        else
+                            alert("You havent uploaded an image for drink.");
+                    }
+                    else {                    /**reset then handle submit */
+                        resetForm();
+                        handleSubmit(values);
+                    }
                 }}
             >
                 {/** The moderate pairings form to submit */}
@@ -141,7 +141,7 @@ function CreateAdForm(...props) {
                                 <div className={classes.FoodLabelButton}>Food</div>
                                 <div className={classes.PreviewPiece}><label htmlFor="file-input-Food"></label></div>
                                 <div className={classes.PreviewPiece}><img src={foodImage} className={classes.ImageContainer} /></div>
-                                <div className={classes.FileInput}><input type="file" id="file-input-Food" name="ImageclassNameFood" accept="image/*" ref={foodFileRef} onChange={FoodImageHandler} style={{ display: 'none' }} />
+                                <div className={classes.FileInput}><input type="file" id="file-input-Food" name="ImageclassNameFood" accept="image/*" ref={foodFileRef} onChange={(values) => FoodImageHandler(values)} style={{ display: 'none' }} />
                                     <Button onClick={() => (foodFileRef.current.click())} className={classes.uploadFoodButton} variant="contained">Upload Image</Button>
                                 </div>
                                 <div className={classes.formElementsImageContainer}>
@@ -255,8 +255,8 @@ function CreateAdForm(...props) {
                                                     'width': '100%'
                                                 },
                                                 chips: {
-                                                    'background-color': '#1FBFBA',
-                                                    'font-weight': 'bold'
+                                                    'backgroundColor': '#1FBFBA',
+                                                    'fontWeight': 'bold'
                                                 },
                                             }}
                                             onRemove={(selectedList) => (values.DrinkTags = selectedList)}
@@ -313,8 +313,8 @@ function CreateAdForm(...props) {
                                                     'width': '100%'
                                                 },
                                                 chips: {
-                                                    'background-color': '#C41ED4',
-                                                    'font-weight': 'bold',
+                                                    'backgroundColor': '#C41ED4',
+                                                    'fontWeight': 'bold',
                                                 },
                                             }}
                                             onRemove={(selectedList) => (values.PairingTags = selectedList)}
@@ -363,8 +363,8 @@ function CreateAdForm(...props) {
                                                     'width': '90%'
                                                 },
                                                 chips: {
-                                                    'background-color': '#4CD41E',
-                                                    'font-weight': 'bold',
+                                                    'backgroundColor': '#4CD41E',
+                                                    'fontWeight': 'bold',
                                                 },
                                             }}
                                             onRemove={(selectedList) => (values.Locations = selectedList)}
@@ -403,8 +403,8 @@ function CreateAdForm(...props) {
                                                     'width': '90%'
                                                 },
                                                 chips: {
-                                                    'background-color': '#4CD41E',
-                                                    'font-weight': 'bold'
+                                                    'backgroundColor': '#4CD41E',
+                                                    'fontWeight': 'bold'
                                                 },
                                             }}
                                             onRemove={(selectedList) => (values.TimePeriod = selectedList)}
