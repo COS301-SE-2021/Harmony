@@ -28,6 +28,11 @@ def get_statement(event, context):
     statement_time_period = event['TimePeriod']
     statement_duration = 30
 
+    """
+    Adjusts duration of statement based on the input set.
+    Default is 1 Month/30 days.
+    """
+
     if statement_time_period == "One Day":
         statement_duration = 1
     elif statement_time_period == "One Month":
@@ -39,7 +44,6 @@ def get_statement(event, context):
     elif statement_time_period == "One Year":
         statement_duration = 365
 
-    print(statement_duration)
 
     # this takes the current time and subtracts the input statement number of days to get a range
     d = datetime.today() - timedelta(days=statement_duration)
