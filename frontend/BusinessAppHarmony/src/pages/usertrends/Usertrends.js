@@ -160,33 +160,35 @@ export default function Tables() {
                 {/** The moderate pairings form to submit */}
                 {({ errors, touched, values, handleChange, resetForm }) => (
                   <Form >
-                    <div>
-                      <label htmlFor="LocationName" className={classes.formLabel}>
-                        <div className={classes.floatLeft}>
-                          <p className={classes.errorDiv}>Name</p>
-                        </div>
-                        <div className={classes.floatLeft}>
-                          {(errors.LocationName && touched.LocationName) ? (
-                            <div className={classes.errorStar}>*</div>
-                          ) : null}
-                        </div>
-                      </label>
-                      <TextField id="outlined-basic" variant="outlined" name="LocationName" className={classes.individualTextField} onChange={handleChange} value={values.LocationName} />
+                    <div className={classes.marginAuto}>
+                      <div className={classes.formContainer}>
+                        <label htmlFor="LocationName" className={classes.formLabel}>
+                          <div className={classes.floatLeft}>
+                            <p className={classes.errorDiv}>Name</p>
+                          </div>
+                          <div className={classes.floatLeft}>
+                            {(errors.LocationName && touched.LocationName) ? (
+                              <div className={classes.errorStar}>*</div>
+                            ) : null}
+                          </div>
+                        </label>
+                        <TextField id="outlined-basic" variant="outlined" name="LocationName" className={classes.individualTextField} onChange={handleChange} value={values.LocationName} />
+                      </div>
+                      <div className={classes.formContainer}>
+                        <label htmlFor="LocationAddress" className={classes.formLabel}>
+                          <div className={classes.floatLeft}>
+                            <p className={classes.errorDiv}>Address</p>
+                          </div>
+                          <div className={classes.floatLeft}>
+                            {(errors.LocationAddress && touched.LocationAddress) ? (
+                              <div className={classes.errorStar}>*</div>
+                            ) : null}
+                          </div>
+                        </label>
+                        <TextField id="outlined-basic" variant="outlined" name="LocationAddress" className={classes.individualTextField} onChange={handleChange} value={values.LocationAddress} />
+                      </div>
                     </div>
-                    <div>
-                      <label htmlFor="LocationAddress" className={classes.formLabel}>
-                        <div className={classes.floatLeft}>
-                          <p className={classes.errorDiv}>Address</p>
-                        </div>
-                        <div className={classes.floatLeft}>
-                          {(errors.LocationAddress && touched.LocationAddress) ? (
-                            <div className={classes.errorStar}>*</div>
-                          ) : null}
-                        </div>
-                      </label>
-                      <TextField id="outlined-basic" variant="outlined" name="LocationAddress" className={classes.individualTextField} onChange={handleChange} value={values.LocationAddress} />
-                    </div>
-                    <Button type="Submit" className={classes.addButton} > Add New Location</Button>
+                    <Button type="Submit" className={classes.addLocationButton} > Add New Location</Button>
 
                   </Form>
                 )}

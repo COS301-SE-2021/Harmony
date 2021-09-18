@@ -19,14 +19,16 @@ export default makeStyles(theme => ({
     fontFamily: "sans-serif-light",
     color: "#717171",
   },
-  addButton: {
-    backgroundColor: "#81b5c2", color: "white", marginLeft: 45, height: 35, borderRadius: 10, paddingLeft: 12, paddingRight: 12, width: "30%",
-    boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)"
 
+  errorDiv: {
+    fontSize: 15,
+    marginTop: 0,
+    color: "#717171",
   },
   individualTextField: {
-    width: 50,
-    height: 10,
+    width: 250,
+    height: 70,
+    float: "left"
   },
   multiselector: {
     width: "75%",
@@ -39,8 +41,11 @@ export default makeStyles(theme => ({
     marginLeft: 100
   },
   formLabel: {
-    marginTop: 10,
     fontSize: 20,
+    width: 150,
+    justifyContent: "space-between",
+    display: "flex",
+    marginTop: 15
   },
   formElements: {
     marginTop: 20,
@@ -116,9 +121,18 @@ export default makeStyles(theme => ({
   buttonContainer: {
     float: "auto",
   },
+  marginAuto: {
+    margin: "auto"
+  },
   addButton: {
     backgroundColor: "#81b5c2", color: "white", marginLeft: 45, height: 35, borderRadius: 10, paddingLeft: 12, paddingRight: 12, width: "30%",
     boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)"
+
+  },
+  addLocationButton: {
+    backgroundColor: "#81b5c2", color: "white", marginLeft: 45, height: 35, borderRadius: 10, width: "70%",
+    boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)",
+
 
   },
   ButtonContainer: {
@@ -222,12 +236,10 @@ export default makeStyles(theme => ({
     width: "95%"
   },
   floatLeft: {
-    float: "left"
+    float: "left",
   },
-  errorDiv: {
-    fontSize: 15,
-    marginTop: 0,
-    color: "#717171",
+  formContainer: {
+    display: "flex",
   },
   errorStar: {
     color: "red", fontSize: 25, marginRight: 5, marginTop: -10
