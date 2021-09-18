@@ -28,6 +28,10 @@ function CreateAdForm(...props) {
 
     const supportedFormats = ['image/jpg', 'image/jpeg', 'image/png'];
 
+    const mockResponse = {
+        statusCode: 200,
+        locations: ["Durban North", "Pretoria East", "Westiville"]
+    }
 
     const handleClear = (values) => {
         setFoodImage(defaultImage);
@@ -163,6 +167,9 @@ function CreateAdForm(...props) {
                                             ref={foodTagSelector}
                                             placeholder=""
                                             style={{
+                                                optionContainer: { // To change css for option container 
+                                                    'width': '100%'
+                                                },
                                                 multiselectContainer: {
                                                     'width': '100%',
                                                     'height': 20
@@ -219,6 +226,9 @@ function CreateAdForm(...props) {
                                             ref={drinkTagSelector}
                                             placeholder=""
                                             style={{
+                                                optionContainer: { // To change css for option container 
+                                                    'width': '100%'
+                                                },
                                                 searchBox: {
                                                     'width': '100%'
                                                 },
@@ -267,6 +277,9 @@ function CreateAdForm(...props) {
                                             placeholder=""
                                             ref={mealTagSelector}
                                             style={{
+                                                optionContainer: { // To change css for option container 
+                                                    'width': '80%'
+                                                },
                                                 searchBox: {
                                                     // 'border': '1px solid grey',
                                                     'width': '80%'
@@ -309,14 +322,16 @@ function CreateAdForm(...props) {
                                             isObject={false}
                                             disablePreSelectedValues
                                             avoidHighlightFirstOption
-                                            selectionLimit={1}
                                             showArrow
                                             placeholder=""
                                             ref={mealTagSelector}
                                             style={{
+                                                optionContainer: { // To change css for option container 
+                                                    'width': '90%'
+                                                },
                                                 searchBox: {
                                                     // 'border': '1px solid grey',
-                                                    'width': '80%'
+                                                    'width': '90%'
                                                 },
                                                 chips: {
                                                     'background-color': '#4CD41E',
@@ -327,7 +342,7 @@ function CreateAdForm(...props) {
                                             onSearch={function noRefCheck() { }}
                                             onSelect={(selectedList) => (values.PairingTags = selectedList)}
                                             id="PairingTags" name="PairingTags" onChange={handleChange} value={values.PairingTags}
-                                            options={['Breakfast', 'Lunch', 'Supper', 'Snack', 'Vegetarian', 'Dairy-Free', 'Nut-Free']}
+                                            options={mockResponse.locations}
                                         />
                                     </div>
                                 </div>
@@ -351,6 +366,9 @@ function CreateAdForm(...props) {
                                             placeholder=""
                                             ref={mealTagSelector}
                                             style={{
+                                                optionContainer: { // To change css for option container 
+                                                    'width': '80%'
+                                                },
                                                 searchBox: {
                                                     'width': '80%'
                                                 },
@@ -363,7 +381,7 @@ function CreateAdForm(...props) {
                                             onSearch={function noRefCheck() { }}
                                             onSelect={(selectedList) => (values.PairingTags = selectedList)}
                                             id="PairingTags" name="PairingTags" onChange={handleChange} value={values.PairingTags}
-                                            options={['Breakfast', 'Lunch', 'Supper', 'Snack', 'Vegetarian', 'Dairy-Free', 'Nut-Free']}
+                                            options={['One Day', 'One Month', 'Three Months', 'Six Months', 'One Year']}
                                         />
                                     </div>
                                 </div>
