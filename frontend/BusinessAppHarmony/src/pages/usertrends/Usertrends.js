@@ -10,6 +10,7 @@ import { Typography } from "../../components/Wrappers";
 import Geocode from "react-geocode";
 import PayPal from '../dashboard/components/Table/PayPal';
 import { GrPaypal } from "react-icons/gr";
+import * as Yup from 'yup';
 import {
   Formik, Form
 } from 'formik';
@@ -89,14 +90,13 @@ export default function Tables() {
   }
 
   const handleLocationUpdate = (values) => {
-    console.log(values.LocationName);
+    console.log(values.LocationAddress);
     /**set the api key to use geocode */
-    Geocode.setApiKey("");
     Geocode.setLanguage("en");
     Geocode.setRegion("za");
     Geocode.setLocationType("ROOFTOP");
     // Get latitude & longitude from address.
-    Geocode.fromAddress(values.LocationName).then(
+    Geocode.fromAddress(values.LocationAddress).then(
       (response) => {
         const { lat, lng } = response.results[0].geometry.location;
         console.log(lat, lng);
@@ -146,22 +146,48 @@ export default function Tables() {
               Edit Locations
             </Typography>
             <div className={classes.formElementsImageContainer}>
-              <label htmlFor="LocationName" className={classes.formLabel}>
-                <div className={classes.floatLeft}>
-                  <p className={classes.errorDiv}>New Location</p>
-                </div>
-              </label>
               <Formik
                 initialValues={{
-                  LocationName: ""
+                  LocationName: "",
+                  LocationAddress: ""
                 }}
+                validationSchema={Yup.object().shape({
+                  LocationName: Yup.string().required('*'),
+                  LocationAddress: Yup.string().required('*'),
+                })}
                 onSubmit={(values, { resetForm }) => { resetForm(); handleLocationUpdate(values) }}
               >
                 {/** The moderate pairings form to submit */}
-                {({ values, handleChange, resetForm }) => (
+                {({ errors, touched, values, handleChange, resetForm }) => (
                   <Form >
-                    <TextField id="outlined-basic" variant="outlined" name="LocationName" className={classes.individualTextField} onChange={handleChange} value={values.LocationName} />
-                    <Button type="Submit"> Add</Button>
+                    <div>
+                      <label htmlFor="LocationName" className={classes.formLabel}>
+                        <div className={classes.floatLeft}>
+                          <p className={classes.errorDiv}>Name</p>
+                        </div>
+                        <div className={classes.floatLeft}>
+                          {(errors.LocationName && touched.LocationName) ? (
+                            <div className={classes.errorStar}>*</div>
+                          ) : null}
+                        </div>
+                      </label>
+                      <TextField id="outlined-basic" variant="outlined" name="LocationName" className={classes.individualTextField} onChange={handleChange} value={values.LocationName} />
+                    </div>
+                    <div>
+                      <label htmlFor="LocationAddress" className={classes.formLabel}>
+                        <div className={classes.floatLeft}>
+                          <p className={classes.errorDiv}>Address</p>
+                        </div>
+                        <div className={classes.floatLeft}>
+                          {(errors.LocationAddress && touched.LocationAddress) ? (
+                            <div className={classes.errorStar}>*</div>
+                          ) : null}
+                        </div>
+                      </label>
+                      <TextField id="outlined-basic" variant="outlined" name="LocationAddress" className={classes.individualTextField} onChange={handleChange} value={values.LocationAddress} />
+                    </div>
+                    <Button type="Submit" className={classes.addButton} > Add New Location</Button>
+
                   </Form>
                 )}
               </Formik>

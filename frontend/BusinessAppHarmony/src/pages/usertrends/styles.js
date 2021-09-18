@@ -19,8 +19,13 @@ export default makeStyles(theme => ({
     fontFamily: "sans-serif-light",
     color: "#717171",
   },
+  addButton: {
+    backgroundColor: "#81b5c2", color: "white", marginLeft: 45, height: 35, borderRadius: 10, paddingLeft: 12, paddingRight: 12, width: "30%",
+    boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)"
+
+  },
   individualTextField: {
-    width: "75%",
+    width: 50,
     height: 10,
   },
   multiselector: {
