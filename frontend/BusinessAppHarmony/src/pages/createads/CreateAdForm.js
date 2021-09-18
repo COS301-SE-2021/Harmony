@@ -24,7 +24,8 @@ function CreateAdForm(...props) {
     const foodTagSelector = useRef();
     const drinkTagSelector = useRef();
     const mealTagSelector = useRef();
-    const audienceTagSelector = useRef();
+    const locationsTagSelector = useRef();
+    const timePeriodTagSelector = useRef();
 
     const supportedFormats = ['image/jpg', 'image/jpeg', 'image/png'];
 
@@ -38,14 +39,14 @@ function CreateAdForm(...props) {
         setDrinkImage(defaultImage);
         foodFileRef.current.value = "";
         drinkFileRef.current.value = "";
-        // console.log(foodTagSelector.current.selectedList);
 
         /**in a try catch because if you try clearing a list thats already empty it should do nothing */
         try {
             foodTagSelector.current.resetSelectedValues();
             drinkTagSelector.current.resetSelectedValues();
             mealTagSelector.current.resetSelectedValues();
-            audienceTagSelector.current.resetSelectedValues();
+            locationsTagSelector.current.resetSelectedValues();
+            timePeriodTagSelector.current.resetSelectedValues();
         } catch (error) {
         }
 
@@ -101,24 +102,21 @@ function CreateAdForm(...props) {
             <Formik
                 enableReinitialize={true}
                 initialValues={{
-                    ItemName: "",
-                    ItemDescription: "",
-                    ItemTags: "",
                     FoodName: "",
                     FoodTags: "",
                     DrinkName: "",
                     DrinkTags: "",
                     PairingDescription: "",
                     PairingTags: "",
+                    Locations: "",
+                    TimePeriod: ""
                 }}
                 validationSchema={Yup.object().shape({
-                    ItemName: Yup.string().required('*'),
-                    ItemDescription: Yup.string().required('*'),
-                    ItemTags: Yup.string().required('*'),
-
+                    Locations: Yup.string().required('*'),
                     FoodName: Yup.string().required(true),
                     DrinkName: Yup.string().required(true),
                     PairingDescription: Yup.string().required(true),
+                    TimePeriod: Yup.string().required(true),
                 })}
                 // onSubmit={(values) => handleSubmit(values)}
                 onSubmit={(values, { resetForm }) => {
@@ -262,10 +260,10 @@ function CreateAdForm(...props) {
                                 <div className={classes.formElementsPairingTag}>
                                     <label htmlFor="ItemTags" className={classes.tagName}>
                                         <div className={classes.floatLeft}><p className={classes.errorDiv}>Tag</p> </div>
-                                        <div className={classes.floatLeft}>
+                                        {/* <div className={classes.floatLeft}>
                                             {errors.ItemTags && touched.ItemTags ? (
                                                 <div className={classes.errorStar}>*</div>
-                                            ) : null}</div>
+                                            ) : null}</div> */}
                                     </label>
                                     <div className={classes.multiselectorTag}>
                                         <Multiselect
@@ -309,12 +307,9 @@ function CreateAdForm(...props) {
                                 <div className={classes.formElementsImageContainer}>
                                     <div className={classes.configLabel}>
 
-                                        <label htmlFor="ItemTags" className={classes.tagName}>
+                                        <label htmlFor="Locations" className={classes.tagName}>
                                             <div className={classes.floatLeft}><p className={classes.errorDiv}>Locations</p> </div>
-                                            <div className={classes.floatLeft}>
-                                                {errors.ItemTags && touched.ItemTags ? (
-                                                    <div className={classes.errorStar}>*</div>
-                                                ) : null}</div>
+
                                         </label>
                                     </div>
                                     <div className={classes.multiselectorTag}>
@@ -324,7 +319,7 @@ function CreateAdForm(...props) {
                                             avoidHighlightFirstOption
                                             showArrow
                                             placeholder=""
-                                            ref={mealTagSelector}
+                                            ref={locationsTagSelector}
                                             style={{
                                                 optionContainer: { // To change css for option container 
                                                     'width': '90%'
@@ -338,22 +333,19 @@ function CreateAdForm(...props) {
                                                     'font-weight': 'bold',
                                                 },
                                             }}
-                                            onRemove={(selectedList) => (values.PairingTags = selectedList)}
+                                            onRemove={(selectedList) => (values.Locations = selectedList)}
                                             onSearch={function noRefCheck() { }}
-                                            onSelect={(selectedList) => (values.PairingTags = selectedList)}
-                                            id="PairingTags" name="PairingTags" onChange={handleChange} value={values.PairingTags}
+                                            onSelect={(selectedList) => (values.Locations = selectedList)}
+                                            id="Locations" name="Locations" onChange={handleChange} value={values.Locations}
                                             options={mockResponse.locations}
                                         />
                                     </div>
                                 </div>
                                 <div className={classes.formElementsImageContainer}>
                                     <div className={classes.configLabel}>
-                                        <label htmlFor="ItemTags" className={classes.tagName}>
+                                        <label htmlFor="TimePeriod" className={classes.tagName}>
                                             <div className={classes.floatLeft}><p className={classes.errorDiv}>Time Period</p> </div>
-                                            <div className={classes.floatLeft}>
-                                                {errors.ItemTags && touched.ItemTags ? (
-                                                    <div className={classes.errorStar}>*</div>
-                                                ) : null}</div>
+
                                         </label>
                                     </div>
                                     <div className={classes.multiselectorTag}>
@@ -364,7 +356,7 @@ function CreateAdForm(...props) {
                                             selectionLimit={1}
                                             showArrow
                                             placeholder=""
-                                            ref={mealTagSelector}
+                                            ref={timePeriodTagSelector}
                                             style={{
                                                 optionContainer: { // To change css for option container 
                                                     'width': '90%'
@@ -377,10 +369,10 @@ function CreateAdForm(...props) {
                                                     'font-weight': 'bold'
                                                 },
                                             }}
-                                            onRemove={(selectedList) => (values.PairingTags = selectedList)}
+                                            onRemove={(selectedList) => (values.TimePeriod = selectedList)}
                                             onSearch={function noRefCheck() { }}
-                                            onSelect={(selectedList) => (values.PairingTags = selectedList)}
-                                            id="PairingTags" name="PairingTags" onChange={handleChange} value={values.PairingTags}
+                                            onSelect={(selectedList) => (values.TimePeriod = selectedList)}
+                                            id="TimePeriod" name="TimePeriod" onChange={handleChange} value={values.TimePeriod}
                                             options={['One Day', 'One Month', 'Three Months', 'Six Months', 'One Year']}
                                         />
                                     </div>
