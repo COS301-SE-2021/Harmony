@@ -10,19 +10,15 @@ import { Typography } from "../../components/Wrappers";
 import Geocode from "react-geocode";
 import PayPal from '../dashboard/components/Table/PayPal';
 import { GrPaypal } from "react-icons/gr";
-import * as Yup from 'yup';
-import {
-  Formik, Form
-} from 'formik';
+import LocationForm from './LocationForm';
 
 export default function Tables() {
   const classes = useStyles();
   const [logo, setLogo] = useState("http://beepeers.com/assets/images/commerces/default-image.jpg");
   const [checkout, setCheckout] = useState(false);
-  const [data, setData] = useState({ OutstandingAmount: 0, Locations: [] });
+  const [data, setData] = useState({ OutstandingAmount: 0, Locations: [{ name: "" }, { address: "" }] });
 
   useEffect(() => {
-    // fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/getprofile", { BID: "b1" })
     fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/getprofile", {
       headers: {
         'Accept': 'application/json',
@@ -92,6 +88,7 @@ export default function Tables() {
   const handleLocationUpdate = (values) => {
     console.log(values.LocationAddress);
     /**set the api key to use geocode */
+    Geocode.setApiKey("AIzaSyBWoLXoRAgQgoJkZb0n5fOy5-T_C4fwhkI");
     Geocode.setLanguage("en");
     Geocode.setRegion("za");
     Geocode.setLocationType("ROOFTOP");
@@ -109,7 +106,7 @@ export default function Tables() {
   const mockResponse = {
     statusCode: 200,
     logo: "base 64 format",
-    locations: [{ name: "Durban North", address: "34 Ilala Drive" },
+    Locations: [{ name: "Durban North", address: "34 Ilala Drive" },
     { name: "Pretoria East", address: "107 Garsfontein Road" },
     { name: "Westiville", address: "37 Jack Martins Drive" }
     ],
@@ -145,55 +142,7 @@ export default function Tables() {
             <Typography size="md" weight="bold">
               Edit Locations
             </Typography>
-            <div className={classes.formElementsImageContainer}>
-              <Formik
-                initialValues={{
-                  LocationName: "",
-                  LocationAddress: ""
-                }}
-                validationSchema={Yup.object().shape({
-                  LocationName: Yup.string().required('*'),
-                  LocationAddress: Yup.string().required('*'),
-                })}
-                onSubmit={(values, { resetForm }) => { resetForm(); handleLocationUpdate(values) }}
-              >
-                {/** The moderate pairings form to submit */}
-                {({ errors, touched, values, handleChange, resetForm }) => (
-                  <Form >
-                    <div className={classes.marginAuto}>
-                      <div className={classes.formContainer}>
-                        <label htmlFor="LocationName" className={classes.formLabel}>
-                          <div className={classes.floatLeft}>
-                            <p className={classes.errorDiv}>Name</p>
-                          </div>
-                          <div className={classes.floatLeft}>
-                            {(errors.LocationName && touched.LocationName) ? (
-                              <div className={classes.errorStar}>*</div>
-                            ) : null}
-                          </div>
-                        </label>
-                        <TextField id="outlined-basic" variant="outlined" name="LocationName" className={classes.individualTextField} onChange={handleChange} value={values.LocationName} />
-                      </div>
-                      <div className={classes.formContainer}>
-                        <label htmlFor="LocationAddress" className={classes.formLabel}>
-                          <div className={classes.floatLeft}>
-                            <p className={classes.errorDiv}>Address</p>
-                          </div>
-                          <div className={classes.floatLeft}>
-                            {(errors.LocationAddress && touched.LocationAddress) ? (
-                              <div className={classes.errorStar}>*</div>
-                            ) : null}
-                          </div>
-                        </label>
-                        <TextField id="outlined-basic" variant="outlined" name="LocationAddress" className={classes.individualTextField} onChange={handleChange} value={values.LocationAddress} />
-                      </div>
-                    </div>
-                    <Button type="Submit" className={classes.addLocationButton} > Add New Location</Button>
-
-                  </Form>
-                )}
-              </Formik>
-            </div>
+            <LocationForm />
             <Table className="mb-0">
               <TableHead>
                 <TableRow className={classes.tableRowHeader}>
@@ -210,12 +159,6 @@ export default function Tables() {
                     <TableCell>{Address}</TableCell>
                   </TableRow>
                 ))}
-                {/* {data.Locations.map((item, index) => (
-                  <TableRow key={item} >
-                    <TableCell className="pl-3 fw-normal">{item[index][0]}</TableCell>
-                    <TableCell>{item[index][1]}</TableCell>
-                  </TableRow>
-                ))} */}
               </TableBody>
             </Table>
           </Widget>

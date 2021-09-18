@@ -26,7 +26,7 @@ export default makeStyles(theme => ({
     color: "#717171",
   },
   individualTextField: {
-    width: 250,
+    width: "100%",
     height: 70,
     float: "left"
   },
