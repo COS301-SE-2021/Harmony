@@ -36,6 +36,7 @@ export default makeStyles(theme => ({
   formLabel: {
     marginTop: 10,
     fontSize: 20,
+    width: 110
   },
   formElements: {
     marginTop: 20,
@@ -44,17 +45,14 @@ export default makeStyles(theme => ({
     display: "flex"
   },
   formElementsPairingTag: {
-    marginTop: 70,
+    marginTop: 80,
     marginBottom: 10,
     display: "flex",
     width: '60%',
-    position: "relative"
   },
   tagName: {
-    float: 'left',
-    marginRight: 15,
-    marginTop: 8,
-    fontSize: 20
+    fontSize: 20,
+    width: 65
   },
   MealContainer: {
     marginTop: 20,
@@ -68,7 +66,8 @@ export default makeStyles(theme => ({
     marginBottom: 20,
     borderRadius: 15,
     justifyContent: "space-around",
-    display: "flex"
+    display: "flex",
+    padding: 10
   },
   addItemContainer: {
     width: "95%",
@@ -134,7 +133,7 @@ export default makeStyles(theme => ({
   },
   PreviewContainer: {
     display: "block",
-    width: "40%",
+    width: "45%",
     border: "1px solid #EDEDED",
     boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.02)",
     borderRadius: 5,

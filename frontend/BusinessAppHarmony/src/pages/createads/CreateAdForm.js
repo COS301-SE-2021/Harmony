@@ -27,11 +27,13 @@ function CreateAdForm(...props) {
     const locationsTagSelector = useRef();
     const timePeriodTagSelector = useRef();
 
+    const foodImageError = false;
     const supportedFormats = ['image/jpg', 'image/jpeg', 'image/png'];
 
     const mockResponse = {
         statusCode: 200,
-        locations: ["Durban North", "Pretoria East", "Westiville"]
+        locations: ["Durban North", "Pretoria East", "Westville"]
+
     }
 
     const handleClear = (values) => {
@@ -83,6 +85,9 @@ function CreateAdForm(...props) {
     }
     /** Submits the form to the database */
     const handleSubmit = (vals) => {
+        if (foodImage == defaultImage) {
+            alert("You havent uploaded an image for food.");
+        }
         // console.log("submitted handle " + JSON.stringify(vals))
         // var request = {
         //     "ItemName": vals.ItemName,
@@ -107,16 +112,20 @@ function CreateAdForm(...props) {
                     DrinkName: "",
                     DrinkTags: "",
                     PairingDescription: "",
+                    ItemTags: "",
                     PairingTags: "",
                     Locations: "",
-                    TimePeriod: ""
+                    TimePeriod: "",
                 }}
                 validationSchema={Yup.object().shape({
+                    FoodTags: Yup.string().required('*'),
+                    FoodName: Yup.string().required('*'),
                     Locations: Yup.string().required('*'),
-                    FoodName: Yup.string().required(true),
-                    DrinkName: Yup.string().required(true),
-                    PairingDescription: Yup.string().required(true),
-                    TimePeriod: Yup.string().required(true),
+                    DrinkTags: Yup.string().required('*'),
+                    DrinkName: Yup.string().required('*'),
+                    PairingDescription: Yup.string().required('*'),
+                    ItemTags: Yup.string().required('*'),
+                    TimePeriod: Yup.string().required('*'),
                 })}
                 // onSubmit={(values) => handleSubmit(values)}
                 onSubmit={(values, { resetForm }) => {
@@ -141,8 +150,14 @@ function CreateAdForm(...props) {
                                         <div className={classes.floatLeft}>
                                             <p className={classes.errorDiv}>Food Name</p>
                                         </div>
+                                        <div className={classes.floatLeft}>
+                                            {(errors.FoodName && touched.FoodName) ? (
+                                                <div className={classes.errorStar}>*</div>
+                                            ) : null}
+                                        </div>
                                     </label>
-                                    <TextField id="outlined-basic" error={errors.FoodName} variant="outlined" name="FoodName" className={classes.individualTextField} onChange={handleChange} value={values.FoodName} />
+                                    {/* <TextField id="outlined-basic" error={errors.FoodName} variant="outlined" name="FoodName" className={classes.individualTextField} onChange={handleChange} value={values.FoodName} /> */}
+                                    <TextField id="outlined-basic" variant="outlined" name="FoodName" className={classes.individualTextField} onChange={handleChange} value={values.FoodName} />
                                 </div>
                                 <div className={classes.formElementsImageContainer}>
                                     <label htmlFor="FoodTags" className={classes.formLabel}>
@@ -166,25 +181,26 @@ function CreateAdForm(...props) {
                                             placeholder=""
                                             style={{
                                                 optionContainer: { // To change css for option container 
-                                                    'width': '100%'
+                                                    'width': '100%',
                                                 },
+
                                                 multiselectContainer: {
                                                     'width': '100%',
-                                                    'height': 20
+                                                    'height': 20,
                                                 },
                                                 inputField: {
                                                     'width': '100%',
-                                                    'height': 20
+                                                    'height': 20,
                                                 },
                                                 chips: {
-                                                    'background-color': '#FF6347',
-                                                    'font-weight': 'bold',
+                                                    'backgroundColor': '#FF6347',
+                                                    'fontWeight': 'bold',
                                                 },
                                             }}
                                             onRemove={(selectedList) => (values.FoodTags = selectedList)}
                                             onSearch={function noRefCheck() { }}
-                                            onSelect={(selectedList) => (values.FoodTags = selectedList)}
-                                            id="FoodTags" name="FoodTags" onChange={handleChange} value={values.FoodTags}
+                                            onSelect={(selectedList) => (values.FoodTags = selectedList, console.log(values.FoodTags))}
+                                            id="FoodTags" name="FoodTags" value={values.FoodTags}
                                             options={['Spicy', 'Savoury', 'Salty', 'Sweet', 'Sour', 'Warm', 'Hot', 'Cold']}
                                         />
                                     </div>
@@ -203,15 +219,24 @@ function CreateAdForm(...props) {
                                         <div className={classes.floatLeft}>
                                             <p className={classes.errorDiv}>Drink Name</p>
                                         </div>
-
+                                        <div className={classes.floatLeft}>
+                                            {(errors.DrinkName && touched.DrinkName) ? (
+                                                <div className={classes.errorStar}>*</div>
+                                            ) : null}
+                                        </div>
                                     </label>
-                                    <TextField id="outlined-basic" error={errors.DrinkName} variant="outlined" name="DrinkName" className={classes.individualTextField} onChange={handleChange} value={values.DrinkName} />
+                                    <TextField id="outlined-basic" variant="outlined" name="DrinkName" className={classes.individualTextField} onChange={handleChange} value={values.DrinkName} />
 
                                 </div>
                                 <div className={classes.formElementsImageContainer}>
                                     <label htmlFor="DrinkTags" className={classes.formLabel}>
                                         <div className={classes.floatLeft}>
                                             <p className={classes.errorDiv}>Drink Tags</p>
+                                        </div>
+                                        <div className={classes.floatLeft}>
+                                            {(errors.DrinkTags && touched.DrinkTags) ? (
+                                                <div className={classes.errorStar}>*</div>
+                                            ) : null}
                                         </div>
                                     </label>
                                     <div className={classes.multiselector}>
@@ -253,17 +278,23 @@ function CreateAdForm(...props) {
                                 <div className={classes.formElementsPairing}>
                                     <label htmlFor="PairingDescription" className={classes.formLabel}>
                                         <div className={classes.floatLeft}><p className={classes.errorDiv}>Description</p> </div>
+                                        <div className={classes.floatLeft}>
+                                            {(errors.PairingDescription && touched.PairingDescription) ? (
+                                                <div className={classes.errorStar}>*</div>
+                                            ) : null}
+                                        </div>
                                     </label>
-                                    <TextField id="outlined-basic" multiline={true} rows={4} error={errors.PairingDescription} variant="outlined" name="PairingDescription" className={classes.individualTextField} onChange={handleChange} value={values.PairingDescription} />
+                                    <TextField id="outlined-basic" multiline={true} rows={4} variant="outlined" name="PairingDescription" className={classes.individualTextField} onChange={handleChange} value={values.PairingDescription} />
                                 </div>
                                 <br />
                                 <div className={classes.formElementsPairingTag}>
                                     <label htmlFor="ItemTags" className={classes.tagName}>
                                         <div className={classes.floatLeft}><p className={classes.errorDiv}>Tag</p> </div>
-                                        {/* <div className={classes.floatLeft}>
-                                            {errors.ItemTags && touched.ItemTags ? (
+                                        <div className={classes.floatLeft}>
+                                            {(errors.ItemTags && touched.ItemTags) ? (
                                                 <div className={classes.errorStar}>*</div>
-                                            ) : null}</div> */}
+                                            ) : null}
+                                        </div>
                                     </label>
                                     <div className={classes.multiselectorTag}>
                                         <Multiselect
@@ -309,7 +340,11 @@ function CreateAdForm(...props) {
 
                                         <label htmlFor="Locations" className={classes.tagName}>
                                             <div className={classes.floatLeft}><p className={classes.errorDiv}>Locations</p> </div>
-
+                                            <div className={classes.floatLeft}>
+                                                {(errors.Locations && touched.Locations) ? (
+                                                    <div className={classes.errorStar}>*</div>
+                                                ) : null}
+                                            </div>
                                         </label>
                                     </div>
                                     <div className={classes.multiselectorTag}>
@@ -345,7 +380,11 @@ function CreateAdForm(...props) {
                                     <div className={classes.configLabel}>
                                         <label htmlFor="TimePeriod" className={classes.tagName}>
                                             <div className={classes.floatLeft}><p className={classes.errorDiv}>Time Period</p> </div>
-
+                                            <div className={classes.floatLeft}>
+                                                {(errors.TimePeriod && touched.TimePeriod) ? (
+                                                    <div className={classes.errorStar}>*</div>
+                                                ) : null}
+                                            </div>
                                         </label>
                                     </div>
                                     <div className={classes.multiselectorTag}>
