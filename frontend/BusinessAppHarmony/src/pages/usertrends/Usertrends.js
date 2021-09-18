@@ -15,7 +15,7 @@ export default function Tables() {
   const classes = useStyles();
   const [logo, setLogo] = useState("http://beepeers.com/assets/images/commerces/default-image.jpg");
   const [checkout, setCheckout] = useState(false);
-  const [data, setData] = useState();
+  const [data, setData] = useState({ OutstandingAmount: 0 });
 
   useEffect(() => {
     // fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/getprofile", { BID: "b1" })
@@ -31,8 +31,8 @@ export default function Tables() {
       .then(
         (result) => {
           console.log(result);
-          setData(result);
-          setLogo(result.Logo)
+          setData(result.UserData);
+          setLogo(result.UserData.Logo)
         },
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
@@ -181,7 +181,7 @@ export default function Tables() {
             <div className={classes.outstandingBalance}>
               <p className={classes.outstandingBalanceWord}>Outstanding Balance</p>
               <Typography size="xxl" weight="bold">
-                {mockResponse.outstandingBalance}
+                {data.OutstandingAmount}
               </Typography>
             </div>
             <div className={classes.PayPalContainer}>
