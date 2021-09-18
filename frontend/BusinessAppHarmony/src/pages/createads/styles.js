@@ -29,7 +29,7 @@ export default makeStyles(theme => ({
     marginLeft: 8
   },
   multiselectorTag: {
-    width: "75%",
+    width: "95%",
     height: 15,
     marginLeft: 100
   },
@@ -47,7 +47,7 @@ export default makeStyles(theme => ({
     marginTop: 20,
     marginBottom: 30,
     display: "flex",
-    width: '40%',
+    width: '60%',
   },
   tagName: {
     float: 'left',

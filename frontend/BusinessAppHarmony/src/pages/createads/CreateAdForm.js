@@ -278,11 +278,11 @@ function CreateAdForm(...props) {
                                             ref={mealTagSelector}
                                             style={{
                                                 optionContainer: { // To change css for option container 
-                                                    'width': '80%'
+                                                    'width': '100%'
                                                 },
                                                 searchBox: {
                                                     // 'border': '1px solid grey',
-                                                    'width': '80%'
+                                                    'width': '100%'
                                                 },
                                                 chips: {
                                                     'background-color': '#C41ED4',
