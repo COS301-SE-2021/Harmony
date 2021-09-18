@@ -9,7 +9,6 @@ import { AppToast } from "../Components/AppToast";
 import AppAlert from "../Components/AppAlert";
 
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { SocialIcon } from "react-native-elements";
 import AppLoadingIcon from "../Components/AppLoadingIcon";
 
 export default function SignUp({ navigation }) {
@@ -181,11 +180,6 @@ export default function SignUp({ navigation }) {
               />
             </View>
             <View style={styles.footer}>
-              <View style={styles.footerIcons}>
-                <SocialIcon type="facebook" />
-                <SocialIcon type="google" />
-              </View>
-
               <View style={styles.footerTextContainer}>
                 <Text style={styles.footerText}>
                   Already have an account?

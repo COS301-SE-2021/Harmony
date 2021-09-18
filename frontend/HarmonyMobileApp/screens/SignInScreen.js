@@ -11,7 +11,6 @@ import AppLoadingIcon from "../Components/AppLoadingIcon";
 import AppAlert from "../Components/AppAlert";
 
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { SocialIcon } from "react-native-elements";
 
 export default function SignIn({ navigation, updateAuthState }) {
   const [isLoading, setLoading] = useState(false);
@@ -136,11 +135,6 @@ export default function SignIn({ navigation, updateAuthState }) {
               </View>
             </View>
             <View style={styles.footer}>
-              <View style={styles.footerIcons}>
-                <SocialIcon type="facebook" />
-                <SocialIcon type="google" />
-              </View>
-
               <View style={styles.footerTextContainer}>
                 <Text style={styles.footerText}>
                   Don't have an account?
