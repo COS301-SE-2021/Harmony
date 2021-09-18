@@ -78,7 +78,7 @@ def create_business_pairing(event, context):
             'FoodImage': drink_image_link,
             'Locations': locations,
             'TimeLimit': time_period,
-            'Status': "Pending",
+            'Status': "Active",
             'DateCreated': str(today),
             'Price': cost
         })
