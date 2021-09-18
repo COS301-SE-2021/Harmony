@@ -17,6 +17,9 @@ const useStyles = makeStyles({
   }
 })
 
+// function refreshPage() {
+//   window.location.reload(true);
+// }
 
 export default function DataTable() {
   const classes = useStyles()
@@ -28,11 +31,11 @@ export default function DataTable() {
 
   useEffect(() => {
     let isSubscribed = true;
-    axios.get(`https://mocki.io/v1/64dfb5a2-0cd9-4483-8dce-a2ef4db47f36`, {
+    axios.get(`https://7q0027151j.execute-api.eu-west-1.amazonaws.com/dev/gettags`, {
       cancelToken: signal.token,
     })
         .then(res => {
-          const posts = res.data;
+          const posts = res.data.data;
           setPost(posts);
         }).catch(err => {
       console.log(err);
@@ -50,30 +53,6 @@ export default function DataTable() {
     {label:"Image count", name:"imageCount" }
   ];
 
-
-  useEffect(() => {
-    let isSubscribed = true;
-    axios.get(`https://mocki.io/v1/37248929-ce35-49cc-a7d1-b2ae7e4cecb3`, {
-      cancelToken: signal.token,
-    })
-        .then(res => {
-          const posts1 = res.data;
-          setPost1(posts1);
-        }).catch(err => {
-      console.log(err);
-    });
-    return function cleanup() {
-      isSubscribed = false;
-      signal.cancel('Api is being canceled');
-    }
-  }, []);
-
-  const columns1 = [
-    {label: "Iteration ID", name: "id" },
-    {label: "Published Name", name:"publishName" },
-    {label:"Status of Iteration", name:"status" },
-    {label:"Date of Training", name:"trainedAt" }
-  ];
 
   const options = {
     filter: true,
@@ -93,7 +72,15 @@ export default function DataTable() {
 
   return (
       <>
-        <PageTitle title="Train AI"/>
+        <PageTitle title="Add to AI"
+            //     button={<Button
+            //     variant="contained"
+            //     size="medium"
+            //     color="secondary"
+            //     onClick={refreshPage}>
+            //   Refresh
+            // </Button>}
+        />
         <Grid container spacing={4}>
           <Grid item xs={12}>
             <MUIDataTable
@@ -108,7 +95,7 @@ export default function DataTable() {
           <div className="App">
             <FormSubmit_NewTag
                 formName="Create New Tag"
-                formDescription="Using TagID and Image URL from the Feedback, You can add images to AI DataSet."
+                formDescription="Enter new Tag name and Tag Type"
             />
           </div>
         </Grid>
@@ -123,25 +110,6 @@ export default function DataTable() {
         </Grid>
         </Grid>
 
-        <Grid container spacing={4}>
-          <Grid item xs={6}>
-            <MUIDataTable
-                title={"Iterations"}
-                data={posts1}
-                columns={columns1}
-                options={options}
-            />
-          </Grid>
-
-          <Grid item xs={6}>
-            <div className="App">
-              <FormSubmit_Iterations
-                  formName="Iteration Publish or Unpublish"
-                  formDescription="Using TagID and Image URL from the Feedback, You can add images to AI DataSet."
-              />
-            </div>
-          </Grid>
-        </Grid>
       </>
   );
 }
