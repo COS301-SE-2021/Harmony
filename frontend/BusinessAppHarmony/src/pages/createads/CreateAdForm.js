@@ -321,6 +321,56 @@ function CreateAdForm(...props) {
                             </div>
                         </div>
                         <br />
+                        <div className={classes.PreviewContainerPairing}>
+                            <div className={classes.configurationLabel}>Configuration</div>
+
+                            <div className={classes.MealContainer}>
+                                <div className={classes.formElementsPairing}>
+                                    <label htmlFor="PairingDescription" className={classes.formLabel}>
+                                        <div className={classes.floatLeft}><p className={classes.errorDiv}>Description</p> </div>
+                                    </label>
+                                    <TextField id="outlined-basic" multiline={true} error={errors.PairingDescription} variant="outlined" name="PairingDescription" className={classes.individualTextField} onChange={handleChange} value={values.PairingDescription} />
+                                </div>
+                                <br />
+                                <div className={classes.formElementsPairingTag}>
+                                    <label htmlFor="ItemTags" className={classes.tagName}>
+                                        <div className={classes.floatLeft}><p className={classes.errorDiv}>Tag</p> </div>
+                                        <div className={classes.floatLeft}>
+                                            {errors.ItemTags && touched.ItemTags ? (
+                                                <div className={classes.errorStar}>*</div>
+                                            ) : null}</div>
+                                    </label>
+                                    <div className={classes.multiselectorTag}>
+                                        <Multiselect
+                                            isObject={false}
+                                            disablePreSelectedValues
+                                            avoidHighlightFirstOption
+                                            selectionLimit={1}
+                                            showArrow
+                                            placeholder=""
+                                            ref={mealTagSelector}
+                                            style={{
+                                                searchBox: {
+                                                    // 'border': '1px solid grey',
+                                                    'width': '80%'
+                                                },
+                                                chips: {
+                                                    'background-color': '#C41ED4',
+                                                    'font-weight': 'bold',
+                                                },
+                                            }}
+                                            onRemove={(selectedList) => (values.PairingTags = selectedList)}
+                                            onSearch={function noRefCheck() { }}
+                                            onSelect={(selectedList) => (values.PairingTags = selectedList)}
+                                            id="PairingTags" name="PairingTags" onChange={handleChange} value={values.PairingTags}
+                                            options={['Breakfast', 'Lunch', 'Supper', 'Snack', 'Vegetarian', 'Dairy-Free', 'Nut-Free']}
+                                        />
+                                    </div>
+                                </div>
+                                <div className={classes.clear}></div>
+                            </div>
+                        </div>
+                        <br />
                         <div className={classes.ButtonContainer}>
                             <Button onClick={(values) => (resetForm(), handleClear())} className={classes.clearButton} variant="contained">Clear</Button>
                             <Button variant="contained" color="primary" type="submit" className={classes.addButton} onClick={() => console.log("clicked submit")}>

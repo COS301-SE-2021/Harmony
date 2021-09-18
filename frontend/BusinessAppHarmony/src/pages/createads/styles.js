@@ -194,6 +194,19 @@ export default makeStyles(theme => ({
     fontSize: 18
 
   },
+  configurationLabel: {
+    backgroundColor: "#4CD41E",
+    padding: 10,
+    color: "white",
+    width: "100%",
+    margin: "auto",
+    height: 40,
+    borderTopRightRadius: 5,
+    borderTopLeftRadius: 5,
+    fontWeight: 'bold',
+    fontSize: 18
+
+  },
   displayFlexJustifyCenter: {
     display: "flex", justifyContent: "center"
   },

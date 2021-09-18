@@ -14,10 +14,24 @@ import { GrPaypal } from "react-icons/gr";
 export default function Tables() {
   const classes = useStyles();
   const [logo, setLogo] = useState("http://beepeers.com/assets/images/commerces/default-image.jpg");
-  // useEffect(() => {
   const [checkout, setCheckout] = useState(false);
   const [data, setData] = useState();
-  // }, [logo])
+
+  useEffect(() => {
+    fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/getprofile", { BID: "b1" })
+      .then(res => res.json())
+      .then(
+        (result) => {
+          console.log(result);
+          setData(result);
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+        }
+      )
+  }, [])
   /**set the api key to use geocode */
   // Geocode.setApiKey("AIzaSyBX7qzFSYnqo28_uZDI3GBRCK7JGkK07L8");
   // Geocode.setLanguage("en");
