@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "HarmonyMobileApp",
-    "slug": "HarmonyMobileApp",
+    "slug": "Harmony",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon1.png",
@@ -18,7 +18,8 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.DreamTeam.Harmony",
+      "package": "com.dreamteam.harmony",
+      "versionCode": 2,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon1.png",
         "backgroundColor": "#118AB2"
