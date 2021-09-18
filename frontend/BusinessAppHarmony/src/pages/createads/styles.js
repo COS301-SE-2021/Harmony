@@ -195,7 +195,7 @@ export default makeStyles(theme => ({
 
   },
   configLabel: {
-    width: 100
+    width: 150
   },
   configurationLabel: {
     backgroundColor: "#4CD41E",

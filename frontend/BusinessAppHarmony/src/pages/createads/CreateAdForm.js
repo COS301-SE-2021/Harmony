@@ -256,7 +256,7 @@ function CreateAdForm(...props) {
                                     <label htmlFor="PairingDescription" className={classes.formLabel}>
                                         <div className={classes.floatLeft}><p className={classes.errorDiv}>Description</p> </div>
                                     </label>
-                                    <TextField id="outlined-basic" multiline={true} error={errors.PairingDescription} variant="outlined" name="PairingDescription" className={classes.individualTextField} onChange={handleChange} value={values.PairingDescription} />
+                                    <TextField id="outlined-basic" multiline={true} rows={4} error={errors.PairingDescription} variant="outlined" name="PairingDescription" className={classes.individualTextField} onChange={handleChange} value={values.PairingDescription} />
                                 </div>
                                 <br />
                                 <div className={classes.formElementsPairingTag}>
@@ -367,10 +367,10 @@ function CreateAdForm(...props) {
                                             ref={mealTagSelector}
                                             style={{
                                                 optionContainer: { // To change css for option container 
-                                                    'width': '80%'
+                                                    'width': '90%'
                                                 },
                                                 searchBox: {
-                                                    'width': '80%'
+                                                    'width': '90%'
                                                 },
                                                 chips: {
                                                     'background-color': '#4CD41E',
