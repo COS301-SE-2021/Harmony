@@ -33,16 +33,16 @@ def get_statement(event, context):
     Default is 1 Month/30 days.
     """
 
-    if statement_time_period == "One Day":
+    if statement_time_period == "Day":
         statement_duration = 1
-    elif statement_time_period == "One Month":
+    elif statement_time_period == "Week":
+        statement_duration = 7
+    elif statement_time_period == "Month":
         statement_duration = 30
-    elif statement_time_period == "Three Months":
-        statement_duration = 90
-    elif statement_time_period == "Six Months":
-        statement_duration = 180
-    elif statement_time_period == "One Year":
+    elif statement_time_period == "Year":
         statement_duration = 365
+    elif statement_time_period == "All":
+        statement_duration = 1000
 
 
     # this takes the current time and subtracts the input statement number of days to get a range

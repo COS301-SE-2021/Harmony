@@ -53,11 +53,22 @@ def create_business_pairing(event, context):
     generate_id1 = uuid.uuid4().hex
     generate_id2 = uuid.uuid4().hex
 
+    if time_period == "One Day":
+        days = 1
+    elif time_period == "One Month":
+        days = 30
+    elif time_period == "Three Months":
+        days = 90
+    elif time_period == "Six Months":
+        days = 180
+    elif time_period == "One Year":
+        days = 365
+
     # place the image in the s3 bucket and get the link
 
     food_image_link = add_image_to_s3(event["FoodImage"], generate_id1)
     drink_image_link = add_image_to_s3(event["DrinkImage"], generate_id2)
-    cost = calculate_cost(len(locations), time_period)
+    cost = calculate_cost(len(locations), days)
 
     # write data for new pairing to the DynamoDB table using the object we instantiated and save response in a variable
     table.put_item(
