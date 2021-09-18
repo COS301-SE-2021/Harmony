@@ -56,6 +56,7 @@ export default function Tables() {
   //     console.error(error);
   //   }
   // );
+
   /**@var fileRef to create a reference to the file input to be able to clear it */
   const logoFileRef = useRef();
 
@@ -81,7 +82,7 @@ export default function Tables() {
           .then(
             (result) => {
               console.log(result);
-              setData(result);
+              setData(result.Data);
             },
             // Note: it's important to handle errors here
             // instead of a catch() block so that we don't swallow

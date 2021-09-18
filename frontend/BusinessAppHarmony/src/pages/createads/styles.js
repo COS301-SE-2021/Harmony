@@ -194,6 +194,9 @@ export default makeStyles(theme => ({
     fontSize: 18
 
   },
+  configLabel: {
+    width: 100
+  },
   configurationLabel: {
     backgroundColor: "#4CD41E",
     padding: 10,
