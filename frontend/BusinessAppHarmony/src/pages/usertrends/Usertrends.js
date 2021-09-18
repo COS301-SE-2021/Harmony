@@ -32,6 +32,7 @@ export default function Tables() {
         (result) => {
           console.log(result);
           setData(result);
+          setLogo(result.Logo)
         },
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
@@ -66,7 +67,16 @@ export default function Tables() {
     reader.onload = () => {
       if (reader.readyState === 2) {
         setLogo(reader.result)
-        fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/updateuserlogo", { BID: "b1", Logo: btoa(reader.result) })
+        console.log(reader.result);
+        // fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/updateuserlogo", { BID: "b1", Logo: btoa(reader.result) })
+        fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/updateuserlogo", {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          method: "POST",
+          body: JSON.stringify({ BID: "b4", Logo: reader.result })
+        })
           .then(res => res.json())
           .then(
             (result) => {
