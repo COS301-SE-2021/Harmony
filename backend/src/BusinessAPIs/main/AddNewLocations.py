@@ -21,10 +21,11 @@ It then adds this data to the database.
 def add_new_locations(event, context):
     user_id = event['BID']
     location_name = event['LocationName']
-    coordinates = event['Coordinates']
+    lat = event['lat']
+    long = event['lng']
     address = event['Address']
 
-    location_to_add = {"Address": f"{address}", "Name": f"{location_name}"}
+    location_to_add = {"Address": f"{address}", "Name": f"{location_name}", "Latitude": f"{lat}", "Longitude": f"{long}"}
     business_users_table.update_item(
         TableName=business_users_table_name,
         Key={
@@ -42,7 +43,6 @@ def add_new_locations(event, context):
     except ClientError as e:
         print(e.response['Error']['Message'])
         return {"StatusCode": 400}
-
 
     return {"StatusCode": 200,
             "Data": business_user_data["Item"]
