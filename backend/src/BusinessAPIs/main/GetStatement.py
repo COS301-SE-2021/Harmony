@@ -58,7 +58,7 @@ def get_statement(event, context):
         if i['BID'] == bid and d <= date_created:
             today = datetime.strptime(str(date.today()), '%Y-%m-%d')
             difference = (today - date_created).days
-            days_remaining = i['TimeLimit'] - difference
+            days_remaining = statement_duration - difference
             i['DaysRemaining'] = days_remaining
             adverts.append(i)
 
