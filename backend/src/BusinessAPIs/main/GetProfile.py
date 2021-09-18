@@ -24,7 +24,15 @@ def get_profile(event, context):
         print(e.response['Error']['Message'])
         return {"StatusCode": 400}
 
+
+    locations = []
+
+    a = business_user_data["Item"]["Locations"]
+    for i in a:
+        locations.append(i["Name"])
+
     return {
         "StatusCode": 200,
-        "UserData": business_user_data["Item"]
+        "UserData": business_user_data["Item"],
+        "Locations": locations
     }
