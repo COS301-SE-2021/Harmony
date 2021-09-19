@@ -14,6 +14,9 @@ business_pairings_table = dynamodb.Table(business_pairings_table_name)
 business_user_table_name = 'BusinessUsers'
 business_user_table = dynamodb.Table(business_user_table_name)
 
+payments_table_name = 'Payments'
+payment_user_table = dynamodb.Table(payments_table_name)
+
 """
 Gets the statement for the business user.
 """
@@ -82,6 +85,13 @@ def get_statement(event, context):
             days_remaining = timeLimit - difference
             i['DaysRemaining'] = days_remaining
             adverts.append(i)
+
+    all_payment_response = payment_user_table.scan()
+    payment_response = all_payment_response['Items']
+
+    for k in payment_response:
+        if k['BID'] == bid:
+            adverts.append(k)
 
     sort_response = sortbynew(adverts)
 
