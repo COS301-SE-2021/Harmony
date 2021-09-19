@@ -1,4 +1,7 @@
 import json
+import random
+import uuid
+
 import boto3
 from boto3.dynamodb.conditions import Key
 from datetime import date, timedelta, datetime
@@ -10,12 +13,15 @@ from geopy.geocoders import Nominatim
 
 table_name = 'Pairings'
 User_table = 'Users'
+bp = 'BusinessPairings'
+bu = "BusinessUsers"
 
 client = boto3.resource('dynamodb')
 
 table = client.Table(table_name)
 usertable = client.Table(User_table)
-
+sponsortable = client.Table(bp)
+businessusers = client.Table(bu)
 """This function will take in the UID of the user, as a json event. This function returns 
  the data in the pairings table
  event format:
@@ -60,6 +66,7 @@ def sort_and_filter(event, context):
     if range is not None:
         sortedResponse = filter_by_range(sortedResponse,event['Distance'])
 
+    sortedResponse = addsponsors(sortedResponse)
     if len(sortedResponse) == 0:
         return {
             "StatusCode": 204,
@@ -289,5 +296,40 @@ def filter_by_range(response, filterdist):
             del response[counter]
         else:
             counter = counter + 1
+
+    return response
+
+def addsponsors(response):
+    businesses = businessusers.scan()
+    businesses = businesses["Items"]
+    sponsors = sponsortable.scan()
+    sponsors = sponsors["Items"]
+    for i in response:
+        i["IsSponsor"] = False
+
+
+    sponsorcounter = 0
+    for i in range(len(response)):
+        if sponsorcounter < len(sponsors):
+            if (i%5==0):
+                newpid = uuid.uuid4().hex
+
+                newSponsor = {
+                    "FoodTags": sponsors[sponsorcounter]["FoodTags"],
+                    "FoodItem": sponsors[sponsorcounter]["FoodName"],
+                    "FoodImage": sponsors[sponsorcounter]["FoodImage"],
+                    "DrinkTags": sponsors[sponsorcounter]["DrinkTags"],
+                    "DrinkItem": sponsors[sponsorcounter]["DrinkName"],
+                    "DrinkImage": sponsors[sponsorcounter]["DrinkImage"],
+                    "Location": "14 Sandton road", #sponsors[sponsorcounter]["Locations"]
+                    "MealTag": sponsors[sponsorcounter]["PairingTags"],
+                    "Distance": random.randint(10,20),
+                    "Price": "R59.99",
+                    "Logo" : businesses[random.randint(1,2)]["Logo"],
+                    "IsSponsor": True,
+                    "PID" : newpid
+                }
+                response.insert(i, newSponsor)
+                sponsorcounter = sponsorcounter+1
 
     return response
