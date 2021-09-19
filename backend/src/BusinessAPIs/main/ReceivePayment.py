@@ -63,7 +63,7 @@ def receive_payment(event, context):
             'DateCreated': str(date.today()),
             'Locations': [],
             'FoodName': "Payment Successful",
-            'Price': amount_paid,
+            'Price': amount_paid*-1,
             'Status': status_type,
             'DaysRemaining': ""
         })
