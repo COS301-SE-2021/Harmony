@@ -19,6 +19,7 @@ import {
   MaterialIcons,
   MaterialCommunityIcons,
   Ionicons,
+  FontAwesome5
 } from "@expo/vector-icons";
 import * as Animatable from "react-native-animatable";
 import { AppToast } from "../Components/AppToast";
@@ -194,7 +195,12 @@ const PairingResultsScreen = ({ navigation, route }) => {
         <View style={styles.rowContainer}>
           {pairingResults.response.Data[0].FoodTags.map((tag, index) => (
             <View style={styles.tagContainer} key={index}>
-              <FontAwesome name="tag" size={16} color="#fff" />
+              {/* <FontAwesome name="tag" size={16} color="#fff" /> */}
+              <FontAwesome5
+                name="hamburger"
+                size={16}
+                color="#fff"
+              />
               {/* Keeping outlined icons just incase we want to change to them for consistency overall */}
               {/* The filled icons look better in this case though */}
               {/* <Feather name="tag" size={16} color="#fff" /> */}
@@ -375,7 +381,7 @@ const styles = StyleSheet.create({
   tagContainer: {
     //Container of individual tag
     flexDirection: "row", //Needed to keep the tag icon and text in one line
-    backgroundColor: "#FF6347",
+    backgroundColor: "#C41ED4",
     borderRadius: 20,
     margin: 5, //Space between tags
     padding: 10, //Space around innner tag
