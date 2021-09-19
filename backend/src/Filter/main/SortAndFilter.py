@@ -1,5 +1,6 @@
 import json
 import random
+import uuid
 
 import boto3
 from boto3.dynamodb.conditions import Key
@@ -311,6 +312,8 @@ def addsponsors(response):
     for i in range(len(response)):
         if sponsorcounter < len(sponsors):
             if (i%5==0):
+                newpid = uuid.uuid4().hex
+
                 newSponsor = {
                     "FoodTags": sponsors[sponsorcounter]["FoodTags"],
                     "FoodItem": sponsors[sponsorcounter]["FoodName"],
@@ -323,7 +326,8 @@ def addsponsors(response):
                     "Distance": random.randint(10,20),
                     "Price": "R59.99",
                     "Logo" : businesses[random.randint(1,2)]["Logo"],
-                    "IsSponsor": True
+                    "IsSponsor": True,
+                    "PID" : newpid
                 }
                 response.insert(i, newSponsor)
                 sponsorcounter = sponsorcounter+1
