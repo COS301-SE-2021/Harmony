@@ -83,6 +83,32 @@ def create_business_pairing(event, context):
             'Price': cost
         })
 
+    """Gets the business user data using the business id"""
+    try:
+        business_user_data = business_user_table.get_item(Key={'BID': businessID})
+    except ClientError as e:
+        print(e.response['Error']['Message'])
+        return {"StatusCode": 400}
+
+    #gets the current users outstanding amount
+    user_data = business_user_data["Item"]
+    new_amount = user_data["OutstandingAmount"] + cost
+
+    """
+        Writes the new outstanding amount to the business users table.
+    """
+    business_user_table.update_item(
+        TableName=business_user_table_name,
+        Key={
+            'BID': businessID
+        },
+        ExpressionAttributeNames={'#V': 'OutstandingAmount'},
+        ExpressionAttributeValues={':v': new_amount},
+        UpdateExpression='SET #V = :v',
+        ReturnValues="UPDATED_NEW"
+
+    )
+
     return {"StatusCode": 200}
 
 
