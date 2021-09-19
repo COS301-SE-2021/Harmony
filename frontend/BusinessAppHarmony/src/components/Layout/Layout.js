@@ -18,11 +18,9 @@ import Header from "../Header";
 import Sidebar from "../Sidebar";
 
 // pages
-import Dashboard from "../../pages/dashboard";
-import ModerateItems from "../../pages/createads";
-import Tables from "../../pages/settings";
-import Feedback from "../../pages/usertrends";
-
+import HomePage from "../../pages/usertrends";
+import Statements from "../../pages/dashboard";
+import CreateAds from "../../pages/createads";
 
 
 // context
@@ -46,10 +44,9 @@ function Layout(props) {
           >
             <div className={classes.fakeToolbar} />
             <Switch>
-              <Route path="/app/dashboard" component={Dashboard} />
-              <Route path="/app/createads" component={ModerateItems} />
-              <Route path="/app/settings" component={Tables} />
-              <Route path="/app/usertrends" component={Feedback} />
+              <Route path="/app/usertrends" component={HomePage} />
+              <Route path="/app/dashboard" component={Statements} />
+              <Route path="/app/createads" component={CreateAds} />
 
             </Switch>
             <Box
