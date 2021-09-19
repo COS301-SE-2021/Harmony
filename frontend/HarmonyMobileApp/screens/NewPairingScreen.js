@@ -146,8 +146,13 @@ function NewPairingScreen({ navigation }) {
     console.log("Creating...")
     setLoading(true);
 
-    let user = await Auth.currentAuthenticatedUser();
-    const { username } = user;
+    let username = "";
+    await Auth.currentAuthenticatedUser({}) //Get user information
+      .then((Data) => {
+        username = Data.username;
+      })
+      .catch((err) => alert(err));
+
 
     await fetch(CREATE_PAIRNG_URL, {
       method: "POST",
