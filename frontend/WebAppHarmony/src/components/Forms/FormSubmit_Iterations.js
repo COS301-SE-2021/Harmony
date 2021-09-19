@@ -1,8 +1,9 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useState } from "react";
 import { Button, Icon, TextField, Paper, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 export function FormSubmit_Iterations(props) {
+    let [iterId, setIterId] = useState("")
     const useStyles = makeStyles(theme => ({
         button: {
             margin: theme.spacing(1)
@@ -29,41 +30,30 @@ export function FormSubmit_Iterations(props) {
             width: 400
         }
     }));
-
-    const [formInput, setFormInput] = useReducer(
-        (state, newState) => ({ ...state, ...newState }),
-        {
-            ID: "",
-            Type: ""
-        }
-    );
-
     const handleSubmit = evt => {
         evt.preventDefault();
-
-        let data =  formInput ;
+        
 
         fetch("https://7q0027151j.execute-api.eu-west-1.amazonaws.com/dev/unpublishiterations", {
             method: "POST",
-            body: JSON.stringify(data),
+            body: JSON.stringify({IterId : iterId}),
             headers: {
                 "Content-Type": "application/json"
             }
         })
             .then(response => response.json())
             .then(response => console.log("Success:", JSON.stringify(response)))
+            .then(response => setIterId("") )
             .catch(error => console.error("Error:", error));
     };
 
     const handleInput = evt => {
         const name = evt.target.name;
         const newValue = evt.target.value;
-        setFormInput({ [name]: newValue });
+        setIterId(newValue );
     };
 
     const classes = useStyles();
-
-    console.log(props);
 
     return (
         <div>
@@ -78,7 +68,7 @@ export function FormSubmit_Iterations(props) {
                         label="Iteration ID"
                         id="margin-normal"
                         name="IterId"
-                        defaultValue={formInput.IterId}
+                        value = {iterId}
                         className={classes.textField}
                         helperText="Enter Iteration ID "
                         onChange={handleInput}
