@@ -51,6 +51,25 @@ export class AccountForm extends Component {
 						/>
 					</Grid>
 
+					<Grid item xs={12}>
+						<TextField
+							id="BusinessName"
+							name="BusinessName"
+							label="Business Name"
+							defaultValue={values.password}
+							fullWidth
+						/>
+					</Grid>
+
+					<Grid item xs={12}>
+						<TextField
+							id="BusinessReg"
+							name="BusinessReg"
+							label="Business Registration"
+							defaultValue={values.password}
+							fullWidth
+						/>
+					</Grid>
 				</Grid>
 			</React.Fragment>
 		);
