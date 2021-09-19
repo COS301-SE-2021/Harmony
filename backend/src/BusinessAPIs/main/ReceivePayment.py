@@ -1,12 +1,19 @@
 import json
 import boto3
 from botocore.exceptions import ClientError
+import uuid
+from datetime import date, timedelta, datetime
+from datetime import time
+from datetime import datetime
 
 dynamodb = boto3.resource('dynamodb')
 
 # use the DynamoDB object to select our table
 business_user_table_name = 'BusinessUsers'
 business_user_table = dynamodb.Table(business_user_table_name)
+
+payments_table_name = 'Payments'
+payment_user_table = dynamodb.Table(payments_table_name)
 
 """
 This lambda function takes in the business users ID and the amount that is being paid.
@@ -45,6 +52,21 @@ def receive_payment(event, context):
         ReturnValues="UPDATED_NEW"
 
     )
+
+    status_type = "Payment"
+    pid = uuid.uuid4().hex
+    # write data for new payment to the DynamoDB table.
+    payment_user_table.put_item(
+        Item={
+            'PID': pid,
+            'BID': bid,
+            'DateCreated': str(date.today()),
+            'Location': "",
+            'Name': "Payment Receievd",
+            'Price': amount_paid,
+            'Status': status_type,
+            'DaysRemaining': ""
+        })
 
     """Gets the business user data that we will now use for the response."""
     try:
