@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     width: "35%",
     padding: 5,
     elevation: 2,
-    backgroundColor: "#4F6D7A",
+    backgroundColor: "#3366FF",
     marginHorizontal: 20
   },
   filterText: {
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   },
   buttonClose: {
     //active modal button
-    backgroundColor: "#4F6D7A",
+    backgroundColor: "#3366FF",
   },
   closeButtonOnFilter: {
     //button for x
