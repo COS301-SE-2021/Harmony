@@ -61,7 +61,7 @@ def receive_payment(event, context):
             'PID': pid,
             'BID': bid,
             'DateCreated': str(date.today()),
-            'Locations': "",
+            'Locations': [],
             'FoodName': "Payment Receievd",
             'Price': amount_paid,
             'Status': status_type,
