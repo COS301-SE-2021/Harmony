@@ -18,19 +18,19 @@ import {
 } from "@ui-kitten/components";
 import IconsBar from "../Components/IconsBar";
 
-export default function Card({ dataSet, isDeleteVisible, isAd, ...otherProps }) {
+export default function Card({ dataSet, isDeleteVisible, ...otherProps }) {
 
     return (
         <View style={{ paddingBottom: 15 }}>
             <View style={styles.cardContainer}>
 
-                {isAd ?
+                {dataSet.IsSponsor ?
                     <View>
                         <View style={styles.adTitleContainer}>
                             <Image
                                 style={styles.tinyLogo}
                                 source={{
-                                    uri: 'https://nandos-site.objects.frb.io/assets/n_logo.png',
+                                    uri: dataSet.Logo,
                                 }}
                             />
                             <View style={{
@@ -162,16 +162,28 @@ export default function Card({ dataSet, isDeleteVisible, isAd, ...otherProps }) 
                         <Text style={styles.TextSmall}>{dataSet.Distance} KM</Text>
                     </View>
                 </View>
-                <Divider />
-                <IconsBar
-                    dataSet={dataSet}
-                    upVoteVal={dataSet.Upvotes}
-                    downVoteVal={dataSet.Downvotes}
-                    isDV={dataSet.isDownvoted}
-                    isUV={dataSet.isUpvoted}
-                    isF={dataSet.isFavourited}
-                    isDeleteVisible={isDeleteVisible}
-                />
+                {!dataSet.IsSponsor ?
+                    <View>
+                        <Divider />
+
+                        <IconsBar
+                            dataSet={dataSet}
+                            upVoteVal={dataSet.Upvotes}
+                            downVoteVal={dataSet.Downvotes}
+                            isDV={dataSet.isDownvoted}
+                            isUV={dataSet.isUpvoted}
+                            isF={dataSet.isFavourited}
+                            isDeleteVisible={isDeleteVisible}
+                        />
+                    </View>
+                    :
+                    <View style={{
+                        //card icons bar
+                        padding: "2%",
+                    }}>
+
+                    </View>
+                }
             </View>
         </View>
     );
