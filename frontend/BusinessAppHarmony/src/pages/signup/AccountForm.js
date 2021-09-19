@@ -48,6 +48,7 @@ export class AccountForm extends Component {
 							defaultValue={values.password}
 							fullWidth
 							type="password"
+							helperText="Password needs to be 8 characters"
 						/>
 					</Grid>
 
