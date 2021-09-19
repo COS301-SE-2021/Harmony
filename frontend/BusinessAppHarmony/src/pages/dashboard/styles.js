@@ -127,6 +127,10 @@ export default makeStyles(theme => ({
     backgroundColor: theme.palette.secondary.main,
     color: '#fff',
   },
+  info: {
+    backgroundColor: theme.palette.info.main,
+    color: '#fff',
+  },
   tableHeader: {
     width: "100%",
     justifyContent: "space-between",

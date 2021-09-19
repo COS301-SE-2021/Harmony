@@ -22,7 +22,7 @@ import { GrPaypal } from "react-icons/gr";
 const states = {
   Active: "success",
   Expired: "secondary",
-  Payment: "primary"
+  Payment: "info"
 };
 
 export default function TableComponent({ data }) {
