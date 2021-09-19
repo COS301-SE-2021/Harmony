@@ -20,14 +20,15 @@ import { Typography } from "../../../../components/Wrappers";
 import { IoMdCloudDownload } from "react-icons/io";
 import { GrPaypal } from "react-icons/gr";
 const states = {
-  active: "success",
-  expired: "secondary",
+  Active: "success",
+  Expired: "secondary",
+  Payment: "primary"
 };
 
 export default function TableComponent({ data }) {
   const classes = useStyles();
   const [checkout, setCheckout] = useState(false);
-  const [result, setResult] = useState({ StatusCode: 200, AdvertData: [], OutstandingAmount: 0 });
+  const [result, setResult] = useState({ StatusCode: 200, AdvertData: [{ Locations: [] }, { Locations: [] }], OutstandingAmount: 0 });
 
   var tableHeadings = [{ name: "", date_Created: "", expiring: "", location: "", status: "", cost: "" },] // var keys = Object.keys(data.statements[0]).map(i => i.toUpperCase());
   var keys = Object.keys(tableHeadings[0]).map(i => i.toUpperCase());
@@ -46,7 +47,7 @@ export default function TableComponent({ data }) {
         'Content-Type': 'application/json'
       },
       method: "POST",
-      body: JSON.stringify({ BID: "ghjgj", TimePeriod: TimePeriod })
+      body: JSON.stringify({ BID: "b4", TimePeriod: TimePeriod })
     })
       .then(res => res.json())
       .then(
@@ -122,8 +123,9 @@ export default function TableComponent({ data }) {
                 <TableCell>{DateCreated}</TableCell>
                 <TableCell>{DaysRemaining}</TableCell>
                 <TableCell>{Locations.map((item) => (item + ", "))}</TableCell>
+                {/* <TableCell>{Locations}</TableCell> */}
                 <TableCell>
-                  <Chip label={Status} classes={{ root: classes[states[Status.toLowerCase()]] }} />
+                  <Chip label={Status} classes={{ root: classes[states[Status]] }} />
                 </TableCell>
                 <TableCell style={{ textAlign: "right" }}>{Price}</TableCell>
 
