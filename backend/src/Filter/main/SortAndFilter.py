@@ -13,13 +13,14 @@ from geopy.geocoders import Nominatim
 table_name = 'Pairings'
 User_table = 'Users'
 bp = 'BusinessPairings'
+bu = "BusinessUsers"
 
 client = boto3.resource('dynamodb')
 
 table = client.Table(table_name)
 usertable = client.Table(User_table)
 sponsortable = client.Table(bp)
-
+businessusers = client.Table(bu)
 """This function will take in the UID of the user, as a json event. This function returns 
  the data in the pairings table
  event format:
@@ -298,6 +299,8 @@ def filter_by_range(response, filterdist):
     return response
 
 def addsponsors(response):
+    businesses = businessusers.scan()
+    businesses = businesses["Items"]
     sponsors = sponsortable.scan()
     sponsors = sponsors["Items"]
     for i in response:
@@ -314,11 +317,12 @@ def addsponsors(response):
                     "FoodImage": sponsors[sponsorcounter]["FoodImage"],
                     "DrinkTags": sponsors[sponsorcounter]["DrinkTags"],
                     "DrinkItem": sponsors[sponsorcounter]["DrinkName"],
-                    "DrinkImage": sponsors[sponsorcounter]["DrinkTags"],
+                    "DrinkImage": sponsors[sponsorcounter]["DrinkImage"],
                     "Location": "14 Sandton road", #sponsors[sponsorcounter]["Locations"]
                     "MealTag": sponsors[sponsorcounter]["PairingTags"],
                     "Distance": random.randint(10,20),
                     "Price": "R59.99",
+                    "Logo" : businesses[random.randint(1,3)]["Logo"],
                     "IsSponsor": True
                 }
                 response.insert(i, newSponsor)
