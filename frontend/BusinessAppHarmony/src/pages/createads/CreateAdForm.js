@@ -157,11 +157,14 @@ function CreateAdForm(...props) {
                 })}
                 // onSubmit={(values) => handleSubmit(values)}
                 onSubmit={(values, { resetForm }) => {
-                    if (foodImage == defaultImage || drinkImage == defaultImage) {
+                    if (foodImage == defaultImage || drinkImage == defaultImage || values.FoodTags == [] || values.DrinkTags == [] || values.PairingTags == [] || values.Locations == [] || values.TimePeriod == []) {
                         if (foodImage == defaultImage)
                             alert("You havent uploaded an image for food.");
-                        else
+                        else if (drinkImage == defaultImage)
                             alert("You havent uploaded an image for drink.");
+                        else
+                            alert("One of your tag fields are blank.");
+
                     }
                     else {                    /**reset then handle submit */
                         resetForm();
