@@ -81,8 +81,14 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
             "FoodOrDrink": FoodOrDrink,
             "Image": btoa(img)
         }
-        // console.log("request to submit " + JSON.stringify(request))
-        fetch('https://w3lfp6r6f7.execute-api.eu-west-1.amazonaws.com/dev/additem', request)
+        console.log("request to submit " + JSON.stringify(request))
+        fetch('https://w3lfp6r6f7.execute-api.eu-west-1.amazonaws.com/dev/additem',             {headers: {
+            'Accept': 'application/json',
+                'Content-Type': 'application/json'
+        },
+        method: "POST",
+            body: JSON.stringify(request)
+    })
             .then(response => response.json())
             .then(data => console.log(data))
     }
@@ -108,12 +114,12 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                         ItemTags: formTags,
                         FoodOrDrink: FoodOrDrink
                     }}
-                    validationSchema={Yup.object().shape({
-                        ItemName: Yup.string().required('*'),
-                        ItemDescription: Yup.string().required('*'),
-                        ItemTags: Yup.string().required('*'),
-                        FoodOrDrink: Yup.string().required('*'),
-                    })}
+                    // validationSchema={Yup.object().shape({
+                    //     ItemName: Yup.string().required('*'),
+                    //     ItemDescription: Yup.string().required('*'),
+                    //     ItemTags: Yup.string().required('*'),
+                    //     FoodOrDrink: Yup.string().required('*'),
+                    // })}
                     // onSubmit={(values) => handleSubmit(values)}
                     onSubmit={(values, { resetForm }) => {
                         /**reset then handle submit */
@@ -135,7 +141,11 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                                     <div className={classes.floatLeft}>
                                         <p className={classes.errorDivType}>Type</p>
                                     </div>
-
+                                    <div className={classes.floatLeft}>
+                                        {(errors.FoodOrDrink && touched.FoodOrDrink) ? (
+                                            <div className={classes.errorStar}>*</div>
+                                        ) : null}
+                                    </div>
                                 </label>
                                 <Select
                                     labelId="demo-simple-select-outlined-label"
@@ -155,9 +165,13 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                                     <div className={classes.floatLeft}>
                                         <p className={classes.errorDivTags}>Name</p>
                                     </div>
-
+                                    <div className={classes.floatLeft}>
+                                        {(errors.ItemName && touched.ItemName) ? (
+                                            <div className={classes.errorStar}>*</div>
+                                        ) : null}
+                                    </div>
                                 </label>
-                                <TextField id="outlined-basic" error={errors.ItemName} variant="outlined" name="ItemName" className={classes.individualTextField} onChange={handleChange} value={values.ItemName} />
+                                <TextField id="outlined-basic" variant="outlined" name="ItemName" className={classes.individualTextField} onChange={handleChange} value={values.ItemName} />
                             </div>
                             <div className={classes.formElementsDescription}>
                                 <label htmlFor="ItemDescription" className={classes.formLabel}>
@@ -195,7 +209,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                                     onRemove={(selectedList) => (values.ItemTags = selectedList)}
                                     onSearch={function noRefCheck() { }}
                                     onSelect={(selectedList) => (values.ItemTags = selectedList)}
-                                    id="ItemTags" name="ItemTags" onChange={handleChange} value={values.ItemTags}
+                                    id="ItemTags" name="ItemTags"  value={values.ItemTags}
                                     options={['Spicy', 'Savoury', 'Salty', 'Sweet', 'Sour', 'Warm', 'Hot', 'Cold', 'Alcoholic', 'Non-Alcoholic', 'Fizzy', 'Sweet', 'Sour', 'Bitter', 'Warm', 'Hot', 'Cold']}
                                 />
                             </div>
