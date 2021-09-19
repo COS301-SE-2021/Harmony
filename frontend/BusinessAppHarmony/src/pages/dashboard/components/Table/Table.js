@@ -20,18 +20,17 @@ import { Typography } from "../../../../components/Wrappers";
 import { IoMdCloudDownload } from "react-icons/io";
 import { GrPaypal } from "react-icons/gr";
 const states = {
-  approved: "success",
-  pending: "warning",
-  declined: "secondary",
+  active: "success",
+  expired: "secondary",
 };
 
 export default function TableComponent({ data }) {
   const classes = useStyles();
   const [checkout, setCheckout] = useState(false);
-  const [result, setResult] = useState({ StatusCode: 200, AdvertData: [], TotalCost: 0 });
+  const [result, setResult] = useState({ StatusCode: 200, AdvertData: [], OutstandingAmount: 0 });
 
-  var keys = Object.keys(data.statements[0]).map(i => i.toUpperCase());
-  keys.shift(); // delete "id" key
+  var tableHeadings = [{ name: "", date_Created: "", expiring: "", location: "", status: "", cost: "" },] // var keys = Object.keys(data.statements[0]).map(i => i.toUpperCase());
+  var keys = Object.keys(tableHeadings[0]).map(i => i.toUpperCase());
   /**to filter the data */
   var [TimePeriod, setTimePeriod] = useState("Month");
   const handleChange = (event) => {
@@ -39,7 +38,7 @@ export default function TableComponent({ data }) {
   };
 
   useEffect(() => {
-    console.log(JSON.stringify({ BID: "ghjgj", TimePeriod: TimePeriod }));
+    console.log(JSON.stringify({ BID: "b4", TimePeriod: TimePeriod }));
     // fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/getprofile", { BID: "b1" })
     fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/getstatement", {
       headers: {
@@ -69,10 +68,9 @@ export default function TableComponent({ data }) {
   /** the header for the csv to be exported */
   const headers = [
     { label: "Name", key: "name" },
-    { label: "Date", key: "date" },
+    { label: "Date Created", key: "date" },
     { label: "Expiring", key: "expiring" },
     { label: "Location", key: "location" },
-    { label: "Audience", key: "audience" },
     { label: "Status", key: "status" },
     { label: "Cost", key: "cost" },
   ];
@@ -117,27 +115,13 @@ export default function TableComponent({ data }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {/* {data.statements.map(({ id, name, date, expiring, location, audience, status, cost }) => (
-              <TableRow key={id}>
-                <TableCell className="pl-3 fw-normal">{name}</TableCell>
-                <TableCell>{date}</TableCell>
-                <TableCell>{expiring}</TableCell>
-                <TableCell>{location}</TableCell>
-                <TableCell>{audience}</TableCell>
-                <TableCell>
-                  <Chip label={status} classes={{ root: classes[states[status.toLowerCase()]] }} />
-                </TableCell>
-                <TableCell style={{ textAlign: "right" }}>{cost}</TableCell>
 
-              </TableRow>
-            ))} */}
-            {result.AdvertData.map(({ BPID, FoodName, DrinkName, DateCreated, DaysRemaining, Locations, audience, Status, Price }) => (
+            {result.AdvertData.map(({ BPID, FoodName, DrinkName, DateCreated, DaysRemaining, Locations, Status, Price }) => (
               <TableRow key={BPID}>
                 <TableCell className="pl-3 fw-normal">{FoodName} and {DrinkName}</TableCell>
                 <TableCell>{DateCreated}</TableCell>
                 <TableCell>{DaysRemaining}</TableCell>
                 <TableCell>{Locations.map((item) => (item + ", "))}</TableCell>
-                <TableCell>{audience}</TableCell>
                 <TableCell>
                   <Chip label={Status} classes={{ root: classes[states[Status.toLowerCase()]] }} />
                 </TableCell>
@@ -156,11 +140,11 @@ export default function TableComponent({ data }) {
           </div>
           <div className={classes.floatLeft}>
             <Typography size="xl" weight="bold">
-              R{result.TotalCost}
+              R{result.OutsandingAmount}
             </Typography>
           </div>
           <div style={{ clear: "both" }}></div>
-          {checkout ? (<PayPal amount={data.total} />) : (
+          {checkout ? (<PayPal amount={result.OutsandingAmount} />) : (
             <Button className={classes.payNowButton} variant="contained" onClick={() => { setCheckout(true) }}><GrPaypal style={{ marginRight: 10 }} size={20} color="white" />Pay now</Button>
           )}
         </div>
