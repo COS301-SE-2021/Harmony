@@ -17,7 +17,7 @@ export class NewPassForm extends Component {
 							required
 							id="password1"
 							name="password1"
-							label="Address line 1"
+							label="New Password"
 							onChange={handleChange("password1")}
 							defaultValue={values.address1}
 							fullWidth
@@ -29,7 +29,7 @@ export class NewPassForm extends Component {
 							required
 							id="password2"
 							name="password2"
-							label="Address line 1"
+							label="Confirm New Password"
 							onChange={handleChange("password2")}
 							defaultValue={values.password2}
 							fullWidth
