@@ -14,7 +14,7 @@ export default function TypographyPage() {
 
   return (
     <>
-      <PageTitle title="Create Pairing Advert" />
+      <PageTitle title="Create Advert" />
       <Grid container spacing={1}>
         {/* <Grid item xs={12} md={12}> */}
         {/* <Widget title="" disableWidgetMenu>
