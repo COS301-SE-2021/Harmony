@@ -1,7 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import useStyles from "./styles";
-
-
 import TextField from '@material-ui/core/TextField'
 // components
 import Button from '@material-ui/core/Button';
@@ -11,13 +9,17 @@ import {
     Formik, Form
 } from 'formik';
 
+const MY_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
 export default function LocationForm() {
     const classes = useStyles();
-
+    /**import the api key */
     const handleLocationUpdate = (values) => {
         console.log(values.LocationAddress);
+
+        console.log("key is " + MY_KEY);
         /**set the api key to use geocode */
+        Geocode.setApiKey(MY_KEY);
         Geocode.setLanguage("en");
         Geocode.setRegion("za");
         Geocode.setLocationType("ROOFTOP");

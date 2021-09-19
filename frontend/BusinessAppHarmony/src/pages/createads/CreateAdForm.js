@@ -28,13 +28,9 @@ function CreateAdForm(...props) {
     const locationsTagSelector = useRef();
     const timePeriodTagSelector = useRef();
 
-    const foodImageError = false;
     const supportedFormats = ['image/jpg', 'image/jpeg', 'image/png'];
 
-    const mockResponse = {
-        statusCode: 200,
-        locations: ["Durban North", "Pretoria East", "Westville"]
-    }
+
     useEffect(() => {
         fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/getprofile", {
             headers: {
@@ -122,7 +118,7 @@ function CreateAdForm(...props) {
             FoodImage: foodImage.split(',')[1],
             DrinkImage: drinkImage.split(',')[1],
         }
-        // console.log("request to submit " + JSON.stringify(request))
+        console.log("request to submit " + JSON.stringify(request))
         fetch('https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/createbusinesspairing', {
             headers: {
                 'Accept': 'application/json',
@@ -157,11 +153,14 @@ function CreateAdForm(...props) {
                 })}
                 // onSubmit={(values) => handleSubmit(values)}
                 onSubmit={(values, { resetForm }) => {
-                    if (foodImage == defaultImage || drinkImage == defaultImage) {
+                    if (foodImage === defaultImage || drinkImage === defaultImage || values.FoodTags === [] || values.DrinkTags === [] || values.PairingTags === [] || values.Locations === [] || values.TimePeriod === []) {
                         if (foodImage == defaultImage)
                             alert("You havent uploaded an image for food.");
-                        else
+                        else if (drinkImage == defaultImage)
                             alert("You havent uploaded an image for drink.");
+                        else
+                            alert("One of your tag fields are blank.");
+
                     }
                     else {                    /**reset then handle submit */
                         resetForm();
@@ -177,7 +176,7 @@ function CreateAdForm(...props) {
                             <div className={classes.PreviewContainer}>
                                 <div className={classes.FoodLabelButton}>Food</div>
                                 <div className={classes.PreviewPiece}><label htmlFor="file-input-Food"></label></div>
-                                <div className={classes.PreviewPiece}><img src={foodImage} className={classes.ImageContainer} /></div>
+                                <div className={classes.PreviewPiece}><img src={foodImage} className={classes.ImageContainer} alt="Error displaying." /></div>
                                 <div className={classes.FileInput}><input type="file" id="file-input-Food" name="ImageclassNameFood" accept="image/*" ref={foodFileRef} onChange={(values) => FoodImageHandler(values)} style={{ display: 'none' }} />
                                     <Button onClick={() => (foodFileRef.current.click())} className={classes.uploadFoodButton} variant="contained">Upload Image</Button>
                                 </div>
