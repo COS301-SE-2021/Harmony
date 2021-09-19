@@ -11,13 +11,15 @@ import {
     Formik, Form
 } from 'formik';
 
+const MY_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
 export default function LocationForm() {
     const classes = useStyles();
     /**import the api key */
-    const MY_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
     const handleLocationUpdate = (values) => {
         console.log(values.LocationAddress);
+
+        console.log("key is " + MY_KEY);
         /**set the api key to use geocode */
         Geocode.setApiKey(MY_KEY);
         Geocode.setLanguage("en");

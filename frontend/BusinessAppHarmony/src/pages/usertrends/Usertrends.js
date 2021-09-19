@@ -11,14 +11,15 @@ import Geocode from "react-geocode";
 import PayPal from '../dashboard/components/Table/PayPal';
 import { GrPaypal } from "react-icons/gr";
 import LocationForm from './LocationForm';
-
+import TrendingStats from './trendingStats';
 export default function Tables() {
   const classes = useStyles();
   const [logo, setLogo] = useState("http://beepeers.com/assets/images/commerces/default-image.jpg");
   const [checkout, setCheckout] = useState(false);
   const [data, setData] = useState({ OutstandingAmount: 0, Locations: [{ name: "" }, { address: "" }] });
-
+  const [recommendations, setRecommendations] = useState({ Tags: [], Pairings: [{ Food: "", Drink: "" }] })
   useEffect(() => {
+    /**load profile data */
     fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/getprofile", {
       headers: {
         'Accept': 'application/json',
@@ -184,8 +185,8 @@ export default function Tables() {
               )}
             </div>
           </Widget>
-
         </Grid>
+        <TrendingStats />
       </Grid>
     </>
   );
