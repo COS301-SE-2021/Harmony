@@ -1,7 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import useStyles from "./styles";
-
-
 import TextField from '@material-ui/core/TextField'
 // components
 import Button from '@material-ui/core/Button';

@@ -1,16 +1,11 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
     Grid,
     Table,
     TableRow,
     TableHead,
     TableBody,
-    TableCell,
-    Chip,
-    Select,
-    OutlinedInput,
-    MenuItem,
-    Button
+    TableCell
 } from "@material-ui/core";
 import Widget from "../../components/Widget";
 import useStyles from "./styles";

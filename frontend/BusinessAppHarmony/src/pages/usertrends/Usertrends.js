@@ -1,23 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Grid, Table, TableRow, TableHead, TableBody, TableCell, } from "@material-ui/core";
 import useStyles from "./styles";
-import TextField from '@material-ui/core/TextField'
 // components
 import PageTitle from "../../components/PageTitle";
 import Widget from "../../components/Widget";
 import Button from '@material-ui/core/Button';
 import { Typography } from "../../components/Wrappers";
-import Geocode from "react-geocode";
 import PayPal from '../dashboard/components/Table/PayPal';
 import { GrPaypal } from "react-icons/gr";
 import LocationForm from './LocationForm';
 import TrendingStats from './trendingStats';
 export default function Tables() {
   const classes = useStyles();
+  /**Default logo */
   const [logo, setLogo] = useState("http://beepeers.com/assets/images/commerces/default-image.jpg");
   const [checkout, setCheckout] = useState(false);
   const [data, setData] = useState({ OutstandingAmount: 0, Locations: [{ name: "" }, { address: "" }] });
-  const [recommendations, setRecommendations] = useState({ Tags: [], Pairings: [{ Food: "", Drink: "" }] })
+
   useEffect(() => {
     /**load profile data */
     fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/getprofile", {
@@ -46,6 +45,7 @@ export default function Tables() {
   /**@var fileRef to create a reference to the file input to be able to clear it */
   const logoFileRef = useRef();
 
+  /**The array of the sopported extensions for the image */
   const supportedFormats = ['image/jpg', 'image/jpeg', 'image/png'];
 
   /**Handles the image preview */
@@ -84,25 +84,6 @@ export default function Tables() {
       alert(e.target.files[0].type + " is not a supported file format.");
       setLogo("http://beepeers.com/assets/images/commerces/default-image.jpg");
     }
-  }
-
-  const handleLocationUpdate = (values) => {
-    console.log(values.LocationAddress);
-    /**set the api key to use geocode */
-    Geocode.setApiKey("AIzaSyBWoLXoRAgQgoJkZb0n5fOy5-T_C4fwhkI");
-    Geocode.setLanguage("en");
-    Geocode.setRegion("za");
-    Geocode.setLocationType("ROOFTOP");
-    // Get latitude & longitude from address.
-    Geocode.fromAddress(values.LocationAddress).then(
-      (response) => {
-        const { lat, lng } = response.results[0].geometry.location;
-        console.log(lat, lng);
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
   }
 
 
