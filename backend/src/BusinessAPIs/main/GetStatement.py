@@ -90,7 +90,8 @@ def get_statement(event, context):
     payment_response = all_payment_response['Items']
 
     for k in payment_response:
-        if k['BID'] == bid:
+        date_created = datetime.strptime(k['DateCreated'], '%Y-%m-%d')
+        if k['BID'] == bid and d <= date_created:
             adverts.append(k)
 
     sort_response = sortbynew(adverts)
