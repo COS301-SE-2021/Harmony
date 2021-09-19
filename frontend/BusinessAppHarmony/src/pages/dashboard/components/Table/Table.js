@@ -126,8 +126,19 @@ export default function TableComponent({ data }) {
                 <TableCell>{DaysRemaining}</TableCell>
                 <TableCell>{Locations.map((item) => (item + ", "))}</TableCell>
                 {/* <TableCell>{Locations}</TableCell> */}
+                {/* {
+                  Status == 'Active' ? (<Chip label={Status} classes={{ root: classes[states[Status]] }} />) : (<TableCell className="pl-3 fw-normal">{FoodName} and {DrinkName}</TableCell>)
+                } */}
                 <TableCell>
-                  <Chip label={Status} classes={{ root: classes[states[Status]] }} />
+                  {
+                    Status == 'Active' ? (<Chip label={Status} style={{ backgroundColor: "#3cd4a0", color: '#fff' }} />) : null
+                  }
+                  {
+                    Status == 'Expired' ? (<Chip label={Status} style={{ backgroundColor: "#FF2222", color: '#fff', }} />) : null
+                  }
+                  {
+                    Status == 'Payment' ? (<Chip label={Status} style={{ backgroundColor: "#9013fe", color: '#fff', }} />) : null
+                  }
                 </TableCell>
                 <TableCell style={{ textAlign: "right" }}>{Price}</TableCell>
 
