@@ -75,3 +75,6 @@ fabric.properties
 frontend/HarmonyMobileApp/.expo/packager-info.json
 frontend/HarmonyMobileApp/.expo/settings.json
 /backend/src/.aws-sam/
+
+/backend/src/.aws-sam/
+/backend/src/ImageRecognition/.aws-sam/
