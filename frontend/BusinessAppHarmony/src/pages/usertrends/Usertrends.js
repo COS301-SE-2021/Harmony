@@ -89,7 +89,7 @@ export default function Tables() {
 
   return (
     <>
-      <PageTitle title="Profile" />
+
       <Grid container spacing={4}>
         <Grid item xs={4}>
           <Widget
