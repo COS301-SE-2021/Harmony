@@ -89,7 +89,7 @@ export default function Tables() {
 
   return (
     <>
-      <PageTitle title="Profile" />
+
       <Grid container spacing={4}>
         <Grid item xs={4}>
           <Widget
@@ -166,7 +166,7 @@ export default function Tables() {
             <div className={classes.outstandingBalance}>
               <p className={classes.outstandingBalanceWord}>Outstanding Balance</p>
               <Typography size="xxl" weight="bold">
-                {data.OutstandingAmount}
+               R {data.OutstandingAmount}
               </Typography>
             </div>
             <div className={classes.PayPalContainer}>

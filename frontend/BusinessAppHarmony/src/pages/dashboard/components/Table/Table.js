@@ -123,7 +123,10 @@ export default function TableComponent({ data }) {
                   FoodName == 'Payment Successful' ? (<TableCell className="pl-3 fw-normal">{FoodName} </TableCell>) : (<TableCell className="pl-3 fw-normal">{FoodName} and {DrinkName}</TableCell>)
                 }
                 <TableCell>{DateCreated}</TableCell>
-                <TableCell>{DaysRemaining}</TableCell>
+
+                {
+                  FoodName == 'Payment Successful' ? (<TableCell>{DaysRemaining} </TableCell>) : (<TableCell>{DaysRemaining} Days </TableCell>)
+                }
                 <TableCell>{Locations.map((item) => (item + ", "))}</TableCell>
                 {/* <TableCell>{Locations}</TableCell> */}
                 {/* {

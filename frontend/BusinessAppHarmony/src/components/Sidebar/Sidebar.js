@@ -33,9 +33,9 @@ import {
 } from "../../context/LayoutContext";
 
 const structure = [
-  { id: 0, label: "Profile", link: "/app/usertrends", icon: <HomeIcon /> },
-  { id: 1, label: "Adverts Summary", link: "/app/dashboard", icon: <TableIcon /> },
-  { id: 2, label: "Create New Advert", link: "/app/createads", icon: <QueueIcon/>},
+  { id: 0, label: "Homepage", link: "/app/usertrends", icon: <HomeIcon /> },
+  { id: 1, label: "Statements", link: "/app/dashboard", icon: <TableIcon /> },
+  { id: 2, label: "Create Advert", link: "/app/createads", icon: <QueueIcon/>},
   { id: 3, type: "divider" },
 
 ];

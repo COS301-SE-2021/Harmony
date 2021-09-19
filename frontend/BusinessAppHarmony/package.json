@@ -16,6 +16,7 @@
     "@mdi/react": "^1.4.0",
     "@paypal/react-paypal-js": "^7.3.3",
     "apexcharts": "^3.24.0",
+    "aws-amplify": "^4.2.10",
     "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "font-awesome": "^4.7.0",
