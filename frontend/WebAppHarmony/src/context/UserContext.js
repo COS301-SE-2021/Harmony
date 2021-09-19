@@ -55,9 +55,13 @@ function useUserDispatch() {
   return context;
 }
 
-export { UserProvider, useUserState, useUserDispatch, loginUser, signOut };
+export { UserProvider, useUserState, useUserDispatch, loginUser, signOut, prevSign };
 
 // ###########################################################
+
+function prevSign(dispatch){
+  dispatch({ type: 'LOGIN_SUCCESS' })
+}
 
 function loginUser(dispatch, login, password, history, setIsLoading, setError) {
   setError(false);
