@@ -15,7 +15,7 @@ export default function FABNew() {
             <Portal>
                 <FAB.Group
                     fabStyle={{
-                        backgroundColor: '#03A9F4',
+                        backgroundColor: '#3366FF',
                     }}
                     open={open}
                     icon={open ? 'close' : 'plus'}
@@ -26,7 +26,7 @@ export default function FABNew() {
                             onPress: () => navigation.navigate("RequestNewItem"),
                             small: false,
                             style: {
-                                backgroundColor: '#03A9F4',
+                                backgroundColor: '#3366FF',
                             },
 
                         },
@@ -36,7 +36,7 @@ export default function FABNew() {
                             onPress: () => navigation.navigate("NewPairing"),
                             small: false,
                             style: {
-                                backgroundColor: '#03A9F4',
+                                backgroundColor: '#3366FF',
                             },
                         },
                     ]}
