@@ -9,8 +9,22 @@ function ItemsButton(item, ...props) {
     /**
        * @function removes the item from the list to be added
        */
-    const handleRemoveItem = () => {
-        console.log(item);
+    const handleRemoveItem = () => {console.log("12 " + item.item);
+        const request = {
+            ItemName: item.item
+        }
+        console.log(request)
+        fetch('https://w3lfp6r6f7.execute-api.eu-west-1.amazonaws.com/dev/removerequesteditem',             {headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+
+        },
+        method: "POST",
+        body: JSON.stringify(request)
+    })
+        .then(response => response.json())
+        .then(data => console.log(data))
+
     }
 
     return (
