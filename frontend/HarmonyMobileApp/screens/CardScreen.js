@@ -46,9 +46,16 @@ const CardScreen = ({ navigation, URL, headerVisible, isDeleteVisible }) => {
   useEffect(() => {
 
     async function fetchData() {
-      let user = await Auth.currentAuthenticatedUser();
-      const { username } = user;
-      alert(username);
+
+      let JWTToken = "";
+      let username = "";
+      await Auth.currentAuthenticatedUser({}) //Get user information
+        .then((Data) => {
+          JWTToken = Data.signInUserSession.idToken.jwtToken;
+          username = Data.username;
+        })
+        .catch((err) => alert(err));
+
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
         //setModalMessage must come before setErrorAlertVisible
@@ -56,17 +63,19 @@ const CardScreen = ({ navigation, URL, headerVisible, isDeleteVisible }) => {
         setErrorAlertVisible(true);
         return;
       }
-      let location = await Location.getCurrentPositionAsync({});
-      myFilterContext.setUserLatitude(location.coords.latitude)
-      myFilterContext.setUserLongitude(location.coords.longitude)
-      let backPerm = await Location.requestBackgroundPermissionsAsync();
-      // console.log(backPerm);//Handle
+
+      await Location.getCurrentPositionAsync({})
+        .then((Data) => {
+          myFilterContext.setUserLatitude(Data.coords.latitude)
+          myFilterContext.setUserLongitude(Data.coords.longitude)
+        })
+        .catch((err) => alert(err));
 
       fetch(API_URL, {
         method: "POST",
         headers: {
-          Accept: "application/json",
           "Content-Type": "application/json",
+          Authorization: JWTToken,
         },
         body: JSON.stringify({
           "UID": username,
@@ -75,8 +84,8 @@ const CardScreen = ({ navigation, URL, headerVisible, isDeleteVisible }) => {
           "FoodTags": myFilterContext.foodTagArray,
           "DrinkTags": myFilterContext.drinkTagArray,
           "Distance": myFilterContext.range,
-          "Latitude": location.coords.latitude,//Directly reference variable instead of context because its faster
-          "Longitude": location.coords.longitude,
+          "Latitude": myFilterContext.userLatitude,//Directly reference variable instead of context because its faster
+          "Longitude": myFilterContext.userLongitude,
         })
       })
         .then((response) => response.json())
@@ -85,10 +94,7 @@ const CardScreen = ({ navigation, URL, headerVisible, isDeleteVisible }) => {
         })
         .catch((error) => alert(error))
     };
-
     fetchData();
-
-
   }, [refreshing]);
 
   useEffect(() => {
@@ -175,7 +181,6 @@ const CardScreen = ({ navigation, URL, headerVisible, isDeleteVisible }) => {
               <Card
                 dataSet={item}
                 isDeleteVisible={isDeleteVisible}
-                isAd={true}
               />
             )}
           />
