@@ -75,6 +75,7 @@ const DrinkDetailsScreen = ({ navigation, route }) => {
         contentContainerStyle={{
           flexDirection: "row",
           flexWrap: "wrap",
+          marginLeft: "10%",
         }}
         showsHorizontalScrollIndicator={false}
         horizontal={true}

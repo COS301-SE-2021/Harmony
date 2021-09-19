@@ -188,6 +188,8 @@ const PairingResultsScreen = ({ navigation, route }) => {
         contentContainerStyle={{
           flexDirection: "row",
           flexWrap: "wrap",
+          marginLeft: "10%",
+
         }}
         showsHorizontalScrollIndicator={false}
         horizontal={true}
@@ -350,7 +352,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     width: "100%",
     // backgroundColor: "#EAEAEA",
-    borderBottomWidth: 1,
     borderBottomColor: "#cccccc",
   },
   section: {
@@ -445,7 +446,8 @@ const styles = StyleSheet.create({
     // backgroundColor: "rgba(0,0,0,0.1)",
     // backgroundColor: "#4F6D7A",
     // backgroundColor: "#DD6E42",
-    backgroundColor: "#FF6347",
+    // backgroundColor: "#FF6347",
+    backgroundColor: "#1FBFBA",
     // backgroundColor: "#E8DAB2",
     // backgroundColor: "#C0D6DF",
     // backgroundColor: "#EAEAEA",
