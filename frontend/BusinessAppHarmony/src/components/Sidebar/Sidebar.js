@@ -16,6 +16,7 @@ import QueueIcon from '@material-ui/icons/Queue';
 import { useTheme } from "@material-ui/styles";
 import { withRouter } from "react-router-dom";
 import classNames from "classnames";
+//import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWalletIcon';
 
 // styles
 import useStyles from "./styles";
@@ -32,16 +33,10 @@ import {
 } from "../../context/LayoutContext";
 
 const structure = [
-  { id: 0, label: "Dashboard", link: "/app/dashboard", icon: <HomeIcon /> },
-  {
-    id: 1,
-    label: "Moderate Pairing",
-    link: "/app/createads",
-    icon: <QueueIcon />,
-  },
-  { id: 2, label: "Train AI", link: "/app/settings", icon: <TableIcon /> },
-  { id: 3, label: "User Feedback", link: "/app/usertrends", icon: <FeedbackIcon /> },
-  { id: 4, type: "divider" },
+  { id: 0, label: "Profile", link: "/app/usertrends", icon: <HomeIcon /> },
+  { id: 1, label: "Adverts Summary", link: "/app/dashboard", icon: <TableIcon /> },
+  { id: 2, label: "Create New Advert", link: "/app/createads", icon: <QueueIcon/>},
+  { id: 3, type: "divider" },
 
 ];
 
