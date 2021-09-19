@@ -22,7 +22,7 @@ import { GrPaypal } from "react-icons/gr";
 const states = {
   Active: "success",
   Expired: "secondary",
-  Payment: "primary"
+  Payment: "info"
 };
 
 export default function TableComponent({ data }) {
@@ -119,7 +119,9 @@ export default function TableComponent({ data }) {
 
             {result.AdvertData.map(({ BPID, FoodName, DrinkName, DateCreated, DaysRemaining, Locations, Status, Price }) => (
               <TableRow key={BPID}>
-                <TableCell className="pl-3 fw-normal">{FoodName} and {DrinkName}</TableCell>
+                {
+                  FoodName == 'Payment Successful' ? (<TableCell className="pl-3 fw-normal">{FoodName} </TableCell>) : (<TableCell className="pl-3 fw-normal">{FoodName} and {DrinkName}</TableCell>)
+                }
                 <TableCell>{DateCreated}</TableCell>
                 <TableCell>{DaysRemaining}</TableCell>
                 <TableCell>{Locations.map((item) => (item + ", "))}</TableCell>

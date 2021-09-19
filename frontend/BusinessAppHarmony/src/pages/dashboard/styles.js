@@ -124,7 +124,11 @@ export default makeStyles(theme => ({
     color: '#fff',
   },
   secondary: {
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: "#FF2222",
+    color: '#fff',
+  },
+  info: {
+    backgroundColor: theme.palette.info.main,
     color: '#fff',
   },
   tableHeader: {
