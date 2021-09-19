@@ -322,7 +322,7 @@ def addsponsors(response):
                     "MealTag": sponsors[sponsorcounter]["PairingTags"],
                     "Distance": random.randint(10,20),
                     "Price": "R59.99",
-                    "Logo" : businesses[random.randint(1,3)]["Logo"],
+                    "Logo" : businesses[random.randint(1,2)]["Logo"],
                     "IsSponsor": True
                 }
                 response.insert(i, newSponsor)
