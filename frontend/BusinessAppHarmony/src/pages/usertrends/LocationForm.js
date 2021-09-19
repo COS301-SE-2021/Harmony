@@ -19,7 +19,7 @@ export default function LocationForm() {
 
         console.log("key is " + MY_KEY);
         /**set the api key to use geocode */
-        Geocode.setApiKey(MY_KEY);
+        Geocode.setApiKey("AIzaSyBWoLXoRAgQgoJkZb0n5fOy5-T_C4fwhkI");
         Geocode.setLanguage("en");
         Geocode.setRegion("za");
         Geocode.setLocationType("ROOFTOP");
@@ -40,7 +40,9 @@ export default function LocationForm() {
                     .then(
                         (result) => {
                             console.log(result);
+                            alert("Location " + values.LocationName + " was added successfully.")
                         },
+
                         // Note: it's important to handle errors here
                         // instead of a catch() block so that we don't swallow
                         // exceptions from actual bugs in components.
