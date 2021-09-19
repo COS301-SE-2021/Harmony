@@ -272,8 +272,13 @@ export default makeStyles(theme => ({
     // height: 60,
     // overflow: "hidden"
   },
+
   tableCell: {
     color: "white"
 
+  },
+  center: {
+    padding: 15,
+    marginLeft: 60,
   }
 }));

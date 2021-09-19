@@ -110,7 +110,7 @@ export default function Tables() {
     <>
       <PageTitle title="Profile" />
       <Grid container spacing={4}>
-        <Grid item xs={12}>
+        <Grid item xs={4}>
           <Widget
             disableWidgetMenu
             bodyClass={classes.tableWidget}
@@ -119,10 +119,27 @@ export default function Tables() {
               Profile Settings
             </Typography>
             <br />
-            <div className={classes.PreviewPiece}><label htmlFor="file-input-Logo"></label></div>
-            <div className={classes.PreviewPiece}><img src={logo} className={classes.ImageContainer} /></div>
-            <div className={classes.FileInput}><input type="file" id="file-input-Logo" name="ImageclassNameFood" accept="image/*" ref={logoFileRef} onChange={logoImageHandler} style={{ display: 'none' }} />
-              <Button onClick={() => (logoFileRef.current.click())} className={classes.uploadLogoButton} variant="contained">Upload New Logo</Button>
+            <div className={classes.center}>
+              <div className={classes.PreviewPiece}><label htmlFor="file-input-Logo"></label></div>
+              <div className={classes.PreviewPiece}><img src={logo} className={classes.ImageContainer} /></div>
+              <div className={classes.FileInput}><input type="file" id="file-input-Logo" name="ImageclassNameFood" accept="image/*" ref={logoFileRef} onChange={logoImageHandler} style={{ display: 'none' }} />
+                <Button onClick={() => (logoFileRef.current.click())} className={classes.uploadLogoButton} variant="contained">Upload New Logo</Button>
+              </div>
+              <br />
+              <Typography size="md" weight="bold">
+                Name
+              </Typography>
+              <Typography size="md" weight="light">
+                Laughing Panda
+              </Typography>
+              <br />
+              <Typography size="md" weight="bold">
+                Business Registration
+              </Typography>
+              <Typography size="sm" weight="medium">
+                201901000005 (1315525-A)
+              </Typography>
+
             </div>
           </Widget>
         </Grid>
