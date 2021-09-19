@@ -36,7 +36,7 @@ def create_business_pairing(event, context):
     pairing_tags = event["PairingTags"]
     pairing_description = event["Description"]
     locations = event["Locations"]
-    time_period = event["TimePeriod"]
+    time_period = event["TimePeriod"][0]
     today = date.today()
 
     # generate unique id for business request pairing
