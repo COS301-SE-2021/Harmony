@@ -27,7 +27,7 @@ def add_item(event, context):
     name = event['ItemName']
     description = event['ItemDescription']
     tags = event['ItemTags']
-    item_type = event['ItemType']
+    item_type = event['FoodOrDrink']
     generate_id = uuid.uuid4().hex
     imagelink = add_image_to_s3(event["Image"], generate_id)
 
