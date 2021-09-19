@@ -116,7 +116,7 @@ export default makeStyles(theme => ({
     marginLeft: theme.spacing(1),
   },
   success: {
-    backgroundColor: theme.palette.success.main,
+    backgroundColor: "#3cd4a0",
     color: '#fff',
   },
   warning: {
@@ -128,7 +128,7 @@ export default makeStyles(theme => ({
     color: '#fff',
   },
   info: {
-    backgroundColor: theme.palette.info.main,
+    backgroundColor: "#9013fe",
     color: '#fff',
   },
   tableHeader: {
