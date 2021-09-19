@@ -32,9 +32,6 @@ function NewPairingScreen({ navigation }) {
   const [drinkArray, setDrinkArray] = useState([]);
   const [mealTypeArray, setMealTypeArray] = useState([]);
 
-  const [userLatitude, setUserLatitude] = useState(null);
-  const [userLongitude, setUserLongitude] = useState(null);
-
   const [isLoading, setLoading] = useState(false);
   const [isErrorAlertVisible, setErrorAlertVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState("Oops, something went wrong.");
@@ -61,23 +58,6 @@ function NewPairingScreen({ navigation }) {
       })
   }, []);
 
-  useEffect(() => {
-    (async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== 'granted') {
-        //setModalMessage must come before setErrorAlertVisible
-        setModalMessage("Permission to access location was denied");
-        setErrorAlertVisible(true);
-        return;
-      }
-      let location = await Location.getCurrentPositionAsync({});
-      let backPerm = await Location.requestBackgroundPermissionsAsync();
-      // console.log(backPerm);//Handle
-      setUserLatitude(location.coords.latitude)
-      setUserLongitude(location.coords.longitude)
-
-    })();
-  }, []);
 
   const DropDown = ({ responseData, selectedItem, setSelected }) => (
     <SearchableDropdown
@@ -143,7 +123,9 @@ function NewPairingScreen({ navigation }) {
 
   async function createNewPairing() {
 
-    console.log("Creating...")
+    let userLatitude = null;
+    let userLongitude = null;
+
     setLoading(true);
 
     let username = "";
@@ -153,6 +135,21 @@ function NewPairingScreen({ navigation }) {
       })
       .catch((err) => alert(err));
 
+    let { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== 'granted') {
+      //setModalMessage must come before setErrorAlertVisible
+      setModalMessage("Permission to access location was denied");
+      setErrorAlertVisible(true);
+      return;
+    }
+
+    await Location.getCurrentPositionAsync({})
+      .then((Data) => {
+        userLatitude = Data.coords.latitude;
+        userLongitude = Data.coords.longitude;
+        console.log(Data);
+      })
+      .catch((err) => alert(err));
 
     await fetch(CREATE_PAIRNG_URL, {
       method: "POST",
@@ -191,8 +188,10 @@ function NewPairingScreen({ navigation }) {
       //setModalMessage must come before setErrorAlertVisible
       setModalMessage(json.Data);
       setErrorAlertVisible(true);
-
-
+    }
+    else {
+      console.log(json);
+      alert("Something went wrong... ");
     }
   }
   return (
