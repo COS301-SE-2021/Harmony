@@ -19,7 +19,7 @@ export default function Dashboard(props) {
 
   return (
     <>
-      <PageTitle title="Remaining balance on account" />
+      <PageTitle title="Statement" />
       <Grid container spacing={4}>
         <Table data={mock.table} />
       </Grid>
