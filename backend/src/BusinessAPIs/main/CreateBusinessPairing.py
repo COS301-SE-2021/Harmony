@@ -46,6 +46,9 @@ def create_business_pairing(event, context):
     generate_id1 = uuid.uuid4().hex
     generate_id2 = uuid.uuid4().hex
 
+    # Standard days is 7
+    days = 7
+
     if time_period == "One Day":
         days = 1
     elif time_period == "One Month":
@@ -54,6 +57,8 @@ def create_business_pairing(event, context):
         days = 90
     elif time_period == "Six Months":
         days = 180
+    elif time_period == "One Week":
+        days = 7
     elif time_period == "One Year":
         days = 365
 
@@ -90,7 +95,7 @@ def create_business_pairing(event, context):
         print(e.response['Error']['Message'])
         return {"StatusCode": 400}
 
-    #gets the current users outstanding amount
+    # gets the current users outstanding amount
     user_data = business_user_data["Item"]
     new_amount = user_data["OutstandingAmount"] + cost
 
