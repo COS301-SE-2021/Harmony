@@ -116,7 +116,7 @@ export default function DataTable() {
             <div className="App">
               <FormSubmit_PublishIterations
                   formName="Publish Iteration"
-                  formDescription="The iteration will no longer be available to be used for prediction"
+                  formDescription="The iteration will be available to be used for prediction"
               />
             </div>
           </Grid>

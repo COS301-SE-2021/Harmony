@@ -85,12 +85,12 @@ export function FormSubmit_PublishIterations(props) {
                     />
 
                     <TextField
-                        label="Iteration ID"
+                        label="Name for Iteration"
                         id="margin-normal"
                         name="Name"
                         defaultValue={formInput.Name}
                         className={classes.textField}
-                        helperText="Enter Name "
+                        helperText="Enter a name for Iteration "
                         onChange={handleInput}
                     />
                     <Button

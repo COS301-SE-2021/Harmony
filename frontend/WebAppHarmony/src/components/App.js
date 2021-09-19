@@ -1,8 +1,8 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { HashRouter, Route, Switch, Redirect} from "react-router-dom";
-import { Amplify } from 'aws-amplify'
+import { Amplify, Auth } from 'aws-amplify'
 import '../aws-exports'
-
+import {  prevSign, useUserDispatch } from "../context/UserContext";
 // components
 import Layout from "./Layout";
 import { useUserState } from "../context/UserContext";
@@ -19,8 +19,20 @@ Amplify.configure(aws_exports);
 
 export default function App() {
     // global
-    var { isAuthenticated } = useUserState();
+    let { isAuthenticated } = useUserState();
+    let [user, setUser ] = useState(false)
+    var userDispatch = useUserDispatch();
 
+
+    useEffect(()=>{
+        Auth.currentAuthenticatedUser().then((user)=>{
+            console.log(user)
+            prevSign(userDispatch)
+            //setUser(true)
+        }).catch(()=>{
+           // setUser(false)
+        })
+    }, [user])
     return (
         <HashRouter>
             <Switch>
@@ -46,7 +58,7 @@ export default function App() {
             <Route
                 {...rest}
                 render={props =>
-                    isAuthenticated ? (
+                    isAuthenticated||user ? (
                         React.createElement(component, props)
                     ) : (
                         <Redirect
@@ -68,7 +80,7 @@ export default function App() {
             <Route
                 {...rest}
                 render={props =>
-                    isAuthenticated ? (
+                    isAuthenticated ||user? (
                         <Redirect
                             to={{
                                 pathname: "/",
