@@ -104,15 +104,7 @@ export default function Tables() {
       }
     );
   }
-  const mockResponse = {
-    statusCode: 200,
-    logo: "base 64 format",
-    Locations: [{ name: "Durban North", address: "34 Ilala Drive" },
-    { name: "Pretoria East", address: "107 Garsfontein Road" },
-    { name: "Westiville", address: "37 Jack Martins Drive" }
-    ],
-    outstandingBalance: 187.25
-  }
+
 
   return (
     <>
@@ -141,7 +133,7 @@ export default function Tables() {
             bodyClass={classes.tableWidget}
           >
             <Typography size="md" weight="bold">
-              Edit Locations
+              Locations
             </Typography>
             <LocationForm />
             <Table className="mb-0">
@@ -180,7 +172,7 @@ export default function Tables() {
               </Typography>
             </div>
             <div className={classes.PayPalContainer}>
-              {checkout ? (<PayPal amount={mockResponse.outstandingBalance} />) : (
+              {checkout ? (<PayPal amount={data.OutstandingAmount} />) : (
                 <Button className={classes.payNowButton} variant="contained" onClick={() => { setCheckout(true) }}><GrPaypal style={{ marginRight: 10 }} size={20} color="white" />Pay now</Button>
               )}
             </div>
