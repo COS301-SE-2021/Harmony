@@ -126,15 +126,15 @@ function Login(props) {
 
                   </Button>
                 )}
-                <Button
-                  color="primary"
-                  size="large"
-                  className={classes.forgetButton}
-                  onClick={handleRouteSign}
-                >
+                {/*<Button*/}
+                {/*  color="primary"*/}
+                {/*  size="large"*/}
+                {/*  className={classes.forgetButton}*/}
+                {/*  onClick={handleRouteSign}*/}
+                {/*>*/}
 
-                  Sign Up
-                </Button>
+                {/*  Sign Up*/}
+                {/*</Button>*/}
                 <Button
                     color="primary"
                     size="large"
