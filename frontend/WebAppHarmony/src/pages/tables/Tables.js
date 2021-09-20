@@ -73,13 +73,7 @@ export default function DataTable() {
   return (
       <>
         <PageTitle title="Add to AI"
-            //     button={<Button
-            //     variant="contained"
-            //     size="medium"
-            //     color="secondary"
-            //     onClick={refreshPage}>
-            //   Refresh
-            // </Button>}
+
         />
         <Grid container spacing={4}>
           <Grid item xs={12}>
