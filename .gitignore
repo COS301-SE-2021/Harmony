@@ -8,6 +8,8 @@
 .idea/**/dictionaries
 .idea/**/shelf
 
+frontend/WebAppHarmony/node_modules
+frontend/HarmonyMobileApp/node_modules
 # AWS User-specific
 .idea/**/aws.xml
 
@@ -74,6 +76,11 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 frontend/HarmonyMobileApp/.expo/packager-info.json
 frontend/HarmonyMobileApp/.expo/settings.json
+*.json
+frontend/WebAppHarmony/.eslintcache
+frontend/WebAppHarmony/.eslintcache
+frontend/WebAppHarmony/.eslintcache
+frontend/BusinessAppHarmony/node_modules/
 frontend/HarmonyMobileApp/.expo/packager-info.json
 
 .vscode/*
