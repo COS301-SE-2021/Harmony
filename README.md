@@ -7,6 +7,14 @@ Visiting South Africa a tourist would not know what a Bunny Chow is, let alone w
 
 
 ---
+## App and Webpages
+Download the app and access the webpages below:
+
+* :iphone: [Download standalone APK available for Android](https://expo.io/artifacts/269a4b3a-edbe-471b-8c2c-e2f6932b9d43)
+* :computer: [Admin Webpage](https://dev.d2dba1zn8s4hhf.amplifyapp.com/#/login)
+* :computer: [Business Webpage](https://dev.d3ayvqwa1ja9g5.amplifyapp.com/)
+
+---
 
 ## Harmony Team Members
 
@@ -57,12 +65,13 @@ Visiting South Africa a tourist would not know what a Bunny Chow is, let alone w
 
 ---
 
+
 ## Recorded demo
 
 * :tv: [DreamTeam-Demo1](https://drive.google.com/file/d/1nDxiOpgDTvwF3yLKnQhtvAptHO-trJP8/view?usp=sharing)
 * :tv: [DreamTeam-Demo2](https://drive.google.com/file/d/1HNs5SVvK4D86Od7OrxOauSXbe83Wpj7N/view?usp=sharing)
 * :tv: [DreamTeam-Demo3](https://drive.google.com/file/d/1_QkdCq8mSU6Zcj6pb_6t-jxq7fSXm7mV/view?usp=sharing)
-* :tv: [DreamTeam-Demo4]()
+* :tv: [DreamTeam-Demo4](https://drive.google.com/file/d/12NvWRSW9JNpkwQspsqyS4qLW0ugahEGy/view?usp=sharing)
 
 ---
 
@@ -70,14 +79,14 @@ Visiting South Africa a tourist would not know what a Bunny Chow is, let alone w
 * :open_book: [SRS Document - V1](https://drive.google.com/file/d/1b0Vfq70Yxiso4dJOJbDcvd1jPnjZuZAg/view?usp=sharing)
 * :open_book: [SRS Document - V2](https://drive.google.com/file/d/1buKDAWI0slSd97IS07naV2RItgKjxfKx/view?usp=sharing)
 * :open_book: [SRS Document - V3](https://drive.google.com/file/d/1S3yW6Z9TRTV9WqyWrNt5R5u3QHKBZhGH/view?usp=sharing)
-* :open_book: [SRS Document - V4]()
+* :open_book: [SRS Document - V4](https://drive.google.com/file/d/1bMjLwoQ85sfuV4nWOPKvtkgDL2P49vlo/view?usp=sharing)
 
 ---
 
 ## Architectural Requirements
 * :open_book: [Architectural Requirements Document - V1](https://drive.google.com/file/d/1FF_dTcBGfnz4OI9baWZcdSioqcNxoswr/view?usp=sharing)
 * :open_book: [Architectural Requirements Document - V2](https://drive.google.com/file/d/1XlpOfeRdMl-AjMlRRmYxrkRisT2gbjsn/view?usp=sharing)
-* :open_book: [Architectural Requirements Document - V3]()
+* :open_book: [Architectural Requirements Document - V3](https://drive.google.com/file/d/1NN4rqH-X6O7KgjevKmPcLjqikYFVlK0N/view?usp=sharing)
 ---
 
 ## Coding Standards
@@ -85,11 +94,13 @@ Visiting South Africa a tourist would not know what a Bunny Chow is, let alone w
 ---
 
 ## User Manual
-* :open_book: [User Manual Document](https://drive.google.com/file/d/1ycadMttV_DPkP4R2xhLMDrRcBZ_lzUwA/view?usp=sharing)
+* :open_book: [User Manual Document V1](https://drive.google.com/file/d/1ycadMttV_DPkP4R2xhLMDrRcBZ_lzUwA/view?usp=sharing)
+* :open_book: [User Manual Document V2](https://drive.google.com/file/d/1d426ZkcWF2mbdPYurOguu1YDrLSebdEm/view?usp=sharing)
+
 ---
 
 ## Testing Policy
-* :open_book: [Testing Policy]()
+* :open_book: [Testing Policy](https://drive.google.com/file/d/1lxbKFKskLR9CMNlMKoGeagUHiYSdWcFc/view?usp=sharing)
 ---
 
 ## Installation Manual
