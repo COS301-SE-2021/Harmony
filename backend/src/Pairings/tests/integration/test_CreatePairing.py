@@ -1,6 +1,8 @@
 import json
 
 import pytest
+import sys
+import time
 
 from backend.src.Pairings.main import CreatePairing
 
@@ -18,6 +20,7 @@ def valid_input():
 
     }
 
-def test_if_pass_valid_event_keys(valid_input):
+def test_if_pass_valid_event_keys(valid_input,benchmark):
     ret = CreatePairing.create_pairing(valid_input,"")
     assert ret["StatusCode"] == 200
+    benchmark(lambda: time.sleep(0.01))
