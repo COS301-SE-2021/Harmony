@@ -173,6 +173,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                                 </label>
                                 <TextField id="outlined-basic" variant="outlined" name="ItemName" className={classes.individualTextField} onChange={handleChange} value={values.ItemName} />
                             </div>
+                            <br/>
                             <div className={classes.formElementsDescription}>
                                 <label htmlFor="ItemDescription" className={classes.formLabel}>
                                     <div className={classes.floatLeft}><p className={classes.errorDiv}>Description</p> </div>
