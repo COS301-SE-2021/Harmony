@@ -37,7 +37,6 @@ export default makeStyles(theme => ({
     justifyContent: "space-between",
     display: "flex",
     height: 100,
-    marginRight: -15,
     marginTop: 10
 
   },

@@ -86,16 +86,16 @@ export default function DataTable() {
       <>
 
         <PageTitle title="Train AI"
-        //            button={<Button
-        //     variant="contained"
-        //     size="medium"
-        //     color="secondary"
-        //     onClick={refreshPage}>
-        //   Refresh
-        // </Button>}
+                   button={<Button
+                       variant="contained"
+                       size="large"
+                       color="secondary"
+                       onClick={callApi}>
+                     Train New Iteration
+        </Button>}
         />
         <Grid container spacing={4}>
-          <Grid item xs={6}>
+          <Grid item xs={12}>
             <MUIDataTable
                 title={"Iterations"}
                 data={posts1}
@@ -103,14 +103,7 @@ export default function DataTable() {
                 options={options}
             />
 
-            <Button
-                variant="contained"
-                size="large"
-                color="secondary"
-                onClick={callApi}>
 
-              Train New Iteration
-            </Button>
           </Grid>
           <Grid item xs={6}>
             <div className="App">
