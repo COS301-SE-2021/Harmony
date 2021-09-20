@@ -27,26 +27,6 @@ const mock = {
   ],
   bigStat: [
     {
-      product: "Light Blue",
-      total: {
-        monthly: 4232,
-        weekly: 1465,
-        daily: 199,
-        percent: { value: 3.7, profit: false }
-      },
-      color: "primary",
-      registrations: {
-        monthly: { value: 830, profit: false },
-        weekly: { value: 215, profit: true },
-        daily: { value: 33, profit: true }
-      },
-      bounce: {
-        monthly: { value: 4.5, profit: false },
-        weekly: { value: 3, profit: true },
-        daily: { value: 3.25, profit: true }
-      }
-    },
-    {
       product: "Sing App",
       total: {
         monthly: 754,

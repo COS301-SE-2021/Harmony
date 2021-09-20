@@ -2,12 +2,11 @@ import React from "react";
 import {
   Route,
   Switch,
-  Redirect,
   withRouter,
 } from "react-router-dom";
 import classnames from "classnames";
-import {Box, IconButton, Link} from '@material-ui/core'
-import Icon from '@mdi/react'
+import {Box} from '@material-ui/core'
+
 
 
 // styles
@@ -18,9 +17,11 @@ import Header from "../Header";
 import Sidebar from "../Sidebar";
 
 // pages
-import HomePage from "../../pages/usertrends";
-import Statements from "../../pages/dashboard";
-import CreateAds from "../../pages/createads";
+import Dashboard from "../../pages/dashboard";
+import ModerateItems from "../../pages/moderateitems/ModerateItems";
+import Tables from "../../pages/tables";
+import Feedback from "../../pages/feedback";
+import Train from "../../pages/train";
 
 
 // context
@@ -44,9 +45,11 @@ function Layout(props) {
           >
             <div className={classes.fakeToolbar} />
             <Switch>
-              <Route path="/app/usertrends" component={HomePage} />
-              <Route path="/app/dashboard" component={Statements} />
-              <Route path="/app/createads" component={CreateAds} />
+              <Route path="/app/dashboard" component={Dashboard} />
+              <Route path="/app/moderateitems" component={ModerateItems} />
+              <Route path="/app/tables" component={Tables} />
+              <Route path="/app/train" component={Train} />
+              <Route path="/app/feedback" component={Feedback} />
 
             </Switch>
             <Box

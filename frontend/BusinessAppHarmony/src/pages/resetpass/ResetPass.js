@@ -24,7 +24,7 @@ function ResetPass(props) {
     <Grid container className={classes.container}>
       <div className={classes.logotypeContainer}>
         <img src={logo} alt="logo" className={classes.logotypeImage} />
-        <Typography className={classes.logotypeText}>Harmony Business</Typography>
+        <Typography className={classes.logotypeText}>Harmony Admin</Typography>
       </div>
       <div className={classes.formContainer}>
         <div className={classes.form}>

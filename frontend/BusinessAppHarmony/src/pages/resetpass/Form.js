@@ -10,8 +10,6 @@ import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
 import { Auth } from "aws-amplify";
-import { withRouter, Link } from 'react-router-dom';
-
 
 const styles = theme => ({
 	appBar: {
@@ -62,7 +60,6 @@ function getStepContent(step, values, handleChange) {
 }
 
 class Form extends React.Component {
-
 	state = {
 		activeStep: 0,
 		email: "",
@@ -70,10 +67,6 @@ class Form extends React.Component {
 		password1: "",
 		password2: "",
 	};
-
-	handleSignIn = () =>{
-		this.props.history.push('/login')
-	}
 
 	handleNext = async () => {
 		if(this.state.activeStep==0){
@@ -135,21 +128,12 @@ class Form extends React.Component {
 						{activeStep === steps.length ? (
 							<React.Fragment>
 								<Typography variant="h5" gutterBottom>
-									You have successfully chanaged your password
+									Welcome!
 								</Typography>
 								<Typography variant="subtitle1">
-									You can now Login with you New Password!
+									Thank you for taking the time to register. We hope you enjoy Harmony!
 								</Typography>
-								<Button
-									color="primary"
-									size="large"
-									className={classes.forgetButton}
-									to="/login"
-									component={Link}
-									// onClick = {this.handleSignIn}}
-								>
-									Login
-								</Button>
+
 							</React.Fragment>
 						) : (
 							<React.Fragment>
