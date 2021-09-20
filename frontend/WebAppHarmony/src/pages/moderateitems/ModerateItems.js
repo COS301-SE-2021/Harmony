@@ -56,7 +56,7 @@ export default function TypographyPage() {
 
   return (
     <>
-      <PageTitle title="Moderate Items" />
+      <PageTitle title="Add Items to Database" />
       <Grid container spacing={1}>
         <Grid item xs={12} md={12}>
           <div className={classes.root}>

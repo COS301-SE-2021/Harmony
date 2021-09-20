@@ -13,11 +13,11 @@ export default makeStyles(theme => ({
     marginBottom: theme.spacing(2),
   },
   individualTextField: {
-    width: "65%",
+    width: 440,
     height: 10,
   },
   individualTextFieldDescription: {
-    width: "67.5%",
+    width: 470,
     height: 100,
     padding: 15,
   },

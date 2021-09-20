@@ -28,7 +28,7 @@ const structure = [
   { id: 0, label: "Dashboard", link: "/app/dashboard", icon: <HomeIcon /> },
   {
     id: 1,
-    label: "Moderate Pairing",
+    label: "Add Items",
     link: "/app/moderateitems",
     icon: <QueueIcon />,
   },
