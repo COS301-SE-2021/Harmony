@@ -1,116 +1,105 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
-  untitled
-
-  Sample SAM Template for untitled
-
+  Sort and Filter Lambda with api
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
     Timeout: 20
 
 Resources:
-  NewPairingsFunction:
+  ViewRequestedItemsFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: main/
-      Handler: NewPairing.newpairing
-      Runtime: python3.8
-
-  viewFavouritesFunction:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
-    Properties:
-      CodeUri: main/
-      Handler: ViewFavourites.view_favourites
+      Handler: ViewRequestedItems.view_requested_items
       Runtime: python3.8
       Policies:
         # Give DynamoDB Full Access to your Lambda Function
         - AmazonDynamoDBFullAccess
 
-  ViewUserPairingsFunction:
+
+  AddItemFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: main/
-      Handler: ViewUserPairings.view_user_pairings
+      Handler: AddItem.add_item
+      Runtime: python3.8
+      Policies:
+        # Give DynamoDB Full Access to your Lambda Function
+        - AmazonDynamoDBFullAccess
+        - AmazonS3FullAccess
+
+  ViewRatioDataFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: main/
+      Handler: ViewRatioData.view_ratio_data
       Runtime: python3.8
       Policies:
         # Give DynamoDB Full Access to your Lambda Function
         - AmazonDynamoDBFullAccess
 
-  ViewPairingsFunction:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
-    Properties:
-      CodeUri: main/
-      Handler: ViewPairings.View_Pairings
-      Runtime: python3.8
 
-  VotingFunction:
+  ViewMostFavouritePairingsFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: main/
-      Handler: Voting.vote
+      Handler: ViewMostFavouritePairings.view_most_favourite_pairings
       Runtime: python3.8
       Policies:
         # Give DynamoDB Full Access to your Lambda Function
         - AmazonDynamoDBFullAccess
 
-  AddtoFavouritesFunction:
+
+  ViewRecentlyScannedItemsFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: main/
-      Handler: AddToFavourites.add_to_favourites
+      Handler: ViewRecentlyScannedItems.view_recently_scanned_items
       Runtime: python3.8
       Policies:
         # Give DynamoDB Full Access to your Lambda Function
         - AmazonDynamoDBFullAccess
 
-  RemoveFromFavouritesFunction:
+  GetTotalUsersFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: main/
-      Handler: RemoveFromFavourites.remove_from_favourites
+      Handler: GetTotalUsers.get_total_users
       Runtime: python3.8
       Policies:
         # Give DynamoDB Full Access to your Lambda Function
         - AmazonDynamoDBFullAccess
 
-  DeletePairingsFunction:
+
+  GetFlavoursMostUsed:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: main/
-      Handler: DeletePairing.delete_pairing
+      Handler: GetFlavoursMostUsed.get_flavours_most_used
       Runtime: python3.8
       Policies:
         # Give DynamoDB Full Access to your Lambda Function
         - AmazonDynamoDBFullAccess
 
-  GetAllPairingItemsFunction:
+  RemoveRequestedItem:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: main/
-      Handler: GetAllPairingItems.get_all_items
+      Handler: RemoveRequestedItem.remove_requested_item
       Runtime: python3.8
       Policies:
         # Give DynamoDB Full Access to your Lambda Function
         - AmazonDynamoDBFullAccess
 
-  CreatePairingsFunction:
+  GetUserFeedback:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: main/
-      Handler: CreatePairing.create_pairing
+      Handler: GetUserFeedback.get_user_feedback
       Runtime: python3.8
       Policies:
         # Give DynamoDB Full Access to your Lambda Function
         - AmazonDynamoDBFullAccess
 
-  RequestNewItemFunction:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
-    Properties:
-      CodeUri: main/
-      Handler: RequestNewItem.request_item
-      Runtime: python3.8
-      Policies:
-        # Give DynamoDB Full Access to your Lambda Function
-        - AmazonDynamoDBFullAccess
