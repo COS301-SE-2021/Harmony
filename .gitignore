@@ -9,6 +9,7 @@
 .idea/**/dictionaries
 .idea/**/shelf
 
+frontend/HarmonyMobileApp/
 # AWS User-specific
 .idea/**/aws.xml
 
@@ -80,3 +81,8 @@ frontend/HarmonyMobileApp/.expo/settings.json
 
 /backend/src/.aws-sam/
 /backend/src/ImageRecognition/.aws-sam/
+
+frontend/BusinessAppHarmony/node_modules/
+frontend/BusinessAppHarmony/.expo/
+frontend/WebAppHarmony/
+.env
