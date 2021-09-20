@@ -41,7 +41,6 @@ export default function EditEmailScreen({ navigation }) {
       const result = await Auth.updateUserAttributes(user, {
         email: values.Email,
       });
-      (result);
 
       setLoading(false);
 

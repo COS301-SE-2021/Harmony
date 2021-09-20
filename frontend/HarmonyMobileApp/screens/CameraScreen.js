@@ -87,7 +87,6 @@ export default function CameraScreen({ navigation }) {
       quality: 1,
     });
 
-    (result);
     if (!result.cancelled) {
       setImage(result.uri);
       const base64 = await FileSystem.readAsStringAsync(result.uri, {
@@ -140,7 +139,6 @@ export default function CameraScreen({ navigation }) {
         if (json.StatusCode === 200) {
           setLoading(false);
           cancelPreview();
-          ("StatusCode Returned: " + json.StatusCode)
           setErrorAlertVisible(false);
 
           navigation.navigate("Results", {
