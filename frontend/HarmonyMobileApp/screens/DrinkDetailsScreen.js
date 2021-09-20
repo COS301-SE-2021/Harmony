@@ -75,6 +75,7 @@ const DrinkDetailsScreen = ({ navigation, route }) => {
         contentContainerStyle={{
           flexDirection: "row",
           flexWrap: "wrap",
+          marginLeft: "10%",
         }}
         showsHorizontalScrollIndicator={false}
         horizontal={true}
@@ -82,7 +83,12 @@ const DrinkDetailsScreen = ({ navigation, route }) => {
         <View style={styles.rowContainer}>
           {item.DrinkTags.map((tag, index) => (
             <View style={styles.tagContainer} key={index}>
-              <FontAwesome name="tag" size={16} color="#fff" />
+              {/* <FontAwesome name="tag" size={16} color="#fff" /> */}
+              <MaterialCommunityIcons
+                name="cup"
+                size={16}
+                color="#fff"
+              />
               <Text style={styles.tagText}>{tag}</Text>
             </View>
           ))}
@@ -173,7 +179,7 @@ const styles = StyleSheet.create({
   tagContainer: {
     //Container of individual tag
     flexDirection: "row", //Needed to keep the tag icon and text in one line
-    backgroundColor: "#FF6347",
+    backgroundColor: "#1FBFBA",
     borderRadius: 20,
     margin: 5, //Space between tags
     padding: 10, //Space around innner tag

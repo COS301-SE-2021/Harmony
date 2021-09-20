@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   View,
   Pressable,
@@ -20,13 +20,9 @@ import { Text } from "@ui-kitten/components";
 import { Slider } from "react-native-elements";
 import FilterTag from "./FilterTag";
 import { Picker } from "@react-native-picker/picker";
-import ReduxStore from "../Components/ReduxStore"
-
+import FilterContext from './FilterContext';
 
 export default function FilterModal({ sortPairingsName, ...otherProps }) {
-  const [sortPairings, setSortPairings] = useState(sortPairingsName); // the type of pairings shown filter
-  const [locationValueSlider, setLocationValueSlider] = useState(0); //distance filter
-  const [locationValueTextInput, setLocationValueTextInput] = useState(0); //distance filter
   const [isModalVisible, setModalVisible] = useState(true); //for the filter popup
   const filters = {
     mealTypes: ["Breakfast", "Lunch", "Supper", "Snack", "Vegetarian", "Dairy-Free", "Nut-Free"],
@@ -34,63 +30,49 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
     drinks: ["Alcoholic", "Non-Alcoholic", "Fizzy", "Sweet", "Sour", "Bitter", "Hot", "Warm", "Cold",],
   };
 
+  const myFilterContext = useContext(FilterContext);
+  //Using temp values to save the value selected
+  //Only once the apply button has been pressed will the
+  //Context be updated
+  //Directly updating the Context with no temp values
+  //Makes it look much slower/blockier
+  const [tempRange, setTempRange] = useState(null);
+  const [tempSortPairingType, setTempSortPairingType] = useState(myFilterContext.sortPairingType);
+
   //toggles the modals visibility
   const toggleModal = () => {
-    //    setSortPairings(ReduxStore.getState().sortPairings)
     setModalVisible(!isModalVisible);
   };
   const ClearAll = () => {
-    ReduxStore.dispatch({
-      type: "CLEAR",
-      //payload is the standard adopted name for the state value
-      payload: { "ApplyFilter": true }
-    });
-    setModalVisible(!isModalVisible);
+    toggleModal();
+    myFilterContext.clearFilter()
+    myFilterContext.toggleFilter()
 
-  };
-  const wait = (timeout) => {
-    return new Promise((resolve) => setTimeout(resolve, timeout));
   };
 
   const applyFilters = () => {
-    setModalVisible(!isModalVisible);
-    ReduxStore.dispatch({
-      type: "APPLYFILTER",
-      payload: { "ApplyFilter": true }
-    })
+    toggleModal();
+    myFilterContext.setRange(tempRange)
+    myFilterContext.setSortPairingType(tempSortPairingType)
+    myFilterContext.toggleFilter()
   }
 
-  useEffect(() => {
-    console.log("location value updated " + locationValueSlider)
-    setLocationValueTextInput(locationValueSlider);
-    if (locationValueSlider != 0) {
-      ReduxStore.dispatch({
-        type: "UPDATERANGE",
-        payload: { "Range": locationValueSlider }
-      })
+  const onChanged = (number) => {
+    if (number.length === 0) {
+      //No value provided so we return null
+      setTempRange(null)
+    } else {
+      //We apply regex to ensure only a number value is provided
+      //We already use a numeric keyboard however the '.' must still be accounted for
+      let validNumber = parseInt(number.replace(/[^0-9]/g, ''))
+      if (validNumber) {
+        setTempRange(validNumber)
+      }
+      else {
+        console.log("Invalid character '.' or '-' provided!")
+      }
     }
-  }, [locationValueSlider]);
-
-  useEffect(() => {
-    console.log("location value updated " + locationValueTextInput)
-    setLocationValueSlider(locationValueTextInput);
-    if (locationValueTextInput != 0) {
-      ReduxStore.dispatch({
-        type: "UPDATERANGE",
-        payload: { "Range": locationValueTextInput }
-      })
-    }
-  }, [locationValueTextInput]);
-
-  useEffect(() => {
-    console.log("sort pairings updated " + sortPairings)
-
-    ReduxStore.dispatch({
-      type: "CHANGESORT",
-      payload: { "sort": sortPairings }
-    })
-
-  }, [sortPairings]);
+  }
 
   return (
     <Modal
@@ -107,10 +89,6 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
       backdropTransitionOutTiming={0}
 
     >
-
-      {/* DO NOT UNCOMMENT:This line will cause a terrible glitchy effect that is horrible to watch */}
-      {/* <StatusBar hidden={true} /> */}
-
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
           <View
@@ -121,7 +99,7 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
             </Text>
             <TouchableOpacity
               style={[styles.closeButton]}
-              onPress={() => setModalVisible(!isModalVisible)}
+              onPress={() => toggleModal()}
             >
               <MaterialIcons name="close" size={30} color="black" />
             </TouchableOpacity>
@@ -151,24 +129,23 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
                       },
                     ]}
                   >
-                    {sortPairings}
+                    {tempSortPairingType}
                   </Text>
                 </View>
               </View>
               <View style={styles.pickerView}>
                 <Picker
-                  selectedValue={sortPairings}
+                  selectedValue={tempSortPairingType}
                   style={[styles.TextSmall, { height: 40, width: 300 }]}
-                  onValueChange={(itemValue, itemIndex) => {
-                    setSortPairings(itemValue);
-                    // console.log(itemValue);
+                  onValueChange={(itemValue) => {
+                    setTempSortPairingType(itemValue);
                   }}
                 >
                   <Picker.Item label="Trending" value="Trending" />
                   <Picker.Item label="New" value="New" />
                   <Picker.Item label="Best" value="Best" />
                   <Picker.Item label="Controversial" value="Controversial" />
-                  <Picker.Item label="Closest" value="Closest" />
+                  <Picker.Item label="Nearby" value="Closest" />
                 </Picker>
               </View>
             </View>
@@ -185,12 +162,11 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
               >
                 <Text style={[styles.TextSmall, { marginRight: 4 }]}>0</Text>
                 <Slider
-                  value={locationValueSlider}
+                  value={tempRange}
                   step={20}
-                  maximumValue={100}
+                  maximumValue={1000}
                   onValueChange={(value) => (
-                    // console.log(value), 
-                    setLocationValueSlider(value)
+                    setTempRange(value)
                   )}
                   style={{ width: "70%" }}
                   thumbStyle={{
@@ -199,17 +175,15 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
                     backgroundColor: "grey",
                   }}
                 />
-                <Text style={[styles.TextSmall, { marginLeft: 4 }]}>100</Text>
+                <Text style={[styles.TextSmall, { marginLeft: 4 }]}>1000</Text>
               </View>
               <View style={styles.flexRowJustCenter}>
                 <TextInput
                   style={[styles.TextSmall, styles.TextInputStyling]}
-                  // value={locationValueTextInput}
-                  //    value={locationValueTextInput.toString()}
-                  // when you use to string it causes errors with the slider
-                  onChangeText={(value) => setLocationValueTextInput(parseInt(value))}
+                  onChangeText={(value) => onChanged(value)}
+                  value={tempRange ? tempRange.toString() : ""}
                   keyboardType="numeric"
-                  placeholder={locationValueTextInput.toString()}
+                  placeholder="0"
                   multiline={false}
                 />
                 <Text style={[styles.TextSmaller]}>KM</Text>
@@ -348,11 +322,6 @@ export default function FilterModal({ sortPairingsName, ...otherProps }) {
 
 const personalStyles = StyleSheet.create({
 
-  dataText: {
-    paddingLeft: "2%",
-    paddingVertical: "1%",
-    fontFamily: "sans-serif-light"
-  },
   modalHeading: {
     fontWeight: "bold",
     flex: 1,

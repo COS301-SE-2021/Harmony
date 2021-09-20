@@ -93,13 +93,20 @@ const styles = StyleSheet.create({
     padding: 10,
     elevation: 2
   },
+  filterButton: {
+    //styling for filter button
+    paddingHorizontal: 10,
+    backgroundColor: "white",
+    marginRight: "8%",
+    marginTop: "8%"
+  },
   applyButton: {
     //styling for modal buttons
     borderRadius: 15,
     width: "35%",
     padding: 5,
     elevation: 2,
-    backgroundColor: "#4F6D7A",
+    backgroundColor: "#3366FF",
     marginHorizontal: 20
   },
   filterText: {
@@ -116,7 +123,7 @@ const styles = StyleSheet.create({
   },
   buttonClose: {
     //active modal button
-    backgroundColor: "#4F6D7A",
+    backgroundColor: "#3366FF",
   },
   closeButtonOnFilter: {
     //button for x
@@ -136,13 +143,40 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 22
   },
+  adTitleContainer: {
+    height: 45,
+    width: "100%",
+    backgroundColor: "#06D6A0",
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
+    overflow: "hidden",
+    flexDirection: "row",
+    justifyContent: "flex-start",
 
+  },
+  adTitleText: {
+    //Heading text for ad cards
+    color: "white",
+    textAlignVertical: "center",
+    fontWeight: "bold",
+    fontFamily: "sans-serif-light",
+    fontSize: 18,
+    padding: 10,
+  },
+
+  tinyLogo: {
+    width: 45,
+    height: 45,
+    borderBottomRightRadius: 15,
+    borderTopRightRadius: 15
+  },
   cardText: {
     //text for the food and drink name
     flexDirection: "row",
     justifyContent: "space-around",
     textAlign: "center",
     alignContent: "center",
+    alignItems: "center",
     fontWeight: "bold",
     fontFamily: "sans-serif-light",
     paddingVertical: "5%",
@@ -219,7 +253,7 @@ const styles = StyleSheet.create({
     padding: 2,
     backgroundColor: "#F3F2F2",
     height: 30,
-    width: 40,
+    width: 100,
     textAlign: "center",
     justifyContent: "center",
     alignItems: "center"
@@ -316,6 +350,14 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 15,
     overflow: "hidden"
   },
+  adimageContainer: {
+    // hold the food+drink images+text
+    flexDirection: "row",
+    width: "100%",
+    height: 180,
+    flex: 1,
+    overflow: "hidden"
+  },
 
   tagsSection: {
     //Different from section because theres no padding on the right or left
@@ -352,8 +394,17 @@ const styles = StyleSheet.create({
   flexRowJustCenter: {
     flexDirection: "row",
     justifyContent: "center"
+  },
+  fab: {
+    position: 'absolute',
+    width: 56,
+    height: 56,
+    alignItems: 'center',
+    justifyContent: 'center',
+    right: 20,
+    bottom: 20,
+    backgroundColor: '#03A9F4',
   }
-
 
 });
 

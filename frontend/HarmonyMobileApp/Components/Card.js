@@ -18,33 +18,80 @@ import {
 } from "@ui-kitten/components";
 import IconsBar from "../Components/IconsBar";
 
-export default function Card({ dataSet, ...otherProps }) {
+export default function Card({ dataSet, isDeleteVisible, ...otherProps }) {
 
     return (
         <View style={{ paddingBottom: 15 }}>
             <View style={styles.cardContainer}>
-                <View style={styles.imageContainer}>
-                    <View
-                        style={personalStyles.image}
-                    >
-                        <Image
-                            source={{ uri: dataSet.FoodImage }}
-                            style={styles.standardImage}
-                        />
-                        <Text style={styles.cardText}>{dataSet.FoodItem}</Text>
+
+                {dataSet.IsSponsor ?
+                    <View>
+                        <View style={styles.adTitleContainer}>
+                            <Image
+                                style={styles.tinyLogo}
+                                source={{
+                                    uri: dataSet.Logo,
+                                }}
+                            />
+                            <View style={{
+                                left: "150%",
+                            }}>
+
+                                <Text style={styles.adTitleText}>
+                                    Sponsored
+                                </Text>
+                            </View>
+                        </View>
+                        <View style={styles.adimageContainer}>
+                            <View
+                                style={personalStyles.image}
+                            >
+                                <Image
+                                    source={{ uri: dataSet.FoodImage }}
+                                    style={styles.standardImage}
+                                />
+                                <Text style={styles.cardText}>{dataSet.FoodItem}</Text>
+                            </View>
+
+                            <View
+                                style={personalStyles.image}
+                            >
+                                <Image
+                                    source={{ uri: dataSet.DrinkImage }}
+                                    style={styles.standardImage}
+                                />
+
+                                <Text style={styles.cardText}>{dataSet.DrinkItem}</Text>
+                            </View>
+                        </View>
                     </View>
 
-                    <View
-                        style={personalStyles.image}
-                    >
-                        <Image
-                            source={{ uri: dataSet.DrinkImage }}
-                            style={styles.standardImage}
-                        />
+                    :
+                    <View style={styles.imageContainer}>
+                        <View
+                            style={personalStyles.image}
+                        >
+                            <Image
+                                source={{ uri: dataSet.FoodImage }}
+                                style={styles.standardImage}
+                            />
+                            <Text style={styles.cardText}>{dataSet.FoodItem}</Text>
+                        </View>
 
-                        <Text style={styles.cardText}>{dataSet.DrinkItem}</Text>
+                        <View
+                            style={personalStyles.image}
+                        >
+                            <Image
+                                source={{ uri: dataSet.DrinkImage }}
+                                style={styles.standardImage}
+                            />
+
+                            <Text style={styles.cardText}>{dataSet.DrinkItem}</Text>
+                        </View>
                     </View>
-                </View>
+                }
+
+
 
                 <Divider />
                 <View style={styles.tagsSection}>
@@ -115,15 +162,28 @@ export default function Card({ dataSet, ...otherProps }) {
                         <Text style={styles.TextSmall}>{dataSet.Distance} KM</Text>
                     </View>
                 </View>
-                <Divider />
-                <IconsBar
-                    dataSet={dataSet}
-                    upVoteVal={dataSet.Upvotes}
-                    downVoteVal={dataSet.Downvotes}
-                    isDV={dataSet.isDownvoted}
-                    isUV={dataSet.isUpvoted}
-                    isF={dataSet.isFavourited}
-                />
+                {!dataSet.IsSponsor ?
+                    <View>
+                        <Divider />
+
+                        <IconsBar
+                            dataSet={dataSet}
+                            upVoteVal={dataSet.Upvotes}
+                            downVoteVal={dataSet.Downvotes}
+                            isDV={dataSet.isDownvoted}
+                            isUV={dataSet.isUpvoted}
+                            isF={dataSet.isFavourited}
+                            isDeleteVisible={isDeleteVisible}
+                        />
+                    </View>
+                    :
+                    <View style={{
+                        //card icons bar
+                        padding: "2%",
+                    }}>
+
+                    </View>
+                }
             </View>
         </View>
     );

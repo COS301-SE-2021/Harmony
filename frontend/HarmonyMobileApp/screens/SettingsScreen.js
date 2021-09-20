@@ -56,22 +56,6 @@ export default function SettingsScreen({ navigation, updateAuthState }) {
           <RightIcon />
         </View>
       </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => Alert.alert("About : Under construction")}
-      >
-        <View style={[styles.list, styles.listContainer]}>
-          <Text style={styles.listText}>About</Text>
-          <RightIcon />
-        </View>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => Alert.alert("Theme : Under construction")}
-      >
-        <View style={[styles.list, styles.listContainer]}>
-          <Text style={styles.listText}>Theme</Text>
-          <RightIcon />
-        </View>
-      </TouchableOpacity>
       <TouchableOpacity onPress={signOut}>
         <View style={[styles.list, styles.listContainer]}>
           <Text style={styles.listText}>Sign Out</Text>

@@ -54,7 +54,7 @@ export default function CameraScreen({ navigation }) {
   const [modalMessage, setModalMessage] = useState("");
 
   const uploadImageURL =
-    "https://jkwhidy1cf.execute-api.eu-west-1.amazonaws.com/dev";
+    "https://jkwhidy1cf.execute-api.eu-west-1.amazonaws.com/dev/imagerecognition";
   useEffect(() => {
     onHandlePermission();
   }, []);
@@ -87,7 +87,6 @@ export default function CameraScreen({ navigation }) {
       quality: 1,
     });
 
-    console.log(result);
     if (!result.cancelled) {
       setImage(result.uri);
       const base64 = await FileSystem.readAsStringAsync(result.uri, {
@@ -120,15 +119,15 @@ export default function CameraScreen({ navigation }) {
     setLoading(true);
     let JWTToken = "";
     await Auth.currentAuthenticatedUser({}) //Get user information
-      .then((data) => {
-        JWTToken = data.signInUserSession.idToken.jwtToken;
+      .then((Data) => {
+        JWTToken = Data.signInUserSession.idToken.jwtToken;
       })
       .catch((err) => console.log(err));
 
     await fetch(uploadImageURL, {
       method: "POST",
       body: JSON.stringify({
-        data: img,
+        Data: img,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -137,25 +136,25 @@ export default function CameraScreen({ navigation }) {
     })
       .then((response) => response.json())
       .then((json) => {
-        if (json.statusCode === 200) {
+        if (json.StatusCode === 200) {
           setLoading(false);
           cancelPreview();
-          console.log("StatusCode Returned: " + json.StatusCode)
           setErrorAlertVisible(false);
 
           navigation.navigate("Results", {
             screen: "PairingResultsScreen",
-            params: { response: json },
+            params: {
+              response: json,
+              b64img: b64Image
+            },
           });
 
         }
-        else if (json.statusCode === 204) {
-          console.log(json)
-          console.log("ERRROR ENCOUNTERED");
+        else if (json.StatusCode === 204) {
           setLoading(false);
           cancelPreview();
           //setModalMessage must come before setErrorAlertVisible
-          setModalMessage(json.data);
+          setModalMessage(json.Data);
           setErrorAlertVisible(true);
 
         }
@@ -261,13 +260,6 @@ export default function CameraScreen({ navigation }) {
         disabled={!isCameraReady}
       />
 
-      <MaterialCommunityIcons
-        name="barcode-scan"
-        size={40}
-        // onPress={handleGridMode} //Change to handleBarcode
-        disabled={!isCameraReady}
-        style={styles.toolbarIcon}
-      />
     </TouchableOpacity>
   );
 

@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Pressable, View } from "react-native";
+import {
+    StyleSheet, Pressable, View, Alert,
+} from "react-native";
 import { Text } from "@ui-kitten/components";
 import { AntDesign } from "@expo/vector-icons";
 import styles from "../styles";
-
+import { AppToast } from "../Components/AppToast";
 // make api call with dataSet.PID
+import { Auth } from "aws-amplify";
 export default function IconsBar({
     dataSet,
     upVoteVal,
     downVoteVal,
-    isDV,
-    isUV,
-    isF,
-    ...otherProps
+    isDeleteVisible,
 }) {
     const [favouriteIconChecked, setFavouriteIconChecked] = useState("");
     const [favouriteIconColor, setFavouriteIconColor] = useState("black"); // controls the favourite heart color (pink/black)
@@ -29,45 +29,43 @@ export default function IconsBar({
     const [upvote, setUpvote] = useState(upVoteVal);
     const [downvote, setDownvote] = useState(downVoteVal);
 
-    // const [isUp, setIsUp] = useState(isUV);
-    // const [isDown, setIsDown] = useState(isDV);
-    // const [isFave, setIsFave] = useState(isF);
-
-    const voteURL = "https://duj0glvi9d.execute-api.eu-west-1.amazonaws.com/dev";
-    const addToFavURL = "https://bqwmc4qpkd.execute-api.eu-west-1.amazonaws.com/dev";
-    const removeFromFavURL = "https://blzyl8bowc.execute-api.eu-west-1.amazonaws.com/dev";
+    const voteURL = "https://2928u23tv1.execute-api.eu-west-1.amazonaws.com/dev/voting";
+    const addToFavURL = "https://2928u23tv1.execute-api.eu-west-1.amazonaws.com/dev/addtofav";
+    const removeFromFavURL = "https://2928u23tv1.execute-api.eu-west-1.amazonaws.com/dev/removefromfav";
+    const deltePairingURL = "https://2928u23tv1.execute-api.eu-west-1.amazonaws.com/dev/deletepairing";
 
     const [load, setLoad] = useState(true);
-
+    const [isErrorAlertVisible, setErrorAlertVisible] = useState(false);
+    const [modalMessage, setModalMessage] = useState("Oops, something went wrong.");
     useEffect(() => {
-        //      console.log(load + " load var")
-        // console.log("prev votes " + dataSet.isUpvoted + " " + dataSet.isDownvoted + " " + dataSet.isFavourited);
-        // console.log(dataSet);
-        //  test();
-        if (load) {
-            setLoad(false);
+        async function fetchData() {
+            let user = await Auth.currentAuthenticatedUser();
+            const { username } = user;
 
-            if (dataSet.isUpvoted == "True") {
-                setUpIconColor("#80CB41");
-                setUpIconOutline("upcircle");
-                setUpIconChecked("Checked");
+            if (load) {
+                setLoad(false);
+
+                if (dataSet.isUpvoted == "True") {
+                    setUpIconColor("#80CB41");
+                    setUpIconOutline("upcircle");
+                    setUpIconChecked("Checked");
+                }
+                if (dataSet.isDownvoted == "True") {
+                    setDownIconColor("#FF2727");
+                    setDownIconOutline("downcircle");
+                    setDownIconChecked("Checked");
+                }
+                if (dataSet.isFavourited == "True") {
+                    setFavouriteIconColor("#FF2763");
+                    setFavouriteIconOutline("heart");
+                    setFavouriteIconChecked("Checked");
+                }
             }
-            if (dataSet.isDownvoted == "True") {
-                setDownIconColor("#FF2727");
-                setDownIconOutline("downcircle");
-                setDownIconChecked("Checked");
-            }
-            if (dataSet.isFavourited == "True") {
-                setFavouriteIconColor("#FF2763");
-                setFavouriteIconOutline("heart");
-                setFavouriteIconChecked("Checked");
-            }
-        }
+
+        };
+        fetchData();
     }, []);
 
-    // const test = () => {
-    //     console.log("in test " + isUp + " " + isDown + " " + isFave);
-    // }
     useEffect(() => {
         if (upIconChecked != "") {//If the value has been set
             vote("Upvotes", upIconChecked);
@@ -78,33 +76,37 @@ export default function IconsBar({
         if (downIconChecked != "") {//If the value has been set
             vote("Downvotes", downIconChecked);
         };
-        //  console.log(dataSet);
     }, [downIconChecked]);
 
     //Upvotes or Downvotes depending on the button clicked
     const vote = async (VoteType, iconChecked) => {
-        await fetch(voteURL, {
-            method: "POST",
-            body: JSON.stringify({
-                UID: "u1",
-                PID: dataSet.PID,
-                VoteType: VoteType,
-                IsChecked: iconChecked,
-            }),
-        })
-            .then((response) => response.json())
-            .then((json) => {
-                if (VoteType == "Downvotes") {
-                    if (json.Downvotes) {
-                        setDownvote(json.Downvotes);
-                    }
-                } else if (VoteType == "Upvotes") {
-                    if (json.Upvotes) {
-                        setUpvote(json.Upvotes);
-                    }
-                }
+        async function fetchData() {
+            let user = await Auth.currentAuthenticatedUser();
+            const { username } = user;
+            await fetch(voteURL, {
+                method: "POST",
+                body: JSON.stringify({
+                    UID: username,
+                    PID: dataSet.PID,
+                    VoteType: VoteType,
+                    IsChecked: iconChecked,
+                }),
             })
-            .catch((error) => alert(error));
+                .then((response) => response.json())
+                .then((json) => {
+                    if (VoteType == "Downvotes") {
+                        if (json.Downvotes) {
+                            setDownvote(json.Downvotes);
+                        }
+                    } else if (VoteType == "Upvotes") {
+                        if (json.Upvotes) {
+                            setUpvote(json.Upvotes);
+                        }
+                    }
+                })
+                .catch((error) => alert(error));
+        };
+        fetchData();
     };
 
     useEffect(() => {
@@ -117,16 +119,21 @@ export default function IconsBar({
 
     //Adds and removes pairings from user favourites
     const addRemoveFavourites = async (URL) => {
-        fetch(URL, {
-            method: "POST",
-            body: JSON.stringify({
-                UID: "u1",
-                PID: dataSet.PID,
-            }),
-        })
-            .then((response) => response.json())
-            .catch((error) => alert(error));
+        async function fetchData() {
+            let user = await Auth.currentAuthenticatedUser();
+            const { username } = user;
 
+            fetch(URL, {
+                method: "POST",
+                body: JSON.stringify({
+                    UID: username,
+                    PID: dataSet.PID,
+                }),
+            })
+                .then((response) => response.json())
+                .catch((error) => alert(error));
+        };
+        fetchData();
     };
 
     const uncheckDownvote = () => {
@@ -196,6 +203,60 @@ export default function IconsBar({
         }
     };
 
+    const handleDeleteIconPress = async () => {
+        async function fetchData() {
+            let user = await Auth.currentAuthenticatedUser();
+            const { username } = user;
+            console.log("Deleting...")
+
+            await fetch(deltePairingURL, {
+                method: "POST",
+                body: JSON.stringify({
+                    UID: username,
+                    PID: dataSet.PID,
+                }),
+            })
+                .then((response) => response.json())
+                .then((json) => {
+                    handleResponse(json)
+                })
+                .catch((error) => alert(error));
+        };
+        fetchData();
+    };
+
+    const confirmPairingDelete = () => {
+        return Alert.alert(
+            "Delete Pairing",
+            "Are you sure you want to Delete this pairing?",
+            [
+                // The "No" button
+                // Does nothing but dismiss the dialog when tapped
+                {
+                    text: "Cancel",
+                },
+                // The "Yes" button
+                {
+                    text: "Delete",
+                    onPress: () => {
+                        handleDeleteIconPress()
+                    }
+                },
+            ]
+        );
+    };
+
+    const handleResponse = (json) => {
+        if (json.StatusCode === 200) {
+            AppToast.ToastDisplay(json.Data);
+            setErrorAlertVisible(false);
+        }
+        else if (json.StatusCode === 400) {
+            //setModalMessage must come before setErrorAlertVisible
+            setModalMessage(json.Data);
+            setErrorAlertVisible(true);
+        }
+    }
     return (
         <View style={styles.iconsBar}>
             <View style={styles.flexRow}>
@@ -217,13 +278,29 @@ export default function IconsBar({
                 </Pressable>
 
             </View>
-            <Pressable onPress={handleFavouriteIconPress}>
-                <AntDesign
-                    name={favouriteIconOutline}
-                    size={24}
-                    color={favouriteIconColor}
-                />
-            </Pressable>
+            <View style={styles.flexRow}>
+
+                <Pressable onPress={handleFavouriteIconPress}
+                    style={[styles.flexRowJustCenter, { paddingRight: 20 }]}
+                >
+                    <AntDesign
+                        name={favouriteIconOutline}
+                        size={24}
+                        color={favouriteIconColor}
+                    />
+                </Pressable>
+                {isDeleteVisible &&
+                    <Pressable onPress={confirmPairingDelete}>
+                        <AntDesign
+                            name="delete"
+                            size={24}
+                            color="black"
+                        />
+                    </Pressable>}
+            </View>
+            {isErrorAlertVisible === true && (
+                <AppAlert visible={true} message={modalMessage} type={"Error"} />
+            )}
         </View>
     );
 }

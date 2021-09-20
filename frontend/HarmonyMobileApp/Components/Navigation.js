@@ -26,6 +26,8 @@ import SettingsScreen from "../screens/SettingsScreen.js";
 import CameraScreen from "../screens/CameraScreen.js";
 import PairingResultsScreen from "../screens/PairingResultsScreen.js";
 import DrinkDetailsScreen from "../screens/DrinkDetailsScreen.js";
+import NewPairingScreen from "../screens/NewPairingScreen";
+import RequestNewItemScreen from "../screens/RequestNewItemScreen";
 
 import config from "../aws-exports";
 import SignIn from "../screens/SignInScreen";
@@ -64,9 +66,9 @@ const BottomTabBar = ({ navigation, state }) => (
 const TabNavigator = (props) => {
   return (
     <Navigator tabBar={(props) => <BottomTabBar {...props} />}>
-      <Screen name="Home" component={HomeScreen} />
+      <Screen name="Home" component={HomeFeed} />
       <Screen name="Camera" component={CameraScreen} />
-      <Screen name="Favourite" component={UserPairingsTopTabs} />
+      <Screen name="Favourite" component={PairingFeed} />
       <Screen name="SettingsScreen">
         {(screenProps) => (
           <SettingsNavigator
@@ -83,8 +85,51 @@ const TabNavigator = (props) => {
   );
 };
 
-const Stack = createSharedElementStackNavigator();
+const HomeStack = createStackNavigator();
+function HomeFeed() {
+  return (
 
+    <HomeStack.Navigator initialRouteName="Home"
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <HomeStack.Screen name="Home" component={HomeScreen} />
+      <HomeStack.Screen
+        name="NewPairing"
+        component={NewPairingScreen}
+      />
+      <HomeStack.Screen
+        name="RequestNewItem"
+        component={RequestNewItemScreen}
+      />
+    </HomeStack.Navigator>
+  );
+}
+
+const PairingStack = createStackNavigator();
+function PairingFeed() {
+  return (
+
+    <PairingStack.Navigator initialRouteName="UserPairings"
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <PairingStack.Screen name="UserPairings" component={UserPairingsTopTabs} />
+      <PairingStack.Screen
+        name="NewPairing"
+        component={NewPairingScreen}
+      />
+      <PairingStack.Screen
+        name="RequestNewItem"
+        component={RequestNewItemScreen}
+      />
+    </PairingStack.Navigator>
+  );
+}
+
+const Stack = createSharedElementStackNavigator();
 const Results = () => (
   <Stack.Navigator initialRouteName="PairingResultsScreen"
     screenOptions={{
@@ -99,8 +144,8 @@ const Results = () => (
     />
   </Stack.Navigator>
 );
-const Tab = createMaterialTopTabNavigator();
 
+const Tab = createMaterialTopTabNavigator();
 const UserPairingsTopTabs = () => (
 
   <Tab.Navigator

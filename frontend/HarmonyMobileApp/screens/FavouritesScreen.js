@@ -1,10 +1,11 @@
 import React from "react";
-import CardScreen from "./CardScreen";
+import CardFilterScreen from "./CardFilterScreen";
 
 const FavouritesScreen = () => {
-  const USER_FAVOURITED_PAIRINGS = "https://w6gduongvk.execute-api.eu-west-1.amazonaws.com/dev/viewfavourites"
+  const USER_FAVOURITED_PAIRINGS = "https://2928u23tv1.execute-api.eu-west-1.amazonaws.com/dev/viewfavourites"
   return (
-    <CardScreen URL={USER_FAVOURITED_PAIRINGS} headerVisible={false} />
+    <CardFilterScreen givenURL={USER_FAVOURITED_PAIRINGS} isHeaderVisible={false} isDeleteVisible={false} />
+
   )
 };
 export default FavouritesScreen;
