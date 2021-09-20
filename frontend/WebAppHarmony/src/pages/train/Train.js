@@ -24,7 +24,7 @@ const useStyles = makeStyles({
 function callApi() {
   fetch('https://7q0027151j.execute-api.eu-west-1.amazonaws.com/dev/train', { method: 'GET' })
       .then(data => data.json()) // Parsing the data into a JavaScript object
-  //    .then(json => alert(JSON.stringify(json))) // Displaying the stringified data in an alert popup
+   .then(json => alert(JSON.stringify(json))) // Displaying the stringified data in an alert popup
 }
 export default function DataTable() {
   const classes = useStyles()
