@@ -33,7 +33,7 @@ def identify_food_item(event, context):
     if keyVal in data:
         a = data['predictions'][0]['tagName']
         b = data['predictions'][0]['probability']
-        if b < 0.6:
+        if b < 0.5:
             return {
                 "StatusCode": 204,
                 "Data": "Image cannot be Identified"
