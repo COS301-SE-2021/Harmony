@@ -9,12 +9,18 @@ import * as Yup from 'yup';
 import Multiselect from 'multiselect-react-dropdown';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField'
+import ReactSlider from 'react-slider';
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import Slider from '@mui/material/Slider';
+
 function CreateAdForm(...props) {
     /**The form variables */
     const defaultImage = "http://beepeers.com/assets/images/commerces/default-image.jpg";
     const [foodImage, setFoodImage] = useState(defaultImage);
     const [drinkImage, setDrinkImage] = useState(defaultImage);
     const [result, setResult] = useState([]);
+    const [radius, setRadius] = useState(20);
     var classes = useStyles();
 
     /**@var fileRef to create a reference to the file input to be able to clear it */
@@ -145,11 +151,13 @@ function CreateAdForm(...props) {
                     PairingTags: "",
                     Locations: "",
                     TimePeriod: "",
+                    Radius: 20
                 }}
                 validationSchema={Yup.object().shape({
                     FoodName: Yup.string().required('*'),
                     DrinkName: Yup.string().required('*'),
                     PairingDescription: Yup.string().required('*'),
+
                 })}
                 // onSubmit={(values) => handleSubmit(values)}
                 onSubmit={(values, { resetForm }) => {
@@ -411,6 +419,26 @@ function CreateAdForm(...props) {
                                         />
                                     </div>
                                 </div>
+
+                                <div className={classes.formElementsImageContainer}>
+                                    <div className={classes.configLabel}>
+
+                                        <label htmlFor="Locations" className={classes.tagName}>
+                                            <div className={classes.floatLeft}><p className={classes.errorDiv}>Radius</p> </div>
+                                            <div className={classes.floatLeft}>
+                                                {(values.Locations == [] && touched.Locations) ? (
+                                                    <div className={classes.errorStar}>*</div>
+                                                ) : null}
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <Box sx={{ width: 200 }}>
+                                        <Slider defaultValue={values.Radius} valueLabelDisplay="auto" min={0} max={100} value={values.Radius} onChange={handleChange} />
+                                    </Box>
+
+                                </div>
+
+
                                 <div className={classes.formElementsImageContainer}>
                                     <div className={classes.configLabel}>
                                         <label htmlFor="TimePeriod" className={classes.tagName}>

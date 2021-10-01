@@ -19,21 +19,22 @@ export default function LocationForm() {
     const handleLocationUpdate = (values) => {
         console.log(values.LocationName);
         console.log(address);
+        setAddress("");
+        setCoordinates({ lat: null, lng: null });
         fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/addnewlocations", {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             method: "POST",
-            body: JSON.stringify({ BID: "b4", lat: coordinates.lat, lng: coordinates.lng, "LocationName": values.LocationName, "Address": values.address })
+            body: JSON.stringify({ BID: "b4", lat: coordinates.lat, lng: coordinates.lng, "LocationName": values.LocationName, "Address": address })
         })
             .then(res => res.json())
             .then(
                 (result) => {
                     console.log(result);
                     alert("Location " + values.LocationName + " was added successfully.")
-                    setAddress("");
-                    setCoordinates({ lat: null, lng: null });
+
                 },
 
                 // Note: it's important to handle errors here
@@ -42,74 +43,17 @@ export default function LocationForm() {
                 (error) => {
                 }
             )
-        // console.log("key is " + MY_KEY);
-        // /**set the api key to use geocode */
-        // Geocode.setLanguage("en");
-        // Geocode.setRegion("za");
-        // Geocode.setLocationType("ROOFTOP");
-        // // Get latitude & longitude from address.
-        // Geocode.fromAddress(values.LocationAddress).then(
-        //     (response) => {
-        //         const { lat, lng } = response.results[0].geometry.location;
-        //         console.log(lat, lng);
-        //         fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/addnewlocations", {
-        //             headers: {
-        //                 'Accept': 'application/json',
-        //                 'Content-Type': 'application/json'
-        //             },
-        //             method: "POST",
-        //             body: JSON.stringify({ BID: "b4", lat: lat, lng: lng, "LocationName": values.LocationName, "Address": values.LocationAddress })
-        //         })
-        //             .then(res => res.json())
-        //             .then(
-        //                 (result) => {
-        //                     console.log(result);
-        //                     alert("Location " + values.LocationName + " was added successfully.")
-        //                 },
-
-        //                 // Note: it's important to handle errors here
-        //                 // instead of a catch() block so that we don't swallow
-        //                 // exceptions from actual bugs in components.
-        //                 (error) => {
-        //                 }
-        //             )
-        //     },
-        //     (error) => {
-        //         console.error(error);
-        //         alert("Location " + values.LocationName + " was not found.")
-        //     }
-        // );
     }
     const handleSelect = async (value) => {
         const results = await geocodeByAddress(value);
+        console.log(results[0].formatted_address);
         const latLng = await getLatLng(results[0]);
         setCoordinates(latLng);
-        setAddress(value);
+        setAddress(results[0].formatted_address);
     }
     return (
 
         <div className={classes.formElementsImageContainer}>
-            {/* <PlacesAutocomplete value={address} onChange={setAddress} onSelect={handleSelect}>
-                {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-                    <div>
-                        <p>Latitude:{coordinates.lat}</p>
-                        <p>Longitude:{coordinates.lng}</p>
-                        <p> Address: {address}</p>
-                        <input  {...getInputProps({ placeholder: "Street Address" })} />
-                        <div>
-                            {loading ? <div>... loading</div> : null}
-
-                            {suggestions.map((suggestion) => {
-                                const style = {
-                                    backgroundColor: suggestion.active ? "#81b5c2" : "#fff",
-                                    color: suggestion.active ? "#fff" : "#4A4A4A",
-                                };
-                                return <div {...getSuggestionItemProps(suggestion, { style })}>{suggestion.description}</div>;
-                            })}
-                        </div>
-                    </div>
-                )}
-            </PlacesAutocomplete> */}
             <Formik
                 initialValues={{
                     LocationName: "",
