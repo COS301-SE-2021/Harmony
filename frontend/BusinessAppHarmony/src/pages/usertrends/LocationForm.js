@@ -14,6 +14,7 @@ const MY_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 export default function LocationForm() {
     const classes = useStyles();
     const [address, setAddress] = useState("");
+    const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
     /**import the api key */
     const handleLocationUpdate = (values) => {
         console.log(values.LocationAddress);
@@ -57,7 +58,10 @@ export default function LocationForm() {
         );
     }
     const handleSelect = async (value) => {
-
+        const results = await geocodeByAddress(value);
+        const latLng = await getLatLng(results[0]);
+        setCoordinates(latLng);
+        setAddress(value);
     }
     return (
 
@@ -65,12 +69,19 @@ export default function LocationForm() {
             <PlacesAutocomplete value={address} onChange={setAddress} onSelect={handleSelect}>
                 {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
                     <div>
+                        <p>Latitude:{coordinates.lat}</p>
+                        <p>Longitude:{coordinates.lng}</p>
+                        <p> Address: {address}</p>
                         <input  {...getInputProps({ placeholder: "Street Address" })} />
                         <div>
                             {loading ? <div>... loading</div> : null}
 
                             {suggestions.map((suggestion) => {
-                                return <div>{suggestion.description}</div>;
+                                const style = {
+                                    backgroundColor: suggestion.active ? "#81b5c2" : "#fff",
+                                    color: suggestion.active ? "#fff" : "#4A4A4A",
+                                };
+                                return <div {...getSuggestionItemProps(suggestion, { style })}>{suggestion.description}</div>;
                             })}
                         </div>
                     </div>
