@@ -308,10 +308,11 @@ def addsponsors(event, response):
         i["IsSponsor"] = False
 
     sponsors = add_sponsored_distances(sponsors,event['Latitude'], event['Longitude'] )
+    sponsors = remove_out_of_range(sponsors)
     sponsorcounter = 0
     for i in range(len(response)):
         if sponsorcounter < len(sponsors):
-            if (i%5==0):
+            if (i != 0) and(i%5==0) :
                 newpid = uuid.uuid4().hex
 
                 newSponsor = {
@@ -363,5 +364,15 @@ def add_sponsored_distances(response, latitude, longitude):
                 i["Location"] = addressstring
 
 
+
+    return response
+
+def remove_out_of_range(response):
+    counter = 0
+    for i in range(len(response)):
+        if response[counter]["Distance"] > response[counter]["Radius"]:
+            del response[counter]
+        else:
+            counter = counter + 1
 
     return response
