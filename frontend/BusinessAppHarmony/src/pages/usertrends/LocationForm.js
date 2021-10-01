@@ -17,10 +17,31 @@ export default function LocationForm() {
     const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
     /**import the api key */
     const handleLocationUpdate = (values) => {
-        console.log(values.LocationAddress);
-        if (coordinates.lat === null) {
-            alert("Please provide a street address");
-        }
+        console.log(values.LocationName);
+        console.log(address);
+        fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/addnewlocations", {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "POST",
+            body: JSON.stringify({ BID: "b4", lat: coordinates.lat, lng: coordinates.lng, "LocationName": values.LocationName, "Address": values.address })
+        })
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    console.log(result);
+                    alert("Location " + values.LocationName + " was added successfully.")
+                    setAddress("");
+                    setCoordinates({ lat: null, lng: null });
+                },
+
+                // Note: it's important to handle errors here
+                // instead of a catch() block so that we don't swallow
+                // exceptions from actual bugs in components.
+                (error) => {
+                }
+            )
         // console.log("key is " + MY_KEY);
         // /**set the api key to use geocode */
         // Geocode.setLanguage("en");
@@ -96,7 +117,6 @@ export default function LocationForm() {
                 }}
                 validationSchema={Yup.object().shape({
                     LocationName: Yup.string().required('*'),
-                    LocationAddress: Yup.string().required('*'),
                 })}
                 onSubmit={(values, { resetForm }) => { resetForm(); handleLocationUpdate(values) }}
             >
@@ -120,7 +140,7 @@ export default function LocationForm() {
                             <div className={classes.formContainer}>
                                 <label htmlFor="LocationAddress" className={classes.formLabel}>
                                     <div className={classes.floatLeft}>
-                                        <p className={classes.errorDiv}>Address</p>
+                                        <p className={classes.errorDiv}>Street Address</p>
                                     </div>
                                     <div className={classes.floatLeft}>
                                         {/* {(errors.LocationAddress && touched.LocationAddress) ? (
@@ -133,27 +153,32 @@ export default function LocationForm() {
                                 </label>
                                 <PlacesAutocomplete value={address} onChange={setAddress} onSelect={handleSelect}>
                                     {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-                                        <div>
-                                            <p>Latitude:{coordinates.lat}</p>
-                                            <p>Longitude:{coordinates.lng}</p>
-                                            <p> Address: {address}</p>
-                                            <TextField id="outlined-basic" variant="outlined" name="LocationAddress" className={classes.individualTextField} {...getInputProps({ placeholder: "Street Address" })} />
+                                        <div style={{ width: '100%' }}>
+                                            <TextField id="outlined-basic" variant="outlined" name="LocationAddress" className={classes.individualTextField} {...getInputProps({ placeholder: "" })} />
 
-                                            <div>
+                                            <div >
                                                 {loading ? <div>... loading</div> : null}
 
                                                 {suggestions.map((suggestion) => {
                                                     const style = {
                                                         backgroundColor: suggestion.active ? "#81b5c2" : "#fff",
                                                         color: suggestion.active ? "#fff" : "#4A4A4A",
+                                                        borderWidth: 2,
+                                                        borderColor: "#4A4A4A"
                                                     };
                                                     return <div {...getSuggestionItemProps(suggestion, { style })}>{suggestion.description}</div>;
                                                 })}
                                             </div>
+
                                         </div>
                                     )}
                                 </PlacesAutocomplete>
+
                                 {/* <TextField id="outlined-basic" variant="outlined" name="LocationAddress" className={classes.individualTextField} onChange={handleChange} value={values.LocationAddress} /> */}
+                            </div>
+                            <div className={classes.CoordinatesContainer}>
+                                <p className={classes.errorDiv}>Latitude:<div style={{ float: 'right' }}>{coordinates.lat}</div></p>
+                                <p className={classes.errorDiv}>Longitude:<div style={{ float: 'right' }}>{coordinates.lng}</div></p>
                             </div>
                         </div>
                         <Button type="Submit" className={classes.addLocationButton} > Add New Location</Button>

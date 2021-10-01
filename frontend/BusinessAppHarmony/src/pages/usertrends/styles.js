@@ -238,6 +238,12 @@ export default makeStyles(theme => ({
   floatLeft: {
     float: "left",
   },
+  CoordinatesContainer: {
+    float: "left",
+    width: "100%",
+    paddingRight: 10,
+    paddingLeft: 10,
+  },
   formContainer: {
     display: "flex",
   },
