@@ -321,7 +321,7 @@ def addsponsors(event, response):
                     "DrinkTags": sponsors[sponsorcounter]["DrinkTags"],
                     "DrinkItem": sponsors[sponsorcounter]["DrinkName"],
                     "DrinkImage": sponsors[sponsorcounter]["DrinkImage"],
-                    "Location": "14 Sandton road", #sponsors[sponsorcounter]["Locations"]
+                    "Location": sponsors[sponsorcounter]["Location"],
                     "MealTag": sponsors[sponsorcounter]["PairingTags"],
                     "Distance": sponsors[sponsorcounter]["Distance"],
                     "Price": "R59.99",
@@ -337,7 +337,7 @@ def addsponsors(event, response):
 def add_sponsored_distances(response, latitude, longitude):
     # must be called for geolocation to work
     geoLoc = Nominatim(user_agent="GetLoc")
-
+    geolocator = Nominatim(user_agent="GetLoc")
     for i in response:
         # calculating distance between pairs and the user
         tempdistance = 50000
@@ -347,5 +347,21 @@ def add_sponsored_distances(response, latitude, longitude):
             if calcdist < tempdistance:
                 i['Distance'] =round(calcdist)
                 tempdistance = calcdist
+
+                location = geolocator.reverse(f"{j['Latitude']}, {j['Longitude']}")
+                address = location.raw["address"]
+                addressstring = ""
+                if "road" in address:
+                    addressstring = addressstring + address["road"]
+
+                if "suburb" in address:
+                    addressstring = addressstring + ", " + address["suburb"]
+
+                if "town" in address:
+                    addressstring = addressstring + ", " + address["town"]
+
+                i["Location"] = addressstring
+
+
 
     return response
