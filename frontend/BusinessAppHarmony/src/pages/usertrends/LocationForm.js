@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useStyles from "./styles";
 import TextField from '@material-ui/core/TextField'
 // components
@@ -8,11 +8,12 @@ import * as Yup from 'yup';
 import {
     Formik, Form
 } from 'formik';
-
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 const MY_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
 export default function LocationForm() {
     const classes = useStyles();
+    const [address, setAddress] = useState("");
     /**import the api key */
     const handleLocationUpdate = (values) => {
         console.log(values.LocationAddress);
@@ -55,10 +56,26 @@ export default function LocationForm() {
             }
         );
     }
+    const handleSelect = async (value) => {
 
+    }
     return (
 
         <div className={classes.formElementsImageContainer}>
+            <PlacesAutocomplete value={address} onChange={setAddress} onSelect={handleSelect}>
+                {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                    <div>
+                        <input  {...getInputProps({ placeholder: "Street Address" })} />
+                        <div>
+                            {loading ? <div>... loading</div> : null}
+
+                            {suggestions.map((suggestion) => {
+                                return <div>{suggestion.description}</div>;
+                            })}
+                        </div>
+                    </div>
+                )}
+            </PlacesAutocomplete>
             <Formik
                 initialValues={{
                     LocationName: "",

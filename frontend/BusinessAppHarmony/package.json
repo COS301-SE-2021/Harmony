@@ -11,6 +11,7 @@
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.60",
     "@material-ui/styles": "^4.11.3",
     "@mdi/js": "^5.9.55",
     "@mdi/react": "^1.4.0",
@@ -32,6 +33,7 @@
     "react-google-maps": "^9.4.5",
     "react-hook-form": "^7.15.3",
     "react-icons": "^4.2.0",
+    "react-places-autocomplete": "^7.3.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "react-syntax-highlighter": "^15.4.3",
