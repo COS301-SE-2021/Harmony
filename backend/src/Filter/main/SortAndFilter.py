@@ -66,7 +66,7 @@ def sort_and_filter(event, context):
     if range is not None:
         sortedResponse = filter_by_range(sortedResponse,event['Distance'])
 
-    sortedResponse = addsponsors(sortedResponse)
+    sortedResponse = addsponsors(event,sortedResponse)
     if len(sortedResponse) == 0:
         return {
             "StatusCode": 204,
@@ -299,7 +299,7 @@ def filter_by_range(response, filterdist):
 
     return response
 
-def addsponsors(response):
+def addsponsors(event, response):
     businesses = businessusers.scan()
     businesses = businesses["Items"]
     sponsors = sponsortable.scan()
@@ -307,7 +307,7 @@ def addsponsors(response):
     for i in response:
         i["IsSponsor"] = False
 
-
+    sponsors = add_sponsored_distances(sponsors,event['Latitude'], event['Longitude'] )
     sponsorcounter = 0
     for i in range(len(response)):
         if sponsorcounter < len(sponsors):
@@ -323,7 +323,7 @@ def addsponsors(response):
                     "DrinkImage": sponsors[sponsorcounter]["DrinkImage"],
                     "Location": "14 Sandton road", #sponsors[sponsorcounter]["Locations"]
                     "MealTag": sponsors[sponsorcounter]["PairingTags"],
-                    "Distance": random.randint(10,20),
+                    "Distance": sponsors[sponsorcounter]["Distance"],
                     "Price": "R59.99",
                     "Logo" : businesses[random.randint(1,2)]["Logo"],
                     "IsSponsor": True,
@@ -331,5 +331,21 @@ def addsponsors(response):
                 }
                 response.insert(i, newSponsor)
                 sponsorcounter = sponsorcounter+1
+
+    return response
+
+def add_sponsored_distances(response, latitude, longitude):
+    # must be called for geolocation to work
+    geoLoc = Nominatim(user_agent="GetLoc")
+
+    for i in response:
+        # calculating distance between pairs and the user
+        tempdistance = 50000
+
+        for j in i["CoordinatesList"]:
+            calcdist = distance.distance((j['Latitude'], j['Longitude']), (latitude, longitude)).kilometers
+            if calcdist < tempdistance:
+                i['Distance'] =round(calcdist)
+                tempdistance = calcdist
 
     return response
