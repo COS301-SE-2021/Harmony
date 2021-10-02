@@ -37,6 +37,7 @@ def create_business_pairing(event, context):
     pairing_description = event["Description"]
     locations = event["Locations"]
     time_period = event["TimePeriod"][0]
+    radius = event["Radius"]
     today = date.today()
 
     # generate unique id for business request pairing
@@ -66,7 +67,7 @@ def create_business_pairing(event, context):
 
     food_image_link = add_image_to_s3(event["FoodImage"], generate_id1)
     drink_image_link = add_image_to_s3(event["DrinkImage"], generate_id2)
-    cost = calculate_cost(len(locations), days)
+    cost = calculate_cost(len(locations), days, radius)
 
     # write data for new pairing to the DynamoDB table using the object we instantiated and save response in a variable
     table.put_item(
@@ -85,7 +86,8 @@ def create_business_pairing(event, context):
             'TimeLimit': time_period,
             'Status': "Active",
             'DateCreated': str(today),
-            'Price': cost
+            'Price': cost,
+            'Radius': radius
         })
 
     """Gets the business user data using the business id"""
@@ -144,7 +146,7 @@ This data must be written to the database
 """
 
 
-def calculate_cost(num_locations, time_limit):
-    cost = time_limit + (2 * num_locations * time_limit)
+def calculate_cost(num_locations, time_limit, radius):
+    cost = time_limit + (2 * num_locations * time_limit) + radius
 
     return cost
