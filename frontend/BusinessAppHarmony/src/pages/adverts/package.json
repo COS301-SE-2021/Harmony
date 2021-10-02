@@ -1,0 +1,6 @@
+{
+  "name": "adverts",
+  "version": "0.0.0",
+  "main": "adverts.js",
+  "private": true
+}

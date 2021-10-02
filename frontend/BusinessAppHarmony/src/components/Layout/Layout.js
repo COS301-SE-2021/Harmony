@@ -21,6 +21,7 @@ import Sidebar from "../Sidebar";
 import HomePage from "../../pages/usertrends";
 import Statements from "../../pages/dashboard";
 import CreateAds from "../../pages/createads";
+import Adverts from "../../pages/adverts";
 
 
 // context
@@ -47,6 +48,8 @@ function Layout(props) {
               <Route path="/app/usertrends" component={HomePage} />
               <Route path="/app/dashboard" component={Statements} />
               <Route path="/app/createads" component={CreateAds} />
+              <Route path="/app/adverts" component={Adverts} />
+
 
             </Switch>
             <Box
