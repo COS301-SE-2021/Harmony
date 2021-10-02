@@ -9,10 +9,7 @@ import * as Yup from 'yup';
 import Multiselect from 'multiselect-react-dropdown';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField'
-import ReactSlider from 'react-slider';
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Slider from '@mui/material/Slider';
+import { Slider, RangeSlider } from 'rsuite';
 
 function CreateAdForm(...props) {
     /**The form variables */
@@ -20,7 +17,7 @@ function CreateAdForm(...props) {
     const [foodImage, setFoodImage] = useState(defaultImage);
     const [drinkImage, setDrinkImage] = useState(defaultImage);
     const [result, setResult] = useState([]);
-    const [radius, setRadius] = useState(20);
+    const [value, setValue] = useState(20);
     var classes = useStyles();
 
     /**@var fileRef to create a reference to the file input to be able to clear it */
@@ -420,7 +417,7 @@ function CreateAdForm(...props) {
                                     </div>
                                 </div>
 
-                                <div className={classes.formElementsImageContainer}>
+                                <div>
                                     <div className={classes.configLabel}>
 
                                         <label htmlFor="Locations" className={classes.tagName}>
@@ -432,10 +429,16 @@ function CreateAdForm(...props) {
                                             </div>
                                         </label>
                                     </div>
-                                    <Box sx={{ width: 200 }}>
-                                        <Slider defaultValue={values.Radius} valueLabelDisplay="auto" min={0} max={100} value={values.Radius} onChange={handleChange} />
-                                    </Box>
-
+                                    <Slider
+                                        progress
+                                        style={{ marginTop: 16, width: "40%", zIndex: 20 }}
+                                        value={value}
+                                        onChange={value => {
+                                            setValue(value);
+                                        }}
+                                        min={5}
+                                        max={100}
+                                    />
                                 </div>
 
 

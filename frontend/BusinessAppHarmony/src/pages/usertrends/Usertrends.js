@@ -10,6 +10,7 @@ import PayPal from '../dashboard/components/Table/PayPal';
 import { GrPaypal } from "react-icons/gr";
 import LocationForm from './LocationForm';
 import TrendingStats from './trendingStats';
+import { FiMinusCircle } from "react-icons/fi";
 export default function Tables() {
   const classes = useStyles();
   /**Default logo */
@@ -139,15 +140,17 @@ export default function Tables() {
                 <TableRow className={classes.tableRowHeader}>
                   <TableCell className={classes.tableCell}>NAME</TableCell>
                   <TableCell className={classes.tableCell}>ADDRESS</TableCell>
+                  <TableCell className={classes.tableCell}>REMOVE</TableCell>
 
                 </TableRow>
               </TableHead>
               <TableBody>
-                {data.Locations.map(({ Name, Address }) => (
+                {data.Locations.map((item) => (
 
-                  <TableRow key={Address}>
-                    <TableCell className="pl-3 fw-normal">{Name}</TableCell>
-                    <TableCell>{Address}</TableCell>
+                  <TableRow key={item.Address}>
+                    <TableCell className="pl-3 fw-normal">{item.Name}</TableCell>
+                    <TableCell>{item.Address}</TableCell>
+                    <TableCell><FiMinusCircle style={{ width: 25, height: 25, marginLeft: 20, marginRight: 20 }} onClick={() => (console.log(item.Address + " removed"))} /></TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -166,7 +169,7 @@ export default function Tables() {
             <div className={classes.outstandingBalance}>
               <p className={classes.outstandingBalanceWord}>Outstanding Balance</p>
               <Typography size="xxl" weight="bold">
-               R {data.OutstandingAmount}
+                R {data.OutstandingAmount}
               </Typography>
             </div>
             <div className={classes.PayPalContainer}>

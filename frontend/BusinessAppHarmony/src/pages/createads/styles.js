@@ -238,6 +238,9 @@ export default makeStyles(theme => ({
   floatLeft: {
     float: "left"
   },
+  clearBoth: {
+    clear: "both"
+  },
   errorDiv: {
     fontSize: 15,
     marginTop: 0,
