@@ -14,16 +14,8 @@ business_users_table = dynamodb.Table(business_users_table_name)
 
 def remove_location(event, context):
     bid = event['BID']
-    location_id = event['Location_ID']
-    location_name = event['Location_name']
-
-    """try:
-        business_users_table.delete_item(Key={'RID': i['RID']})
-    except ClientError as e:
-        if e.response['Error']['Code'] == "ConditionalCheckFailedException":
-            print(e.response['Error']['Message'])
-
-            return {"StatusCode": 400}"""
+    location_id = event['LocationID']
+    location_name = event['LocationName']
 
     """Gets the business user data using the business id"""
     try:
@@ -31,5 +23,31 @@ def remove_location(event, context):
     except ClientError as e:
         print(e.response['Error']['Message'])
         return {"StatusCode": 400}
+
+    count = 0
+    for i in business_user_data["Item"]["Locations"]:
+        count = count + 1
+        if i["Name"] == "Durban":
+            print("------------")
+            del i
+
+    """
+    Write the updated locations to the table
+    """
+
+    """business_users_table.update_item(
+        TableName=business_users_table_name,
+        Key={
+            'BID': user_id
+        },
+        UpdateExpression="SET Locations = list_append(Locations, :locations)",
+        ExpressionAttributeValues={':locations': [location_to_add]},
+        ReturnValues="UPDATED_NEW"
+
+    )"""
+
+    print(business_user_data["Item"]["Locations"])
+
+    print(count)
 
     return {"StatusCode": 200}
