@@ -9,14 +9,12 @@ import { FormSubmit_ImageUrl } from "../../components/Forms/FormSubmit_ImageUrl"
 export default function DataTable() {
   const [posts, setPost] = useState([]);
   const [posts2, setPost2] = useState([]);
-  var [data1, setData] = useState(" ");
 
 
   /**Get User feedback Table */
 
   let signal = axios.CancelToken.source();
   useEffect(() => {
-    let isSubscribed = true;
     axios.get(`https://w3lfp6r6f7.execute-api.eu-west-1.amazonaws.com/dev/getuserfeedback`, {
       cancelToken: signal.token,
     })
@@ -26,10 +24,6 @@ export default function DataTable() {
         }).catch(err => {
       console.log(err);
     });
-    return function cleanup() {
-      isSubscribed = false;
-      signal.cancel('Api is being canceled');
-    }
 
 
   }, []);
@@ -46,7 +40,6 @@ export default function DataTable() {
 
   /**Get Tags Table */
   useEffect(() => {
-    let isSubscribed = true;
     axios.get(`https://7q0027151j.execute-api.eu-west-1.amazonaws.com/dev/gettags`, {
       cancelToken: signal.token,
     })
@@ -57,10 +50,6 @@ export default function DataTable() {
         }).catch(err => {
       console.log(err);
     });
-    return function cleanup() {
-      isSubscribed = false;
-      signal.cancel('Api is being canceled');
-    }
   }, []);
   const columns2 = [
     {label: "Tag ID", name: "id" },
@@ -108,7 +97,7 @@ export default function DataTable() {
               options={options}
           />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={6}>
           <div className="App">
             <FormSubmit_ImageUrl
                 formName="Add new Image to Training Set"
