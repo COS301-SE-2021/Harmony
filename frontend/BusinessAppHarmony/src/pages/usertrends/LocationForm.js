@@ -3,13 +3,11 @@ import useStyles from "./styles";
 import TextField from '@material-ui/core/TextField'
 // components
 import Button from '@material-ui/core/Button';
-import Geocode from "react-geocode";
 import * as Yup from 'yup';
 import {
     Formik, Form
 } from 'formik';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from "react-places-autocomplete";
-const MY_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
 export default function LocationForm() {
     const classes = useStyles();
@@ -117,8 +115,6 @@ export default function LocationForm() {
                                         </div>
                                     )}
                                 </PlacesAutocomplete>
-
-                                {/* <TextField id="outlined-basic" variant="outlined" name="LocationAddress" className={classes.individualTextField} onChange={handleChange} value={values.LocationAddress} /> */}
                             </div>
                             <div className={classes.CoordinatesContainer}>
                                 <p className={classes.errorDiv}>Latitude:<div style={{ float: 'right' }}>{coordinates.lat}</div></p>

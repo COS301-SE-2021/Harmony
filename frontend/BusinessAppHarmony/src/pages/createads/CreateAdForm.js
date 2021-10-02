@@ -9,7 +9,7 @@ import * as Yup from 'yup';
 import Multiselect from 'multiselect-react-dropdown';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField'
-import { Slider, RangeSlider } from 'rsuite';
+import { Slider, RangeSlider, Grid, Row, Col, InputNumber } from 'rsuite';
 
 function CreateAdForm(...props) {
     /**The form variables */
@@ -429,16 +429,28 @@ function CreateAdForm(...props) {
                                             </div>
                                         </label>
                                     </div>
-                                    <Slider
-                                        progress
-                                        style={{ marginTop: 16, width: "40%", zIndex: 20 }}
-                                        value={value}
-                                        onChange={value => {
-                                            setValue(value);
-                                        }}
-                                        min={5}
-                                        max={100}
-                                    />
+                                    <Row>
+                                        <Col md={10}>
+                                            <Slider
+                                                progress
+                                                style={{ marginTop: 16 }}
+                                                value={value}
+                                                onChange={value => {
+                                                    setValue(value);
+                                                }}
+                                            />
+                                        </Col>
+                                        <Col md={4}>
+                                            <InputNumber
+                                                min={0}
+                                                max={100}
+                                                value={value}
+                                                onChange={value => {
+                                                    setValue(value);
+                                                }}
+                                            />
+                                        </Col>
+                                    </Row>
                                 </div>
 
 
