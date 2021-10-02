@@ -1,5 +1,5 @@
 import React, { useReducer } from "react";
-import { Button, Icon, TextField, Paper, Typography } from "@material-ui/core";
+import { Button, Icon, TextField, Paper, Typography, Select, MenuItem, InputLabel } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 export function FormSubmit_NewTag(props) {
@@ -33,7 +33,8 @@ export function FormSubmit_NewTag(props) {
     const [formInput, setFormInput] = useReducer(
         (state, newState) => ({ ...state, ...newState }),
         {
-            TagName: ""
+            TagName: "",
+            Type: ""
         }
     );
 
@@ -73,24 +74,26 @@ export function FormSubmit_NewTag(props) {
 
                 <form onSubmit={handleSubmit}>
                     <TextField
-                        label="New Tag"
+                        label="Enter New Tag Name"
                         id="margin-normal"
                         name="TagName"
                         defaultValue={formInput.TagName}
                         className={classes.textField}
-                        helperText="Enter new Tag "
+                        helperText="        "
                         onChange={handleInput}
                     />
 
-                    <TextField
-                        label="Tag Type"
-                        id="margin-normal"
-                        name="Type"
+                    <InputLabel className={classes.textField}>Select Tag Type</InputLabel>
+                    <Select
                         defaultValue={formInput.Type}
-                        className={classes.textField}
-                        helperText="Enter Regular or Negative"
                         onChange={handleInput}
-                    />
+                        className={classes.textField}
+                        name="Type"
+                    >
+                        <MenuItem value="Regular"> Regular </MenuItem>
+                        <MenuItem value="Negative"> Negative</MenuItem>
+
+                    </Select>
                     <Button
                         type="submit"
                         variant="contained"
