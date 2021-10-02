@@ -17,7 +17,7 @@ All the relevant data is then returned as a JSON object back to the frontend.
 """
 
 def identify_food_item(event, context):
-    url = "https://aiharmony-prediction.cognitiveservices.azure.com/customvision/v3.0/Prediction/b2c99ecb-e43e-4a59-ac87-a189c109e267/classify/iterations/Iteration4/image"
+    url = "https://aiharmony-prediction.cognitiveservices.azure.com/customvision/v3.0/Prediction/b2c99ecb-e43e-4a59-ac87-a189c109e267/classify/iterations/Iteration7/image"
 
     headers = {
         # Request headers
