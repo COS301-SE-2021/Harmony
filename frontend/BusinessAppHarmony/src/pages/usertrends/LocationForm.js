@@ -125,8 +125,13 @@ export default function LocationForm() {
                                 <p className={classes.errorDiv}>Longitude:<div style={{ float: 'right' }}>{coordinates.lng}</div></p>
                             </div>
                         </div>
-                        <Button type="Submit" className={classes.addLocationButton} > Add New Location</Button>
-
+                        <div>
+                            <Button onClick={() => (resetForm(),
+                                setAddress(""),
+                                setCoordinates({ lat: null, lng: null })
+                            )} className={classes.ClearButton} > Clear </Button>
+                            <Button type="Submit" className={classes.addLocationButton} > Add New Location</Button>
+                        </div>
                     </Form>
                 )}
             </Formik>

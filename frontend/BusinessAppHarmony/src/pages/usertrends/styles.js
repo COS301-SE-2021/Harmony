@@ -106,11 +106,7 @@ export default makeStyles(theme => ({
   toggleButton: {
     borderRadius: 10, height: 70
   },
-  clearButton: {
-    backgroundColor: "#CECECE", margin: 10, height: 35, borderRadius: 10, paddingLeft: 12, paddingRight: 12, width: "20%",
-    float: "none",
-    boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)"
-  },
+
   uploadLogoButton: {
     backgroundColor: theme.palette.primary.main,
     height: 25, borderRadius: 50, paddingLeft: 10, paddingRight: 10, fontSize: 10, marginLeft: 10, marginTop: -5,
@@ -130,11 +126,16 @@ export default makeStyles(theme => ({
 
   },
   addLocationButton: {
-    backgroundColor: "#81b5c2", color: "white", marginLeft: 45, height: 35, borderRadius: 10, width: "70%",
+    backgroundColor: "#81b5c2", color: "white", marginLeft: 25, height: 35, borderRadius: 10, width: "60%",
     boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)",
-
-
+    float: "left"
   },
+  ClearButton: {
+    backgroundColor: "#CECECE", marginLeft: 15, height: 35, borderRadius: 10, width: "20%",
+    boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)",
+    float: "left"
+  },
+
   ButtonContainer: {
     float: 'left',
     margin: 'auto',
