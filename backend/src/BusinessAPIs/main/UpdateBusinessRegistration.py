@@ -9,7 +9,7 @@ business_user_table_name = 'BusinessUsers'
 business_user_table = dynamodb.Table(business_user_table_name)
 
 
-def update_name(event, context):
+def update_business_registration(event, context):
     registration = event['Registration']
     bid = event['BID']
 
@@ -21,11 +21,19 @@ def update_name(event, context):
         Key={
             'BID': bid
         },
-        ExpressionAttributeNames={'#V': 'BusinessName'},
+        ExpressionAttributeNames={'#V': 'BusinessRegistration'},
         ExpressionAttributeValues={':v': registration},
         UpdateExpression='SET #V = :v',
         ReturnValues="UPDATED_NEW"
 
     )
 
-    return {"StatusCode": 200}
+    """Gets the business user data using the business id"""
+    try:
+        business_user_data = business_user_table.get_item(Key={'BID': bid})
+    except ClientError as e:
+        print(e.response['Error']['Message'])
+        return {"StatusCode": 400}
+
+    return {"StatusCode": 200,
+            "Data": business_user_data['Item']}

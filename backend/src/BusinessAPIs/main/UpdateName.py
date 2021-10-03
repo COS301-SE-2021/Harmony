@@ -28,4 +28,12 @@ def update_name(event, context):
 
     )
 
-    return {"StatusCode": 200}
+    """Gets the business user data using the business id"""
+    try:
+        business_user_data = business_user_table.get_item(Key={'BID': bid})
+    except ClientError as e:
+        print(e.response['Error']['Message'])
+        return {"StatusCode": 400}
+
+    return {"StatusCode": 200,
+            "Data": business_user_data['Item']}
