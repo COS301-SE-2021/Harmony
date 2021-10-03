@@ -30,6 +30,6 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "description": "Publish test with alerts with updated/correct username and myFilterContext for all fields"
+    "description": "Improvement: \nReduced the image quality when selecting an image from the gallery as well as when taking a picture using the camera. This will reduce the size of the image and prevent the APIs from timing out."
   }
 }
