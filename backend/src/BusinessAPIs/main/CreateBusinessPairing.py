@@ -39,6 +39,7 @@ def create_business_pairing(event, context):
     time_period = event["TimePeriod"][0]
     radius = event["Radius"]
     today = date.today()
+    coord = event["Coord"]
 
     # generate unique id for business request pairing
     bpid = uuid.uuid4().hex
@@ -87,7 +88,8 @@ def create_business_pairing(event, context):
             'Status': "Active",
             'DateCreated': str(today),
             'Price': cost,
-            'Radius': radius
+            'Radius': radius,
+            'CoordinatesList': coord
         })
 
     """Gets the business user data using the business id"""
