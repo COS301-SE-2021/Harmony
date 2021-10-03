@@ -30,7 +30,6 @@ def remove_location(event, context):
         # traverse each item in Locations
         # if we find the address in the dataabse we can break the loop. The index is set.
         if k["Address"] == location_address:
-            print("-----------Found")
             del response_data[index]
             break
         index = index + 1
