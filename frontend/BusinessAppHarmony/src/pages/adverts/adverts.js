@@ -16,7 +16,7 @@ export default function AdvertsPage() {
     Locations: ["Durban", "Pretoria", "Westville"],
     foodTags: ["Sweet", "Warm"],
     drinkTags: ["Warm", "Sweet"],
-    pairingTag: ["Snack"],
+    pairingTag: "Snack",
     radius: ["25"],
     timeLeft: "24 Days",
     status: "Active"
@@ -31,7 +31,7 @@ export default function AdvertsPage() {
         Locations: ["Durban", "Pretoria", "Westville"],
         foodTags: ["Sweet", "Warm"],
         drinkTags: ["Warm", "Sweet"],
-        pairingTag: ["Snack"],
+        pairingTag: "Snack",
         radius: ["25"],
         timeLeft: "24 Days",
         status: "Active"
@@ -44,7 +44,7 @@ export default function AdvertsPage() {
         Locations: ["Durban", "Pretoria", "Westville"],
         foodTags: ["Sweet", "Warm"],
         drinkTags: ["Warm", "Sweet"],
-        pairingTag: ["Snack"],
+        pairingTag: "Snack",
         radius: ["25"],
         timeLeft: "24 Days",
         status: "Active"
@@ -57,7 +57,7 @@ export default function AdvertsPage() {
         Locations: ["Durban", "Pretoria", "Westville"],
         foodTags: ["Sweet", "Warm"],
         drinkTags: ["Warm", "Sweet"],
-        pairingTag: ["Snack"],
+        pairingTag: "Snack",
         radius: ["25"],
         timeLeft: "24 Days",
         status: "Active"
@@ -81,8 +81,27 @@ export default function AdvertsPage() {
             <div className={classes.floatLeft}>{oneData.foodName}</div>
             <div className={classes.floatLeft}>{oneData.drinkName}</div>
           </div>
+          <div className={classes.justifySpaceBet}>
+            <div className={classes.floatLeft}>
+              {oneData.foodTags.map((item) => (
+                <div className={classes.foodChip}>{item}</div>
+              ))}
+            </div>
+            <div className={classes.floatLeft}>
+              {oneData.drinkTags.map((item) => (
+                <div className={classes.drinkChip}>{item}</div>
+              ))}
+            </div>
+          </div><br />
+          <div style={{ float: "left", textAlign: "center", marginLeft: 30 }}>
+            <div className={classes.floatLeft}><p>Pairing tag: </p></div>
+            <div style={{ justifyContent: 'space-around', display: "flex", float: 'left' }}>
+              <div className={classes.pairingChip}>{oneData.pairingTag}</div>
+            </div>
+          </div>
         </Widget>
       </Grid>
+
     </>
   );
 }

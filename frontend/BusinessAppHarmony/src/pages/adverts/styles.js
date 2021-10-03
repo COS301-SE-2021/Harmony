@@ -255,5 +255,39 @@ export default makeStyles(theme => ({
     justifyContent: "space-around",
     width: "100%",
     display: "flex"
+  },
+  foodChip: {
+    backgroundColor: "#FF6347",
+    color: "white",
+    padding: 2,
+    textAlign: "center",
+    borderRadius: 15,
+    width: 55,
+    marginLeft: 10,
+    marginRight: 10,
+    float: "left",
+
+  },
+  drinkChip: {
+    backgroundColor: "#1FBFBA",
+    float: "left",
+    color: "white",
+    padding: 2,
+    textAlign: "center",
+    borderRadius: 15,
+    width: 55,
+    marginLeft: 10,
+    marginRight: 10
+  },
+  pairingChip: {
+    backgroundColor: "#C41ED4",
+    float: "left",
+    color: "white",
+    padding: 2,
+    textAlign: "center",
+    borderRadius: 15,
+    width: 55,
+    marginTop: 13,
+    marginLeft: 10,
   }
 }));
