@@ -23,14 +23,14 @@ import IconsBar from "../Components/IconsBar";
 
 export default function Card({ dataSet, isDeleteVisible, ...otherProps }) {
     const navigation = useNavigation();
-
     return (
         <View style={{ paddingBottom: 15 }}>
             <View style={styles.cardContainer}>
                 <TouchableOpacity
                     onPress={() => {
-                        // console.log("Hello world")
-                        navigation.navigate("PairingDetails")
+                        navigation.navigate("PairingDetails", {
+                            data: dataSet,
+                        })
                     }}
                 >
 
