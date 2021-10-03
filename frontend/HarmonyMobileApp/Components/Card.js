@@ -6,6 +6,8 @@ import {
     StyleSheet,
     TouchableOpacity
 } from "react-native";
+import { useNavigation } from '@react-navigation/native';
+
 import styles from "../styles";
 import {
     SimpleLineIcons,
@@ -20,11 +22,17 @@ import {
 import IconsBar from "../Components/IconsBar";
 
 export default function Card({ dataSet, isDeleteVisible, ...otherProps }) {
+    const navigation = useNavigation();
 
     return (
         <View style={{ paddingBottom: 15 }}>
             <View style={styles.cardContainer}>
-                <TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => {
+                        // console.log("Hello world")
+                        navigation.navigate("PairingDetails")
+                    }}
+                >
 
                     {dataSet.IsSponsor ?
                         <View>
