@@ -120,6 +120,7 @@ function CreateAdForm(...props) {
             TimePeriod: vals.TimePeriod,
             FoodImage: foodImage.split(',')[1],
             DrinkImage: drinkImage.split(',')[1],
+            Radius: 50
         }
         console.log("request to submit " + JSON.stringify(request))
         fetch('https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/createbusinesspairing', {
