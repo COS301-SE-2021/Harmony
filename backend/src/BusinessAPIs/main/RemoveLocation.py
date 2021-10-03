@@ -15,7 +15,7 @@ business_users_table = dynamodb.Table(business_users_table_name)
 def remove_location(event, context):
     bid = event['BID']
     location_id = event['LocationID']
-    location_name = event['LocationName']
+    location_address = event['LocationAddress']
 
     """Gets the business user data using the business id"""
     try:
@@ -27,41 +27,29 @@ def remove_location(event, context):
     response_data = business_user_data["Item"]["Locations"]
     index = 0
     for k in business_user_data['Item']['Locations']:
-        # traverse each item in Pairings and search for id the list
-        # find id the break, because index is incrementing till id is found
-        if k["Name"] == location_name:
+        # traverse each item in Locations
+        # if we find the address in the dataabse we can break the loop. The index is set.
+        if k["Address"] == location_address:
             print("-----------Found")
+            del response_data[index]
             break
         index = index + 1
 
     """
     Write the updated locations to the table
     """
-
-    """business_users_table.update_item(
-        TableName=business_users_table_name,
-        Key={
-            'BID': bid
-        },
-        UpdateExpression="SET Locations = list_append(Locations, :locations)",
-        ExpressionAttributeValues={':locations': response_data},
-        ReturnValues="UPDATED_NEW"
-
-    )"""
-    print(index)
     try:
-
-        table.update_item(
+        business_users_table.update_item(
+            TableName=business_users_table_name,
             Key={
                 'BID': bid
             },
-            # remove id at index of the Locations list
-            UpdateExpression=f"remove Locations[{index}]",
-            ConditionExpression=f"contains(Locations, :locations)",
-            ExpressionAttributeValues={':locations': bid},
+            ExpressionAttributeNames={'#V': "Locations"},
+            ExpressionAttributeValues={':v': response_data},
+            UpdateExpression='SET #V = :v',
             ReturnValues="UPDATED_NEW"
-        )
 
+        )
     except ClientError as e:
         if e.response['Error']['Code'] == "ConditionalCheckFailedException":
             print(e.response['Error']['Message'])
