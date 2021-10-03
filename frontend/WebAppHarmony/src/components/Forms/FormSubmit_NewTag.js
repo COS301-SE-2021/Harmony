@@ -1,8 +1,10 @@
-import React, { useReducer } from "react";
+import React, {useReducer, useState} from "react";
 import { Button, Icon, TextField, Paper, Typography, Select, MenuItem, InputLabel } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 export function FormSubmit_NewTag(props) {
+    let [tagName, setTagName] = useState('')
+    let [type, setType] = useState('')
     const useStyles = makeStyles(theme => ({
         button: {
             margin: theme.spacing(1)
@@ -30,35 +32,41 @@ export function FormSubmit_NewTag(props) {
         }
     }));
 
-    const [formInput, setFormInput] = useReducer(
-        (state, newState) => ({ ...state, ...newState }),
-        {
-            TagName: "",
-            Type: ""
-        }
-    );
 
     const handleSubmit = evt => {
         evt.preventDefault();
-        let data =  formInput ;
+
 
         fetch(" https://7q0027151j.execute-api.eu-west-1.amazonaws.com/dev/createtags", {
             method: "POST",
-            body: JSON.stringify(data),
+            body: JSON.stringify({
+                TagName: tagName,
+                Type: type
+            }),
             headers: {
                 "Content-Type": "application/json"
             }
         })
             .then(response => response.json())
             .then(response => console.log("Success:", JSON.stringify(response)))
+            .then(response => alert(JSON.stringify(response)))
+            .then(response => {
+                setTagName("")
+                setType(" ")
+            })
             .catch(error => console.error("Error:", error));
-    };
 
-    const handleInput = evt => {
-        const name = evt.target.name;
-        const newValue = evt.target.value;
-        setFormInput({ [name]: newValue });
     };
+    const handleTagInput = (evt)=>{
+
+        const newValue = evt.target.value;
+        setTagName(newValue)
+    }
+
+    const handleTypeInput = (evt)=>{
+        const newValue = evt.target.value;
+        setType(newValue)
+    }
 
     const classes = useStyles();
 
@@ -77,16 +85,16 @@ export function FormSubmit_NewTag(props) {
                         label="Enter New Tag Name"
                         id="margin-normal"
                         name="TagName"
-                        defaultValue={formInput.TagName}
+                        value={tagName}
                         className={classes.textField}
                         helperText="        "
-                        onChange={handleInput}
+                        onChange={handleTagInput}
                     />
 
                     <InputLabel className={classes.textField}>Select Tag Type</InputLabel>
                     <Select
-                        defaultValue={formInput.Type}
-                        onChange={handleInput}
+                        value={type}
+                        onChange={handleTypeInput}
                         className={classes.textField}
                         name="Type"
                     >
