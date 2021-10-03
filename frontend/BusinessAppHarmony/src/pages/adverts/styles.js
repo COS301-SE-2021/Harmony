@@ -128,7 +128,7 @@ export default makeStyles(theme => ({
   },
   ImageContainer: {
     height: 165,
-    width: "60%",
+    width: "75%",
     borderRadius: 5
   },
   PreviewContainer: {
@@ -151,7 +151,8 @@ export default makeStyles(theme => ({
     clear: "both"
   },
   PreviewPiece: {
-    marginBottom: 10
+    marginBottom: 10,
+    float: "left",
   },
   FileInput: {
   },

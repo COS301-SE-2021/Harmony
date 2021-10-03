@@ -118,7 +118,7 @@ export default makeStyles(theme => ({
     float: "auto",
   },
   marginAuto: {
-    margin: "auto"
+    margin: "auto",
   },
   addButton: {
     backgroundColor: "#81b5c2", color: "white", marginLeft: 45, height: 35, borderRadius: 10, paddingLeft: 12, paddingRight: 12, width: "30%",

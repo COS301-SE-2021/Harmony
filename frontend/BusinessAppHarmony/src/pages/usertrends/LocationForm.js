@@ -106,7 +106,7 @@ export default function LocationForm() {
                                                         backgroundColor: suggestion.active ? "#81b5c2" : "#fff",
                                                         color: suggestion.active ? "#fff" : "#4A4A4A",
                                                         borderWidth: 2,
-                                                        borderColor: "#4A4A4A"
+                                                        borderColor: "#4A4A4A",
                                                     };
                                                     return <div {...getSuggestionItemProps(suggestion, { style })}>{suggestion.description}</div>;
                                                 })}
