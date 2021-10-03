@@ -84,7 +84,7 @@ export default function CameraScreen({ navigation }) {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images, //We could also do videos in the future
       allowsEditing: true,
-      quality: 1,
+      quality: 0.5,
     });
 
     if (!result.cancelled) {
@@ -101,7 +101,7 @@ export default function CameraScreen({ navigation }) {
 
   const onCapture = async () => {
     if (cameraRef.current) {
-      const options = { quality: 1, base64: true, skipProcessing: true };
+      const options = { quality: 0.5, base64: true };
       const data = await cameraRef.current.takePictureAsync(options);
       const base64 = data.base64;
 
