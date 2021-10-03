@@ -17,7 +17,7 @@ export default function AdvertsPage() {
     foodTags: ["Sweet", "Warm"],
     drinkTags: ["Warm", "Sweet"],
     pairingTag: "Snack",
-    radius: ["25"],
+    radius: "25",
     timeLeft: "24 Days",
     status: "Active"
   }
@@ -32,7 +32,7 @@ export default function AdvertsPage() {
         foodTags: ["Sweet", "Warm"],
         drinkTags: ["Warm", "Sweet"],
         pairingTag: "Snack",
-        radius: ["25"],
+        radius: "25",
         timeLeft: "24 Days",
         status: "Active"
       },
@@ -45,7 +45,7 @@ export default function AdvertsPage() {
         foodTags: ["Sweet", "Warm"],
         drinkTags: ["Warm", "Sweet"],
         pairingTag: "Snack",
-        radius: ["25"],
+        radius: "25",
         timeLeft: "24 Days",
         status: "Active"
       },
@@ -58,7 +58,7 @@ export default function AdvertsPage() {
         foodTags: ["Sweet", "Warm"],
         drinkTags: ["Warm", "Sweet"],
         pairingTag: "Snack",
-        radius: ["25"],
+        radius: "25",
         timeLeft: "24 Days",
         status: "Active"
       }
@@ -97,6 +97,33 @@ export default function AdvertsPage() {
             <div className={classes.floatLeft}><p>Pairing tag: </p></div>
             <div style={{ justifyContent: 'space-around', display: "flex", float: 'left' }}>
               <div className={classes.pairingChip}>{oneData.pairingTag}</div>
+            </div>
+          </div>
+          <div style={{ clear: "both", textAlign: "center", marginLeft: 30 }}>
+            <div className={classes.floatLeft}><p>Locations: </p></div>
+            <div style={{ justifyContent: 'space-around', display: "flex", float: 'left' }}>
+              {oneData.Locations.map((item) => (
+                <div className={classes.locationsChip}>{item}</div>
+              ))}
+            </div>
+          </div>
+          <div style={{ clear: "both", textAlign: "center", marginLeft: 30 }}>
+            <div className={classes.floatLeft}><p>Radius: </p></div>
+            <div style={{ justifyContent: 'space-around', display: "flex", float: 'left' }}>
+              <div><p>{oneData.radius}</p></div>
+            </div>
+          </div>
+          <div style={{ clear: "both", textAlign: "center", marginLeft: 30 }}>
+            <div className={classes.floatLeft}><p>Time Left: </p></div>
+            <div style={{ justifyContent: 'space-around', display: "flex", float: 'left' }}>
+              <div><p>{oneData.timeLeft}</p></div>
+            </div>
+          </div>
+          <div style={{ clear: "both", textAlign: "center", marginLeft: 30 }}>
+            <div className={classes.floatLeft}><p>Status: </p></div>
+            <div style={{ justifyContent: 'space-around', display: "flex", float: 'left' }}>
+              {oneData.status == "Active" ? (<div className={classes.activeChip}>{oneData.status}</div>) : (<div className={classes.expiredChip}>{oneData.status}</div>)}
+
             </div>
           </div>
         </Widget>
