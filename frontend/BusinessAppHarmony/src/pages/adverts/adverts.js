@@ -9,8 +9,8 @@ export default function AdvertsPage() {
   var classes = useStyles();
 
   const oneData = {
-    foodImage: "http://beepeers.com/assets/images/commerces/default-image.jpg",
-    drinkImage: "http://beepeers.com/assets/images/commerces/default-image.jpg",
+    foodImage: "https://thestayathomechef.com/wp-content/uploads/2016/06/The-Most-Amazing-Chocolate-Cake-2-e1598548411160.jpg",
+    drinkImage: "https://www.gardeningknowhow.com/wp-content/uploads/2012/09/herbal-tea-1-400x300.jpg",
     foodName: "Cake",
     drinkName: "Tea",
     Locations: ["Durban", "Pretoria", "Westville"],
@@ -66,14 +66,20 @@ export default function AdvertsPage() {
   }
   return (
     <>
+      <br />
       <Grid container spacing={4}>
         <Widget
           disableWidgetMenu
+          noBodyPadding
           bodyClass={classes.tableWidget}
         >
-          <div>
+          <div style={{ marginTop: -35 }}>
             <div className={classes.PreviewPiece}><img src={oneData.foodImage} className={classes.ImageContainer} /></div>
             <div className={classes.PreviewPiece}><img src={oneData.drinkImage} className={classes.ImageContainer} /></div>
+          </div>
+          <div className={classes.justifySpaceBet}>
+            <div className={classes.floatLeft}>{oneData.foodName}</div>
+            <div className={classes.floatLeft}>{oneData.drinkName}</div>
           </div>
         </Widget>
       </Grid>

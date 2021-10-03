@@ -128,9 +128,10 @@ export default makeStyles(theme => ({
   },
   ImageContainer: {
     height: 165,
-    width: "75%",
+    width: "100%",
     borderRadius: 5
   },
+
   PreviewContainer: {
     display: "block",
     width: "45%",
@@ -251,7 +252,8 @@ export default makeStyles(theme => ({
     color: "red", fontSize: 25, marginRight: 5, marginTop: -10
   },
   justifySpaceBet: {
-    justifyContent: "space-between",
-    width: "100%"
+    justifyContent: "space-around",
+    width: "100%",
+    display: "flex"
   }
 }));
