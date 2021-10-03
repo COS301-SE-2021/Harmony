@@ -87,6 +87,48 @@ export default function Tables() {
     }
   }
 
+  const handleRemoveLocation = (name) => {
+    console.log(name + " removed")
+    fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/removelocation", {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: JSON.stringify({ BID: "b4", LocationID: "idsf", LocationAddress: name })
+    })
+      .then(res => res.json())
+      .then(
+        (result) => {
+          console.log(result);
+          // setData(result.Data);
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+        }
+      )
+    fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/getprofile", {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: JSON.stringify({ BID: "b4" })
+    })
+      .then(res => res.json())
+      .then(
+        (result) => {
+          console.log(result);
+          setData(result.UserData);
+          setLogo(result.UserData.Logo)
+        },
+
+        (error) => {
+        }
+      )
+  }
 
   return (
     <>
@@ -150,7 +192,7 @@ export default function Tables() {
                   <TableRow key={item.Address}>
                     <TableCell className="pl-3 fw-normal">{item.Name}</TableCell>
                     <TableCell>{item.Address}</TableCell>
-                    <TableCell><FiMinusCircle style={{ width: 25, height: 25, marginLeft: 20, marginRight: 20 }} onClick={() => (console.log(item.Address + " removed"))} /></TableCell>
+                    <TableCell><FiMinusCircle style={{ width: 25, height: 25, marginLeft: 20, marginRight: 20 }} onClick={() => (handleRemoveLocation(item.Address))} /></TableCell>
                   </TableRow>
                 ))}
               </TableBody>
