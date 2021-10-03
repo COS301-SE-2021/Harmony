@@ -1,8 +1,10 @@
-import React, { useReducer } from "react";
+import React, {useReducer, useState} from "react";
 import { Button, Icon, TextField, Paper, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 export function FormSubmit_PublishIterations(props) {
+    let [iterId, setIterID] = useState('')
+    let [name, setName] = useState('')
     const useStyles = makeStyles(theme => ({
         button: {
             margin: theme.spacing(1)
@@ -41,25 +43,36 @@ export function FormSubmit_PublishIterations(props) {
     const handleSubmit = evt => {
         evt.preventDefault();
 
-        let data =  formInput ;
 
         fetch(" https://7q0027151j.execute-api.eu-west-1.amazonaws.com/dev/publishiteration", {
             method: "POST",
-            body: JSON.stringify(data),
+            body: JSON.stringify({
+                IterID: iterId,
+                Name: name
+            }),
             headers: {
                 "Content-Type": "application/json"
             }
         })
             .then(response => response.json())
             .then(response => console.log("Success:", JSON.stringify(response)))
-            .catch(error => console.error("Error:", error));
+            .then(response => alert(JSON.stringify(response)))
+            .then(response => {
+                setIterID("")
+                setName(" ")
+            })
     };
 
-    const handleInput = evt => {
-        const name = evt.target.name;
+    const handleIterInput = (evt)=>{
+
         const newValue = evt.target.value;
-        setFormInput({ [name]: newValue });
-    };
+        setIterID(newValue)
+    }
+
+    const handleNameInput = (evt)=>{
+        const newValue = evt.target.value;
+        setName(newValue)
+    }
 
     const classes = useStyles();
 
@@ -78,20 +91,20 @@ export function FormSubmit_PublishIterations(props) {
                         label="Iteration ID"
                         id="margin-normal"
                         name="IterId"
-                        defaultValue={formInput.IterId}
+                        value={iterId}
                         className={classes.textField}
                         helperText="Enter Iteration ID "
-                        onChange={handleInput}
+                        onChange={handleIterInput}
                     />
 
                     <TextField
                         label="Name for Iteration"
                         id="margin-normal"
                         name="Name"
-                        defaultValue={formInput.Name}
+                        value={name}
                         className={classes.textField}
                         helperText="Enter a name for Iteration "
-                        onChange={handleInput}
+                        onChange={handleNameInput}
                     />
                     <Button
                         type="submit"
