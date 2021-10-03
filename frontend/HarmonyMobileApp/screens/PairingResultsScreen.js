@@ -73,6 +73,7 @@ const PairingResultsScreen = ({ navigation, route }) => {
       .then((response) => response.json())
       .then((json) => {
         if (json.StatusCode === 200) {
+          console.log("Sucess");
           setLoading(false);
           console.log("StatusCode Returned: " + json.StatusCode)
           setErrorAlertVisible(false);
@@ -80,11 +81,16 @@ const PairingResultsScreen = ({ navigation, route }) => {
           AppToast.ToastDisplay(json.Data);
         }
         else if (json.StatusCode === 400) {
+          console.log("Something went wrong");
           setLoading(false);
           //setModalMessage must come before setErrorAlertVisible
           setModalMessage(json.Data);
           setErrorAlertVisible(true);
 
+        }
+        else {
+          console.log("failure");
+          console.log(json);
         }
       })
       .catch((error) => {
@@ -163,7 +169,7 @@ const PairingResultsScreen = ({ navigation, route }) => {
       <TouchableOpacity
         style={{
           flexDirection: "row",
-          left: "35%",
+          left: "10%",
         }}
         onPress={() => setModalVisible(true)}
       >
