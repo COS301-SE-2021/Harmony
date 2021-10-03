@@ -39,7 +39,6 @@ def create_business_pairing(event, context):
     time_period = event["TimePeriod"][0]
     radius = event["Radius"]
     today = date.today()
-    coord = event["Coord"]
 
     # generate unique id for business request pairing
     bpid = uuid.uuid4().hex
@@ -70,6 +69,24 @@ def create_business_pairing(event, context):
     drink_image_link = add_image_to_s3(event["DrinkImage"], generate_id2)
     cost = calculate_cost(len(locations), days, radius)
 
+    """Gets the business user data for the location using the business id"""
+    try:
+        location_data = business_user_table.get_item(Key={'BID': businessID})
+    except ClientError as e:
+        print(e.response['Error']['Message'])
+        return {"StatusCode": 400}
+
+    coord = []
+    user_location_data = location_data['Item']['Locations']
+    count = 0
+    for i in locations:
+        for k in user_location_data:
+            if i == k['Name']:
+                coord.append({"Latitude": f"{k['Latitude']}",
+                                "Longitude": f"{k['Longitude']}"})
+                break
+        count = count + 1
+
     # write data for new pairing to the DynamoDB table using the object we instantiated and save response in a variable
     table.put_item(
         Item={
@@ -98,6 +115,8 @@ def create_business_pairing(event, context):
     except ClientError as e:
         print(e.response['Error']['Message'])
         return {"StatusCode": 400}
+
+
 
     # gets the current users outstanding amount
     user_data = business_user_data["Item"]
