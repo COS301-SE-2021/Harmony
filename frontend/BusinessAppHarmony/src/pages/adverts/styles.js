@@ -129,12 +129,12 @@ export default makeStyles(theme => ({
   ImageContainer: {
     height: 165,
     width: "100%",
-    borderRadius: 5
+    borderRadius: 5,
   },
 
   PreviewContainer: {
     display: "block",
-    width: "45%",
+    width: "50%",
     border: "1px solid #EDEDED",
     boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.02)",
     borderRadius: 5,

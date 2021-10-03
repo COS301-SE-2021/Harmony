@@ -1,7 +1,19 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
 import Widget from "../../components/Widget";
-
+import {
+  ResponsiveContainer,
+  ComposedChart,
+  AreaChart,
+  LineChart,
+  Line,
+  Area,
+  PieChart,
+  Pie,
+  Cell,
+  YAxis,
+  XAxis,
+} from "recharts";
 // styles
 import useStyles from "./styles";
 
@@ -110,7 +122,7 @@ export default function AdvertsPage() {
           <div style={{ clear: "both", textAlign: "center", marginLeft: 30 }}>
             <div className={classes.floatLeft}><p>Radius: </p></div>
             <div style={{ justifyContent: 'space-around', display: "flex", float: 'left' }}>
-              <div><p>{oneData.radius}</p></div>
+              <div><p style={{ marginLeft: "50%", marginRight: "50%" }}>{oneData.radius}</p></div>
             </div>
           </div>
           <div style={{ clear: "both", textAlign: "center", marginLeft: 30 }}>
@@ -128,7 +140,27 @@ export default function AdvertsPage() {
           </div>
         </Widget>
       </Grid>
-
+      <Grid container spacing={4}>
+        <LineChart
+          width={100}
+          height={30}
+          data={[
+            { value: 10 },
+            { value: 15 },
+            { value: 10 },
+            { value: 17 },
+            { value: 18 },
+          ]}
+        >
+          <Line
+            type="natural"
+            dataKey="value"
+            stroke="#3cd4a0"
+            strokeWidth={2}
+            dot={false}
+          />
+        </LineChart>
+      </Grid>
     </>
   );
 }
