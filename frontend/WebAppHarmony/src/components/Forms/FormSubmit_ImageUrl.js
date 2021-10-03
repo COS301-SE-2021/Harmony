@@ -1,8 +1,10 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useState } from "react";
 import { Button, Icon, TextField, Paper, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 export function FormSubmit_ImageUrl(props) {
+    let [tagId, setTagID] = useState('')
+    let [URL, setURL] = useState('')
     const useStyles = makeStyles(theme => ({
         button: {
             margin: theme.spacing(1)
@@ -30,37 +32,43 @@ export function FormSubmit_ImageUrl(props) {
         }
     }));
 
-    const [formInput, setFormInput] = useReducer(
-        (state, newState) => ({ ...state, ...newState }),
-        {
-            tagID: "",
-            URL: ""
-        }
-    );
 
     const handleSubmit = evt => {
         evt.preventDefault();
 
-        let data =  formInput ;
 
         fetch("https://7q0027151j.execute-api.eu-west-1.amazonaws.com/dev/newimage", {
             method: "POST",
-            body: JSON.stringify(data),
+            body: JSON.stringify({
+                TagID: tagId,
+                URL: URL
+            }),
             headers: {
                 "Content-Type": "application/json"
             }
         })
             .then(response => response.json())
             .then(response => console.log("Success:", JSON.stringify(response)))
+            .then(response => alert(JSON.stringify(response)))
+            .then(response => {
+                setTagID("")
+                setURL(" ")
+            })
             .catch(error => console.error("Error:", error));
 
     };
 
-    const handleInput = evt => {
-        const name = evt.target.name;
+
+    const handleIDInput = (evt)=>{
+
         const newValue = evt.target.value;
-        setFormInput({ [name]: newValue });
-    };
+        setTagID(newValue)
+    }
+
+    const handleURLInput = (evt)=>{
+        const newValue = evt.target.value;
+        setURL(newValue)
+    }
 
     const classes = useStyles();
 
@@ -79,19 +87,19 @@ export function FormSubmit_ImageUrl(props) {
                         label="Tag ID"
                         id="margin-normal"
                         name="TagID"
-                        defaultValue={formInput.TagID}
+                        value={tagId}
                         className={classes.textField}
                         helperText="Enter TagID "
-                        onChange={handleInput}
+                        onChange={handleIDInput}
                     />
                     <TextField
                         label="Image URL"
                         id="margin-normal"
                         name="images"
-                        defaultValue={formInput.images}
+                        value={URL}
                         className={classes.textField}
                         helperText="e.g. .png"
-                        onChange={handleInput}
+                        onChange={handleURLInput}
                     />
                     <Button
                         type="submit"
