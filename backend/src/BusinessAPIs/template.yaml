@@ -129,3 +129,23 @@ Resources:
       Policies:
         # Give DynamoDB Full Access to your Lambda Function
         - AmazonDynamoDBFullAccess
+
+  UpdateNameFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: main/
+      Handler: UpdateName.update_name
+      Runtime: python3.8
+      Policies:
+        # Give DynamoDB Full Access to your Lambda Function
+        - AmazonDynamoDBFullAccess
+
+  UpdateBusinessRegistrationFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: main/
+      Handler: UpdateBusinessRegistration.update_business_registration
+      Runtime: python3.8
+      Policies:
+        # Give DynamoDB Full Access to your Lambda Function
+        - AmazonDynamoDBFullAccess
