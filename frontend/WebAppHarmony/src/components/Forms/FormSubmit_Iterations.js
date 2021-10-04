@@ -42,7 +42,6 @@ export function FormSubmit_Iterations(props) {
             }
         })
             .then(response => response.json())
-            .then(response => console.log("Success:", JSON.stringify(response)))
             .then(response => alert(JSON.stringify(response)))
             .catch(error => console.error("Error:", error));
     };
