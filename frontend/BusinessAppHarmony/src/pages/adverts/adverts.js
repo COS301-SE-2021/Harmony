@@ -69,7 +69,7 @@ export default function AdvertsPage() {
       {data.adverts.map((pairing) => (
         <>
           <br />
-          <Grid item xs={5} style={{ marginLeft: "5%", marginRight: "5%" }}>
+          <Grid item xs={6} style={{ marginRight: "5%" }}>
             <Widget
               disableWidgetMenu
               noBodyPadding
@@ -79,10 +79,17 @@ export default function AdvertsPage() {
                 <div className={classes.PreviewPiece}><img src={pairing.foodImage} className={classes.ImageContainer} /></div>
                 <div className={classes.PreviewPiece}><img src={pairing.drinkImage} className={classes.ImageContainer} /></div>
               </div>
-              <div style={{ clear: "both" }}></div>
               <div className={classes.justifySpaceBetText}>
-                <div className={classes.floatLeft}>{pairing.foodName}</div>
-                <div className={classes.floatLeft}>{pairing.drinkName}</div>
+                <div className={classes.floatLeft}>
+                  <Typography size="md" weight="bold">
+                    {pairing.foodName}
+                  </Typography>
+                </div>
+                <div className={classes.floatLeft}>
+                  <Typography size="md" weight="bold">
+                    {pairing.drinkName}
+                  </Typography>
+                </div>
               </div>
 
               <div className={classes.justifySpaceBet}>
@@ -99,39 +106,39 @@ export default function AdvertsPage() {
               </div>
 
               <div style={{ float: "left", textAlign: "center", marginLeft: 30 }}>
-                <div className={classes.floatLeft}><p>Pairing tag: </p></div>
+                <div className={classes.floatLeft}><p className={classes.label}>Pairing tag: </p></div>
                 <div style={{ justifyContent: 'space-around', display: "flex", float: 'left' }}>
                   <div className={classes.pairingChip}>{pairing.pairingTag}</div>
                 </div>
               </div>
-              <div style={{ clear: "both", textAlign: "center", marginLeft: 30 }}>
-                <div className={classes.floatLeft}><p>Locations: </p></div>
+              <div className={classes.textWrapper}>
+                <div className={classes.floatLeft}><p className={classes.label}>Locations: </p></div>
                 <div style={{ justifyContent: 'space-around', display: "flex", float: 'left' }}>
                   {pairing.Locations.map((item) => (
                     <div className={classes.locationsChip}>{item}</div>
                   ))}
                 </div>
               </div>
-              <div style={{ clear: "both", textAlign: "center", marginLeft: 30 }}>
-                <div className={classes.floatLeft}><p>Radius: </p></div>
+              <div className={classes.textWrapper}>
+                <div className={classes.floatLeft}><p className={classes.label}>Radius: </p></div>
                 <div style={{ justifyContent: 'space-around', display: "flex", float: 'left' }}>
-                  <div><p style={{ marginLeft: "50%", marginRight: "50%" }}>{pairing.radius}</p></div>
+                  <div><p style={{ marginLeft: "50%" }}>{pairing.radius}</p></div>
                 </div>
               </div>
-              <div style={{ clear: "both", textAlign: "center", marginLeft: 30 }}>
-                <div className={classes.floatLeft}><p>Time Left: </p></div>
-                <div style={{ justifyContent: 'space-around', display: "flex", float: 'left' }}>
-                  <div><p>{pairing.timeLeft}</p></div>
+              <div className={classes.textWrapper}>
+                <div className={classes.floatLeft}><p className={classes.label}>Time Left: </p></div>
+                <div style={{ justifyContent: 'space-around', display: "flex", float: 'left', width: "15%" }}>
+                  <div><p >{pairing.timeLeft}</p></div>
                 </div>
               </div>
-              <div style={{ clear: "both", textAlign: "center", marginLeft: 30 }}>
-                <div className={classes.floatLeft}><p>Date Created: </p></div>
+              <div className={classes.textWrapper}>
+                <div className={classes.floatLeft}><p className={classes.label}>Date Created: </p></div>
                 <div style={{ justifyContent: 'space-around', display: "flex", float: 'left' }}>
-                  <div ><p>{pairing.dateCreated}</p></div>
+                  <div ><p style={{ marginLeft: "20%" }}>{pairing.dateCreated}</p></div>
                 </div>
               </div>
-              <div style={{ clear: "both", textAlign: "center", marginLeft: 30 }}>
-                <div className={classes.floatLeft}><p>Status: </p></div>
+              <div className={classes.textWrapper}>
+                <div className={classes.floatLeft}><p className={classes.label}>Status: </p></div>
                 <div style={{ justifyContent: 'space-around', display: "flex", float: 'left' }}>
                   {pairing.status == "Active" ? (<div className={classes.activeChip}>{pairing.status}</div>) : (<div className={classes.expiredChip}>{pairing.status}</div>)}
 
