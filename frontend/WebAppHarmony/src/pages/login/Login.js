@@ -14,7 +14,7 @@ import {useHistory} from "react-router-dom"
 
 // styles
 import useStyles from "./styles";
-import logo from "./logo.svg";
+import logo from "./logo.png";
 
 // context
 import { useUserDispatch, loginUser } from "../../context/UserContext";
@@ -126,15 +126,15 @@ function Login(props) {
 
                   </Button>
                 )}
-                <Button
-                  color="primary"
-                  size="large"
-                  className={classes.forgetButton}
-                  onClick={handleRouteSign}
-                >
+                {/*<Button*/}
+                {/*  color="primary"*/}
+                {/*  size="large"*/}
+                {/*  className={classes.forgetButton}*/}
+                {/*  onClick={handleRouteSign}*/}
+                {/*>*/}
 
-                  Sign Up
-                </Button>
+                {/*  Sign Up*/}
+                {/*</Button>*/}
                 <Button
                     color="primary"
                     size="large"
