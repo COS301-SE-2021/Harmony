@@ -86,3 +86,4 @@ frontend/BusinessAppHarmony/node_modules/
 frontend/BusinessAppHarmony/.expo/
 frontend/WebAppHarmony/
 .env
+frontend/BusinessAppHarmony/src/aws-exports.js
