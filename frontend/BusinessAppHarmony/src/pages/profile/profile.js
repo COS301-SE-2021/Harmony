@@ -9,17 +9,22 @@ import { Typography } from "../../components/Wrappers";
 import PayPal from '../dashboard/components/Table/PayPal';
 import { GrPaypal } from "react-icons/gr";
 import LocationForm from './LocationForm';
-import TrendingStats from './trendingStats';
+import { GrEdit } from "react-icons/gr";
 import { FiMinusCircle } from "react-icons/fi";
 import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField'
+import {
+  Formik, Form
+} from 'formik';
 
 export default function ProfilePage() {
   const classes = useStyles();
   /**Default logo */
-  const [logo, setLogo] = useState("http://beepeers.com/assets/images/commerces/default-image.jpg");
+  const [logo, setLogo] = useState("https://beepeers.com/assets/images/commerces/default-image.jpg");
   /**The checkout button for paypal */
   const [checkout, setCheckout] = useState(false);
-  const [data, setData] = useState({ OutstandingAmount: 0, Locations: [{ name: "" }, { address: "" }] });
+  const [data, setData] = useState({ BusinessName: "", OutstandingAmount: 0, Locations: [{ name: "" }, { address: "" }] });
+  const [editName, setEditName] = useState(false);
 
   /**to detect if a child component is changed */
   const [change, detectChange] = useState(true);
@@ -66,7 +71,7 @@ export default function ProfilePage() {
         (result) => {
           console.log(result);
           setData(result.UserData);
-          setLogo(result.UserData.Logo)
+          setLogo(result.UserData.Logo);
         },
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
@@ -78,6 +83,8 @@ export default function ProfilePage() {
 
   /**@var fileRef to create a reference to the file input to be able to clear it */
   const logoFileRef = useRef();
+
+  const nameRef = useRef();
 
   /**The array of the sopported extensions for the image */
   const supportedFormats = ['image/jpg', 'image/jpeg', 'image/png'];
@@ -116,7 +123,7 @@ export default function ProfilePage() {
     if (supportedFormats.includes(e.target.files[0].type)) { reader.readAsDataURL(e.target.files[0]) }
     else {
       alert(e.target.files[0].type + " is not a supported file format.");
-      setLogo("http://beepeers.com/assets/images/commerces/default-image.jpg");
+      setLogo("https://beepeers.com/assets/images/commerces/default-image.jpg");
     }
   }
 
@@ -177,18 +184,65 @@ export default function ProfilePage() {
             </Typography>
             <br />
             <div className={classes.center}>
-              <div className={classes.PreviewPiece}><label htmlFor="file-input-Logo"></label></div>
-              <div className={classes.PreviewPiece}><img src={logo} className={classes.ImageContainer} /></div>
-              <div className={classes.FileInput}><input type="file" id="file-input-Logo" name="ImageclassNameFood" accept="image/*" ref={logoFileRef} onChange={logoImageHandler} style={{ display: 'none' }} />
-                <Button onClick={() => (logoFileRef.current.click())} className={classes.uploadLogoButton} variant="contained">Upload New Logo</Button>
+              <div style={{ justifyContent: "space-around", width: "100%" }}>
+                <div className={classes.PreviewPiece}><label htmlFor="file-input-Logo"></label></div>
+                <div className={classes.PreviewPiece}><img src={logo} className={classes.ImageContainer} /></div>
+                <div className={classes.FileInput}><input type="file" id="file-input-Logo" name="ImageclassNameFood" accept="image/*" ref={logoFileRef} onChange={logoImageHandler} style={{ display: 'none' }} />
+                  <Button onClick={() => (logoFileRef.current.click())} className={classes.addButtonLogo} variant="contained">Upload New Logo</Button>
+                </div>
               </div>
               <br />
-              <Typography size="md" weight="bold">
-                Name
-              </Typography>
+              <div style={{ justifyContent: "space-between", display: "flex" }}>
+                <div style={{ float: "left" }}>
+                  <Typography size="md" weight="bold">
+                    Name
+                  </Typography>
+                </div>
+                <div style={{ float: "left", marginRight: 30, marginTop: 5 }}>
+                  <GrEdit size={18} onClick={() => { setEditName(!editName) }} />
+                </div>
+              </div>
+              <div style={{ clear: "both" }}></div>
               <Typography size="md" weight="light">
-                Laughing Panda
+                {data.BusinessName}
               </Typography>
+              {
+                editName ? (
+                  <Formik
+                    onSubmit={(values, { resetForm }) => {
+                      /**reset then handle submit */
+                      resetForm();
+                      fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/updatename", {
+                        headers: {
+                          'Accept': 'application/json',
+                          'Content-Type': 'application/json'
+                        },
+                        method: "POST",
+                        body: JSON.stringify({ BID: "b4", Name: values.Name })
+                      })
+                        .then(res => res.json())
+                        .then(
+                          (result) => {
+                            console.log(result);
+                          },
+                        );
+                      setEditName(false);
+                      detectChange(true);
+                    }}
+                    initialValues={{
+                      Name: "",
+                    }}>
+                    {({ values, handleChange }) => (
+                      <Form>
+                        <TextField id="outlined-basic" variant="outlined" name="Name" className={classes.individualTextField} onChange={handleChange} placeholder="New name" value={values.Name} />
+                        <Button variant="contained" color="primary" type="submit" className={classes.addButton} onClick={() => console.log("clicked submit")}>
+                          Update Name
+                        </Button>
+                      </Form>
+                    )}
+                  </Formik>
+                ) : null
+              }
               <br />
               <Typography size="md" weight="bold">
                 Business Registration

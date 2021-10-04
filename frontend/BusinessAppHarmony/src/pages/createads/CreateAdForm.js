@@ -16,7 +16,7 @@ import { FiPlus, FiMinus } from "react-icons/fi";
 
 function CreateAdForm(...props) {
     /**The form variables */
-    const defaultImage = "http://beepeers.com/assets/images/commerces/default-image.jpg";
+    const defaultImage = "https://beepeers.com/assets/images/commerces/default-image.jpg";
     const [foodImage, setFoodImage] = useState(defaultImage);
     const [drinkImage, setDrinkImage] = useState(defaultImage);
     const [result, setResult] = useState([]);
