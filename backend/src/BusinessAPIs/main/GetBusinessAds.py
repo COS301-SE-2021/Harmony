@@ -80,5 +80,17 @@ def get_business_ads(event, context):
 
             adverts.append(i)
 
+    sorted_adverts = sortbynew(adverts)
     return {"StatusCode": 200,
-            "Adverts": adverts}
+            "Adverts": sorted_adverts}
+
+
+"""
+Sorts the response by date from newest to oldest.
+"""
+
+
+def sortbynew(response):
+    # this function sorts the dateadded from new to old
+    sortedresponse = sorted(response, key=lambda x: datetime.strptime(x['DateCreated'], '%Y-%m-%d'), reverse=True)
+    return sortedresponse
