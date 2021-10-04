@@ -130,6 +130,16 @@ export default function PairingDetailsScreen({ route }) {
             </View>
         </View >
     );
+    const Food = () => (
+        <View style={[styles.centeredView]}>
+            <View id={data.DrinkID}>
+                <Image
+                    source={{ uri: data.FoodImage }}
+                    style={[styles.drinkCard, styles.bigDrinkCard]}
+                />
+            </View>
+        </View >
+    );
 
     return (
         <View style={styles.container}>
@@ -143,17 +153,19 @@ export default function PairingDetailsScreen({ route }) {
                         renderHeader={() => (
                             <Image
                                 style={styles.foodCard}
-                                source={{ uri: data.FoodImage }}
+                                source={{ uri: data.Logo }}
                             />
                         )}
                     >
+                        <TitleBar title={data.BusinessName} />
+                        <ItemDescription description={data.SponsoredDescription} />
+
+                        <Food />
                         <TitleBar title={data.FoodItem} />
-                        <ItemDescription description={data.FoodDesc} />
                         <TagBar itemTags={data.FoodTags} foodItem={true} />
 
                         <Drink />
                         <TitleBar title={data.DrinkItem} />
-                        <ItemDescription description={data.DrinkDesc} />
                         <TagBar itemTags={data.DrinkTags} foodItem={false} />
 
                         {isLoading === true && <AppLoadingIcon />}
