@@ -206,7 +206,7 @@ function CreateAdForm(...props) {
                                 <div className={classes.formElementsImageContainer}>
                                     <label htmlFor="FoodTags" className={classes.formLabel}>
                                         <div className={classes.floatLeft}>
-                                            <p className={classes.errorDiv}>Food Tags</p>
+                                            <p className={classes.errorDiv}>Food Tags <br />(max 3)</p>
                                         </div>
                                         <div className={classes.floatLeft}>
                                             {(values.FoodTags == [] && touched.FoodTags) ? (
@@ -275,7 +275,7 @@ function CreateAdForm(...props) {
                                 <div className={classes.formElementsImageContainer}>
                                     <label htmlFor="DrinkTags" className={classes.formLabel}>
                                         <div className={classes.floatLeft}>
-                                            <p className={classes.errorDiv}>Drink Tags</p>
+                                            <p className={classes.errorDiv}>Drink Tags <br />(max 3)</p>
                                         </div>
                                         <div className={classes.floatLeft}>
                                             {(values.DrinkTags == [] && touched.DrinkTags) ? (
@@ -333,7 +333,7 @@ function CreateAdForm(...props) {
                                 <br />
                                 <div className={classes.formElementsPairingTag}>
                                     <label htmlFor="PairingTags" className={classes.tagName}>
-                                        <div className={classes.floatLeft}><p className={classes.errorDiv}>Tag</p> </div>
+                                        <div className={classes.floatLeft}><p className={classes.errorDiv}>Tag <br />(max 1)</p> </div>
                                         <div className={classes.floatLeft}>
                                             {(values.PairingTags == [] && touched.PairingTags) ? (
                                                 <div className={classes.errorStar}>*</div>
@@ -426,11 +426,6 @@ function CreateAdForm(...props) {
 
                                         <label htmlFor="Locations" className={classes.tagName}>
                                             <div className={classes.floatLeft}><p className={classes.errorDiv}>Radius</p> </div>
-                                            <div className={classes.floatLeft}>
-                                                {(values.Locations == [] && touched.Locations) ? (
-                                                    <div className={classes.errorStar}>*</div>
-                                                ) : null}
-                                            </div>
                                         </label>
                                     </div>
                                     <div className={classes.multiselectorTag}>
@@ -467,7 +462,7 @@ function CreateAdForm(...props) {
                                 <div className={classes.formElementsImageContainer}>
                                     <div className={classes.configLabel}>
                                         <label htmlFor="TimePeriod" className={classes.tagName}>
-                                            <div className={classes.floatLeft}><p className={classes.errorDiv}>Time Period</p> </div>
+                                            <div className={classes.floatLeft}><p className={classes.errorDiv}>Time Period <br />(max 1)</p> </div>
                                             <div className={classes.floatLeft}>
                                                 {(values.TimePeriod == [] && touched.TimePeriod) ? (
                                                     <div className={classes.errorStar}>*</div>

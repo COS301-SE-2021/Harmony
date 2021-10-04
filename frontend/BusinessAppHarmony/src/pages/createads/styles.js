@@ -52,7 +52,8 @@ export default makeStyles(theme => ({
   },
   tagName: {
     fontSize: 20,
-    width: 65
+    width: 85,
+    marginRight: -23
   },
   MealContainer: {
     marginTop: 20,
@@ -243,7 +244,7 @@ export default makeStyles(theme => ({
   },
   errorDiv: {
     fontSize: 15,
-    marginTop: 0,
+    marginTop: -5,
     color: "#717171",
   },
   errorStar: {
