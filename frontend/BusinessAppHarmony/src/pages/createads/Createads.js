@@ -34,7 +34,7 @@ export default function TypographyPage() {
               For example, if you were to make an advert of a burger and coke in 3 of your locations for
               1 week with a radius of 20 kms from each location.
               <br />You would pay:<br />
-              R1 x 3 Locations x 7 days + 20 = R41
+              R1 x 3 Locations x 7 days + 20 Kilometers = R41
             </Typography>
           </Widget>
         </Grid>

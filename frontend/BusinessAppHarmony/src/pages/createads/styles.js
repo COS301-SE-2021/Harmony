@@ -252,5 +252,10 @@ export default makeStyles(theme => ({
   justifySpaceBet: {
     justifyContent: "space-between",
     width: "100%"
+  },
+  radiusIcon: {
+    float: "left",
+    height: 25,
+    width: 25
   }
 }));
