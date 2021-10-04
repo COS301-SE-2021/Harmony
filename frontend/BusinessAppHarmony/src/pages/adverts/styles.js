@@ -19,16 +19,9 @@ export default makeStyles(theme => ({
     fontFamily: "sans-serif-light",
     color: "#717171",
   },
-
-  errorDiv: {
-    fontSize: 15,
-    marginTop: 0,
-    color: "#717171",
-  },
   individualTextField: {
-    width: "100%",
-    height: 70,
-    float: "left"
+    width: "75%",
+    height: 10,
   },
   multiselector: {
     width: "75%",
@@ -36,16 +29,14 @@ export default makeStyles(theme => ({
     marginLeft: 8
   },
   multiselectorTag: {
-    width: "75%",
+    width: "95%",
     height: 15,
     marginLeft: 100
   },
   formLabel: {
+    marginTop: 10,
     fontSize: 20,
-    width: 150,
-    justifyContent: "space-between",
-    display: "flex",
-    marginTop: 15
+    width: 110
   },
   formElements: {
     marginTop: 20,
@@ -54,16 +45,14 @@ export default makeStyles(theme => ({
     display: "flex"
   },
   formElementsPairingTag: {
-    marginTop: 20,
-    marginBottom: 30,
+    marginTop: 80,
+    marginBottom: 10,
     display: "flex",
-    width: '40%',
+    width: '60%',
   },
   tagName: {
-    float: 'left',
-    marginRight: 15,
-    marginTop: 8,
-    fontSize: 20
+    fontSize: 20,
+    width: 65
   },
   MealContainer: {
     marginTop: 20,
@@ -77,7 +66,8 @@ export default makeStyles(theme => ({
     marginBottom: 20,
     borderRadius: 15,
     justifyContent: "space-around",
-    display: "flex"
+    display: "flex",
+    padding: 10
   },
   addItemContainer: {
     width: "95%",
@@ -106,51 +96,45 @@ export default makeStyles(theme => ({
   toggleButton: {
     borderRadius: 10, height: 70
   },
-
-  uploadLogoButton: {
-    backgroundColor: theme.palette.primary.main,
-    height: 25, borderRadius: 50, paddingLeft: 10, paddingRight: 10, fontSize: 10, marginLeft: 10, marginTop: -5,
-    float: "none", color: 'white',
+  clearButton: {
+    backgroundColor: "#CECECE", margin: 10, height: 35, borderRadius: 10, paddingLeft: 12, paddingRight: 12, width: "20%",
+    float: "none",
     boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)"
   },
-
+  uploadFoodButton: {
+    backgroundColor: "#FF6347",
+    height: 35, borderRadius: 5, paddingLeft: 12, paddingRight: 12, width: "40%",
+    float: "none", color: 'white', fontWeight: "bold",
+    boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)"
+  },
+  uploadDrinkButton: {
+    backgroundColor: "#1FBFBA",
+    height: 35, borderRadius: 5, paddingLeft: 12, paddingRight: 12, width: "40%",
+    float: "none", color: 'white', fontWeight: "bold",
+    boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)"
+  },
   buttonContainer: {
     float: "auto",
-  },
-  marginAuto: {
-    margin: "auto",
   },
   addButton: {
     backgroundColor: "#81b5c2", color: "white", marginLeft: 45, height: 35, borderRadius: 10, paddingLeft: 12, paddingRight: 12, width: "30%",
     boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)"
 
   },
-  addLocationButton: {
-    backgroundColor: "#81b5c2", color: "white", marginLeft: 25, height: 35, borderRadius: 10, width: "60%",
-    boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)",
-    float: "left"
-  },
-  ClearButton: {
-    backgroundColor: "#CECECE", marginLeft: 15, height: 35, borderRadius: 10, width: "20%",
-    boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)",
-    float: "left"
-  },
-
   ButtonContainer: {
     float: 'left',
     margin: 'auto',
     width: '100%'
   },
   ImageContainer: {
-    height: 100,
-    width: 120,
+    height: 165,
+    width: "100%",
     borderRadius: 5,
-    marginLeft: 15,
-    marginTop: -20
   },
+
   PreviewContainer: {
     display: "block",
-    width: "40%",
+    width: "50%",
     border: "1px solid #EDEDED",
     boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.02)",
     borderRadius: 5,
@@ -168,7 +152,10 @@ export default makeStyles(theme => ({
     clear: "both"
   },
   PreviewPiece: {
-    marginBottom: 10
+    marginBottom: 10,
+    width: "50%",
+    height: 145,
+    float: "left",
   },
   FileInput: {
   },
@@ -211,6 +198,22 @@ export default makeStyles(theme => ({
     fontSize: 18
 
   },
+  configLabel: {
+    width: 150
+  },
+  configurationLabel: {
+    backgroundColor: "#4CD41E",
+    padding: 10,
+    color: "white",
+    width: "100%",
+    margin: "auto",
+    height: 40,
+    borderTopRightRadius: 5,
+    borderTopLeftRadius: 5,
+    fontWeight: 'bold',
+    fontSize: 18
+
+  },
   displayFlexJustifyCenter: {
     display: "flex", justifyContent: "center"
   },
@@ -237,55 +240,103 @@ export default makeStyles(theme => ({
     width: "95%"
   },
   floatLeft: {
-    float: "left",
+    float: "left"
   },
-  CoordinatesContainer: {
-    float: "left",
-    width: "100%",
-    paddingRight: 10,
-    paddingLeft: 10,
+  clearBoth: {
+    clear: "both"
   },
-  formContainer: {
-    display: "flex",
+  errorDiv: {
+    fontSize: 15,
+    marginTop: 0,
+    color: "#717171",
   },
   errorStar: {
     color: "red", fontSize: 25, marginRight: 5, marginTop: -10
   },
   justifySpaceBet: {
-    justifyContent: "space-between",
-    width: "100%"
-  },
-  outstandingBalance: {
-    color: theme.palette.primary.main,
-    textAlign: "center"
-  },
-  outstandingBalanceWord: {
-    fontSize: 15,
-    marginTop: 20,
-    color: "#717171",
-    float: "left"
-  },
-  payNowButton: {
+    justifyContent: "space-around",
     width: "100%",
-    margin: "auto",
-    backgroundColor: theme.palette.primary.main,
-    fontSize: 17,
+    display: "flex"
+  },
+  justifySpaceBetText: {
+    justifyContent: "space-around",
+    width: "100%",
+    display: "flex",
+    marginTop: 15,
+    marginBottom: 10
+  },
+  foodChip: {
+    backgroundColor: "#FF6347",
     color: "white",
-    height: 50
-  },
-  tableRowHeader: {
-    backgroundColor: theme.palette.primary.main,
-    color: "white"
-    // height: 60,
-    // overflow: "hidden"
-  },
-
-  tableCell: {
-    color: "white"
+    padding: 2,
+    textAlign: "center",
+    borderRadius: 15,
+    paddingLeft: 10,
+    paddingRight: 10,
+    marginLeft: 6,
+    marginRight: 6,
+    float: "left",
 
   },
-  center: {
-    padding: 15,
-    marginLeft: 60,
+  drinkChip: {
+    backgroundColor: "#1FBFBA",
+    float: "left",
+    color: "white",
+    padding: 2,
+    textAlign: "center",
+    borderRadius: 15,
+    paddingLeft: 10,
+    paddingRight: 10,
+    marginLeft: 6,
+    marginRight: 6,
+  },
+  pairingChip: {
+    backgroundColor: "#C41ED4",
+    float: "left",
+    color: "white",
+    padding: 2,
+    textAlign: "center",
+    borderRadius: 15,
+    paddingLeft: 10,
+    paddingRight: 10,
+    marginTop: 13,
+    marginLeft: 10,
+  },
+  locationsChip: {
+    backgroundColor: "#4CD41E",
+    float: "left",
+    color: "white",
+    padding: 2,
+    textAlign: "center",
+    borderRadius: 15,
+    paddingLeft: 10,
+    paddingRight: 10,
+    marginTop: 13,
+    marginLeft: 6,
+    marginRight: 6,
+  },
+  activeChip: {
+    backgroundColor: "#3cd4a0",
+    float: "left",
+    color: "white",
+    padding: 2,
+    textAlign: "center",
+    borderRadius: 15,
+    paddingLeft: 10,
+    paddingRight: 10,
+    marginTop: 13,
+    marginLeft: 10,
+  },
+  expiredChip: {
+    backgroundColor: "#FF2222",
+    float: "left",
+    color: "white",
+    padding: 2,
+    textAlign: "center",
+    borderRadius: 15,
+    paddingLeft: 10,
+    paddingRight: 10,
+    marginTop: 13,
+    marginLeft: 10,
   }
 }));

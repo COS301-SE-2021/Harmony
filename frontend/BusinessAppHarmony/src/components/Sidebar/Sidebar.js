@@ -34,6 +34,7 @@ import {
 
 const structure = [
   { id: 0, label: "Homepage", link: "/app/usertrends", icon: <HomeIcon /> },
+  { id: 2, label: "Adverts", link: "/app/adverts", icon: <QueueIcon/>},
   { id: 1, label: "Statements", link: "/app/dashboard", icon: <TableIcon /> },
   { id: 2, label: "Create Advert", link: "/app/createads", icon: <QueueIcon/>},
   { id: 3, type: "divider" },

@@ -9,12 +9,18 @@ import * as Yup from 'yup';
 import Multiselect from 'multiselect-react-dropdown';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField'
+import { InputGroup, InputNumber } from 'rsuite';
+import { FiPlus, FiMinus } from "react-icons/fi";
+import { Typography } from "../../components/Wrappers";
+
+
 function CreateAdForm(...props) {
     /**The form variables */
     const defaultImage = "http://beepeers.com/assets/images/commerces/default-image.jpg";
     const [foodImage, setFoodImage] = useState(defaultImage);
     const [drinkImage, setDrinkImage] = useState(defaultImage);
     const [result, setResult] = useState([]);
+    const [radius, setRadius] = useState(35);
     var classes = useStyles();
 
     /**@var fileRef to create a reference to the file input to be able to clear it */
@@ -117,6 +123,7 @@ function CreateAdForm(...props) {
             TimePeriod: vals.TimePeriod,
             FoodImage: foodImage.split(',')[1],
             DrinkImage: drinkImage.split(',')[1],
+            Radius: radius
         }
         console.log("request to submit " + JSON.stringify(request))
         fetch('https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/createbusinesspairing', {
@@ -145,11 +152,13 @@ function CreateAdForm(...props) {
                     PairingTags: "",
                     Locations: "",
                     TimePeriod: "",
+                    Radius: 20
                 }}
                 validationSchema={Yup.object().shape({
                     FoodName: Yup.string().required('*'),
                     DrinkName: Yup.string().required('*'),
                     PairingDescription: Yup.string().required('*'),
+
                 })}
                 // onSubmit={(values) => handleSubmit(values)}
                 onSubmit={(values, { resetForm }) => {
@@ -197,7 +206,7 @@ function CreateAdForm(...props) {
                                 <div className={classes.formElementsImageContainer}>
                                     <label htmlFor="FoodTags" className={classes.formLabel}>
                                         <div className={classes.floatLeft}>
-                                            <p className={classes.errorDiv}>Food Tags</p>
+                                            <p className={classes.errorDiv}>Food Tags <br />(max 3)</p>
                                         </div>
                                         <div className={classes.floatLeft}>
                                             {(values.FoodTags == [] && touched.FoodTags) ? (
@@ -266,7 +275,7 @@ function CreateAdForm(...props) {
                                 <div className={classes.formElementsImageContainer}>
                                     <label htmlFor="DrinkTags" className={classes.formLabel}>
                                         <div className={classes.floatLeft}>
-                                            <p className={classes.errorDiv}>Drink Tags</p>
+                                            <p className={classes.errorDiv}>Drink Tags <br />(max 3)</p>
                                         </div>
                                         <div className={classes.floatLeft}>
                                             {(values.DrinkTags == [] && touched.DrinkTags) ? (
@@ -324,7 +333,7 @@ function CreateAdForm(...props) {
                                 <br />
                                 <div className={classes.formElementsPairingTag}>
                                     <label htmlFor="PairingTags" className={classes.tagName}>
-                                        <div className={classes.floatLeft}><p className={classes.errorDiv}>Tag</p> </div>
+                                        <div className={classes.floatLeft}><p className={classes.errorDiv}>Tag <br />(max 1)</p> </div>
                                         <div className={classes.floatLeft}>
                                             {(values.PairingTags == [] && touched.PairingTags) ? (
                                                 <div className={classes.errorStar}>*</div>
@@ -411,10 +420,49 @@ function CreateAdForm(...props) {
                                         />
                                     </div>
                                 </div>
+
+                                <div className={classes.formElementsImageContainer}>
+                                    <div className={classes.configLabel}>
+
+                                        <label htmlFor="Locations" className={classes.tagName}>
+                                            <div className={classes.floatLeft}><p className={classes.errorDiv}>Radius</p> </div>
+                                        </label>
+                                    </div>
+                                    <div className={classes.multiselectorTag}>
+                                        <div>
+                                            <FiMinus className={classes.radiusIcon} onClick={() => setRadius(radius.valueOf(radius) - 5)} />
+                                            <InputNumber
+                                                min={5}
+                                                max={100}
+                                                step={5}
+                                                postfix="KM"
+                                                value={radius}
+                                                onChange={value => {
+                                                    setRadius(value);
+                                                }}
+                                                style={{ display: "none", float: "left" }}
+                                            />
+                                            <div className={classes.floatLeft}>
+                                                <p style={{ marginTop: 0, marginLeft: 10, marginRight: 10, fontSize: 20 }}>
+                                                    {radius} KM
+                                                </p>
+                                            </div>
+                                            <FiPlus className={classes.radiusIcon} onClick={() => setRadius(radius.valueOf(radius) + 5)} />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+
+
+
+
+                                </div>
+
+
                                 <div className={classes.formElementsImageContainer}>
                                     <div className={classes.configLabel}>
                                         <label htmlFor="TimePeriod" className={classes.tagName}>
-                                            <div className={classes.floatLeft}><p className={classes.errorDiv}>Time Period</p> </div>
+                                            <div className={classes.floatLeft}><p className={classes.errorDiv}>Time Period <br />(max 1)</p> </div>
                                             <div className={classes.floatLeft}>
                                                 {(values.TimePeriod == [] && touched.TimePeriod) ? (
                                                     <div className={classes.errorStar}>*</div>

@@ -1,61 +1,51 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useStyles from "./styles";
 import TextField from '@material-ui/core/TextField'
 // components
 import Button from '@material-ui/core/Button';
-import Geocode from "react-geocode";
 import * as Yup from 'yup';
 import {
     Formik, Form
 } from 'formik';
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 
-const MY_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
-
-export default function LocationForm() {
+export default function LocationForm(reference, ...props) {
     const classes = useStyles();
+    const [address, setAddress] = useState("");
+    const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
     /**import the api key */
     const handleLocationUpdate = (values) => {
-        console.log(values.LocationAddress);
-
-        console.log("key is " + MY_KEY);
-        /**set the api key to use geocode */
-        Geocode.setLanguage("en");
-        Geocode.setRegion("za");
-        Geocode.setLocationType("ROOFTOP");
-        // Get latitude & longitude from address.
-        Geocode.fromAddress(values.LocationAddress).then(
-            (response) => {
-                const { lat, lng } = response.results[0].geometry.location;
-                console.log(lat, lng);
-                fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/addnewlocations", {
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    method: "POST",
-                    body: JSON.stringify({ BID: "b4", lat: lat, lng: lng, "LocationName": values.LocationName, "Address": values.LocationAddress })
-                })
-                    .then(res => res.json())
-                    .then(
-                        (result) => {
-                            console.log(result);
-                            alert("Location " + values.LocationName + " was added successfully.")
-                        },
-
-                        // Note: it's important to handle errors here
-                        // instead of a catch() block so that we don't swallow
-                        // exceptions from actual bugs in components.
-                        (error) => {
-                        }
-                    )
+        setAddress("");
+        setCoordinates({ lat: null, lng: null });
+        fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/addnewlocations", {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
             },
-            (error) => {
-                console.error(error);
-                alert("Location " + values.LocationName + " was not found.")
-            }
-        );
-    }
+            method: "POST",
+            body: JSON.stringify({ BID: "b4", lat: coordinates.lat, lng: coordinates.lng, "LocationName": values.LocationName, "Address": address })
+        })
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    console.log(result);
+                },
 
+                // Note: it's important to handle errors here
+                // instead of a catch() block so that we don't swallow
+                // exceptions from actual bugs in components.
+                (error) => {
+                }
+            );
+        console.log(reference.reference.current.click());
+    }
+    const handleSelect = async (value) => {
+        const results = await geocodeByAddress(value);
+        console.log(results[0].formatted_address);
+        const latLng = await getLatLng(results[0]);
+        setCoordinates(latLng);
+        setAddress(results[0].formatted_address);
+    }
     return (
 
         <div className={classes.formElementsImageContainer}>
@@ -66,7 +56,6 @@ export default function LocationForm() {
                 }}
                 validationSchema={Yup.object().shape({
                     LocationName: Yup.string().required('*'),
-                    LocationAddress: Yup.string().required('*'),
                 })}
                 onSubmit={(values, { resetForm }) => { resetForm(); handleLocationUpdate(values) }}
             >
@@ -90,19 +79,52 @@ export default function LocationForm() {
                             <div className={classes.formContainer}>
                                 <label htmlFor="LocationAddress" className={classes.formLabel}>
                                     <div className={classes.floatLeft}>
-                                        <p className={classes.errorDiv}>Address</p>
+                                        <p className={classes.errorDiv}>Street Address</p>
                                     </div>
                                     <div className={classes.floatLeft}>
-                                        {(errors.LocationAddress && touched.LocationAddress) ? (
+                                        {/* {(errors.LocationAddress && touched.LocationAddress) ? (
+                                            <div className={classes.errorStar}>*</div>
+                                        ) : null} */}
+                                        {(coordinates.lat === null && touched.LocationAddress) ? (
                                             <div className={classes.errorStar}>*</div>
                                         ) : null}
                                     </div>
                                 </label>
-                                <TextField id="outlined-basic" variant="outlined" name="LocationAddress" className={classes.individualTextField} onChange={handleChange} value={values.LocationAddress} />
+                                <PlacesAutocomplete value={address} onChange={setAddress} onSelect={handleSelect}>
+                                    {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                                        <div style={{ width: '100%' }}>
+                                            <TextField id="outlined-basic" variant="outlined" name="LocationAddress" className={classes.individualTextField} {...getInputProps({ placeholder: "" })} />
+
+                                            <div >
+                                                {loading ? <div>... loading</div> : null}
+
+                                                {suggestions.map((suggestion) => {
+                                                    const style = {
+                                                        backgroundColor: suggestion.active ? "#81b5c2" : "#fff",
+                                                        color: suggestion.active ? "#fff" : "#4A4A4A",
+                                                        borderWidth: 2,
+                                                        borderColor: "#4A4A4A",
+                                                    };
+                                                    return <div {...getSuggestionItemProps(suggestion, { style })}>{suggestion.description}</div>;
+                                                })}
+                                            </div>
+
+                                        </div>
+                                    )}
+                                </PlacesAutocomplete>
+                            </div>
+                            <div className={classes.CoordinatesContainer}>
+                                <p className={classes.errorDiv}>Latitude:<div style={{ float: 'right' }}>{coordinates.lat}</div></p>
+                                <p className={classes.errorDiv}>Longitude:<div style={{ float: 'right' }}>{coordinates.lng}</div></p>
                             </div>
                         </div>
-                        <Button type="Submit" className={classes.addLocationButton} > Add New Location</Button>
-
+                        <div>
+                            <Button onClick={() => (resetForm(),
+                                setAddress(""),
+                                setCoordinates({ lat: null, lng: null })
+                            )} className={classes.ClearButton} > Clear </Button>
+                            <Button type="Submit" className={classes.addLocationButton} > Add New Location</Button>
+                        </div>
                     </Form>
                 )}
             </Formik>

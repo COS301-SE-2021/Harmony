@@ -52,7 +52,8 @@ export default makeStyles(theme => ({
   },
   tagName: {
     fontSize: 20,
-    width: 65
+    width: 85,
+    marginRight: -23
   },
   MealContainer: {
     marginTop: 20,
@@ -238,9 +239,12 @@ export default makeStyles(theme => ({
   floatLeft: {
     float: "left"
   },
+  clearBoth: {
+    clear: "both"
+  },
   errorDiv: {
     fontSize: 15,
-    marginTop: 0,
+    marginTop: -5,
     color: "#717171",
   },
   errorStar: {
@@ -249,5 +253,10 @@ export default makeStyles(theme => ({
   justifySpaceBet: {
     justifyContent: "space-between",
     width: "100%"
+  },
+  radiusIcon: {
+    float: "left",
+    height: 25,
+    width: 25
   }
 }));

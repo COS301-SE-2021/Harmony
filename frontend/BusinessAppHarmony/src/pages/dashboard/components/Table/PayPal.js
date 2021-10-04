@@ -1,10 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 
-export default function PayPal(amount) {
+export default function PayPal(amount, reference) {
 
     const paypal = useRef();
     useEffect(() => {
-        console.log(amount);
         window.paypal.Buttons({
             createOrder: (data, actions, err) => {
                 return actions.order.create({
@@ -35,7 +34,7 @@ export default function PayPal(amount) {
                 })
                     .then(response => response.json())
                     .then(data => console.log(data))
-                    .then(alert("Payment completed successfully."))
+                    .then(amount.reference.current.click())
                 //do an api call that updates the statement total
             },
             onError: (err) => {

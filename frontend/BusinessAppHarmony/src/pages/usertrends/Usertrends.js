@@ -4,18 +4,51 @@ import useStyles from "./styles";
 // components
 import PageTitle from "../../components/PageTitle";
 import Widget from "../../components/Widget";
-import Button from '@material-ui/core/Button';
 import { Typography } from "../../components/Wrappers";
 import PayPal from '../dashboard/components/Table/PayPal';
 import { GrPaypal } from "react-icons/gr";
 import LocationForm from './LocationForm';
 import TrendingStats from './trendingStats';
+import { FiMinusCircle } from "react-icons/fi";
+import Button from '@material-ui/core/Button';
+
 export default function Tables() {
   const classes = useStyles();
   /**Default logo */
   const [logo, setLogo] = useState("http://beepeers.com/assets/images/commerces/default-image.jpg");
+  /**The checkout button for paypal */
   const [checkout, setCheckout] = useState(false);
   const [data, setData] = useState({ OutstandingAmount: 0, Locations: [{ name: "" }, { address: "" }] });
+
+  /**to detect if a child component is changed */
+  const [change, detectChange] = useState(true);
+  const detectChangeRef = useRef();
+  useEffect(() => {
+    detectChange(false);
+    console.log("change detected");
+    /**load profile data */
+    fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/getprofile", {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: JSON.stringify({ BID: "b4" })
+    })
+      .then(res => res.json())
+      .then(
+        (result) => {
+          console.log(result);
+          setData(result.UserData);
+          setLogo(result.UserData.Logo)
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+        }
+      )
+  }, [change])
 
   useEffect(() => {
     /**load profile data */
@@ -86,6 +119,48 @@ export default function Tables() {
     }
   }
 
+  const handleRemoveLocation = (name) => {
+    console.log(name + " removed")
+    fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/removelocation", {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: JSON.stringify({ BID: "b4", LocationID: "idsf", LocationAddress: name })
+    })
+      .then(res => res.json())
+      .then(
+        (result) => {
+          console.log(result);
+          // setData(result.Data);
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+        }
+      )
+    fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/getprofile", {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: JSON.stringify({ BID: "b4" })
+    })
+      .then(res => res.json())
+      .then(
+        (result) => {
+          console.log(result);
+          setData(result.UserData);
+          setLogo(result.UserData.Logo)
+        },
+
+        (error) => {
+        }
+      )
+  }
 
   return (
     <>
@@ -133,21 +208,24 @@ export default function Tables() {
             <Typography size="md" weight="bold">
               Locations
             </Typography>
-            <LocationForm />
+            <LocationForm reference={detectChangeRef} />
+            <Button style={{ display: 'none' }} onClick={() => detectChange(true)} ref={detectChangeRef} />
             <Table className="mb-0">
               <TableHead>
                 <TableRow className={classes.tableRowHeader}>
                   <TableCell className={classes.tableCell}>NAME</TableCell>
                   <TableCell className={classes.tableCell}>ADDRESS</TableCell>
+                  <TableCell className={classes.tableCell}>REMOVE</TableCell>
 
                 </TableRow>
               </TableHead>
               <TableBody>
-                {data.Locations.map(({ Name, Address }) => (
+                {data.Locations.map((item) => (
 
-                  <TableRow key={Address}>
-                    <TableCell className="pl-3 fw-normal">{Name}</TableCell>
-                    <TableCell>{Address}</TableCell>
+                  <TableRow key={item.Address}>
+                    <TableCell className="pl-3 fw-normal">{item.Name}</TableCell>
+                    <TableCell>{item.Address}</TableCell>
+                    <TableCell><FiMinusCircle style={{ width: 25, height: 25, marginLeft: 20, marginRight: 20 }} onClick={() => (handleRemoveLocation(item.Address))} /></TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -166,11 +244,11 @@ export default function Tables() {
             <div className={classes.outstandingBalance}>
               <p className={classes.outstandingBalanceWord}>Outstanding Balance</p>
               <Typography size="xxl" weight="bold">
-               R {data.OutstandingAmount}
+                R {data.OutstandingAmount}
               </Typography>
             </div>
             <div className={classes.PayPalContainer}>
-              {checkout ? (<PayPal amount={data.OutstandingAmount} />) : (
+              {checkout ? (<PayPal amount={data.OutstandingAmount} reference={detectChangeRef} />) : (
                 <Button className={classes.payNowButton} variant="contained" onClick={() => { setCheckout(true) }}><GrPaypal style={{ marginRight: 10 }} size={20} color="white" />Pay now</Button>
               )}
             </div>
