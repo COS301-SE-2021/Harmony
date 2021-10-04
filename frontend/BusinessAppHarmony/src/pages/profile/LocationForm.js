@@ -100,8 +100,8 @@ export default function LocationForm(reference, ...props) {
 
                                                 {suggestions.map((suggestion) => {
                                                     const style = {
-                                                        backgroundColor: suggestion.active ? "#81b5c2" : "#fff",
-                                                        color: suggestion.active ? "#fff" : "#4A4A4A",
+                                                        // backgroundColor: suggestion.active ? "#CECECE" : "#fff",
+                                                        color: suggestion.active ? "#81b5c2" : "#4A4A4A",
                                                         borderWidth: 2,
                                                         borderColor: "#4A4A4A",
                                                     };

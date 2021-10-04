@@ -7,8 +7,6 @@ import Widget from "../../components/Widget/Widget";
 import { Typography } from "../../components/Wrappers/Wrappers";
 import PayPal from '../dashboard/components/Table/PayPal';
 import { GrPaypal } from "react-icons/gr";
-import LocationForm from './LocationForm';
-import TrendingStats from './trendingStats';
 import { FiMinusCircle } from "react-icons/fi";
 import Button from '@material-ui/core/Button';
 
@@ -18,6 +16,16 @@ export default function PairingCard(data) {
 
     return (
         <>
+            <Grid item xs={12}>
+                <Widget
+                    disableWidgetMenu
+                    bodyClass={classes.tableWidget}
+                >
+                    <Typography size="xl" weight="bold">
+                        Trending Pairing Options
+                    </Typography>
+                </Widget>
+            </Grid>
             {data.data.imageData.map((item) => (
                 <Grid item xs={4}>
                     <Widget
