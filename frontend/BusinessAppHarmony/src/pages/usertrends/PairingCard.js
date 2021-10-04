@@ -26,20 +26,19 @@ export default function PairingCard(data) {
                         bodyClass={classes.tableWidget}
                     >
                         <div style={{ marginTop: -35, width: "100%" }}>
-                            <div className={classes.PreviewPiece}><img src={item.foodImage} className={classes.ImageContainer} /></div>
-                            <div className={classes.PreviewPiece}><img src={item.drinkImage} className={classes.ImageContainer} /></div>
-                        </div>
-                        <div className={classes.justifySpaceBetText}>
-                            <div className={classes.foodChip}>
-                                {item.foodName}
+                            <div style={{ width: "50%", float: "left" }}>
+                                <div className={classes.PreviewPiece}><img src={item.foodImage} className={classes.ImageContainer} /></div>
+                                <div className={classes.foodChip}>
+                                    {item.foodName}
+                                </div>
                             </div>
-                            <div className={classes.floatLeft}>
+                            <div style={{ width: "50%", float: "left" }}>
+                                <div className={classes.PreviewPiece}><img src={item.drinkImage} className={classes.ImageContainer} /></div>
                                 <div className={classes.drinkChip}>
                                     {item.drinkName}
                                 </div>
                             </div>
                         </div>
-
                     </Widget>
                 </Grid>
             ))}

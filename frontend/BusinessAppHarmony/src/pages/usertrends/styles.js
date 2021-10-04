@@ -153,64 +153,26 @@ export default makeStyles(theme => ({
     padding: 5,
     textAlign: "center",
     borderRadius: 15,
-    paddingLeft: 25,
-    paddingRight: 25,
-    marginLeft: 6,
-    marginRight: 6,
-    float: "left",
-
+    paddingLeft: 10,
+    paddingRight: 10,
+    marginLeft: 15,
+    marginRight: 15,
+    marginBottom: 15
   },
   drinkChip: {
     backgroundColor: "#1FBFBA",
-    float: "left",
     color: "white",
     fontWeight: "bold",
     fontSize: 18,
     padding: 5,
     textAlign: "center",
     borderRadius: 15,
-    paddingLeft: 25,
-    paddingRight: 25,
-    marginLeft: 6,
-    marginRight: 6,
-  },
-  FoodLabelButton: {
-    backgroundColor: "#FF6347",
-    padding: 8,
-    color: "white",
-    width: "100%",
-    margin: "auto",
-    height: 40,
-    borderTopRightRadius: 5,
-    borderTopLeftRadius: 5,
-    fontWeight: 'bold',
-    fontSize: 18
-    // marginLeft: 30,
-  },
-  DrinkLabelButton: {
-    backgroundColor: "#1FBFBA",
-    padding: 10,
-    color: "white",
-    width: "100%",
-    margin: "auto",
-    height: 40,
-    borderTopRightRadius: 5,
-    borderTopLeftRadius: 5,
-    fontWeight: 'bold',
-    fontSize: 18
+    paddingLeft: 10,
+    paddingRight: 10,
+    marginLeft: 15,
+    marginRight: 15,
+    marginBottom: 15
 
-  },
-  MealLabelButton: {
-    backgroundColor: "#C41ED4",
-    padding: 10,
-    color: "white",
-    width: "100%",
-    margin: "auto",
-    height: 40,
-    borderTopRightRadius: 5,
-    borderTopLeftRadius: 5,
-    fontWeight: 'bold',
-    fontSize: 18
 
   },
   displayFlexJustifyCenter: {
@@ -284,14 +246,13 @@ export default makeStyles(theme => ({
     marginLeft: 60,
   },
   ImageContainer: {
-    height: 185,
+    height: 165,
     width: "100%",
     borderRadius: 5,
   },
 
   PreviewContainer: {
     display: "block",
-    width: "50%",
     border: "1px solid #EDEDED",
     boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.02)",
     borderRadius: 5,
@@ -307,9 +268,7 @@ export default makeStyles(theme => ({
   },
   PreviewPiece: {
     marginBottom: 10,
-    width: "50%",
-    height: 185,
-    float: "left",
+    height: 165
   },
   floatLeft: {
     float: "left"
