@@ -27,6 +27,8 @@ export default function Card({ dataSet, isDeleteVisible, ...otherProps }) {
         <View style={{ paddingBottom: 15 }}>
             <View style={styles.cardContainer}>
                 <TouchableOpacity
+                    activeOpacity={0.8}
+
                     onPress={() => {
                         navigation.navigate("PairingDetails", {
                             data: dataSet,
@@ -161,45 +163,43 @@ export default function Card({ dataSet, isDeleteVisible, ...otherProps }) {
 
 
                 <Divider />
-                <TouchableOpacity>
 
-                    <View style={styles.locationBar}>
-                        <SimpleLineIcons
-                            name="location-pin"
-                            style={personalStyles.locationPinPadding}
-                            size={26}
-                            color="black"
-                        />
-                        <View
-                            style={personalStyles.locationResultBox}
-                        >
-                            <Text style={styles.TextSmall}>{dataSet.Location} </Text>
-                            <Text style={styles.TextSmall}>{dataSet.Distance} KM</Text>
-                        </View>
+                <View style={styles.locationBar}>
+                    <SimpleLineIcons
+                        name="location-pin"
+                        style={personalStyles.locationPinPadding}
+                        size={26}
+                        color="black"
+                    />
+                    <View
+                        style={personalStyles.locationResultBox}
+                    >
+                        <Text style={styles.TextSmall}>{dataSet.Location} </Text>
+                        <Text style={styles.TextSmall}>{dataSet.Distance} KM</Text>
                     </View>
-                    {!dataSet.IsSponsor ?
-                        <View>
-                            <Divider />
+                </View>
+                {!dataSet.IsSponsor ?
+                    <View>
+                        <Divider />
 
-                            <IconsBar
-                                dataSet={dataSet}
-                                upVoteVal={dataSet.Upvotes}
-                                downVoteVal={dataSet.Downvotes}
-                                isDV={dataSet.isDownvoted}
-                                isUV={dataSet.isUpvoted}
-                                isF={dataSet.isFavourited}
-                                isDeleteVisible={isDeleteVisible}
-                            />
-                        </View>
-                        :
-                        <View style={{
-                            //card icons bar
-                            padding: "2%",
-                        }}>
+                        <IconsBar
+                            dataSet={dataSet}
+                            upVoteVal={dataSet.Upvotes}
+                            downVoteVal={dataSet.Downvotes}
+                            isDV={dataSet.isDownvoted}
+                            isUV={dataSet.isUpvoted}
+                            isF={dataSet.isFavourited}
+                            isDeleteVisible={isDeleteVisible}
+                        />
+                    </View>
+                    :
+                    <View style={{
+                        //card icons bar
+                        padding: "2%",
+                    }}>
 
-                        </View>
-                    }
-                </TouchableOpacity>
+                    </View>
+                }
 
             </View>
         </View>
