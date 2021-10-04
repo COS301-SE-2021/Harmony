@@ -7,7 +7,8 @@ import {
     Dimensions,
     Platform,
     ScrollView,
-    Text
+    Text,
+    Alert
 } from "react-native";
 import { useIsFocused } from '@react-navigation/native';
 
@@ -33,16 +34,40 @@ export default function PairingDetailsScreen({ route }) {
     console.log(data);
     const isFocused = useIsFocused();
 
-
-
+    const USER_INTERACTION_URL = "https://2928u23tv1.execute-api.eu-west-1.amazonaws.com/dev/advertinteraction"
     useEffect(() => {
-        if (isFocused) {
-            startTime = new Date();
-        }
-        else if (!isFocused) {
-            endTime = new Date();
-            differenceInTime = Math.abs(startTime - endTime)//Time in milliseconds
-            console.log("Difference in time (ms): " + differenceInTime)
+        //Only tracks the interaction time of sponsored ads
+        if (data.IsSponsor) {
+            if (isFocused) {
+                startTime = new Date();
+            }
+            else if (!isFocused) {
+
+                endTime = new Date();
+                differenceInTime = Math.abs(startTime - endTime)//Time in milliseconds
+                sendData();
+
+                async function sendData() {
+                    await fetch(USER_INTERACTION_URL, {
+                        method: "POST",
+                        headers: {
+                            Accept: "application/json",
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            "BPID": data.BPID,
+                            "Time": differenceInTime
+                        })
+                    })
+                        .then((response) => response.json())
+                        .then((json) => {
+                            console.log(json);
+                        })
+                        .catch((error) => {
+                            console.log(error)
+                        })
+                };
+            }
         }
     }, [isFocused]);
 
