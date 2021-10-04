@@ -45,31 +45,37 @@ def get_business_ads(event, context):
             days_remaining = timeLimit - days_completed
             i['timeLeft'] = str(days_remaining) + " days"
 
-            i["AverageTime"] = round(i["TotalTime"] / i["NumberOfClicks"])
 
-            if i["TotalTime"] > 60:
-                time = i["TotalTime"]
-                time = round(time / 60)
-                i["TotalTime"] = f"{time} Minutes"
-            elif i["TotalTime"] > 3600:
-                time = i["TotalTime"]
-                time = round(time / 3600)
-                i["TotalTime"] = f"{time} Hours"
-            else:
-                time = i["TotalTime"]
-                i["TotalTime"] = f"{time} Seconds"
+            tt= i["TotalTime"]
+            noc = i["NumberOfClicks"]
+            i["AverageTime"] = 0
+            if noc != 0:
+                avg = tt / noc
+                i["AverageTime"] = round(avg)
 
-            if i["AverageTime"] > 60:
-                time = i["AverageTime"]
-                time = round(time / 60)
-                i["AverageTime"] = f"{time} Minutes"
-            elif i["AverageTime"] > 3600:
-                time = i["AverageTime"]
-                time = round(time / 3600)
-                i["AverageTime"] = f"{time} Hours"
-            else:
-                time = i["AverageTime"]
-                i["AverageTime"] = f"{time} Seconds"
+                if i["TotalTime"] > 60:
+                    time = i["TotalTime"]
+                    time = round(time / 60)
+                    i["TotalTime"] = f"{time} Minutes"
+                elif i["TotalTime"] > 3600:
+                    time = i["TotalTime"]
+                    time = round(time / 3600)
+                    i["TotalTime"] = f"{time} Hours"
+                else:
+                    time = i["TotalTime"]
+                    i["TotalTime"] = f"{time} Seconds"
+
+                if i["AverageTime"] > 60:
+                    time = i["AverageTime"]
+                    time = round(time / 60)
+                    i["AverageTime"] = f"{time} Minutes"
+                elif i["AverageTime"] > 3600:
+                    time = i["AverageTime"]
+                    time = round(time / 3600)
+                    i["AverageTime"] = f"{time} Hours"
+                else:
+                    time = i["AverageTime"]
+                    i["AverageTime"] = f"{time} Seconds"
 
 
             adverts.append(i)
