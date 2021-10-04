@@ -61,7 +61,7 @@ export default function LocationForm(reference, ...props) {
             >
                 {/** The moderate pairings form to submit */}
                 {({ errors, touched, values, handleChange, resetForm }) => (
-                    <Form >
+                    <Form style={{ width: "100%" }}>
                         <div className={classes.marginAuto}>
                             <div className={classes.formContainer}>
                                 <label htmlFor="LocationName" className={classes.formLabel}>
