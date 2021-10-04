@@ -4,7 +4,6 @@ from datetime import date
 import uuid
 import base64
 import io
-from PIL import Image
 from botocore.exceptions import ClientError
 
 dynamodb = boto3.resource('dynamodb')
@@ -40,6 +39,11 @@ def ai_success_ratio(event, context):
 
     ufid = uuid.uuid4().hex
     imagelink = add_image_to_s3(event["Image"], ufid)
+
+    if is_correct:
+        is_correct = "True"
+    else:
+        is_correct = "False"
 
     try:
         table.put_item(
