@@ -153,6 +153,8 @@ export default makeStyles(theme => ({
   },
   PreviewPiece: {
     marginBottom: 10,
+    width: "50%",
+    height: 145,
     float: "left",
   },
   FileInput: {
@@ -256,6 +258,13 @@ export default makeStyles(theme => ({
     width: "100%",
     display: "flex"
   },
+  justifySpaceBetText: {
+    justifyContent: "space-around",
+    width: "100%",
+    display: "flex",
+    marginTop: 15,
+    marginBottom: 10
+  },
   foodChip: {
     backgroundColor: "#FF6347",
     color: "white",
@@ -264,8 +273,8 @@ export default makeStyles(theme => ({
     borderRadius: 15,
     paddingLeft: 10,
     paddingRight: 10,
-    marginLeft: 10,
-    marginRight: 10,
+    marginLeft: 6,
+    marginRight: 6,
     float: "left",
 
   },
@@ -278,8 +287,8 @@ export default makeStyles(theme => ({
     borderRadius: 15,
     paddingLeft: 10,
     paddingRight: 10,
-    marginLeft: 10,
-    marginRight: 10
+    marginLeft: 6,
+    marginRight: 6,
   },
   pairingChip: {
     backgroundColor: "#C41ED4",
@@ -303,7 +312,8 @@ export default makeStyles(theme => ({
     paddingLeft: 10,
     paddingRight: 10,
     marginTop: 13,
-    marginLeft: 10,
+    marginLeft: 6,
+    marginRight: 6,
   },
   activeChip: {
     backgroundColor: "#3cd4a0",
