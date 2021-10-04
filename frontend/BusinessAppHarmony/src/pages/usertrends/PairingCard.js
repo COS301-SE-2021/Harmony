@@ -24,10 +24,13 @@ export default function PairingCard(data) {
                     <Typography size="xl" weight="bold">
                         Trending Pairing Options
                     </Typography>
+                    <Typography size="md" weight="light">
+                        Here are the three most likely pairings to gain popularity.
+                    </Typography>
                 </Widget>
             </Grid>
-            {data.data.imageData.map((item) => (
-                <Grid item xs={4}>
+            {data.data.imageData.map((item, index) => (
+                index < 3 ? (<Grid item xs={4}>
                     <Widget
                         disableWidgetMenu
                         noBodyPadding
@@ -48,7 +51,8 @@ export default function PairingCard(data) {
                             </div>
                         </div>
                     </Widget>
-                </Grid>
+                </Grid>) : null
+
             ))}
         </>
     );
