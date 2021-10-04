@@ -9,9 +9,8 @@ import * as Yup from 'yup';
 import Multiselect from 'multiselect-react-dropdown';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField'
-import { InputGroup, InputNumber } from 'rsuite';
+import { InputNumber } from 'rsuite';
 import { FiPlus, FiMinus } from "react-icons/fi";
-import { Typography } from "../../components/Wrappers";
 
 
 function CreateAdForm(...props) {
@@ -321,7 +320,7 @@ function CreateAdForm(...props) {
                             <div className={classes.MealContainer}>
                                 <div className={classes.formElementsPairing}>
                                     <label htmlFor="PairingDescription" className={classes.formLabel}>
-                                        <div className={classes.floatLeft}><p className={classes.errorDiv}>Description</p> </div>
+                                        <div className={classes.floatLeft}><p className={classes.errorDivDescr}>Description</p> </div>
                                         <div className={classes.floatLeft}>
                                             {(errors.PairingDescription && touched.PairingDescription) ? (
                                                 <div className={classes.errorStar}>*</div>

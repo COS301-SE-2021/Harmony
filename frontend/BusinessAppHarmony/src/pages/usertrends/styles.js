@@ -141,74 +141,38 @@ export default makeStyles(theme => ({
     margin: 'auto',
     width: '100%'
   },
-  ImageContainer: {
-    height: 100,
-    width: 120,
-    borderRadius: 5,
-    marginLeft: 15,
-    marginTop: -20
-  },
-  PreviewContainer: {
-    display: "block",
-    width: "40%",
-    border: "1px solid #EDEDED",
-    boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.02)",
-    borderRadius: 5,
-  },
-  PreviewContainerPairing: {
-    display: "block",
-    border: "1px solid #EDEDED",
-    boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.02)",
-    height: "auto",
-    width: "90%",
-    margin: "auto",
-    borderRadius: 5,
-  },
+
   clear: {
     clear: "both"
   },
-  PreviewPiece: {
-    marginBottom: 10
-  },
-  FileInput: {
-  },
-  FoodLabelButton: {
+  foodChip: {
     backgroundColor: "#FF6347",
-    padding: 8,
     color: "white",
-    width: "100%",
-    margin: "auto",
-    height: 40,
-    borderTopRightRadius: 5,
-    borderTopLeftRadius: 5,
-    fontWeight: 'bold',
-    fontSize: 18
-    // marginLeft: 30,
+    fontWeight: "bold",
+    fontSize: 18,
+    padding: 5,
+    textAlign: "center",
+    borderRadius: 15,
+    paddingLeft: 10,
+    paddingRight: 10,
+    marginLeft: 15,
+    marginRight: 15,
+    marginBottom: 15
   },
-  DrinkLabelButton: {
+  drinkChip: {
     backgroundColor: "#1FBFBA",
-    padding: 10,
     color: "white",
-    width: "100%",
-    margin: "auto",
-    height: 40,
-    borderTopRightRadius: 5,
-    borderTopLeftRadius: 5,
-    fontWeight: 'bold',
-    fontSize: 18
+    fontWeight: "bold",
+    fontSize: 18,
+    padding: 5,
+    textAlign: "center",
+    borderRadius: 15,
+    paddingLeft: 10,
+    paddingRight: 10,
+    marginLeft: 15,
+    marginRight: 15,
+    marginBottom: 15
 
-  },
-  MealLabelButton: {
-    backgroundColor: "#C41ED4",
-    padding: 10,
-    color: "white",
-    width: "100%",
-    margin: "auto",
-    height: 40,
-    borderTopRightRadius: 5,
-    borderTopLeftRadius: 5,
-    fontWeight: 'bold',
-    fontSize: 18
 
   },
   displayFlexJustifyCenter: {
@@ -236,9 +200,6 @@ export default makeStyles(theme => ({
     float: "right",
     width: "95%"
   },
-  floatLeft: {
-    float: "left",
-  },
   CoordinatesContainer: {
     float: "left",
     width: "100%",
@@ -250,10 +211,6 @@ export default makeStyles(theme => ({
   },
   errorStar: {
     color: "red", fontSize: 25, marginRight: 5, marginTop: -10
-  },
-  justifySpaceBet: {
-    justifyContent: "space-between",
-    width: "100%"
   },
   outstandingBalance: {
     color: theme.palette.primary.main,
@@ -287,5 +244,48 @@ export default makeStyles(theme => ({
   center: {
     padding: 15,
     marginLeft: 60,
-  }
+  },
+  ImageContainer: {
+    height: 165,
+    width: "100%",
+    borderRadius: 5,
+  },
+
+  PreviewContainer: {
+    display: "block",
+    border: "1px solid #EDEDED",
+    boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.02)",
+    borderRadius: 5,
+  },
+  PreviewContainerPairing: {
+    display: "block",
+    border: "1px solid #EDEDED",
+    boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.02)",
+    height: "auto",
+    width: "90%",
+    margin: "auto",
+    borderRadius: 5,
+  },
+  PreviewPiece: {
+    marginBottom: 10,
+    height: 165
+  },
+  floatLeft: {
+    float: "left"
+  },
+  clearBoth: {
+    clear: "both"
+  },
+  justifySpaceBet: {
+    justifyContent: "space-around",
+    width: "100%",
+    display: "flex"
+  },
+  justifySpaceBetText: {
+    justifyContent: "space-around",
+    width: "100%",
+    display: "flex",
+    marginTop: 15,
+    marginBottom: 10
+  },
 }));

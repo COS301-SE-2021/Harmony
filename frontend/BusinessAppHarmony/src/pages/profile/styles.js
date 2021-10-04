@@ -77,7 +77,7 @@ export default makeStyles(theme => ({
     marginBottom: 20,
     borderRadius: 15,
     justifyContent: "space-around",
-    display: "flex"
+    display: "flex",
   },
   addItemContainer: {
     width: "95%",
@@ -126,12 +126,12 @@ export default makeStyles(theme => ({
 
   },
   addLocationButton: {
-    backgroundColor: "#81b5c2", color: "white", marginLeft: 25, height: 35, borderRadius: 10, width: "60%",
+    backgroundColor: "#81b5c2", color: "white", marginLeft: 35, height: 40, borderRadius: 10, width: "50%",
     boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)",
     float: "left"
   },
   ClearButton: {
-    backgroundColor: "#CECECE", marginLeft: 15, height: 35, borderRadius: 10, width: "20%",
+    backgroundColor: "#CECECE", marginLeft: 55, height: 40, borderRadius: 10, width: "20%",
     boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)",
     float: "left"
   },

@@ -247,6 +247,11 @@ export default makeStyles(theme => ({
     marginTop: -5,
     color: "#717171",
   },
+  errorDivDescr: {
+    fontSize: 15,
+    marginTop: 15,
+    color: "#717171",
+  },
   errorStar: {
     color: "red", fontSize: 25, marginRight: 5, marginTop: -10
   },

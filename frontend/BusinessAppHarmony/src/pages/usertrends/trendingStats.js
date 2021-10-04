@@ -10,12 +10,14 @@ import {
 import Widget from "../../components/Widget";
 import useStyles from "./styles";
 import { Typography } from "../../components/Wrappers";
+import PairingCard from "./PairingCard";
 
 
 
 export default function TrendingStats() {
     const classes = useStyles();
-    const [recommendations, setRecommendations] = useState({ Tags: [], Pairings: [{}] })
+    const [recommendations, setRecommendations] = useState({ Tags: [], Pairings: [{}], imageData: [{}] })
+
     useEffect(() => {
         /**load recommendations */
         fetch("https://5lvu4c0875.execute-api.eu-west-1.amazonaws.com/dev/getrecommendations")
@@ -50,32 +52,7 @@ export default function TrendingStats() {
                     </Typography>
                 </Widget>
             </Grid>
-            <Grid item xs={6}>
-                <Widget
-                    disableWidgetMenu
-                    bodyClass={classes.tableWidget}
-                >
-                    <Typography size="md" weight="bold">
-                        Trending Tag Statistics
-                    </Typography>
-                    <Table className="mb-0">
-                        <TableHead>
-                            <TableRow className={classes.tableRowHeader}>
-                                <TableCell className={classes.tableCell}>TAG NAME</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-
-                            {recommendations.Tags.map((item) => (
-                                <TableRow key={item}>
-                                    <TableCell className="pl-3 fw-normal">{item}</TableCell>
-
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </Widget>
-            </Grid>
+            <PairingCard data={recommendations} />
             <Grid item xs={6}>
                 <Widget
                     disableWidgetMenu
@@ -103,6 +80,33 @@ export default function TrendingStats() {
                     </Table>
                 </Widget>
             </Grid>
+            <Grid item xs={6}>
+                <Widget
+                    disableWidgetMenu
+                    bodyClass={classes.tableWidget}
+                >
+                    <Typography size="md" weight="bold">
+                        Trending Tag Statistics
+                    </Typography>
+                    <Table className="mb-0">
+                        <TableHead>
+                            <TableRow className={classes.tableRowHeader}>
+                                <TableCell className={classes.tableCell}>TAG NAME</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+
+                            {recommendations.Tags.map((item) => (
+                                <TableRow key={item}>
+                                    <TableCell className="pl-3 fw-normal">{item}</TableCell>
+
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </Widget>
+            </Grid>
+
         </>
     );
 }
