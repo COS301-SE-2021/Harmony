@@ -20,7 +20,7 @@ table = dynamodb.Table('BusinessPairings')
 def add_user_clicks(event, context):
     # extract values from the event object we got from the Lambda service and store in a variable
     bpid = event['BPID']
-
+    timeinteraction = event['Time']
 
     try:
         response = table.update_item(
@@ -37,6 +37,24 @@ def add_user_clicks(event, context):
             ReturnValues="UPDATED_NEW"
 
         )
+
+        timeinteraction = timeinteraction / 1000
+        timeinteraction = round(timeinteraction)
+
+        response = table.update_item(
+            Key={
+                'BPID': bpid
+            },
+            UpdateExpression="SET #s = #s + :val",
+            ExpressionAttributeNames={
+                "#s": "TotalTime"
+            },
+            ExpressionAttributeValues={
+                ':val': decimal.Decimal(timeinteraction)
+            },
+            ReturnValues="UPDATED_NEW"
+
+        )
         print(response)
     except ClientError as e:
         if e.response['Error']['Code'] == "ConditionalCheckFailedException":
@@ -47,6 +65,9 @@ def add_user_clicks(event, context):
             raise
     else:
         return json.dumps({'StatusCode': 200, 'BPID': bpid})
+
+    return json.dumps({'StatusCode': 200, 'BPID': bpid})
+
 
 
 
