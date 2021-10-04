@@ -20,7 +20,7 @@ function CreateAdForm(...props) {
     const [foodImage, setFoodImage] = useState(defaultImage);
     const [drinkImage, setDrinkImage] = useState(defaultImage);
     const [result, setResult] = useState([]);
-    const [radius, setRadius] = useState(20);
+    const [radius, setRadius] = useState(35);
     var classes = useStyles();
 
     /**@var fileRef to create a reference to the file input to be able to clear it */
