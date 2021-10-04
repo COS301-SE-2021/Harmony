@@ -69,7 +69,7 @@ export default function PairingDetailsScreen({ route }) {
 
 
                     {itemTags.map((tag, index) => (
-                        <View style={styles.tagContainer} key={index}>
+                        <View style={[styles.tagContainer, TagColour(foodItem)]} key={index}>
                             {foodItem ?
                                 <FontAwesome5
                                     name="hamburger"
@@ -87,9 +87,22 @@ export default function PairingDetailsScreen({ route }) {
                         </View>
                     ))}
                 </View>
-            </ScrollView>
-        </View>
+            </ScrollView >
+        </View >
     );
+
+    const TagColour = (foodItem) => {
+        console.log(foodItem)
+        if (foodItem)
+            return {
+                backgroundColor: "#C41ED4",
+            };
+        else
+            return {
+                backgroundColor: "#1FBFBA",
+            };
+
+    }
 
     const Drink = () => (
         <View style={[styles.centeredView]}>
@@ -184,7 +197,6 @@ const styles = StyleSheet.create({
     tagContainer: {
         //Container of individual tag
         flexDirection: "row", //Needed to keep the tag icon and text in one line
-        backgroundColor: "#C41ED4",
         borderRadius: 20,
         margin: 5, //Space between tags
         padding: 10, //Space around innner tag
