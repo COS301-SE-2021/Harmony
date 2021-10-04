@@ -8,7 +8,13 @@ import { Typography } from "../../components/Wrappers";
 export default function AdvertsPage() {
   var classes = useStyles();
 
-  const [advertData, setAdvertData] = useState({ adverts: [] })
+  const [advertData, setAdvertData] = useState({
+    Adverts: [{
+      Locations: [],
+      FoodTags: [],
+      DrinkTags: [],
+    }]
+  })
 
   useEffect(() => {
     /**load recommendations */
@@ -35,58 +41,25 @@ export default function AdvertsPage() {
   }, [])
 
   const data = {
-    adverts: [
+    Adverts: [
       {
-        foodImage: "https://thestayathomechef.com/wp-content/uploads/2016/06/The-Most-Amazing-Chocolate-Cake-2-e1598548411160.jpg",
-        drinkImage: "https://www.gardeningknowhow.com/wp-content/uploads/2012/09/herbal-tea-1.jpg",
-        foodName: "Cake",
-        drinkName: "Tea",
+        FoodImage: "https://thestayathomechef.com/wp-content/uploads/2016/06/The-Most-Amazing-Chocolate-Cake-2-e1598548411160.jpg",
+        DrinkImage: "https://www.gardeningknowhow.com/wp-content/uploads/2012/09/herbal-tea-1.jpg",
+        FoodName: "Cake",
+        DrinkName: "Tea",
         Locations: ["Durban", "Pretoria", "Westville"],
-        foodTags: ["Sweet", "Warm"],
-        drinkTags: ["Warm", "Sweet"],
-        pairingTag: "Snack",
-        radius: "25",
-        timeLeft: "24 Days",
-        status: "Active",
-        dateCreated: "04/10/2021",
-        totalClicks: 32,
-        averageViewTime: 1.24,
-        totalViewTime: 39.68
+        FoodTags: ["Sweet", "Warm"],
+        DrinkTags: ["Warm", "Sweet"],
+        PairingTags: "Snack",
+        Radius: "25",
+        TimeLeft: "24 Days",
+        Status: "Active",
+        DateCreated: "04/10/2021",
+        NumberOfClicks: 32,
+        AverageTime: 1.24,
+        TotalTime: 39.68
       },
-      {
-        foodImage: "https://img.buzzfeed.com/thumbnailer-prod-us-east-1/video-api/assets/216054.jpg",
-        drinkImage: "https://images2.minutemediacdn.com/image/upload/c_crop,h_1191,w_2119,x_0,y_111/f_auto,q_auto,w_1100/v1617716394/shape/mentalfloss/643219-gettyimages-1248993201.jpg",
-        foodName: "Pizza",
-        drinkName: "Beer",
-        Locations: ["Umhlanga", "Ballto"],
-        foodTags: ["Savoury", "Spicy", "Hot"],
-        drinkTags: ["Cold", "Alcoholic", "Fizzy"],
-        pairingTag: "Lunch",
-        radius: "35",
-        timeLeft: "5 Days",
-        status: "Active",
-        dateCreated: "29/09/2021",
-        totalClicks: 142,
-        averageViewTime: 2.59,
-        totalViewTime: 367.78
-      },
-      {
-        foodImage: "https://media-cdn.tripadvisor.com/media/photo-s/0f/12/94/43/canecutters.jpg",
-        drinkImage: "https://www.eatthis.com/wp-content/uploads/sites/4/media/images/ext/108098914/coca-cola-soda-ice.jpg?quality=82&strip=all",
-        foodName: "Bunny Chow",
-        drinkName: "Coke",
-        Locations: ["Durban", "Pretoria East", "Umhlanga"],
-        foodTags: ["Spicy", "Hot"],
-        drinkTags: ["Cold", "Fizzy"],
-        pairingTag: "Supper",
-        radius: "25",
-        timeLeft: "0 Days",
-        status: "Expired",
-        dateCreated: "26/09/2021",
-        totalClicks: 219,
-        averageViewTime: 5.42,
-        totalViewTime: 1186.98
-      }
+
     ]
   }
 
