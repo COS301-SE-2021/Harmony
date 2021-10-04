@@ -106,7 +106,8 @@ def create_business_pairing(event, context):
             'DateCreated': str(today),
             'Price': cost,
             'Radius': radius,
-            'CoordinatesList': coord
+            'CoordinatesList': coord,
+            'NumberOfClicks': 0
         })
 
     """Gets the business user data using the business id"""
