@@ -26,8 +26,11 @@ import SettingsScreen from "../screens/SettingsScreen.js";
 import CameraScreen from "../screens/CameraScreen.js";
 import PairingResultsScreen from "../screens/PairingResultsScreen.js";
 import DrinkDetailsScreen from "../screens/DrinkDetailsScreen.js";
+
+
 import NewPairingScreen from "../screens/NewPairingScreen";
 import RequestNewItemScreen from "../screens/RequestNewItemScreen";
+import PairingDetailsScreen from "../screens/PairingDetailsScreen";
 
 import config from "../aws-exports";
 import SignIn from "../screens/SignInScreen";
@@ -102,6 +105,10 @@ function HomeFeed() {
       <HomeStack.Screen
         name="RequestNewItem"
         component={RequestNewItemScreen}
+      />
+      <HomeStack.Screen
+        name="PairingDetails"
+        component={PairingDetailsScreen}
       />
     </HomeStack.Navigator>
   );

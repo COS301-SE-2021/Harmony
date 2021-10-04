@@ -146,6 +146,15 @@ const CardScreen = ({ navigation, URL, headerVisible, isDeleteVisible }) => {
     </View>
   );
 
+  //Function outside of render function so it won't recreate itself each time render function called.
+  const renderCard =
+    ({ item }) => (
+      <Card
+        dataSet={item}
+        isDeleteVisible={isDeleteVisible}
+      />
+    )
+
   return (
     <ApplicationProvider
       {...eva}
@@ -171,18 +180,16 @@ const CardScreen = ({ navigation, URL, headerVisible, isDeleteVisible }) => {
           <AppLoadingIcon />
         ) : (
           <FlatList
+            removeClippedSubviews={true}
+            initialNumToRender={3}
+            maxToRenderPerBatch={5}
             data={data}
             refreshControl={
               <RefreshControl refreshing={refreshing} onRefresh={toggleRefresh} />
             }
             keyExtractor={({ PID }, index) => PID}
 
-            renderItem={({ item }) => (
-              <Card
-                dataSet={item}
-                isDeleteVisible={isDeleteVisible}
-              />
-            )}
+            renderItem={renderCard}
           />
         )}
         <FABNew />
