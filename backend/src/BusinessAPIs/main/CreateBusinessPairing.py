@@ -170,6 +170,6 @@ This data must be written to the database
 
 
 def calculate_cost(num_locations, time_limit, radius):
-    cost = time_limit + (2 * num_locations * time_limit) + radius
+    cost = (2 * num_locations * time_limit) + radius
 
     return cost
