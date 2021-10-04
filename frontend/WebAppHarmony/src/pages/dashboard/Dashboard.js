@@ -70,13 +70,8 @@ export default function Dashboard(props) {
   }, []);
   return (
     <>
-      <PageTitle title="Dashboard" button={<Button
-        variant="contained"
-        size="medium"
-        color="secondary"
+      <PageTitle title="Dashboard"
       >
-        Latest Reports
-      </Button>} />
       <Grid container spacing={4}>
         <Grid item lg={3} md={4} sm={6} xs={12}>
           <Widget
@@ -257,7 +252,7 @@ export default function Dashboard(props) {
                 <Grid container item alignItems={"center"}>
                   <Grid item xs={6}>
                     <Typography color="text" colorBrightness="primary" >
-                      Total Scanned :
+                      Total Feedback :
                     </Typography>
 
                   </Grid>
