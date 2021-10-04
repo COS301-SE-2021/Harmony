@@ -79,7 +79,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
             "ItemDescription": vals.ItemDescription,
             "ItemTags": vals.ItemTags,
             "FoodOrDrink": FoodOrDrink,
-            "Image": btoa(img)
+            "Image":img.split(',')[1],
         }
         console.log("request to submit " + JSON.stringify(request))
         fetch('https://w3lfp6r6f7.execute-api.eu-west-1.amazonaws.com/dev/additem',             {headers: {
@@ -91,6 +91,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
     })
             .then(response => response.json())
             .then(data => console.log(data))
+            .then(handleClear())
     }
 
     return (
@@ -180,7 +181,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                                 </label>
                                 <TextField id="outlined-basic" multiline={true} error={errors.ItemDescription} rows={4} variant="outlined" name="ItemDescription" className={classes.individualTextFieldDescription} onChange={handleChange} value={values.ItemDescription} />
                             </div>
-
+<br/>
                             <div className={classes.formElements}>
                                 <label htmlFor="ItemTags" className={classes.formLabel}>
                                     <div className={classes.floatLeft}><p className={classes.errorDivTags}>Tags</p> </div>
@@ -214,6 +215,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                                     options={['Spicy', 'Savoury', 'Salty', 'Sweet', 'Sour', 'Warm', 'Hot', 'Cold', 'Alcoholic', 'Non-Alcoholic', 'Fizzy', 'Sweet', 'Sour', 'Bitter', 'Warm', 'Hot', 'Cold']}
                                 />
                             </div>
+<br/>
 
                             <div>
                                 <Button onClick={(values) => (resetForm(), handleClear())} className={classes.clearButton} variant="contained">Clear</Button>
