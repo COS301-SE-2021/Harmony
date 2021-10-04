@@ -314,7 +314,10 @@ def addsponsors(event, response):
         if sponsorcounter < len(sponsors):
             if (i != 0) and(i%5==0) :
                 newpid = uuid.uuid4().hex
-
+                logo = ""
+                for k in businesses:
+                    if k["BID"] == sponsors[sponsorcounter]["BID"]:
+                        logo = k["Logo"]
                 newSponsor = {
                     "FoodTags": sponsors[sponsorcounter]["FoodTags"],
                     "FoodItem": sponsors[sponsorcounter]["FoodName"],
@@ -326,9 +329,12 @@ def addsponsors(event, response):
                     "MealTag": sponsors[sponsorcounter]["PairingTags"],
                     "Distance": sponsors[sponsorcounter]["Distance"],
                     "Price": "R59.99",
-                    "Logo" : businesses[random.randint(1,2)]["Logo"],
+                    "Logo" : logo,
                     "IsSponsor": True,
-                    "PID" : newpid
+                    "PID" : newpid,
+                    "BPID" : sponsors[sponsorcounter]["BPID"],
+                    "SponsoredDescription" : sponsors[sponsorcounter]["PairingDescription"]
+
                 }
                 response.insert(i, newSponsor)
                 sponsorcounter = sponsorcounter+1
