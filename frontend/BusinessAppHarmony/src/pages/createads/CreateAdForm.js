@@ -9,9 +9,8 @@ import * as Yup from 'yup';
 import Multiselect from 'multiselect-react-dropdown';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField'
-import { InputGroup, InputNumber } from 'rsuite';
+import { InputNumber } from 'rsuite';
 import { FiPlus, FiMinus } from "react-icons/fi";
-import { Typography } from "../../components/Wrappers";
 
 
 function CreateAdForm(...props) {

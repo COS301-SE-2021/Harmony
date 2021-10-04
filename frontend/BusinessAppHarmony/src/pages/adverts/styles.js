@@ -338,5 +338,20 @@ export default makeStyles(theme => ({
     paddingRight: 10,
     marginTop: 13,
     marginLeft: 10,
+  },
+  statsChip: {
+    backgroundColor: theme.palette.primary.main,
+    color: "white",
+    textAlign: "center",
+    borderRadius: 15,
+    paddingLeft: 5,
+    paddingRight: 5,
+    fontSize: 25,
+    width: "70%",
+    height: 60,
+    fontWeight: "bold",
+    margin: "auto",
+    marginBottom: 15
   }
+
 }));
