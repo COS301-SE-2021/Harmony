@@ -27,7 +27,7 @@ export default function DataTable() {
 
     const history = useHistory();
     const handleRoute = () =>{
-        history.push('/tables');
+        history.push('/app/tables');
     }
 
 
@@ -81,13 +81,13 @@ export default function DataTable() {
   return (
       <>
         <PageTitle title="Add to AI"
-                   button={<Button
-                       variant="contained"
-                       size="large"
-                       color="secondary"
-                       onClick={handleRoute}>
-                     Refresh
-                   </Button>}
+                   // button={<Button
+                   //     variant="contained"
+                   //     size="large"
+                   //     color="secondary"
+                   //     onClick={handleRoute}>
+                   //   Refresh
+                   // </Button>}
         />
         <Grid container spacing={4}>
           <Grid item xs={12}>
