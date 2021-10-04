@@ -30,7 +30,7 @@ export default function PairingDetailsScreen({ route }) {
     const [modalMessage, setModalMessage] = useState("");
 
     const { data } = route.params;
-    // console.log(data);
+    console.log(data);
     const isFocused = useIsFocused();
 
 
@@ -134,29 +134,61 @@ export default function PairingDetailsScreen({ route }) {
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
-            <ImageHeaderScrollView
-                maxHeight={MAX_HEIGHT}
-                minHeight={MIN_HEIGHT}
-                renderHeader={() => (
-                    <Image
-                        style={styles.foodCard}
-                        source={{ uri: data.FoodImage }}
-                    />
-                )}
-            >
-                <TitleBar title={data.FoodItem} />
-                <ItemDescription description={data.FoodDesc} />
-                <TagBar itemTags={data.FoodTags} foodItem={true} />
 
-                <Drink />
-                <TitleBar title={data.DrinkItem} />
-                <ItemDescription description={data.DrinkDesc} />
-                <TagBar itemTags={data.DrinkTags} foodItem={false} />
+            {data.IsSponsor ?
+                (
+                    <ImageHeaderScrollView
+                        maxHeight={MAX_HEIGHT}
+                        minHeight={MIN_HEIGHT}
+                        renderHeader={() => (
+                            <Image
+                                style={styles.foodCard}
+                                source={{ uri: data.FoodImage }}
+                            />
+                        )}
+                    >
+                        <TitleBar title={data.FoodItem} />
+                        <ItemDescription description={data.FoodDesc} />
+                        <TagBar itemTags={data.FoodTags} foodItem={true} />
 
-                {isLoading === true && <AppLoadingIcon />}
+                        <Drink />
+                        <TitleBar title={data.DrinkItem} />
+                        <ItemDescription description={data.DrinkDesc} />
+                        <TagBar itemTags={data.DrinkTags} foodItem={false} />
 
-            </ImageHeaderScrollView>
+                        {isLoading === true && <AppLoadingIcon />}
+
+                    </ImageHeaderScrollView>
+                )
+                :
+                (
+                    <ImageHeaderScrollView
+                        maxHeight={MAX_HEIGHT}
+                        minHeight={MIN_HEIGHT}
+                        renderHeader={() => (
+                            <Image
+                                style={styles.foodCard}
+                                source={{ uri: data.FoodImage }}
+                            />
+                        )}
+                    >
+                        <TitleBar title={data.FoodItem} />
+                        <ItemDescription description={data.FoodDesc} />
+                        <TagBar itemTags={data.FoodTags} foodItem={true} />
+
+                        <Drink />
+                        <TitleBar title={data.DrinkItem} />
+                        <ItemDescription description={data.DrinkDesc} />
+                        <TagBar itemTags={data.DrinkTags} foodItem={false} />
+
+                        {isLoading === true && <AppLoadingIcon />}
+
+                    </ImageHeaderScrollView>
+                )
+            }
         </View>
+
+
     );
 }
 
