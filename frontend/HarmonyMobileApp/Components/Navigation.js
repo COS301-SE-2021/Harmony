@@ -153,6 +153,48 @@ const Results = () => (
 );
 
 const Tab = createMaterialTopTabNavigator();
+const favStack = createStackNavigator();
+function favScreen() {
+  return (
+
+    <favStack.Navigator initialRouteName="Favourite"
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <favStack.Screen
+        name="UserFavourites"
+        component={FavouritesScreen}
+      />
+      <favStack.Screen
+        name="PairingDetails"
+        component={PairingDetailsScreen}
+      />
+    </favStack.Navigator>
+  );
+}
+const createdStack = createStackNavigator();
+function createdScreen() {
+  return (
+
+    <createdStack.Navigator initialRouteName="Favourite"
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <createdStack.Screen
+        name="CreatedPairingsScreen"
+        component={CreatedPairingsScreen}
+      />
+      <createdStack.Screen
+        name="PairingDetails"
+        component={PairingDetailsScreen}
+      />
+    </createdStack.Navigator>
+  );
+}
+
+
 const UserPairingsTopTabs = () => (
 
   <Tab.Navigator
@@ -183,8 +225,8 @@ const UserPairingsTopTabs = () => (
     }}
   >
     <Tab.Screen
-      name="UserFavourites"
-      component={FavouritesScreen}
+      name="favScreen"
+      component={favScreen}
       options={{
         tabBarLabel: "My Favourites",
         tabBarIcon: ({ color }) => (
@@ -193,8 +235,8 @@ const UserPairingsTopTabs = () => (
       }}
     />
     <Tab.Screen
-      name="UserPairings"
-      component={CreatedPairingsScreen}
+      name="createdScreen"
+      component={createdScreen}
       options={{
         tabBarLabel: "My Pairings",
         tabBarIcon: ({ color }) => (
