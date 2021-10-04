@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Grid, Table, TableRow, TableHead, TableBody, TableCell, } from "@material-ui/core";
 import useStyles from "./styles";
+import { Auth } from 'aws-amplify';
 // components
 import PageTitle from "../../components/PageTitle";
 import Widget from "../../components/Widget";
@@ -33,7 +34,7 @@ export default function ProfilePage() {
         'Content-Type': 'application/json'
       },
       method: "POST",
-      body: JSON.stringify({ BID: "b4" })
+      body: JSON.stringify({ BID: Auth.user.username })
     })
       .then(res => res.json())
       .then(
@@ -58,7 +59,7 @@ export default function ProfilePage() {
         'Content-Type': 'application/json'
       },
       method: "POST",
-      body: JSON.stringify({ BID: "b4" })
+      body: JSON.stringify({ BID: Auth.user.username })
     })
       .then(res => res.json())
       .then(
@@ -89,14 +90,14 @@ export default function ProfilePage() {
         setLogo(reader.result)
         var base64result = reader.result.split(',')[1];
         console.log(base64result);
-        // fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/updateuserlogo", { BID: "b1", Logo: btoa(reader.result) })
+
         fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/updateuserlogo", {
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
           },
           method: "POST",
-          body: JSON.stringify({ BID: "b4", Logo: base64result })
+          body: JSON.stringify({ BID: Auth.user.username, Logo: base64result })
         })
           .then(res => res.json())
           .then(
@@ -127,7 +128,7 @@ export default function ProfilePage() {
         'Content-Type': 'application/json'
       },
       method: "POST",
-      body: JSON.stringify({ BID: "b4", LocationID: "idsf", LocationAddress: name })
+      body: JSON.stringify({ BID: Auth.user.username, LocationID: "idsf", LocationAddress: name })
     })
       .then(res => res.json())
       .then(
@@ -147,7 +148,7 @@ export default function ProfilePage() {
         'Content-Type': 'application/json'
       },
       method: "POST",
-      body: JSON.stringify({ BID: "b4" })
+      body: JSON.stringify({ BID: Auth.user.username })
     })
       .then(res => res.json())
       .then(

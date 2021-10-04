@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import useStyles from "./styles";
+import { Auth } from 'aws-amplify';
 import TextField from '@material-ui/core/TextField'
 // components
 import Button from '@material-ui/core/Button';
@@ -23,7 +24,7 @@ export default function LocationForm(reference, ...props) {
                 'Content-Type': 'application/json'
             },
             method: "POST",
-            body: JSON.stringify({ BID: "b4", lat: coordinates.lat, lng: coordinates.lng, "LocationName": values.LocationName, "Address": address })
+            body: JSON.stringify({ BID: Auth.user.username, lat: coordinates.lat, lng: coordinates.lng, "LocationName": values.LocationName, "Address": address })
         })
             .then(res => res.json())
             .then(
