@@ -9,14 +9,12 @@ import {
 } from 'formik';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 
-export default function LocationForm() {
+export default function LocationForm(reference, ...props) {
     const classes = useStyles();
     const [address, setAddress] = useState("");
     const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
     /**import the api key */
     const handleLocationUpdate = (values) => {
-        console.log(values.LocationName);
-        console.log(address);
         setAddress("");
         setCoordinates({ lat: null, lng: null });
         fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/addnewlocations", {
@@ -40,7 +38,8 @@ export default function LocationForm() {
                 // exceptions from actual bugs in components.
                 (error) => {
                 }
-            )
+            );
+        console.log(reference.reference.current.click());
     }
     const handleSelect = async (value) => {
         const results = await geocodeByAddress(value);

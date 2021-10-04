@@ -4,19 +4,50 @@ import useStyles from "./styles";
 // components
 import PageTitle from "../../components/PageTitle";
 import Widget from "../../components/Widget";
-import Button from '@material-ui/core/Button';
 import { Typography } from "../../components/Wrappers";
 import PayPal from '../dashboard/components/Table/PayPal';
 import { GrPaypal } from "react-icons/gr";
 import LocationForm from './LocationForm';
 import TrendingStats from './trendingStats';
 import { FiMinusCircle } from "react-icons/fi";
+import Button from '@material-ui/core/Button';
+
 export default function Tables() {
   const classes = useStyles();
   /**Default logo */
   const [logo, setLogo] = useState("http://beepeers.com/assets/images/commerces/default-image.jpg");
+  /**The checkout button for paypal */
   const [checkout, setCheckout] = useState(false);
   const [data, setData] = useState({ OutstandingAmount: 0, Locations: [{ name: "" }, { address: "" }] });
+
+  /**to detect if a child component is changed */
+  const [change, detectChange] = useState(true);
+  const detectChangeRef = useRef();
+  useEffect(() => {
+    detectChange(false);
+    /**load profile data */
+    fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/getprofile", {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: JSON.stringify({ BID: "b4" })
+    })
+      .then(res => res.json())
+      .then(
+        (result) => {
+          console.log(result);
+          setData(result.UserData);
+          setLogo(result.UserData.Logo)
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+        }
+      )
+  }, [change])
 
   useEffect(() => {
     /**load profile data */
@@ -176,7 +207,8 @@ export default function Tables() {
             <Typography size="md" weight="bold">
               Locations
             </Typography>
-            <LocationForm />
+            <LocationForm reference={detectChangeRef} />
+            <Button style={{ display: 'none' }} onClick={() => detectChange(true)} ref={detectChangeRef} />
             <Table className="mb-0">
               <TableHead>
                 <TableRow className={classes.tableRowHeader}>
