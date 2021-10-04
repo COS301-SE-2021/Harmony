@@ -34,7 +34,6 @@ export default function PayPal(amount, reference) {
                 })
                     .then(response => response.json())
                     .then(data => console.log(data))
-                    .then(alert("Payment completed successfully."))
                     .then(amount.reference.current.click())
                 //do an api call that updates the statement total
             },

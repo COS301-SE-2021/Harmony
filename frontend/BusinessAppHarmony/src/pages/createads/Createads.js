@@ -7,15 +7,44 @@ import useStyles from "./styles";
 // components
 import PageTitle from "../../components/PageTitle";
 import CreateAdForm from "./CreateAdForm";
+import Widget from "../../components/Widget";
+import { Typography } from "../../components/Wrappers";
+
 export default function TypographyPage() {
   var classes = useStyles();
 
   return (
     <>
-      <PageTitle title="Create Advert" />
+      <div style={{ marginLeft: 26 }}>
+        <Grid item xs={12}>
+          <Widget
+            disableWidgetMenu
+          >
+            <Typography size="xl" weight="bold">
+              Create Advert
+            </Typography>
+            <Typography size="md" weight="light">
+              We use a very specific cost calculation in order to determine the perfect price point for adverts.
+              <br />Advert costs are calculated as follows:<br />
+            </Typography>
+            <Typography size="md" weight="bold">
+              R1 x (Number of Locations) x (Time Period in days ) + (Radius in kms)
+            </Typography>
+            <Typography size="xs" weight="light">
+              For example, if you were to make an advert of a burger and coke in 3 of your locations for
+              1 week with a radius of 20 kms from each location.
+              <br />You would pay:<br />
+              R1 x 3 Locations x 7 days + 20 = R41
+            </Typography>
+          </Widget>
+        </Grid>
+      </div>
+      <br />
       <Grid container spacing={1}>
         <CreateAdForm />
       </Grid>
+
+
     </>
   );
 }

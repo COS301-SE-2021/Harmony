@@ -29,8 +29,6 @@ export default function LocationForm(reference, ...props) {
             .then(
                 (result) => {
                     console.log(result);
-                    alert("Location " + values.LocationName + " was added successfully.")
-
                 },
 
                 // Note: it's important to handle errors here
