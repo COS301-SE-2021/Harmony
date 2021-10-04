@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Grid } from "@material-ui/core";
 import Widget from "../../components/Widget";
+import { Auth } from 'aws-amplify';
 // styles
 import useStyles from "./styles";
 import { Typography } from "../../components/Wrappers";
@@ -15,7 +16,6 @@ export default function AdvertsPage() {
       DrinkTags: [],
     }]
   })
-
   useEffect(() => {
     /**load recommendations */
     fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/getbusinessads", {
@@ -24,7 +24,7 @@ export default function AdvertsPage() {
         'Content-Type': 'application/json'
       },
       method: "POST",
-      body: JSON.stringify({ BID: "b4" })
+      body: JSON.stringify({ BID:  Auth.user.username })
     })
       .then(res => res.json())
       .then(
