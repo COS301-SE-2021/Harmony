@@ -320,7 +320,7 @@ function CreateAdForm(...props) {
                             <div className={classes.MealContainer}>
                                 <div className={classes.formElementsPairing}>
                                     <label htmlFor="PairingDescription" className={classes.formLabel}>
-                                        <div className={classes.floatLeft}><p className={classes.errorDiv}>Description</p> </div>
+                                        <div className={classes.floatLeft}><p className={classes.errorDivDescr}>Description</p> </div>
                                         <div className={classes.floatLeft}>
                                             {(errors.PairingDescription && touched.PairingDescription) ? (
                                                 <div className={classes.errorStar}>*</div>
