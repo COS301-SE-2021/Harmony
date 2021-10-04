@@ -33,11 +33,12 @@ import {
 } from "../../context/LayoutContext";
 
 const structure = [
-  { id: 0, label: "Homepage", link: "/app/usertrends", icon: <HomeIcon /> },
-  { id: 2, label: "Adverts", link: "/app/adverts", icon: <QueueIcon/>},
-  { id: 1, label: "Statements", link: "/app/dashboard", icon: <TableIcon /> },
-  { id: 2, label: "Create Advert", link: "/app/createads", icon: <QueueIcon/>},
-  { id: 3, type: "divider" },
+  { id: 0, label: "Statistics", link: "/app/usertrends", icon: <HomeIcon /> },
+  { id: 1, label: "Adverts", link: "/app/adverts", icon: <QueueIcon/>},
+  { id: 3, label: "Statements", link: "/app/dashboard", icon: <TableIcon /> },
+  { id: 4, label: "Create Advert", link: "/app/createads", icon: <QueueIcon/>},
+  { id: 5, label: "Profile", link: "/app/profile", icon: <QueueIcon/>},
+  { id: 6, type: "divider" },
 
 ];
 
