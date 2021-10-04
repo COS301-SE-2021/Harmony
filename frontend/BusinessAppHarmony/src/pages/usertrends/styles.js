@@ -141,36 +141,38 @@ export default makeStyles(theme => ({
     margin: 'auto',
     width: '100%'
   },
-  ImageContainer: {
-    height: 100,
-    width: 120,
-    borderRadius: 5,
-    marginLeft: 15,
-    marginTop: -20
-  },
-  PreviewContainer: {
-    display: "block",
-    width: "40%",
-    border: "1px solid #EDEDED",
-    boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.02)",
-    borderRadius: 5,
-  },
-  PreviewContainerPairing: {
-    display: "block",
-    border: "1px solid #EDEDED",
-    boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.02)",
-    height: "auto",
-    width: "90%",
-    margin: "auto",
-    borderRadius: 5,
-  },
+
   clear: {
     clear: "both"
   },
-  PreviewPiece: {
-    marginBottom: 10
+  foodChip: {
+    backgroundColor: "#FF6347",
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 18,
+    padding: 5,
+    textAlign: "center",
+    borderRadius: 15,
+    paddingLeft: 25,
+    paddingRight: 25,
+    marginLeft: 6,
+    marginRight: 6,
+    float: "left",
+
   },
-  FileInput: {
+  drinkChip: {
+    backgroundColor: "#1FBFBA",
+    float: "left",
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 18,
+    padding: 5,
+    textAlign: "center",
+    borderRadius: 15,
+    paddingLeft: 25,
+    paddingRight: 25,
+    marginLeft: 6,
+    marginRight: 6,
   },
   FoodLabelButton: {
     backgroundColor: "#FF6347",
@@ -236,9 +238,6 @@ export default makeStyles(theme => ({
     float: "right",
     width: "95%"
   },
-  floatLeft: {
-    float: "left",
-  },
   CoordinatesContainer: {
     float: "left",
     width: "100%",
@@ -250,10 +249,6 @@ export default makeStyles(theme => ({
   },
   errorStar: {
     color: "red", fontSize: 25, marginRight: 5, marginTop: -10
-  },
-  justifySpaceBet: {
-    justifyContent: "space-between",
-    width: "100%"
   },
   outstandingBalance: {
     color: theme.palette.primary.main,
@@ -287,5 +282,51 @@ export default makeStyles(theme => ({
   center: {
     padding: 15,
     marginLeft: 60,
-  }
+  },
+  ImageContainer: {
+    height: 185,
+    width: "100%",
+    borderRadius: 5,
+  },
+
+  PreviewContainer: {
+    display: "block",
+    width: "50%",
+    border: "1px solid #EDEDED",
+    boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.02)",
+    borderRadius: 5,
+  },
+  PreviewContainerPairing: {
+    display: "block",
+    border: "1px solid #EDEDED",
+    boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.02)",
+    height: "auto",
+    width: "90%",
+    margin: "auto",
+    borderRadius: 5,
+  },
+  PreviewPiece: {
+    marginBottom: 10,
+    width: "50%",
+    height: 185,
+    float: "left",
+  },
+  floatLeft: {
+    float: "left"
+  },
+  clearBoth: {
+    clear: "both"
+  },
+  justifySpaceBet: {
+    justifyContent: "space-around",
+    width: "100%",
+    display: "flex"
+  },
+  justifySpaceBetText: {
+    justifyContent: "space-around",
+    width: "100%",
+    display: "flex",
+    marginTop: 15,
+    marginBottom: 10
+  },
 }));
