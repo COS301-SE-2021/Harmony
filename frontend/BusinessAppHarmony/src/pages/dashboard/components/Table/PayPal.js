@@ -4,7 +4,6 @@ export default function PayPal(amount, reference) {
 
     const paypal = useRef();
     useEffect(() => {
-        console.log(amount);
         window.paypal.Buttons({
             createOrder: (data, actions, err) => {
                 return actions.order.create({
@@ -13,7 +12,7 @@ export default function PayPal(amount, reference) {
                         {
                             description: "Settlement of account at Harmony Business",
                             amount: {
-                                value: 20,
+                                value: amount.amount,
                                 currency: "USD"
                             }
                         }
@@ -31,7 +30,7 @@ export default function PayPal(amount, reference) {
                         'Content-Type': 'application/json'
                     },
                     method: "POST",
-                    body: JSON.stringify({ BID: "b4", Amount: 20 })
+                    body: JSON.stringify({ BID: "b4", Amount: amount.amount })
                 })
                     .then(response => response.json())
                     .then(data => console.log(data))
