@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     View,
     StyleSheet,
@@ -9,6 +9,8 @@ import {
     ScrollView,
     Text
 } from "react-native";
+import { useIsFocused } from '@react-navigation/native';
+
 import { ImageHeaderScrollView } from "react-native-image-header-scroll-view";
 import {
     FontAwesome5,
@@ -18,16 +20,31 @@ import AppLoadingIcon from "../Components/AppLoadingIcon";
 
 const MIN_HEIGHT = Platform.OS === "ios" ? 90 : 55;
 const MAX_HEIGHT = 300;
+var startTime;
+var endTime;
+var differenceInTime
 export default function PairingDetailsScreen({ route }) {
     const [isLoading, setLoading] = useState(false);
 
     const [isErrorAlertVisible, setErrorAlertVisible] = useState(false);
     const [modalMessage, setModalMessage] = useState("");
 
-
-
     const { data } = route.params;
-    console.log(data.FoodItem);
+    console.log(data);
+    const isFocused = useIsFocused();
+
+
+
+    useEffect(() => {
+        if (isFocused) {
+            startTime = new Date();
+        }
+        else if (!isFocused) {
+            endTime = new Date();
+            differenceInTime = Math.abs(startTime - endTime)//Time in milliseconds
+            console.log("Difference in time (ms): " + differenceInTime)
+        }
+    }, [isFocused]);
 
     const TitleBar = ({ title }) => (
         <View
@@ -92,7 +109,6 @@ export default function PairingDetailsScreen({ route }) {
     );
 
     const TagColour = (foodItem) => {
-        console.log(foodItem)
         if (foodItem)
             return {
                 backgroundColor: "#C41ED4",
