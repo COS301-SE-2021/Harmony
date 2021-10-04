@@ -25,6 +25,7 @@ export default function Tables() {
   const detectChangeRef = useRef();
   useEffect(() => {
     detectChange(false);
+    console.log("change detected");
     /**load profile data */
     fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/getprofile", {
       headers: {
@@ -247,7 +248,7 @@ export default function Tables() {
               </Typography>
             </div>
             <div className={classes.PayPalContainer}>
-              {checkout ? (<PayPal amount={data.OutstandingAmount} />) : (
+              {checkout ? (<PayPal amount={data.OutstandingAmount} reference={detectChangeRef} />) : (
                 <Button className={classes.payNowButton} variant="contained" onClick={() => { setCheckout(true) }}><GrPaypal style={{ marginRight: 10 }} size={20} color="white" />Pay now</Button>
               )}
             </div>

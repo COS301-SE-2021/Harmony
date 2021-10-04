@@ -38,6 +38,36 @@ export default function TableComponent({ data }) {
     setTimePeriod(event.target.value);
   };
 
+  /**to detect if a child component is changed */
+  const [change, detectChange] = useState(true);
+  const detectChangeRef = useRef();
+  useEffect(() => {
+    detectChange(false);
+    console.log("change detected");
+    /**load profile data */
+    fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/getstatement", {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: JSON.stringify({ BID: "b4", TimePeriod: TimePeriod })
+    })
+      .then(res => res.json())
+      .then(
+        (result) => {
+          console.log(result);
+          setResult(result);
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+        }
+      )
+  }, [change])
+
+
   useEffect(() => {
     console.log(JSON.stringify({ BID: "b4", TimePeriod: TimePeriod }));
     // fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/getprofile", { BID: "b1" })
@@ -88,6 +118,8 @@ export default function TableComponent({ data }) {
         noBodyPadding
         bodyClass={classes.tableWidget}
       >
+        <Button style={{ display: 'none' }} onClick={() => detectChange(true)} ref={detectChangeRef} />
+
         <div style={{ float: "right" }}>
           <Select
             labelId="demo-simple-select-outlined-label"
@@ -162,7 +194,7 @@ export default function TableComponent({ data }) {
             </Typography>
           </div>
           <div style={{ clear: "both" }}></div>
-          {checkout ? (<PayPal amount={result.OutsandingAmount} />) : (
+          {checkout ? (<PayPal amount={result.OutsandingAmount} reference={detectChangeRef} />) : (
             <Button className={classes.payNowButton} variant="contained" onClick={() => { setCheckout(true) }}><GrPaypal style={{ marginRight: 10 }} size={20} color="white" />Pay now</Button>
           )}
         </div>

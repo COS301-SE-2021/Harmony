@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 
-export default function PayPal(amount) {
+export default function PayPal(amount, reference) {
 
     const paypal = useRef();
     useEffect(() => {
@@ -13,7 +13,7 @@ export default function PayPal(amount) {
                         {
                             description: "Settlement of account at Harmony Business",
                             amount: {
-                                value: amount.amount,
+                                value: 20,
                                 currency: "USD"
                             }
                         }
@@ -31,11 +31,12 @@ export default function PayPal(amount) {
                         'Content-Type': 'application/json'
                     },
                     method: "POST",
-                    body: JSON.stringify({ BID: "b4", Amount: amount.amount })
+                    body: JSON.stringify({ BID: "b4", Amount: 20 })
                 })
                     .then(response => response.json())
                     .then(data => console.log(data))
                     .then(alert("Payment completed successfully."))
+                    .then(amount.reference.current.click())
                 //do an api call that updates the statement total
             },
             onError: (err) => {
