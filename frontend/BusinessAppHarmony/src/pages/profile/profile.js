@@ -218,7 +218,7 @@ export default function ProfilePage() {
                           'Content-Type': 'application/json'
                         },
                         method: "POST",
-                        body: JSON.stringify({ BID: "b4", Name: values.Name })
+                        body: JSON.stringify({ BID: Auth.user.username , Name: values.Name })
                       })
                         .then(res => res.json())
                         .then(
