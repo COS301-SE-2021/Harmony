@@ -121,12 +121,17 @@ export default makeStyles(theme => ({
     margin: "auto",
   },
   addButton: {
-    backgroundColor: "#81b5c2", color: "white", marginLeft: 65, height: 35, borderRadius: 10, paddingLeft: 12, paddingRight: 12, width: "50%",
+    backgroundColor: theme.palette.primary.main, color: "white", marginLeft: 65, height: 35, borderRadius: 10, paddingLeft: 12, paddingRight: 12, width: "50%",
+    boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)"
+
+  },
+  addButtonLogo: {
+    backgroundColor: theme.palette.primary.main, color: "white", marginLeft: 45, height: 35, borderRadius: 10, paddingLeft: 12, paddingRight: 12, width: "70%",
     boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)"
 
   },
   addLocationButton: {
-    backgroundColor: "#81b5c2", color: "white", marginLeft: 35, height: 40, borderRadius: 10, width: "50%",
+    backgroundColor: theme.palette.primary.main, color: "white", marginLeft: 35, height: 40, borderRadius: 10, width: "50%",
     boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)",
     float: "left"
   },
@@ -168,7 +173,8 @@ export default makeStyles(theme => ({
     clear: "both"
   },
   PreviewPiece: {
-    marginBottom: 10
+    marginBottom: 10,
+    marginLeft: "25%"
   },
   FileInput: {
   },
@@ -286,6 +292,6 @@ export default makeStyles(theme => ({
   },
   center: {
     padding: 15,
-    marginLeft: 60,
+    width: "100%"
   }
 }));

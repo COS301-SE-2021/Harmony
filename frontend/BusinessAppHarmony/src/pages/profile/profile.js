@@ -183,10 +183,12 @@ export default function ProfilePage() {
             </Typography>
             <br />
             <div className={classes.center}>
-              <div className={classes.PreviewPiece}><label htmlFor="file-input-Logo"></label></div>
-              <div className={classes.PreviewPiece}><img src={logo} className={classes.ImageContainer} /></div>
-              <div className={classes.FileInput}><input type="file" id="file-input-Logo" name="ImageclassNameFood" accept="image/*" ref={logoFileRef} onChange={logoImageHandler} style={{ display: 'none' }} />
-                <Button onClick={() => (logoFileRef.current.click())} className={classes.uploadLogoButton} variant="contained">Upload New Logo</Button>
+              <div style={{ justifyContent: "space-around", width: "100%" }}>
+                <div className={classes.PreviewPiece}><label htmlFor="file-input-Logo"></label></div>
+                <div className={classes.PreviewPiece}><img src={logo} className={classes.ImageContainer} /></div>
+                <div className={classes.FileInput}><input type="file" id="file-input-Logo" name="ImageclassNameFood" accept="image/*" ref={logoFileRef} onChange={logoImageHandler} style={{ display: 'none' }} />
+                  <Button onClick={() => (logoFileRef.current.click())} className={classes.addButtonLogo} variant="contained">Upload New Logo</Button>
+                </div>
               </div>
               <br />
               <div style={{ justifyContent: "space-between", display: "flex" }}>
