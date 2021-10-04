@@ -49,27 +49,27 @@ def get_business_ads(event, context):
 
             if i["TotalTime"] > 60:
                 time = i["TotalTime"]
-                time = time / 60
-                i["TotalTime"] = f"{time} minutes"
+                time = round(time / 60)
+                i["TotalTime"] = f"{time} Minutes"
             elif i["TotalTime"] > 3600:
                 time = i["TotalTime"]
-                time = time / 3600
-                i["TotalTime"] = f"{time} hours"
+                time = round(time / 3600)
+                i["TotalTime"] = f"{time} Hours"
             else:
                 time = i["TotalTime"]
-                i["TotalTime"] = f"{time} seconds"
+                i["TotalTime"] = f"{time} Seconds"
 
             if i["AverageTime"] > 60:
                 time = i["AverageTime"]
                 time = round(time / 60)
-                i["AverageTime"] = f"{time} minutes"
+                i["AverageTime"] = f"{time} Minutes"
             elif i["AverageTime"] > 3600:
                 time = i["AverageTime"]
                 time = round(time / 3600)
-                i["AverageTime"] = f"{time} hours"
+                i["AverageTime"] = f"{time} Hours"
             else:
                 time = i["AverageTime"]
-                i["AverageTime"] = f"{time} seconds"
+                i["AverageTime"] = f"{time} Seconds"
 
 
             adverts.append(i)
