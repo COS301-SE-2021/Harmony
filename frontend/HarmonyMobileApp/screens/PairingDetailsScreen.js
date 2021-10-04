@@ -31,7 +31,6 @@ export default function PairingDetailsScreen({ route }) {
     const [modalMessage, setModalMessage] = useState("");
 
     const { data } = route.params;
-    console.log(data);
     const isFocused = useIsFocused();
 
     const USER_INTERACTION_URL = "https://2928u23tv1.execute-api.eu-west-1.amazonaws.com/dev/advertinteraction"
