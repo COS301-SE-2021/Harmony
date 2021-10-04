@@ -43,7 +43,7 @@ export default function App() {
                     render={() => <Redirect to="/app/usertrends" />}
                 />
                 {/* <PrivateRoute path="/app" component={Layout} /> */}
-                <PublicRoute path="/app" component={Layout} />
+                <PrivateRoute path="/app" component={Layout} />
                 <PublicRoute path="/login" component={Login} />
                 <PublicRoute path="/resetpass" component={ResetPass} />
                 <PublicRoute path="/signup" component={SignUp} />
