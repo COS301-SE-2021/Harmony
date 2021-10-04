@@ -30,7 +30,7 @@ export default function PairingDetailsScreen({ route }) {
     const [modalMessage, setModalMessage] = useState("");
 
     const { data } = route.params;
-    console.log(data);
+    // console.log(data);
     const isFocused = useIsFocused();
 
 
