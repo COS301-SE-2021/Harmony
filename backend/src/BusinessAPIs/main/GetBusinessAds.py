@@ -43,7 +43,7 @@ def get_business_ads(event, context):
 
 
             days_remaining = timeLimit - days_completed
-            i['timeLeft'] = days_remaining
+            i['timeLeft'] = str(days_remaining) + " days"
             adverts.append(i)
 
     return {"StatusCode": 200,
