@@ -52,8 +52,8 @@ export default function DataTable() {
     });
   }, []);
   const columns2 = [
-    {label: "Tag ID", name: "id" },
-    {label: "Tag Name", name:"name" },
+    {label: "Food Tag ID", name: "id" },
+    {label: "Food Tag Name", name:"name" },
     {label:"Type of Tag", name:"type" }
   ];
 
@@ -81,7 +81,7 @@ export default function DataTable() {
           <Grid item xs={12}>
 
             <MUIDataTable
-                title={"User Feedback Table"}
+                title={"User Feedback Table: This Table recieves feedback from the Harmony Mobile App if the Item Scanned was Correctly or Incorrectly "}
                 data={posts}
                 columns={columns}
                 options={options}
@@ -91,7 +91,7 @@ export default function DataTable() {
         <Grid container spacing={4}>
         <Grid item xs={6}>
           <MUIDataTable
-              title={"Food Tags"}
+              title={"AI Food Tags"}
               data={posts2}
               columns={columns2}
               options={options}
@@ -100,8 +100,12 @@ export default function DataTable() {
         <Grid item xs={6}>
           <div className="App">
             <FormSubmit_ImageUrl
-                formName="Add new Image to Training Set"
-                formDescription="Using TagID and Image URL from the Feedback, You can add images to AI DataSet."
+                formName="Adding to AI Training Set"
+                formDescription="
+                We need Food Tag ID and a URL of an Image to add to AI Training Set
+                Food Tag ID - This is found in the Food Tag table (on the left)
+                Image URL - We an Image URL which either a JPG or PNG format
+                "
             />
           </div>
         </Grid>
