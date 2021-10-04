@@ -19,7 +19,7 @@ import {
 export default function ProfilePage() {
   const classes = useStyles();
   /**Default logo */
-  const [logo, setLogo] = useState("http://beepeers.com/assets/images/commerces/default-image.jpg");
+  const [logo, setLogo] = useState("https://beepeers.com/assets/images/commerces/default-image.jpg");
   /**The checkout button for paypal */
   const [checkout, setCheckout] = useState(false);
   const [data, setData] = useState({ BusinessName: "", OutstandingAmount: 0, Locations: [{ name: "" }, { address: "" }] });
@@ -122,7 +122,7 @@ export default function ProfilePage() {
     if (supportedFormats.includes(e.target.files[0].type)) { reader.readAsDataURL(e.target.files[0]) }
     else {
       alert(e.target.files[0].type + " is not a supported file format.");
-      setLogo("http://beepeers.com/assets/images/commerces/default-image.jpg");
+      setLogo("https://beepeers.com/assets/images/commerces/default-image.jpg");
     }
   }
 
