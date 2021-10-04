@@ -44,6 +44,34 @@ def get_business_ads(event, context):
 
             days_remaining = timeLimit - days_completed
             i['timeLeft'] = days_remaining
+
+            i["AverageTime"] = round(i["TotalTime"] / i["NumberOfClicks"])
+
+            if i["TotalTime"] > 60:
+                time = i["TotalTime"]
+                time = time / 60
+                i["TotalTime"] = f"{time} minutes"
+            elif i["TotalTime"] > 3600:
+                time = i["TotalTime"]
+                time = time / 3600
+                i["TotalTime"] = f"{time} hours"
+            else:
+                time = i["TotalTime"]
+                i["TotalTime"] = f"{time} seconds"
+
+            if i["AverageTime"] > 60:
+                time = i["AverageTime"]
+                time = round(time / 60)
+                i["AverageTime"] = f"{time} minutes"
+            elif i["AverageTime"] > 3600:
+                time = i["AverageTime"]
+                time = round(time / 3600)
+                i["AverageTime"] = f"{time} hours"
+            else:
+                time = i["AverageTime"]
+                i["AverageTime"] = f"{time} seconds"
+
+
             adverts.append(i)
 
     return {"StatusCode": 200,
