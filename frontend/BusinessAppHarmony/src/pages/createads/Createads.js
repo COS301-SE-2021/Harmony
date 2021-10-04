@@ -25,16 +25,17 @@ export default function TypographyPage() {
             </Typography>
             <Typography size="md" weight="light">
               We use a very specific cost calculation in order to determine the perfect price point for adverts.
-              <br />Advert costs are calculated as follows:<br />
+              <br /><br />Advert costs are calculated as follows:<br />
             </Typography>
-            <Typography size="md" weight="bold">
-              R1 x (Number of Locations) x (Time Period in days ) + (Radius in kms)
+            <Typography size="md" weight="light">
+              ( R2 x (Number of Locations) x (Time Period in days ) )+ (Radius in kms)
             </Typography>
+            <br />
             <Typography size="xs" weight="light">
               For example, if you were to make an advert of a burger and coke in 3 of your locations for
               1 week with a radius of 20 kms from each location.
               <br />You would pay:<br />
-              R1 x 3 Locations x 7 days + 20 Kilometers = R41
+              ( R2 x 3 Locations x 7 days ) + 20 Kilometers = R62
             </Typography>
           </Widget>
         </Grid>

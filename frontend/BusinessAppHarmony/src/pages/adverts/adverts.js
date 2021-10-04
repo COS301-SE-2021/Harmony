@@ -122,19 +122,19 @@ export default function AdvertsPage() {
               <div className={classes.textWrapper}>
                 <div className={classes.floatLeft}><p className={classes.label}>Radius: </p></div>
                 <div style={{ justifyContent: 'space-around', display: "flex", float: 'left' }}>
-                  <div><p style={{ marginLeft: "50%" }}>{pairing.radius}</p></div>
+                  <div><p style={{ marginLeft: "50%", marginTop: 17, fontSize: 20 }}>{pairing.radius}</p></div>
                 </div>
               </div>
               <div className={classes.textWrapper}>
                 <div className={classes.floatLeft}><p className={classes.label}>Time Left: </p></div>
                 <div style={{ justifyContent: 'space-around', display: "flex", float: 'left', width: "15%" }}>
-                  <div><p >{pairing.timeLeft}</p></div>
+                  <div><p style={{ marginTop: 17, fontSize: 20 }}>{pairing.timeLeft}</p></div>
                 </div>
               </div>
               <div className={classes.textWrapper}>
                 <div className={classes.floatLeft}><p className={classes.label}>Date Created: </p></div>
                 <div style={{ justifyContent: 'space-around', display: "flex", float: 'left' }}>
-                  <div ><p style={{ marginLeft: "20%" }}>{pairing.dateCreated}</p></div>
+                  <div ><p style={{ marginLeft: "20%", marginTop: 17, fontSize: 20 }}>{pairing.dateCreated}</p></div>
                 </div>
               </div>
               <div className={classes.textWrapper}>
