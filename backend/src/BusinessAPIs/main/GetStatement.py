@@ -81,6 +81,9 @@ def get_statement(event, context):
                 timeLimit = 180
             if i['TimeLimit'] == "One Year":
                 timeLimit = 365
+            if i['TimeLimit'] == "One Week":
+                timeLimit = 7
+
 
             days_remaining = timeLimit - difference
             i['DaysRemaining'] = days_remaining
