@@ -22,6 +22,7 @@ import HomePage from "../../pages/usertrends";
 import Statements from "../../pages/dashboard";
 import CreateAds from "../../pages/createads";
 import Adverts from "../../pages/adverts";
+import Profile from "../../pages/profile";
 
 
 // context
@@ -49,7 +50,7 @@ function Layout(props) {
               <Route path="/app/dashboard" component={Statements} />
               <Route path="/app/createads" component={CreateAds} />
               <Route path="/app/adverts" component={Adverts} />
-
+              <Route path="/app/Profile" component={Profile} />
 
             </Switch>
             <Box
