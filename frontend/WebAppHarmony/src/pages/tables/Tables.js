@@ -2,12 +2,13 @@ import PageTitle from "../../components/PageTitle";
 import React, {useEffect, useState} from "react";
 import MUIDataTable from "mui-datatables";
 import axios from 'axios';
-import {Grid} from "@material-ui/core";
+import {Grid, Button} from "@material-ui/core";
 import  { makeStyles } from "@material-ui/core";
 import {FormSubmit_ImageUrl} from "../../components/Forms/FormSubmit_ImageUrl";
 import {FormSubmit_NewTag} from "../../components/Forms/FormSubmit_NewTag";
 import {FormSubmit_Iterations} from "../../components/Forms/FormSubmit_Iterations";
-
+import { withRouter } from "react-router-dom";
+import {useHistory} from "react-router-dom"
 
 const useStyles = makeStyles({
   field: {
@@ -16,13 +17,20 @@ const useStyles = makeStyles({
     display: 'block'
   }
 })
-
+//
 // function refreshPage() {
 //   window.location.reload(true);
 // }
 
 export default function DataTable() {
   const classes = useStyles()
+
+    const history = useHistory();
+    const handleRoute = () =>{
+        history.push('/tables');
+    }
+
+
   const [posts, setPost] = useState([]);
   const [posts1, setPost1] = useState([]);
 
@@ -73,7 +81,13 @@ export default function DataTable() {
   return (
       <>
         <PageTitle title="Add to AI"
-
+                   button={<Button
+                       variant="contained"
+                       size="large"
+                       color="secondary"
+                       onClick={handleRoute}>
+                     Refresh
+                   </Button>}
         />
         <Grid container spacing={4}>
           <Grid item xs={12}>
