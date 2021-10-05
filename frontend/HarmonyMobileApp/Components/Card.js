@@ -4,7 +4,10 @@ import {
     Image,
     ScrollView,
     StyleSheet,
+    TouchableOpacity
 } from "react-native";
+import { useNavigation } from '@react-navigation/native';
+
 import styles from "../styles";
 import {
     SimpleLineIcons,
@@ -19,30 +22,64 @@ import {
 import IconsBar from "../Components/IconsBar";
 
 export default function Card({ dataSet, isDeleteVisible, ...otherProps }) {
-
+    const navigation = useNavigation();
     return (
         <View style={{ paddingBottom: 15 }}>
             <View style={styles.cardContainer}>
+                <TouchableOpacity
+                    activeOpacity={0.8}
 
-                {dataSet.IsSponsor ?
-                    <View>
-                        <View style={styles.adTitleContainer}>
-                            <Image
-                                style={styles.tinyLogo}
-                                source={{
-                                    uri: dataSet.Logo,
-                                }}
-                            />
-                            <View style={{
-                                left: "150%",
-                            }}>
+                    onPress={() => {
+                        navigation.navigate("PairingDetails", {
+                            data: dataSet,
+                        })
+                    }}
+                >
 
-                                <Text style={styles.adTitleText}>
-                                    Sponsored
-                                </Text>
+                    {dataSet.IsSponsor ?
+                        <View>
+                            <View style={styles.adTitleContainer}>
+                                <Image
+                                    style={styles.tinyLogo}
+                                    source={{
+                                        uri: dataSet.Logo,
+                                    }}
+                                />
+                                <View style={{
+                                    left: "150%",
+                                }}>
+
+                                    <Text style={styles.adTitleText}>
+                                        Sponsored
+                                    </Text>
+                                </View>
+                            </View>
+                            <View style={styles.adimageContainer}>
+                                <View
+                                    style={personalStyles.image}
+                                >
+                                    <Image
+                                        source={{ uri: dataSet.FoodImage }}
+                                        style={styles.standardImage}
+                                    />
+                                    <Text style={styles.cardText}>{dataSet.FoodItem}</Text>
+                                </View>
+
+                                <View
+                                    style={personalStyles.image}
+                                >
+                                    <Image
+                                        source={{ uri: dataSet.DrinkImage }}
+                                        style={styles.standardImage}
+                                    />
+
+                                    <Text style={styles.cardText}>{dataSet.DrinkItem}</Text>
+                                </View>
                             </View>
                         </View>
-                        <View style={styles.adimageContainer}>
+
+                        :
+                        <View style={styles.imageContainer}>
                             <View
                                 style={personalStyles.image}
                             >
@@ -64,33 +101,9 @@ export default function Card({ dataSet, isDeleteVisible, ...otherProps }) {
                                 <Text style={styles.cardText}>{dataSet.DrinkItem}</Text>
                             </View>
                         </View>
-                    </View>
+                    }
 
-                    :
-                    <View style={styles.imageContainer}>
-                        <View
-                            style={personalStyles.image}
-                        >
-                            <Image
-                                source={{ uri: dataSet.FoodImage }}
-                                style={styles.standardImage}
-                            />
-                            <Text style={styles.cardText}>{dataSet.FoodItem}</Text>
-                        </View>
-
-                        <View
-                            style={personalStyles.image}
-                        >
-                            <Image
-                                source={{ uri: dataSet.DrinkImage }}
-                                style={styles.standardImage}
-                            />
-
-                            <Text style={styles.cardText}>{dataSet.DrinkItem}</Text>
-                        </View>
-                    </View>
-                }
-
+                </TouchableOpacity>
 
 
                 <Divider />
@@ -147,7 +160,10 @@ export default function Card({ dataSet, isDeleteVisible, ...otherProps }) {
                         </View>
                     </ScrollView>
                 </View>
+
+
                 <Divider />
+
                 <View style={styles.locationBar}>
                     <SimpleLineIcons
                         name="location-pin"
@@ -184,8 +200,10 @@ export default function Card({ dataSet, isDeleteVisible, ...otherProps }) {
 
                     </View>
                 }
+
             </View>
         </View>
+
     );
 };
 
