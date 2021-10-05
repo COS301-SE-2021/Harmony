@@ -30,6 +30,6 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "description": "Improvement: \nReduced the image quality when selecting an image from the gallery as well as when taking a picture using the camera. This will reduce the size of the image and prevent the APIs from timing out."
+    "description": "All known bugs fixed. Publish for demo 4 re-demo V1."
   }
 }
