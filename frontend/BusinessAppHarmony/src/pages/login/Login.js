@@ -15,7 +15,7 @@ import Alert from '@material-ui/lab/Alert'
 
 // styles
 import useStyles from "./styles";
-import logo from "./logo.svg";
+import logo from "./logo.png";
 
 // context
 import { useUserDispatch, loginUser } from "../../context/UserContext";

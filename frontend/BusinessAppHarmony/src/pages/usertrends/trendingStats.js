@@ -64,8 +64,8 @@ export default function TrendingStats() {
                     <Table className="mb-0">
                         <TableHead>
                             <TableRow className={classes.tableRowHeader}>
-                                <TableCell className={classes.tableCell}>FOOD NAME</TableCell>
-                                <TableCell className={classes.tableCell}>DRINK NAME</TableCell>
+                                <TableCell style={{color:"white"}}>FOOD NAME</TableCell>
+                                <TableCell style={{color:"white"}}>DRINK NAME</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -91,7 +91,7 @@ export default function TrendingStats() {
                     <Table className="mb-0">
                         <TableHead>
                             <TableRow className={classes.tableRowHeader}>
-                                <TableCell className={classes.tableCell}>TAG NAME</TableCell>
+                                <TableCell style={{color:"white"}}>TAG NAME</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
