@@ -49,7 +49,7 @@ export function FormSubmit_ImageUrl(props) {
         })
             .then(response => response.json())
             .then(response => console.log("Success:", JSON.stringify(response)))
-            .then(json => alert(JSON.stringify(json)))
+            .then(alert("Image Successfully Added to AI Training Set"))
             .then(response => {
                 setTagID("")
                 setURL(" ")

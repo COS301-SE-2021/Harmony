@@ -49,7 +49,7 @@ export function FormSubmit_NewTag(props) {
         })
             .then(response => response.json())
             .then(response => console.log("Success:", JSON.stringify(response)))
-            .then(json => alert(JSON.stringify(json)))
+            .then(alert("New Food Tag successfully been Created"))
             .then(response => {
                 setTagName("")
                 setType(" ")

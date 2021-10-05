@@ -42,7 +42,7 @@ export function FormSubmit_Iterations(props) {
             }
         })
             .then(response => response.json())
-            .then(response => alert(JSON.stringify(response)))
+            .then(alert("Iteration has Successfully been Unpublished"))
             .catch(error => console.error("Error:", error));
     };
 

@@ -91,6 +91,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
     })
             .then(response => response.json())
             .then(data => console.log(data))
+            .then(alert("New item has Successfully been added to the database"))
             .then(handleClear())
     }
 

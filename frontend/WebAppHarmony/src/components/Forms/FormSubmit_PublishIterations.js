@@ -47,7 +47,7 @@ export function FormSubmit_PublishIterations(props) {
         fetch(" https://7q0027151j.execute-api.eu-west-1.amazonaws.com/dev/publishiteration", {
             method: "POST",
             body: JSON.stringify({
-                IterID: iterId,
+                IterId: iterId,
                 Name: name
             }),
             headers: {
@@ -56,7 +56,7 @@ export function FormSubmit_PublishIterations(props) {
         })
             .then(response => response.json())
             .then(response => console.log("Success:", JSON.stringify(response)))
-            .then(json => alert(JSON.stringify(json)))
+            .then(alert("Iteration has Successfully been Published"))
             .then(response => {
                 setIterID("")
                 setName(" ")
