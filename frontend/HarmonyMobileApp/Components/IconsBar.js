@@ -13,6 +13,8 @@ export default function IconsBar({
     upVoteVal,
     downVoteVal,
     isDeleteVisible,
+    deletePairing,
+
 }) {
     const [favouriteIconChecked, setFavouriteIconChecked] = useState("");
     const [favouriteIconColor, setFavouriteIconColor] = useState("black"); // controls the favourite heart color (pink/black)
@@ -250,6 +252,8 @@ export default function IconsBar({
         if (json.StatusCode === 200) {
             AppToast.ToastDisplay(json.Data);
             setErrorAlertVisible(false);
+            deletePairing();
+
         }
         else if (json.StatusCode === 400) {
             //setModalMessage must come before setErrorAlertVisible
