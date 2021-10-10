@@ -21,7 +21,7 @@ import {
 } from "@ui-kitten/components";
 import IconsBar from "../Components/IconsBar";
 
-export default function Card({ dataSet, isDeleteVisible, ...otherProps }) {
+export default function Card({ dataSet, isDeleteVisible, userFavs, ...otherProps }) {
     const navigation = useNavigation();
     const [hide, setHide] = useState(false);
 
@@ -194,12 +194,15 @@ export default function Card({ dataSet, isDeleteVisible, ...otherProps }) {
                                     isUV={dataSet.isUpvoted}
                                     isF={dataSet.isFavourited}
                                     isDeleteVisible={isDeleteVisible}
+                                    userFavs={userFavs}
                                     deletePairing={() => {
-                                        console.log("deletePairing called");
                                         setHide(true);
                                     }}
                                     hide={hide}
-
+                                    unFav={() => {
+                                        console.log("unFav called");
+                                        setHide(true);
+                                    }}
 
                                 />
                             </View>
