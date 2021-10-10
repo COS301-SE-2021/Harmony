@@ -3,7 +3,7 @@ import CardScreen from "./CardScreen";
 import FilterContext from '../Components/FilterContext';
 import AppAlert from "../Components/AppAlert";
 
-const CardFilterScreen = ({ givenURL, isHeaderVisible, isDeleteVisible }) => {
+const CardFilterScreen = ({ givenURL, isHeaderVisible, isDeleteVisible, userFavs }) => {
 
   const [isErrorAlertVisible, setErrorAlertVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState("Oops, something went wrong.");
@@ -107,7 +107,7 @@ const CardFilterScreen = ({ givenURL, isHeaderVisible, isDeleteVisible }) => {
 
   return (
     <FilterContext.Provider value={globalStates}>
-      <CardScreen URL={givenURL} headerVisible={isHeaderVisible} isDeleteVisible={isDeleteVisible} />
+      <CardScreen URL={givenURL} headerVisible={isHeaderVisible} isDeleteVisible={isDeleteVisible} userFavs={userFavs} />
       {isErrorAlertVisible === true && (
         <AppAlert visible={true} message={modalMessage} type={"Error"} />
       )}
