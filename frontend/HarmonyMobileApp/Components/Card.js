@@ -200,7 +200,6 @@ export default function Card({ dataSet, isDeleteVisible, userFavs, ...otherProps
                                     }}
                                     hide={hide}
                                     unFav={() => {
-                                        console.log("unFav called");
                                         setHide(true);
                                     }}
 

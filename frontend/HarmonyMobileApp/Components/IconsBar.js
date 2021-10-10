@@ -136,7 +136,6 @@ export default function IconsBar({
                 .then((response) =>
                     response.json())
                 .then((json) => {
-                    console.log("json " + json.StatusCode);
                     if (userFavs && type == "remove") {
                         unFav();
                         AppToast.ToastDisplay("Unfavourited");
@@ -219,7 +218,6 @@ export default function IconsBar({
         async function fetchData() {
             let user = await Auth.currentAuthenticatedUser();
             const { username } = user;
-            console.log("Deleting...")
 
             await fetch(deltePairingURL, {
                 method: "POST",
