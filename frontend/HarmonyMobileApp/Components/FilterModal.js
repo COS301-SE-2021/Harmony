@@ -22,7 +22,7 @@ import FilterTag from "./FilterTag";
 import { Picker } from "@react-native-picker/picker";
 import FilterContext from './FilterContext';
 
-export default function FilterModal({ sortPairingsName, modalPressed, ...otherProps }) {
+export default function FilterModal({ sortPairingsName, ...otherProps }) {
   const [isModalVisible, setModalVisible] = useState(true); //for the filter popup
   const filters = {
     mealTypes: ["Breakfast", "Lunch", "Supper", "Snack", "Vegetarian", "Dairy-Free", "Nut-Free"],
@@ -42,7 +42,6 @@ export default function FilterModal({ sortPairingsName, modalPressed, ...otherPr
   //toggles the modals visibility
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
-    modalPressed();
   };
   const ClearAll = () => {
     toggleModal();

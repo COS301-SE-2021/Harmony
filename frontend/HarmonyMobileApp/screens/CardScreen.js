@@ -175,7 +175,7 @@ const CardScreen = ({ navigation, URL, headerVisible, isDeleteVisible, userFavs 
       }
       <View style={{ flex: 1 }}>
         <View style={styles.centeredView}>
-          {isModalVisible && <FilterModal sortPairingsName={myFilterContext.sortPairingType} modalPressed={() => toggleModal()} />}
+          {isModalVisible && <FilterModal sortPairingsName={myFilterContext.sortPairingType} />}
         </View>
         {refreshing ? (
           <AppLoadingIcon />
