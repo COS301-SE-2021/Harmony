@@ -188,7 +188,7 @@ Resources:
                 Effect: "Allow"
                 Action:
                   - "sns:Publish"
-                Resource: "*"
+                Resource: "*" # Sensitive
   # BEGIN USER POOL RESOURCES
   UserPool:
   # Created upon user selection
