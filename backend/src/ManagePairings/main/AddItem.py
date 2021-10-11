@@ -29,6 +29,11 @@ def add_item(event, context):
     tags = event['ItemTags']
     item_type = event['FoodOrDrink']
     generate_id = uuid.uuid4().hex
+
+    if name == "" or description == "" or tags == "" or item_type == "" or event["Image"] == "":
+        return {"StatusCode": 403,
+                "ErrorMessage": "Invalid input request."}
+
     imagelink = add_image_to_s3(event["Image"], generate_id)
 
     input_response = request_table.scan()
