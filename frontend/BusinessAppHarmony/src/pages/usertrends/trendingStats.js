@@ -20,6 +20,13 @@ export default function TrendingStats() {
 
     /**to toggle the display of the toast */
     const [open, setOpen] = React.useState(true);
+    /**use effect to detect the alert opening and will auto close after an amount of time */
+    useEffect(() => {
+        setTimeout(function () {
+            setOpen(false);
+        }, 5000);
+    }, [open])
+
     useEffect(() => {
         /**load recommendations */
         fetch("https://5lvu4c0875.execute-api.eu-west-1.amazonaws.com/dev/getrecommendations")
@@ -46,6 +53,8 @@ export default function TrendingStats() {
                     <Typography size="xl" weight="bold">
                         Trending Statistics
                     </Typography>
+
+                    <button onClick={() => { setOpen(true); }}>alert</button>
 
                     <Collapse in={open}>
                         <Alert onClose={() => { setOpen(false); }}>This is a success alert — check it out!</Alert>
