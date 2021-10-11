@@ -106,6 +106,7 @@ export function FormSubmit_ImageUrl(props) {
                         variant="contained"
                         color="primary"
                         className={classes.button}
+                        style = {{color:'white'}}
                     >
                         Submit <Icon className={classes.bottomIcon}></Icon>
                     </Button>

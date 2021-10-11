@@ -111,6 +111,7 @@ export function FormSubmit_PublishIterations(props) {
                         variant="contained"
                         color="primary"
                         className={classes.button}
+                        style = {{color:'white'}}
                     >
                         Submit <Icon className={classes.bottomIcon}></Icon>
                     </Button>
