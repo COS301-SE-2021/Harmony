@@ -11,13 +11,15 @@ import Widget from "../../components/Widget";
 import useStyles from "./styles";
 import { Typography } from "../../components/Wrappers";
 import PairingCard from "./PairingCard";
-
-
+import Alert from '@mui/material/Alert';
+import Collapse from '@mui/material/Collapse';
 
 export default function TrendingStats() {
     const classes = useStyles();
     const [recommendations, setRecommendations] = useState({ Tags: [], Pairings: [{}], imageData: [{}] })
 
+    /**to toggle the display of the toast */
+    const [open, setOpen] = React.useState(true);
     useEffect(() => {
         /**load recommendations */
         fetch("https://5lvu4c0875.execute-api.eu-west-1.amazonaws.com/dev/getrecommendations")
@@ -44,9 +46,14 @@ export default function TrendingStats() {
                     <Typography size="xl" weight="bold">
                         Trending Statistics
                     </Typography>
+
+                    <Collapse in={open}>
+                        <Alert onClose={() => { setOpen(false); }}>This is a success alert — check it out!</Alert>
+                    </Collapse>
+
                     <Typography size="md" weight="light">
                         The following statistics are a tabular representation of what our system has detected
-                        to be trending or popular statistics currently. Hence for your ads to get more interactions
+                        to be trending or popular statistics currently.Hence for your ads to get more interactions
                         and exposure we recommend using pairings of foods or drinks with the following tags, or making
                         pairings similar to these.
                     </Typography>
