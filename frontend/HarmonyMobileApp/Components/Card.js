@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     View,
     Image,
@@ -21,187 +21,203 @@ import {
 } from "@ui-kitten/components";
 import IconsBar from "../Components/IconsBar";
 
-export default function Card({ dataSet, isDeleteVisible, ...otherProps }) {
+export default function Card({ dataSet, isDeleteVisible, userFavs, ...otherProps }) {
     const navigation = useNavigation();
+    const [hide, setHide] = useState(false);
+
     return (
-        <View style={{ paddingBottom: 15 }}>
-            <View style={styles.cardContainer}>
-                <TouchableOpacity
-                    activeOpacity={0.8}
+        <View>
+            {!hide &&
+                <View style={{ paddingBottom: 15 }}>
+                    <View style={styles.cardContainer}>
+                        <TouchableOpacity
+                            activeOpacity={0.8}
 
-                    onPress={() => {
-                        navigation.navigate("PairingDetails", {
-                            data: dataSet,
-                        })
-                    }}
-                >
+                            onPress={() => {
+                                navigation.navigate("PairingDetails", {
+                                    data: dataSet,
+                                })
+                            }}
+                        >
 
-                    {dataSet.IsSponsor ?
-                        <View>
-                            <View style={styles.adTitleContainer}>
-                                <Image
-                                    style={styles.tinyLogo}
-                                    source={{
-                                        uri: dataSet.Logo,
-                                    }}
-                                />
-                                <View style={{
-                                    left: "150%",
-                                }}>
+                            {dataSet.IsSponsor ?
+                                <View>
+                                    <View style={styles.adTitleContainer}>
+                                        <Image
+                                            style={styles.tinyLogo}
+                                            source={{
+                                                uri: dataSet.Logo,
+                                            }}
+                                        />
+                                        <View style={{
+                                            left: "150%",
+                                        }}>
 
-                                    <Text style={styles.adTitleText}>
-                                        Sponsored
-                                    </Text>
+                                            <Text style={styles.adTitleText}>
+                                                Sponsored
+                                            </Text>
+                                        </View>
+                                    </View>
+                                    <View style={styles.adimageContainer}>
+                                        <View
+                                            style={personalStyles.image}
+                                        >
+                                            <Image
+                                                source={{ uri: dataSet.FoodImage }}
+                                                style={styles.standardImage}
+                                            />
+                                            <Text style={styles.cardText}>{dataSet.FoodItem}</Text>
+                                        </View>
+
+                                        <View
+                                            style={personalStyles.image}
+                                        >
+                                            <Image
+                                                source={{ uri: dataSet.DrinkImage }}
+                                                style={styles.standardImage}
+                                            />
+
+                                            <Text style={styles.cardText}>{dataSet.DrinkItem}</Text>
+                                        </View>
+                                    </View>
                                 </View>
-                            </View>
-                            <View style={styles.adimageContainer}>
-                                <View
-                                    style={personalStyles.image}
-                                >
-                                    <Image
-                                        source={{ uri: dataSet.FoodImage }}
-                                        style={styles.standardImage}
-                                    />
-                                    <Text style={styles.cardText}>{dataSet.FoodItem}</Text>
+
+                                :
+                                <View style={styles.imageContainer}>
+                                    <View
+                                        style={personalStyles.image}
+                                    >
+                                        <Image
+                                            source={{ uri: dataSet.FoodImage }}
+                                            style={styles.standardImage}
+                                        />
+                                        <Text style={styles.cardText}>{dataSet.FoodItem}</Text>
+                                    </View>
+
+                                    <View
+                                        style={personalStyles.image}
+                                    >
+                                        <Image
+                                            source={{ uri: dataSet.DrinkImage }}
+                                            style={styles.standardImage}
+                                        />
+
+                                        <Text style={styles.cardText}>{dataSet.DrinkItem}</Text>
+                                    </View>
                                 </View>
+                            }
 
-                                <View
-                                    style={personalStyles.image}
-                                >
-                                    <Image
-                                        source={{ uri: dataSet.DrinkImage }}
-                                        style={styles.standardImage}
-                                    />
+                        </TouchableOpacity>
 
-                                    <Text style={styles.cardText}>{dataSet.DrinkItem}</Text>
-                                </View>
-                            </View>
-                        </View>
 
-                        :
-                        <View style={styles.imageContainer}>
-                            <View
-                                style={personalStyles.image}
+                        <Divider />
+                        <View style={styles.tagsSection}>
+                            <ScrollView
+                                contentContainerStyle={{
+                                    flexDirection: "row",
+                                    flexWrap: "wrap",
+                                }}
+                                showsHorizontalScrollIndicator={false}
+                                horizontal={true}
                             >
-                                <Image
-                                    source={{ uri: dataSet.FoodImage }}
-                                    style={styles.standardImage}
-                                />
-                                <Text style={styles.cardText}>{dataSet.FoodItem}</Text>
-                            </View>
-
-                            <View
-                                style={personalStyles.image}
-                            >
-                                <Image
-                                    source={{ uri: dataSet.DrinkImage }}
-                                    style={styles.standardImage}
-                                />
-
-                                <Text style={styles.cardText}>{dataSet.DrinkItem}</Text>
-                            </View>
-                        </View>
-                    }
-
-                </TouchableOpacity>
-
-
-                <Divider />
-                <View style={styles.tagsSection}>
-                    <ScrollView
-                        contentContainerStyle={{
-                            flexDirection: "row",
-                            flexWrap: "wrap",
-                        }}
-                        showsHorizontalScrollIndicator={false}
-                        horizontal={true}
-                    >
-                        <View style={styles.rowContainer}>
-                            <View style={styles.tagContainer} >
-                                <MaterialIcons
-                                    name="fastfood"
-                                    size={14}
-                                    color="#fff"
-                                />
-                                <Text style={styles.tagText}>{dataSet.MealTag}</Text>
-                            </View>
-                            {dataSet.FoodTags.map((tag, index) => (
-                                <View
-                                    style={[
-                                        styles.tagContainer,
-                                        { backgroundColor: "#C41ED4" },
-                                    ]}
-                                    key={index}
-                                >
-                                    <FontAwesome5
-                                        name="hamburger"
-                                        size={14}
-                                        color="#fff"
-                                    />
-                                    <Text style={styles.tagText}>{tag}</Text>
+                                <View style={styles.rowContainer}>
+                                    <View style={styles.tagContainer} >
+                                        <MaterialIcons
+                                            name="fastfood"
+                                            size={14}
+                                            color="#fff"
+                                        />
+                                        <Text style={styles.tagText}>{dataSet.MealTag}</Text>
+                                    </View>
+                                    {dataSet.FoodTags.map((tag, index) => (
+                                        <View
+                                            style={[
+                                                styles.tagContainer,
+                                                { backgroundColor: "#C41ED4" },
+                                            ]}
+                                            key={index}
+                                        >
+                                            <FontAwesome5
+                                                name="hamburger"
+                                                size={14}
+                                                color="#fff"
+                                            />
+                                            <Text style={styles.tagText}>{tag}</Text>
+                                        </View>
+                                    ))}
+                                    {dataSet.DrinkTags.map((tag, index) => (
+                                        <View
+                                            style={[
+                                                styles.tagContainer,
+                                                { backgroundColor: "#1FBFBA" },
+                                            ]}
+                                            key={index}
+                                        >
+                                            <MaterialCommunityIcons
+                                                name="cup"
+                                                size={14}
+                                                color="#fff"
+                                            />
+                                            <Text style={styles.tagText}>{tag}</Text>
+                                        </View>
+                                    ))}
                                 </View>
-                            ))}
-                            {dataSet.DrinkTags.map((tag, index) => (
-                                <View
-                                    style={[
-                                        styles.tagContainer,
-                                        { backgroundColor: "#1FBFBA" },
-                                    ]}
-                                    key={index}
-                                >
-                                    <MaterialCommunityIcons
-                                        name="cup"
-                                        size={14}
-                                        color="#fff"
-                                    />
-                                    <Text style={styles.tagText}>{tag}</Text>
-                                </View>
-                            ))}
+                            </ScrollView>
                         </View>
-                    </ScrollView>
-                </View>
 
 
-                <Divider />
-
-                <View style={styles.locationBar}>
-                    <SimpleLineIcons
-                        name="location-pin"
-                        style={personalStyles.locationPinPadding}
-                        size={26}
-                        color="black"
-                    />
-                    <View
-                        style={personalStyles.locationResultBox}
-                    >
-                        <Text style={styles.TextSmall}>{dataSet.Location} </Text>
-                        <Text style={styles.TextSmall}>{dataSet.Distance} KM</Text>
-                    </View>
-                </View>
-                {!dataSet.IsSponsor ?
-                    <View>
                         <Divider />
 
-                        <IconsBar
-                            dataSet={dataSet}
-                            upVoteVal={dataSet.Upvotes}
-                            downVoteVal={dataSet.Downvotes}
-                            isDV={dataSet.isDownvoted}
-                            isUV={dataSet.isUpvoted}
-                            isF={dataSet.isFavourited}
-                            isDeleteVisible={isDeleteVisible}
-                        />
-                    </View>
-                    :
-                    <View style={{
-                        //card icons bar
-                        padding: "2%",
-                    }}>
+                        <View style={styles.locationBar}>
+                            <SimpleLineIcons
+                                name="location-pin"
+                                style={personalStyles.locationPinPadding}
+                                size={26}
+                                color="black"
+                            />
+                            <View
+                                style={personalStyles.locationResultBox}
+                            >
+                                <Text style={styles.TextSmall}>{dataSet.Location} </Text>
+                                <Text style={styles.TextSmall}>{dataSet.Distance} KM</Text>
+                            </View>
+                        </View>
+                        {!dataSet.IsSponsor ?
+                            <View>
+                                <Divider />
+
+                                <IconsBar
+                                    dataSet={dataSet}
+                                    upVoteVal={dataSet.Upvotes}
+                                    downVoteVal={dataSet.Downvotes}
+                                    isDV={dataSet.isDownvoted}
+                                    isUV={dataSet.isUpvoted}
+                                    isF={dataSet.isFavourited}
+                                    isDeleteVisible={isDeleteVisible}
+                                    userFavs={userFavs}
+                                    deletePairing={() => {
+                                        setHide(true);
+                                    }}
+                                    hide={hide}
+                                    unFav={() => {
+                                        setHide(true);
+                                    }}
+
+                                />
+                            </View>
+                            :
+                            <View style={{
+                                //card icons bar
+                                padding: "2%",
+                            }}>
+
+                            </View>
+                        }
 
                     </View>
-                }
+                </View>}
 
-            </View>
+
         </View>
 
     );

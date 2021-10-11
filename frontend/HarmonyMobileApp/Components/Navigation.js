@@ -367,10 +367,8 @@ export const AppNavigator = (props) => {
   async function checkAuthState() {
     try {
       await Auth.currentAuthenticatedUser();
-      console.log(" User is signed in");
       setUserLoggedIn("loggedIn");
     } catch (err) {
-      console.log(" User is not signed in");
       setUserLoggedIn("loggedOut");
     }
   }

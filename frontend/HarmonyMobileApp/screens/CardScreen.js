@@ -27,7 +27,7 @@ import FABNew from "../Components/FABNew";
 import { Auth } from "aws-amplify";
 
 
-const CardScreen = ({ navigation, URL, headerVisible, isDeleteVisible }) => {
+const CardScreen = ({ navigation, URL, headerVisible, isDeleteVisible, userFavs }) => {
 
 
   const API_URL = URL;
@@ -152,6 +152,7 @@ const CardScreen = ({ navigation, URL, headerVisible, isDeleteVisible }) => {
       <Card
         dataSet={item}
         isDeleteVisible={isDeleteVisible}
+        userFavs={userFavs}
       />
     )
 

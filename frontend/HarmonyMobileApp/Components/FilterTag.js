@@ -72,7 +72,6 @@ export default function FilterTag({ color, title, filterType }) {
             style={[personalStyles.filterTag, { backgroundColor: filterColor }]}
             onPress={() => {
                 //if i put this in a seperate function it only calls snack instead of the one pressed,
-                //console.log("was pressed"),
                 //  setClicked(true),
                 tagColor();
                 textColor();
