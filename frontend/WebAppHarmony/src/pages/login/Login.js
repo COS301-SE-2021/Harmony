@@ -121,6 +121,7 @@ function Login(props) {
                     variant="contained"
                     color="primary"
                     size="large"
+                    style = {{color:'white'}}
                   >
                     {isLoading? <CircularProgress />:  "Login"}
 
@@ -140,6 +141,7 @@ function Login(props) {
                     size="large"
                     className={classes.forgetButton}
                     onClick={handleRoute}
+
                 >
 
                   Forgot Password
