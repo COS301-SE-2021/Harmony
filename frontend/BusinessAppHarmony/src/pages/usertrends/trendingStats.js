@@ -11,7 +11,6 @@ import Widget from "../../components/Widget";
 import useStyles from "./styles";
 import { Typography } from "../../components/Wrappers";
 import PairingCard from "./PairingCard";
-import AlertComponent from "../../components/Alert";
 
 export default function TrendingStats() {
     const classes = useStyles();
@@ -43,7 +42,6 @@ export default function TrendingStats() {
                     <Typography size="xl" weight="bold">
                         Trending Statistics
                     </Typography>
-                    <AlertComponent message="checking" />
 
                     <Typography size="md" weight="light">
                         The following statistics are a tabular representation of what our system has detected
