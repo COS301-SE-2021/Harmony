@@ -43,8 +43,28 @@ export default function ProfilePage() {
     }, 3000);
   }, [openName])
 
+  /**to toggle the display of the toast */
+  const [openRemove, setRemoveOpen] = React.useState(false);
+  /**use effect to detect the alert opening and will auto close after an amount of time */
+  useEffect(() => {
+    setTimeout(function () {
+      setRemoveOpen(false);
+    }, 3000);
+  }, [openRemove])
+
+  /**to toggle the display of the toast */
+  const [openPaypal, setOpenPaypal] = React.useState(true);
+  const detectPaymentRef = useRef();
+  /**use effect to detect the alert opening and will auto close after an amount of time */
+  useEffect(() => {
+    detectChange(true);
+    setTimeout(function () {
+      setOpenPaypal(false);
+    }, 3000);
+  }, [openPaypal])
+
   /**to detect if a child component is changed */
-  const [change, detectChange] = useState(true);
+  const [change, detectChange] = useState(false);
   const detectChangeRef = useRef();
   useEffect(() => {
     detectChange(false);
@@ -158,8 +178,9 @@ export default function ProfilePage() {
       .then(res => res.json())
       .then(
         (result) => {
-          console.log(result);
-          // setData(result.Data);
+          setRemoveOpen(true);
+          detectChange(true);
+
         },
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
@@ -167,25 +188,7 @@ export default function ProfilePage() {
         (error) => {
         }
       )
-    fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/getprofile", {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      method: "POST",
-      body: JSON.stringify({ BID: "b4" })
-    })
-      .then(res => res.json())
-      .then(
-        (result) => {
-          console.log(result);
-          setData(result.UserData);
-          setLogo(result.UserData.Logo)
-        },
 
-        (error) => {
-        }
-      )
   }
 
   return (
@@ -291,11 +294,18 @@ export default function ProfilePage() {
                 R {data.OutstandingAmount}
               </Typography>
             </div>
+            <Collapse in={openPaypal}>
+              <Alert onClose={() => { setOpenPaypal(false); }}>Payment Successful. </Alert>
+              <br />
+
+            </Collapse>
             <div className={classes.PayPalContainer}>
-              {checkout ? (<PayPal amount={data.OutstandingAmount} reference={detectChangeRef} />) : (
+              {checkout ? (<PayPal amount={data.OutstandingAmount} reference={detectChangeRef} paymentRef={detectPaymentRef} />) : (
                 <Button className={classes.payNowButton} variant="contained" onClick={() => { setCheckout(true) }}><GrPaypal style={{ marginRight: 10 }} size={20} color="white" />Pay now</Button>
               )}
             </div>
+            <Button style={{ display: 'none' }} onClick={() => setOpenPaypal(true)} ref={detectPaymentRef} />
+
           </Widget>
         </Grid>
 
@@ -309,6 +319,11 @@ export default function ProfilePage() {
             </Typography>
             <LocationForm reference={detectChangeRef} />
             <Button style={{ display: 'none' }} onClick={() => detectChange(true)} ref={detectChangeRef} />
+            <Collapse in={openRemove}>
+              <Alert onClose={() => { setRemoveOpen(false); }}>Location Removed Successfully. </Alert>
+              <br />
+            </Collapse>
+
             <Table className="mb-0">
               <TableHead>
                 <TableRow className={classes.tableRowHeader}>

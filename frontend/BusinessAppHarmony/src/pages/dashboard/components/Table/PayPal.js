@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
+import Alert from '@mui/material/Alert';
+import Collapse from '@mui/material/Collapse';
 
-export default function PayPal(amount, reference) {
+export default function PayPal(props, reference) {
 
     const paypal = useRef();
     useEffect(() => {
@@ -12,7 +14,7 @@ export default function PayPal(amount, reference) {
                         {
                             description: "Settlement of account at Harmony Business",
                             amount: {
-                                value: amount.amount,
+                                value: props.amount,
                                 currency: "USD"
                             }
                         }
@@ -22,7 +24,6 @@ export default function PayPal(amount, reference) {
             onApprove: async (data, actions) => {
                 const order = await actions.order.capture()
                 console.log(order);
-                console.log(amount.amount);
 
                 fetch('https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/receivepayment', {
                     headers: {
@@ -30,11 +31,11 @@ export default function PayPal(amount, reference) {
                         'Content-Type': 'application/json'
                     },
                     method: "POST",
-                    body: JSON.stringify({ BID: "b4", Amount: amount.amount })
+                    body: JSON.stringify({ BID: "b4", Amount: props.amount })
                 })
                     .then(response => response.json())
                     .then(data => console.log(data))
-                    .then(amount.reference.current.click())
+                    .then(props.reference.current.click(), props.paymentRef.current.click())
                 //do an api call that updates the statement total
             },
             onError: (err) => {
@@ -44,9 +45,11 @@ export default function PayPal(amount, reference) {
         }).render(paypal.current)
     }, [])
     return (
-        <div>
-            <div ref={paypal}></div>
-        </div>
+        <>
+            <div>
+                <div ref={paypal}></div>
+            </div>
+        </>
     );
 }
 
