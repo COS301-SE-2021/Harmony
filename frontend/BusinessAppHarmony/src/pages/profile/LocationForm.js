@@ -23,7 +23,7 @@ export default function LocationForm(reference, ...props) {
     useEffect(() => {
         setTimeout(function () {
             setOpen(false);
-        }, 5000);
+        }, 3000);
     }, [open])
 
     /**import the api key */

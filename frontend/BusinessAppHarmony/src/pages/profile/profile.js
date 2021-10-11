@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Grid, Table, TableRow, TableHead, TableBody, TableCell, } from "@material-ui/core";
 import useStyles from "./styles";
-// components
-import PageTitle from "../../components/PageTitle";
 import Widget from "../../components/Widget";
 import { Typography } from "../../components/Wrappers";
 import PayPal from '../dashboard/components/Table/PayPal';
@@ -15,6 +13,8 @@ import TextField from '@material-ui/core/TextField'
 import {
   Formik, Form
 } from 'formik';
+import Alert from '@mui/material/Alert';
+import Collapse from '@mui/material/Collapse';
 
 export default function ProfilePage() {
   const classes = useStyles();
@@ -24,6 +24,24 @@ export default function ProfilePage() {
   const [checkout, setCheckout] = useState(false);
   const [data, setData] = useState({ BusinessName: "", OutstandingAmount: 0, Locations: [{ name: "" }, { address: "" }] });
   const [editName, setEditName] = useState(false);
+
+  /**to toggle the display of the toast */
+  const [openLogo, setLogoOpen] = React.useState(false);
+  /**use effect to detect the alert opening and will auto close after an amount of time */
+  useEffect(() => {
+    setTimeout(function () {
+      setLogoOpen(false);
+    }, 3000);
+  }, [openLogo])
+
+  /**to toggle the display of the toast */
+  const [openName, setNameOpen] = React.useState(false);
+  /**use effect to detect the alert opening and will auto close after an amount of time */
+  useEffect(() => {
+    setTimeout(function () {
+      setNameOpen(false);
+    }, 3000);
+  }, [openName])
 
   /**to detect if a child component is changed */
   const [change, detectChange] = useState(true);
@@ -110,6 +128,7 @@ export default function ProfilePage() {
             (result) => {
               console.log(result);
               setData(result.Data);
+              setLogoOpen(true);
             },
             // Note: it's important to handle errors here
             // instead of a catch() block so that we don't swallow
@@ -190,6 +209,10 @@ export default function ProfilePage() {
                   <Button onClick={() => (logoFileRef.current.click())} className={classes.addButtonLogo} variant="contained">Upload New Logo</Button>
                 </div>
               </div>
+              <Collapse in={openLogo}>
+                <br />
+                <Alert onClose={() => { setLogoOpen(false); }}>Logo Updated Successfully. </Alert>
+              </Collapse>
               <br />
               <div style={{ justifyContent: "space-between", display: "flex" }}>
                 <div style={{ float: "left" }}>
@@ -222,11 +245,12 @@ export default function ProfilePage() {
                         .then(res => res.json())
                         .then(
                           (result) => {
-                            console.log(result);
+                            setNameOpen(true);
+                            detectChange(true);
                           },
                         );
                       setEditName(false);
-                      detectChange(true);
+
                     }}
                     initialValues={{
                       Name: "",
@@ -242,6 +266,10 @@ export default function ProfilePage() {
                   </Formik>
                 ) : null
               }
+              <Collapse in={openName}>
+                <br />
+                <Alert onClose={() => { setNameOpen(false); }}>Name Updated Successfully. </Alert>
+              </Collapse>
               <br />
               <Typography size="md" weight="bold">
                 Business Registration
@@ -304,27 +332,7 @@ export default function ProfilePage() {
           </Widget>
 
         </Grid>
-        {/* <Grid item xs={4}>
-          <Widget
-            disableWidgetMenu
-            bodyClass={classes.tableWidget}
-          >
-            <Typography size="md" weight="bold">
-              View Account Balance
-            </Typography>
-            <div className={classes.outstandingBalance}>
-              <p className={classes.outstandingBalanceWord}>Outstanding Balance</p>
-              <Typography size="xxl" weight="bold">
-                R {data.OutstandingAmount}
-              </Typography>
-            </div>
-            <div className={classes.PayPalContainer}>
-              {checkout ? (<PayPal amount={data.OutstandingAmount} reference={detectChangeRef} />) : (
-                <Button className={classes.payNowButton} variant="contained" onClick={() => { setCheckout(true) }}><GrPaypal style={{ marginRight: 10 }} size={20} color="white" />Pay now</Button>
-              )}
-            </div>
-          </Widget>
-        </Grid> */}
+
       </Grid>
     </>
   );
