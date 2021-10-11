@@ -52,17 +52,6 @@ export default function ProfilePage() {
     }, 3000);
   }, [openRemove])
 
-  /**to toggle the display of the toast */
-  const [openPaypal, setOpenPaypal] = React.useState(true);
-  const detectPaymentRef = useRef();
-  /**use effect to detect the alert opening and will auto close after an amount of time */
-  useEffect(() => {
-    detectChange(true);
-    setTimeout(function () {
-      setOpenPaypal(false);
-    }, 3000);
-  }, [openPaypal])
-
   /**to detect if a child component is changed */
   const [change, detectChange] = useState(false);
   const detectChangeRef = useRef();
@@ -190,7 +179,16 @@ export default function ProfilePage() {
       )
 
   }
-
+  /**to toggle the display of the toast */
+  const [openPaypal, setOpenPaypal] = React.useState(false);
+  const detectPaymentRef = useRef();
+  /**use effect to detect the alert opening and will auto close after an amount of time */
+  useEffect(() => {
+    detectChange(true);
+    setTimeout(function () {
+      setOpenPaypal(false);
+    }, 3000);
+  }, [openPaypal])
   return (
     <>
 

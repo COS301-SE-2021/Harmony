@@ -1,8 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
-import Alert from '@mui/material/Alert';
-import Collapse from '@mui/material/Collapse';
 
-export default function PayPal(props, reference) {
+export default function PayPal(amount) {
 
     const paypal = useRef();
     useEffect(() => {
@@ -14,7 +12,7 @@ export default function PayPal(props, reference) {
                         {
                             description: "Settlement of account at Harmony Business",
                             amount: {
-                                value: props.amount,
+                                value: amount.amount,
                                 currency: "USD"
                             }
                         }
@@ -31,11 +29,11 @@ export default function PayPal(props, reference) {
                         'Content-Type': 'application/json'
                     },
                     method: "POST",
-                    body: JSON.stringify({ BID: "b4", Amount: props.amount })
+                    body: JSON.stringify({ BID: "b4", Amount: amount.amount })
                 })
                     .then(response => response.json())
                     .then(data => console.log(data))
-                    .then(props.reference.current.click(), props.paymentRef.current.click())
+                    .then(amount.paymentRef.current.click())
                 //do an api call that updates the statement total
             },
             onError: (err) => {
