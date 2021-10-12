@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import {
     Formik, Form
 } from 'formik';
+import { Auth } from 'aws-amplify';
 // classNames
 import useStyles from "./styles";
 import * as Yup from 'yup';
@@ -54,7 +55,7 @@ function CreateAdForm(...props) {
                 'Content-Type': 'application/json'
             },
             method: "POST",
-            body: JSON.stringify({ BID: "b4" })
+            body: JSON.stringify({ BID: Auth.user.username })
         })
             .then(res => res.json())
             .then(
@@ -124,7 +125,7 @@ function CreateAdForm(...props) {
         var request = {
             FoodName: vals.FoodName,
             DrinkName: vals.DrinkName,
-            BID: "b4",
+            BID: Auth.user.username,
             FoodTags: vals.FoodTags,
             DrinkTags: vals.DrinkTags,
             PairingTags: vals.PairingTags,

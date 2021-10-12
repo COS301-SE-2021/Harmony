@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import useStyles from "./styles";
+import { Auth } from 'aws-amplify';
 import TextField from '@material-ui/core/TextField'
 // components
 import Button from '@material-ui/core/Button';
@@ -35,9 +36,10 @@ export default function LocationForm(reference, ...props) {
                 'Content-Type': 'application/json'
             },
             method: "POST",
-            body: JSON.stringify({ BID: "b4", lat: coordinates.lat, lng: coordinates.lng, "LocationName": values.LocationName, "Address": address })
+            body: JSON.stringify({ BID: Auth.user.username, lat: coordinates.lat, lng: coordinates.lng, "LocationName": values.LocationName, "Address": address })
         })
             .then(res => res.json())
+            .then(alert("A new Successfully been Added"))
             .then(
                 (result) => {
                     console.log(reference.reference.current.click());
@@ -49,6 +51,7 @@ export default function LocationForm(reference, ...props) {
                 // exceptions from actual bugs in components.
                 (error) => {
                 }
+
             );
     }
     const handleSelect = async (value) => {

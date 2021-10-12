@@ -1,0 +1,26 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-busharmony-dev-223456-authRole",
+      "UnauthRoleArn": "arn:aws:iam::294481406452:role/amplify-busharmony-dev-223456-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::294481406452:role/amplify-busharmony-dev-223456-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-busharmony-dev-223456-deployment",
+      "UnauthRoleName": "amplify-busharmony-dev-223456-unauthRole",
+      "StackName": "amplify-busharmony-dev-223456",
+      "StackId": "arn:aws:cloudformation:eu-west-1:294481406452:stack/amplify-busharmony-dev-223456/8d12ac80-2552-11ec-9bdc-06be04343c73",
+      "AmplifyAppId": "drn0mez8nzhad"
+    },
+    "categories": {
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "drn0mez8nzhad",
+          "type": "manual"
+        }
+      },
+      "auth": {
+        "busharmony5ff443a8": {}
+      }
+    }
+  }
+}

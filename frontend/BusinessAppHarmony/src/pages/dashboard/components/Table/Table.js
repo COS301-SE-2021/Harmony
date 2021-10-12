@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { Auth } from 'aws-amplify';
 import {
   Grid,
   Table,
@@ -55,7 +56,7 @@ export default function TableComponent({ data }) {
         'Content-Type': 'application/json'
       },
       method: "POST",
-      body: JSON.stringify({ BID: "b4", TimePeriod: TimePeriod })
+      body: JSON.stringify({ BID: Auth.user.username, TimePeriod: TimePeriod })
     })
       .then(res => res.json())
       .then(
@@ -73,15 +74,15 @@ export default function TableComponent({ data }) {
 
 
   useEffect(() => {
-    console.log(JSON.stringify({ BID: "b4", TimePeriod: TimePeriod }));
-    // fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/getprofile", { BID: "b1" })
+    console.log(JSON.stringify({ BID: Auth.user.username, TimePeriod: TimePeriod }));
+
     fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/getstatement", {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       method: "POST",
-      body: JSON.stringify({ BID: "b4", TimePeriod: TimePeriod })
+      body: JSON.stringify({ BID: Auth.user.username, TimePeriod: TimePeriod })
     })
       .then(res => res.json())
       .then(
