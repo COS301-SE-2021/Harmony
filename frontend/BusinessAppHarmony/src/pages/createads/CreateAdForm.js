@@ -197,7 +197,7 @@ function CreateAdForm(...props) {
                                 <div className={classes.PreviewPiece}><label htmlFor="file-input-Food"></label></div>
                                 <div className={classes.PreviewPiece}><img src={foodImage} className={classes.ImageContainer} alt="Error displaying." /></div>
                                 <div className={classes.FileInput}><input type="file" id="file-input-Food" name="ImageclassNameFood" accept="image/*" ref={foodFileRef} onChange={(values) => FoodImageHandler(values)} style={{ display: 'none' }} />
-                                    <Button onClick={() => (foodFileRef.current.click())} className={classes.uploadFoodButton} variant="contained">Upload Image</Button>
+                                    <Button onClick={() => (foodFileRef.current.click())} className={classes.uploadFoodButton} variant="contained" color="secondary">Upload Image</Button>
                                 </div>
                                 <div className={classes.formElementsImageContainer}>
                                     <label htmlFor="FoodName" className={classes.formLabel}>
@@ -265,7 +265,7 @@ function CreateAdForm(...props) {
                                 <div className={classes.PreviewPiece}><label htmlFor="file-input-Drink"></label></div>
                                 <div className={classes.PreviewPiece}><img src={drinkImage} className={classes.ImageContainer} /></div>
                                 <div className={classes.FileInput}><input type="file" id="file-input-Drink" name="ImageclassNameDrink" accept="image/*" ref={drinkFileRef} onChange={DrinkImageHandler} style={{ display: 'none' }} />
-                                    <Button onClick={() => (drinkFileRef.current.click())} className={classes.uploadDrinkButton} variant="contained">Upload Image</Button>
+                                    <Button onClick={() => (drinkFileRef.current.click())} className={classes.uploadDrinkButton} variant="contained" color="secondary">Upload Image</Button>
                                 </div>
 
                                 <div className={classes.formElementsImageContainer}>
