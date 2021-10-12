@@ -8,7 +8,6 @@ import {
     Formik, Form
 } from 'formik';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from "react-places-autocomplete";
-import AlertComponent from '../../components/AlertComponent';
 import Alert from '@mui/material/Alert';
 import Collapse from '@mui/material/Collapse';
 
@@ -136,7 +135,7 @@ export default function LocationForm(reference, ...props) {
                                     setAddress(""),
                                     setCoordinates({ lat: null, lng: null })
                                 )} className={classes.ClearButton} > Clear </Button>
-                                <Button type="Submit" className={classes.addLocationButton} > Add New Location</Button>
+                                <Button color="secondary" variant="contained" type="Submit" className={classes.addLocationButton} > Add New Location</Button>
                             </div>
                         </Form>
                     )}

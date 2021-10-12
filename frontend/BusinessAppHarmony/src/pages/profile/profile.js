@@ -9,6 +9,8 @@ import LocationForm from './LocationForm';
 import { GrEdit } from "react-icons/gr";
 import { FiMinusCircle } from "react-icons/fi";
 import Button from '@material-ui/core/Button';
+// import Button from '@mui/material/Button';
+// import { Button } from 'semantic-ui-react'
 import TextField from '@material-ui/core/TextField'
 import {
   Formik, Form
@@ -207,7 +209,7 @@ export default function ProfilePage() {
                 <div className={classes.PreviewPiece}><label htmlFor="file-input-Logo"></label></div>
                 <div className={classes.PreviewPiece}><img src={logo} className={classes.ImageContainer} /></div>
                 <div className={classes.FileInput}><input type="file" id="file-input-Logo" name="ImageclassNameFood" accept="image/*" ref={logoFileRef} onChange={logoImageHandler} style={{ display: 'none' }} />
-                  <Button onClick={() => (logoFileRef.current.click())} className={classes.addButtonLogo} variant="contained">Upload New Logo</Button>
+                  <Button onClick={() => (logoFileRef.current.click())} color="secondary" className={classes.addButtonLogo} variant="contained">Upload New Logo</Button>
                 </div>
               </div>
               <Collapse in={openLogo}>
@@ -259,7 +261,7 @@ export default function ProfilePage() {
                     {({ values, handleChange }) => (
                       <Form>
                         <TextField id="outlined-basic" variant="outlined" name="Name" className={classes.individualTextField} onChange={handleChange} placeholder="New name" value={values.Name} />
-                        <Button variant="contained" color="primary" type="submit" className={classes.addButton} onClick={() => console.log("clicked submit")}>
+                        <Button variant="contained" color="secondary" type="submit" className={classes.addButton} onClick={() => console.log("clicked submit")}>
                           Update Name
                         </Button>
                       </Form>
@@ -292,7 +294,7 @@ export default function ProfilePage() {
             </Collapse>
             <div className={classes.PayPalContainer}>
               {checkout ? (<PayPal amount={data.OutstandingAmount} reference={detectChangeRef} paymentRef={detectPaymentRef} />) : (
-                <Button className={classes.payNowButton} variant="contained" onClick={() => { setCheckout(true) }}><GrPaypal style={{ marginRight: 10 }} size={20} color="white" />Pay now</Button>
+                <Button className={classes.payNowButton} variant="contained" color="secondary" onClick={() => { setCheckout(true) }}><GrPaypal style={{ marginRight: 10 }} size={20} color="white" />Pay now</Button>
               )}
             </div>
             <Button style={{ display: 'none' }} onClick={() => setOpenPaypal(true)} ref={detectPaymentRef} />

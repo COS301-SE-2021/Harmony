@@ -45,6 +45,8 @@
     "react-toastify": "^7.0.3",
     "recharts": "^2.0.4",
     "rsuite": "^5.0.0",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^2.0.4",
     "tinycolor2": "^1.4.2",
     "use-places-autocomplete": "^1.9.4",
     "yup": "^0.32.9"
