@@ -519,7 +519,7 @@ function CreateAdForm(...props) {
                         </Collapse>
                         <div className={classes.ButtonContainer}>
                             <Button onClick={(values) => (resetForm(), handleClear())} className={classes.clearButton} variant="contained">Clear</Button>
-                            <Button variant="contained" color="primary" type="submit" className={classes.addButton} onClick={() => console.log("clicked submit")}>
+                            <Button color="secondary" variant="contained" type="submit" className={classes.addButton} onClick={() => console.log("clicked submit")}>
                                 Create Advert
                             </Button>
                         </div>

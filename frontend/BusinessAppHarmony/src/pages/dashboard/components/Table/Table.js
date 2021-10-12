@@ -236,7 +236,7 @@ export default function TableComponent({ data }) {
 
           </Collapse>
           {checkout ? (<PayPal amount={result.OutsandingAmount} reference={detectChangeRef} paymentRef={detectPaymentRef} />) : (
-            <Button className={classes.payNowButton} variant="contained" onClick={() => { setCheckout(true) }}><GrPaypal style={{ marginRight: 10 }} size={20} color="white" />Pay now</Button>
+            <Button className={classes.payNowButton} color="secondary" variant="contained" onClick={() => { setCheckout(true) }}><GrPaypal style={{ marginRight: 10 }} size={20} color="white" />Pay now</Button>
           )}
         </div>
         <Button style={{ display: 'none' }} onClick={() => setOpenPaypal(true)} ref={detectPaymentRef} />
