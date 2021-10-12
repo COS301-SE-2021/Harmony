@@ -271,13 +271,6 @@ export default function ProfilePage() {
                 <br />
                 <Alert onClose={() => { setNameOpen(false); }}>Name Updated Successfully. </Alert>
               </Collapse>
-              <br />
-              <Typography size="md" weight="bold">
-                Business Registration
-              </Typography>
-              <Typography size="sm" weight="medium">
-                201901000005 (1315525-A)
-              </Typography>
 
             </div>
             <br />
