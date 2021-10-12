@@ -1,4 +1,6 @@
-import json
+import pytest
+import sys
+import time
 
 import pytest
 
@@ -25,8 +27,10 @@ def fixture_event():
 #     assert "PID" in data
 
 
-def test_validate_string():
+def test_validate_string(benchmark):
     ret = NewPairing.validatestring(" ")
     ret2 = NewPairing.validatestring("test")
     assert ret == False
     assert ret2 == True
+    benchmark(lambda: time.sleep(0.01))
+
