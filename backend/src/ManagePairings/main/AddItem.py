@@ -32,7 +32,7 @@ def add_item(event, context):
 
     if name == "" or description == "" or tags == "" or item_type == "" or event["Image"] == "":
         return {"StatusCode": 403,
-                "ErrorMessage": "Invalid input request."}
+                "ErrorMessage": "There was an invalid input field."}
 
     imagelink = add_image_to_s3(event["Image"], generate_id)
 
@@ -79,7 +79,8 @@ def add_item(event, context):
                     'FoodName': name,
                     'FoodImage': imagelink
                 })
-            return {"StatusCode": 200}
+            return {"StatusCode": 200,
+                    "Message": "Food item successfully added."}
 
         except ClientError as e:
             if e.response['Error']['Code'] == "ConditionalCheckFailedException":
@@ -96,7 +97,8 @@ def add_item(event, context):
                     'DrinkName': name,
                     'DrinkImage': imagelink
                 })
-            return {"StatusCode": 200}
+            return {"StatusCode": 200,
+                    "Message": "Drink item successfully added."}
 
         except ClientError as e:
             if e.response['Error']['Code'] == "ConditionalCheckFailedException":
