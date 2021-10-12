@@ -13,6 +13,9 @@ export default function IconsBar({
     upVoteVal,
     downVoteVal,
     isDeleteVisible,
+    deletePairing,
+    userFavs,
+    unFav,
 }) {
     const [favouriteIconChecked, setFavouriteIconChecked] = useState("");
     const [favouriteIconColor, setFavouriteIconColor] = useState("black"); // controls the favourite heart color (pink/black)
@@ -111,14 +114,14 @@ export default function IconsBar({
 
     useEffect(() => {
         if (favouriteIconChecked == "Checked") {
-            addRemoveFavourites(addToFavURL);
+            addRemoveFavourites(addToFavURL, "add");
         } else if (favouriteIconChecked == "Unchecked") {
-            addRemoveFavourites(removeFromFavURL);
+            addRemoveFavourites(removeFromFavURL, "remove");
         }
     }, [favouriteIconChecked]);
 
     //Adds and removes pairings from user favourites
-    const addRemoveFavourites = async (URL) => {
+    const addRemoveFavourites = async (URL, type) => {
         async function fetchData() {
             let user = await Auth.currentAuthenticatedUser();
             const { username } = user;
@@ -130,7 +133,14 @@ export default function IconsBar({
                     PID: dataSet.PID,
                 }),
             })
-                .then((response) => response.json())
+                .then((response) =>
+                    response.json())
+                .then((json) => {
+                    if (userFavs && type == "remove") {
+                        unFav();
+                        AppToast.ToastDisplay("Unfavourited");
+                    }
+                })
                 .catch((error) => alert(error));
         };
         fetchData();
@@ -165,6 +175,7 @@ export default function IconsBar({
         setFavouriteIconColor("black");
         setFavouriteIconOutline("hearto");
         setFavouriteIconChecked("Unchecked");
+
     }
 
     handleDownIconPress = () => {
@@ -207,7 +218,6 @@ export default function IconsBar({
         async function fetchData() {
             let user = await Auth.currentAuthenticatedUser();
             const { username } = user;
-            console.log("Deleting...")
 
             await fetch(deltePairingURL, {
                 method: "POST",
@@ -250,6 +260,8 @@ export default function IconsBar({
         if (json.StatusCode === 200) {
             AppToast.ToastDisplay(json.Data);
             setErrorAlertVisible(false);
+            deletePairing();
+
         }
         else if (json.StatusCode === 400) {
             //setModalMessage must come before setErrorAlertVisible

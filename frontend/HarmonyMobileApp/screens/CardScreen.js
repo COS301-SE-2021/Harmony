@@ -27,7 +27,7 @@ import FABNew from "../Components/FABNew";
 import { Auth } from "aws-amplify";
 
 
-const CardScreen = ({ navigation, URL, headerVisible, isDeleteVisible }) => {
+const CardScreen = ({ navigation, URL, headerVisible, isDeleteVisible, userFavs }) => {
 
 
   const API_URL = URL;
@@ -146,6 +146,16 @@ const CardScreen = ({ navigation, URL, headerVisible, isDeleteVisible }) => {
     </View>
   );
 
+  //Function outside of render function so it won't recreate itself each time render function called.
+  const renderCard =
+    ({ item }) => (
+      <Card
+        dataSet={item}
+        isDeleteVisible={isDeleteVisible}
+        userFavs={userFavs}
+      />
+    )
+
   return (
     <ApplicationProvider
       {...eva}
@@ -171,18 +181,16 @@ const CardScreen = ({ navigation, URL, headerVisible, isDeleteVisible }) => {
           <AppLoadingIcon />
         ) : (
           <FlatList
+            removeClippedSubviews={true}
+            initialNumToRender={3}
+            maxToRenderPerBatch={5}
             data={data}
             refreshControl={
               <RefreshControl refreshing={refreshing} onRefresh={toggleRefresh} />
             }
             keyExtractor={({ PID }, index) => PID}
 
-            renderItem={({ item }) => (
-              <Card
-                dataSet={item}
-                isDeleteVisible={isDeleteVisible}
-              />
-            )}
+            renderItem={renderCard}
           />
         )}
         <FABNew />

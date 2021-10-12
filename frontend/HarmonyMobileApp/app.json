@@ -30,6 +30,6 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "description": "Publish test with alerts with updated/correct username and myFilterContext for all fields"
+    "description": "All known bugs fixed. Publish for demo 4 re-demo V1."
   }
 }

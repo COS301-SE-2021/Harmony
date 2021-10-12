@@ -26,8 +26,11 @@ import SettingsScreen from "../screens/SettingsScreen.js";
 import CameraScreen from "../screens/CameraScreen.js";
 import PairingResultsScreen from "../screens/PairingResultsScreen.js";
 import DrinkDetailsScreen from "../screens/DrinkDetailsScreen.js";
+
+
 import NewPairingScreen from "../screens/NewPairingScreen";
 import RequestNewItemScreen from "../screens/RequestNewItemScreen";
+import PairingDetailsScreen from "../screens/PairingDetailsScreen";
 
 import config from "../aws-exports";
 import SignIn from "../screens/SignInScreen";
@@ -103,6 +106,10 @@ function HomeFeed() {
         name="RequestNewItem"
         component={RequestNewItemScreen}
       />
+      <HomeStack.Screen
+        name="PairingDetails"
+        component={PairingDetailsScreen}
+      />
     </HomeStack.Navigator>
   );
 }
@@ -146,6 +153,48 @@ const Results = () => (
 );
 
 const Tab = createMaterialTopTabNavigator();
+const favStack = createStackNavigator();
+function favScreen() {
+  return (
+
+    <favStack.Navigator initialRouteName="Favourite"
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <favStack.Screen
+        name="UserFavourites"
+        component={FavouritesScreen}
+      />
+      <favStack.Screen
+        name="PairingDetails"
+        component={PairingDetailsScreen}
+      />
+    </favStack.Navigator>
+  );
+}
+const createdStack = createStackNavigator();
+function createdScreen() {
+  return (
+
+    <createdStack.Navigator initialRouteName="Favourite"
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <createdStack.Screen
+        name="CreatedPairingsScreen"
+        component={CreatedPairingsScreen}
+      />
+      <createdStack.Screen
+        name="PairingDetails"
+        component={PairingDetailsScreen}
+      />
+    </createdStack.Navigator>
+  );
+}
+
+
 const UserPairingsTopTabs = () => (
 
   <Tab.Navigator
@@ -176,8 +225,8 @@ const UserPairingsTopTabs = () => (
     }}
   >
     <Tab.Screen
-      name="UserFavourites"
-      component={FavouritesScreen}
+      name="favScreen"
+      component={favScreen}
       options={{
         tabBarLabel: "My Favourites",
         tabBarIcon: ({ color }) => (
@@ -186,8 +235,8 @@ const UserPairingsTopTabs = () => (
       }}
     />
     <Tab.Screen
-      name="UserPairings"
-      component={CreatedPairingsScreen}
+      name="createdScreen"
+      component={createdScreen}
       options={{
         tabBarLabel: "My Pairings",
         tabBarIcon: ({ color }) => (
@@ -318,10 +367,8 @@ export const AppNavigator = (props) => {
   async function checkAuthState() {
     try {
       await Auth.currentAuthenticatedUser();
-      console.log(" User is signed in");
       setUserLoggedIn("loggedIn");
     } catch (err) {
-      console.log(" User is not signed in");
       setUserLoggedIn("loggedOut");
     }
   }
