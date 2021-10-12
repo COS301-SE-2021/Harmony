@@ -12,10 +12,14 @@ import LocationForm from './LocationForm';
 import { GrEdit } from "react-icons/gr";
 import { FiMinusCircle } from "react-icons/fi";
 import Button from '@material-ui/core/Button';
+// import Button from '@mui/material/Button';
+// import { Button } from 'semantic-ui-react'
 import TextField from '@material-ui/core/TextField'
 import {
   Formik, Form
 } from 'formik';
+import Alert from '@mui/material/Alert';
+import Collapse from '@mui/material/Collapse';
 
 export default function ProfilePage() {
   const classes = useStyles();
@@ -26,8 +30,35 @@ export default function ProfilePage() {
   const [data, setData] = useState({ BusinessName: "", OutstandingAmount: 0, Locations: [{ name: "" }, { address: "" }] });
   const [editName, setEditName] = useState(false);
 
+  /**to toggle the display of the toast */
+  const [openLogo, setLogoOpen] = React.useState(false);
+  /**use effect to detect the alert opening and will auto close after an amount of time */
+  useEffect(() => {
+    setTimeout(function () {
+      setLogoOpen(false);
+    }, 3000);
+  }, [openLogo])
+
+  /**to toggle the display of the toast */
+  const [openName, setNameOpen] = React.useState(false);
+  /**use effect to detect the alert opening and will auto close after an amount of time */
+  useEffect(() => {
+    setTimeout(function () {
+      setNameOpen(false);
+    }, 3000);
+  }, [openName])
+
+  /**to toggle the display of the toast */
+  const [openRemove, setRemoveOpen] = React.useState(false);
+  /**use effect to detect the alert opening and will auto close after an amount of time */
+  useEffect(() => {
+    setTimeout(function () {
+      setRemoveOpen(false);
+    }, 3000);
+  }, [openRemove])
+
   /**to detect if a child component is changed */
-  const [change, detectChange] = useState(true);
+  const [change, detectChange] = useState(false);
   const detectChangeRef = useRef();
   useEffect(() => {
     detectChange(false);
@@ -111,6 +142,7 @@ export default function ProfilePage() {
             (result) => {
               console.log(result);
               setData(result.Data);
+              setLogoOpen(true);
             },
             // Note: it's important to handle errors here
             // instead of a catch() block so that we don't swallow
@@ -140,8 +172,9 @@ export default function ProfilePage() {
       .then(res => res.json())
       .then(
         (result) => {
-          console.log(result);
-          // setData(result.Data);
+          setRemoveOpen(true);
+          detectChange(true);
+
         },
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
@@ -160,16 +193,22 @@ export default function ProfilePage() {
       .then(res => res.json())
       .then(
         (result) => {
-          console.log(result);
           setData(result.UserData);
           setLogo(result.UserData.Logo)
-        },
-
-        (error) => {
         }
       )
-  }
 
+  }
+  /**to toggle the display of the toast */
+  const [openPaypal, setOpenPaypal] = React.useState(false);
+  const detectPaymentRef = useRef();
+  /**use effect to detect the alert opening and will auto close after an amount of time */
+  useEffect(() => {
+    detectChange(true);
+    setTimeout(function () {
+      setOpenPaypal(false);
+    }, 3000);
+  }, [openPaypal])
   return (
     <>
 
@@ -188,9 +227,13 @@ export default function ProfilePage() {
                 <div className={classes.PreviewPiece}><label htmlFor="file-input-Logo"></label></div>
                 <div className={classes.PreviewPiece}><img src={logo} className={classes.ImageContainer} /></div>
                 <div className={classes.FileInput}><input type="file" id="file-input-Logo" name="ImageclassNameFood" accept="image/*" ref={logoFileRef} onChange={logoImageHandler} style={{ display: 'none' }} />
-                  <Button onClick={() => (logoFileRef.current.click())} className={classes.addButtonLogo} variant="contained">Upload New Logo</Button>
+                  <Button onClick={() => (logoFileRef.current.click())} color="secondary" className={classes.addButtonLogo} variant="contained">Upload New Logo</Button>
                 </div>
               </div>
+              <Collapse in={openLogo}>
+                <br />
+                <Alert onClose={() => { setLogoOpen(false); }}>Logo Updated Successfully. </Alert>
+              </Collapse>
               <br />
               <div style={{ justifyContent: "space-between", display: "flex" }}>
                 <div style={{ float: "left" }}>
@@ -218,16 +261,17 @@ export default function ProfilePage() {
                           'Content-Type': 'application/json'
                         },
                         method: "POST",
-                        body: JSON.stringify({ BID: Auth.user.username , Name: values.Name })
+                        body: JSON.stringify({ BID: Auth.user.username, Name: values.Name })
                       })
                         .then(res => res.json())
                         .then(
                           (result) => {
-                            console.log(result);
+                            setNameOpen(true);
+                            detectChange(true);
                           },
                         );
                       setEditName(false);
-                      detectChange(true);
+
                     }}
                     initialValues={{
                       Name: "",
@@ -235,7 +279,7 @@ export default function ProfilePage() {
                     {({ values, handleChange }) => (
                       <Form>
                         <TextField id="outlined-basic" variant="outlined" name="Name" className={classes.individualTextField} onChange={handleChange} placeholder="New name" value={values.Name} />
-                        <Button variant="contained" color="primary" type="submit" className={classes.addButton} onClick={() => console.log("clicked submit")}>
+                        <Button variant="contained" color="secondary" type="submit" className={classes.addButton} onClick={() => console.log("clicked submit")}>
                           Update Name
                         </Button>
                       </Form>
@@ -243,13 +287,10 @@ export default function ProfilePage() {
                   </Formik>
                 ) : null
               }
-              <br />
-              <Typography size="md" weight="bold">
-                Business Registration
-              </Typography>
-              <Typography size="sm" weight="medium">
-                201901000005 (1315525-A)
-              </Typography>
+              <Collapse in={openName}>
+                <br />
+                <Alert onClose={() => { setNameOpen(false); }}>Name Updated Successfully. </Alert>
+              </Collapse>
 
             </div>
             <br />
@@ -264,11 +305,18 @@ export default function ProfilePage() {
                 R {data.OutstandingAmount}
               </Typography>
             </div>
+            <Collapse in={openPaypal}>
+              <Alert onClose={() => { setOpenPaypal(false); }}>Payment Successful. </Alert>
+              <br />
+
+            </Collapse>
             <div className={classes.PayPalContainer}>
-              {checkout ? (<PayPal amount={data.OutstandingAmount} reference={detectChangeRef} />) : (
-                <Button className={classes.payNowButton} variant="contained" onClick={() => { setCheckout(true) }}><GrPaypal style={{ marginRight: 10 }} size={20} color="white" />Pay now</Button>
+              {checkout ? (<PayPal amount={data.OutstandingAmount} reference={detectChangeRef} paymentRef={detectPaymentRef} />) : (
+                <Button className={classes.payNowButton} variant="contained" color="secondary" onClick={() => { setCheckout(true) }}><GrPaypal style={{ marginRight: 10 }} size={20} color="white" />Pay now</Button>
               )}
             </div>
+            <Button style={{ display: 'none' }} onClick={() => setOpenPaypal(true)} ref={detectPaymentRef} />
+
           </Widget>
         </Grid>
 
@@ -282,6 +330,11 @@ export default function ProfilePage() {
             </Typography>
             <LocationForm reference={detectChangeRef} />
             <Button style={{ display: 'none' }} onClick={() => detectChange(true)} ref={detectChangeRef} />
+            <Collapse in={openRemove}>
+              <Alert onClose={() => { setRemoveOpen(false); }}>Location Removed Successfully. </Alert>
+              <br />
+            </Collapse>
+
             <Table className="mb-0">
               <TableHead>
                 <TableRow className={classes.tableRowHeader}>
@@ -305,27 +358,7 @@ export default function ProfilePage() {
           </Widget>
 
         </Grid>
-        {/* <Grid item xs={4}>
-          <Widget
-            disableWidgetMenu
-            bodyClass={classes.tableWidget}
-          >
-            <Typography size="md" weight="bold">
-              View Account Balance
-            </Typography>
-            <div className={classes.outstandingBalance}>
-              <p className={classes.outstandingBalanceWord}>Outstanding Balance</p>
-              <Typography size="xxl" weight="bold">
-                R {data.OutstandingAmount}
-              </Typography>
-            </div>
-            <div className={classes.PayPalContainer}>
-              {checkout ? (<PayPal amount={data.OutstandingAmount} reference={detectChangeRef} />) : (
-                <Button className={classes.payNowButton} variant="contained" onClick={() => { setCheckout(true) }}><GrPaypal style={{ marginRight: 10 }} size={20} color="white" />Pay now</Button>
-              )}
-            </div>
-          </Widget>
-        </Grid> */}
+
       </Grid>
     </>
   );

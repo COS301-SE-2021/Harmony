@@ -22,7 +22,6 @@ export default function PayPal(amount, reference) {
             onApprove: async (data, actions) => {
                 const order = await actions.order.capture()
                 console.log(order);
-                console.log(amount.amount);
 
                 fetch('https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/receivepayment', {
                     headers: {
@@ -34,7 +33,7 @@ export default function PayPal(amount, reference) {
                 })
                     .then(response => response.json())
                     .then(data => console.log(data))
-                    .then(amount.reference.current.click())
+                    .then(amount.paymentRef.current.click())
                 //do an api call that updates the statement total
             },
             onError: (err) => {
@@ -44,9 +43,11 @@ export default function PayPal(amount, reference) {
         }).render(paypal.current)
     }, [])
     return (
-        <div>
-            <div ref={paypal}></div>
-        </div>
+        <>
+            <div>
+                <div ref={paypal}></div>
+            </div>
+        </>
     );
 }
 

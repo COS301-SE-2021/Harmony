@@ -13,6 +13,8 @@ import TextField from '@material-ui/core/TextField'
 import { InputNumber } from 'rsuite';
 import { FiPlus, FiMinus } from "react-icons/fi";
 
+import Alert from '@mui/material/Alert';
+import Collapse from '@mui/material/Collapse';
 
 function CreateAdForm(...props) {
     /**The form variables */
@@ -35,6 +37,15 @@ function CreateAdForm(...props) {
     const timePeriodTagSelector = useRef();
 
     const supportedFormats = ['image/jpg', 'image/jpeg', 'image/png'];
+
+    /**to toggle the display of the toast */
+    const [openAd, setAdOpen] = React.useState(false);
+    /**use effect to detect the alert opening and will auto close after an amount of time */
+    useEffect(() => {
+        setTimeout(function () {
+            setAdOpen(false);
+        }, 3000);
+    }, [openAd])
 
 
     useEffect(() => {
@@ -136,7 +147,7 @@ function CreateAdForm(...props) {
         })
             .then(response => response.json())
             .then(data => console.log(data))
-            .then(alert("Advert for " + vals.FoodName + " and " + vals.DrinkName + " was created successfully."))
+            .then(setAdOpen(true))
     }
 
     return (
@@ -187,7 +198,7 @@ function CreateAdForm(...props) {
                                 <div className={classes.PreviewPiece}><label htmlFor="file-input-Food"></label></div>
                                 <div className={classes.PreviewPiece}><img src={foodImage} className={classes.ImageContainer} alt="Error displaying." /></div>
                                 <div className={classes.FileInput}><input type="file" id="file-input-Food" name="ImageclassNameFood" accept="image/*" ref={foodFileRef} onChange={(values) => FoodImageHandler(values)} style={{ display: 'none' }} />
-                                    <Button onClick={() => (foodFileRef.current.click())} className={classes.uploadFoodButton} variant="contained">Upload Image</Button>
+                                    <Button onClick={() => (foodFileRef.current.click())} className={classes.uploadFoodButton} variant="contained" color="secondary">Upload Image</Button>
                                 </div>
                                 <div className={classes.formElementsImageContainer}>
                                     <label htmlFor="FoodName" className={classes.formLabel}>
@@ -255,7 +266,7 @@ function CreateAdForm(...props) {
                                 <div className={classes.PreviewPiece}><label htmlFor="file-input-Drink"></label></div>
                                 <div className={classes.PreviewPiece}><img src={drinkImage} className={classes.ImageContainer} /></div>
                                 <div className={classes.FileInput}><input type="file" id="file-input-Drink" name="ImageclassNameDrink" accept="image/*" ref={drinkFileRef} onChange={DrinkImageHandler} style={{ display: 'none' }} />
-                                    <Button onClick={() => (drinkFileRef.current.click())} className={classes.uploadDrinkButton} variant="contained">Upload Image</Button>
+                                    <Button onClick={() => (drinkFileRef.current.click())} className={classes.uploadDrinkButton} variant="contained" color="secondary">Upload Image</Button>
                                 </div>
 
                                 <div className={classes.formElementsImageContainer}>
@@ -503,15 +514,20 @@ function CreateAdForm(...props) {
                             </div>
                         </div>
                         <br />
+                        <Collapse in={openAd}>
+                            <Alert onClose={() => { setAdOpen(false); }}>Ad Created Successfully. </Alert>
+                            <br />
+                        </Collapse>
                         <div className={classes.ButtonContainer}>
                             <Button onClick={(values) => (resetForm(), handleClear())} className={classes.clearButton} variant="contained">Clear</Button>
-                            <Button variant="contained" color="primary" type="submit" className={classes.addButton} onClick={() => console.log("clicked submit")}>
+                            <Button color="secondary" variant="contained" type="submit" className={classes.addButton} onClick={() => console.log("clicked submit")}>
                                 Create Advert
                             </Button>
                         </div>
                     </Form>
                 )}
             </Formik>
+
         </div >
     );
 }
