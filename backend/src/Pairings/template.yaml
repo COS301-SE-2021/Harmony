@@ -1,6 +1,9 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
+  untitled
+
+  Sample SAM Template for untitled
 
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
@@ -67,6 +70,46 @@ Resources:
     Properties:
       CodeUri: main/
       Handler: RemoveFromFavourites.remove_from_favourites
+      Runtime: python3.8
+      Policies:
+        # Give DynamoDB Full Access to your Lambda Function
+        - AmazonDynamoDBFullAccess
+
+  DeletePairingsFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: main/
+      Handler: DeletePairing.delete_pairing
+      Runtime: python3.8
+      Policies:
+        # Give DynamoDB Full Access to your Lambda Function
+        - AmazonDynamoDBFullAccess
+
+  GetAllPairingItemsFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: main/
+      Handler: GetAllPairingItems.get_all_items
+      Runtime: python3.8
+      Policies:
+        # Give DynamoDB Full Access to your Lambda Function
+        - AmazonDynamoDBFullAccess
+
+  CreatePairingsFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: main/
+      Handler: CreatePairing.create_pairing
+      Runtime: python3.8
+      Policies:
+        # Give DynamoDB Full Access to your Lambda Function
+        - AmazonDynamoDBFullAccess
+
+  RequestNewItemFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: main/
+      Handler: RequestNewItem.request_item
       Runtime: python3.8
       Policies:
         # Give DynamoDB Full Access to your Lambda Function

@@ -1,0 +1,16 @@
+name: Business Webpage Uptime Monitor
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+
+jobs:
+  ping_site:
+    runs-on: ubuntu-latest
+    name: Uptime Check
+    steps:
+      - name: Ping Site
+        uses: srt32/uptime@v0.2
+        with:
+          url-to-hit: "https://dev.d3ayvqwa1ja9g5.amplifyapp.com/#/login"
+          expected-statuses: "200"
