@@ -66,7 +66,7 @@ def sort_and_filter(event, context):
     if range is not None:
         sortedResponse = filter_by_range(sortedResponse,event['Distance'])
 
-    sortedResponse = addsponsors(sortedResponse)
+    sortedResponse = addsponsors(event,sortedResponse)
     if len(sortedResponse) == 0:
         return {
             "StatusCode": 204,
@@ -299,7 +299,7 @@ def filter_by_range(response, filterdist):
 
     return response
 
-def addsponsors(response):
+def addsponsors(event, response):
     businesses = businessusers.scan()
     businesses = businesses["Items"]
     sponsors = sponsortable.scan()
@@ -307,12 +307,19 @@ def addsponsors(response):
     for i in response:
         i["IsSponsor"] = False
 
-
+    sponsors = add_sponsored_distances(sponsors,event['Latitude'], event['Longitude'] )
+    sponsors = remove_out_of_range(sponsors)
     sponsorcounter = 0
     for i in range(len(response)):
         if sponsorcounter < len(sponsors):
-            if (i%5==0):
+            if (i != 0) and(i%5==0) :
                 newpid = uuid.uuid4().hex
+                logo = ""
+                businessName = ""
+                for k in businesses:
+                    if k["BID"] == sponsors[sponsorcounter]["BID"]:
+                        logo = k["Logo"]
+                        businessName = k["BusinessName"]
 
                 newSponsor = {
                     "FoodTags": sponsors[sponsorcounter]["FoodTags"],
@@ -321,15 +328,61 @@ def addsponsors(response):
                     "DrinkTags": sponsors[sponsorcounter]["DrinkTags"],
                     "DrinkItem": sponsors[sponsorcounter]["DrinkName"],
                     "DrinkImage": sponsors[sponsorcounter]["DrinkImage"],
-                    "Location": "14 Sandton road", #sponsors[sponsorcounter]["Locations"]
+                    "Location": sponsors[sponsorcounter]["Location"],
                     "MealTag": sponsors[sponsorcounter]["PairingTags"],
-                    "Distance": random.randint(10,20),
+                    "Distance": sponsors[sponsorcounter]["Distance"],
                     "Price": "R59.99",
-                    "Logo" : businesses[random.randint(1,2)]["Logo"],
+                    "Logo" : logo,
                     "IsSponsor": True,
-                    "PID" : newpid
+                    "PID" : newpid,
+                    "BPID" : sponsors[sponsorcounter]["BPID"],
+                    "BusinessName" : businessName,
+                    "SponsoredDescription" : sponsors[sponsorcounter]["PairingDescription"]
+
                 }
                 response.insert(i, newSponsor)
                 sponsorcounter = sponsorcounter+1
+
+    return response
+
+def add_sponsored_distances(response, latitude, longitude):
+    # must be called for geolocation to work
+    geoLoc = Nominatim(user_agent="GetLoc")
+    geolocator = Nominatim(user_agent="GetLoc")
+    for i in response:
+        # calculating distance between pairs and the user
+        tempdistance = 50000
+
+        for j in i["CoordinatesList"]:
+            calcdist = distance.distance((j['Latitude'], j['Longitude']), (latitude, longitude)).kilometers
+            if calcdist < tempdistance:
+                i['Distance'] =round(calcdist)
+                tempdistance = calcdist
+
+                location = geolocator.reverse(f"{j['Latitude']}, {j['Longitude']}")
+                address = location.raw["address"]
+                addressstring = ""
+                if "road" in address:
+                    addressstring = addressstring + address["road"]
+
+                if "suburb" in address:
+                    addressstring = addressstring + ", " + address["suburb"]
+
+                if "town" in address:
+                    addressstring = addressstring + ", " + address["town"]
+
+                i["Location"] = addressstring
+
+
+
+    return response
+
+def remove_out_of_range(response):
+    counter = 0
+    for i in range(len(response)):
+        if response[counter]["Distance"] > response[counter]["Radius"]:
+            del response[counter]
+        else:
+            counter = counter + 1
 
     return response
