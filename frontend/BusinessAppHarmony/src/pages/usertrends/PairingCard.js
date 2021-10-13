@@ -2,24 +2,18 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Grid } from "@material-ui/core";
 import useStyles from "./styles";
 // components
-import PageTitle from "../../components/PageTitle/PageTitle";
 import Widget from "../../components/Widget/Widget";
 import { Typography } from "../../components/Wrappers/Wrappers";
-import PayPal from '../dashboard/components/Table/PayPal';
-import { GrPaypal } from "react-icons/gr";
-import { FiMinusCircle } from "react-icons/fi";
-import Button from '@material-ui/core/Button';
+
 
 export default function PairingCard(data) {
     const classes = useStyles();
-    console.log(data);
 
     return (
         <>
             <Grid item xs={12}>
                 <Widget
                     disableWidgetMenu
-                    bodyClass={classes.tableWidget}
                 >
                     <Typography size="xl" weight="bold">
                         Trending Pairing Options
@@ -34,7 +28,6 @@ export default function PairingCard(data) {
                     <Widget
                         disableWidgetMenu
                         noBodyPadding
-                        bodyClass={classes.tableWidget}
                     >
                         <div style={{ marginTop: -35, width: "100%" }}>
                             <div style={{ width: "50%", float: "left" }}>
