@@ -11,7 +11,7 @@ import Form from './Form';
 import useStyles from "./styles";
 
 // logo
-import logo from "./logo.svg";
+import logo from "./logo.png";
 
 
 // context

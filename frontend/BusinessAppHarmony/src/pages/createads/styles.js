@@ -52,7 +52,8 @@ export default makeStyles(theme => ({
   },
   tagName: {
     fontSize: 20,
-    width: 65
+    width: 85,
+    marginRight: -23
   },
   MealContainer: {
     marginTop: 20,
@@ -117,7 +118,7 @@ export default makeStyles(theme => ({
     float: "auto",
   },
   addButton: {
-    backgroundColor: "#81b5c2", color: "white", marginLeft: 45, height: 35, borderRadius: 10, paddingLeft: 12, paddingRight: 12, width: "30%",
+    backgroundColor: theme.palette.primary.main, color: "white", marginLeft: 45, height: 35, borderRadius: 10, paddingLeft: 12, paddingRight: 12, width: "30%",
     boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)"
 
   },
@@ -238,9 +239,17 @@ export default makeStyles(theme => ({
   floatLeft: {
     float: "left"
   },
+  clearBoth: {
+    clear: "both"
+  },
   errorDiv: {
     fontSize: 15,
-    marginTop: 0,
+    marginTop: -5,
+    color: "#717171",
+  },
+  errorDivDescr: {
+    fontSize: 15,
+    marginTop: 15,
     color: "#717171",
   },
   errorStar: {
@@ -249,5 +258,10 @@ export default makeStyles(theme => ({
   justifySpaceBet: {
     justifyContent: "space-between",
     width: "100%"
+  },
+  radiusIcon: {
+    float: "left",
+    height: 25,
+    width: 25
   }
 }));
