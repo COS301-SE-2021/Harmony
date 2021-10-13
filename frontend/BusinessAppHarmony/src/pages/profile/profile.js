@@ -62,7 +62,6 @@ export default function ProfilePage() {
   const detectChangeRef = useRef();
   useEffect(() => {
     detectChange(false);
-    console.log("change detected");
     /**load profile data */
     fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/getprofile", {
       headers: {
