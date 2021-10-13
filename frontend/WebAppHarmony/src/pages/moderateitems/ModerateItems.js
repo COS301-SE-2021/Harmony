@@ -9,25 +9,16 @@ import PageTitle from "../../components/PageTitle";
 import { Typography } from "../../components/Wrappers";
 import AddItemForm from "./AddItemForm";
 import ItemsButton from "./ItemsButton";
+import Widget from "../../components/Widget";
 export default function TypographyPage() {
   var classes = useStyles();
   /**The name, description and tags for the form */
   const [name, setName] = useState(" ");
   const [description, setDescription] = useState(" ");
   const requestedItems = {
-    Data: [{
-      FoodName: "Malva Pudding",
-      FoodDescription: "Malva pudding is a sweet pudding that contains apricot jam and has a spongy caramelized texture.",
-    },
-    {
-      FoodName: "Cape Malay Curry",
-      FoodDescription: "Influenced by Malay cuisine, Cape/Malay curry powder/masala is a blend of sweet and pungent spices. A curry powder/masala of a mild heat yet full of the flavours you expect in Indian curry.",
-    },
-    { FoodName: "Biltong", FoodDescription: "Biltong is a form of dried, cured meat that originated in Southern African countries Various types of meat are used to produce it, ranging from beef to game" },
-    { FoodName: "Boerewors", FoodDescription: "Boerewors, a type of sausage which originated in South Africa. It is an important part of South African, Zimbabwean and Namibian cuisine and is popular across Southern Africa" },
-    { FoodName: "Amarula Don Pedro", FoodDescription: "Amarula is a cream liqueur from South Africa. It is made with sugar, cream and the fruit of the African marula tree" },
-    { FoodName: "Melktert", FoodDescription: "Melktert is an Afrikaner dessert consisting of a sweet pastry crust containing a custard filling made from milk, flour, sugar and eggs." }]
+    Data: []
   };
+
   const [requestedItemsAPI, setRequested] = useState(requestedItems);
 
   useEffect(() => {
@@ -56,7 +47,25 @@ export default function TypographyPage() {
 
   return (
     <>
-      <PageTitle title="Add Items to Database" />
+    {/*<PageTitle title="Add Items to Database" />*/}
+      <Grid item xs={12}>
+        <Widget
+            disableWidgetMenu
+            bodyClass={classes.tableWidget}
+        >
+          <Typography size="xl" weight="bold">
+            Add Items to Database
+          </Typography>
+
+          <Typography size="md" weight="light">
+            This page is used to Add items to the database. The User can request for a new item from The Harmony Mobile Application and it will appear on the list. <br/>
+            The Admin can select the item to be added from the left to auto-fill the form fields or fill in the form fields to add an item. <br/>
+            Once an item is added, it will be available on The Harmony Mobile Application and you are able to create a Pairing with the item.
+          </Typography>
+        </Widget>
+      </Grid>
+      <br />
+      <br />
       <Grid container spacing={1}>
         <Grid item xs={12} md={12}>
           <div className={classes.root}>

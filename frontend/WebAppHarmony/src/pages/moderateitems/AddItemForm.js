@@ -89,9 +89,12 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
         method: "POST",
             body: JSON.stringify(request)
     })
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .then(alert("New item has Successfully been added to the database"))
+           // .then(response => response.json())
+            //.then(data => console.log(data))
+            .then(data => data.json()) // Parsing the data into a JavaScript object
+            .then(json => alert( JSON.stringify(json))) // Displaying the stringified data in an alert popup
+      //      .then(json => alert("New item has Successfully been added to the database" + (JSON.stringify(data)))) // Displaying the stringified data in an alert popup
+     //       .then(alert("New item has Successfully been added to the database" + data))
             .then(handleClear())
     }
 

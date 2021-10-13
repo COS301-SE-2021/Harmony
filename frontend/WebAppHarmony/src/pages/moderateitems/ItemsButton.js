@@ -22,8 +22,9 @@ function ItemsButton(item, ...props) {
         method: "POST",
         body: JSON.stringify(request)
     })
-        .then(response => response.json())
-        .then(data => console.log(data))
+        .then(data => data.json()) // Parsing the data into a JavaScript object
+       // .then(json => alert( JSON.stringify(json)))
+        .then(alert("New item has been removed from the list"))
 
     }
 
