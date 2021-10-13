@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { Auth } from 'aws-amplify';
 import {
   Grid,
   Table,
@@ -19,6 +20,10 @@ import useStyles from "../../styles";
 import { Typography } from "../../../../components/Wrappers";
 import { IoMdCloudDownload } from "react-icons/io";
 import { GrPaypal } from "react-icons/gr";
+
+import Alert from '@mui/material/Alert';
+import Collapse from '@mui/material/Collapse';
+
 const states = {
   Active: "success",
   Expired: "secondary",
@@ -38,16 +43,46 @@ export default function TableComponent({ data }) {
     setTimePeriod(event.target.value);
   };
 
+  /**to detect if a child component is changed */
+  const [change, detectChange] = useState(true);
+  const detectChangeRef = useRef();
   useEffect(() => {
-    console.log(JSON.stringify({ BID: "b4", TimePeriod: TimePeriod }));
-    // fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/getprofile", { BID: "b1" })
+    detectChange(false);
+    console.log("change detected");
+    /**load profile data */
     fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/getstatement", {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       method: "POST",
-      body: JSON.stringify({ BID: "b4", TimePeriod: TimePeriod })
+      body: JSON.stringify({ BID: Auth.user.username, TimePeriod: TimePeriod })
+    })
+      .then(res => res.json())
+      .then(
+        (result) => {
+          console.log(result);
+          setResult(result);
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+        }
+      )
+  }, [change])
+
+
+  useEffect(() => {
+    console.log(JSON.stringify({ BID: Auth.user.username, TimePeriod: TimePeriod }));
+
+    fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/getstatement", {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: JSON.stringify({ BID: Auth.user.username, TimePeriod: TimePeriod })
     })
       .then(res => res.json())
       .then(
@@ -81,6 +116,37 @@ export default function TableComponent({ data }) {
     headers: headers,
     filename: 'StatementOfAccount.csv'
   };
+
+  /**to toggle the display of the toast */
+  const [openPaypal, setOpenPaypal] = React.useState(false);
+  const detectPaymentRef = useRef();
+  /**use effect to detect the alert opening and will auto close after an amount of time */
+  useEffect(() => {
+    detectChange(true);
+    setTimeout(function () {
+      setOpenPaypal(false);
+    }, 3000);
+    fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/getstatement", {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: JSON.stringify({ BID: Auth.user.username, TimePeriod: TimePeriod })
+    })
+      .then(res => res.json())
+      .then(
+        (result) => {
+          console.log(result);
+          setResult(result);
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+        }
+      )
+  }, [openPaypal])
   return (
     <Grid item xs={12}>
       <Widget
@@ -88,6 +154,8 @@ export default function TableComponent({ data }) {
         noBodyPadding
         bodyClass={classes.tableWidget}
       >
+        <Button style={{ display: 'none' }} onClick={() => detectChange(true)} ref={detectChangeRef} />
+
         <div style={{ float: "right" }}>
           <Select
             labelId="demo-simple-select-outlined-label"
@@ -161,13 +229,21 @@ export default function TableComponent({ data }) {
               R{result.OutsandingAmount}
             </Typography>
           </div>
+
           <div style={{ clear: "both" }}></div>
-          {checkout ? (<PayPal amount={result.OutsandingAmount} />) : (
-            <Button className={classes.payNowButton} variant="contained" onClick={() => { setCheckout(true) }}><GrPaypal style={{ marginRight: 10 }} size={20} color="white" />Pay now</Button>
+          <Collapse in={openPaypal}>
+            <Alert onClose={() => { setOpenPaypal(false); }}>Payment Successful. </Alert>
+            <br />
+
+          </Collapse>
+          {checkout ? (<PayPal amount={result.OutsandingAmount} reference={detectChangeRef} paymentRef={detectPaymentRef} />) : (
+            <Button className={classes.payNowButton} color="secondary" variant="contained" onClick={() => { setCheckout(true) }}><GrPaypal style={{ marginRight: 10 }} size={20} color="white" />Pay now</Button>
           )}
         </div>
+        <Button style={{ display: 'none' }} onClick={() => setOpenPaypal(true)} ref={detectPaymentRef} />
       </Widget>
     </Grid>
+
 
   );
 }
