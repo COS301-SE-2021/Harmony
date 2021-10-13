@@ -24,7 +24,7 @@ export default function AdvertsPage() {
         'Content-Type': 'application/json'
       },
       method: "POST",
-      body: JSON.stringify({ BID:  Auth.user.username })
+      body: JSON.stringify({ BID: Auth.user.username })
     })
       .then(res => res.json())
       .then(
@@ -39,29 +39,6 @@ export default function AdvertsPage() {
         }
       )
   }, [])
-
-  const data = {
-    Adverts: [
-      {
-        FoodImage: "https://thestayathomechef.com/wp-content/uploads/2016/06/The-Most-Amazing-Chocolate-Cake-2-e1598548411160.jpg",
-        DrinkImage: "https://www.gardeningknowhow.com/wp-content/uploads/2012/09/herbal-tea-1.jpg",
-        FoodName: "Cake",
-        DrinkName: "Tea",
-        Locations: ["Durban", "Pretoria", "Westville"],
-        FoodTags: ["Sweet", "Warm"],
-        DrinkTags: ["Warm", "Sweet"],
-        PairingTags: "Snack",
-        Radius: "25",
-        TimeLeft: "24 Days",
-        Status: "Active",
-        DateCreated: "04/10/2021",
-        NumberOfClicks: 32,
-        AverageTime: 1.24,
-        TotalTime: 39.68
-      },
-
-    ]
-  }
 
   return (
     <Grid container spacing={4} >
