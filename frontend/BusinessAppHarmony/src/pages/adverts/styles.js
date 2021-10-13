@@ -19,22 +19,6 @@ export default makeStyles(theme => ({
     borderRadius: 5,
   },
 
-  PreviewContainer: {
-    display: "block",
-    width: "50%",
-    border: "1px solid #EDEDED",
-    boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.02)",
-    borderRadius: 5,
-  },
-  PreviewContainerPairing: {
-    display: "block",
-    border: "1px solid #EDEDED",
-    boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.02)",
-    height: "auto",
-    width: "90%",
-    margin: "auto",
-    borderRadius: 5,
-  },
   PreviewPiece: {
     marginBottom: 10,
     width: "50%",
@@ -43,9 +27,6 @@ export default makeStyles(theme => ({
   },
   floatLeft: {
     float: "left"
-  },
-  clearBoth: {
-    clear: "both"
   },
   justifySpaceBet: {
     justifyContent: "space-around",

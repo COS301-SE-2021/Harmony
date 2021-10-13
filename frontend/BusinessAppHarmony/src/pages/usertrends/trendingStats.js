@@ -22,7 +22,6 @@ export default function TrendingStats() {
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log(result);
                     setRecommendations(result);
                 },
                 // Note: it's important to handle errors here
@@ -37,7 +36,6 @@ export default function TrendingStats() {
             <Grid item xs={12}>
                 <Widget
                     disableWidgetMenu
-                    bodyClass={classes.tableWidget}
                 >
                     <Typography size="xl" weight="bold">
                         Trending Statistics
@@ -55,7 +53,6 @@ export default function TrendingStats() {
             <Grid item xs={6}>
                 <Widget
                     disableWidgetMenu
-                    bodyClass={classes.tableWidget}
                 >
                     <Typography size="md" weight="bold">
                         Trending Pairing Statistics
@@ -63,8 +60,8 @@ export default function TrendingStats() {
                     <Table className="mb-0">
                         <TableHead>
                             <TableRow className={classes.tableRowHeader}>
-                                <TableCell style={{color:"white"}}>FOOD NAME</TableCell>
-                                <TableCell style={{color:"white"}}>DRINK NAME</TableCell>
+                                <TableCell style={{ color: "white" }}>FOOD NAME</TableCell>
+                                <TableCell style={{ color: "white" }}>DRINK NAME</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -90,7 +87,7 @@ export default function TrendingStats() {
                     <Table className="mb-0">
                         <TableHead>
                             <TableRow className={classes.tableRowHeader}>
-                                <TableCell style={{color:"white"}}>TAG NAME</TableCell>
+                                <TableCell style={{ color: "white" }}>TAG NAME</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
