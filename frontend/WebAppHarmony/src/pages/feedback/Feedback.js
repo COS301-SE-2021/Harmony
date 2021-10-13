@@ -4,6 +4,8 @@ import MUIDataTable from "mui-datatables";
 import axios from 'axios';
 import {Grid} from "@material-ui/core";
 import { FormSubmit_ImageUrl } from "../../components/Forms/FormSubmit_ImageUrl";
+import Widget from "../../components/Widget";
+import {Typography} from "../../components/Wrappers";
 
 
 export default function DataTable() {
@@ -76,7 +78,23 @@ export default function DataTable() {
 
   return (
       <>
-        <PageTitle title="User Feedback on Harmony AI"/>
+        {/*<PageTitle title="User Feedback on Harmony AI"/>*/}
+          <Grid item xs={12}>
+              <Widget
+                  disableWidgetMenu
+
+              >
+                  <Typography size="xl" weight="bold">
+                      Add to AI
+                  </Typography>
+
+                  <Typography size="md" weight="light">
+                      Insert Text here
+                  </Typography>
+              </Widget>
+          </Grid>
+          <br/>
+          <br/>
         <Grid container spacing={4}>
           <Grid item xs={12}>
 
