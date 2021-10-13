@@ -12,13 +12,6 @@ export default makeStyles(theme => ({
   text: {
     marginBottom: theme.spacing(2),
   },
-  textAreaField: {
-    width: "85%",
-    height: 100,
-    padding: 15,
-    fontFamily: "sans-serif-light",
-    color: "#717171",
-  },
   individualTextField: {
     width: "75%",
     height: 10,
@@ -78,17 +71,6 @@ export default makeStyles(theme => ({
     float: "left",
     backgroundColor: "white",
     textAlign: "center",
-    boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)"
-  },
-  requestContainer: {
-    width: "25%",
-    height: 620,
-    padding: 15,
-    borderRadius: 5,
-    backgroundColor: "white",
-    float: "left",
-    textAlign: "center",
-    // margin: "auto",
     boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)"
   },
   button: {
@@ -154,8 +136,6 @@ export default makeStyles(theme => ({
   PreviewPiece: {
     marginBottom: 10
   },
-  FileInput: {
-  },
   FoodLabelButton: {
     backgroundColor: "#FF6347",
     padding: 8,
@@ -211,36 +191,10 @@ export default makeStyles(theme => ({
     fontSize: 18
 
   },
-  displayFlexJustifyCenter: {
-    display: "flex", justifyContent: "center"
-  },
-  displayFlexJustifyAround: {
-    display: "flex", justifyContent: "space-around"
-  },
-  background: {
-    flexDirection: "row", justifyContent: "space-around", paddingTop: 15, backgroundColor: "#F3F3F3",
-  },
-  greyContainer: {
-    justifyContent: "center", display: "flex", flexDirection: "row", paddingTop: 25, backgroundColor: "#F3F3F3"
-  },
-  displayFlexOnly: {
-    display: "flex"
-  },
   icon: { float: "right", height: 20, width: 20, marginTop: 15, marginBottom: 0 },
-  fontSizeMedium: {
-    fontSize: 20,
-    fontFamily: "sans-serif-light",
-    marginTop: 0
-  },
-  pageContainer: {
-    float: "right",
-    width: "95%"
-  },
+
   floatLeft: {
     float: "left"
-  },
-  clearBoth: {
-    clear: "both"
   },
   errorDiv: {
     fontSize: 15,
@@ -254,10 +208,6 @@ export default makeStyles(theme => ({
   },
   errorStar: {
     color: "red", fontSize: 25, marginRight: 5, marginTop: -10
-  },
-  justifySpaceBet: {
-    justifyContent: "space-between",
-    width: "100%"
   },
   radiusIcon: {
     float: "left",

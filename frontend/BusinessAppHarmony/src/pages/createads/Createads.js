@@ -88,8 +88,6 @@ export default function TypographyPage() {
           <CreateAdForm />
         </Grid>
       </Grid>
-
-
     </>
   );
 }
