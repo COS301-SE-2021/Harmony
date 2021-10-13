@@ -9,7 +9,7 @@ def create_tag(event, context):
     tagname = event['TagName']
     type = event['Type']
     url_semi1 = "https://eastus.api.cognitive.microsoft.com/customvision/v3.0/training/projects/b2c99ecb-e43e-4a59-ac87-a189c109e267/tags?name="
-    url_semi2 = "type="
+    url_semi2 = "&type="
     url = url_semi1 + tagname + url_semi2 + type
 
     headers = {

@@ -2,13 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Drawer, IconButton, List } from "@material-ui/core";
 import {
   Home as HomeIcon,
-  NotificationsNone as NotificationsIcon,
-  FormatSize as TypographyIcon,
-  FilterNone as UIElementsIcon,
   BorderAll as TableIcon,
-  QuestionAnswer as SupportIcon,
-  LibraryBooks as LibraryIcon,
-  HelpOutline as FAQIcon,
   ArrowBack as ArrowBackIcon,
 } from "@material-ui/icons";
 import FeedbackIcon from "@material-ui/icons/Feedback";
@@ -27,7 +21,6 @@ import useStyles from "./styles";
 
 // components
 import SidebarLink from "./components/SidebarLink/SidebarLink";
-import Dot from "./components/Dot";
 
 // context
 import {
@@ -38,10 +31,10 @@ import {
 
 const structure = [
   { id: 0, label: "Statistics", link: "/app/usertrends", icon: <HomeIcon /> },
-  { id: 1, label: "Adverts", link: "/app/adverts", icon: <MdDashboard size={25}/>},
+  { id: 1, label: "Adverts", link: "/app/adverts", icon: <MdDashboard size={25} /> },
   { id: 3, label: "Statements", link: "/app/dashboard", icon: <MdViewList size={25} /> },
-  { id: 4, label: "Create Advert", link: "/app/createads", icon: <QueueIcon/>},
-  { id: 5, label: "Profile", link: "/app/profile", icon: <MdAccountCircle size={25}/>},
+  { id: 4, label: "Create Advert", link: "/app/createads", icon: <QueueIcon /> },
+  { id: 5, label: "Profile", link: "/app/profile", icon: <MdAccountCircle size={25} /> },
   { id: 6, type: "divider" },
 
 ];
@@ -57,7 +50,7 @@ function Sidebar({ location }) {
   // local
   var [isPermanent, setPermanent] = useState(true);
 
-  useEffect(function() {
+  useEffect(function () {
     window.addEventListener("resize", handleWindowWidthChange);
     handleWindowWidthChange();
     return function cleanup() {

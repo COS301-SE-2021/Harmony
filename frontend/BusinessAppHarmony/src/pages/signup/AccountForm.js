@@ -34,6 +34,7 @@ export class AccountForm extends Component {
 							onChange={handleChange("email")}
 							defaultValue={values.email}
 							fullWidth
+							helperText="Passwords must be atleast 8 characters"
 							autoComplete="email"
 						/>
 					</Grid>
@@ -47,12 +48,11 @@ export class AccountForm extends Component {
 							onChange={handleChange("password")}
 							defaultValue={values.password}
 							fullWidth
-							type="password"
-							helperText="Password needs to be 8 characters"
+
 						/>
 					</Grid>
 
-									</Grid>
+				</Grid>
 			</React.Fragment>
 		);
 	}

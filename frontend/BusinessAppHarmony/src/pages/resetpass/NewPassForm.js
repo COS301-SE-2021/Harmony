@@ -9,7 +9,7 @@ export class NewPassForm extends Component {
 		return (
 			<React.Fragment>
 				<Typography variant="h6" gutterBottom>
-					New Password
+					Personal Details
 				</Typography>
 				<Grid container spacing={24}>
 					<Grid item xs={12}>

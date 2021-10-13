@@ -2,12 +2,11 @@ import React from "react";
 import {
   Route,
   Switch,
-  Redirect,
   withRouter,
 } from "react-router-dom";
 import classnames from "classnames";
-import {Box, IconButton, Link} from '@material-ui/core'
-import Icon from '@mdi/react'
+import { Box } from '@material-ui/core'
+
 
 
 // styles
@@ -36,33 +35,33 @@ function Layout(props) {
 
   return (
     <div className={classes.root}>
-        <>
-          <Header history={props.history} />
-          <Sidebar />
-          <div
-            className={classnames(classes.content, {
-              [classes.contentShift]: layoutState.isSidebarOpened,
-            })}
-          >
-            <div className={classes.fakeToolbar} />
-            <Switch>
-              <Route path="/app/usertrends" component={HomePage} />
-              <Route path="/app/dashboard" component={Statements} />
-              <Route path="/app/createads" component={CreateAds} />
-              <Route path="/app/adverts" component={Adverts} />
-              <Route path="/app/Profile" component={Profile} />
+      <>
+        <Header history={props.history} />
+        <Sidebar />
+        <div
+          className={classnames(classes.content, {
+            [classes.contentShift]: layoutState.isSidebarOpened,
+          })}
+        >
+          <div className={classes.fakeToolbar} />
+          <Switch>
+            <Route path="/app/usertrends" component={HomePage} />
+            <Route path="/app/dashboard" component={Statements} />
+            <Route path="/app/createads" component={CreateAds} />
+            <Route path="/app/adverts" component={Adverts} />
+            <Route path="/app/Profile" component={Profile} />
 
-            </Switch>
-            <Box
-              mt={5}
-              width={"100%"}
-              display={"flex"}
-              alignItems={"center"}
-              justifyContent="space-between"
-            >
-            </Box>
-          </div>
-        </>
+          </Switch>
+          <Box
+            mt={5}
+            width={"100%"}
+            display={"flex"}
+            alignItems={"center"}
+            justifyContent="space-between"
+          >
+          </Box>
+        </div>
+      </>
     </div>
   );
 }

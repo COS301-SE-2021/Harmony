@@ -9,7 +9,7 @@ import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
 import { Auth } from "aws-amplify";
-import { withRouter, Link } from 'react-router-dom';
+
 const styles = theme => ({
 	appBar: {
 		position: "relative"
@@ -111,7 +111,7 @@ class Form extends React.Component {
 				<main className={classes.layout}>
 					<Paper className={classes.paper}>
 						<Typography component="h1" variant="h4" align="center">
-							New Sign Up
+							Reset Password
 						</Typography>
 						<Stepper activeStep={activeStep} className={classes.stepper}>
 							{steps.map(label => (
@@ -133,9 +133,6 @@ class Form extends React.Component {
 									color="primary"
 									size="large"
 									className={classes.forgetButton}
-									to="/login"
-									component={Link}
-									// onClick = {this.handleSignIn}}
 								>
 								Login
 								</Button>
