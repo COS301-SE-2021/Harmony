@@ -9,6 +9,8 @@ import {FormSubmit_NewTag} from "../../components/Forms/FormSubmit_NewTag";
 import {FormSubmit_Iterations} from "../../components/Forms/FormSubmit_Iterations";
 import { withRouter } from "react-router-dom";
 import {useHistory} from "react-router-dom"
+import Widget from "../../components/Widget";
+import {Typography} from "../../components/Wrappers";
 
 const useStyles = makeStyles({
   field: {
@@ -80,15 +82,32 @@ export default function DataTable() {
 
   return (
       <>
-        <PageTitle title="Add to AI"
-                   // button={<Button
-                   //     variant="contained"
-                   //     size="large"
-                   //     color="secondary"
-                   //     onClick={handleRoute}>
-                   //   Refresh
-                   // </Button>}
-        />
+        {/*<PageTitle title="Add to AI"*/}
+        {/*           // button={<Button*/}
+        {/*           //     variant="contained"*/}
+        {/*           //     size="large"*/}
+        {/*           //     color="secondary"*/}
+        {/*           //     onClick={handleRoute}>*/}
+        {/*           //   Refresh*/}
+        {/*           // </Button>}*/}
+        {/*/>*/}
+
+        <Grid item xs={12}>
+          <Widget
+              disableWidgetMenu
+              bodyClass={classes.tableWidget}
+          >
+            <Typography size="xl" weight="bold">
+              Add to AI
+            </Typography>
+
+            <Typography size="md" weight="light">
+              Insert Text here
+            </Typography>
+          </Widget>
+        </Grid>
+        <br/>
+        <br/>
         <Grid container spacing={4}>
           <Grid item xs={12}>
             <MUIDataTable

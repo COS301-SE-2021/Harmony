@@ -8,6 +8,8 @@ import {FormSubmit_ImageUrl} from "../../components/Forms/FormSubmit_ImageUrl";
 import {FormSubmit_NewTag} from "../../components/Forms/FormSubmit_NewTag";
 import {FormSubmit_Iterations} from "../../components/Forms/FormSubmit_Iterations";
 import {FormSubmit_PublishIterations} from "../../components/Forms/FormSubmit_PublishIterations";
+import Widget from "../../components/Widget";
+import {Typography} from "../../components/Wrappers";
 
 
 const useStyles = makeStyles({
@@ -85,7 +87,8 @@ export default function DataTable() {
   return (
       <>
 
-        <PageTitle title="Train AI"
+
+        <PageTitle title=""
                    button={<Button
                        variant="contained"
                        size="large"
@@ -94,6 +97,23 @@ export default function DataTable() {
                      Train New Iteration
         </Button>}
         />
+        <Grid item xs={12}>
+          <Widget
+              disableWidgetMenu
+              bodyClass={classes.tableWidget}
+          >
+            <Typography size="xl" weight="bold">
+              Train AI
+            </Typography>
+
+            <Typography size="md" weight="light">
+              Insert Text here
+            </Typography>
+          </Widget>
+        </Grid>
+        <br/>
+        <br/>
+
         <Grid container spacing={4}>
           <Grid item xs={12}>
             <MUIDataTable

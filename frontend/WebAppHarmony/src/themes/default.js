@@ -6,6 +6,8 @@ const warning = "#FFC260";
 const success = "#3CD4A0";
 const info = "#9013FE";
 
+
+
 const lightenRate = 7.5;
 const darkenRate = 15;
 
