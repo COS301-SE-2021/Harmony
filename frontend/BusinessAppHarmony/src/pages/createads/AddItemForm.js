@@ -23,7 +23,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
     const [formDescription, setDescription] = useState("");
     const [formTags, setTags] = useState("");
     const [FoodOrDrink, setFoodOrDrink] = React.useState('none');
-    const [img, setImg] = useState("http://beepeers.com/assets/images/commerces/default-image.jpg");
+    const [img, setImg] = useState("https://beepeers.com/assets/images/commerces/default-image.jpg");
     var classes = useStyles();
     const tagSelector = useRef();
 
@@ -46,7 +46,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
     const handleClear = () => {
         setName("");
         setDescription("");
-        setImg("http://beepeers.com/assets/images/commerces/default-image.jpg");
+        setImg("https://beepeers.com/assets/images/commerces/default-image.jpg");
         fileRef.current.value = "";
         setFoodOrDrink('none');
         setTags("");
@@ -67,7 +67,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
         if (supportedFormats.includes(e.target.files[0].type)) { reader.readAsDataURL(e.target.files[0]) }
         else {
             alert(e.target.files[0].type + " is not a supported file format.");
-            setImg("http://beepeers.com/assets/images/commerces/default-image.jpg");
+            setImg("https://beepeers.com/assets/images/commerces/default-image.jpg");
         }
     }
 
