@@ -107,7 +107,8 @@ export default function DataTable() {
             </Typography>
 
             <Typography size="md" weight="light">
-              Insert Text here
+              This page allows the Admin to create new Iterations from the updated Images and Tags.
+              Once the Iteration is created, you can punlish an Iteration with the form below and use the Iteration on the Harmony Mobile App
             </Typography>
           </Widget>
         </Grid>

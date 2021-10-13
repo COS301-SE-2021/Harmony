@@ -102,7 +102,8 @@ export default function DataTable() {
             </Typography>
 
             <Typography size="md" weight="light">
-              Insert Text here
+              Harmony AI will be continously learning and this page will assist in adding to the to the Dataset.<br/>
+              We have a form to create New Food Tags and a Form to Add images for each Food Tag
             </Typography>
           </Widget>
         </Grid>

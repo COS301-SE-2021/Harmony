@@ -89,7 +89,9 @@ export default function DataTable() {
                   </Typography>
 
                   <Typography size="md" weight="light">
-                      Insert Text here
+                    This page recieves Feedback from the Harmony Mobile App on AI performance.
+                      From the Table below we can see which have been identfied correctly and incorrectly.
+                      We can also use the images from the User to Train our Dataset using the form below.
                   </Typography>
               </Widget>
           </Grid>
