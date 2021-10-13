@@ -39,7 +39,6 @@ export default function LocationForm(reference, ...props) {
             body: JSON.stringify({ BID: Auth.user.username, lat: coordinates.lat, lng: coordinates.lng, "LocationName": values.LocationName, "Address": address })
         })
             .then(res => res.json())
-            .then(alert("A new Successfully been Added"))
             .then(
                 (result) => {
                     console.log(reference.reference.current.click());
