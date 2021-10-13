@@ -132,7 +132,7 @@ export default function TableComponent({ data }) {
         'Content-Type': 'application/json'
       },
       method: "POST",
-      body: JSON.stringify({ BID: "b4", TimePeriod: TimePeriod })
+      body: JSON.stringify({ BID: Auth.user.username, TimePeriod: TimePeriod })
     })
       .then(res => res.json())
       .then(
