@@ -101,7 +101,7 @@ export default function DataTable() {
           <Grid item xs={12}>
 
             <MUIDataTable
-                title={"User Feedback Table: This Table recieves feedback from the Harmony Mobile App if the Item Scanned was Correctly or Incorrectly "}
+                title={"User Feedback Table from the Harmony Mobile App"}
                 data={posts}
                 columns={columns}
                 options={options}
