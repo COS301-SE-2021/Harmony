@@ -28,7 +28,7 @@ Download the app and access the webpages below:
  ![Firstname Lastname](https://i.ibb.co/30PRKKn/cv-pic-2-4-250x200new.jpg "Firstname Lastname") <br/> Tiashka Seetal <br/> u19226684 | [GitHub](https://github.com/tiashka) <br/> [Profile Page](https://tiashka.github.io/COS301Website2/) <br/> [LinkedIn](https://www.linkedin.com/in/tiashka-seetal-9a9841203/) <br/> | Front-end development <br/> Making things pretty |
  ![Firstname Lastname](https://i.ibb.co/c6t0KSk/74b4e6ae-958e-443b-a123-c77ac2.jpg "Arshad Sacoor") <br/> Arshad Sacoor <br/> u17012512 | [GitHub](https://github.com/ASacoor) <br/> [Profile Page](http:www.arshad.co.za) <br/> [LinkedIn](https://www.linkedin.com/in/arshad-sacoor-613a5720b/) <br/> | Think Different |
  ![Firstname Lastname](https://i.ibb.co/VmK1672/20210518-143221.jpg "Firstname Lastname") <br/> Mohammed Carrim <br/> u18080813 | [GitHub](https://github.com/mohammedcarrim) <br/> [Profile Page](https://tiashka.github.io/COS301Website2/) <br/> [LinkedIn](https://www.linkedin.com/in/mohammed-carrim-706415194/) <br/> | Python, AI, Serverless |
- ![Firstname Lastname](https://i.ibb.co/xDJk39c/Github-Img.jpg "Firstname Lastname") <br/> Keval Maharaj <br/> u18012559 | [GitHub](https://github.com/Keval157) <br/> [Profile Page](https:) <br/> [LinkedIn](https://www.linkedin.com/in/keval-maharaj-829648210/) <br/> | Something exciting |
+ ![Firstname Lastname](https://i.ibb.co/JBX7zc3/20211013-171519l.jpg "Firstname Lastname") <br/> Keval Maharaj <br/> u18012559 | [GitHub](https://github.com/Keval157) <br/> [Profile Page](https:) <br/> [LinkedIn](https://www.linkedin.com/in/keval-maharaj-829648210/) <br/> | Machine Learning <br/> Data Science <br/> Back-end Development <br/> Java, Python, C++ |
 
 ---
 
