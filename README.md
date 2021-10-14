@@ -13,7 +13,7 @@ Visiting South Africa a tourist would not know what a Bunny Chow is, let alone w
 Download the app and access the webpages below:
 
 * :iphone: [Download standalone APK available for Android](https://expo.io/artifacts/299e2ab4-88c3-488d-ba56-be85e99f4f30)
-* 
+
 * :iphone: [Expo Go: Harmony Mobile App](https://expo.dev/@dreamteam_cos301/Harmony)
 
 * :computer: [Admin Webpage](https://dev.d2dba1zn8s4hhf.amplifyapp.com/#/login)
