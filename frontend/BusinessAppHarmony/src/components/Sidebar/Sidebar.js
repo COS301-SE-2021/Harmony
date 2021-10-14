@@ -10,11 +10,6 @@ import QueueIcon from '@material-ui/icons/Queue';
 import { useTheme } from "@material-ui/styles";
 import { withRouter } from "react-router-dom";
 import classNames from "classnames";
-import { MdAccountCircle } from "react-icons/md/";
-import { MdDashboard } from "react-icons/md/";
-import { MdViewList } from "react-icons/md";
-
-//import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWalletIcon';
 
 // styles
 import useStyles from "./styles";
@@ -30,12 +25,25 @@ import {
 } from "../../context/LayoutContext";
 
 const structure = [
-  { id: 0, label: "Statistics", link: "/app/usertrends", icon: <HomeIcon /> },
-  { id: 1, label: "Adverts", link: "/app/adverts", icon: <MdDashboard size={25} /> },
-  { id: 3, label: "Statements", link: "/app/dashboard", icon: <MdViewList size={25} /> },
-  { id: 4, label: "Create Advert", link: "/app/createads", icon: <QueueIcon /> },
-  { id: 5, label: "Profile", link: "/app/profile", icon: <MdAccountCircle size={25} /> },
-  { id: 6, type: "divider" },
+  { id: 0, label: "Dashboard", link: "/app/dashboard", icon: <HomeIcon /> },
+  {
+    id: 1,
+    label: "Add Items",
+    link: "/app/moderateitems",
+    icon: <QueueIcon />,
+  },
+  // { id: 2, label: "Train AI", link: "/app/tables", icon: <TableIcon /> },
+  //
+
+  {
+    id: 2, label: "Harmony AI", icon: <TableIcon/>,
+    children: [
+      {label: "Add to AI", link: "/app/tables"},
+      {label: "Train AI", link: "/app/train"},
+    ],
+  },
+  { id: 3, label: "User Feedback", link: "/app/feedback", icon: <FeedbackIcon /> },
+  { id: 4, type: "divider" },
 
 ];
 
@@ -50,7 +58,7 @@ function Sidebar({ location }) {
   // local
   var [isPermanent, setPermanent] = useState(true);
 
-  useEffect(function () {
+  useEffect(function() {
     window.addEventListener("resize", handleWindowWidthChange);
     handleWindowWidthChange();
     return function cleanup() {

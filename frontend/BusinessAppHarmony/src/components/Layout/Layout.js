@@ -5,7 +5,7 @@ import {
   withRouter,
 } from "react-router-dom";
 import classnames from "classnames";
-import { Box } from '@material-ui/core'
+import {Box} from '@material-ui/core'
 
 
 
@@ -17,11 +17,11 @@ import Header from "../Header";
 import Sidebar from "../Sidebar";
 
 // pages
-import HomePage from "../../pages/usertrends";
-import Statements from "../../pages/dashboard";
-import CreateAds from "../../pages/createads";
-import Adverts from "../../pages/adverts";
-import Profile from "../../pages/profile";
+import Dashboard from "../../pages/dashboard";
+import ModerateItems from "../../pages/moderateitems/ModerateItems";
+import Tables from "../../pages/tables";
+import Feedback from "../../pages/feedback";
+import Train from "../../pages/train";
 
 
 // context
@@ -35,33 +35,33 @@ function Layout(props) {
 
   return (
     <div className={classes.root}>
-      <>
-        <Header history={props.history} />
-        <Sidebar />
-        <div
-          className={classnames(classes.content, {
-            [classes.contentShift]: layoutState.isSidebarOpened,
-          })}
-        >
-          <div className={classes.fakeToolbar} />
-          <Switch>
-            <Route path="/app/usertrends" component={HomePage} />
-            <Route path="/app/dashboard" component={Statements} />
-            <Route path="/app/createads" component={CreateAds} />
-            <Route path="/app/adverts" component={Adverts} />
-            <Route path="/app/Profile" component={Profile} />
-
-          </Switch>
-          <Box
-            mt={5}
-            width={"100%"}
-            display={"flex"}
-            alignItems={"center"}
-            justifyContent="space-between"
+        <>
+          <Header history={props.history} />
+          <Sidebar />
+          <div
+            className={classnames(classes.content, {
+              [classes.contentShift]: layoutState.isSidebarOpened,
+            })}
           >
-          </Box>
-        </div>
-      </>
+            <div className={classes.fakeToolbar} />
+            <Switch>
+              <Route path="/app/dashboard" component={Dashboard} />
+              <Route path="/app/moderateitems" component={ModerateItems} />
+              <Route path="/app/tables" component={Tables} />
+              <Route path="/app/train" component={Train} />
+              <Route path="/app/feedback" component={Feedback} />
+
+            </Switch>
+            <Box
+              mt={5}
+              width={"100%"}
+              display={"flex"}
+              alignItems={"center"}
+              justifyContent="space-between"
+            >
+            </Box>
+          </div>
+        </>
     </div>
   );
 }

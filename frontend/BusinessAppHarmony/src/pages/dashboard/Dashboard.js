@@ -7,7 +7,9 @@ import { useTheme } from "@material-ui/styles";
 import useStyles from "./styles";
 // components
 import mock from "./mock";
+import Widget from "../../components/Widget";
 import PageTitle from "../../components/PageTitle";
+import { Typography } from "../../components/Wrappers";
 import Table from "./components/Table/Table";
 
 export default function Dashboard(props) {

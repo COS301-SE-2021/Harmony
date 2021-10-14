@@ -23,7 +23,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
     const [formDescription, setDescription] = useState("");
     const [formTags, setTags] = useState("");
     const [FoodOrDrink, setFoodOrDrink] = React.useState('none');
-    const [img, setImg] = useState("https://beepeers.com/assets/images/commerces/default-image.jpg");
+    const [img, setImg] = useState("http://beepeers.com/assets/images/commerces/default-image.jpg");
     var classes = useStyles();
     const tagSelector = useRef();
 
@@ -46,7 +46,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
     const handleClear = () => {
         setName("");
         setDescription("");
-        setImg("https://beepeers.com/assets/images/commerces/default-image.jpg");
+        setImg("http://beepeers.com/assets/images/commerces/default-image.jpg");
         fileRef.current.value = "";
         setFoodOrDrink('none');
         setTags("");
@@ -67,7 +67,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
         if (supportedFormats.includes(e.target.files[0].type)) { reader.readAsDataURL(e.target.files[0]) }
         else {
             alert(e.target.files[0].type + " is not a supported file format.");
-            setImg("https://beepeers.com/assets/images/commerces/default-image.jpg");
+            setImg("http://beepeers.com/assets/images/commerces/default-image.jpg");
         }
     }
 
@@ -82,14 +82,13 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
             "Image": btoa(img)
         }
         console.log("request to submit " + JSON.stringify(request))
-        fetch('https://w3lfp6r6f7.execute-api.eu-west-1.amazonaws.com/dev/additem', {
-            headers: {
-                'Accept': 'application/json',
+        fetch('https://w3lfp6r6f7.execute-api.eu-west-1.amazonaws.com/dev/additem',             {headers: {
+            'Accept': 'application/json',
                 'Content-Type': 'application/json'
-            },
-            method: "POST",
+        },
+        method: "POST",
             body: JSON.stringify(request)
-        })
+    })
             .then(response => response.json())
             .then(data => console.log(data))
     }
@@ -105,6 +104,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                 Add an item to the database:
             </Typography>
             <br />
+            {/* <p className={classes.fontSizeMedium}></p> */}
             <div>
                 <Formik
                     // initialValues={formik.values}
@@ -114,7 +114,13 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                         ItemTags: formTags,
                         FoodOrDrink: FoodOrDrink
                     }}
-
+                    // validationSchema={Yup.object().shape({
+                    //     ItemName: Yup.string().required('*'),
+                    //     ItemDescription: Yup.string().required('*'),
+                    //     ItemTags: Yup.string().required('*'),
+                    //     FoodOrDrink: Yup.string().required('*'),
+                    // })}
+                    // onSubmit={(values) => handleSubmit(values)}
                     onSubmit={(values, { resetForm }) => {
                         /**reset then handle submit */
                         resetForm();
@@ -167,7 +173,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                                 </label>
                                 <TextField id="outlined-basic" variant="outlined" name="ItemName" className={classes.individualTextField} onChange={handleChange} value={values.ItemName} />
                             </div>
-                            <br />
+                            <br/>
                             <div className={classes.formElementsDescription}>
                                 <label htmlFor="ItemDescription" className={classes.formLabel}>
                                     <div className={classes.floatLeft}><p className={classes.errorDiv}>Description</p> </div>
@@ -204,7 +210,7 @@ function AddItemForm(itemName, itemDescription, itemTags, ...props) {
                                     onRemove={(selectedList) => (values.ItemTags = selectedList)}
                                     onSearch={function noRefCheck() { }}
                                     onSelect={(selectedList) => (values.ItemTags = selectedList)}
-                                    id="ItemTags" name="ItemTags" value={values.ItemTags}
+                                    id="ItemTags" name="ItemTags"  value={values.ItemTags}
                                     options={['Spicy', 'Savoury', 'Salty', 'Sweet', 'Sour', 'Warm', 'Hot', 'Cold', 'Alcoholic', 'Non-Alcoholic', 'Fizzy', 'Sweet', 'Sour', 'Bitter', 'Warm', 'Hot', 'Cold']}
                                 />
                             </div>

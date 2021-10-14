@@ -12,6 +12,13 @@ export default makeStyles(theme => ({
   text: {
     marginBottom: theme.spacing(2),
   },
+  textAreaField: {
+    width: "85%",
+    height: 100,
+    padding: 15,
+    fontFamily: "sans-serif-light",
+    color: "#717171",
+  },
   individualTextField: {
     width: "75%",
     height: 10,
@@ -45,8 +52,7 @@ export default makeStyles(theme => ({
   },
   tagName: {
     fontSize: 20,
-    width: 85,
-    marginRight: -23
+    width: 65
   },
   MealContainer: {
     marginTop: 20,
@@ -71,6 +77,17 @@ export default makeStyles(theme => ({
     float: "left",
     backgroundColor: "white",
     textAlign: "center",
+    boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)"
+  },
+  requestContainer: {
+    width: "25%",
+    height: 620,
+    padding: 15,
+    borderRadius: 5,
+    backgroundColor: "white",
+    float: "left",
+    textAlign: "center",
+    // margin: "auto",
     boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)"
   },
   button: {
@@ -100,7 +117,7 @@ export default makeStyles(theme => ({
     float: "auto",
   },
   addButton: {
-    backgroundColor: theme.palette.primary.main, color: "white", marginLeft: 45, height: 35, borderRadius: 10, paddingLeft: 12, paddingRight: 12, width: "30%",
+    backgroundColor: "#81b5c2", color: "white", marginLeft: 45, height: 35, borderRadius: 10, paddingLeft: 12, paddingRight: 12, width: "30%",
     boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05)"
 
   },
@@ -135,6 +152,8 @@ export default makeStyles(theme => ({
   },
   PreviewPiece: {
     marginBottom: 10
+  },
+  FileInput: {
   },
   FoodLabelButton: {
     backgroundColor: "#FF6347",
@@ -191,27 +210,44 @@ export default makeStyles(theme => ({
     fontSize: 18
 
   },
+  displayFlexJustifyCenter: {
+    display: "flex", justifyContent: "center"
+  },
+  displayFlexJustifyAround: {
+    display: "flex", justifyContent: "space-around"
+  },
+  background: {
+    flexDirection: "row", justifyContent: "space-around", paddingTop: 15, backgroundColor: "#F3F3F3",
+  },
+  greyContainer: {
+    justifyContent: "center", display: "flex", flexDirection: "row", paddingTop: 25, backgroundColor: "#F3F3F3"
+  },
+  displayFlexOnly: {
+    display: "flex"
+  },
   icon: { float: "right", height: 20, width: 20, marginTop: 15, marginBottom: 0 },
-
+  fontSizeMedium: {
+    fontSize: 20,
+    fontFamily: "sans-serif-light",
+    marginTop: 0
+  },
+  pageContainer: {
+    float: "right",
+    width: "95%"
+  },
   floatLeft: {
     float: "left"
   },
   errorDiv: {
     fontSize: 15,
-    marginTop: -5,
-    color: "#717171",
-  },
-  errorDivDescr: {
-    fontSize: 15,
-    marginTop: 15,
+    marginTop: 0,
     color: "#717171",
   },
   errorStar: {
     color: "red", fontSize: 25, marginRight: 5, marginTop: -10
   },
-  radiusIcon: {
-    float: "left",
-    height: 25,
-    width: 25
+  justifySpaceBet: {
+    justifyContent: "space-between",
+    width: "100%"
   }
 }));

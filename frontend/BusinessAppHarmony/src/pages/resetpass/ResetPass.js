@@ -8,10 +8,10 @@ import Form from './Form';
 
 
 // styles
-import useStyles from "../signup/styles";
+import useStyles from "./styles";
 
 // logo
-import logo from "./logo.png";
+import logo from "./logo.svg";
 
 
 // context
@@ -28,9 +28,9 @@ function ResetPass(props) {
       </div>
       <div className={classes.formContainer}>
         <div className={classes.form}>
-          <React.Fragment>
+        <React.Fragment>
             <Form />
-          </React.Fragment>
+        </React.Fragment>
         </div>
       </div>
     </Grid>

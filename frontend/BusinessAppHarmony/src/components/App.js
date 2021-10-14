@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
+import React, {useState, useEffect} from "react";
+import { HashRouter, Route, Switch, Redirect} from "react-router-dom";
 import { Amplify, Auth } from 'aws-amplify'
 import '../aws-exports'
-import { prevSign, useUserDispatch } from "../context/UserContext";
+import {  prevSign, useUserDispatch } from "../context/UserContext";
 // components
 import Layout from "./Layout";
 import { useUserState } from "../context/UserContext";
@@ -20,16 +20,16 @@ Amplify.configure(aws_exports);
 export default function App() {
     // global
     let { isAuthenticated } = useUserState();
-    let [user, setUser] = useState(false)
+    let [user, setUser ] = useState(false)
     var userDispatch = useUserDispatch();
 
 
-    useEffect(() => {
-        Auth.currentAuthenticatedUser().then((user) => {
+    useEffect(()=>{
+        Auth.currentAuthenticatedUser().then((user)=>{
             console.log(user)
             prevSign(userDispatch)
             //setUser(true)
-        }).catch(() => {
+        }).catch(()=>{
             // setUser(false)
         })
     }, [user])
@@ -42,7 +42,6 @@ export default function App() {
                     path="/app"
                     render={() => <Redirect to="/app/usertrends" />}
                 />
-                {/* <PrivateRoute path="/app" component={Layout} /> */}
                 <PrivateRoute path="/app" component={Layout} />
                 <PublicRoute path="/login" component={Login} />
                 <PublicRoute path="/resetpass" component={ResetPass} />
@@ -59,7 +58,7 @@ export default function App() {
             <Route
                 {...rest}
                 render={props =>
-                    isAuthenticated || user ? (
+                    isAuthenticated||user ? (
                         React.createElement(component, props)
                     ) : (
                         <Redirect
@@ -81,7 +80,7 @@ export default function App() {
             <Route
                 {...rest}
                 render={props =>
-                    isAuthenticated || user ? (
+                    isAuthenticated ||user? (
                         <Redirect
                             to={{
                                 pathname: "/",

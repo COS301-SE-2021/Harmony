@@ -2,27 +2,19 @@ import React, { useState, useRef, useEffect } from 'react';
 import {
     Formik, Form
 } from 'formik';
-import { Auth } from 'aws-amplify';
 // classNames
 import useStyles from "./styles";
 import * as Yup from 'yup';
-// components 
+// components
 import Multiselect from 'multiselect-react-dropdown';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField'
-import { InputNumber } from 'rsuite';
-import { FiPlus, FiMinus } from "react-icons/fi";
-
-import Alert from '@mui/material/Alert';
-import Collapse from '@mui/material/Collapse';
-
 function CreateAdForm(...props) {
     /**The form variables */
-    const defaultImage = "https://beepeers.com/assets/images/commerces/default-image.jpg";
+    const defaultImage = "http://beepeers.com/assets/images/commerces/default-image.jpg";
     const [foodImage, setFoodImage] = useState(defaultImage);
     const [drinkImage, setDrinkImage] = useState(defaultImage);
     const [result, setResult] = useState([]);
-    const [radius, setRadius] = useState(35);
     var classes = useStyles();
 
     /**@var fileRef to create a reference to the file input to be able to clear it */
@@ -38,15 +30,6 @@ function CreateAdForm(...props) {
 
     const supportedFormats = ['image/jpg', 'image/jpeg', 'image/png'];
 
-    /**to toggle the display of the toast */
-    const [openAd, setAdOpen] = React.useState(false);
-    /**use effect to detect the alert opening and will auto close after an amount of time */
-    useEffect(() => {
-        setTimeout(function () {
-            setAdOpen(false);
-        }, 3000);
-    }, [openAd])
-
 
     useEffect(() => {
         fetch("https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/getprofile", {
@@ -55,7 +38,7 @@ function CreateAdForm(...props) {
                 'Content-Type': 'application/json'
             },
             method: "POST",
-            body: JSON.stringify({ BID: Auth.user.username })
+            body: JSON.stringify({ BID: "b4" })
         })
             .then(res => res.json())
             .then(
@@ -125,7 +108,7 @@ function CreateAdForm(...props) {
         var request = {
             FoodName: vals.FoodName,
             DrinkName: vals.DrinkName,
-            BID: Auth.user.username,
+            BID: "b4",
             FoodTags: vals.FoodTags,
             DrinkTags: vals.DrinkTags,
             PairingTags: vals.PairingTags,
@@ -134,7 +117,6 @@ function CreateAdForm(...props) {
             TimePeriod: vals.TimePeriod,
             FoodImage: foodImage.split(',')[1],
             DrinkImage: drinkImage.split(',')[1],
-            Radius: radius
         }
         console.log("request to submit " + JSON.stringify(request))
         fetch('https://alt0c0nrq7.execute-api.eu-west-1.amazonaws.com/dev/createbusinesspairing', {
@@ -147,7 +129,7 @@ function CreateAdForm(...props) {
         })
             .then(response => response.json())
             .then(data => console.log(data))
-            .then(setAdOpen(true))
+            .then(alert("Advert for " + vals.FoodName + " and " + vals.DrinkName + " was created successfully."))
     }
 
     return (
@@ -163,13 +145,11 @@ function CreateAdForm(...props) {
                     PairingTags: "",
                     Locations: "",
                     TimePeriod: "",
-                    Radius: 20
                 }}
                 validationSchema={Yup.object().shape({
                     FoodName: Yup.string().required('*'),
                     DrinkName: Yup.string().required('*'),
                     PairingDescription: Yup.string().required('*'),
-
                 })}
                 // onSubmit={(values) => handleSubmit(values)}
                 onSubmit={(values, { resetForm }) => {
@@ -198,7 +178,7 @@ function CreateAdForm(...props) {
                                 <div className={classes.PreviewPiece}><label htmlFor="file-input-Food"></label></div>
                                 <div className={classes.PreviewPiece}><img src={foodImage} className={classes.ImageContainer} alt="Error displaying." /></div>
                                 <div className={classes.FileInput}><input type="file" id="file-input-Food" name="ImageclassNameFood" accept="image/*" ref={foodFileRef} onChange={(values) => FoodImageHandler(values)} style={{ display: 'none' }} />
-                                    <Button onClick={() => (foodFileRef.current.click())} className={classes.uploadFoodButton} variant="contained" color="secondary">Upload Image</Button>
+                                    <Button onClick={() => (foodFileRef.current.click())} className={classes.uploadFoodButton} variant="contained">Upload Image</Button>
                                 </div>
                                 <div className={classes.formElementsImageContainer}>
                                     <label htmlFor="FoodName" className={classes.formLabel}>
@@ -217,7 +197,7 @@ function CreateAdForm(...props) {
                                 <div className={classes.formElementsImageContainer}>
                                     <label htmlFor="FoodTags" className={classes.formLabel}>
                                         <div className={classes.floatLeft}>
-                                            <p className={classes.errorDiv}>Food Tags <br />(max 3)</p>
+                                            <p className={classes.errorDiv}>Food Tags</p>
                                         </div>
                                         <div className={classes.floatLeft}>
                                             {(values.FoodTags == [] && touched.FoodTags) ? (
@@ -266,7 +246,7 @@ function CreateAdForm(...props) {
                                 <div className={classes.PreviewPiece}><label htmlFor="file-input-Drink"></label></div>
                                 <div className={classes.PreviewPiece}><img src={drinkImage} className={classes.ImageContainer} /></div>
                                 <div className={classes.FileInput}><input type="file" id="file-input-Drink" name="ImageclassNameDrink" accept="image/*" ref={drinkFileRef} onChange={DrinkImageHandler} style={{ display: 'none' }} />
-                                    <Button onClick={() => (drinkFileRef.current.click())} className={classes.uploadDrinkButton} variant="contained" color="secondary">Upload Image</Button>
+                                    <Button onClick={() => (drinkFileRef.current.click())} className={classes.uploadDrinkButton} variant="contained">Upload Image</Button>
                                 </div>
 
                                 <div className={classes.formElementsImageContainer}>
@@ -286,7 +266,7 @@ function CreateAdForm(...props) {
                                 <div className={classes.formElementsImageContainer}>
                                     <label htmlFor="DrinkTags" className={classes.formLabel}>
                                         <div className={classes.floatLeft}>
-                                            <p className={classes.errorDiv}>Drink Tags <br />(max 3)</p>
+                                            <p className={classes.errorDiv}>Drink Tags</p>
                                         </div>
                                         <div className={classes.floatLeft}>
                                             {(values.DrinkTags == [] && touched.DrinkTags) ? (
@@ -332,7 +312,7 @@ function CreateAdForm(...props) {
                             <div className={classes.MealContainer}>
                                 <div className={classes.formElementsPairing}>
                                     <label htmlFor="PairingDescription" className={classes.formLabel}>
-                                        <div className={classes.floatLeft}><p className={classes.errorDivDescr}>Description</p> </div>
+                                        <div className={classes.floatLeft}><p className={classes.errorDiv}>Description</p> </div>
                                         <div className={classes.floatLeft}>
                                             {(errors.PairingDescription && touched.PairingDescription) ? (
                                                 <div className={classes.errorStar}>*</div>
@@ -344,7 +324,7 @@ function CreateAdForm(...props) {
                                 <br />
                                 <div className={classes.formElementsPairingTag}>
                                     <label htmlFor="PairingTags" className={classes.tagName}>
-                                        <div className={classes.floatLeft}><p className={classes.errorDiv}>Tag <br />(max 1)</p> </div>
+                                        <div className={classes.floatLeft}><p className={classes.errorDiv}>Tag</p> </div>
                                         <div className={classes.floatLeft}>
                                             {(values.PairingTags == [] && touched.PairingTags) ? (
                                                 <div className={classes.errorStar}>*</div>
@@ -431,49 +411,10 @@ function CreateAdForm(...props) {
                                         />
                                     </div>
                                 </div>
-
-                                <div className={classes.formElementsImageContainer}>
-                                    <div className={classes.configLabel}>
-
-                                        <label htmlFor="Locations" className={classes.tagName}>
-                                            <div className={classes.floatLeft}><p className={classes.errorDiv}>Radius</p> </div>
-                                        </label>
-                                    </div>
-                                    <div className={classes.multiselectorTag}>
-                                        <div>
-                                            <FiMinus className={classes.radiusIcon} onClick={() => setRadius(radius.valueOf(radius) - 5)} />
-                                            <InputNumber
-                                                min={5}
-                                                max={100}
-                                                step={5}
-                                                postfix="KM"
-                                                value={radius}
-                                                onChange={value => {
-                                                    setRadius(value);
-                                                }}
-                                                style={{ display: "none", float: "left" }}
-                                            />
-                                            <div className={classes.floatLeft}>
-                                                <p style={{ marginTop: 0, marginLeft: 10, marginRight: 10, fontSize: 20 }}>
-                                                    {radius} KM
-                                                </p>
-                                            </div>
-                                            <FiPlus className={classes.radiusIcon} onClick={() => setRadius(radius.valueOf(radius) + 5)} />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-
-
-
-
-                                </div>
-
-
                                 <div className={classes.formElementsImageContainer}>
                                     <div className={classes.configLabel}>
                                         <label htmlFor="TimePeriod" className={classes.tagName}>
-                                            <div className={classes.floatLeft}><p className={classes.errorDiv}>Time Period <br />(max 1)</p> </div>
+                                            <div className={classes.floatLeft}><p className={classes.errorDiv}>Time Period</p> </div>
                                             <div className={classes.floatLeft}>
                                                 {(values.TimePeriod == [] && touched.TimePeriod) ? (
                                                     <div className={classes.errorStar}>*</div>
@@ -514,20 +455,15 @@ function CreateAdForm(...props) {
                             </div>
                         </div>
                         <br />
-                        <Collapse in={openAd}>
-                            <Alert onClose={() => { setAdOpen(false); }}>Ad Created Successfully. </Alert>
-                            <br />
-                        </Collapse>
                         <div className={classes.ButtonContainer}>
                             <Button onClick={(values) => (resetForm(), handleClear())} className={classes.clearButton} variant="contained">Clear</Button>
-                            <Button color="secondary" variant="contained" type="submit" className={classes.addButton} onClick={() => console.log("clicked submit")}>
+                            <Button variant="contained" color="primary" type="submit" className={classes.addButton} onClick={() => console.log("clicked submit")}>
                                 Create Advert
                             </Button>
                         </div>
                     </Form>
                 )}
             </Formik>
-
         </div >
     );
 }
