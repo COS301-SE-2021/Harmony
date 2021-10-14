@@ -5,18 +5,17 @@
 
 Visiting South Africa a tourist would not know what a Bunny Chow is, let alone what it pairs well with. Harmony solves this by allowing you to pull out your phone, take a picture of the food and its drink pairings will be presented to you, but it doesn't stop there, using continuous AI Harmony will provide the best possible pairings as it learns and develops over time. 
 
-*  [Harmony Landing Page](https://dreamteam.arshad.co.za/)
 
 ---
 ## App and Webpages
 Download the app and access the webpages below:
 
-* :iphone: [Download standalone APK available for Android](https://expo.io/artifacts/299e2ab4-88c3-488d-ba56-be85e99f4f30)
+* :iphone: [Download standalone APK available for Android](https://expo.io/artifacts/269a4b3a-edbe-471b-8c2c-e2f6932b9d43)
 
 * :iphone: [Expo Go: Harmony Mobile App](https://expo.dev/@dreamteam_cos301/Harmony)
 
 * :computer: [Admin Webpage](https://dev.d2dba1zn8s4hhf.amplifyapp.com/#/login)
-* :computer: [Business Webpage](https://dev.drn0mez8nzhad.amplifyapp.com/#/login)
+* :computer: [Business Webpage](https://dev.d3ayvqwa1ja9g5.amplifyapp.com/)
 
 ---
 
